@@ -15,7 +15,16 @@ Responsables del tratamiento (empresas, profesionales, instituciones) y DPD que 
 | `plantilla-RAT.xlsx` | Plantilla para completar. Incluye hoja de obligatoriedad, datos del responsable, registro con alertas automáticas y resumen. |
 | `ejemplo-RAT-ficticio.xlsx` | Clínica dental ficticia con 6 actividades: 2 completas y 4 con errores intencionales, útil para capacitaciones y demostraciones. |
 | `asistente-rat.html` | Versión web interactiva: verifica obligatoriedad, registra actividades, importa un RAT existente pegado desde Excel, muestra alertas y copia el registro con firma de responsabilidad. |
-| `../scripts/generar_rat.py` | Regenera ambos Excel (`python scripts/generar_rat.py`). |
+| `../scripts/rat_config.py` | **Fuente única** de listas desplegables, preguntas de obligatoriedad y sus ayudas. Para agregar una opción o pegar el texto literal de una norma, edita este archivo y regenera. |
+| `../scripts/generar_rat.py` · `../scripts/generar_asistente_rat.py` | Regeneran el Excel y el asistente web desde la configuración. |
+
+## ¿Está obligada la organización?
+
+16 preguntas en cinco grupos (rol, tamaño, habitualidad, categorías especiales y riesgo), cada una con una ayuda de **Qué significa** y **Qué dice la norma**. El resultado indica la causal concreta que obliga (o qué falta responder) y advierte la regla del encargado (art. 44 RGLOPDP). Las ayudas son resúmenes fieles de la norma; al incorporar el texto literal, cambia `literal` a `True` en `rat_config.py`.
+
+## Listas desplegables con "Otro"
+
+Actividad, área, finalidades, titulares, categorías de datos, origen, destinatarios, encargados, garantía de transferencia, plazo y medidas se eligen de listas. Si la opción no existe, se elige **Otro** y se escribe. En el asistente web las categorías especiales aparecen en rojo y marcan automáticamente la actividad. En el Excel, las listas aceptan texto libre; para varios valores se separan con punto y coma.
 
 ## Base legal
 

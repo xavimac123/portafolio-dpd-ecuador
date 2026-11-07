@@ -11,6 +11,9 @@ from openpyxl.formatting.rule import FormulaRule
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import rat_config as C  # noqa: E402
 
 OUT = Path(__file__).resolve().parent.parent / "01-registro-tratamientos"
 
@@ -23,16 +26,7 @@ ALERTF = PatternFill("solid", fgColor="FCE4D6")
 thin = Side(style="thin", color="BFBFBF")
 BORDER = Border(left=thin, right=thin, top=thin, bottom=thin)
 
-BASES = [
-    "Consentimiento del titular",
-    "Obligación legal",
-    "Orden judicial",
-    "Interés público / potestades públicas",
-    "Ejecución de contrato o medidas precontractuales",
-    "Interés vital",
-    "Datos de bases de acceso público",
-    "Interés legítimo",
-]
+BASES = C.BASES
 SINO = ["Sí", "No"]
 
 # (encabezado, ancho, numeral art. 38 RGLOPDP o None, nota)
@@ -90,9 +84,9 @@ def hoja_instrucciones(wb):
         ("Documentar cada actividad de tratamiento con el contenido mínimo del art. 38 del Reglamento General a la LOPDP y detectar vacíos automáticamente.", False, 10),
         ("", False, 10),
         ("Cómo se usa", True, 11),
-        ("1. Hoja 'Obligado': confirma si la organización debe llevar el RAT (arts. 38 y 39 RGLOPDP).", False, 10),
+        ("1. Hoja 'Obligado': responde las preguntas; cada una tiene su explicación y la norma que la sustenta (arts. 38, 39 y 44 RGLOPDP).", False, 10),
         ("2. Hoja 'Responsable': datos de contacto del responsable, corresponsable y DPD (art. 38 num. 1).", False, 10),
-        ("3. Hoja 'RAT': una fila por actividad de tratamiento. Completa solo las celdas amarillas.", False, 10),
+        ("3. Hoja 'RAT': una fila por actividad. Las celdas amarillas tienen listas desplegables; si tu caso no está, escribe tu propio texto en la celda ('Otro').", False, 10),
         ("4. La columna 'Alertas' indica qué falta. Una fila está lista cuando dice 'Completo'.", False, 10),
         ("5. Hoja 'Resumen': estado general del registro.", False, 10),
         ("", False, 10),
@@ -112,43 +106,94 @@ def hoja_instrucciones(wb):
     ws.sheet_view.showGridLines = False
 
 
-def hoja_obligado(wb):
+def hoja_obligado(wb, respuestas=None):
     ws = wb.create_sheet("Obligado")
     ws.column_dimensions["A"].width = 3
-    ws.column_dimensions["B"].width = 62
-    ws.column_dimensions["C"].width = 18
-    ws["B2"] = "¿Debe la organización llevar el RAT?"
+    ws.column_dimensions["B"].width = 52
+    ws.column_dimensions["C"].width = 15
+    ws.column_dimensions["D"].width = 55
+    ws.column_dimensions["E"].width = 62
+    ws["B2"] = "¿Debe la organización llevar el RAT? (arts. 38, 39 y 44 RGLOPDP)"
     ws["B2"].font = Font(name=FONT, bold=True, size=13, color=AZUL)
-    rows = [
-        ("Número de trabajadores", 25),
-        ("¿El tratamiento implica riesgo para los derechos y libertades de los titulares?", "Sí"),
-        ("¿El tratamiento es ocasional?", "No"),
-        ("¿Incluye categorías especiales de datos?", "Sí"),
-    ]
-    for i, (q, v) in enumerate(rows, start=4):
-        ws.cell(row=i, column=2, value=q).font = Font(name=FONT, size=10)
-        c = ws.cell(row=i, column=3, value=v)
-        c.fill = INPUT
-        c.font = Font(name=FONT, size=10, color="0000FF")
-        c.border = BORDER
-        c.alignment = Alignment(horizontal="center")
-    dv = DataValidation(type="list", formula1='"Sí,No"', allow_blank=True)
-    ws.add_data_validation(dv)
-    dv.add("C5:C7")
-    ws["C4"].comment = Comment("Valor de ejemplo. Reemplázalo.", "MSC")
-    ws["B9"] = "Resultado"
-    ws["B9"].font = Font(name=FONT, bold=True, size=11)
-    ws["C9"] = '=IF(C4="","",IF(C4>=100,"OBLIGADO",IF(OR(C5="Sí",C6="No",C7="Sí"),"OBLIGADO","NO OBLIGADO")))'
-    ws["C9"].font = Font(name=FONT, bold=True, size=11)
-    ws["C9"].alignment = Alignment(horizontal="center")
-    ws["B10"] = '=IF(C4="","",IF(C4>=100,"Tiene 100 o más trabajadores (art. 38 RGLOPDP).",IF(C9="OBLIGADO","Menos de 100 trabajadores, pero concurre riesgo, tratamiento no ocasional o categorías especiales (art. 39 RGLOPDP).","Menos de 100 trabajadores, sin riesgo, ocasional y sin categorías especiales. Recomendable llevarlo igual como prueba de responsabilidad proactiva.")))'
-    ws["B10"].font = Font(name=FONT, size=10, italic=True)
-    ws["B10"].alignment = Alignment(wrap_text=True)
-    ws.row_dimensions[10].height = 45
-    ws["B12"] = "Nota: el art. 39 opera con cualquiera de las tres condiciones. Confirma su redacción literal en el texto oficial."
-    ws["B12"].font = Font(name=FONT, size=9, italic=True, color="7F7F7F")
-    ws["B12"].alignment = Alignment(wrap_text=True)
+    ws["B3"] = "Responde en las celdas amarillas. Las columnas D y E explican cada pregunta. La columna E es un resumen fiel de la norma salvo que diga 'Texto literal'."
+    ws["B3"].font = Font(name=FONT, size=9, italic=True, color="7F7F7F")
+    r = 5
+    for col, h in zip("BCDE", ["Pregunta", "Respuesta", "Qué significa", "Qué dice la norma"]):
+        ws[f"{col}{r}"] = h
+    style_header(ws, r, 5)
+    ws.cell(row=r, column=1).fill = PatternFill(None)
+    dv_sn = DataValidation(type="list", formula1='"Sí,No"', allow_blank=True)
+    dv_rol = DataValidation(type="list", formula1='"Responsable,Encargado,Ambos"', allow_blank=True)
+    ws.add_data_validation(dv_sn)
+    ws.add_data_validation(dv_rol)
+    filas = {}
+    grupo = None
+    r += 1
+    for q in C.PREGUNTAS:
+        if q["grupo"] != grupo:
+            grupo = q["grupo"]
+            c = ws.cell(row=r, column=2, value=C.GRUPOS[grupo])
+            c.font = Font(name=FONT, bold=True, size=10, color=AZUL)
+            r += 1
+        ws.cell(row=r, column=2, value=q["texto"])
+        resp_c = ws.cell(row=r, column=3, value=(respuestas or {}).get(q["id"]))
+        resp = resp_c
+        resp.fill = INPUT
+        resp.font = Font(name=FONT, size=10, color="0000FF")
+        resp.alignment = Alignment(horizontal="center", vertical="top")
+        ws.cell(row=r, column=4, value=q["concepto"])
+        norma = q["norma"] + ("" if not q["norma"] else ("  [Texto literal]" if q["literal"] else "  [Resumen fiel]"))
+        ws.cell(row=r, column=5, value=norma)
+        for cc in (2, 4, 5):
+            cell = ws.cell(row=r, column=cc)
+            cell.font = Font(name=FONT, size=9 if cc > 2 else 10)
+            cell.alignment = Alignment(wrap_text=True, vertical="top")
+        for cc in range(2, 6):
+            ws.cell(row=r, column=cc).border = BORDER
+        if q["tipo"] == "sino":
+            dv_sn.add(f"C{r}")
+        elif q["tipo"] == "rol":
+            dv_rol.add(f"C{r}")
+        filas.setdefault(q["grupo"], []).append(r)
+        filas[q["id"]] = r
+        ws.row_dimensions[r].height = 62
+        r += 1
+
+    def rng(g):
+        rows = filas[g]
+        return f"C{rows[0]}:C{rows[-1]}"
+
+    trab = f"C{filas['trab']}"
+    rol = f"C{filas['rol']}"
+    total = len(C.PREGUNTAS)
+    r += 1
+    ws.cell(row=r, column=2, value="Resultado").font = Font(name=FONT, bold=True, size=12)
+    res = ws.cell(row=r, column=3)
+    res.value = (f'=IF(AND({trab}="",{rol}=""),"",IF(OR(N({trab})>=100,COUNTIF({rng("habitual")},"Sí")>0,'
+                 f'COUNTIF({rng("especial")},"Sí")>0,COUNTIF({rng("riesgo")},"Sí")>0),"OBLIGADO",'
+                 f'IF(COUNTA(C{filas["rol"]}:C{filas[C.PREGUNTAS[-1]["id"]]})<{total},"PENDIENTE","NO OBLIGADO")))')
+    res.font = Font(name=FONT, bold=True, size=12)
+    res.alignment = Alignment(horizontal="center")
+    res.border = BORDER
+    fund = ws.cell(row=r, column=4)
+    fund.value = (f'=IF(C{r}="","",IF(N({trab})>=100,"100 o más trabajadores (art. 38). ","")'
+                  f'&IF(COUNTIF({rng("habitual")},"Sí")>0,"Tratamiento habitual, no ocasional (art. 39). ","")'
+                  f'&IF(COUNTIF({rng("especial")},"Sí")>0,"Incluye categorías especiales (art. 39; art. 25 LOPDP). ","")'
+                  f'&IF(COUNTIF({rng("riesgo")},"Sí")>0,"Indicadores de riesgo para los titulares (art. 39). ","")'
+                  f'&IF(C{r}="PENDIENTE","Faltan respuestas. ","")'
+                  f'&IF(C{r}="NO OBLIGADO","Situación poco frecuente: revisar respuestas. ","")'
+                  f'&IF(OR({rol}="Encargado",{rol}="Ambos"),"Como encargado, lleva el RAT de cada cliente solo si ese responsable está obligado (art. 44).",""))')
+    fund.font = Font(name=FONT, size=10, italic=True)
+    fund.alignment = Alignment(wrap_text=True, vertical="top")
+    ws.merge_cells(start_row=r, start_column=4, end_row=r, end_column=5)
+    ws.row_dimensions[r].height = 60
+    ws.cell(row=r + 2, column=2, value=C.NORMA_39 + "  [Resumen fiel]").font = Font(name=FONT, size=9, italic=True, color="7F7F7F")
+    ws.cell(row=r + 2, column=2).alignment = Alignment(wrap_text=True)
+    ws.merge_cells(start_row=r + 2, start_column=2, end_row=r + 2, end_column=5)
+    ws.row_dimensions[r + 2].height = 30
+    ws.freeze_panes = "B6"
     ws.sheet_view.showGridLines = False
+    return f"Obligado!$C${r}"
 
 
 def hoja_responsable(wb, datos):
@@ -175,15 +220,24 @@ def hoja_responsable(wb, datos):
 
 def hoja_listas(wb):
     ws = wb.create_sheet("Listas")
-    ws["A1"] = "Bases legitimadoras (art. 7 LOPDP)"
-    ws["A1"].font = Font(name=FONT, bold=True)
+    ws.cell(row=1, column=1, value="Bases legitimadoras (art. 7 LOPDP)").font = Font(name=FONT, bold=True)
     for i, b in enumerate(BASES, start=2):
         ws.cell(row=i, column=1, value=b).font = Font(name=FONT, size=10)
+    rangos = {}
+    for j, (nombre, d) in enumerate(C.LISTAS.items(), start=2):
+        L = get_column_letter(j)
+        ws.cell(row=1, column=j, value=nombre).font = Font(name=FONT, bold=True)
+        ops = d["opciones"] + [C.OTRO + " (escribir en la celda)"]
+        for i, o in enumerate(ops, start=2):
+            ws.cell(row=i, column=j, value=o).font = Font(name=FONT, size=10)
+        ws.column_dimensions[L].width = 40
+        rangos[nombre] = f"=Listas!${L}$2:${L}${1 + len(ops)}"
     ws.column_dimensions["A"].width = 50
     ws.sheet_state = "hidden"
+    return rangos
 
 
-def hoja_rat(wb, filas, n_filas=100):
+def hoja_rat(wb, filas, rangos, n_filas=100):
     ws = wb.create_sheet("RAT")
     ncols = len(COLS)
     ws.cell(row=1, column=1, value="Registro de Actividades de Tratamiento").font = Font(name=FONT, bold=True, size=13, color=AZUL)
@@ -256,6 +310,23 @@ def hoja_rat(wb, filas, n_filas=100):
     ws.add_data_validation(dv_sino)
     col = Lmap["Base legitimadora"]
     dv_base.add(f"{col}{first}:{col}{last}")
+    # listas con "Otro": aceptan texto libre (sin mensaje de error)
+    abiertas = {
+        "Actividad de tratamiento": "actividad", "Área responsable": "area", "Finalidades": "finalidad",
+        "Categorías de titulares": "titulares", "Categorías de datos personales": "datos", "Origen de los datos": "origen",
+        "Categorías de destinatarios": "dest", "Encargados del tratamiento": "enc",
+        "Plazo de conservación / supresión": "plazo",
+        "Medidas técnicas, jurídicas, administrativas y organizativas": "medidas",
+    }
+    for head, key in abiertas.items():
+        multi = C.LISTAS[key]["tipo"] == "varios"
+        dv = DataValidation(type="list", formula1=rangos[key], allow_blank=True, showErrorMessage=False,
+                            showInputMessage=True, promptTitle="Lista u Otro",
+                            prompt=("Elige de la lista o escribe tu propio texto. Varios valores: sepáralos con punto y coma."
+                                    if multi else "Elige de la lista o escribe tu propio texto si es otro."))
+        ws.add_data_validation(dv)
+        col = Lmap[head]
+        dv.add(f"{col}{first}:{col}{last}")
     for name in ["¿Categorías especiales?", "¿Datos de niñas, niños y adolescentes?", "¿Elaboración de perfiles?", "¿Transferencia internacional?"]:
         col = Lmap[name]
         dv_sino.add(f"{col}{first}:{col}{last}")
@@ -268,7 +339,7 @@ def hoja_rat(wb, filas, n_filas=100):
     return first, last, alert_col
 
 
-def hoja_resumen(wb, first, last, alert_col):
+def hoja_resumen(wb, first, last, alert_col, ref_oblig):
     ws = wb.create_sheet("Resumen", 1)
     ws.column_dimensions["A"].width = 3
     ws.column_dimensions["B"].width = 44
@@ -285,7 +356,7 @@ def hoja_resumen(wb, first, last, alert_col):
         ("Con categorías especiales", f'=COUNTIF(RAT!$G${first}:$G${last},"Sí")'),
         ("Con transferencia internacional", f'=COUNTIF(RAT!$O${first}:$O${last},"Sí")'),
         ("Basadas en interés legítimo", f'=COUNTIF(RAT!$J${first}:$J${last},"Interés legítimo")'),
-        ("¿Obligado a llevar el RAT?", "=Obligado!C9"),
+        ("¿Obligado a llevar el RAT?", "=" + ref_oblig),
     ]
     for i, (label, f) in enumerate(items, start=4):
         ws.cell(row=i, column=2, value=label).font = Font(name=FONT, size=10)
@@ -377,6 +448,12 @@ EJEMPLO_CLINICA = [
      "Acceso restringido", "2026-11-01"],
 ]
 
+OBLIG_CLINICA = {
+    "rol": "Responsable", "trab": 25, "h_nomina": "Sí", "h_clientes": "Sí", "h_visitas": "Sí", "h_publicidad": "Sí",
+    "e_salud": "Sí", "e_bio": "No", "e_nna": "Sí", "e_disc": "No", "e_sens": "No",
+    "r_perfiles": "No", "r_observacion": "No", "r_escala": "No", "r_financieros": "No", "r_geo": "No",
+}
+
 DATOS_CLINICA = {
     "Razón social / nombre": "Clínica Dental Ficticia Sonrisas S.A. (EJEMPLO)",
     "RUC": "[RUC]",
@@ -388,14 +465,14 @@ DATOS_CLINICA = {
 }
 
 
-def build(path, filas, datos):
+def build(path, filas, datos, oblig=None):
     wb = Workbook()
     hoja_instrucciones(wb)
-    hoja_obligado(wb)
+    ref_oblig = hoja_obligado(wb, oblig)
     hoja_responsable(wb, datos)
-    first, last, alert_col = hoja_rat(wb, filas)
-    hoja_resumen(wb, first, last, alert_col)
-    hoja_listas(wb)
+    rangos = hoja_listas(wb)
+    first, last, alert_col = hoja_rat(wb, filas, rangos)
+    hoja_resumen(wb, first, last, alert_col, ref_oblig)
     wb.save(path)
     print("OK", path)
 
@@ -403,4 +480,4 @@ def build(path, filas, datos):
 if __name__ == "__main__":
     OUT.mkdir(exist_ok=True)
     build(OUT / "plantilla-RAT.xlsx", EJEMPLO_UNICO, {})
-    build(OUT / "ejemplo-RAT-ficticio.xlsx", EJEMPLO_CLINICA, DATOS_CLINICA)
+    build(OUT / "ejemplo-RAT-ficticio.xlsx", EJEMPLO_CLINICA, DATOS_CLINICA, OBLIG_CLINICA)

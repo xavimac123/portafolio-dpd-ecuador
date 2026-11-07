@@ -24,6 +24,10 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | RAT, extensión | También obligatorio con menos de 100 trabajadores si el tratamiento implica riesgo para los derechos, no es ocasional o incluye categorías especiales | RGLOPDP art. 39 | ☐ |
 | RAT, contenido | 9 elementos: contacto de responsable/corresponsable/DPD; finalidades; categorías de destinatarios; titulares y categorías de datos; perfiles; transferencias internacionales; bases legitimadoras; plazos de supresión o revisión; medidas técnicas, jurídicas, administrativas y organizativas | RGLOPDP art. 38 | ☐ |
 | RAT del encargado | El encargado lo lleva solo cuando el responsable está obligado | RGLOPDP art. 44 | ☐ |
+| Definiciones | Responsable, encargado, datos sensibles, datos de salud, datos biométricos, elaboración de perfiles (usadas en las ayudas del RAT) | LOPDP art. 4 | ☐ |
+| Categorías especiales | Datos sensibles; de niñas, niños y adolescentes; de salud; de personas con discapacidad y sus sustitutos | LOPDP art. 25 | ☐ |
+| Datos sensibles, tratamiento | Prohibido salvo las excepciones que enumera | LOPDP art. 26 | ☐ |
+| Evaluación de impacto | Procede, entre otros, ante evaluación sistemática automatizada de aspectos personales, gran escala de categorías especiales u observación sistemática a gran escala de zonas de acceso público | LOPDP art. 42 | ☐ |
 | Bases legitimadoras | Consentimiento; obligación legal; orden judicial; interés público/potestades públicas; contrato o medidas precontractuales; interés vital; bases de acceso público; interés legítimo | LOPDP art. 7 | ☐ |
 | Interés legítimo | Si es la base, debe constar en el RAT y respaldarse con la evaluación de ponderación | RGLOPDP art. 38 num. 7; RES-0041 | ☐ |
 | Registro Nacional | Las bases de datos se inscriben en el Registro Nacional de Protección de Datos Personales (figura distinta del RAT) | LOPDP art. 51 | ☐ |

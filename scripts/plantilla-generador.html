@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generador de documentos LOPDP</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
+<script>/*__MARKED__*/</script>
+<style>
+  :root{--oro:#A09046;--carbon:#14181E;--marfil:#F7F5EE;--oliva:#6E6230;--oroc:#C9BC82;--linea:#DDD8C8}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Archivo,system-ui,sans-serif;background:var(--marfil);color:var(--carbon);font-size:15px;line-height:1.5}
+  header{background:var(--carbon);color:var(--marfil);padding:22px 20px 18px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}header .wrap{padding:0}
+  .marca{font-stretch:115%;font-weight:700;letter-spacing:.08em;color:var(--oro);font-size:12px;text-transform:uppercase}
+  h1{font-stretch:115%;font-weight:800;font-size:clamp(22px,4vw,32px);margin:6px 0 4px;line-height:1.15}
+  header p{margin:0;color:var(--oroc);font-size:14px}
+  main{display:grid;grid-template-columns:330px 1fr;gap:20px;padding:24px 20px 60px;max-width:1100px;margin:0 auto}
+  @media (max-width:820px){main{grid-template-columns:1fr}}
+  aside .card{position:sticky;top:12px}
+  .card{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:16px}
+  h2{font-stretch:115%;font-size:17px;margin:0 0 4px}
+  .sub{color:var(--oliva);font-size:13px;margin:0 0 12px}
+  label{display:block;font-weight:600;font-size:12px;margin:10px 0 3px}
+  input{width:100%;font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--linea);border-radius:8px;background:#FFFDF6}
+  input:focus{outline:2px solid var(--oro)}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .tabs button{border:1px solid var(--linea);background:#fff;padding:8px 12px;border-radius:999px;font:inherit;font-size:13px;cursor:pointer}
+  .tabs button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
+  .bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+  .btn{background:var(--oro);color:var(--carbon);border:0;padding:9px 14px;border-radius:8px;font:inherit;font-weight:700;cursor:pointer}
+  .btn.sec{background:transparent;border:1px solid var(--carbon)}
+  .pend{font-size:13px;color:var(--oliva)}
+  #doc{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:28px clamp(16px,4vw,40px);font-family:Georgia,'Times New Roman',serif;font-size:15px}
+  #doc h1{font-family:Archivo,sans-serif;font-stretch:110%;font-size:22px}
+  #doc h2{font-family:Archivo,sans-serif;font-size:16px;margin-top:22px}
+  #doc table{border-collapse:collapse;width:100%;font-size:13px;margin:10px 0}
+  #doc th,#doc td{border:1px solid var(--linea);padding:6px 8px;text-align:left;vertical-align:top}
+  #doc th{background:#F1EEE2}
+  #doc blockquote{margin:12px 0;padding:10px 14px;background:#FFF6DC;border-left:4px solid var(--oro);font-family:Archivo,sans-serif;font-size:13px}
+  mark.ph{background:#FCE4D6;color:#8A3A12;padding:0 2px;border-radius:3px}
+  mark.ok{background:#E6F2EA;color:#1F5E3A;padding:0 2px;border-radius:3px}
+  .chk{display:flex;gap:6px;align-items:center;font-size:13px}
+  .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--carbon);color:#fff;padding:10px 16px;border-radius:8px;opacity:0;transition:.2s;pointer-events:none}.toast.on{opacity:1}
+  footer{border-top:1px solid var(--linea);padding:18px 20px;font-size:12px;color:var(--oliva);max-width:1100px;margin:0 auto}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="marca">Macías Sánchez Consultores · Herramienta 02</div>
+  <h1>Generador de documentos de protección de datos</h1>
+  <p>Política de privacidad, avisos, contrato de encargo y cláusulas de consentimiento · LOPDP Ecuador</p>
+</div></header>
+<main>
+  <aside><div class="card">
+    <h2>Datos del responsable</h2>
+    <p class="sub">Complétalos una vez; se aplican a todas las plantillas. Usa datos ficticios para practicar.</p>
+    <div id="campos"></div>
+    <div class="bar" style="margin-top:14px"><button class="btn sec" id="ejemplo">Cargar ejemplo ficticio</button><button class="btn sec" id="limpiar">Limpiar</button></div>
+  </div></aside>
+  <section>
+    <div class="tabs" id="tabs"></div>
+    <div class="bar">
+      <button class="btn" id="copiar">Copiar documento</button>
+      <label class="chk"><input type="checkbox" id="notas" style="width:auto"> Mostrar notas para quien redacta</label>
+      <span class="pend" id="pend"></span>
+    </div>
+    <article id="doc"></article>
+  </section>
+</main>
+<footer>Abg. Mariano X. Macías Sánchez · Macías Sánchez Consultores · Plantillas de apoyo; no sustituyen el análisis jurídico del caso concreto. Resalte naranja = dato pendiente · verde = dato completado.</footer>
+<div class="toast" id="toast"></div>
+<script>
+var TEMPLATES = /*__TEMPLATES__*/;
+(function(){
+  var CAMPOS=[
+    ['RAZÓN SOCIAL','Razón social'],['RUC','RUC'],['DIRECCIÓN','Dirección'],['CIUDAD','Ciudad'],
+    ['CORREO DE PRIVACIDAD','Correo de privacidad'],['TELÉFONO','Teléfono'],['URL','URL de la política'],
+    ['NOMBRE DEL DPD','Nombre del DPD (si aplica)'],['CORREO DEL DPD','Correo del DPD'],
+    ['VERSIÓN','Versión de la política'],['FECHA DE VIGENCIA','Fecha de vigencia'],['FECHA','Fecha del documento'],
+    ['RAZÓN SOCIAL DEL ENCARGADO','Encargado: razón social'],['RUC DEL ENCARGADO','Encargado: RUC'],['DIRECCIÓN DEL ENCARGADO','Encargado: dirección'],['CORREO DEL RESPONSABLE','Correo del responsable para avisos']
+  ];
+  var EJ={'RAZÓN SOCIAL':'Ferretería Ficticia El Tornillo S.A.','RUC':'0999999999001','DIRECCIÓN':'Av. Ejemplo 123','CIUDAD':'Guayaquil','CORREO DE PRIVACIDAD':'privacidad@ejemplo.ec','TELÉFONO':'04 000 0000','URL':'https://ejemplo.ec/privacidad','VERSIÓN':'1.0','FECHA DE VIGENCIA':'1 de diciembre de 2026','FECHA':'7 de noviembre de 2026','RAZÓN SOCIAL DEL ENCARGADO':'Nube Ficticia Cía. Ltda.','RUC DEL ENCARGADO':'0988888888001','DIRECCIÓN DEL ENCARGADO':'Calle Ficticia 456, Quito','CORREO DEL RESPONSABLE':'privacidad@ejemplo.ec'};
+  var KEY='msc-gen-v1', val={};
+  try{val=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+  function $(i){return document.getElementById(i)}
+  function toast(t){var e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},1800)}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  $('campos').innerHTML=CAMPOS.map(function(c,i){return'<label for="c'+i+'">'+c[1]+'</label><input id="c'+i+'" data-k="'+c[0]+'" value="'+esc(val[c[0]]||'')+'">'}).join('');
+  document.querySelectorAll('#campos input').forEach(function(inp){inp.oninput=function(){val[inp.dataset.k]=inp.value;try{localStorage.setItem(KEY,JSON.stringify(val))}catch(e){}render()}});
+  var cur=0;
+  $('tabs').innerHTML=TEMPLATES.map(function(t,i){return'<button data-i="'+i+'"'+(i?'':' class="on"')+'>'+esc(t.nombre)+'</button>'}).join('');
+  $('tabs').querySelectorAll('button').forEach(function(b){b.onclick=function(){cur=+b.dataset.i;$('tabs').querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});render()}});
+  $('notas').onchange=render;
+  function fill(md,mark){
+    var keys=Object.keys(val).filter(function(k){return val[k]}).sort(function(a,b){return b.length-a.length});
+    keys.forEach(function(k){md=md.split('['+k+']').join(mark?'\u0001'+val[k]+'\u0002':val[k])});
+    return md}
+  function render(){
+    var md=TEMPLATES[cur].md;
+    if(!$('notas').checked){md=md.split('\n').filter(function(l){return!/^>/.test(l)}).join('\n')}
+    md=fill(md,true);
+    var html=marked.parse(md);
+    var pend=0;
+    html=html.replace(/\[([A-ZÁÉÍÓÚÑ0-9 ]{2,})\]/g,function(m){pend++;return'<mark class="ph">'+m+'</mark>'});
+    html=html.replace(/\u0001([\s\S]*?)\u0002/g,'<mark class="ok">$1</mark>');
+    $('doc').innerHTML=html;
+    $('pend').textContent=pend?pend+' datos pendientes en este documento':'Sin datos pendientes de formato [MAYÚSCULAS]';
+  }
+  $('copiar').onclick=function(){
+    var md=TEMPLATES[cur].md.split('\n').filter(function(l){return!/^>/.test(l)}).join('\n');
+    md=fill(md,false);var html=marked.parse(md);
+    var plain=$('doc').innerText;
+    try{
+      if(window.ClipboardItem&&navigator.clipboard.write){
+        navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([plain],{type:'text/plain'})})]).then(function(){toast('Copiado: pega en Word')},function(){fb(plain)});return}
+    }catch(e){}
+    fb(plain)};
+  function fb(t){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Copiado como texto')}catch(e){toast('No se pudo copiar')}ta.remove()}
+  $('ejemplo').onclick=function(){val=Object.assign({},EJ);document.querySelectorAll('#campos input').forEach(function(i){i.value=val[i.dataset.k]||''});try{localStorage.setItem(KEY,JSON.stringify(val))}catch(e){}render();toast('Ejemplo cargado')};
+  $('limpiar').onclick=function(){val={};document.querySelectorAll('#campos input').forEach(function(i){i.value=''});try{localStorage.removeItem(KEY)}catch(e){}render()};
+  render();
+})();
+</script>
+</body>
+</html>

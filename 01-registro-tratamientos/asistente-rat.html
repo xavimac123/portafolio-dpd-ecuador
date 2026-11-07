@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asistente RAT — LOPDP Ecuador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
+<style>
+  :root{--oro:#A09046;--carbon:#14181E;--marfil:#F7F5EE;--oliva:#6E6230;--oroc:#C9BC82;--linea:#DDD8C8;--ok:#2E7D4F;--okbg:#E6F2EA;--al:#A4461C;--albg:#FBEDE5}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Archivo,system-ui,sans-serif;background:var(--marfil);color:var(--carbon);font-size:15px;line-height:1.5}
+  header{background:var(--carbon);color:var(--marfil);padding:22px 20px 18px}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+  header .wrap{padding:0}
+  .marca{font-stretch:115%;font-weight:700;letter-spacing:.08em;color:var(--oro);font-size:12px;text-transform:uppercase}
+  h1{font-stretch:115%;font-weight:800;font-size:clamp(22px,4vw,32px);margin:6px 0 4px;line-height:1.15}
+  header p{margin:0;color:var(--oroc);font-size:14px}
+  nav{display:flex;gap:6px;margin:18px 0 0;flex-wrap:wrap}
+  nav button{background:transparent;border:1px solid #3a3f47;color:var(--marfil);padding:8px 14px;border-radius:999px;font:inherit;font-size:14px;cursor:pointer}
+  nav button[aria-selected=true]{background:var(--oro);border-color:var(--oro);color:var(--carbon);font-weight:700}
+  main{padding:24px 0 60px}
+  section{display:none}section.on{display:block}
+  h2{font-stretch:115%;font-size:20px;margin:0 0 6px}
+  .sub{color:var(--oliva);margin:0 0 18px;font-size:14px}
+  .card{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:18px;margin-bottom:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  label{display:block;font-weight:600;font-size:13px;margin-bottom:4px}
+  .ref{font-weight:400;color:var(--oliva);font-size:11px;margin-left:4px}
+  input,select,textarea{width:100%;font:inherit;font-size:14px;padding:9px 10px;border:1px solid var(--linea);border-radius:8px;background:#FFFDF6}
+  textarea{min-height:64px;resize:vertical}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--oro);outline-offset:1px}
+  .seg{display:flex;gap:6px}.seg button{flex:1;padding:8px;border:1px solid var(--linea);background:#FFFDF6;border-radius:8px;font:inherit;cursor:pointer}
+  .seg button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
+  .btn{background:var(--carbon);color:#fff;border:0;padding:10px 16px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
+  .btn.sec{background:transparent;color:var(--carbon);border:1px solid var(--carbon)}
+  .btn.oro{background:var(--oro);color:var(--carbon)}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .res{border-radius:12px;padding:16px;margin-top:14px;font-weight:600}
+  .res.si{background:var(--albg);color:var(--al)}.res.no{background:var(--okbg);color:var(--ok)}
+  .res small{display:block;font-weight:400;color:var(--carbon);margin-top:4px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:14px}
+  .kpi{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:12px}
+  .kpi b{display:block;font-size:24px;font-stretch:115%}.kpi span{font-size:12px;color:var(--oliva)}
+  .item{background:#fff;border:1px solid var(--linea);border-left:5px solid var(--ok);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .item.al{border-left-color:var(--al)}
+  .item h3{margin:0;font-size:15px}.item .meta{font-size:12px;color:var(--oliva)}
+  .item ul{margin:6px 0 0;padding-left:18px;font-size:13px;color:var(--al)}
+  .item .okt{font-size:13px;color:var(--ok);margin-top:4px}
+  .item .acts{margin-top:8px;display:flex;gap:6px}
+  .item .acts button{font:inherit;font-size:12px;padding:4px 10px;border-radius:6px;border:1px solid var(--linea);background:#fff;cursor:pointer}
+  .vacio{text-align:center;color:var(--oliva);padding:30px;border:1px dashed var(--linea);border-radius:12px}
+  .nota{font-size:12px;color:var(--oliva)}
+  .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--carbon);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;transition:.2s;pointer-events:none}
+  .toast.on{opacity:1}
+  footer{border-top:1px solid var(--linea);padding:18px 0;font-size:12px;color:var(--oliva)}
+  @media (max-width:560px){.card{padding:14px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="marca">Macías Sánchez Consultores · Herramienta 01</div>
+  <h1>Asistente de Registro de Actividades de Tratamiento</h1>
+  <p>Ley Orgánica de Protección de Datos Personales y su Reglamento · Ecuador</p>
+  <nav role="tablist">
+    <button role="tab" data-t="obligado" aria-selected="true">1 · ¿Estoy obligado?</button>
+    <button role="tab" data-t="registro" aria-selected="false">2 · Registrar actividad</button>
+    <button role="tab" data-t="estado" aria-selected="false">3 · Estado del registro</button>
+  </nav>
+</div></header>
+
+<main class="wrap">
+<section id="obligado" class="on">
+  <h2>¿Debe la organización llevar el RAT?</h2>
+  <p class="sub">Arts. 38 y 39 del Reglamento General a la LOPDP.</p>
+  <div class="card">
+    <div class="grid">
+      <div><label for="trab">Número de trabajadores</label><input id="trab" type="number" min="0" inputmode="numeric" placeholder="Ej. 25"></div>
+      <div><label>¿El tratamiento implica riesgo para los derechos de los titulares?</label><div class="seg" data-k="riesgo"><button>Sí</button><button>No</button></div></div>
+      <div><label>¿El tratamiento es ocasional?</label><div class="seg" data-k="ocasional"><button>Sí</button><button>No</button></div></div>
+      <div><label>¿Incluye categorías especiales de datos?</label><div class="seg" data-k="especiales"><button>Sí</button><button>No</button></div></div>
+    </div>
+    <div id="resOblig"></div>
+  </div>
+  <p class="nota">Aunque la organización no esté obligada, llevar el registro sirve como prueba de responsabilidad proactiva.</p>
+</section>
+
+<section id="registro">
+  <h2>Registrar una actividad de tratamiento</h2>
+  <p class="sub">Los campos siguen el contenido mínimo del art. 38 del Reglamento. Se usan datos ficticios o propios; no ingreses datos de personas.</p>
+  <form id="f" class="card" autocomplete="off">
+    <div class="grid">
+      <div><label for="actividad">Actividad de tratamiento</label><input id="actividad" required placeholder="Ej. Gestión de nómina"></div>
+      <div><label for="area">Área responsable</label><input id="area" placeholder="Ej. Talento Humano"></div>
+      <div style="grid-column:1/-1"><label for="finalidad">Finalidades <span class="ref">art. 38 num. 2</span></label><textarea id="finalidad" placeholder="Para qué se tratan los datos"></textarea></div>
+      <div><label for="titulares">Categorías de titulares <span class="ref">num. 4</span></label><input id="titulares" placeholder="Trabajadores, clientes, pacientes…"></div>
+      <div><label for="datos">Categorías de datos <span class="ref">num. 4</span></label><input id="datos" placeholder="Identificación, contacto, salud…"></div>
+      <div><label>¿Categorías especiales?</label><div class="seg" data-k="especial"><button type="button">Sí</button><button type="button">No</button></div></div>
+      <div><label>¿Datos de niñas, niños y adolescentes?</label><div class="seg" data-k="nna"><button type="button">Sí</button><button type="button">No</button></div></div>
+      <div><label for="base">Base legitimadora <span class="ref">num. 7 · art. 7 LOPDP</span></label>
+        <select id="base"><option value="">— Seleccionar —</option>
+          <option>Consentimiento del titular</option><option>Obligación legal</option><option>Orden judicial</option>
+          <option>Interés público / potestades públicas</option><option>Ejecución de contrato o medidas precontractuales</option>
+          <option>Interés vital</option><option>Datos de bases de acceso público</option><option>Interés legítimo</option></select></div>
+      <div id="ilBox" hidden><label for="il">Referencia de la evaluación de interés legítimo</label><input id="il" placeholder="Código o fecha de la ponderación"></div>
+      <div><label for="dest">Categorías de destinatarios <span class="ref">num. 3</span></label><input id="dest" placeholder="IESS, SRI, aseguradoras… o “Ninguno”"></div>
+      <div><label for="enc">Encargados del tratamiento</label><input id="enc" placeholder="Proveedores de nube, nómina, TI"></div>
+      <div><label>¿Elaboración de perfiles? <span class="ref">num. 5</span></label><div class="seg" data-k="perfiles"><button type="button">Sí</button><button type="button">No</button></div></div>
+      <div><label>¿Transferencia internacional? <span class="ref">num. 6</span></label><div class="seg" data-k="transf"><button type="button">Sí</button><button type="button">No</button></div></div>
+      <div id="tBox" hidden><label for="tgar">País y garantía de la transferencia</label><input id="tgar" placeholder="Ej. EE. UU., cláusulas contractuales"></div>
+      <div><label for="plazo">Plazo de conservación o supresión <span class="ref">num. 8</span></label><input id="plazo" placeholder="Plazo o criterio y su fundamento"></div>
+      <div style="grid-column:1/-1"><label for="medidas">Medidas técnicas, jurídicas, administrativas y organizativas <span class="ref">num. 9</span></label><textarea id="medidas" placeholder="Descripción general"></textarea></div>
+      <div><label for="rev">Fecha de última revisión</label><input id="rev" type="date"></div>
+    </div>
+    <div class="row" style="margin-top:16px"><button class="btn" type="submit" id="guardar">Agregar al registro</button><button class="btn sec" type="button" id="limpiar">Limpiar</button></div>
+  </form>
+</section>
+
+<section id="estado">
+  <h2>Estado del registro</h2>
+  <p class="sub">Las alertas revisan que cada campo exista, no que su contenido sea jurídicamente correcto.</p>
+  <div class="kpis" id="kpis"></div>
+  <div class="row" style="margin-bottom:14px">
+    <button class="btn oro" id="copiar">Copiar para Excel</button>
+    <button class="btn sec" id="ejemplo">Cargar ejemplo ficticio</button>
+    <button class="btn sec" id="borrar">Vaciar registro</button>
+  </div>
+  <div id="lista"></div>
+  <p class="nota">“Copiar para Excel” copia el registro como tabla; pégala en la hoja RAT de la plantilla o en una hoja nueva.</p>
+</section>
+</main>
+
+<footer><div class="wrap">Abg. Mariano X. Macías Sánchez · Macías Sánchez Consultores · Herramienta de apoyo; no sustituye el análisis jurídico del caso concreto. Verifica la vigencia de la normativa citada.</div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var KEY='msc-rat-v1';
+  var reg=[]; try{reg=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){reg=[]}
+  var editIdx=-1, seg={};
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(reg))}catch(e){}}
+  function $(id){return document.getElementById(id)}
+  function toast(t){var el=$('toast');el.textContent=t;el.classList.add('on');setTimeout(function(){el.classList.remove('on')},1800)}
+
+  // pestañas
+  var tabs=document.querySelectorAll('nav button');
+  function show(t){tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});document.querySelectorAll('section').forEach(function(s){s.classList.toggle('on',s.id===t)});if(t==='estado')render();window.scrollTo(0,0)}
+  tabs.forEach(function(b){b.onclick=function(){show(b.dataset.t)}});
+
+  // botones Sí/No
+  document.querySelectorAll('.seg').forEach(function(g){
+    g.querySelectorAll('button').forEach(function(b){b.onclick=function(){setSeg(g.dataset.k,b.textContent)}});
+  });
+  function setSeg(k,v){seg[k]=v;var g=document.querySelector('.seg[data-k="'+k+'"]');g.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.textContent===v)});
+    if(k==='transf')$('tBox').hidden=v!=='Sí';
+    if(['riesgo','ocasional','especiales'].indexOf(k)>-1)oblig();}
+
+  // ¿obligado?
+  $('trab').oninput=oblig;
+  function oblig(){var n=$('trab').value, out=$('resOblig');
+    if(n===''){out.innerHTML='';return}
+    n=+n; var o, why;
+    if(n>=100){o=true;why='Tiene 100 o más trabajadores (art. 38 RGLOPDP).'}
+    else if(seg.riesgo==='Sí'||seg.ocasional==='No'||seg.especiales==='Sí'){o=true;why='Menos de 100 trabajadores, pero concurre riesgo, tratamiento no ocasional o categorías especiales (art. 39 RGLOPDP).'}
+    else if(seg.riesgo&&seg.ocasional&&seg.especiales){o=false;why='Menos de 100 trabajadores, sin riesgo, ocasional y sin categorías especiales.'}
+    else {out.innerHTML='<div class="res no" style="background:#F1EEE2;color:var(--oliva)">Responde las tres preguntas para obtener el resultado.</div>';return}
+    out.innerHTML='<div class="res '+(o?'si':'no')+'">'+(o?'Obligada a llevar el RAT':'No obligada (recomendable llevarlo)')+'<small>'+why+'</small></div>';}
+
+  $('base').onchange=function(){$('ilBox').hidden=this.value!=='Interés legítimo'};
+
+  var campos=['actividad','area','finalidad','titulares','datos','base','il','dest','enc','tgar','plazo','medidas','rev'];
+  var segs=['especial','nna','perfiles','transf'];
+  function leer(){var o={};campos.forEach(function(c){o[c]=$(c).value.trim()});segs.forEach(function(s){o[s]=seg[s]||''});return o}
+  function limpiar(){$('f').reset();segs.forEach(function(s){delete seg[s];document.querySelector('.seg[data-k="'+s+'"]').querySelectorAll('button').forEach(function(b){b.classList.remove('on')})});$('ilBox').hidden=true;$('tBox').hidden=true;editIdx=-1;$('guardar').textContent='Agregar al registro'}
+  $('limpiar').onclick=limpiar;
+  $('f').onsubmit=function(e){e.preventDefault();var o=leer();if(!o.actividad){$('actividad').focus();return}
+    if(editIdx>-1){reg[editIdx]=o;toast('Actividad actualizada')}else{reg.push(o);toast('Actividad agregada')}
+    save();limpiar();show('estado')};
+
+  function alertas(o){var a=[];
+    if(!o.finalidad)a.push('Falta finalidad');
+    if(!o.titulares)a.push('Faltan categorías de titulares');
+    if(!o.datos)a.push('Faltan categorías de datos');
+    if(!o.base)a.push('Falta base legitimadora');
+    if(o.base==='Interés legítimo'&&!o.il)a.push('Interés legítimo sin evaluación de ponderación');
+    if(o.base==='Consentimiento del titular'&&o.nna==='Sí')a.push('Datos de NNA con consentimiento: verificar quién lo otorga');
+    if(!o.dest)a.push('Faltan destinatarios (escribe “Ninguno” si no hay)');
+    if(o.transf==='Sí'&&!o.tgar)a.push('Transferencia internacional sin país o garantía');
+    if(!o.plazo)a.push('Falta plazo de conservación');
+    if(!o.medidas)a.push('Faltan medidas de seguridad');
+    if(!o.rev)a.push('Sin fecha de revisión');
+    if(o.especial==='Sí')a.push('Revisar si requiere evaluación de impacto');
+    return a}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+  function render(){var tot=reg.length,ok=0,esp=0,tr=0;
+    var html=reg.map(function(o,i){var a=alertas(o);if(!a.length)ok++;if(o.especial==='Sí')esp++;if(o.transf==='Sí')tr++;
+      return '<div class="item'+(a.length?' al':'')+'"><h3>'+esc(o.actividad)+'</h3><div class="meta">'+esc(o.area||'Sin área')+' · '+esc(o.base||'Sin base')+'</div>'+
+        (a.length?'<ul>'+a.map(function(x){return'<li>'+esc(x)+'</li>'}).join('')+'</ul>':'<div class="okt">Completo</div>')+
+        '<div class="acts"><button data-e="'+i+'">Editar</button><button data-d="'+i+'">Eliminar</button></div></div>'}).join('');
+    $('lista').innerHTML=tot?html:'<div class="vacio">Aún no hay actividades. Registra una o carga el ejemplo ficticio.</div>';
+    var pct=tot?Math.round(ok/tot*100):0;
+    $('kpis').innerHTML=[[tot,'Actividades'],[ok,'Completas'],[tot-ok,'Con alertas'],[pct+'%','Avance'],[esp,'Categorías especiales'],[tr,'Transferencias int.']].map(function(k){return'<div class="kpi"><b>'+k[0]+'</b><span>'+k[1]+'</span></div>'}).join('');
+    $('lista').querySelectorAll('[data-e]').forEach(function(b){b.onclick=function(){editar(+b.dataset.e)}});
+    $('lista').querySelectorAll('[data-d]').forEach(function(b){b.onclick=function(){var i=+b.dataset.d;if(b.dataset.c){reg.splice(i,1);save();render();toast('Eliminada')}else{b.dataset.c=1;b.textContent='¿Confirmar?'}}});}
+
+  function editar(i){var o=reg[i];limpiar();campos.forEach(function(c){$(c).value=o[c]||''});segs.forEach(function(s){if(o[s])setSeg(s,o[s])});
+    $('ilBox').hidden=o.base!=='Interés legítimo';editIdx=i;$('guardar').textContent='Guardar cambios';show('registro')}
+
+  var H=['Actividad','Área','Finalidades','Titulares','Categorías de datos','¿Categorías especiales?','¿NNA?','Base legitimadora','Ref. interés legítimo','Destinatarios','Encargados','¿Perfiles?','¿Transferencia internacional?','País y garantía','Plazo de conservación','Medidas','Fecha de revisión','Alertas'];
+  $('copiar').onclick=function(){if(!reg.length){toast('El registro está vacío');return}
+    var clean=function(s){return String(s||'').replace(/[\t\n\r]+/g,' ')};
+    var rows=[H.join('\t')].concat(reg.map(function(o){var a=alertas(o);return[o.actividad,o.area,o.finalidad,o.titulares,o.datos,o.especial,o.nna,o.base,o.il,o.dest,o.enc,o.perfiles,o.transf,o.tgar,o.plazo,o.medidas,o.rev,a.length?a.join('; '):'Completo'].map(clean).join('\t')}));
+    var txt=rows.join('\n');
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){toast('Copiado: pega en Excel')},function(){fallback(txt)})}else fallback(txt)};
+  function fallback(t){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Copiado: pega en Excel')}catch(e){toast('No se pudo copiar')}ta.remove()}
+
+  $('borrar').onclick=function(){var b=this;if(b.dataset.c){reg=[];save();render();b.textContent='Vaciar registro';delete b.dataset.c;toast('Registro vaciado')}else{b.dataset.c=1;b.textContent='¿Confirmar vaciado?'}};
+  $('ejemplo').onclick=function(){reg=reg.concat([
+    {actividad:'Historias clínicas (EJEMPLO)',area:'Dirección médica',finalidad:'Prestación de servicios odontológicos',titulares:'Pacientes',datos:'Identificación, contacto, salud',especial:'Sí',nna:'Sí',base:'Ejecución de contrato o medidas precontractuales',il:'',dest:'Laboratorios dentales',enc:'Software clínico en la nube',perfiles:'No',transf:'Sí',tgar:'EE. UU., cláusulas contractuales',plazo:'[Según normativa sanitaria]',medidas:'Control de acceso, cifrado, bitácora',rev:'2026-11-01'},
+    {actividad:'Videovigilancia (EJEMPLO)',area:'Administración',finalidad:'Seguridad de personas e instalaciones',titulares:'Visitantes, trabajadores',datos:'Imagen',especial:'No',nna:'Sí',base:'Interés legítimo',il:'',dest:'Autoridades ante requerimiento',enc:'Empresa de seguridad',perfiles:'No',transf:'No',tgar:'',plazo:'30 días salvo incidente',medidas:'',rev:'2026-11-01'},
+    {actividad:'Nómina (EJEMPLO)',area:'Talento Humano',finalidad:'Pago de remuneraciones y obligaciones laborales',titulares:'Trabajadores',datos:'Identificación, cuenta bancaria, remuneración',especial:'No',nna:'No',base:'Obligación legal',il:'',dest:'IESS, SRI, banco',enc:'Contadora externa',perfiles:'No',transf:'No',tgar:'',plazo:'[Plazo legal aplicable]',medidas:'Carpeta cifrada, acceso restringido',rev:'2026-11-01'}
+  ]);save();render();toast('Ejemplo cargado')};
+})();
+</script>
+</body>
+</html>

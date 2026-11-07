@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Generador de documentos LOPDP</title>
+<title>__TITULO__</title>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
 <script>/*__MARKED__*/</script>
 <style>
@@ -17,6 +17,8 @@
   header p{margin:0;color:var(--oroc);font-size:14px}
   main{display:grid;grid-template-columns:330px 1fr;gap:20px;padding:24px 20px 60px;max-width:1100px;margin:0 auto}
   @media (max-width:820px){main{grid-template-columns:1fr}}
+  main>section,main>aside{min-width:0}
+  #doc{overflow-x:auto}
   aside .card{position:sticky;top:12px}
   .card{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:16px}
   h2{font-stretch:115%;font-size:17px;margin:0 0 4px}
@@ -47,9 +49,9 @@
 </head>
 <body>
 <header><div class="wrap">
-  <div class="marca">Macías Sánchez Consultores · Herramienta 02</div>
-  <h1>Generador de documentos de protección de datos</h1>
-  <p>Política de privacidad, avisos, contrato de encargo y cláusulas de consentimiento · LOPDP Ecuador</p>
+  <div class="marca">Macías Sánchez Consultores · __HERRAMIENTA__</div>
+  <h1>__TITULO__</h1>
+  <p>__SUBTITULO__</p>
 </div></header>
 <main>
   <aside><div class="card">
@@ -59,6 +61,7 @@
     <div class="bar" style="margin-top:14px"><button class="btn sec" id="ejemplo">Cargar ejemplo ficticio</button><button class="btn sec" id="limpiar">Limpiar</button></div>
   </div></aside>
   <section>
+<!--__EXTRA__-->
     <div class="tabs" id="tabs"></div>
     <div class="bar">
       <button class="btn" id="copiar">Copiar documento</button>
@@ -73,15 +76,9 @@
 <script>
 var TEMPLATES = /*__TEMPLATES__*/;
 (function(){
-  var CAMPOS=[
-    ['RAZÓN SOCIAL','Razón social'],['RUC','RUC'],['DIRECCIÓN','Dirección'],['CIUDAD','Ciudad'],
-    ['CORREO DE PRIVACIDAD','Correo de privacidad'],['TELÉFONO','Teléfono'],['URL','URL de la política'],
-    ['NOMBRE DEL DPD','Nombre del DPD (si aplica)'],['CORREO DEL DPD','Correo del DPD'],
-    ['VERSIÓN','Versión de la política'],['FECHA DE VIGENCIA','Fecha de vigencia'],['FECHA','Fecha del documento'],
-    ['RAZÓN SOCIAL DEL ENCARGADO','Encargado: razón social'],['RUC DEL ENCARGADO','Encargado: RUC'],['DIRECCIÓN DEL ENCARGADO','Encargado: dirección'],['CORREO DEL RESPONSABLE','Correo del responsable para avisos']
-  ];
-  var EJ={'RAZÓN SOCIAL':'Ferretería Ficticia El Tornillo S.A.','RUC':'0999999999001','DIRECCIÓN':'Av. Ejemplo 123','CIUDAD':'Guayaquil','CORREO DE PRIVACIDAD':'privacidad@ejemplo.ec','TELÉFONO':'04 000 0000','URL':'https://ejemplo.ec/privacidad','VERSIÓN':'1.0','FECHA DE VIGENCIA':'1 de diciembre de 2026','FECHA':'7 de noviembre de 2026','RAZÓN SOCIAL DEL ENCARGADO':'Nube Ficticia Cía. Ltda.','RUC DEL ENCARGADO':'0988888888001','DIRECCIÓN DEL ENCARGADO':'Calle Ficticia 456, Quito','CORREO DEL RESPONSABLE':'privacidad@ejemplo.ec'};
-  var KEY='msc-gen-v1', val={};
+  var CAMPOS=/*__CAMPOS__*/;
+  var EJ=/*__EJ__*/;
+  var KEY='__KEY__', val={};
   try{val=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
   function $(i){return document.getElementById(i)}
   function toast(t){var e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},1800)}

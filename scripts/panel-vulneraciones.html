@@ -1,0 +1,87 @@
+<style>
+  .pv{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:16px;margin-bottom:16px}
+  .pv .g{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .pv select,.pv input[type=datetime-local],.pv input[type=text]{width:100%;font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--linea);border-radius:8px;background:#FFFDF6}
+  .plz{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:12px}
+  .plz div{border-radius:10px;padding:12px;background:#F1EEE2}
+  .plz b{display:block;font-size:12px;color:var(--oliva);font-weight:600}
+  .plz strong{display:block;font-size:17px;font-stretch:110%;margin:2px 0}
+  .plz small{font-size:12px;color:#555}
+  .plz .warn{background:#FFF6DC}
+  .ck{display:flex;gap:8px;align-items:flex-start;font-size:14px;margin:6px 0}
+  .ck input{width:auto;margin-top:4px}
+  .rr{margin-top:12px;border-radius:10px;padding:12px;font-weight:700}
+  .rr small{display:block;font-weight:400;margin-top:4px;color:var(--carbon)}
+  .r0{background:#E6F2EA;color:#1F5E3A}.r1{background:#FFF6DC;color:#7A5B00}.r2{background:#FBEDE5;color:#A4461C}
+  .pv h3{margin:0 0 8px;font-size:15px;font-stretch:110%}
+</style>
+<div class="pv">
+  <h2>1 · Plazos</h2>
+  <p class="sub">El cómputo parte de la fecha y hora en que se tuvo constancia de la vulneración.</p>
+  <div class="g">
+    <div><label for="pvF">Fecha y hora de constancia</label><input type="datetime-local" id="pvF"></div>
+    <div><label for="pvRol">La organización actúa como</label><select id="pvRol"><option value="r">Responsable</option><option value="e">Encargado</option></select></div>
+    <div><label for="pvFer">Feriados en el período (AAAA-MM-DD, separados por coma)</label><input type="text" id="pvFer" placeholder="2026-11-02, 2026-11-03"></div>
+  </div>
+  <div class="plz" id="pvPlz"></div>
+  <p class="nota" style="font-size:12px;color:var(--oliva);margin:8px 0 0">El término de 5 días se calcula en días hábiles (excluye sábados, domingos y los feriados que ingreses). El plazo de 2 días del encargado se muestra en días calendario como criterio conservador. Verifica siempre el cómputo con la normativa vigente.</p>
+</div>
+<div class="pv">
+  <h2>2 · ¿Debe notificarse? Evaluación inicial de riesgo</h2>
+  <p class="sub">Causales del art. 24 RGLOPDP y factores de gravedad.</p>
+  <div class="g">
+    <div>
+      <h3>¿Qué ocurrió con los datos?</h3>
+      <label class="ck"><input type="checkbox" data-c="1"> Se destruyeron o no están disponibles de forma útil</label>
+      <label class="ck"><input type="checkbox" data-c="1"> Se alteraron, corrompieron o quedaron incompletos</label>
+      <label class="ck"><input type="checkbox" data-c="1"> Se perdió el control o el acceso a ellos</label>
+      <label class="ck"><input type="checkbox" data-c="1"> Hubo acceso, divulgación o tratamiento no autorizado</label>
+    </div>
+    <div>
+      <h3>Factores de gravedad</h3>
+      <label class="ck"><input type="checkbox" data-g="2"> Categorías especiales (salud, biométricos, etc.)</label>
+      <label class="ck"><input type="checkbox" data-g="2"> Datos financieros o credenciales de acceso</label>
+      <label class="ck"><input type="checkbox" data-g="2"> Datos de niñas, niños y adolescentes</label>
+      <label class="ck"><input type="checkbox" data-g="1"> Más de 100 titulares afectados</label>
+      <label class="ck"><input type="checkbox" data-g="1"> Datos que identifican directamente a las personas</label>
+      <label class="ck"><input type="checkbox" data-g="1"> Los datos no pueden recuperarse o la exposición es irreversible</label>
+      <label class="ck"><input type="checkbox" data-g="-2"> Datos cifrados con clave no comprometida</label>
+    </div>
+  </div>
+  <div id="pvR"></div>
+</div>
+<h2 style="margin-top:6px">3 · Documentos</h2>
+<p class="sub">Completa los datos del responsable e incidente y elige el documento.</p>
+<script>
+(function(){
+  function $(i){return document.getElementById(i)}
+  var DIAS=['dom','lun','mar','mié','jue','vie','sáb'];
+  function fmt(d){return DIAS[d.getDay()]+' '+d.toLocaleDateString('es-EC',{day:'2-digit',month:'short',year:'numeric'})+', '+d.toTimeString().slice(0,5)}
+  function fer(){return $('pvFer').value.split(',').map(function(s){return s.trim()}).filter(Boolean)}
+  function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+  function habiles(d,n){var f=fer(),x=new Date(d),c=0;while(c<n){x.setDate(x.getDate()+1);var w=x.getDay();if(w!==0&&w!==6&&f.indexOf(iso(x))<0)c++}x.setHours(23,59,0,0);return x}
+  function calend(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x}
+  function plazos(){var v=$('pvF').value,box=$('pvPlz');if(!v){box.innerHTML='';return}
+    var d=new Date(v),h='';
+    if($('pvRol').value==='e')h+='<div><b>Encargado → responsable</b><strong>'+fmt(calend(d,2))+'</strong><small>Máximo 2 días · Res. SPDP-SPD-2026-0040-R</small></div>';
+    var lim=habiles(d,5);
+    h+='<div><b>'+($('pvRol').value==='e'?'Responsable → SPDP (referencial)':'Notificación a la SPDP')+'</b><strong>'+fmt(lim)+'</strong><small>Término de 5 días · LOPDP art. 43 · vía SISPDP</small></div>';
+    h+='<div class="warn"><b>ARCOTEL y CSIRT</b><strong>Verificar</strong><small>Art. 43 reformado (mayo 2026): canal y plazo por confirmar</small></div>';
+    h+='<div class="warn"><b>Titulares</b><strong>Verificar</strong><small>Referencia doctrinal: 3 días (art. 46 LOPDP). Confirmar en texto vigente</small></div>';
+    box.innerHTML=h;
+    var inp=document.querySelector('#campos input[data-k="FECHA LÍMITE"]');if(inp){inp.value=fmt(lim);inp.dispatchEvent(new Event('input'))}
+    var inp2=document.querySelector('#campos input[data-k="FECHA Y HORA"]');if(inp2){inp2.value=fmt(d);inp2.dispatchEvent(new Event('input'))}
+  }
+  ['pvF','pvRol','pvFer'].forEach(function(i){$(i).addEventListener('input',plazos);$(i).addEventListener('change',plazos)});
+  function riesgo(){var c=document.querySelectorAll('[data-c]:checked').length,g=0;
+    document.querySelectorAll('[data-g]:checked').forEach(function(x){g+=+x.dataset.g});
+    var out=$('pvR');
+    if(!c&&!document.querySelectorAll('[data-g]:checked').length){out.innerHTML='';return}
+    if(!c){out.innerHTML='<div class="rr r0">Sin causal del art. 24 marcada<small>Si ninguna de las cuatro situaciones ocurrió, puede no tratarse de una vulneración notificable. Documenta igualmente el incidente y la justificación en la bitácora.</small></div>';return}
+    if(g>=3)out.innerHTML='<div class="rr r2">Riesgo alto: notificar a la SPDP y a los titulares<small>Concurren causales del art. 24 y factores de gravedad significativos. Prepara también la notificación a ARCOTEL y al CSIRT.</small></div>';
+    else if(g>=1)out.innerHTML='<div class="rr r1">Riesgo: notificar a la SPDP; evaluar comunicación a titulares<small>Concurre al menos una causal del art. 24. Valora si las consecuencias para los titulares justifican comunicarles; la omisión injustificada es infracción grave.</small></div>';
+    else out.innerHTML='<div class="rr r1">Causal presente con factores atenuantes<small>Hay una causal del art. 24, pero los atenuantes reducen el riesgo. La decisión de no notificar debe estar justificada por escrito; ante duda, notifica.</small></div>';
+  }
+  document.querySelectorAll('[data-c],[data-g]').forEach(function(x){x.onchange=riesgo});
+})();
+</script>

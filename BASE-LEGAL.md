@@ -36,6 +36,8 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | Vulneración, encargado | Comunica al responsable en máximo 2 días, por correo salvo otro medio pactado en el contrato | RES-0040; RES-0006 Anexo I | ☐ |
 | Vulneración, titulares | Notificación a titulares afectados; fuentes doctrinales citan 3 días (art. 46) **— confirmar en texto vigente** | LOPDP art. 46; RES-0040 | ☐ |
 | Vulneración, contenido | Naturaleza; titulares afectados; sistemas; causa presunta; volumen y tipos de datos; medidas; evaluación de riesgo; otros | RGLOPDP art. 26 | ☐ |
+| Vulneración, encargado (contenido) | Mismo contenido del art. 26, excepto la evaluación del riesgo | RGLOPDP art. 27 | ☐ |
+| Vulneración, titulares (contenido) | Mismo contenido, en lenguaje claro y sencillo; excepciones a la notificación de aplicación restringida | RGLOPDP art. 28 | ☐ |
 | Vulneración, canal | Obligatoriamente por el SISPDP (servicios.spdp.gob.ec) | RES-0040 | ☐ |
 | Información al titular | Contenidos del derecho a la información (base de la política y aviso de privacidad) | LOPDP art. 12 | ☐ |
 

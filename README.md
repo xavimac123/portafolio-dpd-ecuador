@@ -8,9 +8,9 @@ Herramientas para la gestión del cumplimiento de la **Ley Orgánica de Protecci
 
 | # | Herramienta | Contenido | Estado |
 |---|---|---|---|
-| 01 | [Registro de actividades de tratamiento](01-registro-tratamientos/) | Guía, plantilla Excel con validación de vacíos, ejemplo ficticio, asistente web | v0.1 |
+| 01 | [Registro de actividades de tratamiento](01-registro-tratamientos/) | Plantilla Excel con alertas automáticas, ejemplo ficticio, asistente web | v0.1 |
 | 02 | [Kit de plantillas](02-kit-plantillas/) | Política de privacidad, aviso de privacidad, contrato de encargo, cláusulas de consentimiento | v0.1 |
-| 03 | [Kit de vulneraciones](03-kit-vulneraciones/) | Protocolo, bitácora, modelos de comunicación encargado→responsable, SPDP y titulares | v0.1 |
+| 03 | [Kit de vulneraciones](03-kit-vulneraciones/) | Protocolo, bitácora, modelos de comunicación, calculadora de plazos y evaluación de riesgo | v0.1 |
 
 ## Cómo se usa
 
@@ -26,3 +26,13 @@ Estas herramientas son material de apoyo y no sustituyen el análisis jurídico 
 ## Licencia
 
 Pendiente de definir antes de hacer público el repositorio (ver `docs/decision-licencia.md`).
+
+## Regenerar los archivos derivados
+
+```bash
+python scripts/generar_rat.py          # Excel del RAT
+python scripts/generar_generador.py    # páginas web de los kits 02 y 03
+bash scripts/exportar_docx.sh          # versiones Word
+```
+
+`scripts/vendor/marked.min.js` (licencia MIT, ver `marked-LICENSE.md`) se incrusta en las páginas web para que funcionen sin conexión.

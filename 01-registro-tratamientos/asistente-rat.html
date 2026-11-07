@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>Asistente RAT — LOPDP Ecuador</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
 <style>
-  :root{--oro:#A09046;--carbon:#14181E;--marfil:#F7F5EE;--oliva:#6E6230;--oroc:#C9BC82;--linea:#DDD8C8;--ok:#2E7D4F;--okbg:#E6F2EA;--al:#A4461C;--albg:#FBEDE5}
+  :root{color-scheme:light;--oro:#A09046;--carbon:#14181E;--marfil:#F7F5EE;--oliva:#6E6230;--oroc:#C9BC82;--linea:#DDD8C8;--ok:#2E7D4F;--okbg:#E6F2EA;--al:#A4461C;--albg:#FBEDE5}
   *{box-sizing:border-box}
   body{margin:0;font-family:Archivo,system-ui,sans-serif;background:var(--marfil);color:var(--carbon);font-size:15px;line-height:1.5}
   header{background:var(--carbon);color:var(--marfil);padding:22px 20px 18px}
@@ -27,13 +28,16 @@
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
   label{display:block;font-weight:600;font-size:13px;margin-bottom:4px}
   .ref{font-weight:400;color:var(--oliva);font-size:11px;margin-left:4px}
-  input,select,textarea{width:100%;font:inherit;font-size:14px;padding:9px 10px;border:1px solid var(--linea);border-radius:8px;background:#FFFDF6}
+  html,body{background:var(--marfil);color:var(--carbon)}
+  input,select,textarea{width:100%;font:inherit;font-size:14px;padding:9px 10px;border:1px solid var(--linea);border-radius:8px;background:#FFFDF6;color:#14181E;-webkit-text-fill-color:#14181E;caret-color:#14181E;color-scheme:light;opacity:1}
+  input::placeholder,textarea::placeholder{color:#8C8775;-webkit-text-fill-color:#8C8775}
+  select option{color:#14181E;background:#fff}
   textarea{min-height:64px;resize:vertical}
   input:focus,select:focus,textarea:focus{outline:2px solid var(--oro);outline-offset:1px}
-  .seg{display:flex;gap:6px}.seg button{flex:1;padding:8px;border:1px solid var(--linea);background:#FFFDF6;border-radius:8px;font:inherit;cursor:pointer}
+  .seg{display:flex;gap:6px}.seg button{flex:1;padding:8px;border:1px solid var(--linea);background:#FFFDF6;color:#14181E;border-radius:8px;font:inherit;cursor:pointer}
   .seg button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
   .btn{background:var(--carbon);color:#fff;border:0;padding:10px 16px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
-  .btn.sec{background:transparent;color:var(--carbon);border:1px solid var(--carbon)}
+  .btn.sec{background:#fff;color:var(--carbon);border:1px solid var(--carbon)}
   .btn.oro{background:var(--oro);color:var(--carbon)}
   .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
   .res{border-radius:12px;padding:16px;margin-top:14px;font-weight:600}
@@ -120,10 +124,29 @@
   <h2>Estado del registro</h2>
   <p class="sub">Las alertas revisan que cada campo exista, no que su contenido sea jurídicamente correcto.</p>
   <div class="kpis" id="kpis"></div>
+  <div class="card">
+    <h3 style="margin:0 0 4px;font-size:15px">Firma de responsabilidad</h3>
+    <p class="nota" style="margin:0 0 6px">Se agrega al final de la tabla al copiarla.</p>
+    <div class="grid">
+      <div><label for="fElab">Elaborado por</label><input id="fElab"></div>
+      <div><label for="fCargo">Cargo / matrícula</label><input id="fCargo"></div>
+      <div><label for="fAprob">Revisado y aprobado por</label><input id="fAprob" placeholder="Representante legal del responsable"></div>
+      <div><label for="fCargoA">Cargo de quien aprueba</label><input id="fCargoA"></div>
+      <div><label for="fFecha">Fecha</label><input id="fFecha" type="date"></div>
+    </div>
+  </div>
   <div class="row" style="margin-bottom:14px">
     <button class="btn oro" id="copiar">Copiar para Excel</button>
+    <button class="btn sec" id="bImport">Importar RAT existente</button>
     <button class="btn sec" id="ejemplo">Cargar ejemplo ficticio</button>
     <button class="btn sec" id="borrar">Vaciar registro</button>
+  </div>
+  <div class="card" id="pImport" hidden>
+    <h3 style="margin:0 0 4px;font-size:15px">Importar un registro que ya uses</h3>
+    <p class="nota" style="margin:0 0 8px">En Excel, selecciona la tabla <b>incluida la fila de encabezados</b>, cópiala y pégala aquí. Se reconocen columnas como Actividad, Finalidad, Titulares, Categorías de datos, Base legitimadora, Destinatarios, Encargados, Transferencia, Plazo, Medidas y Fecha de revisión, aunque estén en otro orden. Las columnas no reconocidas se informan para que puedas ajustarlas.</p>
+    <textarea id="imTxt" style="min-height:120px" placeholder="Pega aquí la tabla copiada desde Excel"></textarea>
+    <div class="row" style="margin-top:8px"><button class="btn" id="imOk">Importar y analizar</button><button class="btn sec" id="imNo">Cancelar</button></div>
+    <p class="nota" id="imRes"></p>
   </div>
   <div id="lista"></div>
   <p class="nota">“Copiar para Excel” copia el registro como tabla; pégala en la hoja RAT de la plantilla o en una hoja nueva.</p>
@@ -211,9 +234,33 @@
   $('copiar').onclick=function(){if(!reg.length){toast('El registro está vacío');return}
     var clean=function(s){return String(s||'').replace(/[\t\n\r]+/g,' ')};
     var rows=[H.join('\t')].concat(reg.map(function(o){var a=alertas(o);return[o.actividad,o.area,o.finalidad,o.titulares,o.datos,o.especial,o.nna,o.base,o.il,o.dest,o.enc,o.perfiles,o.transf,o.tgar,o.plazo,o.medidas,o.rev,a.length?a.join('; '):'Completo'].map(clean).join('\t')}));
-    var txt=rows.join('\n');
+    var txt=rows.concat(firmaRows()).join('\n');
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){toast('Copiado: pega en Excel')},function(){fallback(txt)})}else fallback(txt)};
   function fallback(t){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Copiado: pega en Excel')}catch(e){toast('No se pudo copiar')}ta.remove()}
+
+  // firma de responsabilidad
+  var FK='msc-rat-firma-v1',fir={fElab:'Abg. Mariano X. Macías Sánchez',fCargo:'Consultor en Protección de Datos · Mat. 09-2022-736',fAprob:'',fCargoA:'',fFecha:''};
+  try{var sf=JSON.parse(localStorage.getItem(FK)||'null');if(sf)fir=sf}catch(e){}
+  Object.keys(fir).forEach(function(k){$(k).value=fir[k]||'';$(k).addEventListener('input',function(){fir[k]=$(k).value;try{localStorage.setItem(FK,JSON.stringify(fir))}catch(e){}})});
+  function firmaRows(){return['','FIRMA DE RESPONSABILIDAD','Elaborado por\t'+fir.fElab+'\t\tRevisado y aprobado por\t'+fir.fAprob,'Cargo\t'+fir.fCargo+'\t\tCargo\t'+fir.fCargoA,'Firma\t______________________\t\tFirma\t______________________','Fecha\t'+fir.fFecha]}
+
+  // importar
+  var MAP=[['actividad',/actividad|tratamiento|proceso/],['area',/área|area|departamento|unidad/],['finalidad',/finalidad|fin(es)?\b|propósito/],['titulares',/titular|interesad/],['datos',/categor.*dato|tipo.*dato|datos personales|^datos$/],['especial',/especial|sensible/],['nna',/niñ|menor|nna|adolescent/],['base',/base|legitima|licitud/],['il',/ponderaci|evaluaci.*inter/],['dest',/destinatari|cesion|comunicaci/],['enc',/encargad|proveedor/],['perfiles',/perfil/],['transf',/^¿?transferencia|internacional/],['tgar',/país|pais|garant/],['plazo',/plazo|conservaci|retenci|supresi/],['medidas',/medida|seguridad/],['rev',/revisi|fecha/]];
+  $('bImport').onclick=function(){$('pImport').hidden=false;$('imTxt').focus()};
+  $('imNo').onclick=function(){$('pImport').hidden=true};
+  $('imOk').onclick=function(){var lines=$('imTxt').value.replace(/\r/g,'').split('\n').filter(function(l){return l.trim()});
+    if(lines.length<2){$('imRes').textContent='Pega al menos la fila de encabezados y una fila de datos.';return}
+    var head=lines[0].split('\t'),col={},used={},nores=[];
+    head.forEach(function(h,i){var hl=h.trim().toLowerCase(),hit=null;
+      for(var j=0;j<MAP.length;j++){if(!used[MAP[j][0]]&&MAP[j][1].test(hl)){hit=MAP[j][0];break}}
+      if(hit){col[hit]=i;used[hit]=1}else if(hl&&hl!=='alertas'&&hl!=='id')nores.push(h.trim())});
+    if(col.actividad===undefined){$('imRes').textContent='No se encontró una columna de actividad o tratamiento. Revisa los encabezados.';return}
+    var n=0;lines.slice(1).forEach(function(l){var c=l.split('\t');if(!(c[col.actividad]||'').trim())return;var o={};
+      ['actividad','area','finalidad','titulares','datos','especial','nna','base','il','dest','enc','perfiles','transf','tgar','plazo','medidas','rev'].forEach(function(k){o[k]=col[k]!==undefined?(c[col[k]]||'').trim():''});
+      ['especial','nna','perfiles','transf'].forEach(function(k){var v=o[k].toLowerCase();o[k]=/^s[ií]|^x$|^yes/.test(v)?'Sí':(/^no/.test(v)?'No':'')});
+      reg.push(o);n++});
+    save();render();$('imTxt').value='';
+    $('imRes').textContent=n+' actividades importadas.'+(nores.length?' Columnas no reconocidas: '+nores.join(', ')+'.':'')+' Revisa las alertas de cada actividad.';toast(n+' actividades importadas')};
 
   $('borrar').onclick=function(){var b=this;if(b.dataset.c){reg=[];save();render();b.textContent='Vaciar registro';delete b.dataset.c;toast('Registro vaciado')}else{b.dataset.c=1;b.textContent='¿Confirmar vaciado?'}};
   $('ejemplo').onclick=function(){reg=reg.concat([

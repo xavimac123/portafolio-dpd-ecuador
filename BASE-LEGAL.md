@@ -39,6 +39,10 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | Vulneración, encargado (contenido) | Mismo contenido del art. 26, excepto la evaluación del riesgo | RGLOPDP art. 27 | ☐ |
 | Vulneración, titulares (contenido) | Mismo contenido, en lenguaje claro y sencillo; excepciones a la notificación de aplicación restringida | RGLOPDP art. 28 | ☐ |
 | Vulneración, canal | Obligatoriamente por el SISPDP (servicios.spdp.gob.ec) | RES-0040 | ☐ |
+| DPD, obligación | Designar al DPD en los casos que corresponda; no hacerlo es infracción grave | LOPDP art. 47 num. 13; art. 68 | ☐ |
+| DPD, definición | Persona natural que asesora, vela y supervisa de forma independiente el cumplimiento | LOPDP art. 48 | ☐ |
+| DPD, causales y funciones | 14 actividades privadas con designación obligatoria; funciones ampliadas; registro ante la SPDP | RES-0028 arts. 10 y 13 | ☐ |
+| DPD, información al titular | Identidad y datos de contacto del DPD, cuando sea del caso | LOPDP art. 12 | ☐ |
 | Información al titular | Contenidos del derecho a la información (base de la política y aviso de privacidad) | LOPDP art. 12 | ☐ |
 
 ## Puntos abiertos (no resolver con supuestos)

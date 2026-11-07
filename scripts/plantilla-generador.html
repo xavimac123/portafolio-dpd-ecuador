@@ -3,48 +3,57 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>__TITULO__</title>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
 <script>/*__MARKED__*/</script>
 <style>
-  :root{--oro:#A09046;--carbon:#14181E;--marfil:#F7F5EE;--oliva:#6E6230;--oroc:#C9BC82;--linea:#DDD8C8}
+  :root{color-scheme:light;--oro:#A09046;--carbon:#14181E;--marfil:#F7F5EE;--oliva:#6E6230;--oroc:#C9BC82;--linea:#DDD8C8}
   *{box-sizing:border-box}
-  body{margin:0;font-family:Archivo,system-ui,sans-serif;background:var(--marfil);color:var(--carbon);font-size:15px;line-height:1.5}
+  html,body{background:var(--marfil);color:var(--carbon)}
+  body{margin:0;font-family:Archivo,system-ui,sans-serif;font-size:15px;line-height:1.5}
   header{background:var(--carbon);color:var(--marfil);padding:22px 20px 18px}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}header .wrap{padding:0}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 20px}header .wrap{padding:0}
   .marca{font-stretch:115%;font-weight:700;letter-spacing:.08em;color:var(--oro);font-size:12px;text-transform:uppercase}
   h1{font-stretch:115%;font-weight:800;font-size:clamp(22px,4vw,32px);margin:6px 0 4px;line-height:1.15}
   header p{margin:0;color:var(--oroc);font-size:14px}
-  main{display:grid;grid-template-columns:330px 1fr;gap:20px;padding:24px 20px 60px;max-width:1100px;margin:0 auto}
-  @media (max-width:820px){main{grid-template-columns:1fr}}
+  main{display:grid;grid-template-columns:340px 1fr;gap:20px;padding:24px 20px 60px;max-width:1140px;margin:0 auto}
   main>section,main>aside{min-width:0}
-  #doc{overflow-x:auto}
-  aside .card{position:sticky;top:12px}
-  .card{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:16px}
+  @media (max-width:860px){main{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:16px;margin-bottom:14px}
   h2{font-stretch:115%;font-size:17px;margin:0 0 4px}
-  .sub{color:var(--oliva);font-size:13px;margin:0 0 12px}
+  .sub{color:var(--oliva);font-size:13px;margin:0 0 10px}
   label{display:block;font-weight:600;font-size:12px;margin:10px 0 3px}
-  input{width:100%;font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--linea);border-radius:8px;background:#FFFDF6}
-  input:focus{outline:2px solid var(--oro)}
+  input,select,textarea{width:100%;font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--linea);border-radius:8px;
+    background:#FFFDF6;color:#14181E;-webkit-text-fill-color:#14181E;caret-color:#14181E;color-scheme:light;opacity:1}
+  input::placeholder,textarea::placeholder{color:#8C8775;-webkit-text-fill-color:#8C8775}
+  input:focus,textarea:focus{outline:2px solid var(--oro)}
+  input[type=checkbox]{width:auto}
+  textarea{min-height:90px;resize:vertical;font-family:ui-monospace,Menlo,monospace;font-size:13px}
   .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-  .tabs button{border:1px solid var(--linea);background:#fff;padding:8px 12px;border-radius:999px;font:inherit;font-size:13px;cursor:pointer}
+  .tabs button{border:1px solid var(--linea);background:#fff;color:var(--carbon);padding:8px 12px;border-radius:999px;font:inherit;font-size:13px;cursor:pointer}
   .tabs button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
+  .tabs button.imp{border-style:dashed}
   .bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
   .btn{background:var(--oro);color:var(--carbon);border:0;padding:9px 14px;border-radius:8px;font:inherit;font-weight:700;cursor:pointer}
-  .btn.sec{background:transparent;border:1px solid var(--carbon)}
+  .btn.sec{background:#fff;color:var(--carbon);border:1px solid var(--carbon);font-weight:600}
+  .btn.min{padding:6px 10px;font-size:13px}
+  .chk{display:flex;gap:6px;align-items:center;font-size:13px;margin:0;font-weight:500}
   .pend{font-size:13px;color:var(--oliva)}
-  #doc{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:28px clamp(16px,4vw,40px);font-family:Georgia,'Times New Roman',serif;font-size:15px}
+  #doc{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:28px clamp(16px,4vw,40px);font-family:Georgia,'Times New Roman',serif;font-size:15px;overflow-x:auto;color:var(--carbon)}
   #doc h1{font-family:Archivo,sans-serif;font-stretch:110%;font-size:22px}
   #doc h2{font-family:Archivo,sans-serif;font-size:16px;margin-top:22px}
   #doc table{border-collapse:collapse;width:100%;font-size:13px;margin:10px 0}
   #doc th,#doc td{border:1px solid var(--linea);padding:6px 8px;text-align:left;vertical-align:top}
   #doc th{background:#F1EEE2}
   #doc blockquote{margin:12px 0;padding:10px 14px;background:#FFF6DC;border-left:4px solid var(--oro);font-family:Archivo,sans-serif;font-size:13px}
+  #doc hr{border:0;border-top:1px solid var(--linea);margin:28px 0 14px}
   mark.ph{background:#FCE4D6;color:#8A3A12;padding:0 2px;border-radius:3px}
   mark.ok{background:#E6F2EA;color:#1F5E3A;padding:0 2px;border-radius:3px}
-  .chk{display:flex;gap:6px;align-items:center;font-size:13px}
-  .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--carbon);color:#fff;padding:10px 16px;border-radius:8px;opacity:0;transition:.2s;pointer-events:none}.toast.on{opacity:1}
-  footer{border-top:1px solid var(--linea);padding:18px 20px;font-size:12px;color:var(--oliva);max-width:1100px;margin:0 auto}
+  .panel{display:none}.panel.on{display:block}
+  .vacio{font-size:13px;color:var(--oliva)}
+  .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--carbon);color:#fff;padding:10px 16px;border-radius:8px;opacity:0;transition:.2s;pointer-events:none;z-index:9}.toast.on{opacity:1}
+  footer{border-top:1px solid var(--linea);padding:18px 20px;font-size:12px;color:var(--oliva);max-width:1140px;margin:0 auto}
 </style>
 </head>
 <body>
@@ -54,69 +63,139 @@
   <p>__SUBTITULO__</p>
 </div></header>
 <main>
-  <aside><div class="card">
-    <h2>Datos del responsable</h2>
-    <p class="sub">Complétalos una vez; se aplican a todas las plantillas. Usa datos ficticios para practicar.</p>
-    <div id="campos"></div>
-    <div class="bar" style="margin-top:14px"><button class="btn sec" id="ejemplo">Cargar ejemplo ficticio</button><button class="btn sec" id="limpiar">Limpiar</button></div>
-  </div></aside>
+  <aside>
+    <div class="card">
+      <h2>Datos generales</h2>
+      <p class="sub">Se aplican a todas las plantillas. Usa datos ficticios para practicar.</p>
+      <div id="campos"></div>
+      <div class="bar" style="margin:14px 0 0"><button class="btn sec min" id="ejemplo">Cargar ejemplo ficticio</button><button class="btn sec min" id="limpiar">Limpiar</button></div>
+    </div>
+    <div class="card">
+      <h2>Datos de este documento</h2>
+      <p class="sub">Campos propios del documento abierto. Los datos que cambian fila por fila en una tabla se completan después en Word.</p>
+      <div id="dinamicos"></div>
+    </div>
+    <div class="card">
+      <h2>Firma de responsabilidad</h2>
+      <p class="sub">Se agrega al final del documento al copiarlo.</p>
+      <div id="firma"></div>
+    </div>
+  </aside>
   <section>
 <!--__EXTRA__-->
     <div class="tabs" id="tabs"></div>
     <div class="bar">
       <button class="btn" id="copiar">Copiar documento</button>
-      <label class="chk"><input type="checkbox" id="notas" style="width:auto"> Mostrar notas para quien redacta</label>
+      <button class="btn sec min" id="bEditar">Editar plantilla</button>
+      <button class="btn sec min" id="bImportar">Importar plantilla propia</button>
+    </div>
+    <div class="bar">
+      <label class="chk"><input type="checkbox" id="conFirma" checked> Incluir firma de responsabilidad</label>
+      <label class="chk"><input type="checkbox" id="notas"> Mostrar notas para quien redacta</label>
       <span class="pend" id="pend"></span>
     </div>
+
+    <div class="card panel" id="pEditar">
+      <h2>Editar plantilla: <span id="edNombre"></span></h2>
+      <p class="sub">Corrige o mejora el texto. Usa <b>[MAYÚSCULAS ENTRE CORCHETES]</b> para los datos variables y <b>&gt;</b> al inicio de línea para notas internas. Los cambios se guardan en este navegador; usa “Copiar Markdown” para incorporarlos al repositorio.</p>
+      <textarea id="edTexto" style="min-height:320px"></textarea>
+      <div class="bar" style="margin:10px 0 0">
+        <button class="btn" id="edGuardar">Guardar cambios</button>
+        <button class="btn sec min" id="edCopiar">Copiar Markdown</button>
+        <button class="btn sec min" id="edRestaurar">Restaurar original</button>
+        <button class="btn sec min" id="edEliminar">Eliminar plantilla importada</button>
+        <button class="btn sec min" id="edCerrar">Cerrar</button>
+      </div>
+    </div>
+
+    <div class="card panel" id="pImportar">
+      <h2>Importar plantilla propia</h2>
+      <p class="sub">Pega el texto de un documento que ya uses (desde Word) o sube un archivo .md o .txt. Reemplaza los datos variables por <b>[MAYÚSCULAS ENTRE CORCHETES]</b> y el generador creará un campo para cada uno.</p>
+      <label for="imNombre">Nombre de la plantilla</label><input id="imNombre" placeholder="Ej. Acuerdo de confidencialidad">
+      <label for="imArchivo">Archivo (.md o .txt)</label><input type="file" id="imArchivo" accept=".md,.txt,text/plain,text/markdown">
+      <label for="imTexto">o pega el texto</label><textarea id="imTexto" placeholder="# Título del documento&#10;&#10;[RAZÓN SOCIAL], con RUC [RUC]..."></textarea>
+      <div class="bar" style="margin:10px 0 0"><button class="btn" id="imAgregar">Agregar plantilla</button><button class="btn sec min" id="imCerrar">Cerrar</button></div>
+    </div>
+
     <article id="doc"></article>
   </section>
 </main>
-<footer>Abg. Mariano X. Macías Sánchez · Macías Sánchez Consultores · Plantillas de apoyo; no sustituyen el análisis jurídico del caso concreto. Resalte naranja = dato pendiente · verde = dato completado.</footer>
+<footer>Abg. Mariano X. Macías Sánchez · Macías Sánchez Consultores · Plantillas de apoyo; no sustituyen el análisis jurídico del caso concreto. Resaltado naranja = dato pendiente · verde = dato completado.</footer>
 <div class="toast" id="toast"></div>
 <script>
 var TEMPLATES = /*__TEMPLATES__*/;
+var FIRMA_MD = /*__FIRMA__*/;
 (function(){
   var CAMPOS=/*__CAMPOS__*/;
   var EJ=/*__EJ__*/;
-  var KEY='__KEY__', val={};
-  try{val=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+  var FIRMA=[['ELABORADO POR','Elaborado por'],['CARGO DE QUIEN ELABORA','Cargo de quien elabora'],['REGISTRO DE QUIEN ELABORA','Matrícula o registro'],['APROBADO POR','Revisado y aprobado por'],['CARGO DE QUIEN APRUEBA','Cargo de quien aprueba'],['FECHA DE FIRMA','Fecha de firma']];
+  var FIRMA_DEF={'ELABORADO POR':'Abg. Mariano X. Macías Sánchez','CARGO DE QUIEN ELABORA':'Consultor en Protección de Datos Personales · Macías Sánchez Consultores','REGISTRO DE QUIEN ELABORA':'Matrícula profesional 09-2022-736'};
+  var KEY='__KEY__';
+  var st={val:{},edits:{},imports:[]};
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.val)st=s}catch(e){}
+  Object.keys(FIRMA_DEF).forEach(function(k){if(st.val[k]===undefined)st.val[k]=FIRMA_DEF[k]});
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
   function $(i){return document.getElementById(i)}
-  function toast(t){var e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},1800)}
+  function toast(t){var e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},1900)}
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-  $('campos').innerHTML=CAMPOS.map(function(c,i){return'<label for="c'+i+'">'+c[1]+'</label><input id="c'+i+'" data-k="'+c[0]+'" value="'+esc(val[c[0]]||'')+'">'}).join('');
-  document.querySelectorAll('#campos input').forEach(function(inp){inp.oninput=function(){val[inp.dataset.k]=inp.value;try{localStorage.setItem(KEY,JSON.stringify(val))}catch(e){}render()}});
-  var cur=0;
-  $('tabs').innerHTML=TEMPLATES.map(function(t,i){return'<button data-i="'+i+'"'+(i?'':' class="on"')+'>'+esc(t.nombre)+'</button>'}).join('');
-  $('tabs').querySelectorAll('button').forEach(function(b){b.onclick=function(){cur=+b.dataset.i;$('tabs').querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});render()}});
-  $('notas').onchange=render;
-  function fill(md,mark){
-    var keys=Object.keys(val).filter(function(k){return val[k]}).sort(function(a,b){return b.length-a.length});
-    keys.forEach(function(k){md=md.split('['+k+']').join(mark?'\u0001'+val[k]+'\u0002':val[k])});
-    return md}
-  function render(){
-    var md=TEMPLATES[cur].md;
-    if(!$('notas').checked){md=md.split('\n').filter(function(l){return!/^>/.test(l)}).join('\n')}
-    md=fill(md,true);
-    var html=marked.parse(md);
-    var pend=0;
-    html=html.replace(/\[([A-ZÁÉÍÓÚÑ0-9 ]{2,})\]/g,function(m){pend++;return'<mark class="ph">'+m+'</mark>'});
+  var PH=/\[([A-ZÁÉÍÓÚÑÜ0-9][A-ZÁÉÍÓÚÑÜ0-9 \-.º°]+)\]/g;
+  var KNOWN={};CAMPOS.concat(FIRMA).forEach(function(c){KNOWN[c[0]]=1});
+
+  function inputs(box,list){box.innerHTML=list.map(function(c,i){var id=box.id+i;return'<label for="'+id+'">'+esc(c[1])+'</label><input id="'+id+'" data-k="'+esc(c[0])+'" value="'+esc(st.val[c[0]]||'')+'">'}).join('');
+    box.querySelectorAll('input').forEach(function(inp){inp.addEventListener('input',function(){st.val[inp.dataset.k]=inp.value;save();preview()})})}
+  inputs($('campos'),CAMPOS);inputs($('firma'),FIRMA);
+
+  function all(){return TEMPLATES.map(function(t,i){return{nombre:t.nombre,md:t.md,id:'b'+i}}).concat(st.imports.map(function(t,i){return{nombre:t.nombre,md:t.md,id:'i'+i,imp:true}}))}
+  var cur='b0';
+  function tpl(){var a=all();for(var i=0;i<a.length;i++)if(a[i].id===cur)return a[i];cur='b0';return a[0]}
+  function srcMd(){var t=tpl();return st.edits[t.id]!==undefined?st.edits[t.id]:t.md}
+  function tabs(){$('tabs').innerHTML=all().map(function(t){return'<button data-id="'+t.id+'" class="'+(t.id===cur?'on ':'')+(t.imp?'imp':'')+'">'+esc(t.nombre)+(st.edits[t.id]!==undefined?' ✎':'')+'</button>'}).join('');
+    $('tabs').querySelectorAll('button').forEach(function(b){b.onclick=function(){cur=b.dataset.id;closePanels();tabs();full()}})}
+
+  function body(withNotes){var md=srcMd();
+    if(!withNotes)md=md.split('\n').filter(function(l){return!/^\s*>/.test(l)}).join('\n');
+    if($('conFirma').checked)md+=FIRMA_MD;return md}
+  function fill(md,mark){var ks=Object.keys(st.val).filter(function(k){return st.val[k]}).sort(function(a,b){return b.length-a.length});
+    ks.forEach(function(k){md=md.split('['+k+']').join(mark?'\u0001'+st.val[k]+'\u0002':st.val[k])});return md}
+
+  var lastDyn='';
+  function dynamic(){var md=body($('notas').checked),cnt={},rows={},m;
+    md.split('\n').forEach(function(l){var isRow=/^\s*\|/.test(l);var r=new RegExp(PH.source,'g');while((m=r.exec(l))){var k=m[1];cnt[k]=(cnt[k]||0)+1;if(isRow)rows[k]=(rows[k]||0)+1}});
+    var keys=Object.keys(cnt).filter(function(k){return!KNOWN[k]&&!((rows[k]||0)>=2)});
+    var sig=cur+'|'+keys.join('|');if(sig===lastDyn)return;lastDyn=sig;
+    if(!keys.length){$('dinamicos').innerHTML='<p class="vacio">Este documento no tiene datos adicionales.</p>';return}
+    inputs($('dinamicos'),keys.map(function(k){return[k,k.charAt(0)+k.slice(1).toLowerCase()]}))}
+
+  function preview(){var md=fill(body($('notas').checked),true);var html=marked.parse(md),pend=0;
+    html=html.replace(new RegExp(PH.source,'g'),function(x){pend++;return'<mark class="ph">'+x+'</mark>'});
     html=html.replace(/\u0001([\s\S]*?)\u0002/g,'<mark class="ok">$1</mark>');
-    $('doc').innerHTML=html;
-    $('pend').textContent=pend?pend+' datos pendientes en este documento':'Sin datos pendientes de formato [MAYÚSCULAS]';
-  }
-  $('copiar').onclick=function(){
-    var md=TEMPLATES[cur].md.split('\n').filter(function(l){return!/^>/.test(l)}).join('\n');
-    md=fill(md,false);var html=marked.parse(md);
-    var plain=$('doc').innerText;
-    try{
-      if(window.ClipboardItem&&navigator.clipboard.write){
-        navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([plain],{type:'text/plain'})})]).then(function(){toast('Copiado: pega en Word')},function(){fb(plain)});return}
-    }catch(e){}
+    $('doc').innerHTML=html;$('pend').textContent=pend?pend+' datos pendientes':'Sin datos pendientes'}
+  function full(){dynamic();preview()}
+  $('notas').onchange=full;$('conFirma').onchange=full;
+
+  $('copiar').onclick=function(){var html=marked.parse(fill(body(false),false));var tmp=document.createElement('div');tmp.innerHTML=html;var plain=tmp.innerText;
+    try{if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([plain],{type:'text/plain'})})]).then(function(){toast('Copiado: pega en Word')},function(){fb(plain)});return}}catch(e){}
     fb(plain)};
-  function fb(t){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Copiado como texto')}catch(e){toast('No se pudo copiar')}ta.remove()}
-  $('ejemplo').onclick=function(){val=Object.assign({},EJ);document.querySelectorAll('#campos input').forEach(function(i){i.value=val[i.dataset.k]||''});try{localStorage.setItem(KEY,JSON.stringify(val))}catch(e){}render();toast('Ejemplo cargado')};
-  $('limpiar').onclick=function(){val={};document.querySelectorAll('#campos input').forEach(function(i){i.value=''});try{localStorage.removeItem(KEY)}catch(e){}render()};
-  render();
+  function fb(t){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Copiado como texto')}catch(e){toast('No se pudo copiar')}ta.remove()}
+
+  function closePanels(){$('pEditar').classList.remove('on');$('pImportar').classList.remove('on')}
+  $('bEditar').onclick=function(){closePanels();$('edEliminar').style.display=tpl().imp?'':'none';$('edRestaurar').style.display=tpl().imp?'none':'';$('edNombre').textContent=tpl().nombre;$('edTexto').value=srcMd();$('pEditar').classList.add('on');$('edTexto').focus()};
+  $('edCerrar').onclick=closePanels;
+  $('edGuardar').onclick=function(){var t=tpl();if(t.imp){st.imports[+t.id.slice(1)].md=$('edTexto').value}else{st.edits[t.id]=$('edTexto').value}save();tabs();full();toast('Cambios guardados en este navegador')};
+  $('edRestaurar').onclick=function(){var t=tpl();if(t.imp){toast('Las plantillas importadas no tienen original');return}delete st.edits[t.id];save();$('edTexto').value=t.md;tabs();full();toast('Plantilla original restaurada')};
+  $('edEliminar').onclick=function(){var t=tpl();if(!t.imp){toast('Solo se pueden eliminar plantillas importadas');return}var b=this;if(!b.dataset.c){b.dataset.c=1;b.textContent='¿Confirmar eliminación?';return}delete b.dataset.c;b.textContent='Eliminar plantilla importada';var i=+t.id.slice(1);st.imports.splice(i,1);var ne={};Object.keys(st.edits).forEach(function(k){if(k.charAt(0)==='b')ne[k]=st.edits[k]});st.edits=ne;save();cur='b0';closePanels();tabs();full();toast('Plantilla eliminada')};
+  $('edCopiar').onclick=function(){fb($('edTexto').value)};
+
+  $('bImportar').onclick=function(){closePanels();$('pImportar').classList.add('on');$('imNombre').focus()};
+  $('imCerrar').onclick=closePanels;
+  $('imArchivo').onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){$('imTexto').value=r.result;if(!$('imNombre').value)$('imNombre').value=f.name.replace(/\.[^.]+$/,'')};r.readAsText(f)};
+  $('imAgregar').onclick=function(){var n=$('imNombre').value.trim(),t=$('imTexto').value;if(!n||!t.trim()){toast('Falta el nombre o el texto');return}
+    st.imports.push({nombre:n,md:t});save();cur='i'+(st.imports.length-1);$('imNombre').value='';$('imTexto').value='';$('imArchivo').value='';closePanels();tabs();full();toast('Plantilla agregada')};
+
+  $('ejemplo').onclick=function(){Object.keys(EJ).forEach(function(k){st.val[k]=EJ[k]});save();inputs($('campos'),CAMPOS);lastDyn='';full();toast('Ejemplo cargado')};
+  $('limpiar').onclick=function(){var keep={};FIRMA.forEach(function(f){keep[f[0]]=st.val[f[0]]});st.val=keep;save();inputs($('campos'),CAMPOS);lastDyn='';full()};
+
+  tabs();full();
 })();
 </script>
 </body>

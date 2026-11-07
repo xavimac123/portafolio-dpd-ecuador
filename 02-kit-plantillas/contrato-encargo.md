@@ -9,9 +9,9 @@
 
 En la ciudad de [CIUDAD], a [FECHA], comparecen:
 
-**EL RESPONSABLE:** [RAZÓN SOCIAL], RUC [RUC], representada por [NOMBRE], en calidad de [CARGO], domiciliada en [DIRECCIÓN].
+**EL RESPONSABLE:** [RAZÓN SOCIAL], RUC [RUC], representada por [REPRESENTANTE DEL RESPONSABLE], en calidad de [CARGO DEL REPRESENTANTE DEL RESPONSABLE], domiciliada en [DIRECCIÓN].
 
-**EL ENCARGADO:** [RAZÓN SOCIAL DEL ENCARGADO], RUC [RUC DEL ENCARGADO], representada por [NOMBRE], en calidad de [CARGO], domiciliada en [DIRECCIÓN DEL ENCARGADO].
+**EL ENCARGADO:** [RAZÓN SOCIAL DEL ENCARGADO], RUC [RUC DEL ENCARGADO], representada por [REPRESENTANTE DEL ENCARGADO], en calidad de [CARGO DEL REPRESENTANTE DEL ENCARGADO], domiciliada en [DIRECCIÓN DEL ENCARGADO].
 
 Las partes celebran el presente contrato al tenor de las siguientes cláusulas:
 
@@ -81,5 +81,7 @@ Para constancia, las partes firman en [NÚMERO] ejemplares de igual tenor.
 
 | EL RESPONSABLE | EL ENCARGADO |
 |---|---|
-| [NOMBRE] | [NOMBRE] |
-| [CARGO] | [CARGO] |
+| Firma: ______________________ | Firma: ______________________ |
+| [REPRESENTANTE DEL RESPONSABLE] | [REPRESENTANTE DEL ENCARGADO] |
+| [CARGO DEL REPRESENTANTE DEL RESPONSABLE] | [CARGO DEL REPRESENTANTE DEL ENCARGADO] |
+| [RAZÓN SOCIAL] | [RAZÓN SOCIAL DEL ENCARGADO] |

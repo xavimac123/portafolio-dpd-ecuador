@@ -8,14 +8,14 @@
 
 [RAZÓN SOCIAL], con RUC [RUC], domicilio en [DIRECCIÓN], [CIUDAD], Ecuador, es responsable del tratamiento de los datos personales descritos en esta política.
 
-- Correo de contacto: [CORREO DE PRIVACIDAD]
+- Correo de contacto: [CORREO DE ATENCIÓN AL TITULAR]
 - Teléfono: [TELÉFONO]
 
 ## 2. Delegado de Protección de Datos
 
-[Si aplica:] Puede contactar a nuestro Delegado de Protección de Datos, [NOMBRE DEL DPD], en [CORREO DEL DPD].
+[Si aplica:] Nuestro Delegado de Protección de Datos es [NOMBRE DEL DPD], designación registrada ante la Superintendencia de Protección de Datos Personales el [FECHA DE REGISTRO SPDP]. Puede contactarle en [CORREO DE ATENCIÓN AL TITULAR].
 
-[Si no aplica:] [RAZÓN SOCIAL] no está obligada a designar un Delegado de Protección de Datos. Las consultas se atienden en [CORREO DE PRIVACIDAD].
+[Si no aplica:] [RAZÓN SOCIAL] no está obligada a designar un Delegado de Protección de Datos. Las consultas se atienden en [CORREO DE ATENCIÓN AL TITULAR].
 
 ## 3. Datos que tratamos y de dónde provienen
 
@@ -46,7 +46,7 @@ Realizamos las siguientes operaciones: [recolección, registro, almacenamiento, 
 
 [Elegir una opción:]
 - No tomamos decisiones basadas únicamente en tratamientos automatizados ni elaboramos perfiles.
-- Elaboramos perfiles para [FINALIDAD]. La lógica aplicada consiste en [DESCRIPCIÓN] y sus consecuencias para usted son [CONSECUENCIAS]. Puede solicitar intervención humana escribiendo a [CORREO DE PRIVACIDAD].
+- Elaboramos perfiles para [FINALIDAD]. La lógica aplicada consiste en [DESCRIPCIÓN] y sus consecuencias para usted son [CONSECUENCIAS]. Puede solicitar intervención humana escribiendo a [CORREO DE ATENCIÓN AL TITULAR].
 
 ## 6. Destinatarios, encargados y transferencias
 
@@ -62,7 +62,7 @@ Los datos marcados como obligatorios son necesarios para [FINALIDAD]. Si no los 
 
 Como titular puede ejercer, de forma gratuita, los derechos que le reconoce la LOPDP: información, acceso, rectificación y actualización, eliminación, oposición, portabilidad, suspensión del tratamiento y a no ser objeto de decisiones basadas únicamente en valoraciones automatizadas.
 
-**Cómo ejercerlos:** envíe su solicitud a [CORREO DE PRIVACIDAD] o a [DIRECCIÓN], indicando su nombre, el derecho que ejerce y un medio de contacto. Podremos solicitarle información para verificar su identidad. Responderemos dentro del plazo previsto en la normativa vigente.
+**Cómo ejercerlos:** envíe su solicitud a [CORREO DE ATENCIÓN AL TITULAR] o a [DIRECCIÓN], indicando su nombre, el derecho que ejerce y un medio de contacto. Podremos solicitarle información para verificar su identidad. Responderemos dentro del plazo previsto en la normativa vigente.
 
 **Portabilidad:** [describir el formato estructurado en que se entregarán los datos].
 

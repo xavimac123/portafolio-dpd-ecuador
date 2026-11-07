@@ -14,7 +14,7 @@ Responsables del tratamiento (empresas, profesionales, instituciones) y DPD que 
 |---|---|
 | `plantilla-RAT.xlsx` | Plantilla para completar. Incluye hoja de obligatoriedad, datos del responsable, registro con alertas automáticas y resumen. |
 | `ejemplo-RAT-ficticio.xlsx` | Clínica dental ficticia con 6 actividades: 2 completas y 4 con errores intencionales, útil para capacitaciones y demostraciones. |
-| `asistente-rat.html` | Versión web interactiva: verifica obligatoriedad, registra actividades, muestra alertas y copia el registro para Excel. |
+| `asistente-rat.html` | Versión web interactiva: verifica obligatoriedad, registra actividades, importa un RAT existente pegado desde Excel, muestra alertas y copia el registro con firma de responsabilidad. |
 | `../scripts/generar_rat.py` | Regenera ambos Excel (`python scripts/generar_rat.py`). |
 
 ## Base legal
@@ -52,6 +52,14 @@ Una fila se marca "Completo" cuando tiene todos los campos mínimos. Se generan 
 - hay transferencia internacional sin país o garantía;
 - incluye categorías especiales (recordatorio de revisar la evaluación de impacto);
 - no hay fecha de revisión.
+
+## Importar un RAT que ya uses
+
+En el asistente web, pestaña "Estado del registro" → "Importar RAT existente": copia la tabla desde Excel (con encabezados) y pégala. El asistente reconoce las columnas por su nombre aunque estén en otro orden, informa las que no reconoce y aplica las alertas a cada actividad. Para mejorar la estructura de la plantilla con registros reales, deja versiones anonimizadas en `referencias/rat/`.
+
+## Firma de responsabilidad
+
+La hoja "Resumen" del Excel y la copia del asistente web incluyen el bloque "Elaborado por / Revisado y aprobado por".
 
 ## Limitaciones
 

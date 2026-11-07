@@ -159,9 +159,10 @@ def hoja_responsable(wb, datos):
     ws["B2"] = "Identificación del responsable (art. 38 num. 1 RGLOPDP)"
     ws["B2"].font = Font(name=FONT, bold=True, size=12, color=AZUL)
     campos = [
-        "Razón social / nombre", "RUC", "Dirección", "Correo de contacto", "Teléfono",
+        "Razón social / nombre", "RUC", "Dirección", "Correo de atención al titular", "Teléfono",
         "Corresponsable (si existe)", "Contacto del corresponsable",
         "Delegado de Protección de Datos (DPD)", "Correo del DPD", "Fecha de registro del DPD ante la SPDP",
+        "Referencia del registro del DPD en la SPDP",
     ]
     for i, campo in enumerate(campos, start=4):
         ws.cell(row=i, column=2, value=campo).font = Font(name=FONT, size=10, bold=True)
@@ -293,7 +294,35 @@ def hoja_resumen(wb, first, last, alert_col):
         c.alignment = Alignment(horizontal="center")
         c.border = BORDER
     ws["C7"].number_format = "0%"
+    firma(ws, 14)
     ws.sheet_view.showGridLines = False
+
+
+def firma(ws, r0):
+    ws.column_dimensions["D"].width = 4
+    ws.column_dimensions["E"].width = 30
+    ws.column_dimensions["F"].width = 40
+    ws.cell(row=r0, column=2, value="FIRMA DE RESPONSABILIDAD").font = Font(name=FONT, bold=True, size=11, color=AZUL)
+    filas = [
+        ("Elaborado por", "Abg. Mariano X. Macías Sánchez", "Revisado y aprobado por", ""),
+        ("Cargo", "Consultor en Protección de Datos Personales", "Cargo", ""),
+        ("Matrícula / registro", "Matrícula profesional 09-2022-736", "Responsable", "=IF(Responsable!C4=\"\",\"\",Responsable!C4)"),
+        ("Firma", "", "Firma", ""),
+        ("Fecha", "", "Fecha", ""),
+    ]
+    for i, (l1, v1, l2, v2) in enumerate(filas, start=r0 + 1):
+        ws.cell(row=i, column=2, value=l1).font = Font(name=FONT, size=10, bold=True)
+        c = ws.cell(row=i, column=3, value=v1)
+        ws.cell(row=i, column=5, value=l2).font = Font(name=FONT, size=10, bold=True)
+        d = ws.cell(row=i, column=6, value=v2)
+        for cell in (c, d):
+            cell.font = Font(name=FONT, size=10, color="008000" if str(cell.value).startswith("=") else "0000FF")
+            cell.border = BORDER
+            if not str(cell.value).startswith("="):
+                cell.fill = INPUT
+        if l1 == "Firma":
+            ws.row_dimensions[i].height = 42
+    ws.column_dimensions["C"].width = 40
 
 
 EJEMPLO_UNICO = [[
@@ -352,7 +381,7 @@ DATOS_CLINICA = {
     "Razón social / nombre": "Clínica Dental Ficticia Sonrisas S.A. (EJEMPLO)",
     "RUC": "[RUC]",
     "Dirección": "Av. Ejemplo 123, Guayaquil",
-    "Correo de contacto": "privacidad@ejemplo.ec",
+    "Correo de atención al titular": "privacidad@ejemplo.ec",
     "Teléfono": "[TELÉFONO]",
     "Delegado de Protección de Datos (DPD)": "[NOMBRE DEL DPD]",
     "Correo del DPD": "dpd@ejemplo.ec",

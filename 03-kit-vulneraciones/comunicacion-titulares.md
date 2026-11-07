@@ -28,7 +28,7 @@ Le escribimos porque el [FECHA O PERÍODO] ocurrió un incidente de seguridad qu
 - [Revisar sus movimientos y reportarnos cualquier actividad extraña.]
 
 **Dónde obtener más información**
-Puede escribirnos a [CORREO DE PRIVACIDAD] o llamar al [TELÉFONO], de [HORARIO]. [Si hay DPD: También puede contactar a nuestro Delegado de Protección de Datos en [CORREO DEL DPD].] Puede ejercer sus derechos y, si lo considera necesario, presentar un reclamo ante la Superintendencia de Protección de Datos Personales.
+Puede escribirnos a [CORREO DE ATENCIÓN AL TITULAR] o llamar al [TELÉFONO], de [HORARIO]. [Si hay DPD: También puede contactar a nuestro Delegado de Protección de Datos en [CORREO DEL DPD].] Puede ejercer sus derechos y, si lo considera necesario, presentar un reclamo ante la Superintendencia de Protección de Datos Personales.
 
 Lamentamos lo ocurrido y le agradecemos su confianza.
 

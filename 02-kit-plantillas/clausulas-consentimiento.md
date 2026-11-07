@@ -15,7 +15,7 @@
 
 **[N].3 Base de legitimación.** El tratamiento se basa en [la ejecución de este contrato] y en [el cumplimiento de obligaciones legales tributarias]. [Si hay finalidades adicionales basadas en consentimiento, remitir a la autorización separada.]
 
-**[N].4 Derechos del titular.** EL CLIENTE puede ejercer sus derechos de acceso, rectificación y actualización, eliminación, oposición, portabilidad, suspensión y los demás reconocidos por la LOPDP, escribiendo a [CORREO DE PRIVACIDAD].
+**[N].4 Derechos del titular.** EL CLIENTE puede ejercer sus derechos de acceso, rectificación y actualización, eliminación, oposición, portabilidad, suspensión y los demás reconocidos por la LOPDP, escribiendo a [CORREO DE ATENCIÓN AL TITULAR].
 
 **[N].5 Medidas de seguridad.** [RAZÓN SOCIAL] aplica medidas técnicas, jurídicas, administrativas y organizativas para proteger los datos frente a su pérdida, alteración o acceso no autorizado.
 
@@ -25,13 +25,13 @@
 
 ## 2. Autorización para comunicaciones comerciales
 
-☐ Autorizo a [RAZÓN SOCIAL] a usar mi nombre, correo electrónico y teléfono para enviarme información sobre [productos, servicios, promociones] por [correo electrónico / WhatsApp / SMS]. Sé que esta autorización es voluntaria, que no aceptarla no afecta el servicio que contraté y que puedo revocarla en cualquier momento por [enlace de baja / correo a [CORREO DE PRIVACIDAD]].
+☐ Autorizo a [RAZÓN SOCIAL] a usar mi nombre, correo electrónico y teléfono para enviarme información sobre [productos, servicios, promociones] por [correo electrónico / WhatsApp / SMS]. Sé que esta autorización es voluntaria, que no aceptarla no afecta el servicio que contraté y que puedo revocarla en cualquier momento por [enlace de baja / correo a [CORREO DE ATENCIÓN AL TITULAR]].
 
 ## 3. Consentimiento explícito para categorías especiales de datos
 
 > Usar solo cuando el consentimiento sea la base aplicable al dato sensible y no exista otra (por ejemplo, una obligación legal o la prestación de un servicio de salud con su propia base).
 
-☐ Autorizo de forma expresa a [RAZÓN SOCIAL] a tratar mis datos de [salud / biométricos / otros] con la única finalidad de [FINALIDAD]. He sido informado de que se trata de datos sensibles, de las medidas de seguridad reforzadas que se aplicarán y de que puedo revocar esta autorización en cualquier momento escribiendo a [CORREO DE PRIVACIDAD].
+☐ Autorizo de forma expresa a [RAZÓN SOCIAL] a tratar mis datos de [salud / biométricos / otros] con la única finalidad de [FINALIDAD]. He sido informado de que se trata de datos sensibles, de las medidas de seguridad reforzadas que se aplicarán y de que puedo revocar esta autorización en cualquier momento escribiendo a [CORREO DE ATENCIÓN AL TITULAR].
 
 Nombre: ________________ · Identificación: ________________ · Firma: ________________ · Fecha: ________
 

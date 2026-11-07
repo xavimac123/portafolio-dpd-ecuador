@@ -11,6 +11,9 @@ Repositorio de herramientas de cumplimiento LOPDP (Ecuador) de Macías Sánchez 
 - Español de Ecuador, registro formal. Lenguaje claro en los documentos dirigidos a titulares.
 - Cada herramienta tiene su `README.md` con: propósito, a quién va dirigida, base legal, instrucciones y limitaciones.
 - Versionar con commits descriptivos en español.
+- `referencias/` contiene documentos anonimizados que el usuario ya utilizó. Úsalos para mejorar la **estructura** de las plantillas (secciones, orden, campos), nunca para copiar redacción de terceros. Si una referencia contiene datos personales reales, detente y avisa antes de procesarla.
+- Ediciones hechas en los generadores web ("Copiar Markdown") se incorporan reemplazando el `.md` correspondiente y regenerando con `scripts/generar_generador.py`.
+- Toda exportación lleva firma de responsabilidad (`scripts/firma-responsabilidad.md`).
 
 ## Estructura
 
@@ -18,4 +21,5 @@ Repositorio de herramientas de cumplimiento LOPDP (Ecuador) de Macías Sánchez 
 - `02-kit-plantillas/` — documentos contractuales e informativos
 - `03-kit-vulneraciones/` — gestión y notificación de vulneraciones
 - `docs/` — decisiones del proyecto
+- `referencias/` — plantillas ya utilizadas, anonimizadas
 - `scripts/` — generadores (Excel, exportación a Word)

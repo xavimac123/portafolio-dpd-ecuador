@@ -1,4 +1,4 @@
-"""Fuente única de la Herramienta 05: Evaluación de impacto del tratamiento de datos personales.
+"""Fuente única de la Herramienta 06: Evaluación de impacto del tratamiento de datos personales.
 
 Base: LOPDP arts. 40 y 42; RGLOPDP arts. 29 a 32; Res. SPDP-SPD-2025-0003-R (Guía de Gestión de
 Riesgos y Evaluación de Impacto, Cap. I obligatorio, Cap. II referencial).

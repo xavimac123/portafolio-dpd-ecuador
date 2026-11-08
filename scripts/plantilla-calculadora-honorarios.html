@@ -84,7 +84,7 @@
 </head>
 <body>
 <header><div class="wrap">
-  <div class="marca">Macías Sánchez Consultores · Herramienta 01</div>
+  <div class="marca">Macías Sánchez Consultores · Herramienta 02</div>
   <h1>Calculadora de honorarios del DPD</h1>
   <p>Evaluación inicial, adecuación y control mensual, con IVA, comparación de métodos y proforma de servicios</p>
   <nav role="tablist">
@@ -107,7 +107,7 @@
     <div class="grid" id="fTam"></div>
     <div id="tamBox" class="calc"></div>
   </div>
-  <div class="card"><h3>Perfil del tratamiento de datos</h3><p class="nota" style="margin:-4px 0 10px">Si ya usó la herramienta 03 (RAT), tome el número de actividades y encargados del registro.</p><div class="grid" id="fPerf"></div></div>
+  <div class="card"><h3>Perfil del tratamiento de datos</h3><p class="nota" style="margin:-4px 0 10px">Si ya usó la herramienta 04 (RAT), tome el número de actividades y encargados del registro.</p><div class="grid" id="fPerf"></div></div>
   <div class="row"><button class="btn" data-go="t2">Continuar</button><button class="btn sec" id="ejemplo">Cargar ejemplo ficticio</button><button class="btn sec" id="nueva">Nueva estimación</button></div>
 </section>
 
@@ -158,7 +158,7 @@
   <h2>Proforma de servicios</h2>
   <p class="sub">Elija los servicios que ofrecerá. Cada uno trae un <b>valor sugerido</b> según el tamaño del cliente, su sector y el método elegido en la pestaña 5; puede reemplazarlo por su propio valor.</p>
   <div class="card"><h3>Datos de la proforma</h3><div class="grid" id="fProf"></div></div>
-  <div class="card"><h3>Servicios</h3><div id="svcBox"></div><div id="svcWarn"></div></div>
+  <div class="card"><h3>Servicios</h3><p class="nota" style="margin:-4px 0 8px">Los códigos y servicios son los del catálogo (herramienta 01). Si ya eligió servicios allí, pegue los códigos:</p><div class="row" style="margin-bottom:6px"><input id="impCod" placeholder="Ej.: S02, S05, S09, S18" style="flex:1;min-width:180px"><button class="btn sm" id="impBtn" type="button">Importar del catálogo</button></div><div id="svcBox"></div><div id="svcWarn"></div></div>
   <div class="card"><h3>Totales</h3><div class="grid" id="fTot"></div><div class="g3" id="totBox" style="margin-top:12px"></div></div>
   <div class="card"><h3>Argumentos de valor para el cliente</h3><div class="grid" id="fMk"></div><p class="nota">Las cifras de exposición y ahorro son estimaciones: la proforma las presenta como tales.</p></div>
   <div class="card"><h3>Condiciones y firma</h3><label for="p_cond">Condiciones comerciales</label><textarea id="p_cond" data-p="cond" rows="5"></textarea><div class="grid" style="margin-top:12px" id="fFirma"></div></div>
@@ -168,7 +168,7 @@
 </section>
 </main>
 
-<footer><div class="wrap">Calculadora de honorarios · Herramienta 01 del Kit LOPDP de Macías Sánchez Consultores. Valores referenciales de criterio propio; los parámetros tributarios y laborales deben verificarse cada año. No sustituye el análisis del caso concreto.</div></footer>
+<footer><div class="wrap">Calculadora de honorarios · Herramienta 02 del Kit LOPDP de Macías Sánchez Consultores. Valores referenciales de criterio propio; los parámetros tributarios y laborales deben verificarse cada año. No sustituye el análisis del caso concreto.</div></footer>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -210,13 +210,13 @@
   // ---------- construcción de formularios
   $('fIdent').innerHTML=field('c','emp','Razón social',{ph:'[RAZÓN SOCIAL]'})+field('c','ruc','RUC',{ph:'[RUC]'})+field('c','contacto','Persona de contacto',{ph:'[NOMBRE]'})+field('c','cargo','Cargo del contacto',{ph:'Gerente general'})+
     field('c','sector','Sector',{opts:CFG.sectores.map(function(s){return s[0]}),help:'Los sectores con categorías especiales de datos o regulación sectorial llevan un <b>factor de complejidad</b> mayor (criterio propio): '+CFG.sectores.filter(function(s){return s[1]!==1}).map(function(s){return s[0]+' ×'+String(s[1]).replace('.',',')}).join('; ')+'.'});
-  $('fTam').innerHTML=field('c','ventas','Ventas netas del ejercicio anterior (USD)',{type:'number',ph:'Ej. 850000',help:'Ingresos por venta de bienes y prestación de servicios del último ejercicio, <b>sin IVA</b>. Es el mismo dato que usa la herramienta 02 para estimar la multa (volumen de negocio, art. 73 LOPDP). Fuente: estado de resultados o declaración de impuesto a la renta.'})+
+  $('fTam').innerHTML=field('c','ventas','Ventas netas del ejercicio anterior (USD)',{type:'number',ph:'Ej. 850000',help:'Ingresos por venta de bienes y prestación de servicios del último ejercicio, <b>sin IVA</b>. Es el mismo dato que usa la herramienta 03 para estimar la multa (volumen de negocio, art. 73 LOPDP). Fuente: estado de resultados o declaración de impuesto a la renta.'})+
     field('c','trab','Número de trabajadores',{type:'number',ph:'Ej. 45'})+field('c','sedes','Sedes o establecimientos',{type:'number'});
   $('fPerf').innerHTML=field('c','act','Actividades de tratamiento',{type:'number',help:'Número de actividades del RAT (nómina, facturación, videovigilancia…). Si aún no hay RAT, estime: micro 4 a 6, pequeña 6 a 10, mediana 10 a 20, grande 20 o más.'})+
     field('c','enc','Encargados del tratamiento',{type:'number',help:'Proveedores que tratan datos por cuenta del cliente: contador externo, nómina, nube, correo, call center, mensajería.'})+
     field('c','sol','Solicitudes de derechos al mes (estimadas)',{type:'number'})+
     field('c','tr','¿Transferencias internacionales?',{opts:['No','Sí'],help:'Por ejemplo, correo, CRM o respaldos en servidores fuera del Ecuador (art. 56 LOPDP; Res. SPDP-SPD-2026-0004-R).'})+
-    field('c','eipd','Evaluaciones de impacto requeridas',{type:'number',help:'Número de tratamientos que necesitan evaluación de impacto (herramienta 05). Si el tratamiento es de gran escala, al menos una.'})+
+    field('c','eipd','Evaluaciones de impacto requeridas',{type:'number',help:'Número de tratamientos que necesitan evaluación de impacto (herramienta 06). Si el tratamiento es de gran escala, al menos una.'})+
     field('c','cap','Horas de capacitación al año',{type:'number'})+
     field('c','areas','Áreas a entrevistar',{type:'number',ph:'Automático según tamaño'});
   $('fMtge').innerHTML=CFG.mtge.variables.map(function(v){return field('v',v.id,v.nombre,{opts:v.ops.map(function(o,i){return [i,o[0]+' · '+String(o[1]).replace('.',',')+' pts']})})}).join('');
@@ -230,7 +230,7 @@
     field('k','retir','Retención de impuesto a la renta (%)',{type:'number'})+field('k','retiva','Retención de IVA (%)',{type:'number',help:'En honorarios profesionales de personas naturales el agente de retención suele retener el 100 % del IVA. Verifique la tabla vigente del SRI según el tipo de cliente y de prestador.'});
   $('fProf').innerHTML=field('p','num','Número de proforma')+field('p','fecha','Fecha',{type:'date'})+field('p','validez','Validez (días)',{type:'number'})+field('p','aten','Dirigida a',{ph:'Nombre y cargo'});
   $('fTot').innerHTML=field('p','desc','Descuento (%)',{type:'number'})+field('p','iva','IVA (%)',{type:'number',help:'Tarifa general vigente: 15 % (art. 65 LRTI; el SRI confirmó su vigencia para 2026). Verifique si un decreto ejecutivo la modifica.'})+field('p','meses','Meses del servicio mensual',{type:'number'});
-  $('fMk').innerHTML=field('p','multa','Multa estimada del cliente (USD, opcional)',{type:'number',help:'Copie el valor «multa estimada si no actúa» de la herramienta 02 (pestaña Impacto económico). Si lo deja vacío, la proforma no muestra la comparación.'});
+  $('fMk').innerHTML=field('p','multa','Multa estimada del cliente (USD, opcional)',{type:'number',help:'Copie el valor «multa estimada si no actúa» de la herramienta 03 (pestaña Impacto económico). Si lo deja vacío, la proforma no muestra la comparación.'});
   $('fFirma').innerHTML=field('pf','el','Elaborado por')+field('pf','ec','Cargo / matrícula')+field('pf','cl','Aceptado por (cliente)',{ph:'[REPRESENTANTE LEGAL]'})+field('pf','cc','Cargo',{ph:'Gerente general'});
 
   // ---------- cálculos
@@ -313,7 +313,7 @@
   function rSvc(){var su=sug(),g='',out='';
     CFG.servicios.forEach(function(s){var id=s[1],it=S.p.items[id]||{on:false,q:1,v:''},pr=svcPrice(s,su);if(s[0]!==g){g=s[0];out+='<div class="grp">'+g+(g==='Por evento'?' · se cotizan como tarifa, no suman al total':'')+'</div>'}
       var val=it.v!==''&&it.v!=null?num(it.v):pr;
-      out+='<div class="svc"><input type="checkbox" data-si="'+id+'" '+(it.on?'checked':'')+' aria-label="Incluir '+esc(s[2])+'"><div><div class="nm">'+esc(s[2])+'</div><div class="ds">'+esc(s[3])+'</div></div>'+
+      out+='<div class="svc"><input type="checkbox" data-si="'+id+'" '+(it.on?'checked':'')+' aria-label="Incluir '+esc(s[2])+'"><div><div class="nm">'+esc(s[7])+' · '+esc(s[2])+'</div><div class="ds">'+esc(s[3])+'</div></div>'+
         '<div><label class="nota" style="font-weight:400;margin:0">Cant. ('+s[4]+')</label><input type="number" min="0" step="1" data-sq="'+id+'" value="'+esc(it.q==null?1:it.q)+'"></div>'+
         '<div><label class="nota" style="font-weight:400;margin:0">Valor unitario</label><input type="number" min="0" step="any" inputmode="decimal" data-sv="'+id+'" value="'+esc(it.v==null?'':it.v)+'" placeholder="'+pr+'"><div class="sg">Sugerido: '+usd0(pr)+'</div></div>'+
         '<div class="st">'+(it.on&&s[0]!=='Por evento'?usd(val*num(it.q==null?1:it.q)):'')+'</div></div>'});
@@ -325,11 +325,11 @@
     if(on('dpd')&&on('acomp'))w.push('El DPD externo ya incluye el acompañamiento: elija uno de los dos.');
     if(mtge().ge&&!on('dpd'))w.push('El tratamiento principal es de gran escala: el DPD es obligatorio (Res. SPDP-SPD-2026-0005-R art. 12). Considere incluir el servicio de DPD externo.');
     $('svcWarn').innerHTML=w.map(function(x){return '<div class="verd vam" style="font-weight:600">'+x+'</div>'}).join('')}
-  function lines(){var su=sug(),L=[];CFG.servicios.forEach(function(s){var it=S.p.items[s[1]];if(!it||!it.on)return;var pr=svcPrice(s,su),v=it.v!==''&&it.v!=null?num(it.v):pr,q=num(it.q==null?1:it.q);L.push({g:s[0],id:s[1],n:s[2],d:s[3],u:s[4],q:q,v:v,st:v*q,b:s[6]})});return L}
+  function lines(){var su=sug(),L=[];CFG.servicios.forEach(function(s){var it=S.p.items[s[1]];if(!it||!it.on)return;var pr=svcPrice(s,su),v=it.v!==''&&it.v!=null?num(it.v):pr,q=num(it.q==null?1:it.q);L.push({g:s[0],id:s[1],c:s[7],n:s[2],d:s[3],u:s[4],q:q,v:v,st:v*q,b:s[6]})});return L}
   function totals(){var L=lines(),d=num(S.p.desc)/100,iv=num(S.p.iva)/100,u=0,m=0;L.forEach(function(l){if(l.g==='Control mensual')m+=l.st;else if(l.g!=='Por evento')u+=l.st});
     var o={L:L,u:u,ud:u*d,un:u*(1-d),m:m,md:m*d,mn:m*(1-d),meses:num(S.p.meses)||12};o.uiva=o.un*iv;o.ut=o.un+o.uiva;o.miva=o.mn*iv;o.mt=o.mn+o.miva;o.anio=o.un+o.mn*o.meses;o.aniot=o.ut+o.mt*o.meses;return o}
   function rTot(){var t=totals();
-    $('totBox').innerHTML='<div class="kpi"><small>Evaluación y adecuación (única vez)</small><div class="tot" style="margin:0">'+tr('Subtotal sin IVA',usd(t.u))+(t.ud?tr('Descuento',usd(-t.ud)):'')+tr('IVA '+pct(num(S.p.iva),0),usd(t.uiva))+'<span class="gt">Total</span><b class="gt">'+usd(t.ut)+'</b></div></div>'+
+    $('totBox').innerHTML='<div class="kpi"><small>Pagos únicos (evaluación, adecuación y control anual)</small><div class="tot" style="margin:0">'+tr('Subtotal sin IVA',usd(t.u))+(t.ud?tr('Descuento',usd(-t.ud)):'')+tr('IVA '+pct(num(S.p.iva),0),usd(t.uiva))+'<span class="gt">Total</span><b class="gt">'+usd(t.ut)+'</b></div></div>'+
       '<div class="kpi"><small>Control mensual</small><div class="tot" style="margin:0">'+tr('Subtotal sin IVA',usd(t.m))+(t.md?tr('Descuento',usd(-t.md)):'')+tr('IVA '+pct(num(S.p.iva),0),usd(t.miva))+'<span class="gt">Total mensual</span><b class="gt">'+usd(t.mt)+'</b></div></div>'+
       '<div class="kpi"><small>Inversión del primer año ('+t.meses+' meses)</small><b>'+usd(t.aniot)+'</b><span>con IVA · '+usd(t.anio)+' sin IVA</span></div>'}
   function tr(a,b){return '<span>'+a+'</span><b>'+b+'</b>'}
@@ -342,11 +342,11 @@
     h+='<p>Agradecemos su interés. A continuación presentamos la propuesta para que su organización cumpla la Ley Orgánica de Protección de Datos Personales (LOPDP), su Reglamento General y la normativa de la Superintendencia de Protección de Datos Personales (SPDP), y pueda <b>demostrarlo</b>.</p>';
     function bloque(g,tit){var L=t.L.filter(function(l){return l.g===g});if(!L.length)return '';
       return '<h2 style="font-size:12pt;margin:14px 0 6px">'+tit+'</h2><table style="width:100%;border-collapse:collapse"><tr><th style="'+th+'">Servicio</th><th style="'+th+';text-align:right">Cant.</th><th style="'+th+';text-align:right">Valor unitario</th>'+(g==='Por evento'?'':'<th style="'+th+';text-align:right">Subtotal</th>')+'</tr>'+
-        L.map(function(l){return '<tr><td style="'+td+'"><b>'+esc(l.n)+'</b><br><span style="color:#555">'+esc(l.d)+'</span></td><td style="'+tn+'">'+(g==='Por evento'?'por '+esc(l.u):l.q)+'</td><td style="'+tn+'">'+usd(l.v)+'</td>'+(g==='Por evento'?'':'<td style="'+tn+'">'+usd(l.st)+'</td>')+'</tr>'}).join('')+'</table>'}
-    h+=bloque('Evaluación inicial','1. Evaluación inicial')+bloque('Adecuación','2. Adecuación')+bloque('Control mensual','3. Control mensual')+bloque('Por evento','4. Servicios por evento (tarifas, no incluidas en el total)');
+        L.map(function(l){return '<tr><td style="'+td+'"><b>'+esc(l.c)+' · '+esc(l.n)+'</b><br><span style="color:#555">'+esc(l.d)+'</span></td><td style="'+tn+'">'+(g==='Por evento'?'por '+esc(l.u):l.q)+'</td><td style="'+tn+'">'+usd(l.v)+'</td>'+(g==='Por evento'?'':'<td style="'+tn+'">'+usd(l.st)+'</td>')+'</tr>'}).join('')+'</table>'}
+    var gi=0;CFG.grupos.forEach(function(g){var b=bloque(g,(gi+1)+'. '+g+(g==='Por evento'?' (tarifas, no incluidas en el total)':''));if(b){gi++;h+=b}});
     var sum=function(a,b,bold){return '<tr><td style="'+td+(bold?';font-weight:bold;border-top:2px solid #14181E':'')+'">'+a+'</td><td style="'+tn+(bold?';font-weight:bold;border-top:2px solid #14181E':'')+'">'+b+'</td></tr>'};
     h+='<h2 style="font-size:12pt;margin:14px 0 6px">Resumen económico</h2><table style="width:100%;border-collapse:collapse"><tr><th style="'+th+'">Concepto</th><th style="'+th+';text-align:right">Valor</th></tr>';
-    if(t.u){h+=sum('Evaluación y adecuación, subtotal sin IVA',usd(t.u))+(t.ud?sum('Descuento '+pct(num(S.p.desc),0),usd(-t.ud)):'')+sum('IVA '+pct(num(S.p.iva),0),usd(t.uiva))+sum('Total única vez',usd(t.ut),1)}
+    if(t.u){h+=sum('Pagos únicos, subtotal sin IVA',usd(t.u))+(t.ud?sum('Descuento '+pct(num(S.p.desc),0),usd(-t.ud)):'')+sum('IVA '+pct(num(S.p.iva),0),usd(t.uiva))+sum('Total única vez',usd(t.ut),1)}
     if(t.m){h+=sum('Control mensual, subtotal sin IVA',usd(t.m))+(t.md?sum('Descuento '+pct(num(S.p.desc),0),usd(-t.md)):'')+sum('IVA '+pct(num(S.p.iva),0),usd(t.miva))+sum('Total mensual',usd(t.mt),1)+sum('Inversión del primer año ('+t.meses+' meses), con IVA',usd(t.aniot),1)}
     h+='</table>';
     // marketing
@@ -383,11 +383,14 @@
     try{if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([plain],{type:'text/plain'})})]).then(function(){toast('Proforma copiada: pegue en Word')},function(){fb(plain)});return}}catch(e){}fb(plain)};
   $('copXls').onclick=function(){var t=totals();if(!t.L.length){toast('Elija al menos un servicio');return}
     var f=function(x){return r2(x).toFixed(2).replace('.',',')};
-    var rows=[['Proforma',S.p.num],['Cliente',S.c.emp||''],['Fecha',S.p.fecha],[],['Grupo','Servicio','Unidad','Cantidad','Valor unitario','Subtotal sin IVA']];
-    t.L.forEach(function(l){rows.push([l.g,l.n,l.u,l.q,f(l.v),l.g==='Por evento'?'':f(l.st)])});
+    var rows=[['Proforma',S.p.num],['Cliente',S.c.emp||''],['Fecha',S.p.fecha],[],['Grupo','Código','Servicio','Unidad','Cantidad','Valor unitario','Subtotal sin IVA']];
+    t.L.forEach(function(l){rows.push([l.g,l.c,l.n,l.u,l.q,f(l.v),l.g==='Por evento'?'':f(l.st)])});
     rows.push([],['Única vez sin IVA',f(t.un)],['IVA',f(t.uiva)],['Total única vez',f(t.ut)],['Mensual sin IVA',f(t.mn)],['IVA mensual',f(t.miva)],['Total mensual',f(t.mt)],['Primer año con IVA',f(t.aniot)]);
     var txt=rows.map(function(r){return r.join('\t')}).join('\n');
     if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(function(){toast('Detalle copiado: pegue en Excel')},function(){fb(txt)});else fb(txt)};
+  $('impBtn').onclick=function(){var cods=($('impCod').value.toUpperCase().match(/S\d{2}/g)||[]),n=0;
+    cods.forEach(function(c){var sv=CFG.servicios.filter(function(x){return x[7]===c})[0];if(sv){S.p.items[sv[1]]={on:true,q:1,v:''};n++}});
+    save();upd();toast(n?n+' servicios importados':'No se reconocieron códigos')};
   all();
 })();
 </script>

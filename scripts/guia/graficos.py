@@ -50,24 +50,24 @@ def arrow(ax, a, b, color=OLI, rad=0.0):
 
 # 1. Flujo de las herramientas
 def flujo():
-    fig, ax = plt.subplots(figsize=(12, 3.7))
-    ax.set_xlim(0, 12); ax.set_ylim(0, 3.7); ax.axis("off")
-    pasos = [("01", "Honorarios", "Proforma\nantes de iniciar"), ("02", "Madurez", "Mapeo, diagnóstico\ny plan de acción"), ("03", "RAT", "Inventario de\nactividades"),
-             ("04", "Gran escala", "Puntaje MTGE\npor actividad"), ("05", "Evaluación\nde impacto", "Actividades de\nalto riesgo"),
-             ("06", "Plantillas", "Política, avisos,\ncontratos, DPD"), ("07", "Vulneraciones", "Protocolo y\nrespuesta")]
-    w, gap, y = 1.5, 0.2, 1.3
+    fig, ax = plt.subplots(figsize=(13.4, 3.7))
+    ax.set_xlim(0, 13.4); ax.set_ylim(0, 3.7); ax.axis("off")
+    pasos = [("01", "Catálogo", "Servicios\ny glosario"), ("02", "Honorarios", "Proforma\nantes de iniciar"), ("03", "Madurez", "Mapeo, diagnóstico\ny plan de acción"),
+             ("04", "RAT", "Inventario de\nactividades"), ("05", "Gran escala", "Puntaje MTGE\npor actividad"), ("06", "Evaluación\nde impacto", "Actividades de\nalto riesgo"),
+             ("07", "Plantillas", "Política, avisos,\ncontratos, DPD"), ("08", "Vulneraciones", "Protocolo y\nrespuesta")]
+    w, gap, y = 1.48, 0.18, 1.3
     for i, (n, t, s_) in enumerate(pasos):
         x = 0.08 + i * (w + gap)
-        dark = i == 1
-        fc = CAR if dark else ("#EFEBDD" if i == 0 else MAR)
-        ax.add_patch(FancyBboxPatch((x, y), w, 1.55, boxstyle="round,pad=0.02,rounding_size=0.08", fc=fc, ec=ORO, lw=1.5, ls="--" if i == 0 else "-"))
+        dark = i == 2
+        fc = CAR if dark else ("#EFEBDD" if i < 2 else MAR)
+        ax.add_patch(FancyBboxPatch((x, y), w, 1.55, boxstyle="round,pad=0.02,rounding_size=0.08", fc=fc, ec=ORO, lw=1.5, ls="--" if i < 2 else "-"))
         ax.text(x + 0.14, y + 1.32, n, fontsize=9, weight="bold", color=ORO)
         ax.text(x + w / 2, y + 0.92, t, ha="center", va="center", fontsize=10.5, weight="bold", color=MAR if dark else CAR)
         ax.text(x + w / 2, y + 0.33, s_, ha="center", va="center", fontsize=7.8, color=ORC if dark else OLI)
         if i < len(pasos) - 1:
             arrow(ax, (x + w + 0.02, y + 0.78), (x + w + gap - 0.02, y + 0.78))
-    arrow(ax, (11.2, 1.25), (2.6, 1.25), color=ORO, rad=-0.16)
-    ax.text(6.9, 0.12, "Revisión anual: repetir 02 · Madurez y 04 · Gran escala para medir el avance", ha="center", fontsize=9, color=OLI, style="italic")
+    arrow(ax, (12.6, 1.25), (4.1, 1.25), color=ORO, rad=-0.16)
+    ax.text(8.3, 0.12, "Revisión anual: repetir 03 · Madurez y 05 · Gran escala para medir el avance", ha="center", fontsize=9, color=OLI, style="italic")
     save(fig, "flujo_herramientas")
 
 

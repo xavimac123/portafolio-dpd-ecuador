@@ -1,4 +1,4 @@
-"""Fuente única de la herramienta 04: evaluación del tratamiento a gran escala.
+"""Fuente única de la herramienta 05: evaluación del tratamiento a gran escala.
 
 Base: RGLOPDP art. 4 num. 7 (definición y casos predeterminados), arts. 53 y 54; LOPDP arts. 42 y 48;
 Res. SPDP-SPD-2026-0005-R (MTGE). Las ayudas didácticas, el contador de tipos de datos y la lectura de

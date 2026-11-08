@@ -1,4 +1,4 @@
-"""Fuente única de la Herramienta 02: Nivel de madurez en protección de datos personales.
+"""Fuente única de la Herramienta 03: Nivel de madurez en protección de datos personales.
 
 MODELO PROPIO de Macías Sánchez Consultores. La SPDP no ha emitido un modelo de madurez:
 los dominios se ordenan por las obligaciones de la LOPDP, su Reglamento y la normativa SPDP
@@ -33,21 +33,21 @@ DOMINIOS = [
          ("La dirección recibe reportes periódicos del estado de cumplimiento.", "Informes o actas"),
      ]},
     {"id": "dpd", "corto": "DPD", "nombre": "Delegado de Protección de Datos", "peso": 2,
-     "base": "LOPDP arts. 47 num. 13, 48 y 68; Res. SPDP-SPD-2025-0028-R", "herramienta": "06 · Designación del DPD",
+     "base": "LOPDP arts. 47 num. 13, 48 y 68; Res. SPDP-SPD-2025-0028-R", "herramienta": "07 · Designación del DPD",
      "preguntas": [
          ("Se analizó si la organización está obligada a designar DPD (causales del art. 10 de la Res. 0028).", "Informe de análisis"),
          ("Si corresponde, el DPD está designado y registrado ante la SPDP.", "Nombramiento y constancia de registro"),
          ("El DPD actúa con independencia y tiene acceso a la información y a la dirección.", "Funciones documentadas"),
      ]},
     {"id": "rat", "corto": "RAT", "nombre": "Registro de actividades de tratamiento", "peso": 2,
-     "base": "RGLOPDP arts. 38, 39 y 44; LOPDP art. 51", "herramienta": "03 · Registro de actividades de tratamiento",
+     "base": "RGLOPDP arts. 38, 39 y 44; LOPDP art. 51", "herramienta": "04 · Registro de actividades de tratamiento",
      "preguntas": [
          ("Existe un RAT con el contenido mínimo del art. 38 RGLOPDP para todas las actividades.", "RAT vigente"),
          ("El RAT se actualiza ante cambios (proveedores, sistemas, finalidades) y se revisa periódicamente.", "Fechas de revisión y motivo de actualización"),
          ("Las bases de datos se inscribieron en el Registro Nacional de Protección de Datos Personales.", "Constancia de inscripción"),
      ]},
     {"id": "lic", "corto": "Licitud", "nombre": "Licitud y bases legitimadoras", "peso": 2,
-     "base": "LOPDP arts. 7 y 26; Res. SPDP-SPD-2025-0041-R", "herramienta": "03 · RAT (base legitimadora) y 06 · Cláusulas de consentimiento",
+     "base": "LOPDP arts. 7 y 26; Res. SPDP-SPD-2025-0041-R", "herramienta": "04 · RAT (base legitimadora) y 07 · Cláusulas de consentimiento",
      "preguntas": [
          ("Cada actividad tiene identificada su base legitimadora.", "Columna de base en el RAT"),
          ("Los consentimientos son específicos, informados, verificables y revocables.", "Formularios y registro de consentimientos"),
@@ -55,28 +55,28 @@ DOMINIOS = [
          ("Los datos sensibles se tratan solo bajo una excepción del art. 26 LOPDP.", "Análisis por actividad"),
      ]},
     {"id": "tra", "corto": "Transparencia", "nombre": "Transparencia e información al titular", "peso": 1,
-     "base": "LOPDP art. 12", "herramienta": "06 · Política y avisos de privacidad",
+     "base": "LOPDP art. 12", "herramienta": "07 · Política y avisos de privacidad",
      "preguntas": [
          ("Existe una política de privacidad publicada con los contenidos del art. 12 LOPDP.", "Política publicada"),
          ("Cada punto de recolección (formularios, cámaras, web) tiene su aviso de privacidad.", "Avisos y letreros"),
          ("Los trabajadores reciben información sobre el tratamiento de sus datos.", "Aviso interno o cláusula contractual"),
      ]},
     {"id": "der", "corto": "Derechos", "nombre": "Derechos de los titulares", "peso": 1,
-     "base": "LOPDP art. 12 y derechos del titular", "herramienta": "06 · Política de privacidad (canal de derechos)",
+     "base": "LOPDP art. 12 y derechos del titular", "herramienta": "07 · Política de privacidad (canal de derechos)",
      "preguntas": [
          ("Existe un canal y un procedimiento escrito para atender solicitudes de derechos.", "Procedimiento y correo de atención"),
          ("Las solicitudes se registran y se responden dentro del plazo legal.", "Registro de solicitudes"),
          ("El personal que recibe solicitudes sabe a quién derivarlas.", "Capacitación o instructivo"),
      ]},
     {"id": "enc", "corto": "Encargados", "nombre": "Encargados y terceros", "peso": 2,
-     "base": "RGLOPDP art. 41; LOPDP art. 68 num. 9; Res. SPDP-SPD-2025-0006-R", "herramienta": "06 · Contrato de encargo",
+     "base": "RGLOPDP art. 41; LOPDP art. 68 num. 9; Res. SPDP-SPD-2025-0006-R", "herramienta": "07 · Contrato de encargo",
      "preguntas": [
          ("Existe un inventario de proveedores que tratan datos por cuenta de la organización.", "Lista de encargados"),
          ("Todos los encargados tienen contrato con el contenido del art. 41 RGLOPDP.", "Contratos firmados"),
          ("Se verifica periódicamente que los encargados cumplan sus obligaciones.", "Auditorías o certificaciones"),
      ]},
     {"id": "seg", "corto": "Seguridad", "nombre": "Seguridad y gestión de riesgos", "peso": 2,
-     "base": "LOPDP art. 40; Res. SPDP-SPD-2025-0003-R", "herramienta": "05 · Evaluación de impacto (matriz de riesgos)",
+     "base": "LOPDP art. 40; Res. SPDP-SPD-2025-0003-R", "herramienta": "06 · Evaluación de impacto (matriz de riesgos)",
      "preguntas": [
          ("Existe un análisis de riesgos de los tratamientos con una metodología documentada.", "Matriz de riesgos"),
          ("Hay controles de acceso por perfil y mínimo privilegio.", "Política de accesos"),
@@ -84,14 +84,14 @@ DOMINIOS = [
          ("Los datos sensibles o críticos están cifrados.", "Configuración documentada"),
      ]},
     {"id": "eipd", "corto": "Evaluación de impacto", "nombre": "Evaluación de impacto y privacidad desde el diseño", "peso": 1,
-     "base": "LOPDP art. 42; RGLOPDP arts. 29 a 32", "herramienta": "05 · Evaluación de impacto",
+     "base": "LOPDP art. 42; RGLOPDP arts. 29 a 32", "herramienta": "06 · Evaluación de impacto",
      "preguntas": [
          ("Se identifica qué tratamientos requieren evaluación de impacto.", "Columna en el RAT o análisis"),
          ("Las evaluaciones obligatorias se hacen antes de iniciar el tratamiento.", "Informes de evaluación"),
          ("Los proyectos nuevos consideran la protección de datos desde su diseño.", "Lista de verificación de proyectos"),
      ]},
     {"id": "vul", "corto": "Vulneraciones", "nombre": "Gestión de vulneraciones", "peso": 2,
-     "base": "LOPDP art. 43; RGLOPDP arts. 24 a 28; Res. SPDP-SPD-2026-0040-R", "herramienta": "07 · Kit de vulneraciones",
+     "base": "LOPDP art. 43; RGLOPDP arts. 24 a 28; Res. SPDP-SPD-2026-0040-R", "herramienta": "08 · Kit de vulneraciones",
      "preguntas": [
          ("Existe un protocolo aprobado de respuesta a vulneraciones.", "Protocolo"),
          ("El personal sabe cómo reportar internamente un incidente.", "Canal interno y capacitación"),
@@ -99,7 +99,7 @@ DOMINIOS = [
          ("La organización conoce los plazos y el canal (SISPDP) para notificar a la SPDP.", "Protocolo con plazos"),
      ]},
     {"id": "tri", "corto": "Transferencias", "nombre": "Transferencias internacionales", "peso": 1,
-     "base": "LOPDP art. 56; Res. SPDP-SPD-2026-0004-R; RGLOPDP art. 38 num. 6", "herramienta": "03 · RAT (transferencias)",
+     "base": "LOPDP art. 56; Res. SPDP-SPD-2026-0004-R; RGLOPDP art. 38 num. 6", "herramienta": "04 · RAT (transferencias)",
      "preguntas": [
          ("Se identificaron los servicios que alojan o envían datos fuera del Ecuador (nube, correo, CRM).", "Inventario de servicios"),
          ("Cada transferencia tiene una garantía documentada.", "Cláusulas o evaluación de la transferencia"),

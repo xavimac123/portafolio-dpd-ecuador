@@ -1,4 +1,4 @@
-"""Construye 02-madurez/asistente-madurez.html y 02-madurez/cuestionario-madurez.md desde madurez_config.py.
+"""Construye 03-madurez/asistente-madurez.html y 03-madurez/cuestionario-madurez.md desde madurez_config.py.
 
 Uso: python scripts/generar_asistente_madurez.py
 """
@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import madurez_config as C  # noqa: E402
 
-OUT = ROOT / "02-madurez"
+OUT = ROOT / "03-madurez"
 OUT.mkdir(exist_ok=True)
 
 # Ejemplo ficticio: pyme comercial de 45 trabajadores con adecuación inicial

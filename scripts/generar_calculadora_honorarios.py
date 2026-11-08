@@ -1,9 +1,9 @@
-"""Construye la herramienta 01 desde honorarios_config.py.
+"""Construye la herramienta 02 desde honorarios_config.py.
 
 Salidas:
-  01-honorarios/calculadora-honorarios.html  (página web)
-  01-honorarios/metodologia-honorarios.md    (método, tablas y fuentes)
-  01-honorarios/proforma-servicios.md        (plantilla de proforma para Word)
+  02-honorarios/calculadora-honorarios.html  (página web)
+  02-honorarios/metodologia-honorarios.md    (método, tablas y fuentes)
+  02-honorarios/proforma-servicios.md        (plantilla de proforma para Word)
 
 Uso: python scripts/generar_calculadora_honorarios.py
 """
@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import honorarios_config as C  # noqa: E402
 
-OUT = ROOT / "01-honorarios"
+OUT = ROOT / "02-honorarios"
 OUT.mkdir(exist_ok=True)
 
 ejemplo = {
@@ -36,7 +36,7 @@ ejemplo = {
 
 cfg = {"version": C.VERSION, "econ": C.ECON, "tamanos": C.TAMANOS, "sectores": C.SECTORES, "volneg": C.VOLNEG, "mtge": C.MTGE,
        "voltrat": C.VOLTRAT, "perfiles": C.PERFILES, "gastos": C.GASTOS_PCT, "tareas": C.TAREAS, "areas": C.AREAS_POR_TAMANO,
-       "dpdInterno": C.DPD_INTERNO, "paquetes": C.PAQUETES, "servicios": C.SERVICIOS, "condiciones": C.CONDICIONES,
+       "dpdInterno": C.DPD_INTERNO, "paquetes": C.PAQUETES, "servicios": C.SERVICIOS, "grupos": C.GRUPOS, "condiciones": C.CONDICIONES,
        "beneficios": C.BENEFICIOS, "ejemplo": ejemplo}
 shell = (ROOT / "scripts" / "plantilla-calculadora-honorarios.html").read_text(encoding="utf-8")
 (OUT / "calculadora-honorarios.html").write_text(
@@ -145,7 +145,7 @@ P = ["# Proforma de servicios de protección de datos personales", "",
      "> **Nota para el consultor (eliminar antes de entregar):** los valores sugeridos dependen del tamaño y el sector; "
      "calcúlelos en `calculadora-honorarios.html`. Elimine las filas de servicios que no ofrezca. Valores de referencia sin IVA "
      "por tamaño (micro / pequeña / mediana / grande), criterio propio: "
-     + "; ".join(f"{s[2]}: " + " / ".join(usd(x) for x in s[5]) for s in C.SERVICIOS if isinstance(s[5], list)) + ".", "",
+     + "; ".join(f"{s[7]} {s[2]}: " + " / ".join(usd(x) for x in s[5]) for s in C.SERVICIOS if isinstance(s[5], list)) + ".", "",
      "Agradecemos su interés. Presentamos la propuesta para que su organización cumpla la Ley Orgánica de Protección de Datos "
      "Personales (LOPDP), su Reglamento General y la normativa de la Superintendencia de Protección de Datos Personales (SPDP), y pueda demostrarlo.", ""]
 grupos = []
@@ -155,7 +155,7 @@ for s in C.SERVICIOS:
 for i, g in enumerate(grupos, start=1):
     P += [f"## {i}. {g}" + (" (tarifas, no incluidas en el total)" if g == "Por evento" else ""), "",
           "| Servicio | Cantidad | Valor unitario | Subtotal |", "|---|---|---|---|"]
-    P += [f"| **{s[2]}**. {s[3]} | [CANT.] ({s[4]}) | [VALOR] | [SUBTOTAL] |" for s in C.SERVICIOS if s[0] == g]
+    P += [f"| **{s[7]} · {s[2]}**. {s[3]} | [CANT.] ({s[4]}) | [VALOR] | [SUBTOTAL] |" for s in C.SERVICIOS if s[0] == g]
     P.append("")
 P += ["## Resumen económico", "", "| Concepto | Valor |", "|---|---|",
       "| Evaluación y adecuación, subtotal sin IVA | [VALOR] |", "| Descuento | [VALOR] |", "| IVA [15] % | [VALOR] |", "| **Total única vez** | **[VALOR]** |",

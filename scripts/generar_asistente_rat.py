@@ -1,4 +1,4 @@
-"""Construye 03-registro-tratamientos/asistente-rat.html desde rat_config.py.
+"""Construye 04-registro-tratamientos/asistente-rat.html desde rat_config.py.
 
 Uso: python scripts/generar_asistente_rat.py
 """
@@ -21,6 +21,6 @@ cfg = {
     "revision_meses": C.REVISION_MESES, "genericas": C.FINALIDADES_GENERICAS, "separable": C.FINALIDAD_SEPARABLE,
 }
 shell = (ROOT / "scripts" / "plantilla-asistente-rat.html").read_text(encoding="utf-8")
-out = ROOT / "03-registro-tratamientos" / "asistente-rat.html"
+out = ROOT / "04-registro-tratamientos" / "asistente-rat.html"
 out.write_text(shell.replace("/*__CONFIG__*/", json.dumps(cfg, ensure_ascii=False).replace("</", "<\\/")), encoding="utf-8")
 print("OK", out)

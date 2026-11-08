@@ -199,14 +199,14 @@ def cover(c, d):
         c.drawString(M, H - 10.6 * cm - i * 1.35 * cm, t)
     c.setFillColor(ORC); c.setFont("Archivo-Regular", 12.5)
     for i, t in enumerate(["Rol y límites del DPD, mapeo de la empresa, recorrido de los datos,",
-                           "siete herramientas en orden de uso, propuestas, honorarios,",
+                           "ocho herramientas en orden de uso, catálogo de servicios, honorarios,",
                            "informe a la gerencia y normas ISO para el DPD en Ecuador."]):
         c.drawString(M, H - 17 * cm - i * 0.62 * cm, t)
     c.setStrokeColor(ORO); c.setLineWidth(1); c.line(M, 4.2 * cm, W - M, 4.2 * cm)
     c.setFillColor(colors.white); c.setFont("Archivo-SemiBold", 10); c.drawString(M, 3.4 * cm, "Abg. Mariano X. Macías Sánchez")
     c.setFillColor(ORC); c.setFont("Archivo-Regular", 9)
     c.drawString(M, 2.9 * cm, "Consultor en Protección de Datos Personales · Matrícula profesional 09-2022-736")
-    c.drawRightString(W - M, 3.4 * cm, "Versión 1.2 · noviembre de 2026")
+    c.drawRightString(W - M, 3.4 * cm, "Versión 1.3 · noviembre de 2026")
     c.drawRightString(W - M, 2.9 * cm, "Uso profesional · material de apoyo")
     c.restoreState()
 
@@ -243,10 +243,11 @@ def contenido():
     s = []
     # ================================================================ Presentación
     s += [Paragraph("PRESENTACIÓN", S["kick"]), Paragraph("Cómo usar esta guía", S["h1"]), Spacer(1, 6)]
-    s.append(P("Esta guía acompaña al <b>Kit de herramientas LOPDP</b>: siete herramientas, cada una en versión documento (Word o Excel) y versión web interactiva, para que el Delegado de Protección de Datos (DPD) en Ecuador cotice, diagnostique, documente, evalúe y supervise el cumplimiento de la <b>Ley Orgánica de Protección de Datos Personales (LOPDP)</b>, su Reglamento General (RGLOPDP) y la normativa de la <b>Superintendencia de Protección de Datos Personales (SPDP)</b>."))
-    s.append(P("Las herramientas están <b>numeradas en el orden en que se usan</b>: la 01 se usa primero y la 07 al final. Cada capítulo responde qué herramienta usar, cuándo, cómo, por qué es necesaria según el caso y cómo explicarla al cliente con precisión técnica y en lenguaje claro."))
+    s.append(P("Esta guía acompaña al <b>Kit de herramientas LOPDP</b>: ocho herramientas, cada una en versión documento (Word o Excel) y versión web interactiva, para que el Delegado de Protección de Datos (DPD) en Ecuador cotice, diagnostique, documente, evalúe y supervise el cumplimiento de la <b>Ley Orgánica de Protección de Datos Personales (LOPDP)</b>, su Reglamento General (RGLOPDP) y la normativa de la <b>Superintendencia de Protección de Datos Personales (SPDP)</b>."))
+    s.append(P("Las herramientas están <b>numeradas en el orden en que se usan</b>: la 01 se usa primero y la 08 al final. Cada capítulo responde qué herramienta usar, cuándo, cómo, por qué es necesaria según el caso y cómo explicarla al cliente con precisión técnica y en lenguaje claro."))
     s += table([["Si necesita…", "Vaya a"],
-                ["Ver las siete herramientas y cuál usar según el caso", "Capítulo 1"],
+                ["Ver las ocho herramientas y cuál usar según el caso", "Capítulo 1"],
+                ["Elegir qué servicios ofrecer y consultar definiciones", "Capítulo 9.1"],
                 ["Repasar el marco normativo y el vocabulario técnico", "Capítulo 2"],
                 ["Entender qué hace y qué no hace el DPD: asesorar y supervisar, no implementar", "Capítulo 3"],
                 ["Planificar una intervención completa", "Capítulo 4"],
@@ -266,29 +267,30 @@ def contenido():
     s.append(toc)
 
     # ================================================================ 1
-    s += chapter(1, "El kit en una página", "Siete herramientas numeradas en el orden de una intervención: se cotiza, se mide, se inventaría, se califica la escala, se evalúa el riesgo, se adecúa la documentación y se prepara la respuesta. Al año, se vuelve a medir.")
+    s += chapter(1, "El kit en una página", "Ocho herramientas numeradas en el orden de una intervención: se elige qué ofrecer, se cotiza, se mide, se inventaría, se califica la escala, se evalúa el riesgo, se adecúa la documentación y se prepara la respuesta. Al año, se vuelve a medir.")
     s.append(fig("flujo_herramientas", "Orden de uso de las herramientas del kit. La numeración sigue este orden."))
     s += table([["N.º", "Herramienta", "Cuándo se usa", "Por qué es necesaria", "Entregable"],
-                ["01", "Calculadora de honorarios", "Después de la primera reunión, antes de empezar", "Cobrar con método: ni por debajo del costo ni fuera de la capacidad del cliente", "Proforma con IVA y firma"],
-                ["02", "Nivel de madurez", "Al inicio y cada año", "Sin punto de partida medible no hay plan defendible ni evidencia de avance; estima la multa", "Informe de diagnóstico y plan de acción"],
-                ["03", "Registro de actividades (RAT)", "Después del diagnóstico", "Es el inventario obligatorio y la base de todos los demás documentos", "RAT en Excel"],
-                ["04", "Evaluación de gran escala", "Sobre cada actividad del RAT", "Toda organización debe evaluar si trata datos a gran escala; define si el DPD y la evaluación de impacto son obligatorios", "Informe con el puntaje MTGE"],
-                ["05", "Evaluación de impacto", "Antes de tratamientos de alto riesgo o gran escala", "Es obligatoria y previa en los casos del art. 42 LOPDP y de gran escala", "Informe del art. 32 RGLOPDP"],
-                ["06", "Kit de plantillas", "Después del RAT", "Cumple el deber de información y formaliza a los encargados", "Política, avisos, contratos, DPD"],
-                ["07", "Kit de vulneraciones", "Antes del incidente y en las primeras horas", "Los plazos de notificación son de días", "Protocolo, bitácora, notificaciones"]],
+                ["01", "Catálogo de servicios y glosario", "Antes de la primera propuesta", "Saber qué ofrecer, a quién, con quién levantar información y cuánto cobrar; usar el vocabulario de la ley", "Ficha de servicios y códigos para la proforma"],
+                ["02", "Calculadora de honorarios", "Después de la primera reunión, antes de empezar", "Cobrar con método: ni por debajo del costo ni fuera de la capacidad del cliente", "Proforma con IVA y firma"],
+                ["03", "Nivel de madurez", "Al inicio y cada año", "Sin punto de partida medible no hay plan defendible ni evidencia de avance; estima la multa", "Informe de diagnóstico y plan de acción"],
+                ["04", "Registro de actividades (RAT)", "Después del diagnóstico", "Es el inventario obligatorio y la base de todos los demás documentos", "RAT en Excel"],
+                ["05", "Evaluación de gran escala", "Sobre cada actividad del RAT", "Toda organización debe evaluar si trata datos a gran escala; define si el DPD y la evaluación de impacto son obligatorios", "Informe con el puntaje MTGE"],
+                ["06", "Evaluación de impacto", "Antes de tratamientos de alto riesgo o gran escala", "Es obligatoria y previa en los casos del art. 42 LOPDP y de gran escala", "Informe del art. 32 RGLOPDP"],
+                ["07", "Kit de plantillas", "Después del RAT", "Cumple el deber de información y formaliza a los encargados", "Política, avisos, contratos, DPD"],
+                ["08", "Kit de vulneraciones", "Antes del incidente y en las primeras horas", "Los plazos de notificación son de días", "Protocolo, bitácora, notificaciones"]],
                [0.06, 0.17, 0.22, 0.33, 0.22])
     s += h2("1.1 Qué herramienta usar según el caso")
     s.append(P("No todos los clientes necesitan todo al mismo tiempo. Use esta tabla para decidir por dónde empezar."))
     s += table([["Situación del cliente", "Herramientas, en este orden", "Por qué"],
-                ["Primer contacto con una empresa", "01 › 02", "Cotizar y medir antes de prometer resultados"],
-                ["Nunca ha hecho nada en protección de datos", "02 › 03 › 04 › 06 › 07", "Construir la base documental en orden; sin RAT, la política queda vacía"],
-                ["Pregunta «¿estoy obligado a tener DPD?»", "03 › 04", "El puntaje oficial de gran escala responde con evidencia; revise además las causales de la Res. SPDP-SPD-2025-0028-R"],
-                ["Va a instalar reloj biométrico, cámaras, GPS o inteligencia artificial", "04 › 05 › 06", "Suele ser gran escala directa y requiere evaluación de impacto antes de empezar"],
-                ["Contratará un proveedor de nube, nómina o contabilidad", "03 › 06", "Actualizar el RAT y firmar el contrato de encargo"],
-                ["Ocurrió un incidente", "07 de inmediato; luego 03 y 02", "Los plazos corren desde que se tuvo constancia del incidente"],
-                ["Solo pide «una política de privacidad»", "03 › 06", "La política debe salir del RAT; explíquelo antes de cotizar"],
-                ["Un cliente corporativo o una licitación exige evidencia", "02 › 03 › 04 › 06", "El informe de madurez y el RAT son la evidencia más solicitada"],
-                ["Revisión anual", "02 › 04 › 03", "Medir avance, recalcular la escala y actualizar el inventario"]], [0.36, 0.24, 0.40])
+                ["Primer contacto con una empresa", "01 › 02 › 03", "Elegir servicios, cotizar y medir antes de prometer resultados"],
+                ["Nunca ha hecho nada en protección de datos", "03 › 04 › 05 › 07 › 08", "Construir la base documental en orden; sin RAT, la política queda vacía"],
+                ["Pregunta «¿estoy obligado a tener DPD?»", "04 › 05", "El puntaje oficial de gran escala responde con evidencia; revise además las causales de la Res. SPDP-SPD-2025-0028-R"],
+                ["Va a instalar reloj biométrico, cámaras, GPS o inteligencia artificial", "05 › 06 › 07", "Suele ser gran escala directa y requiere evaluación de impacto antes de empezar"],
+                ["Contratará un proveedor de nube, nómina o contabilidad", "04 › 07", "Actualizar el RAT y firmar el contrato de encargo"],
+                ["Ocurrió un incidente", "08 de inmediato; luego 04 y 03", "Los plazos corren desde que se tuvo constancia del incidente"],
+                ["Solo pide «una política de privacidad»", "04 › 07", "La política debe salir del RAT; explíquelo antes de cotizar"],
+                ["Un cliente corporativo o una licitación exige evidencia", "03 › 04 › 05 › 07", "El informe de madurez y el RAT son la evidencia más solicitada"],
+                ["Revisión anual", "03 › 05 › 04", "Medir avance, recalcular la escala y actualizar el inventario"]], [0.36, 0.24, 0.40])
     s += box("ok", ["Use el asistente web en vivo durante las reuniones: el cliente ve cómo se construye el resultado y entiende el porqué de cada recomendación. Luego copie el resultado a Word o Excel y archívelo con la firma de responsabilidad."])
 
     # ================================================================ 2
@@ -296,38 +298,33 @@ def contenido():
     s += h2("2.1 Las normas que usará todos los días")
     s += table([["Norma", "Qué regula", "Herramienta"],
                 ["LOPDP (RO Supl. 459, 26-05-2021)", "Principios, bases legitimadoras, derechos, transferencias, obligaciones, DPD, infracciones y sanciones", "Todas"],
-                ["RGLOPDP (Decreto Ejecutivo 904, 2023)", "Gran escala (art. 4 num. 7), RAT (arts. 38-44), evaluación de impacto (arts. 29-32), vulneraciones (arts. 24-28), encargo (arts. 40-43), DPD (arts. 48-55)", "03, 04, 05, 06, 07"],
-                ["Res. SPDP-SPD-2025-0003-R", "Guía de Gestión de Riesgos y Evaluación de Impacto (Cap. I obligatorio; Cap. II referencial)", "02, 05"],
-                ["Res. SPDP-SPD-2025-0006-R", "Contenidos mínimos de cláusulas contractuales y modelos referenciales", "06"],
-                ["Res. SPDP-SPD-2025-0022-R", "Metodología de cálculo de multas (MPRIV-1 y MPUB-1)", "02"],
-                ["Res. SPDP-SPD-2025-0028-R", "Figura del DPD, causales de designación obligatoria y registro", "04, 06"],
-                ["Res. SPDP-SPD-2025-0041-R", "Interés legítimo como base de legitimación", "03, 05"],
-                ["Res. SPDP-SPD-2026-0004-R", "Transferencias o comunicaciones nacionales e internacionales", "03, 06"],
-                ["Res. SPDP-SPD-2026-0005-R", "Tratamiento a gran escala: Modelo Técnico de Gran Escala (MTGE) y obligaciones reforzadas", "01, 04"],
-                ["Res. SPDP-SPD-2026-0009-R y 0037-R", "Protección de datos en sistemas de inteligencia artificial", "05"],
-                ["Res. SPDP-SPD-2026-0039-R", "Tratamiento de datos biométricos", "04, 05"],
-                ["Res. SPDP-SPD-2026-0040-R", "Notificación de vulneraciones de seguridad (SISPDP)", "07"],
-                ["Ley Orgánica para el Fortalecimiento de la Ciberseguridad (mayo 2026)", "Reforma del art. 43 LOPDP: notificación también al CSIRT", "07"]],
+                ["RGLOPDP (Decreto Ejecutivo 904, 2023)", "Gran escala (art. 4 num. 7), RAT (arts. 38-44), evaluación de impacto (arts. 29-32), vulneraciones (arts. 24-28), encargo (arts. 40-43), DPD (arts. 48-55)", "04, 05, 06, 07, 08"],
+                ["Res. SPDP-SPD-2025-0003-R", "Guía de Gestión de Riesgos y Evaluación de Impacto (Cap. I obligatorio; Cap. II referencial)", "03, 06"],
+                ["Res. SPDP-SPD-2025-0006-R", "Contenidos mínimos de cláusulas contractuales y modelos referenciales", "07"],
+                ["Res. SPDP-SPD-2025-0022-R", "Metodología de cálculo de multas (MPRIV-1 y MPUB-1)", "03"],
+                ["Res. SPDP-SPD-2025-0028-R", "Figura del DPD, causales de designación obligatoria y registro", "05, 07"],
+                ["Res. SPDP-SPD-2025-0041-R", "Interés legítimo como base de legitimación", "04, 06"],
+                ["Res. SPDP-SPD-2026-0004-R", "Transferencias o comunicaciones nacionales e internacionales", "04, 07"],
+                ["Res. SPDP-SPD-2026-0005-R", "Tratamiento a gran escala: Modelo Técnico de Gran Escala (MTGE) y obligaciones reforzadas", "02, 05"],
+                ["Res. SPDP-SPD-2026-0009-R y 0037-R", "Protección de datos en sistemas de inteligencia artificial", "06"],
+                ["Res. SPDP-SPD-2026-0039-R", "Tratamiento de datos biométricos", "05, 06"],
+                ["Res. SPDP-SPD-2026-0040-R", "Notificación de vulneraciones de seguridad (SISPDP)", "08"],
+                ["Ley Orgánica para el Fortalecimiento de la Ciberseguridad (mayo 2026)", "Reforma del art. 43 LOPDP: notificación también al CSIRT", "08"]],
                [0.33, 0.52, 0.15])
     s += h2("2.2 El principio que ordena todo: responsabilidad proactiva")
     s += box("norma", ["El responsable debe <b>acreditar</b> haber implementado mecanismos para la protección de datos personales (LOPDP art. 10 lit. k). No basta con cumplir: hay que poder demostrarlo."])
     s.append(P("Por eso cada herramienta del kit produce un <b>soporte documental</b>. Ante una inspección de la SPDP, la pregunta no será «¿cumple?», sino «¿cómo lo demuestra?». Note quién debe acreditar: <b>el responsable</b>, no el DPD (capítulo 3)."))
-    s += h2("2.3 Vocabulario técnico, explicado con claridad")
-    s.append(P("Use siempre la terminología de la LOPDP. Evite los términos del reglamento europeo (interesado, brecha, AEPD) salvo para comparar."))
-    s += table([["Término", "Definición técnica", "Cómo explicarlo al cliente"],
-                ["Titular", "Persona natural cuyos datos son objeto de tratamiento", "La persona a quien pertenecen los datos: su cliente, su trabajador, su paciente"],
-                ["Responsable", "Quien decide la finalidad y el modo del tratamiento", "Su empresa, cuando decide para qué y cómo usa los datos"],
-                ["Encargado", "Quien trata datos por cuenta del responsable y según sus instrucciones", "Su contador externo, su proveedor de nube o de nómina"],
-                ["Destinatario", "Quien recibe datos por una comunicación o transferencia, para sus propios fines", "El SRI, el IESS o la aseguradora que recibe datos de su empresa"],
-                ["Comunicación o transferencia", "Revelación de datos a un tercero para sus fines propios (LOPDP art. 33)", "Cuando sus datos salen hacia alguien que los usará para lo suyo"],
-                ["Encargo", "Acceso de un encargado para prestar un servicio al responsable; no es transferencia (LOPDP arts. 34 y 35)", "Cuando un proveedor trabaja con sus datos para usted, no para él"],
-                ["Tratamiento", "Cualquier operación sobre datos: recolección, registro, conservación, uso, comunicación, supresión", "Todo lo que hace con un dato, desde pedirlo hasta borrarlo"],
-                ["Base legitimadora", "Fundamento jurídico que hace lícito el tratamiento (art. 7 LOPDP)", "La razón legal que le permite usar ese dato"],
-                ["Categorías especiales", "Datos sensibles, de NNA, de salud y de personas con discapacidad (art. 25 LOPDP)", "Datos que, mal usados, pueden discriminar o dañar gravemente"],
-                ["Gran escala", "Tratamiento que alcanza 6 puntos en el MTGE o encaja en un caso de calificación directa", "Cuando su tratamiento es grande o delicado, la ley le exige más cuidado"],
-                ["Vulneración de la seguridad", "Incidente que afecta confidencialidad, integridad o disponibilidad de los datos", "Una fuga, pérdida o alteración de datos"],
-                ["Minimización", "Tratar solo los datos adecuados, pertinentes y necesarios para la finalidad", "Pedir solo lo que realmente necesita"]],
-               [0.19, 0.40, 0.41])
+    s += h2("2.3 Vocabulario esencial para hablar con el cliente")
+    s.append(P("Use siempre la terminología de la LOPDP; evite los términos del reglamento europeo (interesado, brecha, AEPD) salvo para comparar. El glosario completo, con las definiciones del art. 4 LOPDP y los conceptos del Reglamento y de la SPDP, está en la herramienta 01."))
+    s += table([["Término", "Cómo explicarlo al cliente"],
+                ["Titular", "La persona a quien pertenecen los datos: su cliente, su trabajador, su paciente"],
+                ["Responsable", "Su empresa, cuando decide para qué y cómo usa los datos"],
+                ["Encargado", "El proveedor que trabaja con sus datos para usted: contador, nómina, nube"],
+                ["Destinatario", "Quien recibe datos para sus propios fines: SRI, IESS, aseguradora"],
+                ["Base legitimadora", "La razón legal que le permite usar ese dato (art. 7 LOPDP)"],
+                ["Categorías especiales", "Datos que, mal usados, pueden discriminar o dañar gravemente: salud, biométricos, NNA"],
+                ["Gran escala", "Cuando su tratamiento es grande o delicado y la ley le exige más cuidado"],
+                ["Vulneración de la seguridad", "Una fuga, pérdida o alteración de datos"]], [0.26, 0.74])
 
     # ================================================================ 3
     s += chapter(3, "El rol del DPD: asesorar y supervisar, no implementar", "Es el capítulo más importante para un DPD nuevo. Un cliente que cree que «contrató a alguien que hace la protección de datos» terminará decepcionado o, peor, convencido de que ya no es responsable de nada.")
@@ -346,7 +343,7 @@ def contenido():
                 ["Quién lo hace", "La empresa, con asesoría. Un consultor externo puede redactar los borradores", "La empresa: gerencia, dueños de procesos, TI y proveedores", "El DPD"],
                 ["Quién decide y aprueba", "La gerencia", "La gerencia", "El DPD informa; la gerencia decide"],
                 ["Entregable", "Documentos aprobados y plan de acción", "Medidas funcionando y evidencias", "Informes, indicadores, recomendaciones"],
-                ["Herramientas del kit", "02, 03, 04, 05, 06, 07", "Ninguna: es trabajo de la empresa", "02 (repetición), 04 (recálculo), 03 (revisión)"]],
+                ["Herramientas del kit", "03, 04, 05, 06, 07, 08", "Ninguna: es trabajo de la empresa", "03 (repetición), 05 (recálculo), 04 (revisión)"]],
                [0.16, 0.30, 0.30, 0.24])
     s += h2("3.3 Quién hace qué")
     s += table([["Actividad", "Gerencia", "Dueños de proceso", "Sistemas (TI)", "DPD"],
@@ -390,12 +387,12 @@ def contenido():
     s += chapter(4, "Metodología de intervención", "Una intervención ordenada evita el error más común: redactar políticas antes de saber qué datos trata la empresa.")
     s.append(fig("ciclo_dpd", "Ciclo de intervención del DPD. Cada fase alimenta a la siguiente; el control reinicia el ciclo.", width=TW * 0.62))
     s += table([["Fase", "Objetivo", "Herramienta", "Quién ejecuta", "Entregable", "Duración*"],
-                ["0. Propuesta", "Cotizar el servicio", "01", "Consultor", "Proforma", "1 a 3 días"],
-                ["1. Diagnóstico", "Mapear la empresa y medir su punto de partida", "02 · cap. 6", "Consultor con la empresa", "Informe de diagnóstico", "1 a 2 semanas"],
-                ["2. Inventario", "Saber qué datos se tratan, dónde, para qué, con quién y a qué escala", "03 · 04 · cap. 7 y 8", "Empresa, guiada por el consultor", "RAT, mapa de flujos, informe de gran escala", "2 a 6 semanas"],
-                ["3. Riesgos", "Valorar riesgos y decidir medidas", "05", "Empresa, con asesoría del DPD", "Evaluaciones de impacto", "1 a 3 semanas por tratamiento"],
-                ["4. Adecuación e implementación", "Documentar y poner en marcha las medidas", "06 · 07", "Empresa (aprueba y ejecuta); consultor redacta borradores", "Documentos aprobados y medidas funcionando", "2 a 8 semanas"],
-                ["5. Control", "Supervisar y medir", "02 · 04 (repetición) · cap. 12", "DPD", "Reportes e informe anual", "Permanente"]],
+                ["0. Propuesta", "Elegir servicios y cotizar", "01 · 02", "Consultor", "Ficha de servicios y proforma", "1 a 3 días"],
+                ["1. Diagnóstico", "Mapear la empresa y medir su punto de partida", "03 · cap. 6", "Consultor con la empresa", "Informe de diagnóstico", "1 a 2 semanas"],
+                ["2. Inventario", "Saber qué datos se tratan, dónde, para qué, con quién y a qué escala", "04 · 05 · cap. 7 y 8", "Empresa, guiada por el consultor", "RAT, mapa de flujos, informe de gran escala", "2 a 6 semanas"],
+                ["3. Riesgos", "Valorar riesgos y decidir medidas", "06", "Empresa, con asesoría del DPD", "Evaluaciones de impacto", "1 a 3 semanas por tratamiento"],
+                ["4. Adecuación e implementación", "Documentar y poner en marcha las medidas", "07 · 08", "Empresa (aprueba y ejecuta); consultor redacta borradores", "Documentos aprobados y medidas funcionando", "2 a 8 semanas"],
+                ["5. Control", "Supervisar y medir", "03 · 05 (repetición) · cap. 12", "DPD", "Reportes e informe anual", "Permanente"]],
                [0.14, 0.22, 0.13, 0.19, 0.19, 0.13])
     s.append(Paragraph("* Criterio propio para una pyme de 20 a 100 trabajadores. Depende del tamaño, el sector y la colaboración del cliente.", S["small"]))
     s += box("error", ["Empezar por la política de privacidad. Sin RAT no se sabe qué finalidades, bases ni plazos declarar: la política queda genérica y no protege a nadie."])
@@ -406,8 +403,8 @@ def contenido():
     s += B(["Identifique el <b>sector</b> y si trata categorías especiales (salud, educación, seguridad privada, financiero, biométricos).",
             "Estime el <b>tamaño</b>: con 100 o más trabajadores el RAT es obligatorio sin más análisis (art. 38 RGLOPDP).",
             "Revise su <b>sitio web</b>: formularios, política publicada, cookies, chat de WhatsApp.",
-            "Verifique si la actividad está entre las causales de <b>designación obligatoria de DPD</b> (Res. SPDP-SPD-2025-0028-R) o si probablemente es de <b>gran escala</b> (capítulo 9.4).",
-            "Prepare la ficha de mapeo del capítulo 6 y lleve abiertos los asistentes 01 y 02."])
+            "Verifique si la actividad está entre las causales de <b>designación obligatoria de DPD</b> (Res. SPDP-SPD-2025-0028-R) o si probablemente es de <b>gran escala</b> (capítulo 9.5).",
+            "Prepare la ficha de mapeo del capítulo 6 y lleve abiertos los asistentes 02 y 03."])
     s += h2("5.2 Guion de la primera reunión (30 minutos)")
     s += steps([("Apertura (3 min)", "Presente el objetivo: entender cómo la empresa trata datos personales y mostrar su nivel de exposición. Aclare que no es una auditoría punitiva."),
                 ("Contexto del negocio (7 min)", "Pregunte por procesos, no por datos: «¿Cómo llega un cliente nuevo? ¿Qué pasa cuando contratan a alguien? ¿Qué proveedores usan para facturar, nómina o correo?»."),
@@ -422,7 +419,7 @@ def contenido():
                 ["«Ya tenemos una política en la web»", "La política es la última pieza, no la primera. Debe reflejar finalidades, bases y plazos reales, que salen del RAT."],
                 ["«Eso lo ve el área de sistemas»", "Sistemas protege la información; la protección de datos decide qué datos se pueden tratar, para qué y por cuánto tiempo. Son complementarios."],
                 ["«Si lo contrato a usted, ya cumplo»", "No: el responsable sigue siendo la empresa. Yo asesoro y superviso; ustedes deciden y ejecutan. Por eso la propuesta separa lo que yo entrego de lo que ustedes implementan."],
-                ["«Es muy caro»", "Compare el plan con la multa estimada y el riesgo anual esperado del diagnóstico; la herramienta 02 lo calcula con sus números."]],
+                ["«Es muy caro»", "Compare el plan con la multa estimada y el riesgo anual esperado del diagnóstico; la herramienta 03 lo calcula con sus números."]],
                [0.3, 0.7])
     s += h2("5.4 Cómo presentar la propuesta de evaluación")
     s += table([["Sección", "Contenido"],
@@ -435,18 +432,18 @@ def contenido():
                 ["7. Información requerida", "Organigrama, proveedores con acceso a datos, formularios y contratos tipo, ingresos del ejercicio anterior, contacto por área."],
                 ["8. Cronograma", "Por semana: inicio, entrevistas, análisis, entrega y presentación."],
                 ["9. Confidencialidad", "Acuerdo de confidencialidad y, si accederá a datos personales, contrato de encargo (art. 41 RGLOPDP)."],
-                ["10. Honorarios", "Valores de la proforma de la herramienta 01, sin IVA y con IVA; forma de pago y vigencia."]],
+                ["10. Servicios y honorarios", "Servicios con sus códigos del catálogo (herramienta 01) y valores de la proforma (herramienta 02), sin IVA y con IVA; forma de pago y vigencia."]],
                [0.26, 0.74])
     s += h2("5.5 Cómo presentar la propuesta de control")
     s += table([["Modalidad", "Cuándo conviene", "Incluye"],
                 ["DPD externo designado", "La organización está obligada a designar DPD (gran escala o Res. 0028) y no tiene perfil interno", "Funciones del art. 49 LOPDP, registro ante la SPDP, supervisión, reportes"],
                 ["Acompañamiento de cumplimiento", "Tiene responsable interno pero necesita soporte experto", "Revisión trimestral del RAT, asesoría en proyectos nuevos, capacitación"],
-                ["Revisión anual", "Organización pequeña con riesgo bajo", "Repetición de las herramientas 02 y 04 y actualización documental"]],
+                ["Revisión anual", "Organización pequeña con riesgo bajo", "Repetición de las herramientas 03 y 05 y actualización documental"]],
                [0.25, 0.37, 0.38])
     s.append(P("La propuesta de control debe fijar <b>indicadores</b> (capítulo 12), la <b>frecuencia de reportes</b>, los <b>tiempos de respuesta</b> ante una vulneración (el encargado comunica al responsable en máximo 2 días y el responsable notifica a la SPDP en el término de 5 días) y lo que <b>no</b> incluye: implementar medidas técnicas o decidir por la empresa."))
     s += box("cliente", ["«La adecuación deja la casa en orden; el control evita que se desordene. Cada trimestre le entrego un tablero con cinco indicadores y, si ocurre un incidente, ya sabemos quién hace qué y en qué plazo.»"])
     s += h2("5.6 Cómo fijar los honorarios")
-    s.append(P("En Ecuador no existe una tabla oficial ni gremial de honorarios del DPD. La herramienta 01 propone tres miradas del mismo servicio y una regla de decisión. Tramos y tarifas son <b>criterio propio</b>, ajustables a su mercado."))
+    s.append(P("En Ecuador no existe una tabla oficial ni gremial de honorarios del DPD. La herramienta 02 propone tres miradas del mismo servicio y una regla de decisión. Tramos y tarifas son <b>criterio propio</b>, ajustables a su mercado."))
     s += table([["Método", "Pregunta que responde", "Úselo para"],
                 ["Volumen de negocio", "¿Cuánto puede pagar este cliente?", "Anclar el precio a su tamaño (las ventas prevalecen sobre los trabajadores)"],
                 ["Volumen de tratamiento", "¿Cuánto exige su tratamiento de datos?", "Justificar el precio con el puntaje oficial MTGE de la SPDP"],
@@ -460,7 +457,7 @@ def contenido():
     s += table([["Fuente", "Qué revela", "Dominio de madurez"],
                 ["Sitio web y formularios", "Política publicada, avisos, cookies, canales de recolección", "Transparencia, Licitud"],
                 ["Redes sociales y anuncios", "Campañas, concursos, captación de contactos, uso de imágenes", "Licitud, Transparencia"],
-                ["Información societaria y estados financieros públicos (si es compañía)", "Tamaño, ventas del ejercicio anterior, grupo empresarial", "Base para las herramientas 01 y 02"],
+                ["Información societaria y estados financieros públicos (si es compañía)", "Tamaño, ventas del ejercicio anterior, grupo empresarial", "Base para las herramientas 02 y 03"],
                 ["Visita a las instalaciones", "Cámaras y letreros, relojes biométricos, archivos abiertos, pantallas visibles", "Seguridad, Transparencia"],
                 ["Ofertas de empleo publicadas", "Datos que piden a postulantes, uso de plataformas externas", "Licitud, Encargados"]], [0.34, 0.42, 0.24])
     s += h2("6.2 Ficha de perfil de la empresa")
@@ -475,7 +472,7 @@ def contenido():
                 ["Incidentes y reclamos previos", "Vulneraciones y derechos", "Gerencia, servicio al cliente"],
                 ["Documentos existentes (política, contratos, procedimientos)", "Punto de partida de la adecuación", "Legal, gerencia"]], [0.40, 0.36, 0.24])
     s += h2("6.3 Matriz de áreas y dominios")
-    s.append(P("Cada área de la empresa responde mejor ciertos dominios de la herramienta 02. Use la matriz para decidir a quién entrevistar y qué evidencia pedirle; así evita preguntar todo a la gerencia, que suele no conocer el detalle operativo."))
+    s.append(P("Cada área de la empresa responde mejor ciertos dominios de la herramienta 03. Use la matriz para decidir a quién entrevistar y qué evidencia pedirle; así evita preguntar todo a la gerencia, que suele no conocer el detalle operativo."))
     s.append(fig("mapeo_areas", "Matriz de mapeo: qué área aporta evidencia para cada dominio del diagnóstico de madurez (criterio propio)."))
     s += h2("6.4 Señales observables")
     s += table([["Señal", "Qué suele indicar", "Dominio"],
@@ -487,20 +484,20 @@ def contenido():
                 ["Nadie sabe a quién avisar si se pierde una laptop", "No hay protocolo de vulneraciones", "Vulneraciones"],
                 ["Datos de clientes en grupos de WhatsApp personales", "Tratamiento sin control ni registro", "RAT, Seguridad, Cultura"]], [0.36, 0.44, 0.20])
     s += h2("6.5 Del mapeo al diagnóstico")
-    s += steps([("Complete la ficha de perfil", "Con la información pública y la que entregue la gerencia. Registre los datos en la pestaña de contexto de la herramienta 02."),
+    s += steps([("Complete la ficha de perfil", "Con la información pública y la que entregue la gerencia. Registre los datos en la pestaña de contexto de la herramienta 03."),
                 ("Arme la agenda de entrevistas", "Con la matriz de áreas y dominios: una entrevista de 45 minutos por área, con el guion del Anexo B."),
                 ("Formule hipótesis", "Marque en el cuestionario los puntajes que espera según las señales observadas. Le ayudarán a enfocar las preguntas."),
                 ("Valide con evidencia", "En cada entrevista pida el documento o la pantalla que respalda la respuesta. Sin evidencia, el puntaje no supera 2."),
-                ("Aplique la herramienta 02", "Complete el cuestionario, revise el radar y el plan de acción, y cruce el resultado con las señales del mapeo.")])
+                ("Aplique la herramienta 03", "Complete el cuestionario, revise el radar y el plan de acción, y cruce el resultado con las señales del mapeo.")])
 
     # ================================================================ 7
     s += chapter(7, "Cómo identificar los datos que trata una empresa", "Existen estructuras reconocidas para hacerlo. La legal es el RAT; la técnica más difundida es el inventario y mapeo de datos del NIST Privacy Framework; la de escala es el MTGE de la SPDP. El kit combina las tres.")
     s += h2("7.1 Las estructuras de referencia")
     s += table([["Estructura", "Qué aporta", "Cómo se usa en el kit"],
-                ["RAT (art. 38 RGLOPDP)", "El contenido mínimo legal del inventario", "Herramienta 03"],
-                ["Registro Nacional de Protección de Datos (art. 51 LOPDP)", "Inscripción de las bases de datos ante la autoridad", "Dominio RAT de la herramienta 02"],
+                ["RAT (art. 38 RGLOPDP)", "El contenido mínimo legal del inventario", "Herramienta 04"],
+                ["Registro Nacional de Protección de Datos (art. 51 LOPDP)", "Inscripción de las bases de datos ante la autoridad", "Dominio RAT de la herramienta 03"],
                 ["NIST Privacy Framework, categoría ID.IM-P", "Ocho preguntas para levantar el inventario de forma sistemática", "Método del apartado 7.3"],
-                ["Modelo Técnico de Gran Escala (Res. SPDP-SPD-2026-0005-R)", "Seis variables por tratamiento con umbral oficial; el cálculo debe constar en el RAT", "Herramienta 04"],
+                ["Modelo Técnico de Gran Escala (Res. SPDP-SPD-2026-0005-R)", "Seis variables por tratamiento con umbral oficial; el cálculo debe constar en el RAT", "Herramienta 05"],
                 ["ISO/IEC 27701 e ISO/IEC 29100", "Roles, ciclo de vida del dato y registros dentro de un sistema de gestión", "Capítulo 13"]],
                [0.30, 0.42, 0.28])
     s += h2("7.2 Las ocho preguntas del inventario (NIST ID.IM-P)")
@@ -519,7 +516,7 @@ def contenido():
                 ("Inventario de sistemas y soportes", "ERP, nómina, CRM, correo, hojas de cálculo, WhatsApp corporativo, cámaras y archivo físico."),
                 ("Ciclo de vida por actividad", "Las seis etapas del capítulo 8: captación, registro, uso, comunicación, conservación y supresión."),
                 ("Mapa de flujos", "Origen, recolección, sistemas, encargados y destinatarios. Distinga encargo de comunicación."),
-                ("Validación y registro", "Valide con el dueño de cada proceso, cargue el RAT (herramienta 03) y puntúe cada actividad con la herramienta 04.")])
+                ("Validación y registro", "Valide con el dueño de cada proceso, cargue el RAT (herramienta 04) y puntúe cada actividad con la herramienta 05.")])
     s.append(fig("flujo_datos", "Mapa de flujos de una pyme ficticia. El proveedor de nube en EE. UU. es un encargado: su ubicación en el exterior no convierte el encargo en transferencia internacional."))
     s += box("error", ["Preguntar «¿qué bases de datos tienen?». La respuesta casi siempre es «solo la de clientes». Pregunte por procesos: así aparecen la nómina, las cámaras, el grupo de WhatsApp de ventas y las hojas de vida en el correo del gerente."])
 
@@ -528,12 +525,12 @@ def contenido():
     s += h2("8.1 Las seis etapas")
     s.append(fig("roadmap_datos", "Recorrido del dato y lo que la ley exige en cada etapa."))
     s += table([["Etapa", "Pregunta del DPD", "Documento o medida", "Herramienta"],
-                ["1. Captación", "¿Se informó a la persona y hay base legal?", "Aviso de privacidad; consentimiento solo cuando es la base", "03, 06"],
-                ["2. Registro", "¿Dónde queda y quién accede?", "RAT; controles de acceso", "03"],
-                ["3. Uso", "¿Se usa solo para lo informado?", "Finalidades del RAT; evaluación de impacto si el riesgo es alto", "03, 04, 05"],
-                ["4. Comunicación", "¿Sale a un encargado o a un destinatario?", "Contrato de encargo o base del art. 33 LOPDP", "03, 06"],
-                ["5. Conservación", "¿Cuánto tiempo y por qué?", "Plazo en el RAT y en la política", "03, 06"],
-                ["6. Supresión", "¿Cómo y cuándo se elimina?", "Procedimiento y constancia de supresión", "06"]], [0.16, 0.30, 0.38, 0.16])
+                ["1. Captación", "¿Se informó a la persona y hay base legal?", "Aviso de privacidad; consentimiento solo cuando es la base", "04, 07"],
+                ["2. Registro", "¿Dónde queda y quién accede?", "RAT; controles de acceso", "04"],
+                ["3. Uso", "¿Se usa solo para lo informado?", "Finalidades del RAT; evaluación de impacto si el riesgo es alto", "04, 05, 06"],
+                ["4. Comunicación", "¿Sale a un encargado o a un destinatario?", "Contrato de encargo o base del art. 33 LOPDP", "04, 07"],
+                ["5. Conservación", "¿Cuánto tiempo y por qué?", "Plazo en el RAT y en la política", "04, 07"],
+                ["6. Supresión", "¿Cómo y cuándo se elimina?", "Procedimiento y constancia de supresión", "07"]], [0.16, 0.30, 0.38, 0.16])
     s += h2("8.2 Encargo frente a comunicación o transferencia")
     s.append(fig("roles_datos", "Encargados (trabajan para la empresa) y destinatarios (usan los datos para sus fines)."))
     s += table([["", "Encargo", "Comunicación o transferencia"],
@@ -565,7 +562,7 @@ def contenido():
               "Juan se postula a un cargo de bodeguero, es contratado y empieza a marcar asistencia con huella.",
               [["Captación", "Envía su hoja de vida; luego entrega cédula, cuenta bancaria, certificado médico y datos de sus hijos (cargas)", "—", "Aviso a postulantes y trabajadores; datos de salud y de NNA son categorías especiales"],
                ["Registro", "Se crea su ficha en el sistema de nómina de un proveedor", "Proveedor de nómina: encargado", "Contrato de encargo"],
-               ["Uso", "Marca asistencia con huella dactilar", "—", "Biométrico: gran escala directa (herramienta 04) y evaluación de impacto previa (herramienta 05)"],
+               ["Uso", "Marca asistencia con huella dactilar", "—", "Biométrico: gran escala directa (herramienta 05) y evaluación de impacto previa (herramienta 06)"],
                ["Comunicación", "Se le afilia al IESS y se registra el contrato ante el Ministerio del Trabajo", "IESS y Ministerio: destinatarios por obligación legal", "Base legal en el RAT"],
                ["Comunicación", "La empresa lo incluye en el seguro médico privado de grupo", "Aseguradora: destinataria que usa los datos para sus fines", "Base de legitimación e información al trabajador; analizar el caso"],
                ["Conservación y supresión", "Al terminar la relación, se conservan solo los datos exigidos por ley; las hojas de vida no seleccionadas se eliminan", "—", "Plazos en el RAT; constancia de supresión"]],
@@ -582,8 +579,27 @@ def contenido():
 
     # ================================================================ 9
     s += chapter(9, "Las herramientas paso a paso", "Cada herramienta se presenta en el orden de uso con la misma estructura: qué es, por qué es necesaria, cuándo usarla según el caso, cómo, un ejemplo, los errores frecuentes y cómo explicarla.")
-    # 9.1 Honorarios
-    s += h2("9.1 Herramienta 01 · Calculadora de honorarios")
+    # 9.1 Catálogo
+    s += h2("9.1 Herramienta 01 · Catálogo de servicios y glosario")
+    s += ficha([("Qué es", "Catálogo de 28 servicios (S01 a S28) por fase, con qué es, cómo se aplica, para quién, qué se obtiene, departamento responsable, con quién levantar información, recomendaciones y precio sugerido por tamaño. Incluye el glosario del art. 4 LOPDP, del Reglamento y de la SPDP."),
+                ("Por qué", "Un DPD nuevo suele ofrecer «protección de datos» en abstracto. El catálogo le permite ofrecer servicios concretos, con alcance claro y el mismo nombre y código en la proforma, el contrato y la factura."),
+                ("Según el caso", "Antes de cada propuesta. Con clientes recurrentes, para ofrecer servicios de control anual o por evento. El glosario, siempre que redacte para un cliente o explique un término."),
+                ("Entregable", "Códigos para la proforma; catálogo para el cliente y ficha interna en Word; glosario en Word.")])
+    s += steps([("Ubique la fase del cliente", "Evaluación inicial, inventario y riesgos, adecuación, control o por evento."),
+                ("Revise la naturaleza del servicio", "Asesoría, borradores para aprobación, supervisión, formación o acompañamiento ante la autoridad: deja claro qué hace usted y qué hace la empresa."),
+                ("Prepare el levantamiento", "Cada servicio indica el departamento responsable y con quién conversar."),
+                ("Copie los códigos", "Péguelos en la proforma de la herramienta 02 con «Importar del catálogo»."),
+                ("Entregue el catálogo al cliente", "La versión para el cliente omite las recomendaciones internas.")])
+    s += table([["Fase", "Servicios"],
+                ["Evaluación inicial", "S01 reunión inicial · S02 diagnóstico de madurez · S03 gran escala y DPD · S04 informe a la gerencia"],
+                ["Inventario y riesgos", "S05 RAT · S06 evaluación de impacto · S07 ponderación del interés legítimo · S08 encargos y transferencias"],
+                ["Adecuación", "S09 programa integral · S10 política y avisos · S11 contratos de encargo · S12 política interna y roles · S13 conservación y supresión · S14 derechos · S15 protocolo de vulneraciones · S16 sitio web · S17 capacitación"],
+                ["Control mensual y anual", "S18 DPD externo · S19 acompañamiento · S20 informe anual · S21 auditoría independiente"],
+                ["Por evento", "S22 vulneración · S23 solicitud de derechos · S24 privacidad desde el diseño · S25 evaluación de proveedor · S26 simulacro · S27 requerimientos y consultas a la SPDP · S28 hora adicional"]], [0.22, 0.78])
+    s += box("ojo", ["No audite (S21) a un cliente del que es DPD o al que adecuó: perdería independencia. Si además patrocinará a la empresa en un procedimiento sancionador (S27), evalúe el conflicto con su función de punto de contacto ante la SPDP."])
+
+    # 9.2 Honorarios
+    s += h2("9.2 Herramienta 02 · Calculadora de honorarios")
     s += ficha([("Qué es", "Calculadora con seis pestañas: cliente, volumen de negocio, volumen de tratamiento (MTGE), estimación técnica, comparar y decidir, y proforma con valores sugeridos, IVA y firma."),
                 ("Por qué", "Cotizar sin método lleva a cobrar de menos a las pymes con muchos datos o de más a las que no pueden pagar. Da un rango defendible y argumentos de valor honestos."),
                 ("Según el caso", "Indispensable en toda oferta. En clientes recurrentes, actualice la proforma cada año. Si el cliente solo pide una consulta puntual, use la tarifa por hora."),
@@ -591,11 +607,11 @@ def contenido():
     s += steps([("Datos del cliente", "Ventas del ejercicio anterior sin IVA, trabajadores, sector, actividades y encargados."),
                 ("Tres métodos", "Revise el resultado por volumen de negocio, por volumen de tratamiento y por horas."),
                 ("Decida", "Lea la mediana, el rango y las advertencias. Elija el método base; considere paquetes o bolsa de horas."),
-                ("Proforma", "Marque servicios, revise valores, agregue la multa estimada de la herramienta 02 y complete condiciones y firma."),
+                ("Proforma", "Marque servicios, revise valores, agregue la multa estimada de la herramienta 03 y complete condiciones y firma."),
                 ("Neto real", "Revise, solo para usted, lo que recibirá después de las retenciones.")])
     s += box("error", ["Ofrecer en la proforma «implementación completa» como si fuera tarea del DPD. Describa la adecuación como asesoría con entregables y deje claro que la empresa implementa (capítulo 3)."])
     # 9.2 Madurez
-    s += h2("9.2 Herramienta 02 · Nivel de madurez")
+    s += h2("9.3 Herramienta 03 · Nivel de madurez")
     s += ficha([("Qué es", "Diagnóstico de 39 preguntas en 12 dominios, con índice ponderado de 0 a 4, radar, plan de acción priorizado y estimación de la multa con la metodología de la SPDP."),
                 ("Por qué", "Sin punto de partida medible no hay plan defendible ni forma de demostrar avance. El reglamento de multas usa la madurez en el cumplimiento como variable de cálculo."),
                 ("Según el caso", "Siempre al inicio y cada año. En una microempresa con pocos tratamientos puede aplicarse en una sola reunión; en una mediana o grande, tras el mapeo del capítulo 6 y entrevistas por área."),
@@ -616,21 +632,21 @@ def contenido():
     s.append(fig("multa_escenarios", "Multa estimada y riesgo anual esperado del ejemplo ficticio, sin acción y con plan, frente al apetito al riesgo."))
     s += box("ojo", ["Es una <b>estimación orientativa</b>, no una liquidación. Las fórmulas provienen de un resumen profesional de la resolución; el sentido del PDI y los pesos son interpretación del portafolio."])
     # 9.3 RAT
-    s += h2("9.3 Herramienta 03 · Registro de actividades de tratamiento")
+    s += h2("9.4 Herramienta 04 · Registro de actividades de tratamiento")
     s += ficha([("Qué es", "Plantilla Excel y asistente web para documentar cada actividad con el contenido mínimo del art. 38 RGLOPDP, con control automático del estado y del riesgo."),
                 ("Por qué", "Es el inventario obligatorio y la base de la gran escala, la evaluación de impacto, la política y los contratos."),
-                ("Según el caso", "Obligatorio con 100 o más trabajadores y, con menos, si el tratamiento implica riesgo, no es ocasional o incluye categorías especiales (arts. 38 y 39 RGLOPDP). En la práctica, imprescindible siempre: sin RAT no funcionan las herramientas 04, 05 y 06."),
+                ("Según el caso", "Obligatorio con 100 o más trabajadores y, con menos, si el tratamiento implica riesgo, no es ocasional o incluye categorías especiales (arts. 38 y 39 RGLOPDP). En la práctica, imprescindible siempre: sin RAT no funcionan las herramientas 05, 06 y 07."),
                 ("Entregable", "RAT en Excel aprobado por la gerencia, con hoja del encargado si aplica.")])
     s += steps([("¿Está obligada?", "Responda las preguntas de obligatoriedad, cada una con su ayuda normativa."),
                 ("Una actividad por fila", "Misma finalidad y base. Nómina y publicidad son actividades distintas."),
                 ("Catálogo", "Elegir una actividad del catálogo sugiere finalidades, datos y bases que el DPD valida con el dueño del proceso."),
                 ("Mínimo legal y buenas prácticas", "Los nueve elementos del art. 38 llevan a «Mínimo cumplido»; las buenas prácticas, a «Completo»."),
                 ("Encargados y destinatarios", "Registre por separado quién trabaja para la empresa y a quién se comunican datos (capítulo 8)."),
-                ("Revisión", "Fecha de revisión anual o ante cambios; agregue el puntaje de la herramienta 04.")])
+                ("Revisión", "Fecha de revisión anual o ante cambios; agregue el puntaje de la herramienta 05.")])
     s.append(fig("estados_rat", "Estado del RAT del ejemplo ficticio: 8 actividades, 50 % con el mínimo legal cumplido.", width=TW * 0.55))
     s += box("error", ["Agrupar todo en «Gestión de clientes». Mezcla finalidades con bases y plazos distintos y vuelve imposible justificar cada una."])
     # 9.4 Gran escala
-    s += h2("9.4 Herramienta 04 · Evaluación de gran escala")
+    s += h2("9.5 Herramienta 05 · Evaluación de gran escala")
     s += ficha([("Qué es", "Asistente instructivo que califica cada tratamiento: casos de calificación directa (RGLOPDP art. 4 num. 7 y art. 14 de la Res. SPDP-SPD-2026-0005-R) y Modelo Técnico de Gran Escala con seis variables y umbral de 6 puntos."),
                 ("Por qué", "Si un tratamiento es de gran escala, el DPD y la evaluación de impacto previa son obligatorios, el cálculo debe constar en el RAT, se audita cada 12 meses y se elabora un informe anual. Es la forma objetiva de responder «¿debo tener DPD?»."),
                 ("Según el caso", "Siempre después del RAT: toda organización debe evaluar si sus tratamientos son de gran escala (art. 4 de la resolución). Decisiva cuando hay biométricos, cámaras, salud, menores, crédito o courier. Recalcule cada año y ante cambios sustanciales."),
@@ -650,10 +666,10 @@ def contenido():
     s += box("ojo", ["El umbral se alcanza con facilidad: un tratamiento con pocos datos básicos suma 6,5 puntos si es prolongado y nacional. Aplique el modelo como está, documente cada dato y, si el resultado parece desproporcionado, el responsable puede consultar a la SPDP; su respuesta es obligatoria para quien consulta (RGLOPDP art. 53)."])
     s += box("cliente", ["«La Superintendencia mide la gran escala con seis factores. Su facturación suma 8,5 puntos y el límite es 6. No es una sanción: significa que la ley le exige un delegado registrado, una evaluación de riesgos previa y una auditoría anual.»"])
     # 9.5 EIPD
-    s += h2("9.5 Herramienta 05 · Evaluación de impacto")
+    s += h2("9.6 Herramienta 06 · Evaluación de impacto")
     s += ficha([("Qué es", "Asistente de cinco pasos: necesidad, descripción, necesidad y proporcionalidad, matriz de riesgos con medidas, conclusión e informe con el contenido del art. 32 RGLOPDP."),
                 ("Por qué", "Es obligatoria y previa en los casos del art. 42 LOPDP y cuando el tratamiento es de gran escala (Res. SPDP-SPD-2026-0005-R art. 12)."),
-                ("Según el caso", "Solo para tratamientos de alto riesgo: los que la herramienta 04 califica de gran escala, perfiles automatizados, biométricos, inteligencia artificial o datos de NNA. No la aplique a todo el RAT; recomiéndela ante nuevas tecnologías aunque no sea obligatoria."),
+                ("Según el caso", "Solo para tratamientos de alto riesgo: los que la herramienta 05 califica de gran escala, perfiles automatizados, biométricos, inteligencia artificial o datos de NNA. No la aplique a todo el RAT; recomiéndela ante nuevas tecnologías aunque no sea obligatoria."),
                 ("Entregable", "Informe de evaluación de impacto y matriz de riesgos aprobados por la gerencia.")])
     s += steps([("¿Es obligatoria?", "Supuestos del art. 42, gran escala y normativa especial."),
                 ("Descripción", "Finalidades, operaciones, datos, titulares, sistemas, flujos y terceros."),
@@ -663,7 +679,7 @@ def contenido():
     s.append(fig("heatmap_eipd", "Matriz de riesgo del ejemplo (control de asistencia con huella): las medidas llevan los riesgos de nivel Alto a Medio y Bajo."))
     s += box("concepto", ["<b>Riesgo inherente</b> es el riesgo antes de las medidas; <b>riesgo residual</b>, el que queda después. Quien implementa las medidas es la empresa; el DPD verifica que el residual quede por debajo del umbral aceptado."])
     # 9.6 Plantillas
-    s += h2("9.6 Herramienta 06 · Kit de plantillas")
+    s += h2("9.7 Herramienta 07 · Kit de plantillas")
     s += ficha([("Qué es", "Generador de documentos: política de privacidad, avisos, contrato de encargo, cláusulas de consentimiento y designación del DPD."),
                 ("Por qué", "Cumple el deber de información (art. 12 LOPDP), formaliza a los encargados (art. 41 RGLOPDP; su falta es infracción grave) y documenta consentimientos y la designación del DPD."),
                 ("Según el caso", "Siempre, pero después del RAT. Elija solo las plantillas necesarias: una empresa sin encargados no necesita contratos de encargo; el consentimiento solo cuando es la base. Los documentos son borradores que la gerencia aprueba."),
@@ -675,7 +691,7 @@ def contenido():
                 ("Aprobación", "La gerencia revisa, aprueba y publica; el DPD verifica que se usen.")])
     s += box("error", ["Pedir consentimiento para todo «por si acaso». Si el titular lo revoca y el tratamiento sigue siendo necesario, la cláusula queda engañosa."])
     # 9.7 Vulneraciones
-    s += h2("9.7 Herramienta 07 · Kit de vulneraciones")
+    s += h2("9.8 Herramienta 08 · Kit de vulneraciones")
     s += ficha([("Qué es", "Protocolo de respuesta, bitácora y modelos de comunicación del encargado al responsable, a la SPDP y a los titulares, con calculadora de plazos y evaluación orientativa del riesgo."),
                 ("Por qué", "La notificación es obligatoria y con plazos cortos: el encargado comunica al responsable en máximo 2 días y el responsable notifica a la SPDP en el término de 5 días por el SISPDP; desde mayo de 2026, también al CSIRT."),
                 ("Según el caso", "El protocolo, siempre y antes de cualquier incidente. El asistente, en las primeras horas de un incidente; si el cliente llega con un incidente en curso, empiece por aquí aunque no tenga nada más."),
@@ -701,17 +717,17 @@ def contenido():
                [0.15, 0.21, 0.22, 0.18, 0.24])
     s += h2("10.2 Dominios del diagnóstico de madurez")
     s += table([["Dominio", "Qué significa", "Nivel 3 (Implementado)", "Herramienta"],
-                ["Gobierno", "La dirección asume la protección de datos", "Política interna aprobada, roles asignados, reporte periódico", "02"],
-                ["DPD (crítico)", "La figura del DPD está analizada y, si corresponde, designada", "Gran escala evaluada; DPD registrado y con acceso a la dirección", "04, 06"],
-                ["RAT (crítico)", "La organización sabe qué datos trata", "RAT con mínimo legal, revisado, con puntaje MTGE", "03, 04"],
-                ["Licitud (crítico)", "Cada tratamiento tiene su base", "Bases por actividad; consentimientos verificables", "03, 06"],
-                ["Transparencia", "Los titulares saben qué se hace con sus datos", "Política y avisos en cada punto de recolección", "06"],
-                ["Derechos", "Los titulares pueden ejercer sus derechos", "Canal, procedimiento y registro con plazos", "06"],
-                ["Encargados (crítico)", "Los proveedores que tratan datos están controlados", "Inventario de encargados y contratos firmados", "03, 06"],
-                ["Seguridad (crítico)", "Los datos están protegidos según su riesgo", "Análisis de riesgos, accesos por rol, respaldos probados", "05"],
-                ["Evaluación de impacto", "Los tratamientos de alto riesgo se evalúan antes", "Evaluaciones previas; privacidad desde el diseño", "04, 05"],
-                ["Vulneraciones (crítico)", "La organización responde en plazo", "Protocolo, canal interno, bitácora", "07"],
-                ["Transferencias", "Las comunicaciones y transferencias tienen base y garantías", "Encargo y transferencia distinguidos; garantías documentadas", "03"],
+                ["Gobierno", "La dirección asume la protección de datos", "Política interna aprobada, roles asignados, reporte periódico", "03"],
+                ["DPD (crítico)", "La figura del DPD está analizada y, si corresponde, designada", "Gran escala evaluada; DPD registrado y con acceso a la dirección", "05, 07"],
+                ["RAT (crítico)", "La organización sabe qué datos trata", "RAT con mínimo legal, revisado, con puntaje MTGE", "04, 05"],
+                ["Licitud (crítico)", "Cada tratamiento tiene su base", "Bases por actividad; consentimientos verificables", "04, 07"],
+                ["Transparencia", "Los titulares saben qué se hace con sus datos", "Política y avisos en cada punto de recolección", "07"],
+                ["Derechos", "Los titulares pueden ejercer sus derechos", "Canal, procedimiento y registro con plazos", "07"],
+                ["Encargados (crítico)", "Los proveedores que tratan datos están controlados", "Inventario de encargados y contratos firmados", "04, 07"],
+                ["Seguridad (crítico)", "Los datos están protegidos según su riesgo", "Análisis de riesgos, accesos por rol, respaldos probados", "06"],
+                ["Evaluación de impacto", "Los tratamientos de alto riesgo se evalúan antes", "Evaluaciones previas; privacidad desde el diseño", "05, 06"],
+                ["Vulneraciones (crítico)", "La organización responde en plazo", "Protocolo, canal interno, bitácora", "08"],
+                ["Transferencias", "Las comunicaciones y transferencias tienen base y garantías", "Encargo y transferencia distinguidos; garantías documentadas", "04"],
                 ["Cultura", "El personal sabe proteger datos", "Capacitación al ingreso y periódica", "Plan de capacitación"]],
                [0.18, 0.28, 0.40, 0.14])
     s += box("concepto", ["Los dominios <b>críticos</b> pesan el doble en el índice. Es criterio propio del kit: la SPDP no ha emitido un modelo oficial de madurez."])
@@ -720,23 +736,23 @@ def contenido():
     s += chapter(11, "El informe a la gerencia", "Primero se entrega el informe de evaluación general, con todos sus soportes; después se presenta en una reunión breve, centrada en decisiones que toma la gerencia.")
     s += h2("11.1 Estructura del informe de evaluación general")
     s += table([["Sección", "Contenido", "Fuente"],
-                ["1. Resumen ejecutivo (1 página)", "Nivel de madurez, tres hallazgos, exposición económica y tres decisiones solicitadas", "02"],
+                ["1. Resumen ejecutivo (1 página)", "Nivel de madurez, tres hallazgos, exposición económica y tres decisiones solicitadas", "03"],
                 ["2. Alcance y metodología", "Mapeo, procesos evaluados, entrevistas, documentos revisados y normas aplicadas", "Cap. 6"],
-                ["3. Resultado de madurez", "Índice, radar y puntaje por dominio", "02"],
-                ["4. Inventario de tratamientos", "Actividades, estados, encargados y destinatarios", "03"],
-                ["5. Gran escala", "Tratamientos de gran escala y obligaciones que activan", "04"],
-                ["6. Riesgos", "Tratamientos que requieren evaluación de impacto y riesgo residual", "05"],
-                ["7. Exposición económica y apetito al riesgo", "Multa estimada sin acción y con plan", "02"],
-                ["8. Plan de acción", "Acciones con responsable de la empresa, fecha y costo", "02"],
+                ["3. Resultado de madurez", "Índice, radar y puntaje por dominio", "03"],
+                ["4. Inventario de tratamientos", "Actividades, estados, encargados y destinatarios", "04"],
+                ["5. Gran escala", "Tratamientos de gran escala y obligaciones que activan", "05"],
+                ["6. Riesgos", "Tratamientos que requieren evaluación de impacto y riesgo residual", "06"],
+                ["7. Exposición económica y apetito al riesgo", "Multa estimada sin acción y con plan", "03"],
+                ["8. Plan de acción", "Acciones con responsable de la empresa, fecha y costo", "03"],
                 ["9. Decisiones solicitadas", "Aprobación del plan, presupuesto, designación de DPD, aprobación de documentos", "—"],
-                ["Anexos", "RAT, informes de gran escala y de impacto, matriz de soportes", "03 a 05"]],
+                ["Anexos", "RAT, informes de gran escala y de impacto, matriz de soportes", "04 a 06"]],
                [0.30, 0.54, 0.16])
     s += h2("11.2 Matriz de soportes")
     s += table([["Dato del informe", "Soporte o evidencia", "Quién lo provee"],
                 ["Índice de madurez", "Cuestionario con evidencias; documentos revisados", "DPD con cada área"],
                 ["Volumen de negocio", "Estado de resultados o declaración de impuesto a la renta", "Contabilidad"],
                 ["Actividades y estados", "RAT aprobado", "Dueños de procesos"],
-                ["Tratamientos de gran escala", "Informe de la herramienta 04 con conteos y evidencia", "Sistemas y dueños de procesos"],
+                ["Tratamientos de gran escala", "Informe de la herramienta 05 con conteos y evidencia", "Sistemas y dueños de procesos"],
                 ["Encargados sin contrato", "Proveedores con acceso a datos y contratos vigentes", "Compras o legal"],
                 ["Transferencias", "Destinatarios, bases y garantías", "Legal, sistemas"],
                 ["Riesgos residuales", "Evaluaciones de impacto", "DPD y sistemas"],
@@ -769,7 +785,7 @@ def contenido():
                 ["Solicitudes de derechos en plazo", "Respondidas en plazo / recibidas", "100 %"],
                 ["Personal capacitado", "Capacitados en el año / total de personal", "90 % o más"],
                 ["Vulneraciones notificadas en plazo", "Notificadas en plazo / notificables", "100 %"],
-                ["Índice de madurez", "Resultado anual de la herramienta 02", "2,8 o más"]], [0.32, 0.48, 0.20])
+                ["Índice de madurez", "Resultado anual de la herramienta 03", "2,8 o más"]], [0.32, 0.48, 0.20])
     s.append(Paragraph("* Criterio propio; ajustar con la gerencia.", S["small"]))
 
     # ================================================================ 13
@@ -780,10 +796,10 @@ def contenido():
                 ["ISO/IEC 27701:2025", "Sistema de gestión de la privacidad; desde la edición de octubre de 2025 es independiente de ISO/IEC 27001", "Estructura todo el programa: roles, RAT, derechos, encargados, evaluación de impacto"],
                 ["ISO/IEC 27001:2022", "Sistema de gestión de seguridad de la información", "Medidas técnicas y organizativas (art. 38 num. 9 RGLOPDP) y análisis de riesgos"],
                 ["ISO/IEC 29100", "Marco de privacidad: terminología, actores, principios", "Lenguaje común con TI y auditores"],
-                ["ISO/IEC 29134", "Directrices para la evaluación de impacto en la privacidad", "Metodología para la herramienta 05"]], [0.20, 0.42, 0.38])
+                ["ISO/IEC 29134", "Directrices para la evaluación de impacto en la privacidad", "Metodología para la herramienta 06"]], [0.20, 0.42, 0.38])
     s += table([["Recomendadas y según el caso", "Cuándo usarla"],
                 ["ISO/IEC 27002 · 27005 · ISO 31000", "Controles de seguridad y gestión de riesgos"],
-                ["ISO/IEC 27035", "Gestión de incidentes (herramienta 07)"],
+                ["ISO/IEC 27035", "Gestión de incidentes (herramienta 08)"],
                 ["ISO/IEC 29151 · 27018", "Controles de datos personales; nube pública"],
                 ["ISO/IEC 29184 · 27560", "Avisos de privacidad y registros de consentimiento"],
                 ["ISO/IEC 42001", "Inteligencia artificial"],
@@ -832,7 +848,7 @@ def contenido():
                 ["Anexo I de la Res. SPDP-SPD-2025-0022-R", "Fórmulas de un resumen profesional; PDI y pesos interpretados."],
                 ["Alcance de «otros datos sensibles» (Res. 2026-0005 art. 14.1)", "Podría calificar directamente todo tratamiento con datos sensibles."],
                 ["Alcance «transfronterizo» en el MTGE", "Precisar si basta el almacenamiento fuera del país."],
-                ["Mecanismos de la Res. SPDP-SPD-2026-0004-R", "Leer la norma completa e incorporarla a las herramientas 03 y 06."],
+                ["Mecanismos de la Res. SPDP-SPD-2026-0004-R", "Leer la norma completa e incorporarla a las herramientas 04 y 07."],
                 ["Retenciones de IVA y renta", "Verificar la tabla vigente del SRI."],
                 ["Reglamento de certificaciones y sellos", "Verificar si fue expedido."]], [0.5, 0.5])
     s += [Spacer(1, 14)]

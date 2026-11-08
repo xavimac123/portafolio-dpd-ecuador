@@ -21,13 +21,14 @@ Repositorio de herramientas de cumplimiento LOPDP (Ecuador) de Macías Sánchez 
 La numeración de las herramientas sigue el orden de uso de la guía (`docs/guia/`). Si se agrega una herramienta, ubicarla en ese orden y actualizar la guía.
 
 
-- `01-honorarios/` — calculadora de honorarios y proforma, fuente `scripts/honorarios_config.py` (tarifas y tramos son criterio propio)
-- `02-madurez/` — diagnóstico de madurez, fuente `scripts/madurez_config.py` (modelo propio, rotularlo siempre así)
-- `03-registro-tratamientos/` — RAT
-- `04-gran-escala/` — evaluación de gran escala (MTGE), fuente `scripts/granescala_config.py`
-- `05-evaluacion-impacto/` — evaluación de impacto (EIPD), fuente `scripts/eipd_config.py`
-- `06-kit-plantillas/` — documentos contractuales e informativos
-- `07-kit-vulneraciones/` — gestión y notificación de vulneraciones
+- `01-catalogo-servicios/` — catálogo de servicios y glosario, fuente `scripts/catalogo_config.py`; la proforma de 02 importa de allí sus servicios (mismos códigos S01 a S28)
+- `02-honorarios/` — calculadora de honorarios y proforma, fuente `scripts/honorarios_config.py` (tarifas y tramos son criterio propio)
+- `03-madurez/` — diagnóstico de madurez, fuente `scripts/madurez_config.py` (modelo propio, rotularlo siempre así)
+- `04-registro-tratamientos/` — RAT
+- `05-gran-escala/` — evaluación de gran escala (MTGE), fuente `scripts/granescala_config.py`
+- `06-evaluacion-impacto/` — evaluación de impacto (EIPD), fuente `scripts/eipd_config.py`
+- `07-kit-plantillas/` — documentos contractuales e informativos
+- `08-kit-vulneraciones/` — gestión y notificación de vulneraciones
 - `docs/` — decisiones del proyecto
 - `referencias/` — plantillas ya utilizadas, anonimizadas
 - `scripts/` — generadores (Excel, exportación a Word)

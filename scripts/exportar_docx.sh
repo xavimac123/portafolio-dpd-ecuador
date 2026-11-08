@@ -5,7 +5,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 FIRMA=scripts/firma-responsabilidad.md
-for dir in 01-honorarios 02-madurez 04-gran-escala 05-evaluacion-impacto 06-kit-plantillas 07-kit-vulneraciones; do
+for dir in 01-catalogo-servicios 02-honorarios 03-madurez 05-gran-escala 06-evaluacion-impacto 07-kit-plantillas 08-kit-vulneraciones; do
   mkdir -p "$dir/docx"
   for f in "$dir"/*.md; do
     name=$(basename "$f" .md)

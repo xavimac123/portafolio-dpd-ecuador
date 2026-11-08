@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Evaluación de impacto — LOPDP Ecuador</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light;--oro:#A09046;--carbon:#14181E;--marfil:#F7F5EE;--oliva:#6E6230;--oroc:#C9BC82;--linea:#DDD8C8;--ok:#2E7D4F;--okbg:#E6F2EA;--al:#A4461C;--albg:#FBEDE5;--am:#8A6A00;--ambg:#FFF4D6;--ma:#7A1F1F;--mabg:#F6DADA}
+  *{box-sizing:border-box}
+  html,body{background:var(--marfil);color:var(--carbon)}
+  body{margin:0;font-family:Archivo,system-ui,sans-serif;font-size:15px;line-height:1.5}
+  header{background:var(--carbon);color:var(--marfil);padding:22px 20px 18px}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}header .wrap{padding:0}
+  .marca{font-stretch:115%;font-weight:700;letter-spacing:.08em;color:var(--oro);font-size:12px;text-transform:uppercase}
+  h1{font-stretch:115%;font-weight:800;font-size:clamp(22px,4vw,32px);margin:6px 0 4px;line-height:1.15}
+  header p{margin:0;color:var(--oroc);font-size:14px}
+  nav{display:flex;gap:6px;margin:18px 0 0;flex-wrap:wrap}
+  nav button{background:transparent;border:1px solid #3a3f47;color:var(--marfil);padding:8px 13px;border-radius:999px;font:inherit;font-size:13px;cursor:pointer}
+  nav button[aria-selected=true]{background:var(--oro);border-color:var(--oro);color:var(--carbon);font-weight:700}
+  main{padding:24px 0 60px}
+  section{display:none}section.on{display:block}
+  h2{font-stretch:115%;font-size:20px;margin:0 0 6px}
+  h3{font-size:15px;margin:0 0 8px;font-stretch:108%}
+  .sub{color:var(--oliva);margin:0 0 16px;font-size:14px}
+  .card{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:18px;margin-bottom:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .full{grid-column:1/-1}
+  label,.lbl{display:block;font-weight:600;font-size:13px;margin-bottom:4px}
+  .ref{font-weight:400;color:var(--oliva);font-size:11px;margin-left:4px}
+  input,select,textarea{width:100%;font:inherit;font-size:14px;padding:9px 10px;border:1px solid var(--linea);border-radius:8px;background:#FFFDF6;color:#14181E;-webkit-text-fill-color:#14181E;caret-color:#14181E;color-scheme:light;opacity:1}
+  input::placeholder,textarea::placeholder{color:#8C8775;-webkit-text-fill-color:#8C8775}
+  select option{color:#14181E;background:#fff}
+  textarea{min-height:64px;resize:vertical}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--oro);outline-offset:1px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chips button{border:1px solid var(--linea);background:#FFFDF6;color:#14181E;border-radius:999px;padding:6px 11px;font:inherit;font-size:13px;cursor:pointer;text-align:left}
+  .chips button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
+  .seg{display:flex;gap:6px;flex-wrap:wrap}.seg button{flex:1;min-width:70px;padding:8px;border:1px solid var(--linea);background:#FFFDF6;color:#14181E;border-radius:8px;font:inherit;font-size:13px;cursor:pointer}
+  .seg button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
+  .btn{background:var(--carbon);color:#fff;border:0;padding:10px 16px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
+  .btn.sec{background:#fff;color:var(--carbon);border:1px solid var(--carbon)}
+  .btn.oro{background:var(--oro);color:var(--carbon)}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .q{border-top:1px solid #EFEBDD;padding:12px 0}.q:first-of-type{border-top:0}
+  .qh{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+  .qt{font-size:14px;font-weight:600}
+  .help{background:none;border:1px solid var(--oro);color:var(--oliva);border-radius:999px;width:26px;height:26px;cursor:pointer;flex:0 0 26px;font:inherit;font-size:13px;font-weight:700;line-height:1}
+  .hbox{display:none;margin-top:8px;background:#F8F5EA;border-left:3px solid var(--oro);border-radius:6px;padding:10px 12px;font-size:13px}
+  .hbox.on{display:block}.hbox b{display:block;font-size:12px;color:var(--oliva);margin-top:6px}.hbox b:first-child{margin-top:0}
+  .lit{font-size:11px;color:#8C8775;font-style:italic}
+  .res{border-radius:12px;padding:16px;margin-bottom:14px;font-weight:700}
+  .res ul{font-weight:400;color:var(--carbon);margin:8px 0 0;padding-left:18px;font-size:14px}
+  .res small{display:block;font-weight:400;color:var(--carbon);margin-top:6px;font-size:13px}
+  .si{background:var(--albg);color:var(--al)}.no{background:var(--okbg);color:var(--ok)}.pe{background:#F1EEE2;color:var(--oliva)}.am{background:var(--ambg);color:var(--am)}
+  .pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:700}
+  .n-Bajo{background:var(--okbg);color:var(--ok)}.n-Medio{background:var(--ambg);color:var(--am)}.n-Alto{background:var(--albg);color:var(--al)}.n-Muy{background:var(--mabg);color:var(--ma)}
+  .risk{background:#fff;border:1px solid var(--linea);border-left:5px solid var(--oro);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .risk h4{margin:0 0 4px;font-size:14px}.risk .meta{font-size:12px;color:var(--oliva)}
+  .risk .acts{margin-top:8px;display:flex;gap:6px}
+  .risk .acts button{font:inherit;font-size:12px;padding:4px 10px;border-radius:6px;border:1px solid var(--linea);background:#fff;color:var(--carbon);cursor:pointer}
+  .warn{font-size:12px;color:var(--al);margin-top:4px}
+  .heat{display:grid;grid-template-columns:auto repeat(5,1fr);gap:3px;font-size:11px;max-width:420px}
+  .heat div{padding:6px 2px;text-align:center;border-radius:4px}
+  .heat .ax{color:var(--oliva);background:none}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:14px}
+  .kpi{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:12px}
+  .kpi b{display:block;font-size:22px;font-stretch:115%}.kpi span{font-size:12px;color:var(--oliva)}
+  table.prop{width:100%;border-collapse:collapse;font-size:13px}
+  table.prop td{border-top:1px solid #EFEBDD;padding:10px 6px;vertical-align:top}
+  .nota{font-size:12px;color:var(--oliva)}
+  .vacio{text-align:center;color:var(--oliva);padding:24px;border:1px dashed var(--linea);border-radius:12px}
+  .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--carbon);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;z-index:9}.toast.on{opacity:1}
+  footer{border-top:1px solid var(--linea);padding:18px 0;font-size:12px;color:var(--oliva)}
+  @media (max-width:560px){.card{padding:14px}nav button{font-size:12px;padding:7px 10px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="marca">Macías Sánchez Consultores · Herramienta 06</div>
+  <h1>Evaluación de impacto del tratamiento de datos personales</h1>
+  <p>Art. 42 LOPDP · arts. 29 a 32 RGLOPDP · Guía SPDP de Gestión de Riesgos y Evaluación de Impacto (Res. SPDP-SPD-2025-0003-R)</p>
+  <nav role="tablist">
+    <button data-t="t1" aria-selected="true">1 · ¿Es obligatoria?</button>
+    <button data-t="t2" aria-selected="false">2 · Descripción</button>
+    <button data-t="t3" aria-selected="false">3 · Necesidad</button>
+    <button data-t="t4" aria-selected="false">4 · Riesgos y medidas</button>
+    <button data-t="t5" aria-selected="false">5 · Conclusión e informe</button>
+  </nav>
+</div></header>
+
+<main class="wrap">
+<section id="t1" class="on">
+  <h2>¿Debe realizarse una evaluación de impacto?</h2>
+  <p class="sub">Toca <b>?</b> para ver qué significa cada pregunta y qué dice la norma. La evaluación obligatoria se hace <b>antes de iniciar</b> el tratamiento (art. 31 RGLOPDP) y se <b>presenta ante la SPDP</b> (art. 32 RGLOPDP).</p>
+  <div id="resNec"></div>
+  <div id="necesidad"></div>
+  <div class="row"><button class="btn sec" id="ejemplo">Cargar ejemplo ficticio</button><button class="btn sec" id="nueva">Nueva evaluación</button></div>
+</section>
+
+<section id="t2">
+  <h2>Descripción sistemática del tratamiento</h2>
+  <p class="sub">Art. 32 num. 1 RGLOPDP: operaciones de tratamiento y sus finalidades. Si la actividad ya está en el RAT, anota su código.</p>
+  <div class="card"><div class="grid">
+    <div><label for="d_resp">Responsable del tratamiento</label><input id="d_resp" data-d placeholder="Razón social"></div>
+    <div><label for="d_trat">Nombre del tratamiento evaluado</label><input id="d_trat" data-d placeholder="Ej. Control de asistencia con huella"></div>
+    <div><label for="d_rat">Código en el RAT</label><input id="d_rat" data-d placeholder="Ej. T-07"></div>
+    <div><label for="d_inicio">Fecha prevista de inicio</label><input id="d_inicio" data-d type="date"></div>
+    <div class="full"><label for="d_fin">Finalidades</label><textarea id="d_fin" data-d placeholder="Para qué se tratarán los datos, de forma concreta"></textarea></div>
+    <div class="full"><label>Operaciones de tratamiento</label><div class="chips" id="d_ops"></div></div>
+    <div><label for="d_datos">Categorías de datos</label><textarea id="d_datos" data-d></textarea></div>
+    <div><label for="d_tit">Categorías de titulares y volumen</label><textarea id="d_tit" data-d placeholder="Ej. 120 trabajadores"></textarea></div>
+    <div><label for="d_sist">Sistemas, soportes y flujo de los datos</label><textarea id="d_sist" data-d placeholder="Dónde se recogen, almacenan y a dónde se envían"></textarea></div>
+    <div><label for="d_terc">Encargados, destinatarios y transferencias</label><textarea id="d_terc" data-d></textarea></div>
+    <div class="full"><label for="d_part">Participantes en la evaluación</label><input id="d_part" data-d placeholder="DPD, TI, área usuaria, asesor legal"></div>
+  </div></div>
+</section>
+
+<section id="t3">
+  <h2>Necesidad y proporcionalidad</h2>
+  <p class="sub">Art. 32 num. 2 RGLOPDP: justificar la necesidad de las operaciones y su proporcionalidad con la finalidad.</p>
+  <div class="card"><table class="prop" id="prop"></table></div>
+</section>
+
+<section id="t4">
+  <h2>Riesgos para los derechos y libertades, y medidas</h2>
+  <p class="sub">Art. 32 nums. 3 y 4 RGLOPDP. Nivel = impacto × probabilidad (1 a 25). Escalas propias del portafolio, compatibles con la guía de la SPDP (su Cap. II es referencial). Toca <b>?</b> junto a cada escala para ver los criterios.</p>
+  <div class="card" id="heatCard"><h3>Mapa de riesgo residual</h3><div id="heat"></div><p class="nota" style="margin:8px 0 0">Cada celda muestra cuántos riesgos quedan en esa combinación después de las medidas.</p></div>
+  <div id="riesgos"></div>
+  <form class="card" id="fr" autocomplete="off">
+    <h3 id="frTit">Agregar riesgo</h3>
+    <div class="grid">
+      <div><label for="r_dim">Dimensión afectada</label><select id="r_dim"></select></div>
+      <div><label for="r_esc">Escenario de riesgo</label><select id="r_esc"></select><input id="r_escO" style="margin-top:6px" placeholder="Describe el escenario" hidden></div>
+      <div><label for="r_ame">Amenaza (origen)</label><select id="r_ame"></select></div>
+      <div><label for="r_vul">Vulnerabilidad</label><select id="r_vul"></select><input id="r_vulD" style="margin-top:6px" placeholder="Detalle de la vulnerabilidad"></div>
+      <div class="full"><label>Consecuencias para el titular</label><div class="chips" id="r_imp"></div></div>
+      <div><div class="qh"><label>Impacto (antes de medidas)</label><button type="button" class="help" data-h="hI">?</button></div><div class="seg" data-s="i0"></div><div class="hbox" id="hI"></div></div>
+      <div><div class="qh"><label>Probabilidad (antes de medidas)</label><button type="button" class="help" data-h="hP">?</button></div><div class="seg" data-s="p0"></div><div class="hbox" id="hP"></div></div>
+      <div class="full" id="inh"></div>
+      <div class="full"><label>Medidas y controles <span class="ref">art. 32 num. 4</span></label><div class="chips" id="r_ctl"></div><input id="r_ctlO" style="margin-top:6px" placeholder="Otras medidas (separadas por punto y coma)"></div>
+      <div><label>Impacto residual</label><div class="seg" data-s="i1"></div></div>
+      <div><label>Probabilidad residual</label><div class="seg" data-s="p1"></div></div>
+      <div class="full" id="resi"></div>
+      <div><label for="r_dec">Decisión sobre el riesgo</label><select id="r_dec"></select></div>
+      <div><label for="r_own">Responsable de la medida</label><input id="r_own" placeholder="Cargo"></div>
+      <div><label for="r_plazo">Plazo de implementación</label><input id="r_plazo" type="date"></div>
+    </div>
+    <div class="row" style="margin-top:14px"><button class="btn" type="submit" id="rGuardar">Agregar riesgo</button><button class="btn sec" type="button" id="rLimpiar">Limpiar</button></div>
+  </form>
+</section>
+
+<section id="t5">
+  <h2>Conclusión e informe</h2>
+  <p class="sub">El informe sigue el contenido mínimo del art. 32 RGLOPDP. No incluyas detalles confidenciales de la implementación de seguridad: basta describir las medidas.</p>
+  <div id="resumen"></div>
+  <div class="card"><div class="grid">
+    <div><label for="c_umbral">Riesgo residual aceptable hasta (1-25)</label><input id="c_umbral" data-c type="number" min="1" max="25"><p class="nota" style="margin:4px 0 0">Apetito de riesgo de la organización (Guía SPDP, Cap. II, 1.6). Por defecto 9 (nivel Medio).</p></div>
+    <div><label for="c_dict">Dictamen</label><select id="c_dict" data-c></select><p class="nota" id="c_sug" style="margin:4px 0 0"></p></div>
+    <div class="full"><label for="c_obs">Observaciones del DPD o del evaluador</label><textarea id="c_obs" data-c></textarea></div>
+    <div><label for="c_rev">Fecha prevista de revisión</label><input id="c_rev" data-c type="date"></div>
+    <div><label for="c_ver">Versión del informe</label><input id="c_ver" data-c placeholder="1.0"></div>
+  </div></div>
+  <div class="card"><h3>Firma de responsabilidad</h3><div class="grid">
+    <div><label for="f_el">Elaborado por</label><input id="f_el" data-f></div>
+    <div><label for="f_ec">Cargo / matrícula</label><input id="f_ec" data-f></div>
+    <div><label for="f_ap">Revisado y aprobado por</label><input id="f_ap" data-f placeholder="Representante legal del responsable"></div>
+    <div><label for="f_ac">Cargo de quien aprueba</label><input id="f_ac" data-f></div>
+    <div><label for="f_fe">Fecha</label><input id="f_fe" data-f type="date"></div>
+  </div></div>
+  <div class="row"><button class="btn oro" id="copInf">Copiar informe (Word)</button><button class="btn sec" id="copMat">Copiar matriz de riesgos (Excel)</button></div>
+  <p class="nota">El informe se copia con formato: pégalo en Word. La matriz se copia como tabla: pégala en Excel.</p>
+</section>
+</main>
+<footer><div class="wrap">Abg. Mariano X. Macías Sánchez · Macías Sánchez Consultores · Herramienta de apoyo; no sustituye el análisis jurídico ni técnico del caso concreto. Las escalas son propias y ajustables; contrasta las citas normativas con el Registro Oficial.</div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+var CFG={"necesidad": [{"id": "n_perfiles", "grupo": "ley", "oblig": true, "texto": "¿Se evalúan de forma sistemática y exhaustiva aspectos personales mediante tratamiento automatizado (incluida la elaboración de perfiles), y con base en ello se toman decisiones con efectos jurídicos para las personas?", "concepto": "Ejemplos: scoring crediticio que aprueba o niega un crédito, filtros automáticos que descartan postulantes, sistemas que fijan primas de seguro según el perfil.", "norma": "Art. 42 lit. a LOPDP: evaluación sistemática y exhaustiva de aspectos personales basada en tratamiento automatizado, como la elaboración de perfiles, sobre cuya base se tomen decisiones con efectos jurídicos.", "fuente": "Art. 42 lit. a LOPDP"}, {"id": "n_especiales", "grupo": "ley", "oblig": true, "texto": "¿Se tratan a gran escala categorías especiales de datos o datos relativos a condenas e infracciones penales?", "concepto": "Categorías especiales: datos sensibles, de niñas, niños y adolescentes, de salud y de personas con discapacidad (art. 25 LOPDP). Gran escala se valora por número de titulares, volumen, duración y alcance geográfico. Ejemplos: clínica u hospital, colegio, aseguradora de salud, empresa que verifica récords policiales de miles de postulantes.", "norma": "Art. 42 lit. b LOPDP: tratamiento a gran escala de las categorías especiales de datos, o de los datos personales relativos a condenas e infracciones penales.", "fuente": "Art. 42 lit. b LOPDP"}, {"id": "n_observacion", "grupo": "ley", "oblig": true, "texto": "¿Se observa de forma sistemática y a gran escala una zona de acceso público?", "concepto": "Ejemplos: cámaras de un centro comercial, de un terminal o de una urbanización que captan áreas abiertas al público; lectura de placas en vías.", "norma": "Art. 42 lit. c LOPDP: observación sistemática a gran escala de una zona de acceso público.", "fuente": "Art. 42 lit. c LOPDP"}, {"id": "n_autoridad", "grupo": "ley", "oblig": true, "texto": "¿La SPDP ha requerido realizar la evaluación de impacto?", "concepto": "La Superintendencia puede exigirla aunque no concurra ninguno de los tres supuestos.", "norma": "Art. 42 LOPDP: se realiza también cuando la Autoridad de Protección de Datos Personales lo requiera.", "fuente": "Art. 42 LOPDP"}, {"id": "n_biometricos", "grupo": "norma", "oblig": false, "texto": "¿Se tratan datos biométricos (huella, rostro, voz) para identificar a las personas?", "concepto": "La norma general de datos biométricos remite a la guía de riesgos y evaluación de impacto para fijar las medidas reforzadas. Con datos de niñas, niños y adolescentes, la evaluación de impacto es condición expresa.", "norma": "Res. SPDP-SPD-2026-0039-R (norma general de datos biométricos). Ver BASE-LEGAL.md.", "fuente": "Res. SPDP-SPD-2026-0039-R"}, {"id": "n_ia", "grupo": "norma", "oblig": false, "texto": "¿Se usan sistemas de inteligencia artificial que traten datos personales?", "concepto": "La SPDP emitió una norma general sobre protección de datos en sistemas de inteligencia artificial, reformada en 2026.", "norma": "Res. SPDP-SPD-2026-0009-R, reformada por Res. SPDP-SPD-2026-0037-R. Ver BASE-LEGAL.md.", "fuente": "Res. SPDP-SPD-2026-0009-R, reformada por Res. SPDP-SPD-2026-0037-R"}, {"id": "n_nna_il", "grupo": "norma", "oblig": false, "texto": "¿Se tratan datos de niñas, niños o adolescentes con base en el interés legítimo?", "concepto": "Solo se admite con justificación expresa vinculada al interés superior del niño, respaldada en la evaluación de ponderación o de impacto, con medidas reforzadas.", "norma": "Res. SPDP-SPD-2025-0041-R (interés legítimo).", "fuente": "Res. SPDP-SPD-2025-0041-R"}, {"id": "n_nueva_tec", "grupo": "riesgo", "oblig": false, "texto": "¿Se trata de una tecnología nueva o de un uso innovador de datos en la organización?", "concepto": "Indicador de alto riesgo por su naturaleza o contexto: los riesgos aún no son conocidos ni controlados.", "norma": "Art. 42 LOPDP: alto riesgo por la naturaleza, contexto o fines del tratamiento.", "fuente": "Art. 42 LOPDP"}, {"id": "n_combinacion", "grupo": "riesgo", "oblig": false, "texto": "¿Se combinan o cruzan bases de datos de distintos orígenes o finalidades?", "concepto": "El cruce de bases revela información que el titular no esperaba que se conociera.", "norma": "Art. 42 LOPDP: alto riesgo por la naturaleza, contexto o fines del tratamiento.", "fuente": "Art. 42 LOPDP"}, {"id": "n_vulnerables", "grupo": "riesgo", "oblig": false, "texto": "¿Los titulares pertenecen a grupos vulnerables (niñas, niños y adolescentes, personas con discapacidad, adultos mayores, pacientes, trabajadores frente al empleador)?", "concepto": "La guía de la SPDP considera la vulnerabilidad de grupos especiales como criterio de evaluación.", "norma": "Art. 40 LOPDP (particularidades de las partes involucradas); Guía Res. SPDP-SPD-2025-0003-R, Cap. II, 1.1.", "fuente": "Art. 40 LOPDP"}, {"id": "n_impide", "grupo": "riesgo", "oblig": false, "texto": "¿El tratamiento puede impedir a las personas ejercer un derecho o acceder a un servicio o contrato?", "concepto": "Ejemplos: listas de morosos, verificación de antecedentes que condiciona una contratación.", "norma": "Art. 42 LOPDP: alto riesgo para los derechos y libertades del titular.", "fuente": "Art. 42 LOPDP"}], "grupos": {"ley": "Supuestos de obligatoriedad (art. 42 LOPDP)", "norma": "Normativa especial de la SPDP que exige o remite a la evaluación de impacto", "riesgo": "Indicadores de alto riesgo (art. 42 LOPDP: naturaleza, contexto o fines)"}, "prop": [{"id": "p_base", "texto": "La base legitimadora está identificada y documentada (art. 7 LOPDP).", "ayuda": "Si es interés legítimo, adjunta la evaluación de ponderación (Res. SPDP-SPD-2025-0041-R)."}, {"id": "p_finalidad", "texto": "La finalidad es determinada, explícita y legítima.", "ayuda": "Evita finalidades genéricas como 'gestión comercial'."}, {"id": "p_necesario", "texto": "El tratamiento es necesario para la finalidad: no existe una alternativa menos invasiva que logre lo mismo.", "ayuda": "Describe las alternativas consideradas y por qué se descartaron."}, {"id": "p_minimizacion", "texto": "Solo se recogen los datos estrictamente necesarios (minimización).", "ayuda": "Revisa campo por campo del formulario o sistema."}, {"id": "p_conservacion", "texto": "El plazo de conservación está definido y justificado.", "ayuda": ""}, {"id": "p_calidad", "texto": "Existen mecanismos para mantener los datos exactos y actualizados.", "ayuda": ""}, {"id": "p_info", "texto": "Los titulares son informados conforme al art. 12 LOPDP.", "ayuda": ""}, {"id": "p_derechos", "texto": "Existe un procedimiento para que los titulares ejerzan sus derechos.", "ayuda": ""}, {"id": "p_encargados", "texto": "Los encargados tienen contrato con el contenido del art. 41 RGLOPDP.", "ayuda": ""}, {"id": "p_transf", "texto": "Las transferencias internacionales tienen garantía y están documentadas.", "ayuda": "Marca 'No aplica' si no hay transferencias."}], "respProp": ["Cumple", "Parcial", "No cumple", "No aplica"], "impacto": [[1, "Muy bajo", "Molestias menores que el titular supera sin dificultad."], [2, "Bajo", "Inconvenientes superables con poco esfuerzo (repetir un trámite, cambiar una contraseña)."], [3, "Medio", "Consecuencias significativas pero superables: pérdidas económicas menores, estrés, publicidad no deseada."], [4, "Alto", "Consecuencias graves y difíciles de revertir: fraude, discriminación, pérdida de empleo, daño a la reputación."], [5, "Muy alto", "Consecuencias irreversibles o que afectan la integridad física, la libertad o a grupos vulnerables. La guía de la SPDP pone como ejemplo de criterio que una vulneración que afecte a más de mil personas sea siempre de riesgo muy alto."]], "probabilidad": [[1, "Muy baja", "Menos de 5 % en un año. No hay antecedentes y existen controles sólidos."], [2, "Baja", "5 % a 20 % en un año."], [3, "Media", "20 % a 50 % en un año. Ha ocurrido en el sector."], [4, "Alta", "50 % a 80 % en un año. Ha ocurrido en la organización."], [5, "Muy alta", "Más de 80 % en un año. Ocurre de forma recurrente o los controles no existen."]], "niveles": [[1, 4, "Bajo"], [5, 9, "Medio"], [10, 16, "Alto"], [17, 25, "Muy alto"]], "umbral": 9, "dimensiones": ["Confidencialidad", "Integridad", "Disponibilidad", "Derechos y licitud"], "escenarios": [["Confidencialidad", "Acceso no autorizado a los datos por un tercero externo (ataque informático)"], ["Confidencialidad", "Acceso o uso indebido por personal interno"], ["Confidencialidad", "Envío de datos a un destinatario equivocado"], ["Confidencialidad", "Pérdida o robo de dispositivos o documentos físicos"], ["Confidencialidad", "Divulgación por un encargado o proveedor"], ["Integridad", "Alteración o corrupción de los datos por error o ataque"], ["Integridad", "Datos inexactos que llevan a decisiones erróneas sobre el titular"], ["Disponibilidad", "Secuestro de datos (ransomware) o pérdida sin respaldo"], ["Disponibilidad", "Indisponibilidad prolongada del sistema que impide atender al titular"], ["Derechos y licitud", "Uso de los datos para una finalidad distinta a la informada"], ["Derechos y licitud", "Conservación de los datos más allá del plazo necesario"], ["Derechos y licitud", "Decisión automatizada injusta o discriminatoria"], ["Derechos y licitud", "Imposibilidad del titular de ejercer sus derechos"], ["Derechos y licitud", "Vigilancia excesiva o intrusión en la intimidad"], ["Derechos y licitud", "Transferencia internacional sin garantías adecuadas"]], "amenazas": ["Ciberdelincuentes", "Personal interno sin privilegios", "Personal interno con privilegios", "Encargado o proveedor", "Error humano", "El propio responsable (uso indebido)", "Hacktivistas", "Amenaza natural (incendio, inundación, terremoto)", "Falla técnica o eléctrica"], "vulnerabilidades": ["Jurídica", "De grupos especialmente vulnerables", "Organizacional", "Técnica"], "impactosTitular": ["Suplantación de identidad o fraude", "Pérdida económica", "Discriminación", "Daño a la reputación", "Pérdida de empleo u oportunidades", "Afectación a la salud o integridad", "Pérdida de control sobre sus datos", "Angustia o temor", "Exclusión de un servicio"], "controles": ["Control de acceso por perfil y mínimo privilegio", "Autenticación de dos factores", "Cifrado en reposo y en tránsito", "Respaldos periódicos probados", "Registro y revisión de accesos (bitácora)", "Seudonimización o anonimización", "Minimización de datos recogidos", "Plazo de conservación con borrado automático", "Contrato de encargo y auditoría al proveedor", "Acuerdos de confidencialidad y capacitación al personal", "Intervención humana en decisiones automatizadas", "Aviso de privacidad específico y canal de derechos", "Pruebas de seguridad (vulnerabilidades, penetración)", "Plan de respuesta a vulneraciones", "Señalética y limitación del ángulo de cámaras"], "decisiones": ["Mitigar", "Aceptar", "Evitar", "Transferir"], "operaciones": ["Recolección", "Registro", "Almacenamiento", "Consulta y uso", "Análisis o perfilado", "Comunicación a terceros", "Transferencia internacional", "Conservación", "Supresión o anonimización"], "dictamen": ["Favorable: el tratamiento puede iniciar", "Favorable con condiciones: iniciar solo tras implementar las medidas del plan", "Desfavorable: el riesgo residual no es aceptable; rediseñar el tratamiento"], "ejemplo": {"nec": {"n_perfiles": "No", "n_especiales": "No", "n_observacion": "No", "n_autoridad": "No", "n_biometricos": "Sí", "n_ia": "No", "n_nna_il": "No", "n_nueva_tec": "Sí", "n_combinacion": "No", "n_vulnerables": "Sí", "n_impide": "No"}, "d": {"d_resp": "Ferretería Ficticia El Tornillo S.A. (EJEMPLO)", "d_trat": "Control de asistencia con lector de huella", "d_rat": "T-07", "d_inicio": "2027-01-15", "d_fin": "Registrar la hora de entrada y salida del personal para calcular la jornada, las horas extraordinarias y los atrasos.", "ops": ["Recolección", "Registro", "Almacenamiento", "Consulta y uso", "Conservación", "Supresión o anonimización"], "d_datos": "Plantilla biométrica de la huella dactilar; nombres, cédula, área y cargo; registros de marcación.", "d_tit": "Trabajadores en relación de dependencia (120).", "d_sist": "Lector de huella en la entrada; software de asistencia en servidor local; reporte mensual exportado a Excel para nómina.", "d_terc": "Proveedor del software (soporte remoto) como encargado. Sin transferencias internacionales.", "d_part": "Gerencia de Talento Humano, jefe de TI, asesor externo en protección de datos.", "ops_": []}, "prop": {"p_base": {"r": "Parcial", "j": "Obligación legal de llevar el control de la jornada; falta analizar si exige un medio biométrico."}, "p_finalidad": {"r": "Cumple", "j": "Control de jornada y horas extraordinarias."}, "p_necesario": {"r": "Parcial", "j": "Existen alternativas menos invasivas (tarjeta de proximidad, registro en aplicación). Justificar por qué no bastan."}, "p_minimizacion": {"r": "Cumple", "j": "El lector guarda la plantilla, no la imagen de la huella."}, "p_conservacion": {"r": "No cumple", "j": "No hay plazo definido para borrar la plantilla al terminar la relación laboral."}, "p_calidad": {"r": "Cumple", "j": ""}, "p_info": {"r": "No cumple", "j": "No existe aviso de privacidad para el personal."}, "p_derechos": {"r": "Parcial", "j": "Las solicitudes se atienden en Talento Humano sin procedimiento escrito."}, "p_encargados": {"r": "No cumple", "j": "El proveedor del software no tiene contrato de encargo."}, "p_transf": {"r": "No aplica", "j": ""}}, "riesgos": [{"dim": "Confidencialidad", "esc": "Acceso no autorizado a los datos por un tercero externo (ataque informático)", "ame": "Ciberdelincuentes", "vul": "Técnica", "vulD": "Servidor local sin cifrado ni actualizaciones", "imp": ["Suplantación de identidad o fraude", "Pérdida de control sobre sus datos"], "i0": 5, "p0": 2, "ctl": ["Cifrado en reposo y en tránsito", "Control de acceso por perfil y mínimo privilegio", "Pruebas de seguridad (vulnerabilidades, penetración)"], "i1": 5, "p1": 1, "dec": "Mitigar", "own": "Jefe de TI", "plazo": "2026-12-15"}, {"dim": "Confidencialidad", "esc": "Divulgación por un encargado o proveedor", "ame": "Encargado o proveedor", "vul": "Jurídica", "vulD": "Sin contrato de encargo con el proveedor del software", "imp": ["Pérdida de control sobre sus datos"], "i0": 4, "p0": 3, "ctl": ["Contrato de encargo y auditoría al proveedor"], "i1": 4, "p1": 1, "dec": "Mitigar", "own": "Asesor legal", "plazo": "2026-12-01"}, {"dim": "Derechos y licitud", "esc": "Conservación de los datos más allá del plazo necesario", "ame": "El propio responsable (uso indebido)", "vul": "Organizacional", "vulD": "Sin procedimiento de baja", "imp": ["Pérdida de control sobre sus datos"], "i0": 3, "p0": 4, "ctl": ["Plazo de conservación con borrado automático"], "i1": 3, "p1": 1, "dec": "Mitigar", "own": "Talento Humano", "plazo": "2026-12-01"}, {"dim": "Derechos y licitud", "esc": "Vigilancia excesiva o intrusión en la intimidad", "ame": "El propio responsable (uso indebido)", "vul": "De grupos especialmente vulnerables", "vulD": "Relación de subordinación laboral", "imp": ["Angustia o temor"], "i0": 3, "p0": 3, "ctl": ["Aviso de privacidad específico y canal de derechos", "Minimización de datos recogidos"], "i1": 2, "p1": 2, "dec": "Mitigar", "own": "Talento Humano", "plazo": "2026-12-01"}], "c": {"c_umbral": 9, "c_dict": "Favorable con condiciones: iniciar solo tras implementar las medidas del plan", "c_obs": "Ejemplo ficticio. Antes de usar el lector, ofrecer una alternativa no biométrica a quien lo solicite y verificar la norma general de datos biométricos de la SPDP.", "c_rev": "2027-12-01", "c_ver": "1.0"}, "f": {"f_el": "Abg. Mariano X. Macías Sánchez", "f_ec": "Consultor en Protección de Datos · Mat. 09-2022-736", "f_ap": "[REPRESENTANTE LEGAL]", "f_ac": "Gerente General", "f_fe": ""}}};
+(function(){
+  function $(i){return document.getElementById(i)}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function toast(t){var e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},1900)}
+  var KEY='msc-eipd-v1';
+  function blank(){return{nec:{},d:{ops:[]},prop:{},riesgos:[],c:{c_umbral:CFG.umbral},f:{f_el:'Abg. Mariano X. Macías Sánchez',f_ec:'Consultor en Protección de Datos · Mat. 09-2022-736'}}}
+  var S;try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}if(!S)S=blank();
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+  // tabs
+  var tabs=document.querySelectorAll('nav button');
+  function show(t){tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});document.querySelectorAll('section').forEach(function(s){s.classList.toggle('on',s.id===t)});if(t==='t5')resumen();if(t==='t4')renderR();window.scrollTo(0,0)}
+  tabs.forEach(function(b){b.onclick=function(){show(b.dataset.t)}});
+
+  function nivel(n){for(var i=0;i<CFG.niveles.length;i++){var x=CFG.niveles[i];if(n>=x[0]&&n<=x[1])return x[2]}return''}
+  function pill(n){if(!n)return'';var l=nivel(n);return'<span class="pill n-'+l.split(' ')[0]+'">'+n+' · '+l+'</span>'}
+
+  // ---- 1. necesidad
+  function helpHtml(q){var h='';if(q.concepto)h+='<b>Qué significa</b>'+esc(q.concepto);if(q.norma)h+='<b>Qué dice la norma</b>'+esc(q.norma)+'<div class="lit">Resumen fiel; contrastar con el texto oficial</div>';return h}
+  (function(){var h='',g=null;CFG.necesidad.forEach(function(q){if(q.grupo!==g){if(g)h+='</div>';g=q.grupo;h+='<div class="card"><h3>'+esc(CFG.grupos[g])+'</h3>'}
+    h+='<div class="q"><div class="qh"><div class="qt">'+esc(q.texto)+'</div><button type="button" class="help" data-h="h_'+q.id+'">?</button></div><div class="seg" data-n="'+q.id+'" style="margin-top:8px;max-width:260px"><button type="button">Sí</button><button type="button">No</button></div><div class="hbox" id="h_'+q.id+'">'+helpHtml(q)+'</div></div>'});
+    $('necesidad').innerHTML=h+'</div>'})();
+  document.querySelectorAll('.help').forEach(function(b){b.onclick=function(){$(b.dataset.h).classList.toggle('on')}});
+  document.querySelectorAll('.seg[data-n]').forEach(function(s){s.querySelectorAll('button').forEach(function(b){b.onclick=function(){S.nec[s.dataset.n]=b.textContent;save();paintNec();resNec()}})});
+  function paintNec(){document.querySelectorAll('.seg[data-n]').forEach(function(s){s.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',S.nec[s.dataset.n]===b.textContent)})})}
+  function necResult(){var si=function(g){return CFG.necesidad.filter(function(q){return q.grupo===g&&S.nec[q.id]==='Sí'})};
+    var ley=si('ley'),norma=si('norma'),rie=si('riesgo'),tot=CFG.necesidad.filter(function(q){return S.nec[q.id]}).length;
+    if(ley.length)return{cls:'si',t:'Evaluación de impacto OBLIGATORIA',items:ley.map(function(q){return q.fuente+': '+q.texto.replace(/\s*\(.*?\)/g,'')}).concat(norma.map(function(q){return q.fuente+': '+q.texto.replace(/\s*\(.*?\)/g,'')})),nota:'Debe hacerse antes de iniciar el tratamiento (art. 31 RGLOPDP) y presentarse ante la SPDP con el contenido del art. 32 RGLOPDP.'};
+    if(norma.length||rie.length>=2)return{cls:'am',t:'Evaluación de impacto RECOMENDADA',items:norma.map(function(q){return q.fuente+': '+q.texto.replace(/\s*\(.*?\)/g,'')}).concat(rie.map(function(q){return'Indicador de alto riesgo: '+q.texto.replace(/\s*\(.*?\)/g,'')})),nota:'No concurre un supuesto del art. 42, pero hay normativa especial o varios indicadores de alto riesgo. Documentarla demuestra responsabilidad proactiva; la SPDP puede requerirla.'};
+    if(tot<CFG.necesidad.length)return{cls:'pe',t:'Responde todas las preguntas para obtener el resultado.',items:[],nota:''};
+    return{cls:'no',t:'No se identifica obligación',items:rie.map(function(q){return'Indicador: '+q.texto.replace(/\s*\(.*?\)/g,'')}),nota:'Mantén el análisis de riesgos del art. 40 LOPDP y documenta esta conclusión. Revísala si cambia el tratamiento.'}}
+  function resNec(){var r=necResult();$('resNec').innerHTML='<div class="res '+r.cls+'">'+esc(r.t)+(r.items.length?'<ul>'+r.items.map(function(x){return'<li>'+esc(x)+'</li>'}).join('')+'</ul>':'')+(r.nota?'<small>'+esc(r.nota)+'</small>':'')+'</div>'}
+
+  // ---- 2. descripción
+  $('d_ops').innerHTML=CFG.operaciones.map(function(o){return'<button type="button" data-v="'+esc(o)+'">'+esc(o)+'</button>'}).join('');
+  $('d_ops').querySelectorAll('button').forEach(function(b){b.onclick=function(){var v=b.dataset.v,a=S.d.ops||[];var i=a.indexOf(v);if(i>-1)a.splice(i,1);else a.push(v);S.d.ops=a;save();paintD()}});
+  document.querySelectorAll('[data-d]').forEach(function(i){i.addEventListener('input',function(){S.d[i.id]=i.value;save()})});
+  function paintD(){document.querySelectorAll('[data-d]').forEach(function(i){i.value=S.d[i.id]||''});$('d_ops').querySelectorAll('button').forEach(function(b){b.classList.toggle('on',(S.d.ops||[]).indexOf(b.dataset.v)>-1)})}
+
+  // ---- 3. proporcionalidad
+  $('prop').innerHTML=CFG.prop.map(function(p){return'<tr><td style="width:52%"><b>'+esc(p.texto)+'</b>'+(p.ayuda?'<div class="nota">'+esc(p.ayuda)+'</div>':'')+'<div class="seg" data-p="'+p.id+'" style="margin-top:8px">'+CFG.respProp.map(function(r){return'<button type="button">'+r+'</button>'}).join('')+'</div></td><td><textarea data-pj="'+p.id+'" placeholder="Justificación o evidencia"></textarea></td></tr>'}).join('');
+  document.querySelectorAll('.seg[data-p]').forEach(function(s){s.querySelectorAll('button').forEach(function(b){b.onclick=function(){S.prop[s.dataset.p]=S.prop[s.dataset.p]||{};S.prop[s.dataset.p].r=b.textContent;save();paintP()}})});
+  document.querySelectorAll('[data-pj]').forEach(function(t){t.addEventListener('input',function(){var k=t.dataset.pj;S.prop[k]=S.prop[k]||{};S.prop[k].j=t.value;save()})});
+  function paintP(){document.querySelectorAll('.seg[data-p]').forEach(function(s){var v=(S.prop[s.dataset.p]||{}).r;s.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.textContent===v)})});document.querySelectorAll('[data-pj]').forEach(function(t){t.value=(S.prop[t.dataset.pj]||{}).j||''})}
+
+  // ---- 4. riesgos
+  function opts(sel,list,first){sel.innerHTML=(first?'<option value="">'+first+'</option>':'')+list.map(function(o){return'<option>'+esc(o)+'</option>'}).join('')}
+  opts($('r_dim'),CFG.dimensiones);opts($('r_ame'),CFG.amenazas,'— Seleccionar —');opts($('r_vul'),CFG.vulnerabilidades,'— Seleccionar —');opts($('r_dec'),CFG.decisiones);
+  function escs(){var d=$('r_dim').value;opts($('r_esc'),CFG.escenarios.filter(function(e){return e[0]===d}).map(function(e){return e[1]}).concat(['Otro (escribir)…']),'— Seleccionar —');$('r_escO').hidden=true}
+  $('r_dim').onchange=escs;escs();
+  $('r_esc').onchange=function(){$('r_escO').hidden=this.value!=='Otro (escribir)…'};
+  function chips(box,list){box.innerHTML=list.map(function(o){return'<button type="button" data-v="'+esc(o)+'">'+esc(o)+'</button>'}).join('');box.querySelectorAll('button').forEach(function(b){b.onclick=function(){b.classList.toggle('on')}})}
+  chips($('r_imp'),CFG.impactosTitular);chips($('r_ctl'),CFG.controles);
+  function getChips(box){var a=[];box.querySelectorAll('button.on').forEach(function(b){a.push(b.dataset.v)});return a}
+  function setChips(box,a){box.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',(a||[]).indexOf(b.dataset.v)>-1)})}
+  var R={};
+  document.querySelectorAll('.seg[data-s]').forEach(function(s){var k=s.dataset.s;s.innerHTML=[1,2,3,4,5].map(function(n){return'<button type="button">'+n+'</button>'}).join('');
+    s.querySelectorAll('button').forEach(function(b){b.onclick=function(){R[k]=+b.textContent;paintS();calc()}})});
+  function paintS(){document.querySelectorAll('.seg[data-s]').forEach(function(s){s.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',+b.textContent===R[s.dataset.s])})})}
+  $('hI').innerHTML=CFG.impacto.map(function(x){return'<b>'+x[0]+' · '+esc(x[1])+'</b>'+esc(x[2])}).join('')+'<div class="lit">Escala propia compatible con la guía SPDP (Cap. II, referencial)</div>';
+  $('hP').innerHTML=CFG.probabilidad.map(function(x){return'<b>'+x[0]+' · '+esc(x[1])+'</b>'+esc(x[2])}).join('')+'<div class="lit">Escala propia; la guía SPDP estima la probabilidad entre 0 y 1 en un lapso determinado</div>';
+  function calc(){var a=R.i0&&R.p0?R.i0*R.p0:0,b=R.i1&&R.p1?R.i1*R.p1:0;
+    $('inh').innerHTML=a?'Riesgo inherente: '+pill(a)+(R.i0===5&&R.p0<=2?'<div class="warn">Alto impacto con baja probabilidad: la guía de la SPDP advierte que las matrices pueden subestimar estos riesgos. Considera tratarlo aunque el nivel resulte bajo o medio.</div>':''):'';
+    $('resi').innerHTML=b?'Riesgo residual: '+pill(b)+(b>a&&a?'<div class="warn">El residual no debería superar al inherente.</div>':''):''}
+  var editR=-1;
+  function limpiarR(){R={};paintS();calc();$('fr').reset();escs();setChips($('r_imp'),[]);setChips($('r_ctl'),[]);editR=-1;$('rGuardar').textContent='Agregar riesgo';$('frTit').textContent='Agregar riesgo'}
+  $('rLimpiar').onclick=limpiarR;
+  $('fr').onsubmit=function(e){e.preventDefault();var esc0=$('r_esc').value==='Otro (escribir)…'?$('r_escO').value.trim():$('r_esc').value;
+    if(!esc0){toast('Indica el escenario de riesgo');return}if(!(R.i0&&R.p0)){toast('Indica impacto y probabilidad');return}
+    var o={dim:$('r_dim').value,esc:esc0,ame:$('r_ame').value,vul:$('r_vul').value,vulD:$('r_vulD').value.trim(),imp:getChips($('r_imp')),i0:R.i0,p0:R.p0,
+      ctl:getChips($('r_ctl')).concat($('r_ctlO').value.split(';').map(function(s){return s.trim()}).filter(Boolean)),i1:R.i1||R.i0,p1:R.p1||R.p0,dec:$('r_dec').value,own:$('r_own').value.trim(),plazo:$('r_plazo').value};
+    if(editR>-1)S.riesgos[editR]=o;else S.riesgos.push(o);save();limpiarR();renderR();toast('Riesgo guardado')};
+  function renderR(){var h=S.riesgos.map(function(o,i){var a=o.i0*o.p0,b=o.i1*o.p1;
+      return'<div class="risk"><h4>R'+(i+1)+' · '+esc(o.esc)+'</h4><div class="meta">'+esc(o.dim)+(o.ame?' · '+esc(o.ame):'')+(o.vul?' · Vulnerabilidad '+esc(o.vul.toLowerCase()):'')+'</div>'+
+      '<div style="margin-top:6px;font-size:13px">Inherente '+pill(a)+' → Residual '+pill(b)+' · '+esc(o.dec)+'</div>'+
+      (o.ctl.length?'<div class="nota" style="margin-top:4px">Medidas: '+esc(o.ctl.join('; '))+'</div>':'<div class="warn">Sin medidas definidas</div>')+
+      (o.dec==='Aceptar'&&b>(+S.c.c_umbral||CFG.umbral)?'<div class="warn">Se acepta un riesgo por encima del umbral: justifícalo en las observaciones.</div>':'')+
+      '<div class="acts"><button data-e="'+i+'">Editar</button><button data-x="'+i+'">Eliminar</button></div></div>'}).join('');
+    $('riesgos').innerHTML=S.riesgos.length?h:'<div class="vacio" style="margin-bottom:14px">Aún no hay riesgos. Agrega al menos uno por cada dimensión relevante.</div>';
+    $('riesgos').querySelectorAll('[data-e]').forEach(function(b){b.onclick=function(){editarR(+b.dataset.e)}});
+    $('riesgos').querySelectorAll('[data-x]').forEach(function(b){b.onclick=function(){if(b.dataset.c){S.riesgos.splice(+b.dataset.x,1);save();renderR()}else{b.dataset.c=1;b.textContent='¿Confirmar?'}}});
+    heat()}
+  function editarR(i){var o=S.riesgos[i];limpiarR();$('r_dim').value=o.dim;escs();
+    var ex=CFG.escenarios.some(function(e){return e[1]===o.esc});if(ex)$('r_esc').value=o.esc;else{$('r_esc').value='Otro (escribir)…';$('r_escO').hidden=false;$('r_escO').value=o.esc}
+    $('r_ame').value=o.ame;$('r_vul').value=o.vul;$('r_vulD').value=o.vulD||'';setChips($('r_imp'),o.imp);
+    var base=o.ctl.filter(function(c){return CFG.controles.indexOf(c)>-1}),otros=o.ctl.filter(function(c){return CFG.controles.indexOf(c)<0});setChips($('r_ctl'),base);$('r_ctlO').value=otros.join('; ');
+    R={i0:o.i0,p0:o.p0,i1:o.i1,p1:o.p1};paintS();calc();$('r_dec').value=o.dec;$('r_own').value=o.own;$('r_plazo').value=o.plazo;
+    editR=i;$('rGuardar').textContent='Guardar cambios';$('frTit').textContent='Editar R'+(i+1);$('fr').scrollIntoView({behavior:'smooth'})}
+  function color(n){var l=nivel(n);return l==='Bajo'?'#E6F2EA':l==='Medio'?'#FFF4D6':l==='Alto'?'#FBEDE5':'#F6DADA'}
+  function heat(){var h='<div class="heat"><div class="ax">Impacto ↓ / Prob. →</div>'+[1,2,3,4,5].map(function(p){return'<div class="ax">'+p+'</div>'}).join('');
+    for(var i=5;i>=1;i--){h+='<div class="ax">'+i+'</div>';for(var p=1;p<=5;p++){var n=S.riesgos.filter(function(o){return o.i1===i&&o.p1===p}).length;h+='<div style="background:'+color(i*p)+';font-weight:'+(n?700:400)+'">'+(n||'')+'</div>'}}
+    $('heat').innerHTML=h+'</div>'}
+
+  // ---- 5. conclusión
+  opts($('c_dict'),CFG.dictamen,'— Seleccionar —');
+  document.querySelectorAll('[data-c]').forEach(function(i){i.addEventListener('input',function(){S.c[i.id]=i.value;save();if(i.id==='c_umbral')resumen()})});
+  document.querySelectorAll('[data-f]').forEach(function(i){i.addEventListener('input',function(){S.f[i.id]=i.value;save()})});
+  function paintC(){document.querySelectorAll('[data-c]').forEach(function(i){i.value=S.c[i.id]==null?'':S.c[i.id]});document.querySelectorAll('[data-f]').forEach(function(i){i.value=S.f[i.id]||''})}
+  function stats(){var u=+S.c.c_umbral||CFG.umbral,max0=0,max1=0,sobre=0,sinm=0;S.riesgos.forEach(function(o){max0=Math.max(max0,o.i0*o.p0);max1=Math.max(max1,o.i1*o.p1);if(o.i1*o.p1>u)sobre++;if(!o.ctl.length)sinm++});
+    var pr=CFG.prop.filter(function(p){return(S.prop[p.id]||{}).r==='No cumple'}).length,pend=CFG.prop.filter(function(p){return!(S.prop[p.id]||{}).r}).length;
+    var sug=!S.riesgos.length?'':(sobre||pr)?(sobre&&max1>=17?2:1):0;return{u:u,max0:max0,max1:max1,sobre:sobre,sinm:sinm,pr:pr,pend:pend,sug:sug}}
+  function resumen(){var s=stats(),n=necResult();
+    $('resumen').innerHTML='<div class="kpis">'+[[n.t.replace('Evaluación de impacto ',''),'Necesidad'],[S.riesgos.length,'Riesgos identificados'],[s.max0?s.max0+' · '+nivel(s.max0):'—','Máximo inherente'],[s.max1?s.max1+' · '+nivel(s.max1):'—','Máximo residual'],[s.sobre,'Sobre el umbral ('+s.u+')'],[s.pr,'Criterios de proporcionalidad incumplidos']].map(function(k){return'<div class="kpi"><b>'+esc(k[0])+'</b><span>'+esc(k[1])+'</span></div>'}).join('')+'</div>'+
+      ((s.pend||!S.riesgos.length||!S.d.d_trat)?'<div class="res pe">Pendiente: '+[!S.d.d_trat?'descripción del tratamiento':'',s.pend?s.pend+' criterios de necesidad sin responder':'',!S.riesgos.length?'identificar riesgos':''].filter(Boolean).join(' · ')+'</div>':'');
+    $('c_sug').textContent=s.sug===''?'':'Sugerido: '+CFG.dictamen[s.sug]+(s.sinm?' · '+s.sinm+' riesgo(s) sin medidas':'')}
+
+  // ---- informe
+  function tr(cells,th){return'<tr>'+cells.map(function(c){return(th?'<th>':'<td>')+esc(c)+(th?'</th>':'</td>')}).join('')+'</tr>'}
+  var TB='<table border="1" cellpadding="5" style="border-collapse:collapse;width:100%;font-size:10pt">';
+  function informe(){var s=stats(),n=necResult(),d=S.d,h='';
+    h+='<h1>Evaluación de impacto del tratamiento de datos personales</h1>';
+    h+=TB+tr(['Responsable',d.d_resp||'[RESPONSABLE]'])+tr(['Tratamiento evaluado',d.d_trat||'[TRATAMIENTO]'])+tr(['Código en el RAT',d.d_rat||'—'])+tr(['Fecha prevista de inicio',d.d_inicio||'—'])+tr(['Versión',S.c.c_ver||'1.0'])+tr(['Participantes',d.d_part||'—'])+'</table>';
+    h+='<h2>1. Necesidad de la evaluación</h2><p><b>'+esc(n.t)+'.</b> '+esc(n.nota)+'</p>'+(n.items.length?'<ul>'+n.items.map(function(x){return'<li>'+esc(x)+'</li>'}).join('')+'</ul>':'');
+    h+='<h2>2. Descripción sistemática del tratamiento (art. 32 num. 1 RGLOPDP)</h2>'+TB+tr(['Finalidades',d.d_fin||'—'])+tr(['Operaciones',(d.ops||[]).join(', ')||'—'])+tr(['Categorías de datos',d.d_datos||'—'])+tr(['Titulares y volumen',d.d_tit||'—'])+tr(['Sistemas, soportes y flujo',d.d_sist||'—'])+tr(['Encargados, destinatarios y transferencias',d.d_terc||'—'])+'</table>';
+    h+='<h2>3. Necesidad y proporcionalidad (art. 32 num. 2 RGLOPDP)</h2>'+TB+tr(['Criterio','Valoración','Justificación'],1)+CFG.prop.map(function(p){var v=S.prop[p.id]||{};return tr([p.texto,v.r||'Sin valorar',v.j||''])}).join('')+'</table>';
+    h+='<h2>4. Evaluación de riesgos para los derechos y libertades (art. 32 num. 3 RGLOPDP)</h2><p>Nivel = impacto × probabilidad (escala 1 a 5 cada uno). Niveles: '+CFG.niveles.map(function(x){return x[2]+' '+x[0]+'-'+x[1]}).join('; ')+'. Escalas propias, compatibles con la Guía de Gestión de Riesgos y Evaluación de Impacto de la SPDP.</p>'+
+      TB+tr(['N.º','Escenario','Dimensión','Amenaza','Vulnerabilidad','Consecuencias para el titular','I','P','Inherente'],1)+S.riesgos.map(function(o,i){return tr(['R'+(i+1),o.esc,o.dim,o.ame,[o.vul,o.vulD].filter(Boolean).join(': '),o.imp.join('; '),o.i0,o.p0,o.i0*o.p0+' '+nivel(o.i0*o.p0)])}).join('')+'</table>';
+    h+='<h2>5. Medidas previstas y riesgo residual (art. 32 num. 4 RGLOPDP)</h2>'+TB+tr(['N.º','Medidas, garantías y mecanismos','Residual','Decisión','Responsable','Plazo'],1)+S.riesgos.map(function(o,i){return tr(['R'+(i+1),o.ctl.join('; ')||'Sin medidas',o.i1*o.p1+' '+nivel(o.i1*o.p1),o.dec,o.own,o.plazo])}).join('')+'</table>';
+    h+='<h2>6. Conclusión</h2><p>Riesgo residual máximo: <b>'+(s.max1?s.max1+' ('+nivel(s.max1)+')':'—')+'</b>. Umbral de aceptación: '+s.u+'. Riesgos sobre el umbral: '+s.sobre+'.</p><p><b>Dictamen:</b> '+esc(S.c.c_dict||'[DICTAMEN]')+'</p>'+(S.c.c_obs?'<p><b>Observaciones:</b> '+esc(S.c.c_obs)+'</p>':'')+'<p>Fecha prevista de revisión: '+esc(S.c.c_rev||'—')+'. La evaluación debe revisarse cuando cambie el tratamiento o sus riesgos.</p>';
+    if(n.cls==='si')h+='<p><i>Por ser obligatoria, esta evaluación se realiza antes del inicio del tratamiento (art. 31 RGLOPDP) y se presenta ante la Superintendencia de Protección de Datos Personales (art. 32 RGLOPDP).</i></p>';
+    var f=S.f;h+='<p><b>FIRMA DE RESPONSABILIDAD</b></p>'+TB+tr(['Elaborado por','Revisado y aprobado por'],1)+tr(['Firma: ______________________','Firma: ______________________'])+tr([f.f_el||'',f.f_ap||''])+tr([f.f_ec||'',f.f_ac||''])+tr(['Fecha: '+(f.f_fe||''),d.d_resp||''])+'</table>';
+    return h}
+  function copyHtml(html){var tmp=document.createElement('div');tmp.innerHTML=html;var plain=tmp.innerText;
+    try{if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([plain],{type:'text/plain'})})]).then(function(){toast('Informe copiado: pega en Word')},function(){fb(plain)});return}}catch(e){}fb(plain)}
+  function fb(t){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Copiado')}catch(e){toast('No se pudo copiar')}ta.remove()}
+  $('copInf').onclick=function(){if(!S.riesgos.length){toast('Agrega al menos un riesgo');return}copyHtml(informe())};
+  $('copMat').onclick=function(){if(!S.riesgos.length){toast('No hay riesgos');return}var c=function(x){return String(x==null?'':x).replace(/[\t\n\r]+/g,' ')};
+    var rows=[['N.º','Escenario','Dimensión','Amenaza','Vulnerabilidad','Consecuencias','Impacto','Probabilidad','Inherente','Nivel inherente','Medidas','Impacto residual','Prob. residual','Residual','Nivel residual','Decisión','Responsable','Plazo'].join('\t')].concat(S.riesgos.map(function(o,i){return['R'+(i+1),o.esc,o.dim,o.ame,[o.vul,o.vulD].filter(Boolean).join(': '),o.imp.join('; '),o.i0,o.p0,o.i0*o.p0,nivel(o.i0*o.p0),o.ctl.join('; '),o.i1,o.p1,o.i1*o.p1,nivel(o.i1*o.p1),o.dec,o.own,o.plazo].map(c).join('\t')}));
+    var t=rows.join('\n');if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){toast('Matriz copiada: pega en Excel')},function(){fb(t)});else fb(t)};
+
+  $('nueva').onclick=function(){var b=this;if(!b.dataset.c){b.dataset.c=1;b.textContent='¿Borrar la evaluación actual?';return}delete b.dataset.c;b.textContent='Nueva evaluación';S=blank();save();all();toast('Evaluación nueva')};
+  $('ejemplo').onclick=function(){S=JSON.parse(JSON.stringify(CFG.ejemplo));save();all();toast('Ejemplo ficticio cargado')};
+  function all(){paintNec();resNec();paintD();paintP();paintC();renderR();resumen()}
+  all();
+})();
+</script>
+</body>
+</html>

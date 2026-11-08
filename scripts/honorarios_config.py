@@ -1,9 +1,9 @@
-"""Fuente única de la calculadora de honorarios (herramienta 01).
+"""Fuente única de la calculadora de honorarios (herramienta 02).
 
 Todo valor monetario, porcentaje, tarifa y ponderación de este archivo es CRITERIO PROPIO de
 Macías Sánchez Consultores, salvo los marcados con su norma (IVA, MTGE, clasificación de empresas,
 retenciones, costo laboral). Las referencias de mercado consultadas constan en
-01-honorarios/metodologia-honorarios.md.
+02-honorarios/metodologia-honorarios.md.
 """
 
 VERSION = "0.1"
@@ -128,59 +128,13 @@ PAQUETES = [
      "items": ["diag", "adec", "eipd", "dpd", "capac", "informe"]},
 ]
 
-# ---------------------------------------------------------------- Catálogo de servicios de la proforma (USD por tamaño: micro, pequeña, mediana, grande)
-# "auto" toma el valor del método elegido en la pestaña Comparar.
-SERVICIOS = [
-    # grupo, id, nombre, descripción, unidad, precios | "auto:clave", beneficio para el cliente
-    ["Evaluación inicial", "diag", "Diagnóstico de madurez y exposición económica",
-     "Entrevistas, revisión documental, índice de madurez en 12 dominios, estimación de multa (Res. SPDP-SPD-2025-0022-R), apetito al riesgo y plan de acción priorizado.",
-     "servicio", "auto:diag", "Saber exactamente dónde está su empresa, cuánto arriesga y qué hacer primero."],
-    ["Evaluación inicial", "mtge", "Análisis de gran escala y obligación de designar DPD",
-     "Aplicación del Modelo Técnico de Gran Escala (Res. SPDP-SPD-2026-0005-R) y de las causales de la Res. SPDP-SPD-2025-0028-R.",
-     "servicio", [120, 180, 250, 350], "Certeza sobre si su empresa debe designar DPD y realizar evaluaciones de impacto."],
-    ["Evaluación inicial", "informe", "Informe ejecutivo y presentación a la gerencia",
-     "Informe de evaluación general con matriz de soportes y reunión de decisiones con la gerencia.",
-     "servicio", [150, 250, 400, 600], "Decisiones claras de la dirección, con respaldo documental."],
-    ["Adecuación", "adec", "Programa de adecuación integral",
-     "RAT completo, política y avisos, contratos de encargo, protocolo de vulneraciones, procedimiento de derechos, capacitación inicial y designación del DPD.",
-     "programa", "auto:adec", "Cumplimiento documentado de las obligaciones de la LOPDP en un solo programa."],
-    ["Adecuación", "rat", "Registro de actividades de tratamiento (RAT)",
-     "Inventario de actividades con el contenido mínimo del art. 38 RGLOPDP, estados y fechas de revisión.",
-     "servicio", [350, 700, 1400, 2800], "El inventario oficial que pedirá la Superintendencia."],
-    ["Adecuación", "eipd", "Evaluación de impacto (por tratamiento)",
-     "Necesidad y proporcionalidad, matriz de riesgos, medidas e informe con el contenido del art. 32 RGLOPDP.",
-     "tratamiento", [450, 600, 900, 1500], "Lanzar tratamientos de alto riesgo con respaldo técnico y legal."],
-    ["Adecuación", "politica", "Política de privacidad y avisos",
-     "Política construida desde el RAT y avisos para cada punto de recolección (formularios, cámaras, correo).",
-     "paquete", [250, 400, 600, 900], "Clientes y trabajadores informados conforme al art. 12 LOPDP."],
-    ["Adecuación", "contratos", "Contratos de encargo y cláusulas",
-     "Contratos con encargados (art. 41 RGLOPDP) y cláusulas de consentimiento; paquete de hasta cinco.",
-     "paquete", [200, 350, 500, 800], "Proveedores obligados por contrato: evita una infracción grave."],
-    ["Adecuación", "vulner", "Protocolo de vulneraciones y bitácora",
-     "Protocolo aprobado, roles, bitácora y modelos de notificación a la SPDP, ARCOTEL, CSIRT y titulares.",
-     "paquete", [200, 350, 550, 850], "Responder a un incidente en los plazos legales, sin improvisar."],
-    ["Adecuación", "derechos", "Procedimiento de atención de derechos",
-     "Canal, formularios, plazos y registro de solicitudes de los titulares.",
-     "paquete", [150, 250, 400, 600], "Atender reclamos a tiempo y reducir denuncias ante la SPDP."],
-    ["Adecuación", "capac", "Capacitación al personal (taller de 2 horas)",
-     "Taller práctico con evaluación y registro de asistencia como evidencia.",
-     "taller", [200, 300, 450, 700], "Personal que sabe proteger datos: la primera barrera contra incidentes."],
-    ["Control mensual", "dpd", "Delegado de Protección de Datos externo",
-     "Funciones del DPD, registro ante la SPDP, supervisión del cumplimiento, atención de derechos y vulneraciones, reporte mensual.",
-     "mes", "auto:mens", "Un especialista independiente que responde por el cumplimiento cada mes."],
-    ["Control mensual", "acomp", "Acompañamiento de cumplimiento (sin designación)",
-     "Revisión del RAT, asesoría en proyectos nuevos y soporte al responsable interno.",
-     "mes", "auto:acomp", "Soporte experto continuo a un costo menor."],
-    ["Por evento", "incidente", "Gestión de una vulneración de la seguridad",
-     "Evaluación, contención documental y notificaciones en plazo (por incidente).",
-     "incidente", [250, 400, 600, 900], "Acompañamiento inmediato cuando más se necesita."],
-    ["Por evento", "solicitud", "Atención de solicitud de derechos adicional",
-     "Respuesta a una solicitud fuera del volumen incluido en el plan mensual.",
-     "solicitud", [25, 35, 50, 70], "Respuesta en plazo a cada titular."],
-    ["Por evento", "hora", "Hora adicional de asesoría",
-     "Asesoría puntual fuera del alcance contratado, a la tarifa por hora.",
-     "hora", "auto:hora", "Flexibilidad para consultas puntuales."],
-]
+# ---------------------------------------------------------------- Servicios de la proforma
+# Fuente única: scripts/catalogo_config.py (herramienta 01). Formato que usa la proforma:
+# [grupo, id, nombre, descripción, unidad, precio [micro, pequeña, mediana, grande] o "auto:clave", beneficio, código]
+import catalogo_config as _CAT  # noqa: E402
+SERVICIOS = [[x["fase"], x["id"], x["nombre"], x["que"], x["unidad"], x["precio"], x["beneficio"], x["cod"]]
+             for x in _CAT.SERVICIOS if x["proforma"]]
+GRUPOS = [f for f, _ in _CAT.FASES]
 
 CONDICIONES = (
     "Los valores están expresados en dólares de los Estados Unidos de América. "

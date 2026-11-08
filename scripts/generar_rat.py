@@ -276,6 +276,7 @@ def formulas(r, M, rg):
         f'&IF(OR({c["info"]}="",{c["info"]}="No se informa aún"),"Definir cómo se informa al titular (art. 12 LOPDP). ","")'
         f'&IF(AND({c["enc"]}<>"",{c["enc"]}<>"Ninguno",{c["contrato"]}<>"Sí, con todos"),"Encargados sin contrato de encargo completo (art. 41 RGLOPDP; art. 68 num. 9 LOPDP). ","")'
         f'&IF(ISNUMBER(SEARCH("(indicar",{c["plazo"]})),"Plazo genérico: indica la norma o el número de días. ","")'
+        f'&IF(AND({c["transf"]}="Sí",{c["tia"]}=""),"Documenta la evaluación de la transferencia (buena práctica). ","")'
         f'&IF({c["sistemas"]}="","Indica sistemas y soportes. ","")'
         f'&IF({c["volumen"]}="","Indica el volumen aproximado de titulares. ","")'
         f'&IF(AND(OR({c["riesgo"]}="Alto",{c["especial"]}="Sí",{c["perfiles"]}="Sí"),{c["eipd"]}=""),"Define si requiere evaluación de impacto (art. 42 LOPDP). ","")'

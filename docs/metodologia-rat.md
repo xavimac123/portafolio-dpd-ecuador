@@ -25,6 +25,17 @@ Las referencias europeas son comparativas y no vinculantes en Ecuador. La herram
 | Registro vivo: responsable interno, fecha de alta, revisiones | Responsable interno, fecha de alta, última y próxima revisión, alerta de revisión vencida | Secciones 1 y 7 |
 | Relación con encargados y contratos | Campo de contrato de encargo y alerta (**art. 41 RGLOPDP; art. 68 num. 9 LOPDP**) | Sección 4 |
 
+## Revisión de DPO Partners y Wiibiq (2026-11-07, v0.5)
+
+Ambas páginas se leyeron directamente. Son contenido comercial sin plantillas descargables.
+
+| Fuente | Qué se adoptó | Dónde |
+|---|---|---|
+| DPO Partners (Chile) | Ámbito o entidad para registros de grupos; disparadores de actualización por eventos; vínculo del RAT con la evaluación de transferencias | Campos `entidad`, `evento`, `tia` |
+| Wiibiq (Ecuador) | Organización por macroprocesos; lista de eventos que obligan a actualizar | Campos `macro`, `evento` |
+
+**No se adoptó de Wiibiq:** (1) atribuye el contenido mínimo del RAT al art. 13 LOPDP; en el portafolio rige el **art. 38 RGLOPDP**; (2) cita la Res. SPDP-SPD-2025-0028-R para transferencias internacionales, pero esa resolución regula al DPD; (3) recomienda revisión trimestral sin base normativa. Sus citas no deben usarse sin contraste con el Registro Oficial.
+
 ## Qué no se adoptó
 
 - **Umbral de 250 trabajadores y sus excepciones (art. 30.5 RGPD):** en Ecuador rigen los 100 trabajadores del art. 38 y las causales del art. 39 RGLOPDP.

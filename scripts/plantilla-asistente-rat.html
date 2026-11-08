@@ -307,6 +307,7 @@ var CFG=/*__CONFIG__*/;
     if(!o.info||o.info==='No se informa aún')b.push('Definir cómo se informa al titular (art. 12 LOPDP)');
     if(o.enc&&o.enc!=='Ninguno'&&o.contrato!=='Sí, con todos')b.push('Encargados sin contrato de encargo completo (art. 41 RGLOPDP; su falta es infracción grave, art. 68 num. 9 LOPDP)');
     if(/\(indicar/.test(o.plazo||''))b.push('Plazo genérico: indica la norma o el número de días');
+    if(o.transf==='Sí'&&!o.tia)b.push('Documenta la evaluación de la transferencia (buena práctica)');
     if(!o.sistemas)b.push('Indica sistemas y soportes (necesario para gestionar vulneraciones)');
     if(!o.volumen)b.push('Indica el volumen aproximado de titulares');
     if((o.riesgo==='Alto'||o.especial==='Sí'||o.perfiles==='Sí')&&!o.eipd)b.push('Define si requiere evaluación de impacto (art. 42 LOPDP)');

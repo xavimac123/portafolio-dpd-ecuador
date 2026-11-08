@@ -121,3 +121,50 @@ CONTEXTO = [
     ("ctx_fecha", "Fecha de la evaluación", "fecha"),
     ("ctx_entrev", "Personas entrevistadas", "texto"),
 ]
+
+
+# ---------------------------------------------------------------------------
+# Impacto económico: estimación de la multa (modelo MPRIV-1, Res. SPDP-SPD-2025-0022-R)
+# ---------------------------------------------------------------------------
+# Fórmulas publicadas (resumen de Corral Rosales, 23-07-2025; el Anexo I oficial no se pudo leer):
+#   CDI = VDN x RDMmin + (PDI/100) x VDN x (RDMmax - RDMmin)
+#   SDI = 2 (IED + INT + RER), cada factor por PERT = (mín + 4 x más probable + máx) / 6
+#   Multa = CDI x SDI, acotada al mínimo y máximo de la LOPDP
+# INTERPRETACIÓN DEL PORTAFOLIO (rotular siempre así):
+#   - PDI: el reglamento lo describe como el grado de madurez en el cumplimiento y de las medidas
+#     correctivas, en escala 0-100 %. Como un PDI mayor acerca la multa al máximo, se toma
+#     PDI = (1 - índice de madurez / 4) x 100: a menor madurez, mayor multa.
+#   - Pesos publicados (IED 60 %, INT 40 %, RER 20 % opcional) aplicados como
+#     SDI = 2 (0,6 IED + 0,4 INT + 0,2 RER), con factores en escala 0 a 1. Con IED = INT = 0,5
+#     y sin reincidencia, SDI = 1 (no altera la categoría).
+MULTAS = {
+    "rdm": {"Leve": (0.001, 0.007), "Grave": (0.007, 0.010)},  # LOPDP arts. 71 y 72
+    "pesos": {"IED": 0.6, "INT": 0.4, "RER": 0.2},
+    # Opciones con su terna PERT (mínimo, más probable, máximo) en escala 0-1: criterio propio
+    "IED": [
+        ("Baja", "Datos comunes, pocos titulares, sin grupos vulnerables, vulneración reversible", (0.1, 0.2, 0.4)),
+        ("Media", "Algún dato sensible o financiero, cientos de titulares, efectos superables", (0.3, 0.5, 0.7)),
+        ("Alta", "Categorías especiales o NNA, miles de titulares, efectos graves o irreversibles", (0.6, 0.8, 1.0)),
+    ],
+    "INT": [
+        ("Negligencia leve", "Descuido puntual; la organización desconocía la obligación pero actuó de buena fe", (0.1, 0.3, 0.5)),
+        ("Negligencia grave", "La obligación era conocida o fácilmente cognoscible y no se adoptaron medidas", (0.4, 0.6, 0.8)),
+        ("Intencional", "Se conocía el incumplimiento y se mantuvo deliberadamente", (0.7, 0.9, 1.0)),
+    ],
+    "RER": [
+        ("Ninguna", "Sin sanciones previas", (0.0, 0.0, 0.0)),
+        ("Reiteración", "Sancionada antes por dos o más leves, o por una de igual o mayor gravedad de otra naturaleza", (0.3, 0.5, 0.7)),
+        ("Reincidencia", "Sancionada antes por una infracción de la misma naturaleza", (0.6, 0.8, 1.0)),
+    ],
+    # Probabilidad anual orientativa de una sanción según el nivel de madurez: criterio propio, editable
+    "prob_por_nivel": [0.40, 0.25, 0.15, 0.08, 0.04],
+    "indice_objetivo": 3.0,  # escenario "con plan de acción": nivel Implementado
+}
+
+# Dominios cuyo incumplimiento está calificado como infracción GRAVE en las fuentes del portafolio.
+# Solo se listan los verificados (ver BASE-LEGAL.md); el resto queda a criterio del evaluador.
+INFRACCION_GRAVE = {
+    "dpd": "No designar al DPD cuando corresponde (LOPDP art. 68)",
+    "enc": "No suscribir el contrato de encargo (LOPDP art. 68 num. 9)",
+    "vul": "No notificar a los titulares una vulneración (Res. SPDP-SPD-2026-0040-R)",
+}

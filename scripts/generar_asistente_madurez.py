@@ -27,9 +27,12 @@ ejemplo = {
           "dpd_2": "No aplica al no existir DPD.", "lic_2": "No se usa interés legítimo.", "eipd_1": "Ningún tratamiento obligado a evaluación."},
     "f": {"f_el": "Abg. Mariano X. Macías Sánchez", "f_ec": "Consultor en Protección de Datos · Mat. 09-2022-736",
           "f_ap": "[REPRESENTANTE LEGAL]", "f_ac": "Gerente General"},
+    "e": {"e_tipo": "Privada con fines de lucro", "e_anio": "2025", "e_ing": "1850000", "e_imp": "0",
+          "e_ied": "1", "e_int": "1", "e_rer": "0", "e_cap": "8000", "e_tol": "Media", "e_plan": "6500"},
 }
 
-cfg = {"escala": C.ESCALA, "niveles": C.NIVELES, "dominios": C.DOMINIOS, "contexto": C.CONTEXTO, "ejemplo": ejemplo}
+cfg = {"escala": C.ESCALA, "niveles": C.NIVELES, "dominios": C.DOMINIOS, "contexto": C.CONTEXTO, "ejemplo": ejemplo,
+       "multas": C.MULTAS, "graves": list(C.INFRACCION_GRAVE), "gravesTxt": C.INFRACCION_GRAVE}
 shell = (ROOT / "scripts" / "plantilla-asistente-madurez.html").read_text(encoding="utf-8")
 (OUT / "asistente-madurez.html").write_text(
     shell.replace("/*__CONFIG__*/", json.dumps(cfg, ensure_ascii=False).replace("</", "<\\/")), encoding="utf-8")
@@ -52,5 +55,20 @@ for i, d in enumerate(C.DOMINIOS, start=1):
     L += [f"| {q} | {e} | [ ] | [EVIDENCIA] |" for q, e in d["preguntas"]]
     L += ["", f"**Puntaje del dominio:** [PROMEDIO]", ""]
 L += ["## Resultado", "", "| Índice de madurez | Nivel |", "|---|---|", "| [ÍNDICE] | [NIVEL] |", ""]
+L += ["## Impacto económico estimado (Res. SPDP-SPD-2025-0022-R, modelo MPRIV-1)", "",
+      "> Estimación orientativa; el asistente web la calcula automáticamente. Interpretaciones del portafolio: PDI = (1 − índice/4) × 100; SDI = 2 (0,6 IED + 0,4 INT + 0,2 RER).", "",
+      "| Dato | Valor |", "|---|---|",
+      "| Ejercicio económico anterior | [AÑO] |",
+      "| Ingresos por venta de bienes y servicios (USD) | [INGRESOS] |",
+      "| Impuestos directamente relacionados a deducir (USD) | [IMPUESTOS] |",
+      "| Volumen de negocio (VDN) | [VDN] |",
+      "| Categoría simulada | [Leve 0,1 %-0,7 % / Grave 0,7 %-1 %] |",
+      "| Afectación a derechos (IED) · Intencionalidad (INT) · Reincidencia (RER) | [VALORES] |",
+      "| Multa estimada si no actúa | [MONTO] |",
+      "| Multa estimada con plan de acción | [MONTO] |",
+      "| Probabilidad anual de sanción | [%] |",
+      "| Riesgo anual esperado | [MONTO] |",
+      "| Apetito al riesgo: capacidad × tolerancia | [MONTO] |",
+      "| ¿La multa estimada está dentro del apetito? | [Sí / No] |", ""]
 (OUT / "cuestionario-madurez.md").write_text("\n".join(L), encoding="utf-8")
 print("OK", OUT / "cuestionario-madurez.md")

@@ -62,6 +62,18 @@
   .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--carbon);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;z-index:9}.toast.on{opacity:1}
   footer{border-top:1px solid var(--linea);padding:18px 0;font-size:12px;color:var(--oliva)}
   svg text{font-family:Archivo,system-ui,sans-serif}
+  .help{background:none;border:1px solid var(--oro);color:var(--oliva);border-radius:999px;width:24px;height:24px;cursor:pointer;font:inherit;font-size:12px;font-weight:700;line-height:1;margin-left:6px;vertical-align:middle}
+  .hbox{display:none;margin-top:6px;background:#F8F5EA;border-left:3px solid var(--oro);border-radius:6px;padding:8px 10px;font-size:12.5px}.hbox.on{display:block}
+  .money{font-size:26px;font-weight:800;font-stretch:112%;line-height:1.1}
+  .esc2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .esc2 .card{margin:0}
+  .rng{position:relative;height:10px;background:#EFEBDD;border-radius:5px;margin:10px 0 4px}
+  .rng i{position:absolute;top:-4px;width:4px;height:18px;border-radius:2px}
+  .verd{border-radius:12px;padding:14px 16px;font-weight:700;margin-bottom:14px}
+  .verd small{display:block;font-weight:400;color:var(--carbon);margin-top:4px;font-size:13px}
+  .vok{background:var(--okbg);color:var(--ok)}.vno{background:var(--albg);color:var(--al)}.vpe{background:#F1EEE2;color:var(--oliva)}
+  .calc{font-size:12.5px;color:#444;background:#FAF8F1;border-radius:8px;padding:10px 12px;line-height:1.7}
+  .calc b{color:var(--carbon)}
   @media (max-width:560px){.card{padding:14px}.seg button{font-size:11px}table.plan tr:first-child{display:none}table.plan tr{display:block;border-bottom:1px solid #EFEBDD;padding:10px 0}table.plan td{display:block;border:0;padding:3px 0}.bars .b{grid-template-columns:1fr 1.4fr 36px}}
 </style>
 </head>
@@ -74,6 +86,7 @@
     <button data-t="t1" aria-selected="true">1 · Contexto</button>
     <button data-t="t2" aria-selected="false">2 · Cuestionario</button>
     <button data-t="t3" aria-selected="false">3 · Resultados y plan</button>
+    <button data-t="t4" aria-selected="false">4 · Impacto económico</button>
   </nav>
 </div></header>
 
@@ -112,6 +125,42 @@
   <div class="row"><button class="btn oro" id="copInf">Copiar informe (Word)</button><button class="btn sec" id="copTab">Copiar resultados (Excel)</button></div>
   <p class="nota">El informe incluye el gráfico como tabla de puntajes. Para el gráfico, toma una captura de esta pantalla.</p>
 </section>
+
+<section id="t4">
+  <h2>Impacto económico y apetito al riesgo</h2>
+  <p class="sub">Estimación orientativa de la multa que podría imponerse si la organización no actúa sobre el resultado, con la metodología <b>MPRIV-1</b> de la Res. SPDP-SPD-2025-0022-R. La multa se calcula sobre el <b>volumen de negocio del ejercicio económico anterior</b> (LOPDP arts. 71 a 73).</p>
+  <div class="card">
+    <h3>1. Datos de la organización</h3>
+    <div class="grid">
+      <div><label for="e_tipo">Tipo de organización</label><select id="e_tipo" data-e><option>Privada con fines de lucro</option><option>Empresa pública</option><option>Institución pública (servidores públicos)</option><option>Sin fines de lucro</option></select></div>
+      <div><label for="e_anio">Ejercicio económico anterior <button type="button" class="help" data-h="hAnio">?</button></label><input id="e_anio" data-e type="number" min="2000" max="2100"><div class="hbox" id="hAnio">La multa se calcula sobre el ejercicio económico <b>inmediatamente anterior al de la imposición</b> de la multa. Por defecto, el año anterior a la fecha de la evaluación.</div></div>
+      <div><label for="e_ing">Ingresos por venta de bienes y prestación de servicios (USD) <button type="button" class="help" data-h="hIng">?</button></label><input id="e_ing" data-e type="number" min="0" step="0.01" inputmode="decimal" placeholder="Ej. 850000"><div class="hbox" id="hIng"><b>Qué valor usar.</b> Ingresos ordinarios por ventas y servicios del ejercicio indicado. Fuentes habituales: estado de resultados de los estados financieros presentados a la Superintendencia de Compañías, o la declaración de impuesto a la renta del ejercicio. No incluyas otros ingresos (financieros, extraordinarios).</div></div>
+      <div><label for="e_imp">Impuestos directamente relacionados a deducir (USD) <button type="button" class="help" data-h="hImp">?</button></label><input id="e_imp" data-e type="number" min="0" step="0.01" inputmode="decimal" placeholder="Ej. IVA incluido en los ingresos"><div class="hbox" id="hImp">El volumen de negocio se toma <b>previa deducción del IVA y otros impuestos directamente relacionados</b> con la operación. Si los ingresos ya están netos de IVA (como en los estados financieros), deja 0.</div></div>
+    </div>
+    <div id="vdnBox" class="nota" style="margin-top:10px"></div>
+  </div>
+  <div class="card">
+    <h3>2. Infracción y seriedad</h3>
+    <div class="grid">
+      <div><label for="e_cat">Categoría de infracción a simular</label><select id="e_cat" data-e><option>Leve</option><option>Grave</option></select><div class="nota" id="catSug" style="margin-top:4px"></div></div>
+      <div><label for="e_ied">Afectación a los derechos de los titulares (IED · 60 %) <button type="button" class="help" data-h="hIED">?</button></label><select id="e_ied" data-e></select><div class="hbox" id="hIED"></div></div>
+      <div><label for="e_int">Intencionalidad (INT · 40 %) <button type="button" class="help" data-h="hINT">?</button></label><select id="e_int" data-e></select><div class="hbox" id="hINT"></div></div>
+      <div><label for="e_rer">Reincidencia o reiteración (RER · 20 %) <button type="button" class="help" data-h="hRER">?</button></label><select id="e_rer" data-e></select><div class="hbox" id="hRER"></div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>3. Apetito al riesgo <button type="button" class="help" data-h="hApe">?</button></h3>
+    <div class="hbox" id="hApe">La Guía de Gestión de Riesgos de la SPDP (Res. SPDP-SPD-2025-0003-R, Cap. II, 1.6) determina el apetito al riesgo por la <b>capacidad</b> (cuantitativa: cuánto puede perder la organización) y la <b>tolerancia</b> (cualitativa: cuánto está dispuesta a aceptar). La misma guía calcula el riesgo como probabilidad × impacto: por ejemplo, 50 % anual × USD 10 000 = USD 5 000.</div>
+    <div class="grid" style="margin-top:8px">
+      <div><label for="e_cap">Capacidad: pérdida máxima por sanción que la organización puede asumir (USD)</label><input id="e_cap" data-e type="number" min="0" step="0.01" inputmode="decimal" placeholder="Ej. 5000"></div>
+      <div><label for="e_tol">Tolerancia</label><select id="e_tol" data-e><option>Baja</option><option selected>Media</option><option>Alta</option></select><div class="nota" style="margin-top:4px">Baja: se acepta hasta el 50 % de la capacidad · Media: 100 % · Alta: 150 % (criterio propio).</div></div>
+      <div><label for="e_prob">Probabilidad anual de una sanción (%) <button type="button" class="help" data-h="hProb">?</button></label><input id="e_prob" data-e type="number" min="0" max="100" step="1"><div class="hbox" id="hProb">Por defecto se sugiere según el nivel de madurez (criterio propio): Inexistente 40 %, Inicial 25 %, En desarrollo 15 %, Implementado 8 %, Gestionado 4 %. Ajústala si conoces la actividad fiscalizadora de la SPDP en el sector.</div></div>
+      <div><label for="e_plan">Costo estimado del plan de adecuación (USD, opcional)</label><input id="e_plan" data-e type="number" min="0" step="0.01" inputmode="decimal"></div>
+    </div>
+  </div>
+  <div id="econ"></div>
+  <p class="nota"><b>Advertencia.</b> Estimación orientativa para gestionar el riesgo, no una liquidación. La SPDP aplica la metodología con sus propios valores justificados (<i>rationales</i>) y puede usar un cálculo estocástico (Monte Carlo). Interpretaciones del portafolio: el PDI se toma como el complemento del índice de madurez y los pesos 60/40/20 se aplican dentro del SDI; las escalas de IED, INT y RER son propias. Ver <code>BASE-LEGAL.md</code>.</p>
+</section>
 </main>
 <footer><div class="wrap">Abg. Mariano X. Macías Sánchez · Macías Sánchez Consultores · Diagnóstico orientativo; no constituye auditoría ni certificación de cumplimiento.</div></footer>
 <div class="toast" id="toast"></div>
@@ -123,11 +172,11 @@ var CFG=/*__CONFIG__*/;
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function toast(t){var e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},1900)}
   var KEY='msc-madurez-v1';
-  function blank(){return{ctx:{},r:{},c:{},f:{f_el:'Abg. Mariano X. Macías Sánchez',f_ec:'Consultor en Protección de Datos · Mat. 09-2022-736'}}}
+  function blank(){return{ctx:{},r:{},c:{},e:{},f:{f_el:'Abg. Mariano X. Macías Sánchez',f_ec:'Consultor en Protección de Datos · Mat. 09-2022-736'}}}
   var S;try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}if(!S)S=blank();
   function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
   var tabs=document.querySelectorAll('nav button');
-  function show(t){tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});document.querySelectorAll('section').forEach(function(s){s.classList.toggle('on',s.id===t)});if(t==='t3')resultados();window.scrollTo(0,0)}
+  function show(t){tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});document.querySelectorAll('section').forEach(function(s){s.classList.toggle('on',s.id===t)});if(t==='t3')resultados();if(t==='t4'){defaults();paintE();econ()}window.scrollTo(0,0)}
   tabs.forEach(function(b){b.onclick=function(){show(b.dataset.t)}});$('ir').onclick=function(){show('t2')};$('verRes').onclick=function(){show('t3')};
 
   // contexto
@@ -182,6 +231,59 @@ var CFG=/*__CONFIG__*/;
     var p=plan(c.ds);
     $('plan').innerHTML='<tr><th>Prioridad</th><th>Dominio</th><th>Brechas (puntaje 2 o menos)</th><th>Cómo cerrarlas</th></tr>'+(p.length?p.map(function(r){return'<tr><td><span class="pr p'+r.pri[0]+'">'+r.pri+'</span></td><td><b>'+esc(r.dom)+'</b><div class="nota">'+r.v.toFixed(1)+' · '+esc(r.base)+'</div></td><td>'+(r.brechas.length?'<ul style="margin:0;padding-left:16px">'+r.brechas.map(function(b){return'<li>'+esc(b.t)+' <span class="nota">('+b.v+')</span></li>'}).join('')+'</ul>':'Mantener y medir')+'</td><td>'+esc(r.herr)+'</td></tr>'}).join(''):'<tr><td colspan="4">Sin brechas relevantes.</td></tr>')}
 
+  // ---------- impacto económico
+  var M=CFG.multas;if(!S.e)S.e={};
+  function fill(sel,list){$(sel).innerHTML=list.map(function(o,i){return'<option value="'+i+'">'+esc(o[0])+'</option>'}).join('')}
+  fill('e_ied',M.IED);fill('e_int',M.INT);fill('e_rer',M.RER);
+  [['hIED','IED'],['hINT','INT'],['hRER','RER']].forEach(function(h){$(h[0]).innerHTML=M[h[1]].map(function(o){return'<b>'+esc(o[0])+'.</b> '+esc(o[1])+' <span class="nota">(PERT: '+o[2].join(' · ')+')</span>'}).join('<br>')+'<div class="nota" style="margin-top:4px">Escala propia 0 a 1, con valores mínimo, más probable y máximo.</div>'});
+  document.querySelectorAll('.help').forEach(function(b){b.onclick=function(){$(b.dataset.h).classList.toggle('on')}});
+  document.querySelectorAll('[data-e]').forEach(function(i){var f=function(){S.e[i.id]=i.value;save();econ()};i.addEventListener('input',f);i.addEventListener('change',f)});
+  function pert(t){return(t[0]+4*t[1]+t[2])/6}
+  function usd(v){return'USD '+(Math.round(v*100)/100).toLocaleString('es-EC',{minimumFractionDigits:2,maximumFractionDigits:2})}
+  function pct(v,d){return(v*100).toLocaleString('es-EC',{maximumFractionDigits:d==null?2:d})+' %'}
+  function defaults(){var c=calc(),y=new Date().getFullYear();
+    if(!S.e.e_anio){var f=S.ctx.ctx_fecha;S.e.e_anio=String((f?+f.slice(0,4):y)-1)}
+    if(S.e.e_cat==null){var g=CFG.graves.some(function(k){var d=CFG.dominios.filter(function(x){return x.id===k})[0];var s=d?dom(d):{v:null};return s.v!=null&&s.v<2});S.e.e_cat=g?'Grave':'Leve'}
+    if(S.e.e_ied==null)S.e.e_ied='1';if(S.e.e_int==null)S.e.e_int=(c.idx!=null&&c.idx<2)?'1':'0';if(S.e.e_rer==null)S.e.e_rer='0';
+    if(S.e.e_prob==null||S.e.e_prob===''){S.e.e_prob=c.idx==null?'':String(Math.round(M.prob_por_nivel[nivel(c.idx)]*100))}
+    if(!S.e.e_tipo)S.e.e_tipo='Privada con fines de lucro';if(!S.e.e_tol)S.e.e_tol='Media'}
+  function paintE(){document.querySelectorAll('[data-e]').forEach(function(i){i.value=S.e[i.id]==null?'':S.e[i.id]})}
+  function multa(vdn,idx,cat){var r=M.rdm[cat],pdi=(1-idx/4)*100,cdi=vdn*r[0]+(pdi/100)*vdn*(r[1]-r[0]);
+    var ied=pert(M.IED[+S.e.e_ied][2]),int=pert(M.INT[+S.e.e_int][2]),rer=pert(M.RER[+S.e.e_rer][2]);
+    var sdi=2*(M.pesos.IED*ied+M.pesos.INT*int+M.pesos.RER*rer),bruta=cdi*sdi,min=vdn*r[0],max=vdn*r[1],m=Math.min(max,Math.max(min,bruta));
+    return{pdi:pdi,cdi:cdi,ied:ied,int:int,rer:rer,sdi:sdi,bruta:bruta,min:min,max:max,m:m,tope:bruta>max?'máximo':bruta<min?'mínimo':''}}
+  var ECON=null;
+  function econ(){var c=calc(),box=$('econ');ECON=null;
+    var gs=CFG.graves.filter(function(k){var d=CFG.dominios.filter(function(x){return x.id===k})[0];var s=d?dom(d):{v:null};return s.v!=null&&s.v<2});
+    $('catSug').textContent=gs.length?'Sugerida: Grave. Dominios con puntaje bajo cuyo incumplimiento es grave: '+gs.map(function(k){return CFG.gravesTxt[k]}).join('; ')+'.':'Sugerida: Leve. Cambia a Grave si conoces un incumplimiento calificado como grave.';
+    var ing=+S.e.e_ing||0,imp=+S.e.e_imp||0,vdn=Math.max(0,ing-imp);
+    $('vdnBox').innerHTML=ing?'Volumen de negocio del ejercicio '+esc(S.e.e_anio)+' (VDN): <b>'+usd(vdn)+'</b>':'';
+    if(c.idx==null){box.innerHTML='<div class="verd vpe">Primero responde el cuestionario de madurez.</div>';return}
+    if(S.e.e_tipo!=='Privada con fines de lucro'&&S.e.e_tipo!=='Empresa pública'){box.innerHTML='<div class="verd vpe">Cálculo no disponible para este tipo de organización<small>'+(S.e.e_tipo==='Sin fines de lucro'?'Confirma si la entidad sin fines de lucro se rige por el volumen de negocio (art. 71 LOPDP: entidades de derecho privado). Si es así, elige "Privada con fines de lucro".':'En el sector público se sanciona al servidor responsable en salarios básicos unificados (modelo MPUB-1); los múltiplos para infracciones graves están pendientes de verificación.')+'</small></div>';return}
+    if(!vdn){box.innerHTML='<div class="verd vpe">Ingresa los ingresos del ejercicio '+esc(S.e.e_anio)+' para estimar la multa.</div>';return}
+    var cat=S.e.e_cat||'Leve',a=multa(vdn,c.idx,cat),obj=Math.max(c.idx,M.indice_objetivo),b=multa(vdn,obj,cat);
+    var pA=(S.e.e_prob===''?M.prob_por_nivel[nivel(c.idx)]:+S.e.e_prob/100),pB=M.prob_por_nivel[nivel(obj)];
+    var eA=a.m*pA,eB=b.m*pB,cap=+S.e.e_cap||0,tol={Baja:.5,Media:1,Alta:1.5}[S.e.e_tol||'Media'],lim=cap*tol,plan=+S.e.e_plan||0;
+    ECON={vdn:vdn,cat:cat,a:a,b:b,obj:obj,pA:pA,pB:pB,eA:eA,eB:eB,cap:cap,lim:lim,tol:S.e.e_tol,plan:plan};
+    function rangeBar(x){var w=x.max-x.min||1,pos=Math.min(100,Math.max(0,(x.m-x.min)/w*100));return'<div class="rng"><i style="left:calc('+pos+'% - 2px);background:#14181E"></i></div><div class="nota" style="display:flex;justify-content:space-between"><span>Mín. '+usd(x.min)+'</span><span>Máx. '+usd(x.max)+'</span></div>'}
+    var h='';
+    if(cap){var ok=a.m<=lim;h+='<div class="verd '+(ok?'vok':'vno')+'">'+(ok?'La multa estimada está DENTRO del apetito al riesgo':'La multa estimada EXCEDE el apetito al riesgo')+'<small>Multa estimada '+usd(a.m)+' frente a un límite aceptable de '+usd(lim)+' (capacidad '+usd(cap)+' × tolerancia '+esc(S.e.e_tol)+'). '+(ok?'Aun así, el plan de acción reduce la probabilidad de sanción y la exposición reputacional.':'El riesgo debe tratarse: ejecutar el plan de acción priorizado.')+'</small></div>'}
+    else h+='<div class="verd vpe">Ingresa la capacidad para evaluar el apetito al riesgo.</div>';
+    h+='<div class="esc2">'+
+      '<div class="card"><div class="nota">Si NO actúa · índice '+c.idx.toFixed(2)+'</div><div class="money">'+usd(a.m)+'</div><div class="nota">Infracción '+cat.toLowerCase()+' · '+pct(a.m/vdn,3)+' del VDN'+(a.tope?' · ajustada al '+a.tope+' legal':'')+'</div>'+rangeBar(a)+'<div style="margin-top:8px;font-size:13px">Riesgo anual esperado: <b>'+usd(eA)+'</b> <span class="nota">('+pct(pA,0)+' × multa)</span></div></div>'+
+      '<div class="card"><div class="nota">Con el plan de acción · índice '+obj.toFixed(2)+'</div><div class="money" style="color:var(--ok)">'+usd(b.m)+'</div><div class="nota">'+pct(b.m/vdn,3)+' del VDN</div>'+rangeBar(b)+'<div style="margin-top:8px;font-size:13px">Riesgo anual esperado: <b>'+usd(eB)+'</b> <span class="nota">('+pct(pB,0)+' × multa)</span></div></div>'+
+      '<div class="card"><div class="nota">Reducción de exposición</div><div class="money">'+usd(a.m-b.m)+'</div><div class="nota">en la multa estimada</div><div style="margin-top:8px;font-size:13px">Riesgo anual: <b>'+usd(eA-eB)+'</b> menos</div>'+(plan?'<div style="margin-top:6px;font-size:13px">Costo del plan: '+usd(plan)+' · '+(plan<=a.m?'<b style="color:var(--ok)">menor que la multa estimada</b>':'mayor que la multa estimada; considera también el daño reputacional y las medidas correctivas que puede ordenar la SPDP')+'</div>':'')+'</div></div>';
+    h+='<div class="card"><h3>Cómo se calculó</h3><div class="calc">'+
+      'VDN = ingresos − impuestos = <b>'+usd(vdn)+'</b><br>'+
+      'RDM ('+cat.toLowerCase()+') = '+pct(M.rdm[cat][0],1)+' a '+pct(M.rdm[cat][1],1)+' del VDN<br>'+
+      'PDI = (1 − '+c.idx.toFixed(2)+' / 4) × 100 = <b>'+a.pdi.toFixed(1)+'</b><br>'+
+      'CDI = VDN × RDMmín + (PDI/100) × VDN × (RDMmáx − RDMmín) = <b>'+usd(a.cdi)+'</b><br>'+
+      'IED = '+a.ied.toFixed(3)+' · INT = '+a.int.toFixed(3)+' · RER = '+a.rer.toFixed(3)+' (PERT = (mín + 4 × más probable + máx) / 6)<br>'+
+      'SDI = 2 × (0,6 × IED + 0,4 × INT + 0,2 × RER) = <b>'+a.sdi.toFixed(3)+'</b><br>'+
+      'Multa = CDI × SDI = '+usd(a.bruta)+(a.tope?' → ajustada al '+a.tope+' legal':'')+' = <b>'+usd(a.m)+'</b>'+
+      '</div></div>';
+    box.innerHTML=h}
+
   // firma
   document.querySelectorAll('[data-f]').forEach(function(i){i.addEventListener('input',function(){S.f[i.id]=i.value;save()})});
   function paintF(){document.querySelectorAll('[data-f]').forEach(function(i){i.value=S.f[i.id]||''});document.querySelectorAll('[data-x]').forEach(function(i){i.value=S.ctx[i.id]||''})}
@@ -194,7 +296,8 @@ var CFG=/*__CONFIG__*/;
     h+='<h2>1. Resultado general</h2><p>Índice de madurez: <b>'+c.idx.toFixed(2)+' de 4</b> · Nivel: <b>'+esc(N[2])+'</b>. '+esc(N[3])+'</p><p><i>Modelo propio de Macías Sánchez Consultores, organizado por las obligaciones de la LOPDP, su Reglamento y la normativa de la SPDP. Los dominios críticos pesan el doble. No constituye auditoría ni certificación.</i></p>';
     h+='<h2>2. Resultado por dominio</h2>'+TB+tr(['Dominio','Base normativa','Puntaje (0-4)','Nivel'],1)+c.ds.map(function(y){return tr([y.d.nombre+(y.d.peso>1?' (crítico)':''),y.d.base,y.v==null?'—':y.v.toFixed(2),y.v==null?'—':CFG.niveles[nivel(y.v)][2]])}).join('')+'</table>';
     h+='<h2>3. Plan de acción priorizado</h2>'+TB+tr(['Prioridad','Dominio','Brechas','Herramienta o acción'],1)+p.map(function(r){return tr([r.pri,r.dom+' ('+r.v.toFixed(1)+')',r.brechas.map(function(b){return'• '+b.t}).join(' ')||'Mantener y medir',r.herr])}).join('')+'</table>';
-    h+='<h2>4. Detalle de respuestas</h2>'+TB+tr(['Dominio','Pregunta','Respuesta','Comentario'],1);
+    econ();if(ECON){var E=ECON;h+='<h2>4. Impacto económico estimado y apetito al riesgo</h2><p>Estimación orientativa con la metodología MPRIV-1 de la Res. SPDP-SPD-2025-0022-R, sobre el volumen de negocio del ejercicio '+esc(S.e.e_anio)+' (LOPDP arts. 71 a 73). Interpretaciones del portafolio: PDI como complemento del índice de madurez; pesos 60/40/20 dentro del SDI; escalas propias de IED, INT y RER.</p>'+TB+tr(['Concepto','Si no actúa','Con plan de acción'],1)+tr(['Índice de madurez',c.idx.toFixed(2),E.obj.toFixed(2)])+tr(['Volumen de negocio (VDN)',usd(E.vdn),usd(E.vdn)])+tr(['Categoría simulada',E.cat,E.cat])+tr(['Multa estimada',usd(E.a.m),usd(E.b.m)])+tr(['Rango legal de la categoría',usd(E.a.min)+' a '+usd(E.a.max),usd(E.b.min)+' a '+usd(E.b.max)])+tr(['Probabilidad anual de sanción',pct(E.pA,0),pct(E.pB,0)])+tr(['Riesgo anual esperado',usd(E.eA),usd(E.eB)])+'</table>'+(E.cap?'<p><b>Apetito al riesgo:</b> capacidad '+usd(E.cap)+', tolerancia '+esc(E.tol)+', límite aceptable '+usd(E.lim)+'. La multa estimada '+(E.a.m<=E.lim?'está dentro':'excede')+' del apetito al riesgo.</p>':'')+(E.plan?'<p>Costo estimado del plan de adecuación: '+usd(E.plan)+'.</p>':'')+'<p><i>No es una liquidación: la SPDP fija los valores con sus propios rationales.</i></p>'}
+    h+='<h2>'+(ECON?'5':'4')+'. Detalle de respuestas</h2>'+TB+tr(['Dominio','Pregunta','Respuesta','Comentario'],1);
     CFG.dominios.forEach(function(d){d.preguntas.forEach(function(q,i){var v=S.r[d.id+'_'+i];h+=tr([d.nombre,q[0],v==null?'Sin responder':v==='na'?'N/A':v+' · '+CFG.escala[+v][1],S.c[d.id+'_'+i]||''])})});h+='</table>';
     var f=S.f;h+='<p><b>FIRMA DE RESPONSABILIDAD</b></p>'+TB+tr(['Elaborado por','Revisado por'],1)+tr(['Firma: ______________________','Firma: ______________________'])+tr([f.f_el||'',f.f_ap||''])+tr([f.f_ec||'',f.f_ac||''])+'</table>';
     return h}
@@ -202,12 +305,12 @@ var CFG=/*__CONFIG__*/;
   $('copInf').onclick=function(){if(calc().idx==null){toast('Responde el cuestionario');return}var html=informe(),tmp=document.createElement('div');tmp.innerHTML=html;var plain=tmp.innerText;
     try{if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([plain],{type:'text/plain'})})]).then(function(){toast('Informe copiado: pega en Word')},function(){fb(plain)});return}}catch(e){}fb(plain)};
   $('copTab').onclick=function(){var c=calc();if(c.idx==null){toast('Responde el cuestionario');return}
-    var t=['Dominio\tCrítico\tBase normativa\tPuntaje\tNivel'].concat(c.ds.map(function(y){return[y.d.nombre,y.d.peso>1?'Sí':'No',y.d.base,y.v==null?'':y.v.toFixed(2).replace('.',','),y.v==null?'':CFG.niveles[nivel(y.v)][2]].join('\t')})).concat(['','Índice ponderado\t\t\t'+c.idx.toFixed(2).replace('.',',')+'\t'+CFG.niveles[nivel(c.idx)][2]]).join('\n');
+    var t=['Dominio\tCrítico\tBase normativa\tPuntaje\tNivel'].concat(c.ds.map(function(y){return[y.d.nombre,y.d.peso>1?'Sí':'No',y.d.base,y.v==null?'':y.v.toFixed(2).replace('.',','),y.v==null?'':CFG.niveles[nivel(y.v)][2]].join('\t')})).concat(['','Índice ponderado\t\t\t'+c.idx.toFixed(2).replace('.',',')+'\t'+CFG.niveles[nivel(c.idx)][2]]).concat((function(){econ();if(!ECON)return[];var E=ECON,n=function(v){return(Math.round(v*100)/100).toFixed(2).replace('.',',')};return['','IMPACTO ECONÓMICO (estimación orientativa, Res. SPDP-SPD-2025-0022-R)','Volumen de negocio ejercicio '+S.e.e_anio+'\t\t\t'+n(E.vdn),'Categoría simulada\t\t\t'+E.cat,'Multa estimada si no actúa\t\t\t'+n(E.a.m),'Multa estimada con plan\t\t\t'+n(E.b.m),'Riesgo anual esperado si no actúa\t\t\t'+n(E.eA),'Riesgo anual esperado con plan\t\t\t'+n(E.eB),'Límite de apetito al riesgo\t\t\t'+(E.cap?n(E.lim):'')]})()).join('\n');
     if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){toast('Resultados copiados: pega en Excel')},function(){fb(t)});else fb(t)};
 
   $('nueva').onclick=function(){var b=this;if(!b.dataset.c){b.dataset.c=1;b.textContent='¿Borrar la evaluación actual?';return}delete b.dataset.c;b.textContent='Nueva evaluación';S=blank();save();all();toast('Evaluación nueva')};
   $('ejemplo').onclick=function(){S=JSON.parse(JSON.stringify(CFG.ejemplo));save();all();toast('Ejemplo ficticio cargado');show('t3')};
-  function all(){paintF();paintQ();resultados()}
+  function all(){if(!S.e)S.e={};defaults();paintE();paintF();paintQ();resultados();econ()}
   all();
 })();
 </script>

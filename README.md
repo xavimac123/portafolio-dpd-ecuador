@@ -12,7 +12,7 @@ Herramientas para la gestión del cumplimiento de la **Ley Orgánica de Protecci
 | 02 | [Kit de plantillas](02-kit-plantillas/) | Política y avisos de privacidad, contrato de encargo, cláusulas de consentimiento, designación del DPD; generador web | v0.2 |
 | 03 | [Kit de vulneraciones](03-kit-vulneraciones/) | Protocolo, bitácora, modelos de comunicación, calculadora de plazos y evaluación de riesgo | v0.2 |
 | 04 | [Evaluación de impacto](04-evaluacion-impacto/) | Necesidad (art. 42), descripción, proporcionalidad, matriz de riesgos y medidas, informe del art. 32 RGLOPDP | v0.1 |
-| 05 | [Nivel de madurez](05-madurez/) | Diagnóstico en 12 dominios, índice ponderado, radar y plan de acción enlazado a las herramientas | v0.1 |
+| 05 | [Nivel de madurez](05-madurez/) | Diagnóstico en 12 dominios, índice ponderado, radar, plan de acción, multa estimada (Res. SPDP-SPD-2025-0022-R) y apetito al riesgo | v0.2 |
 
 ## Flujo recomendado con un cliente
 

@@ -177,3 +177,22 @@ Base: RGLOPDP art. 30 num. 4 (cultura preventiva). Herramienta: Plan de capacita
 | Índice de madurez | Nivel |
 |---|---|
 | [ÍNDICE] | [NIVEL] |
+
+## Impacto económico estimado (Res. SPDP-SPD-2025-0022-R, modelo MPRIV-1)
+
+> Estimación orientativa; el asistente web la calcula automáticamente. Interpretaciones del portafolio: PDI = (1 − índice/4) × 100; SDI = 2 (0,6 IED + 0,4 INT + 0,2 RER).
+
+| Dato | Valor |
+|---|---|
+| Ejercicio económico anterior | [AÑO] |
+| Ingresos por venta de bienes y servicios (USD) | [INGRESOS] |
+| Impuestos directamente relacionados a deducir (USD) | [IMPUESTOS] |
+| Volumen de negocio (VDN) | [VDN] |
+| Categoría simulada | [Leve 0,1 %-0,7 % / Grave 0,7 %-1 %] |
+| Afectación a derechos (IED) · Intencionalidad (INT) · Reincidencia (RER) | [VALORES] |
+| Multa estimada si no actúa | [MONTO] |
+| Multa estimada con plan de acción | [MONTO] |
+| Probabilidad anual de sanción | [%] |
+| Riesgo anual esperado | [MONTO] |
+| Apetito al riesgo: capacidad × tolerancia | [MONTO] |
+| ¿La multa estimada está dentro del apetito? | [Sí / No] |

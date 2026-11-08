@@ -52,9 +52,9 @@ def arrow(ax, a, b, color=OLI, rad=0.0):
 def flujo():
     fig, ax = plt.subplots(figsize=(12, 3.7))
     ax.set_xlim(0, 12); ax.set_ylim(0, 3.7); ax.axis("off")
-    pasos = [("06", "Honorarios", "Proforma\nantes de iniciar"), ("05", "Madurez", "Diagnóstico y\nplan de acción"), ("01", "RAT", "Inventario de\nactividades"),
-             ("07", "Gran escala", "Puntaje MTGE\npor actividad"), ("04", "Evaluación\nde impacto", "Actividades de\nalto riesgo"),
-             ("02", "Plantillas", "Política, avisos,\ncontratos, DPD"), ("03", "Vulneraciones", "Protocolo y\nrespuesta")]
+    pasos = [("01", "Honorarios", "Proforma\nantes de iniciar"), ("02", "Madurez", "Mapeo, diagnóstico\ny plan de acción"), ("03", "RAT", "Inventario de\nactividades"),
+             ("04", "Gran escala", "Puntaje MTGE\npor actividad"), ("05", "Evaluación\nde impacto", "Actividades de\nalto riesgo"),
+             ("06", "Plantillas", "Política, avisos,\ncontratos, DPD"), ("07", "Vulneraciones", "Protocolo y\nrespuesta")]
     w, gap, y = 1.5, 0.2, 1.3
     for i, (n, t, s_) in enumerate(pasos):
         x = 0.08 + i * (w + gap)
@@ -67,7 +67,7 @@ def flujo():
         if i < len(pasos) - 1:
             arrow(ax, (x + w + 0.02, y + 0.78), (x + w + gap - 0.02, y + 0.78))
     arrow(ax, (11.2, 1.25), (2.6, 1.25), color=ORO, rad=-0.16)
-    ax.text(6.9, 0.12, "Revisión anual: repetir 05 · Madurez y 07 · Gran escala para medir el avance", ha="center", fontsize=9, color=OLI, style="italic")
+    ax.text(6.9, 0.12, "Revisión anual: repetir 02 · Madurez y 04 · Gran escala para medir el avance", ha="center", fontsize=9, color=OLI, style="italic")
     save(fig, "flujo_herramientas")
 
 
@@ -192,7 +192,7 @@ def multa():
 def flujo_datos():
     fig, ax = plt.subplots(figsize=(10, 4.6))
     ax.set_xlim(0, 10); ax.set_ylim(0, 4.6); ax.axis("off")
-    cols = [("ORIGEN", 0.2), ("RECOLECCIÓN", 2.2), ("SISTEMAS", 4.25), ("ENCARGADOS", 6.3), ("DESTINO", 8.3)]
+    cols = [("ORIGEN", 0.2), ("RECOLECCIÓN", 2.2), ("SISTEMAS", 4.25), ("ENCARGADOS", 6.3), ("DESTINATARIOS", 8.3)]
     for t, x in cols:
         ax.text(x + 0.75, 4.35, t, ha="center", fontsize=8.5, weight="bold", color=ORO)
     B = {}
@@ -207,7 +207,7 @@ def flujo_datos():
     b("erp", 4.25, 3.1, "ERP / facturación", "servidor local")
     b("nom", 4.25, 1.7, "Software nómina", "nube")
     b("arc", 4.25, 0.3, "Archivo físico", "bajo llave")
-    b("nube", 6.3, 2.45, "Proveedor nube", "EE. UU. · transferencia", fc="#FBEDE5")
+    b("nube", 6.3, 2.45, "Proveedor nube", "EE. UU. · encargo (no transferencia)", fc="#FBEDE5")
     b("cont", 6.3, 0.85, "Contadora externa", "contrato de encargo")
     b("sri", 8.3, 3.1, "SRI", "obligación legal")
     b("iess", 8.3, 1.7, "IESS · MDT", "obligación legal")
@@ -280,7 +280,7 @@ def estados_rat():
     save(fig, "estados_rat")
 
 
-# 10. Puntaje MTGE del ejemplo de la herramienta 07
+# 10. Puntaje MTGE del ejemplo de la herramienta 04
 def mtge():
     import granescala_config as G
     trat = [("Facturación y clientes", [2, 1, 0.5, 1, 2, 2], False), ("Nómina", [1, 2, 3, 1, 2, 1], False),
@@ -302,7 +302,7 @@ def mtge():
     save(fig, "mtge_ejemplo")
 
 
-# 11. Honorarios por método (ejemplo de la herramienta 06)
+# 11. Honorarios por método (ejemplo de la herramienta 01)
 def honorarios():
     fases = ["Evaluación inicial", "Adecuación", "Control mensual × 12"]
     datos = {"Volumen de negocio": [1470, 3780, 350 * 12], "Volumen de tratamiento": [1090, 2210, 590 * 12], "Técnica (piso)": [1350, 2130, 370 * 12]}
@@ -323,6 +323,93 @@ def honorarios():
     save(fig, "honorarios_metodos")
 
 
+# 12. Recorrido de los datos (roadmap)
+def roadmap():
+    fig, ax = plt.subplots(figsize=(11, 4.2))
+    ax.set_xlim(0, 11); ax.set_ylim(0, 4.2); ax.axis("off")
+    et = [("1", "Captación", "Formulario, contrato,\ncámara, correo", "Aviso de privacidad\ny base legal"),
+          ("2", "Registro", "ERP, nómina, Excel,\narchivo físico", "RAT y medidas\nde seguridad"),
+          ("3", "Uso", "Facturar, pagar,\natender, vender", "Solo para la\nfinalidad informada"),
+          ("4", "Comunicación", "Encargados y\ndestinatarios", "Contrato de encargo\no base del art. 33"),
+          ("5", "Conservación", "Mientras se necesita\no lo exige la ley", "Plazo definido\nen el RAT"),
+          ("6", "Supresión", "Borrado, destrucción\no anonimización", "Constancia de\nsupresión")]
+    w, gap = 1.62, 0.2
+    for i, (n, t, q, c) in enumerate(et):
+        x = 0.1 + i * (w + gap)
+        ax.add_patch(FancyBboxPatch((x, 2.0), w, 1.45, boxstyle="round,pad=0.02,rounding_size=0.08", fc=CAR if i in (0, 3) else MAR, ec=ORO, lw=1.5))
+        dark = i in (0, 3)
+        ax.text(x + 0.14, 3.22, n, fontsize=9, weight="bold", color=ORO)
+        ax.text(x + w / 2, 2.98, t, ha="center", va="center", fontsize=10.5, weight="bold", color=MAR if dark else CAR)
+        ax.text(x + w / 2, 2.42, q, ha="center", va="center", fontsize=7.6, color=ORC if dark else OLI)
+        ax.add_patch(FancyBboxPatch((x + 0.08, 0.55), w - 0.16, 0.95, boxstyle="round,pad=0.02,rounding_size=0.06", fc="#E6F2EA", ec=OK, lw=1))
+        ax.text(x + w / 2, 1.02, c, ha="center", va="center", fontsize=7.6, color="#2E5E40")
+        arrow(ax, (x + w / 2, 1.98), (x + w / 2, 1.52), color=OK)
+        if i < len(et) - 1:
+            arrow(ax, (x + w + 0.02, 2.72), (x + w + gap - 0.02, 2.72))
+    ax.text(0.1, 3.85, "QUÉ PASA CON EL DATO", fontsize=8.5, weight="bold", color=ORO)
+    ax.text(0.1, 0.15, "QUÉ EXIGE LA LEY EN CADA ETAPA (lo documenta la empresa; el DPD asesora y supervisa)", fontsize=8.5, weight="bold", color=OK)
+    save(fig, "roadmap_datos")
+
+
+# 13. Encargo frente a comunicación o transferencia
+def roles():
+    fig, ax = plt.subplots(figsize=(10.5, 4.8))
+    ax.set_xlim(0, 10.5); ax.set_ylim(0, 4.8); ax.axis("off")
+    ax.add_patch(FancyBboxPatch((4.0, 1.75), 2.5, 1.3, boxstyle="round,pad=0.02,rounding_size=0.1", fc=CAR, ec=ORO, lw=2))
+    ax.text(5.25, 2.6, "RESPONSABLE", ha="center", fontsize=11, weight="bold", color=MAR)
+    ax.text(5.25, 2.15, "La empresa: decide\npara qué y cómo", ha="center", va="center", fontsize=8, color=ORC)
+    ax.text(1.6, 4.5, "ENCARGADOS · tratan por cuenta del responsable", ha="center", fontsize=8.5, weight="bold", color=OLI)
+    ax.text(1.6, 4.2, "No es transferencia (LOPDP arts. 34 y 35) · contrato art. 41 RGLOPDP", ha="center", fontsize=7.2, color=OLI)
+    ax.text(8.9, 4.5, "DESTINATARIOS · usan los datos para fines propios", ha="center", fontsize=8.5, weight="bold", color=AL)
+    ax.text(8.9, 4.2, "Comunicación o transferencia (LOPDP art. 33) · base legal", ha="center", fontsize=7.2, color=AL)
+    izq = [("Contadora externa", "lleva la contabilidad"), ("Proveedor de nómina", "calcula roles de pago"), ("Nube o ERP en el exterior", "aloja la información")]
+    der = [("SRI · IESS · Ministerio", "obligación legal"), ("Aseguradora médica", "a pedido del titular"), ("Fiscalía o juez", "orden o requerimiento")]
+    for i, (t, s_) in enumerate(izq):
+        y = 3.2 - i * 1.15
+        box(ax, 0.3, y, 2.6, 0.82, t, s_, fc=MAR, ec=OLI, fs=8.8, fss=7.4)
+        arrow(ax, (4.0, 2.4), (2.92, y + 0.41), color=OLI)
+    for i, (t, s_) in enumerate(der):
+        y = 3.2 - i * 1.15
+        box(ax, 7.6, y, 2.6, 0.82, t, s_, fc="#FBEDE5", ec=AL, fs=8.8, fss=7.4)
+        arrow(ax, (6.5, 2.4), (7.58, y + 0.41), color=AL)
+    ax.text(5.25, 0.35, "Si un encargado usa los datos para sus propios fines, pasa a ser responsable (RGLOPDP art. 43).", ha="center", fontsize=8, style="italic", color=CAR)
+    save(fig, "roles_datos")
+
+
+# 14. Matriz de mapeo: áreas × dominios de madurez
+def mapeo():
+    areas = ["Gerencia", "Talento humano", "Ventas y\natención", "Contabilidad\ny finanzas", "Sistemas (TI)", "Marketing", "Seguridad\nfísica", "Legal o\ncompras"]
+    doms = [d["corto"] for d in MC.DOMINIOS]
+    P, S_ = 2, 1  # principal, apoyo
+    M = {
+        "Gerencia":            [P, P, S_, S_, 0, 0, 0, 0, 0, S_, 0, P],
+        "Talento humano":      [0, 0, P, P, P, S_, S_, S_, 0, S_, 0, P],
+        "Ventas y\natención":  [0, 0, P, P, P, P, 0, 0, 0, 0, 0, S_],
+        "Contabilidad\ny finanzas": [0, 0, P, P, S_, 0, P, S_, 0, 0, S_, 0],
+        "Sistemas (TI)":       [0, 0, S_, 0, 0, 0, P, P, P, P, P, S_],
+        "Marketing":           [0, 0, P, P, P, P, S_, 0, S_, 0, S_, 0],
+        "Seguridad\nfísica":   [0, 0, P, P, P, 0, S_, P, S_, S_, 0, 0],
+        "Legal o\ncompras":    [S_, S_, S_, P, 0, S_, P, 0, 0, 0, P, 0],
+    }
+    import numpy as np
+    Z = np.array([M[a] for a in areas])
+    from matplotlib.colors import ListedColormap
+    fig, ax = plt.subplots(figsize=(10, 4.6))
+    ax.imshow(Z, cmap=ListedColormap(["#FFFFFF", ORC, ORO]), vmin=0, vmax=2, aspect="auto")
+    ax.set_xticks(range(len(doms))); ax.set_xticklabels(doms, rotation=35, ha="right", fontsize=8.5)
+    ax.set_yticks(range(len(areas))); ax.set_yticklabels(areas, fontsize=8.5)
+    for i in range(len(areas)):
+        for j in range(len(doms)):
+            if Z[i, j] == 2: ax.plot(j, i, "o", ms=6, color=CAR)
+            elif Z[i, j] == 1: ax.plot(j, i, "o", ms=6, mfc="white", mec=OLI)
+    ax.set_xticks(np.arange(-.5, len(doms)), minor=True); ax.set_yticks(np.arange(-.5, len(areas)), minor=True)
+    ax.grid(which="minor", color="#DDD8C8", lw=0.8); ax.tick_params(which="minor", length=0)
+    for s_ in ax.spines.values(): s_.set_visible(False)
+    ax.plot([], [], "o", ms=6, color=CAR, label="Fuente principal de evidencia"); ax.plot([], [], "o", ms=6, mfc="white", mec=OLI, label="Aporta información")
+    ax.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2, frameon=False, fontsize=8.5)
+    save(fig, "mapeo_areas")
+
+
 if __name__ == "__main__":
-    flujo(); ciclo(); idx = radar(); heatmap(); multa(); flujo_datos(); calendario(); iso(); estados_rat(); mtge(); honorarios()
+    flujo(); ciclo(); idx = radar(); heatmap(); multa(); flujo_datos(); calendario(); iso(); estados_rat(); mtge(); honorarios(); roadmap(); roles(); mapeo()
     print("índice ejemplo", round(idx, 2))

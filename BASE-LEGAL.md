@@ -2,7 +2,7 @@
 
 Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:** ninguna plantilla cita un artículo que no esté en esta tabla. Antes de publicar o usar una herramienta con un cliente, contrasta cada fila con el texto oficial en el Registro Oficial y marca la columna "Verificado".
 
-Última revisión de fuentes: 2026-11-07 (herramientas 04 y 05).
+Última revisión de fuentes: 2026-11-07 (herramientas 05 y 02).
 
 ## Normas
 
@@ -81,6 +81,15 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | Gran escala, efectos | Evaluación de impacto previa, DPD obligatorio, inclusión en el RAT y medidas reforzadas | RES-2026-0005 art. 12 | ☐ |
 | Gran escala, calificación directa | Salud y categorías especiales; perfiles automatizados con efectos jurídicos; observación sistemática en espacios públicos; biométricos y geolocalización; información crediticia; NNA; transferencias sistemáticas; mensajería y courier | RES-2026-0005 art. 14 | ☐ |
 | Gran escala, transitoria | 90 días desde la vigencia (25-02-2026) para designar y registrar al DPD | RES-2026-0005, disposición transitoria | ☐ |
+| Transferencia o comunicación | Los datos pueden transferirse o comunicarse a terceros para fines relacionados con las funciones legítimas del responsable y del destinatario, con base de legitimación y, cuando corresponda, consentimiento informado | LOPDP art. 33 | ☐ |
+| Acceso del encargado | El acceso a datos por un encargado para prestar un servicio al responsable no es transferencia ni comunicación; el contrato de encargo es obligatorio | LOPDP arts. 34 y 35; RGLOPDP arts. 40 y 41; Oficio SPDP-IRD-2025-0096-O | ☐ |
+| Encargado que decide fines | Si el encargado determina fines o medios propios, es responsable de ese tratamiento | RGLOPDP art. 43 | ☐ |
+| Encargado en el exterior | La ubicación del encargado fuera del Ecuador no convierte por sí sola el encargo en transferencia internacional | Oficio SPDP-IRD-2026-0300-O; RES-2026-0004 | ☐ |
+| DPD, funciones | Asesorar al responsable, su personal y el encargado; supervisar el cumplimiento; asesorar y supervisar análisis de riesgo, evaluaciones de impacto y medidas de seguridad; cooperar con la SPDP y ser su punto de contacto; otras que fije la SPDP | LOPDP art. 49 | ☐ |
+| DPD, responsabilidad | Responde administrativa, civil y penalmente por el incumplimiento de sus funciones | LOPDP art. 49, inciso final (según Oficio SPDP-IRD-2026-0004-O) | ☐ |
+| DPD, rol e independencia | Asesora, vela y supervisa de forma independiente; puede asumir otras tareas de protección de datos sin conflicto; el responsable le provee recursos | RGLOPDP art. 48 | ☐ |
+| DPD, no sustituye al responsable | La responsabilidad legal del cumplimiento permanece en el responsable o el encargado | SPDP, página institucional «Delegado de Protección de Datos» (consulta 2026-11-08) | ☐ |
+| DPD, incompatibilidades | No puede ser a la vez oficial de cumplimiento, oficial de seguridad de la información ni apoderado especial | Oficio SPDP-IRD-2025-0197-O | ☐ |
 | Gran escala, definición | Tratamiento que afecta a una gran cantidad de datos de un elevado número de titulares, de amplia diversidad geográfica, con posible riesgo; factores: titulares, volumen, duración, alcance | RGLOPDP art. 4 num. 7 | ☐ |
 | Gran escala, casos predeterminados | (a) pacientes de hospitales o del Sistema Nacional de Salud; (b) desplazamientos en transporte público; (c) geolocalización en tiempo real por responsable especializado; (d) clientes de aseguradoras, intermediarios o instituciones financieras; (e) publicidad comportamental de buscadores; (f) contenido, tráfico y ubicación de telefonía o internet | RGLOPDP art. 4 num. 7 lit. a a f | ☐ |
 | DPD, control permanente y sistemático; consulta | Criterios de control permanente y sistemático; ante dudas, consulta a la SPDP con respuesta obligatoria para el consultante | RGLOPDP art. 53 | ☐ |
@@ -93,7 +102,7 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | Retención de renta, honorarios | 10 % en honorarios profesionales de personas naturales | RES-SRI-26-0009 | ☐ |
 | Retención de IVA, honorarios | 100 % del IVA en honorarios profesionales de personas naturales cuando paga un agente de retención | Tabla de porcentajes de retención de IVA del SRI | ☐ |
 | Costo laboral de referencia | Décimo tercero (art. 111), décimo cuarto equivalente a un SBU (art. 113), fondos de reserva 8,33 % (art. 196); SBU 2026 USD 482; aporte patronal 12,15 % | CT arts. 111, 113 y 196; Ley de Seguridad Social | ☐ |
-| Honorarios del DPD | No existe tabla oficial ni gremial en Ecuador; la herramienta 06 usa criterio propio | — | — |
+| Honorarios del DPD | No existe tabla oficial ni gremial en Ecuador; la herramienta 01 usa criterio propio | — | — |
 
 ## Puntos abiertos (no resolver con supuestos)
 
@@ -103,15 +112,15 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 4. Lista literal de excepciones del art. 26 LOPDP: incorporarla a `rat_config.py` para convertir el campo "Excepción del art. 26" en lista desplegable.
 5. Contenido del RAT del encargado: el art. 44 RGLOPDP fija cuándo se lleva; confirmar si define su contenido. La hoja "RAT encargado" usa estructura de buena práctica.
 6. Periodicidad de revisión del RAT: la norma no la fija; la herramienta usa 12 meses como práctica interna.
-7. Gran escala: resuelto por la RES-2026-0005 (MTGE), aplicado en la herramienta 06. Pendiente incorporarlo a las herramientas 01 (columna de puntaje por actividad) y 04 (supuestos de evaluación de impacto). El texto deja un vacío entre 100.000 y 101.000 titulares; la herramienta 06 lo asigna al tramo superior.
-8. Escalas oficiales de impacto y probabilidad y anexo con el formato de evaluación de impacto de la Guía SPDP (RES-0003, v2 2026): no se pudieron leer completos; la herramienta 04 usa escalas propias. Contrastar al obtener el texto íntegro.
+7. Gran escala: resuelto por la RES-2026-0005 (MTGE), aplicado en la herramienta 01. Pendiente incorporarlo a las herramientas 03 (columna de puntaje por actividad) y 04 (supuestos de evaluación de impacto). El texto deja un vacío entre 100.000 y 101.000 titulares; la herramienta 01 lo asigna al tramo superior.
+8. Escalas oficiales de impacto y probabilidad y anexo con el formato de evaluación de impacto de la Guía SPDP (RES-0003, v2 2026): no se pudieron leer completos; la herramienta 05 usa escalas propias. Contrastar al obtener el texto íntegro.
 9. Alcance exacto de la obligación de evaluación de impacto en la norma de IA (RES-2026-0009/0037) y en la de biométricos (RES-2026-0039): leer sus textos completos.
-10. Transferencias internacionales: identificado el art. 56 LOPDP y la RES-2026-0004 (norma general); falta leer el texto completo de la norma general para incorporar sus mecanismos a las herramientas 01 y 05.
+10. Transferencias internacionales: identificado el art. 56 LOPDP y la RES-2026-0004 (norma general); falta leer el texto completo de la norma general para incorporar sus mecanismos a las herramientas 03 y 02.
 14. Estado del reglamento de certificaciones y sellos de la SPDP (plan regulatorio 2025-2026): verificar si fue expedido.
-11. Anexo I de la RES-0022: leer el texto oficial (spdp.gob.ec no fue accesible). Confirmar (a) el sentido del PDI: la herramienta 05 lo toma como complemento del índice de madurez (menor madurez, mayor multa); (b) cómo se aplican los pesos 60/40/20 dentro del SDI; (c) las escalas de IED, INT y RER.
-12. Múltiplos de SBU para infracciones graves de servidores públicos (art. 72 LOPDP): pendiente; la herramienta 05 no calcula multas del sector público.
-17. Gran escala, art. 14.1: «otros datos sensibles» podría calificar directamente cualquier tratamiento con datos sensibles (por ejemplo, certificados médicos en nómina). Confirmar el alcance con la SPDP o con criterios publicados; la herramienta 07 solo sugiere revisarlo.
-18. Gran escala, alcance «transfronterizo»: precisar si el almacenamiento en una nube fuera del Ecuador basta para calificar el alcance como transfronterizo; la herramienta 07 deja la decisión documentada al evaluador.
+11. Anexo I de la RES-0022: leer el texto oficial (spdp.gob.ec no fue accesible). Confirmar (a) el sentido del PDI: la herramienta 02 lo toma como complemento del índice de madurez (menor madurez, mayor multa); (b) cómo se aplican los pesos 60/40/20 dentro del SDI; (c) las escalas de IED, INT y RER.
+12. Múltiplos de SBU para infracciones graves de servidores públicos (art. 72 LOPDP): pendiente; la herramienta 02 no calcula multas del sector público.
+17. Gran escala, art. 14.1: «otros datos sensibles» podría calificar directamente cualquier tratamiento con datos sensibles (por ejemplo, certificados médicos en nómina). Confirmar el alcance con la SPDP o con criterios publicados; la herramienta 04 solo sugiere revisarlo.
+18. Gran escala, alcance «transfronterizo»: precisar si el almacenamiento en una nube fuera del Ecuador basta para calificar el alcance como transfronterizo; la herramienta 04 deja la decisión documentada al evaluador.
 15. Retenciones: confirmar en el texto de la Res. NAC-DGERCGC26-00000009 el porcentaje para sociedades (los resúmenes citan 5 %) y en la tabla vigente del SRI el porcentaje de retención de IVA según el tipo de cliente.
 16. Clasificación de empresas: una fuente secundaria cita el límite inferior de la pequeña empresa en USD 300.001; la herramienta usa USD 100.001 (mayoría de fuentes). Verificar en el texto vigente del Reglamento del COPCI art. 106.
 13. Catálogo completo de infracciones leves y graves (arts. 67 y 68 LOPDP): solo se clasifican como graves los tres dominios verificados (DPD, contrato de encargo, notificación a titulares).
@@ -135,6 +144,7 @@ Solo pueden citarse en comparaciones explícitas, nunca como fundamento de una o
 - RES-2026-0039 (biométricos) y RES-2026-0009/0037 (IA): resúmenes de nmslaw.com.ec, allende.com y ecija.com.
 
 - Resumen de la RES-0040: nmslaw.com.ec, 14-09-2026.
+- Arts. 33 a 35 y 49 LOPDP, RGLOPDP arts. 43 y 48 y oficios de la SPDP: resúmenes de nmslaw.com.ec y páginas de spdp.gob.ec (2026-11-08).
 - RES-2026-0005: copia del texto en procuraduria.utpl.edu.ec y fielweb.com; resúmenes de lexis.com.ec y corralrosales.com (2026-11-08).
 - IVA, retenciones y SBU 2026: eluniverso.com, ccq.ec (Circular NAC-DGECCGC25-00000006), nmslaw.com.ec (Res. NAC-DGERCGC26-00000009), vistazo.com (SBU).
 - Reforma art. 43 por la LOFC: globalsuitesolutions.com.

@@ -19,18 +19,18 @@ def js(obj):
 
 KITS = [
     {
-        "out": "02-kit-plantillas/generador-documentos.html",
+        "out": "06-kit-plantillas/generador-documentos.html",
         "key": "msc-gen-v1",
-        "herramienta": "Herramienta 02",
+        "herramienta": "Herramienta 06",
         "titulo": "Generador de documentos de protección de datos",
         "subtitulo": "Política de privacidad, avisos, contrato de encargo y cláusulas de consentimiento · LOPDP Ecuador",
         "extra": "",
         "plantillas": [
-            ("Política de privacidad", "02-kit-plantillas/politica-privacidad.md"),
-            ("Aviso de privacidad", "02-kit-plantillas/aviso-privacidad.md"),
-            ("Contrato de encargo", "02-kit-plantillas/contrato-encargo.md"),
-            ("Cláusulas de consentimiento", "02-kit-plantillas/clausulas-consentimiento.md"),
-            ("Designación del DPD", "02-kit-plantillas/comunicacion-dpd.md"),
+            ("Política de privacidad", "06-kit-plantillas/politica-privacidad.md"),
+            ("Aviso de privacidad", "06-kit-plantillas/aviso-privacidad.md"),
+            ("Contrato de encargo", "06-kit-plantillas/contrato-encargo.md"),
+            ("Cláusulas de consentimiento", "06-kit-plantillas/clausulas-consentimiento.md"),
+            ("Designación del DPD", "06-kit-plantillas/comunicacion-dpd.md"),
         ],
         "campos": [
             ["RAZÓN SOCIAL", "Razón social"], ["RUC", "RUC"], ["DIRECCIÓN", "Dirección"], ["CIUDAD", "Ciudad"],
@@ -55,18 +55,18 @@ KITS = [
         },
     },
     {
-        "out": "03-kit-vulneraciones/asistente-vulneraciones.html",
+        "out": "07-kit-vulneraciones/asistente-vulneraciones.html",
         "key": "msc-vul-v1",
-        "herramienta": "Herramienta 03",
+        "herramienta": "Herramienta 07",
         "titulo": "Asistente de respuesta a vulneraciones",
         "subtitulo": "Plazos, evaluación de riesgo y modelos de comunicación · LOPDP Ecuador",
         "extra": (ROOT / "scripts" / "panel-vulneraciones.html").read_text(encoding="utf-8"),
         "plantillas": [
-            ("Protocolo", "03-kit-vulneraciones/protocolo-respuesta.md"),
-            ("Bitácora", "03-kit-vulneraciones/bitacora-vulneracion.md"),
-            ("Encargado → responsable", "03-kit-vulneraciones/comunicacion-encargado-responsable.md"),
-            ("Notificación SPDP", "03-kit-vulneraciones/notificacion-spdp.md"),
-            ("Comunicación a titulares", "03-kit-vulneraciones/comunicacion-titulares.md"),
+            ("Protocolo", "07-kit-vulneraciones/protocolo-respuesta.md"),
+            ("Bitácora", "07-kit-vulneraciones/bitacora-vulneracion.md"),
+            ("Encargado → responsable", "07-kit-vulneraciones/comunicacion-encargado-responsable.md"),
+            ("Notificación SPDP", "07-kit-vulneraciones/notificacion-spdp.md"),
+            ("Comunicación a titulares", "07-kit-vulneraciones/comunicacion-titulares.md"),
         ],
         "campos": [
             ["RAZÓN SOCIAL", "Razón social del responsable"], ["RUC", "RUC"],

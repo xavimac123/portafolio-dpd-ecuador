@@ -1,9 +1,9 @@
-"""Construye la herramienta 06 desde honorarios_config.py.
+"""Construye la herramienta 01 desde honorarios_config.py.
 
 Salidas:
-  06-honorarios/calculadora-honorarios.html  (página web)
-  06-honorarios/metodologia-honorarios.md    (método, tablas y fuentes)
-  06-honorarios/proforma-servicios.md        (plantilla de proforma para Word)
+  01-honorarios/calculadora-honorarios.html  (página web)
+  01-honorarios/metodologia-honorarios.md    (método, tablas y fuentes)
+  01-honorarios/proforma-servicios.md        (plantilla de proforma para Word)
 
 Uso: python scripts/generar_calculadora_honorarios.py
 """
@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import honorarios_config as C  # noqa: E402
 
-OUT = ROOT / "06-honorarios"
+OUT = ROOT / "01-honorarios"
 OUT.mkdir(exist_ok=True)
 
 ejemplo = {

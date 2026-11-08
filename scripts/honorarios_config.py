@@ -1,9 +1,9 @@
-"""Fuente única de la calculadora de honorarios (herramienta 06).
+"""Fuente única de la calculadora de honorarios (herramienta 01).
 
 Todo valor monetario, porcentaje, tarifa y ponderación de este archivo es CRITERIO PROPIO de
 Macías Sánchez Consultores, salvo los marcados con su norma (IVA, MTGE, clasificación de empresas,
 retenciones, costo laboral). Las referencias de mercado consultadas constan en
-06-honorarios/metodologia-honorarios.md.
+01-honorarios/metodologia-honorarios.md.
 """
 
 VERSION = "0.1"

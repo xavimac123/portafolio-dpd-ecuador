@@ -1,9 +1,9 @@
-"""Construye la herramienta 07 desde granescala_config.py.
+"""Construye la herramienta 04 desde granescala_config.py.
 
 Salidas:
-  07-gran-escala/evaluacion-gran-escala.html  (asistente web)
-  07-gran-escala/informe-gran-escala.md       (plantilla de informe para Word)
-  07-gran-escala/solicitud-informacion.md     (lista de información a pedir al cliente)
+  04-gran-escala/evaluacion-gran-escala.html  (asistente web)
+  04-gran-escala/informe-gran-escala.md       (plantilla de informe para Word)
+  04-gran-escala/solicitud-informacion.md     (lista de información a pedir al cliente)
 
 Uso: python scripts/generar_gran_escala.py
 """
@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import granescala_config as C  # noqa: E402
 
-OUT = ROOT / "07-gran-escala"
+OUT = ROOT / "04-gran-escala"
 OUT.mkdir(exist_ok=True)
 
 

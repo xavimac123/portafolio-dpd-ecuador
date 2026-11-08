@@ -1,7 +1,7 @@
 """Genera la plantilla del Registro de Actividades de Tratamiento (RAT) y un ejemplo ficticio.
 
 Uso: python scripts/generar_rat.py
-Salida: 01-registro-tratamientos/plantilla-RAT.xlsx y ejemplo-RAT-ficticio.xlsx
+Salida: 03-registro-tratamientos/plantilla-RAT.xlsx y ejemplo-RAT-ficticio.xlsx
 """
 import datetime
 from pathlib import Path
@@ -16,7 +16,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rat_config as C  # noqa: E402
 
-OUT = Path(__file__).resolve().parent.parent / "01-registro-tratamientos"
+OUT = Path(__file__).resolve().parent.parent / "03-registro-tratamientos"
 
 FONT = "Arial"
 AZUL = "1F3864"
@@ -67,7 +67,7 @@ def hoja_instrucciones(wb):
     ws.column_dimensions["B"].width = 100
     lines = [
         ("Registro de Actividades de Tratamiento (RAT) — LOPDP Ecuador", True, 14),
-        ("Macías Sánchez Consultores · Herramienta 01 · v0.4", False, 10),
+        ("Macías Sánchez Consultores · Herramienta 07 · v0.4", False, 10),
         ("", False, 10),
         ("Para qué sirve", True, 11),
         ("Documentar cada actividad de tratamiento con el contenido mínimo del art. 38 del Reglamento General a la LOPDP, separar lo exigido por la norma de lo recomendable y detectar vacíos automáticamente.", False, 10),

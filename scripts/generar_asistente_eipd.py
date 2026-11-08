@@ -1,4 +1,4 @@
-"""Construye 04-evaluacion-impacto/asistente-eipd.html desde eipd_config.py.
+"""Construye 05-evaluacion-impacto/asistente-eipd.html desde eipd_config.py.
 
 Uso: python scripts/generar_asistente_eipd.py
 """
@@ -77,7 +77,7 @@ cfg = {
     "decisiones": C.DECISIONES, "operaciones": C.OPERACIONES, "dictamen": C.DICTAMEN, "ejemplo": EJEMPLO,
 }
 shell = (ROOT / "scripts" / "plantilla-asistente-eipd.html").read_text(encoding="utf-8")
-out = ROOT / "04-evaluacion-impacto" / "asistente-eipd.html"
+out = ROOT / "05-evaluacion-impacto" / "asistente-eipd.html"
 out.parent.mkdir(exist_ok=True)
 out.write_text(shell.replace("/*__CONFIG__*/", json.dumps(cfg, ensure_ascii=False).replace("</", "<\\/")), encoding="utf-8")
 print("OK", out)

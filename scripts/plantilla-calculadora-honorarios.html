@@ -84,7 +84,7 @@
 </head>
 <body>
 <header><div class="wrap">
-  <div class="marca">Macías Sánchez Consultores · Herramienta 06</div>
+  <div class="marca">Macías Sánchez Consultores · Herramienta 01</div>
   <h1>Calculadora de honorarios del DPD</h1>
   <p>Evaluación inicial, adecuación y control mensual, con IVA, comparación de métodos y proforma de servicios</p>
   <nav role="tablist">
@@ -107,7 +107,7 @@
     <div class="grid" id="fTam"></div>
     <div id="tamBox" class="calc"></div>
   </div>
-  <div class="card"><h3>Perfil del tratamiento de datos</h3><p class="nota" style="margin:-4px 0 10px">Si ya usó la herramienta 01 (RAT), tome el número de actividades y encargados del registro.</p><div class="grid" id="fPerf"></div></div>
+  <div class="card"><h3>Perfil del tratamiento de datos</h3><p class="nota" style="margin:-4px 0 10px">Si ya usó la herramienta 03 (RAT), tome el número de actividades y encargados del registro.</p><div class="grid" id="fPerf"></div></div>
   <div class="row"><button class="btn" data-go="t2">Continuar</button><button class="btn sec" id="ejemplo">Cargar ejemplo ficticio</button><button class="btn sec" id="nueva">Nueva estimación</button></div>
 </section>
 
@@ -168,7 +168,7 @@
 </section>
 </main>
 
-<footer><div class="wrap">Calculadora de honorarios · Herramienta 06 del Kit LOPDP de Macías Sánchez Consultores. Valores referenciales de criterio propio; los parámetros tributarios y laborales deben verificarse cada año. No sustituye el análisis del caso concreto.</div></footer>
+<footer><div class="wrap">Calculadora de honorarios · Herramienta 01 del Kit LOPDP de Macías Sánchez Consultores. Valores referenciales de criterio propio; los parámetros tributarios y laborales deben verificarse cada año. No sustituye el análisis del caso concreto.</div></footer>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -210,13 +210,13 @@
   // ---------- construcción de formularios
   $('fIdent').innerHTML=field('c','emp','Razón social',{ph:'[RAZÓN SOCIAL]'})+field('c','ruc','RUC',{ph:'[RUC]'})+field('c','contacto','Persona de contacto',{ph:'[NOMBRE]'})+field('c','cargo','Cargo del contacto',{ph:'Gerente general'})+
     field('c','sector','Sector',{opts:CFG.sectores.map(function(s){return s[0]}),help:'Los sectores con categorías especiales de datos o regulación sectorial llevan un <b>factor de complejidad</b> mayor (criterio propio): '+CFG.sectores.filter(function(s){return s[1]!==1}).map(function(s){return s[0]+' ×'+String(s[1]).replace('.',',')}).join('; ')+'.'});
-  $('fTam').innerHTML=field('c','ventas','Ventas netas del ejercicio anterior (USD)',{type:'number',ph:'Ej. 850000',help:'Ingresos por venta de bienes y prestación de servicios del último ejercicio, <b>sin IVA</b>. Es el mismo dato que usa la herramienta 05 para estimar la multa (volumen de negocio, art. 73 LOPDP). Fuente: estado de resultados o declaración de impuesto a la renta.'})+
+  $('fTam').innerHTML=field('c','ventas','Ventas netas del ejercicio anterior (USD)',{type:'number',ph:'Ej. 850000',help:'Ingresos por venta de bienes y prestación de servicios del último ejercicio, <b>sin IVA</b>. Es el mismo dato que usa la herramienta 02 para estimar la multa (volumen de negocio, art. 73 LOPDP). Fuente: estado de resultados o declaración de impuesto a la renta.'})+
     field('c','trab','Número de trabajadores',{type:'number',ph:'Ej. 45'})+field('c','sedes','Sedes o establecimientos',{type:'number'});
   $('fPerf').innerHTML=field('c','act','Actividades de tratamiento',{type:'number',help:'Número de actividades del RAT (nómina, facturación, videovigilancia…). Si aún no hay RAT, estime: micro 4 a 6, pequeña 6 a 10, mediana 10 a 20, grande 20 o más.'})+
     field('c','enc','Encargados del tratamiento',{type:'number',help:'Proveedores que tratan datos por cuenta del cliente: contador externo, nómina, nube, correo, call center, mensajería.'})+
     field('c','sol','Solicitudes de derechos al mes (estimadas)',{type:'number'})+
     field('c','tr','¿Transferencias internacionales?',{opts:['No','Sí'],help:'Por ejemplo, correo, CRM o respaldos en servidores fuera del Ecuador (art. 56 LOPDP; Res. SPDP-SPD-2026-0004-R).'})+
-    field('c','eipd','Evaluaciones de impacto requeridas',{type:'number',help:'Número de tratamientos que necesitan evaluación de impacto (herramienta 04). Si el tratamiento es de gran escala, al menos una.'})+
+    field('c','eipd','Evaluaciones de impacto requeridas',{type:'number',help:'Número de tratamientos que necesitan evaluación de impacto (herramienta 05). Si el tratamiento es de gran escala, al menos una.'})+
     field('c','cap','Horas de capacitación al año',{type:'number'})+
     field('c','areas','Áreas a entrevistar',{type:'number',ph:'Automático según tamaño'});
   $('fMtge').innerHTML=CFG.mtge.variables.map(function(v){return field('v',v.id,v.nombre,{opts:v.ops.map(function(o,i){return [i,o[0]+' · '+String(o[1]).replace('.',',')+' pts']})})}).join('');
@@ -230,7 +230,7 @@
     field('k','retir','Retención de impuesto a la renta (%)',{type:'number'})+field('k','retiva','Retención de IVA (%)',{type:'number',help:'En honorarios profesionales de personas naturales el agente de retención suele retener el 100 % del IVA. Verifique la tabla vigente del SRI según el tipo de cliente y de prestador.'});
   $('fProf').innerHTML=field('p','num','Número de proforma')+field('p','fecha','Fecha',{type:'date'})+field('p','validez','Validez (días)',{type:'number'})+field('p','aten','Dirigida a',{ph:'Nombre y cargo'});
   $('fTot').innerHTML=field('p','desc','Descuento (%)',{type:'number'})+field('p','iva','IVA (%)',{type:'number',help:'Tarifa general vigente: 15 % (art. 65 LRTI; el SRI confirmó su vigencia para 2026). Verifique si un decreto ejecutivo la modifica.'})+field('p','meses','Meses del servicio mensual',{type:'number'});
-  $('fMk').innerHTML=field('p','multa','Multa estimada del cliente (USD, opcional)',{type:'number',help:'Copie el valor «multa estimada si no actúa» de la herramienta 05 (pestaña Impacto económico). Si lo deja vacío, la proforma no muestra la comparación.'});
+  $('fMk').innerHTML=field('p','multa','Multa estimada del cliente (USD, opcional)',{type:'number',help:'Copie el valor «multa estimada si no actúa» de la herramienta 02 (pestaña Impacto económico). Si lo deja vacío, la proforma no muestra la comparación.'});
   $('fFirma').innerHTML=field('pf','el','Elaborado por')+field('pf','ec','Cargo / matrícula')+field('pf','cl','Aceptado por (cliente)',{ph:'[REPRESENTANTE LEGAL]'})+field('pf','cc','Cargo',{ph:'Gerente general'});
 
   // ---------- cálculos

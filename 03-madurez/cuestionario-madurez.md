@@ -40,7 +40,7 @@ Base: LOPDP arts. 10 lit. k y 47. Herramienta: Esta evaluación (plan de acción
 
 ## 2. Delegado de Protección de Datos (crítico)
 
-Base: LOPDP arts. 47 num. 13, 48 y 68; Res. SPDP-SPD-2025-0028-R. Herramienta: 07 · Designación del DPD.
+Base: LOPDP arts. 47 num. 13, 48 y 68; Res. SPDP-SPD-2025-0028-R. Herramienta: 08 · Designación del DPD.
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|
@@ -64,7 +64,7 @@ Base: RGLOPDP arts. 38, 39 y 44; LOPDP art. 51. Herramienta: 04 · Registro de a
 
 ## 4. Licitud y bases legitimadoras (crítico)
 
-Base: LOPDP arts. 7 y 26; Res. SPDP-SPD-2025-0041-R. Herramienta: 04 · RAT (base legitimadora) y 07 · Cláusulas de consentimiento.
+Base: LOPDP arts. 7 y 26; Res. SPDP-SPD-2025-0041-R. Herramienta: 04 · RAT (base legitimadora), 06 · Interés legítimo y 08 · Cláusulas.
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|
@@ -77,7 +77,7 @@ Base: LOPDP arts. 7 y 26; Res. SPDP-SPD-2025-0041-R. Herramienta: 04 · RAT (bas
 
 ## 5. Transparencia e información al titular
 
-Base: LOPDP art. 12. Herramienta: 07 · Política y avisos de privacidad.
+Base: LOPDP art. 12. Herramienta: 08 · Política y avisos de privacidad.
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|
@@ -89,7 +89,7 @@ Base: LOPDP art. 12. Herramienta: 07 · Política y avisos de privacidad.
 
 ## 6. Derechos de los titulares
 
-Base: LOPDP art. 12 y derechos del titular. Herramienta: 07 · Política de privacidad (canal de derechos).
+Base: LOPDP art. 12 y derechos del titular. Herramienta: 08 · Política de privacidad (canal de derechos).
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|
@@ -101,7 +101,7 @@ Base: LOPDP art. 12 y derechos del titular. Herramienta: 07 · Política de priv
 
 ## 7. Encargados y terceros (crítico)
 
-Base: RGLOPDP art. 41; LOPDP art. 68 num. 9; Res. SPDP-SPD-2025-0006-R. Herramienta: 07 · Contrato de encargo.
+Base: RGLOPDP art. 41; LOPDP art. 68 num. 9; Res. SPDP-SPD-2025-0006-R. Herramienta: 08 · Contrato de encargo.
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|
@@ -113,7 +113,7 @@ Base: RGLOPDP art. 41; LOPDP art. 68 num. 9; Res. SPDP-SPD-2025-0006-R. Herramie
 
 ## 8. Seguridad y gestión de riesgos (crítico)
 
-Base: LOPDP art. 40; Res. SPDP-SPD-2025-0003-R. Herramienta: 06 · Evaluación de impacto (matriz de riesgos).
+Base: LOPDP art. 40; Res. SPDP-SPD-2026-0012-R. Herramienta: 07 · Evaluación de impacto (matriz de riesgos).
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|
@@ -126,7 +126,7 @@ Base: LOPDP art. 40; Res. SPDP-SPD-2025-0003-R. Herramienta: 06 · Evaluación d
 
 ## 9. Evaluación de impacto y privacidad desde el diseño
 
-Base: LOPDP art. 42; RGLOPDP arts. 29 a 32. Herramienta: 06 · Evaluación de impacto.
+Base: LOPDP art. 42; RGLOPDP arts. 29 a 32. Herramienta: 07 · Evaluación de impacto.
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|
@@ -138,7 +138,7 @@ Base: LOPDP art. 42; RGLOPDP arts. 29 a 32. Herramienta: 06 · Evaluación de im
 
 ## 10. Gestión de vulneraciones (crítico)
 
-Base: LOPDP art. 43; RGLOPDP arts. 24 a 28; Res. SPDP-SPD-2026-0040-R. Herramienta: 08 · Kit de vulneraciones.
+Base: LOPDP art. 43; RGLOPDP arts. 24 a 28; Res. SPDP-SPD-2026-0040-R. Herramienta: 09 · Kit de vulneraciones.
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|

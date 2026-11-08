@@ -1,6 +1,6 @@
 # Catálogo de servicios de protección de datos personales
 
-Versión 0.1. Ficha interna para el consultor. Fuente única: `scripts/catalogo_config.py` (también alimenta la proforma de la herramienta 02).
+Versión 0.2. Ficha interna para el consultor. Fuente única: `scripts/catalogo_config.py` (también alimenta la proforma de la herramienta 02).
 
 > **Rol del consultor:** asesora, redacta borradores para aprobación y supervisa. Las decisiones y la implementación son de la empresa.
 
@@ -20,7 +20,7 @@ Precios sugeridos sin IVA por tamaño (micro / pequeña / mediana / grande), **c
 | S08 | Análisis de encargos y transferencias | Inventario y riesgos | Asesoría y diagnóstico | $200 / $300 / $450 / $700 por servicio |
 | S09 | Programa de adecuación integral | Adecuación | Borradores para aprobación de la empresa | desde $900 / desde $1.800 / desde $3.500 / desde $7.000 por programa |
 | S10 | Política de privacidad y avisos | Adecuación | Borradores para aprobación de la empresa | $250 / $400 / $600 / $900 por paquete |
-| S11 | Contratos de encargo y cláusulas | Adecuación | Borradores para aprobación de la empresa | $200 / $350 / $500 / $800 por paquete |
+| S11 | Contratos de encargo y cláusulas por tipo de contrato | Adecuación | Borradores para aprobación de la empresa | $200 / $350 / $500 / $800 por paquete |
 | S12 | Política interna y roles de protección de datos | Adecuación | Borradores para aprobación de la empresa | $200 / $300 / $450 / $700 por paquete |
 | S13 | Tabla de conservación y procedimiento de supresión | Adecuación | Borradores para aprobación de la empresa | $150 / $250 / $400 / $650 por paquete |
 | S14 | Procedimiento de atención de derechos | Adecuación | Borradores para aprobación de la empresa | $150 / $250 / $400 / $600 por paquete |
@@ -136,18 +136,18 @@ Saber qué datos se tratan y qué riesgo tienen antes de redactar documentos.
 
 | | |
 |---|---|
-| Qué es | Análisis previo de necesidad, proporcionalidad, riesgos y medidas, con informe del contenido del art. 32 RGLOPDP. |
+| Qué es | Análisis previo de necesidad, proporcionalidad, contexto, riesgos para los derechos y medidas, con informe del contenido del art. 32 RGLOPDP y las etapas de la Guía v2 de la SPDP. |
 | Naturaleza | Asesoría y diagnóstico |
-| Cómo se aplica | Confirmar si es obligatoria; Describir el tratamiento; Evaluar necesidad y proporcionalidad; Valorar riesgos y medidas; Dictamen y plan; aprobación de la gerencia |
+| Cómo se aplica | Confirmar si es obligatoria; Describir el tratamiento; Evaluar necesidad y proporcionalidad; Establecer el contexto: criterios de impacto en derechos y aceptación; Valorar riesgos con justificación de cada valor y definir medidas; Dictamen y plan; aprobación de la gerencia |
 | Para quién | Tratamientos de gran escala, perfiles automatizados, biométricos, inteligencia artificial, datos de NNA |
 | Qué se obtiene | Decisión informada antes de lanzar un tratamiento de alto riesgo |
 | Responsable principal | Dueño del proceso evaluado |
 | Participan | Sistemas, gerencia |
 | Levantar información con | Dueño del proceso, sistemas, proveedor de la tecnología |
-| Herramientas del kit | 06 Evaluación de impacto |
-| Base | LOPDP art. 42; RGLOPDP arts. 29 a 32; Res. SPDP-SPD-2025-0003-R |
+| Herramientas del kit | 07 Evaluación de impacto |
+| Base | LOPDP art. 42; RGLOPDP arts. 29 a 32; Res. SPDP-SPD-2026-0012-R |
 | Precio sugerido | $450 / $600 / $900 / $1.500 por tratamiento |
-| Recomendaciones | Hágala antes del tratamiento, no después · Las medidas las implementa la empresa; usted verifica el riesgo residual |
+| Recomendaciones | Hágala antes del tratamiento, no después · Cada valor de impacto y probabilidad necesita su justificación: la guía v2 rechaza las estimaciones sin fundamento · Las medidas las implementa la empresa; usted verifica el riesgo residual |
 
 ### S07 · Ponderación del interés legítimo (por tratamiento)
 
@@ -155,16 +155,16 @@ Saber qué datos se tratan y qué riesgo tienen antes de redactar documentos.
 |---|---|
 | Qué es | Análisis que respalda el uso del interés legítimo como base: finalidad, necesidad y equilibrio con los derechos del titular. |
 | Naturaleza | Asesoría y diagnóstico |
-| Cómo se aplica | Identificar el interés y su legitimidad; Probar la necesidad; Ponderar con las expectativas del titular; Documentar garantías y conclusión |
+| Cómo se aplica | Verificar el supuesto admisible y las prohibiciones; Identificar el interés y sus cuatro características; Probar la necesidad; Ponderar con los derechos y expectativas del titular; Documentar salvaguardas, resultado y fecha de revisión anual |
 | Para quién | Empresas que usan videovigilancia, marketing a clientes, prevención de fraude u otros tratamientos sin consentimiento |
 | Qué se obtiene | Documento de ponderación que se registra en el RAT |
 | Responsable principal | Dueño del proceso |
 | Participan | Legal, marketing |
 | Levantar información con | Marketing, seguridad, legal |
-| Herramientas del kit | 04 RAT |
+| Herramientas del kit | 04 RAT, 06 Interés legítimo |
 | Base | LOPDP art. 7; Res. SPDP-SPD-2025-0041-R; RGLOPDP art. 38 num. 7 |
 | Precio sugerido | $150 / $200 / $300 / $450 por tratamiento |
-| Recomendaciones | Solo en el sector privado · Si la ponderación no favorece a la empresa, la base debe ser otra |
+| Recomendaciones | Solo en el sector privado y en los supuestos que admite la resolución · Omitir la ponderación es infracción grave · Si la ponderación no favorece a la empresa, la base debe ser otra |
 
 ### S08 · Análisis de encargos y transferencias
 
@@ -178,7 +178,7 @@ Saber qué datos se tratan y qué riesgo tienen antes de redactar documentos.
 | Responsable principal | Legal o compras |
 | Participan | Sistemas, contabilidad |
 | Levantar información con | Compras, sistemas, contabilidad, legal |
-| Herramientas del kit | 04 RAT, 07 Plantillas |
+| Herramientas del kit | 04 RAT, 08 Plantillas |
 | Base | LOPDP arts. 33 a 35 y 56; RGLOPDP art. 43; Res. SPDP-SPD-2026-0004-R |
 | Precio sugerido | $200 / $300 / $450 / $700 por servicio |
 | Recomendaciones | Un encargado en el exterior no convierte el encargo en transferencia internacional · Si un proveedor usa los datos para sus fines, es responsable |
@@ -199,7 +199,7 @@ Documentos y procedimientos que la empresa aprueba e implementa; el consultor re
 | Responsable principal | Gerencia |
 | Participan | Todas las áreas |
 | Levantar información con | Gerencia y jefes de área |
-| Herramientas del kit | 04 RAT, 07 Plantillas, 08 Vulneraciones |
+| Herramientas del kit | 04 RAT, 08 Plantillas, 09 Vulneraciones |
 | Base | LOPDP arts. 10 lit. k y 47 |
 | Precio sugerido | desde $900 / desde $1.800 / desde $3.500 / desde $7.000 por programa |
 | Recomendaciones | Escriba en la propuesta qué implementa la empresa · No combine este programa con servicios sueltos que ya incluye |
@@ -216,24 +216,24 @@ Documentos y procedimientos que la empresa aprueba e implementa; el consultor re
 | Responsable principal | Gerencia |
 | Participan | Marketing, talento humano, sistemas (web) |
 | Levantar información con | Marketing, talento humano, sistemas |
-| Herramientas del kit | 07 Plantillas |
+| Herramientas del kit | 08 Plantillas |
 | Base | LOPDP art. 12 |
 | Precio sugerido | $250 / $400 / $600 / $900 por paquete |
 | Recomendaciones | Sin RAT, la política queda genérica: no la haga primero · Un aviso por canal, no uno genérico |
 
-### S11 · Contratos de encargo y cláusulas
+### S11 · Contratos de encargo y cláusulas por tipo de contrato
 
 | | |
 |---|---|
-| Qué es | Contratos con encargados y cláusulas de consentimiento cuando esa es la base; paquete de hasta cinco. |
+| Qué es | Cláusulas de protección de datos según el tipo de contrato (laboral, por cargo o rol, encargo, transferencia, corresponsables) y contratos de encargo; paquete de hasta cinco modelos. |
 | Naturaleza | Borradores para aprobación de la empresa |
-| Cómo se aplica | Identificar encargados desde el RAT; Redactar contratos con el contenido del art. 41; Firma de la empresa y el proveedor |
+| Cómo se aplica | Clasificar los contratos de la empresa por tipo de relación; Identificar encargados y destinatarios desde el RAT; Redactar las cláusulas y contratos de encargo con el contenido del art. 41; Firma de la empresa, el personal y los proveedores |
 | Para quién | Empresas con contador, nómina, nube, seguridad u otros proveedores con acceso a datos |
 | Qué se obtiene | Encargados obligados por contrato |
 | Responsable principal | Legal o compras |
 | Participan | Gerencia |
 | Levantar información con | Compras, legal, contabilidad |
-| Herramientas del kit | 07 Plantillas |
+| Herramientas del kit | 08 Plantillas |
 | Base | RGLOPDP arts. 40 y 41; LOPDP arts. 34, 35 y 68 num. 9; Res. SPDP-SPD-2025-0006-R |
 | Precio sugerido | $200 / $350 / $500 / $800 por paquete |
 | Recomendaciones | La falta de contrato de encargo es infracción grave · Pida consentimiento solo cuando es la base correcta |
@@ -284,7 +284,7 @@ Documentos y procedimientos que la empresa aprueba e implementa; el consultor re
 | Responsable principal | Servicio al cliente |
 | Participan | Talento humano, legal |
 | Levantar información con | Servicio al cliente, talento humano |
-| Herramientas del kit | 07 Plantillas |
+| Herramientas del kit | 08 Plantillas |
 | Base | LOPDP arts. 12 y siguientes |
 | Precio sugerido | $150 / $250 / $400 / $600 por paquete |
 | Recomendaciones | Use un correo institucional, no el personal del DPD · Registre cada solicitud, se atienda o no |
@@ -301,7 +301,7 @@ Documentos y procedimientos que la empresa aprueba e implementa; el consultor re
 | Responsable principal | Sistemas |
 | Participan | Gerencia, legal |
 | Levantar información con | Sistemas, gerencia |
-| Herramientas del kit | 08 Vulneraciones |
+| Herramientas del kit | 09 Vulneraciones |
 | Base | LOPDP art. 43; RGLOPDP arts. 24 a 28; Res. SPDP-SPD-2026-0040-R |
 | Precio sugerido | $200 / $350 / $550 / $850 por paquete |
 | Recomendaciones | El protocolo debe existir antes del incidente · El responsable notifica; el DPD asesora y coordina |
@@ -318,7 +318,7 @@ Documentos y procedimientos que la empresa aprueba e implementa; el consultor re
 | Responsable principal | Marketing |
 | Participan | Sistemas |
 | Levantar información con | Marketing, sistemas, proveedor web |
-| Herramientas del kit | 03 Madurez, 07 Plantillas |
+| Herramientas del kit | 03 Madurez, 08 Plantillas |
 | Base | LOPDP arts. 8 y 12 |
 | Precio sugerido | $150 / $200 / $300 / $450 por servicio |
 | Recomendaciones | Es la evidencia más visible para un cliente o la SPDP · No modifique el sitio usted mismo |
@@ -432,7 +432,7 @@ Servicios que se cotizan como tarifa y se cobran solo cuando ocurren.
 | Responsable principal | Sistemas |
 | Participan | Gerencia, legal |
 | Levantar información con | Sistemas, gerencia, encargado involucrado |
-| Herramientas del kit | 08 Vulneraciones |
+| Herramientas del kit | 09 Vulneraciones |
 | Base | LOPDP art. 43; Res. SPDP-SPD-2026-0040-R |
 | Precio sugerido | $250 / $400 / $600 / $900 por incidente |
 | Recomendaciones | Los plazos corren desde la constancia del incidente · La contención técnica la hace sistemas |
@@ -449,7 +449,7 @@ Servicios que se cotizan como tarifa y se cobran solo cuando ocurren.
 | Responsable principal | Servicio al cliente |
 | Participan | Legal |
 | Levantar información con | Servicio al cliente |
-| Herramientas del kit | 07 Plantillas |
+| Herramientas del kit | 08 Plantillas |
 | Base | LOPDP arts. 12 y siguientes |
 | Precio sugerido | $25 / $35 / $50 / $70 por solicitud |
 | Recomendaciones | La respuesta la firma la empresa |
@@ -460,14 +460,14 @@ Servicios que se cotizan como tarifa y se cobran solo cuando ocurren.
 |---|---|
 | Qué es | Asesoría en un sistema, aplicación, campaña o proceso nuevo antes de su lanzamiento. |
 | Naturaleza | Asesoría y diagnóstico |
-| Cómo se aplica | Revisar el proyecto; Identificar datos y riesgos; Recomendar ajustes y, si corresponde, evaluación de impacto |
+| Cómo se aplica | Revisar el proyecto desde su planificación; Identificar datos y riesgos; Verificar la configuración por defecto (solo los datos necesarios); Recomendar ajustes con los principios DevPrivOps y, si corresponde, evaluación de impacto |
 | Para quién | Empresas que contratan software, lanzan aplicaciones o campañas |
 | Qué se obtiene | Proyecto ajustado antes de tratar datos |
 | Responsable principal | Dueño del proyecto |
 | Participan | Sistemas, proveedor |
 | Levantar información con | Dueño del proyecto, sistemas, proveedor |
-| Herramientas del kit | 05 Gran escala, 06 Evaluación de impacto |
-| Base | Res. SPDP-SPD-2026-0005-R art. 16; LOPDP art. 42 |
+| Herramientas del kit | 05 Gran escala, 07 Evaluación de impacto |
+| Base | LOPDP arts. 39 y 42; Res. SPDP-SPD-2025-0040-R; Res. SPDP-SPD-2026-0005-R art. 16 |
 | Precio sugerido | $250 / $350 / $500 / $800 por proyecto |
 | Recomendaciones | Intervenga antes de firmar con el proveedor · Recomiende; la decisión es del dueño del proyecto |
 
@@ -483,7 +483,7 @@ Servicios que se cotizan como tarifa y se cobran solo cuando ocurren.
 | Responsable principal | Compras |
 | Participan | Sistemas, legal |
 | Levantar información con | Compras, sistemas, el proveedor |
-| Herramientas del kit | 04 RAT, 07 Plantillas |
+| Herramientas del kit | 04 RAT, 08 Plantillas |
 | Base | RGLOPDP arts. 40 y 41 |
 | Precio sugerido | $60 / $80 / $100 / $150 por proveedor |
 | Recomendaciones | Pregunte por subencargados y servidores · Guarde la evaluación como evidencia |
@@ -500,7 +500,7 @@ Servicios que se cotizan como tarifa y se cobran solo cuando ocurren.
 | Responsable principal | Sistemas |
 | Participan | Gerencia, legal, comunicación |
 | Levantar información con | Equipo de respuesta |
-| Herramientas del kit | 08 Vulneraciones |
+| Herramientas del kit | 09 Vulneraciones |
 | Base | LOPDP art. 43; Res. SPDP-SPD-2026-0040-R |
 | Precio sugerido | $200 / $300 / $450 / $700 por ejercicio |
 | Recomendaciones | Hágalo una vez al año · Mida tiempos reales frente a los plazos legales |

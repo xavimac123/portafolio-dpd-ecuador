@@ -2,7 +2,7 @@
 
 Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:** ninguna plantilla cita un artículo que no esté en esta tabla. Antes de publicar o usar una herramienta con un cliente, contrasta cada fila con el texto oficial en el Registro Oficial y marca la columna "Verificado".
 
-Última revisión de fuentes: 2026-11-07 (herramientas 06 y 03).
+Última revisión de fuentes: 2026-11-08 (herramientas 06, 07 y 08; guías SPDP v2 y de diseño y por defecto).
 
 ## Normas
 
@@ -15,7 +15,9 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | RES-0028 | Res. SPDP-SPD-2025-0028-R, figura del DPD y su registro | 30-07-2025 |
 | RES-0041 | Res. SPDP-SPD-2025-0041-R, interés legítimo como base de legitimación (solo sector privado) | 07-11-2025 |
 | RES-0040 | Res. SPDP-SPD-2026-0040-R, norma técnica de notificación de vulneraciones de seguridad | sept. 2026 (vigente desde su publicación en RO) |
-| RES-0003 | Res. SPDP-SPD-2025-0003-R, Guía de Gestión de Riesgos y Evaluación de Impacto (Cap. I obligatorio, Cap. II referencial; versión 2 en 2026) | 29-04-2025; RO 4to Supl. 41, 19-05-2025 |
+| RES-0003 | Res. SPDP-SPD-2025-0003-R, Guía de Gestión de Riesgos y Evaluación de Impacto, versión 1 (**sustituida por la v2**; se conserva como antecedente) | 29-04-2025; RO 4to Supl. 41, 19-05-2025 |
+| RES-2026-0012 | Res. SPDP-SPD-2026-0012-R, Guía de Gestión de Riesgos y Evaluación de Impacto del tratamiento de datos personales, **versión 2** (Cap. I obligatorio; Cap. II referencial; cinco etapas: contexto, identificación, análisis, evaluación y tratamiento; anexo con formato de evaluación de impacto) | RO Supl. 254, 30-03-2026 (número de resolución por confirmar en el RO) |
+| RES-2025-0040 | Res. SPDP-SPD-2025-0040-R, Guía de Protección de Datos desde el Diseño y por Defecto (capítulos 1 y 2 de aplicación obligatoria en lo pertinente; desarrolla el art. 39 LOPDP). No confundir con la RES-0040 de vulneraciones (2026) | Publicada por la SPDP el 21-10-2025; RO 13-11-2025 |
 | RES-0022 | Res. SPDP-SPD-2025-0022-R, reglamento de la metodología para el cálculo de multas (modelos MPRIV-1 y MPUB-1; Anexo I) | 16-07-2025; RO 92, 30-07-2025 |
 | RES-2026-0004 | Res. SPDP-SPD-2026-0004-R, Norma General de Transferencias Internacionales | RO 3er Supl. 225, 13-02-2026 |
 | RES-0030 | Res. SPDP-SPD-2025-0030-R, reglamento de seudonimización, anonimización, bloqueo, suspensión y eliminación de datos personales | 2025 |
@@ -58,9 +60,22 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | Obligaciones del responsable | Catálogo de obligaciones del responsable (base del modelo de madurez) | LOPDP art. 47 | ☐ |
 | Bases legitimadoras | Consentimiento; obligación legal; orden judicial; interés público/potestades públicas; contrato o medidas precontractuales; interés vital; bases de acceso público; interés legítimo | LOPDP art. 7 | ☐ |
 | Interés legítimo | Si es la base, debe constar en el RAT y respaldarse con la evaluación de ponderación | RGLOPDP art. 38 num. 7; RES-0041 | ☐ |
+| Interés legítimo, características | Lícito; real y concreto; proporcional (adecuado, necesario, oportuno, no excesivo); coherente con las expectativas razonables (información previa y constancia en la política) | RES-0041 art. 4 | ☐ |
+| Interés legítimo, ponderación | Previa, motivada, documentada y disponible para la SPDP y los titulares; criterios mínimos del Anexo 1 (identificación y justificación del interés; necesidad sin medios menos intrusivos; ponderación con los derechos y expectativas; medidas y resultado); su omisión es infracción grave | RES-0041 y Anexo 1 | ☐ |
+| Interés legítimo, registro | Registro actualizado de evaluaciones, revisado al menos una vez al año o cuando cambien la finalidad, el tipo de datos o el riesgo | RES-0041 | ☐ |
+| Interés legítimo, supuestos admisibles | Mercadotecnia directa (sin datos sensibles ni de NNA; oposición gratuita e inmediata); prevención y reporte de fraude, lavado de activos y financiamiento del terrorismo; comunicación interna en grupos empresariales; seguridad de redes y sistemas; videovigilancia de seguridad sin audio | RES-0041 (artículo por confirmar) | ☐ |
+| Interés legítimo, prohibiciones | Categorías especiales salvo indispensabilidad y medidas reforzadas; perfiles automatizados con efectos jurídicos o significativos (salvo sector financiero y de seguros con salvaguardas); NNA salvo interés superior; tratamiento masivo o reutilización incompatible | RES-0041 (artículo por confirmar) | ☐ |
+| Interés legítimo, titulares | Pueden ejercer en todo momento sus derechos, en especial acceso y oposición | RES-0041 | ☐ |
+| Contexto de la gestión de riesgos | Criterios de impacto en derechos y libertades: (a) categorías especiales, (b) vulnerabilidad de grupos, (c) número de titulares, (d) naturaleza de la afectación (confidencialidad, integridad, disponibilidad), (e) volumen de datos por titular; probabilidad en un lapso definido; aceptación por capacidad y tolerancia | RES-2026-0012, Cap. II, etapa 1 (referencial) | ☐ |
+| Rationales | Todo valor de entrada de un modelo de riesgo debe justificarse; se rechazan las listas de chequeo y las estimaciones sin fundamento | RES-2026-0012, Cap. I (obligatorio) | ☐ |
+| Evaluación de impacto, secuencia | Solo después de contexto, identificación y análisis; no implementar medidas sin las etapas previas | RES-2026-0012, Cap. II | ☐ |
+| Protección desde el diseño y por defecto | Considerar los riesgos desde la planificación; por defecto, tratar solo los datos necesarios para cada finalidad | LOPDP art. 39; RES-2025-0040 | ☐ |
+| DevPrivOps | Ocho principios: minimizar, ocultar, separar, abstraer, informar, controlar, cumplir y demostrar; madurez por principio en niveles 0 a 3 sobre las actividades del RAT | RES-2025-0040 | ☐ |
+| Cláusulas, obligación | Inclusión obligatoria de cláusulas de protección de datos en los contratos entre actores del sistema; el Anexo I es referencial | RES-0006 arts. 1 a 3 y disposición primera | ☐ |
+| Cláusulas, modelos | Cuatro modelos referenciales: responsable–titular (con ámbito laboral, fiscal, contable), responsable–encargado (no reemplaza el contrato de encargo), responsable–destinatario y corresponsables; acuerdos de confidencialidad con el personal | RES-0006 Anexo I | ☐ |
 | Registro Nacional | Las bases de datos se inscriben en el Registro Nacional de Protección de Datos Personales (figura distinta del RAT) | LOPDP art. 51 | ☐ |
 | Contrato de encargo | Contenido mínimo: objeto, duración, naturaleza, finalidad, categorías de datos, identificación de titulares, obligaciones y responsabilidades del encargado | RGLOPDP art. 41 | ☐ |
-| Cláusulas contractuales | Modelos referenciales (responsable-titular y responsable-encargado) y 12 defectos a evitar | RES-0006 art. 4 y Anexo I | ☐ |
+| Cláusulas contractuales | 12 defectos a evitar (art. 4) y modelos referenciales por tipo de relación (Anexo I) | RES-0006 art. 4 y Anexo I | ☐ |
 | Falta de contrato de encargo | Infracción grave del responsable | LOPDP art. 68 num. 9 | ☐ |
 | Vulneración, cuándo notificar | Si probablemente representa riesgo: destrucción/indisponibilidad, alteración, pérdida de control, tratamiento no autorizado o ilícito | RGLOPDP art. 24 | ☐ |
 | Vulneración, a quién | SPDP y ARCOTEL; desde mayo 2026 también el CSIRT correspondiente | LOPDP art. 43 reformado por LOFC | ☐ |
@@ -120,7 +135,7 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 5. Contenido del RAT del encargado: el art. 44 RGLOPDP fija cuándo se lleva; confirmar si define su contenido. La hoja "RAT encargado" usa estructura de buena práctica.
 6. Periodicidad de revisión del RAT: la norma no la fija; la herramienta usa 12 meses como práctica interna.
 7. Gran escala: resuelto por la RES-2026-0005 (MTGE), aplicado en la herramienta 02. Pendiente incorporarlo a las herramientas 04 (columna de puntaje por actividad) y 04 (supuestos de evaluación de impacto). El texto deja un vacío entre 100.000 y 101.000 titulares; la herramienta 02 lo asigna al tramo superior.
-8. Escalas oficiales de impacto y probabilidad y anexo con el formato de evaluación de impacto de la Guía SPDP (RES-0003, v2 2026): no se pudieron leer completos; la herramienta 06 usa escalas propias. Contrastar al obtener el texto íntegro.
+8. Guía v2 (RES-2026-0012): leídos el Cap. I y las etapas 1 a 3 del Cap. II. Faltan las etapas 4 (evaluación) y 5 (tratamiento: opciones, declaración de aplicabilidad) y el **anexo con el formato de evaluación de impacto**. La herramienta 07 usa escalas propias y un contexto con los cinco factores de la etapa 1. Contrastar el informe con el anexo al obtener el texto íntegro.
 9. Alcance exacto de la obligación de evaluación de impacto en la norma de IA (RES-2026-0009/0037) y en la de biométricos (RES-2026-0039): leer sus textos completos.
 10. Transferencias internacionales: identificado el art. 56 LOPDP y la RES-2026-0004 (norma general); falta leer el texto completo de la norma general para incorporar sus mecanismos a las herramientas 04 y 03.
 14. Estado del reglamento de certificaciones y sellos de la SPDP (plan regulatorio 2025-2026): verificar si fue expedido.
@@ -130,6 +145,10 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 18. Gran escala, alcance «transfronterizo»: precisar si el almacenamiento en una nube fuera del Ecuador basta para calificar el alcance como transfronterizo; la herramienta 05 deja la decisión documentada al evaluador.
 15. Retenciones: confirmar en el texto de la Res. NAC-DGERCGC26-00000009 el porcentaje para sociedades (los resúmenes citan 5 %) y en la tabla vigente del SRI el porcentaje de retención de IVA según el tipo de cliente.
 16. Clasificación de empresas: una fuente secundaria cita el límite inferior de la pequeña empresa en USD 300.001; la herramienta usa USD 100.001 (mayoría de fuentes). Verificar en el texto vigente del Reglamento del COPCI art. 106.
+19. Interés legítimo: confirmar en el texto oficial de la RES-0041 (a) los números de artículo de los supuestos admisibles y las prohibiciones; (b) si existe una **evaluación de ponderación simplificada** para tratamientos de riesgo medio (el buscador muestra esa expresión en el texto oficial, sin contexto); (c) el contenido completo del Anexo 1 y las evidencias mínimas.
+20. Número exacto de la resolución que aprueba la Guía v2 (citado como Res. SPDP-SPD-2026-0012-R) y fecha de su publicación en el RO.
+21. Guía de diseño y por defecto: leída la versión de julio de 2025 publicada por un gremio (asobanca.org.ec); contrastar con el texto aprobado por la RES-2025-0040 y confirmar qué capítulos son obligatorios y el alcance de RGLOPDP art. 59.
+22. Cláusulas: la RES-0006 no trae un modelo separado para personal ni para contratos laborales; las plantillas `clausula-laboral.md` y `clausula-cargo-rol.md` adaptan el modelo responsable–titular y los acuerdos de confidencialidad. Verificar si la SPDP actualiza el Anexo I (disposición segunda).
 13. Catálogo completo de infracciones leves y graves (arts. 67 y 68 LOPDP): solo se clasifican como graves los tres dominios verificados (DPD, contrato de encargo, notificación a titulares).
 
 ## Referencias comparadas (no vinculantes en Ecuador)
@@ -156,6 +175,9 @@ Solo pueden citarse en comparaciones explícitas, nunca como fundamento de una o
 - RES-2026-0005: copia del texto en procuraduria.utpl.edu.ec y fielweb.com; resúmenes de lexis.com.ec y corralrosales.com (2026-11-08).
 - IVA, retenciones y SBU 2026: eluniverso.com, ccq.ec (Circular NAC-DGECCGC25-00000006), nmslaw.com.ec (Res. NAC-DGERCGC26-00000009), vistazo.com (SBU).
 - Reforma art. 43 por la LOFC: globalsuitesolutions.com.
-- RES-0006 (texto firmado): primicias.ec.
+- RES-0006 (texto firmado, arts. 1 a 4, disposiciones y Anexo I): primicias.ec, leído el 2026-11-08.
+- RES-0041: resúmenes de corralrosales.com y baclaw.ec; extractos del texto oficial en spdp.gob.ec (no descargable desde el entorno de trabajo), 2026-11-08.
+- Guía v2: spdp.gob.ec/wp-content/uploads/2026/11/guia_v2_vfinal_opt.pdf (lectura parcial: Cap. I y etapas 1 a 3), 2026-11-08.
+- Guía de diseño y por defecto: asobanca.org.ec (versión de julio de 2025); publicación de la RES-2025-0040 en el RO: tzvs.ec y nmslaw.com.ec.
 - RGLOPDP arts. 24-28, 38-44: copia de edicioneslegales.com.ec alojada en deltechaudit.ec.
 - RAT y art. 38: lexis.com.ec.

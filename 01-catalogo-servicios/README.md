@@ -15,6 +15,8 @@ Al DPD o consultor, en especial al que empieza. La versión para el cliente (bot
 | `catalogo-servicios.html` | Página web: catálogo filtrable, responsables por servicio, glosario y selección de códigos |
 | `catalogo-servicios.md` | Ficha interna completa para Word |
 | `glosario.md` | Glosario para Word |
+| `carta-presentacion.md` | Carta genérica de presentación del servicio para cualquier empresa |
+| `correos-campana.md` | Secuencia de cinco correos empresariales y dos respuestas tipo, con pie de baja obligatorio |
 | `docx/` | Versiones Word |
 
 Fuente única: `scripts/catalogo_config.py`. La calculadora de honorarios (herramienta 02) importa de allí sus servicios: **mismos códigos (S01 a S28), nombres, unidades y precios sugeridos**. Regenerar con `python scripts/generar_catalogo.py` y `python scripts/generar_calculadora_honorarios.py`.
@@ -35,6 +37,11 @@ El glosario resume las 24 definiciones del art. 4 de la LOPDP (no es texto liter
 2. Abra cada servicio para revisar aplicación, responsables y recomendaciones.
 3. Revise la pestaña «Responsables por servicio» para planificar entrevistas.
 4. Seleccione servicios, copie los códigos y cotice en la herramienta 02.
+
+## Kit comercial
+
+- **Carta de presentación:** personalice solo el párrafo marcado y los datos de contacto. Va firmada por el consultor; no lleva el bloque de firma de responsabilidad.
+- **Campaña de correos:** cinco correos (días 1, 4, 9, 15 y 22) y dos respuestas tipo. Cada correo debe llevar el pie de baja. El correo de un contacto empresarial es un dato personal: envíe solo con base de legitimación y, si usa el interés legítimo para mercadotecnia directa, haga antes la ponderación con la herramienta 06. Las cifras de multas provienen de la LOPDP arts. 71 y 72.
 
 ## Limitaciones
 

@@ -1,4 +1,4 @@
-"""Construye 06-evaluacion-impacto/asistente-eipd.html desde eipd_config.py.
+"""Construye 07-evaluacion-impacto/asistente-eipd.html desde eipd_config.py.
 
 Uso: python scripts/generar_asistente_eipd.py
 """
@@ -59,12 +59,27 @@ EJEMPLO = {
          "ctl": ["Aviso de privacidad específico y canal de derechos", "Minimización de datos recogidos"],
          "i1": 2, "p1": 2, "dec": "Mitigar", "own": "Talento Humano", "plazo": "2026-12-01"},
     ],
+    "ctx": {"f": {"fa": 1, "fb": 1, "fc": 1, "fd": 2, "fe": 0},
+            "der": ["Protección de datos personales (autodeterminación informativa)", "Intimidad personal y familiar", "Trabajo"],
+            "per": "Un año", "met": C.METODOS[0], "cap": "5000",
+            "rat": "Valores estimados por el jefe de TI y el asesor externo con base en los incidentes del sector y en los controles actuales del servidor. Sin incidentes propios registrados en los últimos tres años."},
     "c": {"c_umbral": 9, "c_dict": C.DICTAMEN[1],
           "c_obs": "Ejemplo ficticio. Antes de usar el lector, ofrecer una alternativa no biométrica a quien lo solicite y verificar la norma general de datos biométricos de la SPDP.",
           "c_rev": "2027-12-01", "c_ver": "1.0"},
     "f": {"f_el": "Abg. Mariano X. Macías Sánchez", "f_ec": "Consultor en Protección de Datos · Mat. 09-2022-736",
           "f_ap": "[REPRESENTANTE LEGAL]", "f_ac": "Gerente General", "f_fe": ""},
 }
+
+_DER = [["Protección de datos personales (autodeterminación informativa)", "Propiedad y patrimonio"],
+        ["Protección de datos personales (autodeterminación informativa)"],
+        ["Protección de datos personales (autodeterminación informativa)"],
+        ["Intimidad personal y familiar", "Trabajo"]]
+_RAT = ["Impacto 5: la plantilla biométrica no se puede cambiar como una contraseña (exposición irreversible). Probabilidad 2: servidor sin cifrado, pero sin acceso desde internet.",
+        "Sin contrato no hay obligación de confidencialidad ni de devolución; el proveedor tiene acceso remoto permanente.",
+        "Hoy se conservan plantillas de personas que ya no trabajan en la empresa.",
+        "La subordinación limita la capacidad del trabajador de oponerse; impacto secundario posible en la relación laboral."]
+for _i, _r in enumerate(EJEMPLO["riesgos"]):
+    _r["der"], _r["rat"] = _DER[_i], _RAT[_i]
 
 for q in C.NECESIDAD:
     q["fuente"] = re.split(r":| \(|\. Ver|;", q["norma"])[0].strip()
@@ -74,10 +89,11 @@ cfg = {
     "impacto": C.IMPACTO, "probabilidad": C.PROBABILIDAD, "niveles": C.NIVELES, "umbral": C.UMBRAL_ACEPTABLE,
     "dimensiones": C.DIMENSIONES, "escenarios": C.ESCENARIOS, "amenazas": C.AMENAZAS,
     "vulnerabilidades": C.VULNERABILIDADES, "impactosTitular": C.IMPACTOS_TITULAR, "controles": C.CONTROLES,
-    "decisiones": C.DECISIONES, "operaciones": C.OPERACIONES, "dictamen": C.DICTAMEN, "ejemplo": EJEMPLO,
+    "decisiones": C.DECISIONES, "factores": C.FACTORES_IMPACTO, "derechos": C.DERECHOS,
+    "periodos": C.PERIODOS, "metodos": C.METODOS, "pasos": C.PASOS_IMPACTO, "operaciones": C.OPERACIONES, "dictamen": C.DICTAMEN, "ejemplo": EJEMPLO,
 }
 shell = (ROOT / "scripts" / "plantilla-asistente-eipd.html").read_text(encoding="utf-8")
-out = ROOT / "06-evaluacion-impacto" / "asistente-eipd.html"
+out = ROOT / "07-evaluacion-impacto" / "asistente-eipd.html"
 out.parent.mkdir(exist_ok=True)
 out.write_text(shell.replace("/*__CONFIG__*/", json.dumps(cfg, ensure_ascii=False).replace("</", "<\\/")), encoding="utf-8")
 print("OK", out)

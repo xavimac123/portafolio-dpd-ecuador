@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Interés legítimo — LOPDP Ecuador</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light;--oro:#A09046;--carbon:#14181E;--marfil:#F7F5EE;--oliva:#6E6230;--oroc:#C9BC82;--linea:#DDD8C8;--ok:#2E7D4F;--okbg:#E6F2EA;--al:#A4461C;--albg:#FBEDE5;--am:#8A6A00;--ambg:#FFF4D6;--ma:#7A1F1F;--mabg:#F6DADA}
+  *{box-sizing:border-box}
+  html,body{background:var(--marfil);color:var(--carbon)}
+  body{margin:0;font-family:Archivo,system-ui,sans-serif;font-size:15px;line-height:1.5}
+  header{background:var(--carbon);color:var(--marfil);padding:22px 20px 18px}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}header .wrap{padding:0}
+  .marca{font-stretch:115%;font-weight:700;letter-spacing:.08em;color:var(--oro);font-size:12px;text-transform:uppercase}
+  h1{font-stretch:115%;font-weight:800;font-size:clamp(22px,4vw,32px);margin:6px 0 4px;line-height:1.15}
+  header p{margin:0;color:var(--oroc);font-size:14px}
+  nav{display:flex;gap:6px;margin:18px 0 0;flex-wrap:wrap}
+  nav button{background:transparent;border:1px solid #3a3f47;color:var(--marfil);padding:8px 13px;border-radius:999px;font:inherit;font-size:13px;cursor:pointer}
+  nav button[aria-selected=true]{background:var(--oro);border-color:var(--oro);color:var(--carbon);font-weight:700}
+  main{padding:24px 0 60px}
+  section{display:none}section.on{display:block}
+  h2{font-stretch:115%;font-size:20px;margin:0 0 6px}
+  h3{font-size:15px;margin:0 0 8px;font-stretch:108%}
+  .sub{color:var(--oliva);margin:0 0 16px;font-size:14px}
+  .card{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:18px;margin-bottom:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .full{grid-column:1/-1}
+  label,.lbl{display:block;font-weight:600;font-size:13px;margin-bottom:4px}
+  .ref{font-weight:400;color:var(--oliva);font-size:11px;margin-left:4px}
+  input,select,textarea{width:100%;font:inherit;font-size:14px;padding:9px 10px;border:1px solid var(--linea);border-radius:8px;background:#FFFDF6;color:#14181E;-webkit-text-fill-color:#14181E;caret-color:#14181E;color-scheme:light;opacity:1}
+  input::placeholder,textarea::placeholder{color:#8C8775;-webkit-text-fill-color:#8C8775}
+  select option{color:#14181E;background:#fff}
+  textarea{min-height:64px;resize:vertical}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--oro);outline-offset:1px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chips button{border:1px solid var(--linea);background:#FFFDF6;color:#14181E;border-radius:999px;padding:6px 11px;font:inherit;font-size:13px;cursor:pointer;text-align:left}
+  .chips button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
+  .seg{display:flex;gap:6px;flex-wrap:wrap}.seg button{flex:1;min-width:70px;padding:8px;border:1px solid var(--linea);background:#FFFDF6;color:#14181E;border-radius:8px;font:inherit;font-size:13px;cursor:pointer}
+  .seg button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
+  .seg.wide{margin-top:8px}.seg.wide button{min-width:160px}.pasos{margin:0;padding-left:20px;font-size:14px}.pasos li{margin:6px 0}
+  .btn{background:var(--carbon);color:#fff;border:0;padding:10px 16px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
+  .btn.sec{background:#fff;color:var(--carbon);border:1px solid var(--carbon)}
+  .btn.oro{background:var(--oro);color:var(--carbon)}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .q{border-top:1px solid #EFEBDD;padding:12px 0}.q:first-of-type{border-top:0}
+  .qh{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+  .qt{font-size:14px;font-weight:600}
+  .help{background:none;border:1px solid var(--oro);color:var(--oliva);border-radius:999px;width:26px;height:26px;cursor:pointer;flex:0 0 26px;font:inherit;font-size:13px;font-weight:700;line-height:1}
+  .hbox{display:none;margin-top:8px;background:#F8F5EA;border-left:3px solid var(--oro);border-radius:6px;padding:10px 12px;font-size:13px}
+  .hbox.on{display:block}.hbox b{display:block;font-size:12px;color:var(--oliva);margin-top:6px}.hbox b:first-child{margin-top:0}
+  .lit{font-size:11px;color:#8C8775;font-style:italic}
+  .res{border-radius:12px;padding:16px;margin-bottom:14px;font-weight:700}
+  .res ul{font-weight:400;color:var(--carbon);margin:8px 0 0;padding-left:18px;font-size:14px}
+  .res small{display:block;font-weight:400;color:var(--carbon);margin-top:6px;font-size:13px}
+  .si{background:var(--albg);color:var(--al)}.no{background:var(--okbg);color:var(--ok)}.pe{background:#F1EEE2;color:var(--oliva)}.am{background:var(--ambg);color:var(--am)}
+  .pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:700}
+  .n-Bajo{background:var(--okbg);color:var(--ok)}.n-Medio{background:var(--ambg);color:var(--am)}.n-Alto{background:var(--albg);color:var(--al)}.n-Muy{background:var(--mabg);color:var(--ma)}
+  .risk{background:#fff;border:1px solid var(--linea);border-left:5px solid var(--oro);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .risk h4{margin:0 0 4px;font-size:14px}.risk .meta{font-size:12px;color:var(--oliva)}
+  .risk .acts{margin-top:8px;display:flex;gap:6px}
+  .risk .acts button{font:inherit;font-size:12px;padding:4px 10px;border-radius:6px;border:1px solid var(--linea);background:#fff;color:var(--carbon);cursor:pointer}
+  .warn{font-size:12px;color:var(--al);margin-top:4px}
+  .heat{display:grid;grid-template-columns:auto repeat(5,1fr);gap:3px;font-size:11px;max-width:420px}
+  .heat div{padding:6px 2px;text-align:center;border-radius:4px}
+  .heat .ax{color:var(--oliva);background:none}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:14px}
+  .kpi{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:12px}
+  .kpi b{display:block;font-size:22px;font-stretch:115%}.kpi span{font-size:12px;color:var(--oliva)}
+  table.prop{width:100%;border-collapse:collapse;font-size:13px}
+  table.prop td{border-top:1px solid #EFEBDD;padding:10px 6px;vertical-align:top}
+  .nota{font-size:12px;color:var(--oliva)}
+  .vacio{text-align:center;color:var(--oliva);padding:24px;border:1px dashed var(--linea);border-radius:12px}
+  .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--carbon);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;z-index:9}.toast.on{opacity:1}
+  footer{border-top:1px solid var(--linea);padding:18px 0;font-size:12px;color:var(--oliva)}
+  @media (max-width:560px){.card{padding:14px}nav button{font-size:12px;padding:7px 10px}}
+  .score{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}
+  .bar{height:10px;border-radius:6px;background:#EFEBDD;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--oro)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="marca">Macías Sánchez Consultores · Herramienta 06</div>
+  <h1>Evaluación de ponderación del interés legítimo</h1>
+  <p>Art. 7 LOPDP · Res. SPDP-SPD-2025-0041-R y su Anexo 1 · Solo sector privado</p>
+  <nav role="tablist">
+    <button data-t="t1" aria-selected="true">1 · ¿Puede invocarse?</button>
+    <button data-t="t2" aria-selected="false">2 · El interés</button>
+    <button data-t="t3" aria-selected="false">3 · Necesidad</button>
+    <button data-t="t4" aria-selected="false">4 · Ponderación</button>
+    <button data-t="t5" aria-selected="false">5 · Resultado e informe</button>
+  </nav>
+</div></header>
+
+<main class="wrap">
+<section id="t1" class="on">
+  <h2>¿Puede usarse el interés legítimo en este tratamiento?</h2>
+  <p class="sub">La resolución exige una evaluación de ponderación <b>previa, motivada, documentada y disponible</b> para la SPDP y para los titulares. Omitirla es <b>infracción grave</b>. Antes de ponderar, verifica que el caso entre en un supuesto admisible y no caiga en una prohibición.</p>
+  <div id="resFiltro"></div>
+  <div class="card"><h3>Ámbito</h3>
+    <div class="q"><div class="qt">¿El responsable es una persona natural o jurídica del sector privado?</div><div class="seg" data-y="priv" style="margin-top:8px;max-width:260px"><button type="button">Sí</button><button type="button">No</button></div></div>
+  </div>
+  <div class="card"><h3>Supuesto admisible</h3>
+    <p class="nota">La resolución limita el interés legítimo a estos supuestos. Elige el que corresponde y confirma sus condiciones.</p>
+    <div class="chips" id="sup"></div><div id="cond" style="margin-top:12px"></div>
+  </div>
+  <div class="card"><h3>Prohibiciones</h3><div id="prohib"></div></div>
+  <div class="row"><button class="btn sec" id="ejemplo">Cargar ejemplo ficticio</button><button class="btn sec" id="nueva">Nueva evaluación</button></div>
+</section>
+
+<section id="t2">
+  <h2>Identificación y justificación del interés</h2>
+  <p class="sub">Primer criterio del Anexo 1. Describe el interés con precisión: quién lo tiene, para qué y por qué no basta otra base.</p>
+  <div class="card"><div class="grid">
+    <div><label for="i_resp">Responsable del tratamiento</label><input id="i_resp" data-i placeholder="Razón social"></div>
+    <div><label for="i_trat">Tratamiento evaluado</label><input id="i_trat" data-i placeholder="Ej. Correos de ofertas a clientes actuales"></div>
+    <div><label for="i_rat">Código en el RAT</label><input id="i_rat" data-i placeholder="Ej. T-12"></div>
+    <div><label for="i_benef">Titular del interés</label><select id="i_benef" data-i><option value="">— Seleccionar —</option><option>El responsable</option><option>Un tercero</option><option>El responsable y un tercero</option></select></div>
+    <div class="full"><label for="i_int">Interés invocado</label><textarea id="i_int" data-i placeholder="Qué busca el responsable con el tratamiento, en términos concretos"></textarea></div>
+    <div><label for="i_datos">Datos que se tratarán</label><textarea id="i_datos" data-i></textarea></div>
+    <div><label for="i_tit">Titulares y volumen</label><textarea id="i_tit" data-i placeholder="Ej. 4.500 clientes con compras en los últimos 24 meses"></textarea></div>
+    <div class="full"><label for="i_otra">¿Por qué no se usa otra base (consentimiento, contrato, obligación legal)?</label><textarea id="i_otra" data-i></textarea></div>
+  </div></div>
+  <div class="card"><h3>Características del interés <span class="ref">RES-0041, art. 4</span></h3><table class="prop" id="car"></table></div>
+</section>
+
+<section id="t3">
+  <h2>Necesidad</h2>
+  <p class="sub">Segundo criterio del Anexo 1: demostrar que el tratamiento es indispensable para la finalidad y que no existen medios menos intrusivos.</p>
+  <div class="card"><table class="prop" id="nec"></table></div>
+  <div class="card"><label for="n_altd">Alternativas consideradas y por qué se descartaron</label><textarea id="n_altd" placeholder="Ej. Segmentar sin historial de compras: descartado porque…"></textarea></div>
+</section>
+
+<section id="t4">
+  <h2>Ponderación con los derechos del titular</h2>
+  <p class="sub">Tercer criterio del Anexo 1: comparar el peso del interés con el impacto en los derechos y las expectativas del titular, y documentar las salvaguardas. <b>Los puntajes de esta pestaña son criterio propio</b> del portafolio: ordenan el razonamiento; la conclusión debe motivarse por escrito.</p>
+  <div id="balance"></div>
+  <div class="card"><h3>Peso del interés del responsable</h3><div id="peso"></div></div>
+  <div class="card"><h3>Impacto en los derechos y expectativas del titular</h3><div id="impacto"></div></div>
+  <div class="card"><h3>Salvaguardas</h3><p class="nota">Cada salvaguarda reduce el impacto en <span id="sRed"></span> puntos, hasta un máximo de <span id="sTope"></span> (criterio propio). Solo cuenta si se implementa antes de iniciar.</p><div class="chips" id="salv"></div><input id="salvO" style="margin-top:8px" placeholder="Otras salvaguardas (separadas por punto y coma)"></div>
+  <div class="card"><label for="p_mot">Motivación de la ponderación</label><textarea id="p_mot" placeholder="Explica con tus palabras por qué prevalece o no el interés frente a los derechos del titular"></textarea></div>
+</section>
+
+<section id="t5">
+  <h2>Resultado, transparencia y registro</h2>
+  <p class="sub">El documento completo se conserva, se registra en el RAT y se revisa al menos una vez al año o cuando cambien la finalidad, los datos o el riesgo. Los titulares pueden ejercer en todo momento sus derechos, en especial el de oposición.</p>
+  <div id="resumen"></div>
+  <div class="card"><div class="grid">
+    <div class="full"><label for="r_res">Resultado</label><select id="r_res" data-r></select><p class="nota" id="r_sug" style="margin:4px 0 0"></p></div>
+    <div><label for="r_pol">¿El tratamiento consta en la política de privacidad?</label><select id="r_pol" data-r><option value="">— Seleccionar —</option><option>Sí</option><option>Se incorporará antes de iniciar</option><option>No</option></select></div>
+    <div><label for="r_opo">Canal de oposición para el titular</label><input id="r_opo" data-r placeholder="Ej. enlace de baja en cada correo y privacidad@…"></div>
+    <div><label for="r_cod">Código de la evaluación</label><input id="r_cod" data-r placeholder="Ej. IL-2026-01"></div>
+    <div><label for="r_fec">Fecha de la evaluación</label><input id="r_fec" data-r type="date"></div>
+    <div><label for="r_rev">Próxima revisión</label><input id="r_rev" data-r type="date"><p class="nota" style="margin:4px 0 0">Por defecto, 12 meses después de la fecha de evaluación.</p></div>
+    <div class="full"><label for="r_obs">Observaciones del consultor</label><textarea id="r_obs" data-r></textarea></div>
+  </div></div>
+  <div class="card"><h3>Firma de responsabilidad</h3><div class="grid">
+    <div><label for="f_el">Elaborado por</label><input id="f_el" data-f></div>
+    <div><label for="f_ec">Cargo / matrícula</label><input id="f_ec" data-f></div>
+    <div><label for="f_ap">Revisado y aprobado por</label><input id="f_ap" data-f placeholder="Representante legal del responsable"></div>
+    <div><label for="f_ac">Cargo de quien aprueba</label><input id="f_ac" data-f></div>
+  </div></div>
+  <div class="row"><button class="btn oro" id="copInf">Copiar informe (Word)</button><button class="btn sec" id="copReg">Copiar fila del registro (Excel)</button></div>
+  <p class="nota">El consultor recomienda; la decisión de usar el interés legítimo y la implementación de las salvaguardas corresponden al responsable.</p>
+</section>
+</main>
+<footer><div class="wrap">Abg. Mariano X. Macías Sánchez · Macías Sánchez Consultores · Herramienta de apoyo; no sustituye el análisis jurídico del caso concreto. Puntajes de ponderación de criterio propio. Contrasta las citas con el texto oficial de la Res. SPDP-SPD-2025-0041-R.</div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+var CFG={"supuestos": [{"id": "mkt", "nombre": "Mercadotecnia directa", "cond": ["No se usan datos sensibles ni datos de niñas, niños o adolescentes", "Existe un mecanismo gratuito e inmediato para oponerse (darse de baja)"]}, {"id": "fraude", "nombre": "Prevención y reporte de fraude, lavado de activos y financiamiento del terrorismo", "cond": ["Los datos se conservan solo el tiempo estrictamente necesario"]}, {"id": "grupo", "nombre": "Comunicación interna dentro de un grupo empresarial", "cond": ["Se limita a finalidades legítimas", "Es transparente para los titulares (consta en la política y en los avisos)"]}, {"id": "redes", "nombre": "Seguridad de redes y sistemas de información", "cond": ["Existen medidas técnicas y organizativas adecuadas"]}, {"id": "cctv", "nombre": "Videovigilancia con fines de seguridad de personas, bienes o instalaciones", "cond": ["No se capta ni graba audio", "Hay señalética visible en las zonas vigiladas"]}], "prohibiciones": [{"id": "x_esp", "texto": "¿El tratamiento usa datos sensibles o de categorías especiales?", "efecto": "reforzado", "nota": "Solo se admite si es estrictamente indispensable, con medidas de seguridad reforzadas y una ponderación que garantice plenamente los derechos."}, {"id": "x_perf", "texto": "¿Hay elaboración de perfiles automatizada con efectos jurídicos o un impacto significativo en las personas?", "efecto": "prohibido_salvo", "nota": "Prohibido, salvo en los sectores financiero y de seguros con salvaguardas adicionales."}, {"id": "x_nna", "texto": "¿Se tratan datos de niñas, niños o adolescentes?", "efecto": "reforzado", "nota": "Solo con justificación expresa en el interés superior del niño, respaldada en la ponderación, con medidas reforzadas."}, {"id": "x_masivo", "texto": "¿Se tratan datos de forma masiva o se reutilizan para una finalidad distinta o incompatible con la original?", "efecto": "prohibido", "nota": "No puede invocarse el interés legítimo. Busca otra base o rediseña el tratamiento."}], "caracteristicas": [{"id": "c_licito", "nombre": "Lícito", "pregunta": "¿La finalidad está permitida por la ley y no persigue un fin prohibido?"}, {"id": "c_real", "nombre": "Real y concreto", "pregunta": "¿Responde a una necesidad cierta y demostrable, no hipotética ni futura?"}, {"id": "c_prop", "nombre": "Proporcional", "pregunta": "¿El tratamiento es adecuado, necesario, oportuno y no excesivo?"}, {"id": "c_expect", "nombre": "Coherente con las expectativas razonables", "pregunta": "¿Se informó al titular antes del tratamiento y consta en la política de privacidad?"}], "resp": ["Cumple", "Parcial", "No cumple"], "necesidad": [{"id": "n_indisp", "texto": "El tratamiento es indispensable para lograr la finalidad."}, {"id": "n_alt", "texto": "Se analizaron alternativas menos intrusivas y ninguna logra el mismo fin."}, {"id": "n_min", "texto": "Solo se usan los datos mínimos necesarios (campo por campo)."}, {"id": "n_plazo", "texto": "El plazo de conservación está definido y es el mínimo necesario."}], "peso": [{"id": "w_imp", "nombre": "Importancia del interés", "ops": [["Conveniencia comercial", 0], ["Interés relevante para la operación", 1], ["Interés vinculado a seguridad, fraude o protección de terceros", 2]]}, {"id": "w_benef", "nombre": "Beneficio para los titulares o la sociedad", "ops": [["Solo beneficia al responsable", 0], ["Beneficio indirecto para los titulares", 1], ["Protege directamente a los titulares o a terceros", 2]]}, {"id": "w_conexo", "nombre": "Respaldo normativo o sectorial", "ops": [["Ninguno", 0], ["Recomendación o buena práctica sectorial", 1], ["Deber legal conexo o supuesto admisible expreso", 2]]}], "impacto": [{"id": "i_datos", "nombre": "Naturaleza de los datos", "ops": [["Identificación o contacto", 0], ["Datos financieros, de ubicación o de comportamiento", 1], ["Datos sensibles o de categorías especiales", 2]]}, {"id": "i_expect", "nombre": "Expectativa del titular", "ops": [["Lo espera: hay relación previa y fue informado", 0], ["Podría esperarlo", 1], ["No lo espera o le sorprendería", 2]]}, {"id": "i_pos", "nombre": "Posición del titular", "ops": [["Igualdad con el responsable", 0], ["Dependencia o subordinación", 1], ["Grupo especialmente vulnerable", 2]]}, {"id": "i_efecto", "nombre": "Efectos posibles", "ops": [["Molestias menores", 0], ["Pérdida de control o publicidad no deseada", 1], ["Decisiones, exclusión, discriminación o daño económico", 2]]}, {"id": "i_escala", "nombre": "Escala y duración", "ops": [["Pocos titulares y por poco tiempo", 0], ["Volumen moderado o tratamiento continuo", 1], ["Gran escala o tratamiento permanente", 2]]}], "salvaguardas": ["Oposición gratuita e inmediata (darse de baja en un paso)", "Información previa específica y visible", "Minimización de datos", "Plazo de conservación corto con borrado automático", "Seudonimización o anonimización", "Acceso restringido por perfil y registro de accesos", "Sin decisiones automatizadas", "Sin audio (videovigilancia)", "Cifrado en reposo y en tránsito", "Revisión periódica de la ponderación"], "salvReduce": 0.5, "salvTope": 3, "resultados": ["Prevalece el interés legítimo: puede usarse como base", "Prevalece solo con las salvaguardas indicadas: aplicarlas antes de iniciar", "No prevalece: el interés legítimo no puede ser la base; usar otra base o rediseñar el tratamiento"], "revision": 12, "ejemplo": {"y": {"priv": "Sí"}, "sup": "mkt", "cond": {"0": "Se cumple", "1": "Se cumple"}, "x": {"x_esp": "No", "x_perf": "No", "x_nna": "No", "x_masivo": "No"}, "i": {"i_resp": "Ferretería Ficticia El Tornillo S.A. (EJEMPLO)", "i_trat": "Correos de ofertas a clientes actuales", "i_rat": "T-12", "i_benef": "El responsable", "i_int": "Informar a quienes ya compraron en la tienda sobre ofertas de productos similares a los adquiridos.", "i_datos": "Nombre, correo electrónico y categoría de los productos comprados.", "i_tit": "4.500 clientes con compras en los últimos 24 meses.", "i_otra": "El consentimiento sería una base posible, pero los clientes ya mantienen una relación comercial y esperan recibir información de la tienda; se ofrece oposición inmediata."}, "car": {"c_licito": {"r": "Cumple", "j": "La publicidad de productos propios es una actividad lícita."}, "c_real": {"r": "Cumple", "j": "Campañas mensuales ya planificadas."}, "c_prop": {"r": "Cumple", "j": "Máximo dos correos al mes; sin perfiles detallados."}, "c_expect": {"r": "Parcial", "j": "La política vigente no menciona el envío de ofertas: incorporarlo antes de iniciar."}}, "n": {"n_indisp": {"r": "Cumple", "j": ""}, "n_alt": {"r": "Cumple", "j": ""}, "n_min": {"r": "Cumple", "j": "No se usa teléfono ni dirección."}, "n_plazo": {"r": "Parcial", "j": "Definir la baja automática a los 24 meses sin compras."}}, "altd": "Publicidad en redes sin datos personales: no llega a los clientes recurrentes. Pedir consentimiento en caja: se mantiene como alternativa si la ponderación cambia.", "w": {"w_imp": 1, "w_benef": 1, "w_conexo": 2}, "im": {"i_datos": 0, "i_expect": 1, "i_pos": 0, "i_efecto": 1, "i_escala": 1}, "salv": ["Oposición gratuita e inmediata (darse de baja en un paso)", "Información previa específica y visible", "Minimización de datos", "Plazo de conservación corto con borrado automático"], "salvO": "", "mot": "El interés comercial es legítimo y esperado por clientes con relación previa. El impacto es bajo: datos de contacto, sin perfiles y con baja inmediata. Prevalece si se actualiza la política antes de iniciar.", "r": {"r_res": "Prevalece solo con las salvaguardas indicadas: aplicarlas antes de iniciar", "r_pol": "Se incorporará antes de iniciar", "r_opo": "Enlace de baja en cada correo y privacidad@ejemplo.ec", "r_cod": "IL-2026-01", "r_fec": "2026-11-10", "r_rev": "2027-11-10", "r_obs": "Ejemplo ficticio."}, "f": {"f_el": "Abg. Mariano X. Macías Sánchez", "f_ec": "Consultor en Protección de Datos · Mat. 09-2022-736", "f_ap": "[REPRESENTANTE LEGAL]", "f_ac": "Gerente General"}}};
+(function(){
+  function $(i){return document.getElementById(i)}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function toast(t){var e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},1900)}
+  var KEY='msc-il-v1';
+  function blank(){return{y:{},sup:'',cond:{},x:{},i:{},car:{},n:{},altd:'',w:{},im:{},salv:[],salvO:'',mot:'',r:{},f:{f_el:'Abg. Mariano X. Macías Sánchez',f_ec:'Consultor en Protección de Datos · Mat. 09-2022-736'}}}
+  var S;try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}if(!S)S=blank();
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+  var tabs=document.querySelectorAll('nav button');
+  function show(t){tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});document.querySelectorAll('section').forEach(function(s){s.classList.toggle('on',s.id===t)});if(t==='t4')balance();if(t==='t5')resumen();window.scrollTo(0,0)}
+  tabs.forEach(function(b){b.onclick=function(){show(b.dataset.t)}});
+  function seg(attr,vals){return'<div class="seg" '+attr+' style="margin-top:8px;max-width:340px">'+vals.map(function(v){return'<button type="button">'+esc(v)+'</button>'}).join('')+'</div>'}
+  function bindSeg(sel,get,set){document.querySelectorAll(sel).forEach(function(s){s.querySelectorAll('button').forEach(function(b){b.onclick=function(){set(s,b.textContent);save();all()}})})}
+  function paintSeg(sel,get){document.querySelectorAll(sel).forEach(function(s){var v=get(s);s.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.textContent===v)})})}
+
+  // ---- 1. filtro
+  $('sup').innerHTML=CFG.supuestos.map(function(x){return'<button type="button" data-v="'+x.id+'">'+esc(x.nombre)+'</button>'}).join('')+'<button type="button" data-v="otro">Otro supuesto</button>';
+  $('sup').querySelectorAll('button').forEach(function(b){b.onclick=function(){S.sup=S.sup===b.dataset.v?'':b.dataset.v;S.cond={};save();all()}});
+  $('prohib').innerHTML=CFG.prohibiciones.map(function(p){return'<div class="q"><div class="qt">'+esc(p.texto)+'</div>'+seg('data-x="'+p.id+'"',['Sí','No'])+'<div class="nota" style="margin-top:6px">'+esc(p.nota)+'</div></div>'}).join('');
+  bindSeg('[data-y]',null,function(s,v){S.y[s.dataset.y]=v});
+  bindSeg('[data-x]',null,function(s,v){S.x[s.dataset.x]=v});
+  function supObj(){return CFG.supuestos.filter(function(x){return x.id===S.sup})[0]}
+  function paintCond(){var o=supObj();if(S.sup==='otro'){$('cond').innerHTML='<div class="warn">La resolución enumera supuestos admisibles. Un supuesto distinto no está previsto: documenta la razón y consulta el texto oficial o a la SPDP antes de continuar.</div>';return}
+    if(!o){$('cond').innerHTML='';return}
+    $('cond').innerHTML='<label>Condiciones del supuesto</label>'+o.cond.map(function(c,i){return'<div class="q"><div class="qt">'+esc(c)+'</div>'+seg('data-k="'+i+'"',['Se cumple','No se cumple'])+'</div>'}).join('');
+    bindSeg('[data-k]',null,function(s,v){S.cond[s.dataset.k]=v});paintSeg('[data-k]',function(s){return S.cond[s.dataset.k]})}
+  function filtro(){var r={cls:'pe',t:'Responde las preguntas para saber si puede invocarse.',items:[],bloq:false};
+    if(S.y.priv==='No')return{cls:'si',t:'NO APLICA: la resolución regula el interés legítimo solo en el sector privado.',items:[],bloq:true};
+    var pro=CFG.prohibiciones.filter(function(p){return S.x[p.id]==='Sí'}),items=[],bloq=false,ref=false;
+    pro.forEach(function(p){if(p.efecto==='prohibido'){bloq=true;items.push('Prohibición: '+p.nota)}else if(p.efecto==='prohibido_salvo'){items.push('Prohibido salvo excepción: '+p.nota);ref=true}else{items.push('Justificación reforzada: '+p.nota);ref=true}});
+    var o=supObj(),faltaCond=o&&o.cond.some(function(c,i){return S.cond[i]==='No se cumple'});
+    if(faltaCond){bloq=true;items.push('Una condición del supuesto «'+o.nombre+'» no se cumple.')}
+    if(S.sup==='otro'){ref=true;items.push('Supuesto no enumerado en la resolución: consultar antes de continuar.')}
+    if(bloq)return{cls:'si',t:'NO PUEDE INVOCARSE el interés legítimo tal como está planteado',items:items,bloq:true};
+    var resp=S.y.priv&&S.sup&&CFG.prohibiciones.every(function(p){return S.x[p.id]})&&(!o||o.cond.every(function(c,i){return S.cond[i]}));
+    if(!resp)return{cls:'pe',t:'Responde todas las preguntas para obtener el resultado.',items:items,bloq:false};
+    if(ref)return{cls:'am',t:'PUEDE CONTINUAR con justificación reforzada',items:items,bloq:false};
+    return{cls:'no',t:'PUEDE CONTINUAR con la evaluación de ponderación',items:['Supuesto: '+(o?o.nombre:'')],bloq:false}}
+  function resFiltro(){var r=filtro();$('resFiltro').innerHTML='<div class="res '+r.cls+'">'+esc(r.t)+(r.items.length?'<ul>'+r.items.map(function(x){return'<li>'+esc(x)+'</li>'}).join('')+'</ul>':'')+'</div>'}
+
+  // ---- 2. interés
+  document.querySelectorAll('[data-i]').forEach(function(i){i.addEventListener('input',function(){S.i[i.id]=i.value;save()});i.addEventListener('change',function(){S.i[i.id]=i.value;save()})});
+  function tabla(id,list,store,lbl){$(id).innerHTML=list.map(function(c){return'<tr><td style="width:55%"><b>'+esc(lbl(c))+'</b>'+(c.pregunta?'<div class="nota">'+esc(c.pregunta)+'</div>':'')+'</td><td>'+seg('data-'+store+'="'+c.id+'"',CFG.resp)+'<textarea data-'+store+'j="'+c.id+'" style="margin-top:6px;min-height:44px" placeholder="Justificación y evidencia"></textarea></td></tr>'}).join('');
+    bindSeg('[data-'+store+']',null,function(s,v){S[store][s.getAttribute('data-'+store)]=Object.assign(S[store][s.getAttribute('data-'+store)]||{},{r:v})});
+    document.querySelectorAll('[data-'+store+'j]').forEach(function(t){t.addEventListener('input',function(){var k=t.getAttribute('data-'+store+'j');S[store][k]=Object.assign(S[store][k]||{},{j:t.value});save()})})}
+  tabla('car',CFG.caracteristicas,'car',function(c){return c.nombre});
+  tabla('nec',CFG.necesidad,'n',function(c){return c.texto});
+  $('n_altd').addEventListener('input',function(){S.altd=this.value;save()});
+
+  // ---- 4. ponderación
+  function factores(id,list,store){$(id).innerHTML=list.map(function(f){return'<div class="q"><div class="qt">'+esc(f.nombre)+'</div><div class="seg wide" data-'+store+'="'+f.id+'" style="margin-top:8px">'+f.ops.map(function(o,i){return'<button type="button" data-i="'+i+'">'+esc(o[0])+'</button>'}).join('')+'</div></div>'}).join('');
+    document.querySelectorAll('[data-'+store+']').forEach(function(s){s.querySelectorAll('button').forEach(function(b){b.onclick=function(){S[store][s.getAttribute('data-'+store)]=+b.dataset.i;save();all()}})})}
+  factores('peso',CFG.peso,'w');factores('impacto',CFG.impacto,'im');
+  $('sRed').textContent=String(CFG.salvReduce).replace('.',',');$('sTope').textContent=CFG.salvTope;
+  $('salv').innerHTML=CFG.salvaguardas.map(function(o){return'<button type="button" data-v="'+esc(o)+'">'+esc(o)+'</button>'}).join('');
+  $('salv').querySelectorAll('button').forEach(function(b){b.onclick=function(){var a=S.salv,i=a.indexOf(b.dataset.v);if(i>-1)a.splice(i,1);else a.push(b.dataset.v);save();all()}});
+  $('salvO').addEventListener('input',function(){S.salvO=this.value;save();balance()});
+  $('p_mot').addEventListener('input',function(){S.mot=this.value;save()});
+  function salvList(){return S.salv.concat((S.salvO||'').split(';').map(function(s){return s.trim()}).filter(Boolean))}
+  function pond(){var w=0,nw=0,im=0,ni=0;CFG.peso.forEach(function(f){if(S.w[f.id]!=null){nw++;w+=f.ops[S.w[f.id]][1]}});CFG.impacto.forEach(function(f){if(S.im[f.id]!=null){ni++;im+=f.ops[S.im[f.id]][1]}});
+    var red=Math.min(CFG.salvTope,salvList().length*CFG.salvReduce),imR=Math.max(0,im-red),wN=w/(CFG.peso.length*2)*10,iN=imR/(CFG.impacto.length*2)*10,dif=wN-iN;
+    var comp=nw===CFG.peso.length&&ni===CFG.impacto.length;
+    var fallo=CFG.caracteristicas.some(function(c){return(S.car[c.id]||{}).r==='No cumple'})||CFG.necesidad.some(function(c){return(S.n[c.id]||{}).r==='No cumple'})||filtro().bloq;
+    var parc=CFG.caracteristicas.concat(CFG.necesidad).some(function(c){return((S.car[c.id]||S.n[c.id])||{}).r==='Parcial'});var sug=!comp?'':fallo?2:dif>=2?(parc?1:0):dif>=-1?1:2;return{w:w,im:im,red:red,imR:imR,wN:wN,iN:iN,comp:comp,fallo:fallo,sug:sug}}
+  function balance(){var p=pond();var b=function(v,l){return'<div class="kpi"><b>'+v.toFixed(1).replace('.',',')+' / 10</b><span>'+l+'</span><div class="bar"><i style="width:'+v*10+'%"></i></div></div>'};
+    $('balance').innerHTML='<div class="score">'+b(p.wN,'Peso del interés')+b(p.im/(CFG.impacto.length*2)*10,'Impacto antes de salvaguardas')+b(p.iN,'Impacto con salvaguardas')+'</div>'+
+      (p.comp?'<div class="res '+(p.sug===0?'no':p.sug===1?'am':'si')+'">Sugerido: '+esc(CFG.resultados[p.sug])+(p.fallo?'<small>Hay una característica o un criterio de necesidad que no se cumple, o el filtro del paso 1 lo impide: el interés no puede prevalecer.</small>':(p.sug===1?'<small>Hay criterios valorados como «Parcial» o el balance es estrecho: corrige lo pendiente o aplica las salvaguardas antes de iniciar. Puntajes de criterio propio.</small>':'<small>Puntajes de criterio propio. La conclusión debe motivarse por escrito.</small>'))+'</div>':'<div class="res pe">Valora todos los factores para ver el resultado sugerido.</div>')}
+  function paintFx(store){document.querySelectorAll('[data-'+store+']').forEach(function(s){if(!s.classList.contains('wide'))return;s.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',S[store][s.getAttribute('data-'+store)]===+b.dataset.i)})})}
+
+  // ---- 5. resultado
+  $('r_res').innerHTML='<option value="">— Seleccionar —</option>'+CFG.resultados.map(function(r){return'<option>'+esc(r)+'</option>'}).join('');
+  function addM(d,m){var x=new Date(d+'T12:00:00');if(isNaN(x))return'';x.setMonth(x.getMonth()+m);return x.toISOString().slice(0,10)}
+  document.querySelectorAll('[data-r]').forEach(function(i){var h=function(){S.r[i.id]=i.value;if(i.id==='r_fec'&&i.value&&!S.r.r_rev){S.r.r_rev=addM(i.value,CFG.revision);$('r_rev').value=S.r.r_rev}save()};i.addEventListener('input',h);i.addEventListener('change',h)});
+  document.querySelectorAll('[data-f]').forEach(function(i){i.addEventListener('input',function(){S.f[i.id]=i.value;save()})});
+  function resumen(){var f=filtro(),p=pond(),pend=[];if(!S.i.i_trat)pend.push('describir el tratamiento');if(!S.i.i_int)pend.push('indicar el interés');
+    CFG.caracteristicas.forEach(function(c){if(!(S.car[c.id]||{}).r)pend.push('característica «'+c.nombre+'»')});
+    if(!p.comp)pend.push('completar la ponderación');if(!S.mot)pend.push('motivar la ponderación');
+    $('resumen').innerHTML='<div class="kpis">'+[[f.t.split(' ').slice(0,3).join(' '),'Paso 1'],[p.wN.toFixed(1).replace('.',','),'Peso del interés'],[p.iN.toFixed(1).replace('.',','),'Impacto con salvaguardas'],[salvList().length,'Salvaguardas']].map(function(k){return'<div class="kpi"><b style="font-size:17px">'+esc(k[0])+'</b><span>'+esc(k[1])+'</span></div>'}).join('')+'</div>'+(pend.length?'<div class="res pe">Pendiente: '+esc(pend.join(' · '))+'</div>':'');
+    $('r_sug').textContent=p.sug===''?'':'Sugerido: '+CFG.resultados[p.sug]}
+
+  // ---- informe
+  function tr(c,th){return'<tr>'+c.map(function(x){return(th?'<th>':'<td>')+esc(x)+(th?'</th>':'</td>')}).join('')+'</tr>'}
+  var TB='<table border="1" cellpadding="5" style="border-collapse:collapse;width:100%;font-size:10pt">';
+  function informe(){var f=filtro(),p=pond(),o=supObj(),I=S.i,h='<h1>Evaluación de ponderación del interés legítimo</h1>';
+    h+=TB+tr(['Responsable',I.i_resp||'[RESPONSABLE]'])+tr(['Tratamiento',I.i_trat||'[TRATAMIENTO]'])+tr(['Código en el RAT',I.i_rat||'—'])+tr(['Código de la evaluación',S.r.r_cod||'—'])+tr(['Fecha',S.r.r_fec||'—'])+'</table>';
+    h+='<p>Evaluación previa exigida por la Resolución SPDP-SPD-2025-0041-R para usar el interés legítimo como base de legitimación (art. 7 LOPDP). Sigue los criterios mínimos de su Anexo 1. Debe conservarse y estar disponible para la Superintendencia de Protección de Datos Personales y para los titulares.</p>';
+    h+='<h2>1. Ámbito, supuesto admisible y prohibiciones</h2>'+TB+tr(['Sector privado',S.y.priv||'—'])+tr(['Supuesto admisible',o?o.nombre:S.sup==='otro'?'Otro supuesto (no enumerado)':'—'])+(o?o.cond.map(function(c,i){return tr(['Condición: '+c,S.cond[i]||'—'])}).join(''):'')+CFG.prohibiciones.map(function(x){return tr([x.texto,S.x[x.id]||'—'])}).join('')+'</table><p><b>Resultado del filtro:</b> '+esc(f.t)+'</p>'+(f.items.length?'<ul>'+f.items.map(function(x){return'<li>'+esc(x)+'</li>'}).join('')+'</ul>':'');
+    h+='<h2>2. Identificación y justificación del interés</h2>'+TB+tr(['Titular del interés',I.i_benef||'—'])+tr(['Interés invocado',I.i_int||'—'])+tr(['Datos',I.i_datos||'—'])+tr(['Titulares y volumen',I.i_tit||'—'])+tr(['Por qué no otra base',I.i_otra||'—'])+'</table>';
+    h+='<h3>Características (RES-0041, art. 4)</h3>'+TB+tr(['Característica','Valoración','Justificación'],1)+CFG.caracteristicas.map(function(c){var v=S.car[c.id]||{};return tr([c.nombre,v.r||'Sin valorar',v.j||''])}).join('')+'</table>';
+    h+='<h2>3. Necesidad</h2>'+TB+tr(['Criterio','Valoración','Justificación'],1)+CFG.necesidad.map(function(c){var v=S.n[c.id]||{};return tr([c.texto,v.r||'Sin valorar',v.j||''])}).join('')+'</table><p><b>Alternativas consideradas:</b> '+esc(S.altd||'—')+'</p>';
+    h+='<h2>4. Ponderación con los derechos del titular</h2><p>Puntajes de criterio propio de Macías Sánchez Consultores (0 a 2 por factor), normalizados a 10. No provienen de la resolución.</p>'+TB+tr(['Factor','Valoración'],1)+CFG.peso.map(function(x){var i=S.w[x.id];return tr(['Interés: '+x.nombre,i==null?'—':x.ops[i][0]])}).join('')+CFG.impacto.map(function(x){var i=S.im[x.id];return tr(['Titular: '+x.nombre,i==null?'—':x.ops[i][0]])}).join('')+tr(['Peso del interés',p.wN.toFixed(1)+' / 10'])+tr(['Impacto en el titular con salvaguardas',p.iN.toFixed(1)+' / 10'])+'</table><p><b>Motivación:</b> '+esc(S.mot||'—')+'</p>';
+    h+='<h2>5. Salvaguardas</h2>'+(salvList().length?'<ul>'+salvList().map(function(x){return'<li>'+esc(x)+'</li>'}).join('')+'</ul>':'<p>Ninguna.</p>');
+    h+='<h2>6. Resultado, transparencia y registro</h2><p><b>Resultado:</b> '+esc(S.r.r_res||'[RESULTADO]')+'</p>'+TB+tr(['Consta en la política de privacidad',S.r.r_pol||'—'])+tr(['Canal de oposición',S.r.r_opo||'—'])+tr(['Próxima revisión',S.r.r_rev||'—'])+'</table>'+(S.r.r_obs?'<p><b>Observaciones:</b> '+esc(S.r.r_obs)+'</p>':'')+'<p>La evaluación se revisa al menos una vez al año o cuando cambien la finalidad, el tipo de datos o el nivel de riesgo. El titular puede ejercer en cualquier momento sus derechos, en especial el de oposición.</p>';
+    var F=S.f;h+='<p><b>FIRMA DE RESPONSABILIDAD</b></p>'+TB+tr(['Elaborado por','Revisado y aprobado por'],1)+tr(['Firma: ______________________','Firma: ______________________'])+tr([F.f_el||'',F.f_ap||''])+tr([F.f_ec||'',F.f_ac||''])+'</table><p><i>El consultor emite una recomendación; la decisión y la implementación de las salvaguardas corresponden al responsable del tratamiento.</i></p>';return h}
+  function fb(t){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Copiado')}catch(e){toast('No se pudo copiar')}ta.remove()}
+  function copyHtml(html){var tmp=document.createElement('div');tmp.innerHTML=html;var plain=tmp.innerText;try{if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([plain],{type:'text/plain'})})]).then(function(){toast('Informe copiado: pega en Word')},function(){fb(plain)});return}}catch(e){}fb(plain)}
+  $('copInf').onclick=function(){if(!S.i.i_trat){toast('Describe el tratamiento (paso 2)');return}copyHtml(informe())};
+  $('copReg').onclick=function(){var o=supObj(),c=function(x){return String(x==null?'':x).replace(/[\t\n\r]+/g,' ')};var t=['Código','Tratamiento','Código RAT','Supuesto','Resultado','Fecha','Próxima revisión','Elaborado por'].join('\t')+'\n'+[S.r.r_cod,S.i.i_trat,S.i.i_rat,o?o.nombre:S.sup,S.r.r_res,S.r.r_fec,S.r.r_rev,S.f.f_el].map(c).join('\t');
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){toast('Fila copiada: pega en Excel')},function(){fb(t)});else fb(t)};
+  $('nueva').onclick=function(){var b=this;if(!b.dataset.c){b.dataset.c=1;b.textContent='¿Borrar la evaluación actual?';return}delete b.dataset.c;b.textContent='Nueva evaluación';S=blank();save();all();toast('Evaluación nueva')};
+  $('ejemplo').onclick=function(){S=JSON.parse(JSON.stringify(CFG.ejemplo));save();all();toast('Ejemplo ficticio cargado')};
+  function all(){var d=blank();for(var k in d)if(S[k]==null)S[k]=d[k];
+    paintSeg('[data-y]',function(s){return S.y[s.dataset.y]});paintSeg('[data-x]',function(s){return S.x[s.dataset.x]});
+    $('sup').querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.v===S.sup)});paintCond();resFiltro();
+    document.querySelectorAll('[data-i]').forEach(function(i){i.value=S.i[i.id]||''});
+    paintSeg('[data-car]',function(s){return(S.car[s.dataset.car]||{}).r});paintSeg('[data-n]',function(s){return(S.n[s.dataset.n]||{}).r});
+    document.querySelectorAll('[data-carj]').forEach(function(t){t.value=(S.car[t.dataset.carj]||{}).j||''});document.querySelectorAll('[data-nj]').forEach(function(t){t.value=(S.n[t.dataset.nj]||{}).j||''});
+    $('n_altd').value=S.altd||'';paintFx('w');paintFx('im');$('salv').querySelectorAll('button').forEach(function(b){b.classList.toggle('on',S.salv.indexOf(b.dataset.v)>-1)});$('salvO').value=S.salvO||'';$('p_mot').value=S.mot||'';
+    document.querySelectorAll('[data-r]').forEach(function(i){i.value=S.r[i.id]||''});document.querySelectorAll('[data-f]').forEach(function(i){i.value=S.f[i.id]||''});
+    balance();resumen()}
+  all();
+})();
+</script>
+</body>
+</html>

@@ -29,8 +29,8 @@ hora = r10(H.PERFILES[1][1] * (1 + H.GASTOS_PCT / 100))
 DESDE = {"diag": [H.VOLNEG["diag_piso"][t] for t in TAM], "adec": [H.VOLNEG["adec_piso"][t] for t in TAM],
          "mens": [H.VOLNEG["piso_mensual"][t] for t in TAM], "acomp": [r10(H.VOLNEG["piso_mensual"][t] * 0.7) for t in TAM],
          "hora": [hora] * 4}
-HERR = {"01": "Catálogo", "02": "Honorarios", "03": "Madurez", "04": "RAT", "05": "Gran escala", "06": "Evaluación de impacto",
-        "07": "Plantillas", "08": "Vulneraciones"}
+HERR = {"01": "Catálogo", "02": "Honorarios", "03": "Madurez", "04": "RAT", "05": "Gran escala", "06": "Interés legítimo", "07": "Evaluación de impacto",
+        "08": "Plantillas", "09": "Vulneraciones"}
 cfg = {"version": C.VERSION, "tamanos": C.TAMANOS, "fases": C.FASES, "naturaleza": C.NATURALEZA, "servicios": C.SERVICIOS,
        "recomendaciones": C.RECOMENDACIONES, "gloLopdp": C.GLOSARIO_LOPDP, "gloNorma": C.GLOSARIO_NORMATIVA, "gloKit": C.GLOSARIO_KIT,
        "desde": DESDE, "herramientas": HERR}

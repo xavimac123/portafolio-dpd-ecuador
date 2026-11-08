@@ -39,6 +39,7 @@
   .chips button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
   .seg{display:flex;gap:6px;flex-wrap:wrap}.seg button{flex:1;min-width:70px;padding:8px;border:1px solid var(--linea);background:#FFFDF6;color:#14181E;border-radius:8px;font:inherit;font-size:13px;cursor:pointer}
   .seg button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
+  .seg.wide{margin-top:8px}.seg.wide button{min-width:160px}.pasos{margin:0;padding-left:20px;font-size:14px}.pasos li{margin:6px 0}
   .btn{background:var(--carbon);color:#fff;border:0;padding:10px 16px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
   .btn.sec{background:#fff;color:var(--carbon);border:1px solid var(--carbon)}
   .btn.oro{background:var(--oro);color:var(--carbon)}
@@ -78,15 +79,16 @@
 </head>
 <body>
 <header><div class="wrap">
-  <div class="marca">Macías Sánchez Consultores · Herramienta 06</div>
+  <div class="marca">Macías Sánchez Consultores · Herramienta 07</div>
   <h1>Evaluación de impacto del tratamiento de datos personales</h1>
-  <p>Art. 42 LOPDP · arts. 29 a 32 RGLOPDP · Guía SPDP de Gestión de Riesgos y Evaluación de Impacto (Res. SPDP-SPD-2025-0003-R)</p>
+  <p>Art. 42 LOPDP · arts. 29 a 32 RGLOPDP · Guía SPDP de Gestión de Riesgos y Evaluación de Impacto (Res. SPDP-SPD-2026-0012-R)</p>
   <nav role="tablist">
     <button data-t="t1" aria-selected="true">1 · ¿Es obligatoria?</button>
     <button data-t="t2" aria-selected="false">2 · Descripción</button>
     <button data-t="t3" aria-selected="false">3 · Necesidad</button>
-    <button data-t="t4" aria-selected="false">4 · Riesgos y medidas</button>
-    <button data-t="t5" aria-selected="false">5 · Conclusión e informe</button>
+    <button data-t="tc" aria-selected="false">4 · Contexto</button>
+    <button data-t="t4" aria-selected="false">5 · Riesgos y medidas</button>
+    <button data-t="t5" aria-selected="false">6 · Conclusión e informe</button>
   </nav>
 </div></header>
 
@@ -123,6 +125,23 @@
   <div class="card"><table class="prop" id="prop"></table></div>
 </section>
 
+<section id="tc">
+  <h2>Establecimiento del contexto</h2>
+  <p class="sub">Primera etapa de la Guía v2 de la SPDP (Cap. II): antes de valorar riesgos se fijan los criterios con que se medirá el impacto en los derechos y libertades, la probabilidad y la aceptación del riesgo. La evaluación de impacto no puede hacerse sin completar contexto, identificación y análisis.</p>
+  <div class="card"><h3>Cómo determinar el impacto sobre los derechos</h3><ol class="pasos" id="pasos"></ol></div>
+  <div class="card"><h3>Criterios de impacto en derechos y libertades</h3>
+    <p class="nota">Los cinco factores provienen de la guía v2. Las opciones y su puntaje son <b>criterio propio</b> del portafolio.</p>
+    <div id="factores"></div><div id="piso"></div></div>
+  <div class="card"><h3>Derechos y libertades potencialmente afectados</h3><div class="chips" id="cx_der"></div></div>
+  <div class="card"><h3>Probabilidad, método y aceptación</h3><div class="grid">
+    <div><label for="cx_per">Periodo de referencia de la probabilidad</label><select id="cx_per"></select><p class="nota" style="margin:4px 0 0">La guía exige estimar la probabilidad dentro de un lapso definido.</p></div>
+    <div><label for="cx_met">Método de análisis</label><select id="cx_met"></select></div>
+    <div><label for="cx_cap">Capacidad de riesgo (USD, opcional)</label><input id="cx_cap" type="number" min="0" placeholder="Pérdida máxima que la organización puede soportar"></div>
+    <div><label>Tolerancia</label><p class="nota" style="margin:4px 0 0">Se fija como umbral de riesgo residual aceptable en la pestaña 6.</p></div>
+    <div class="full"><label for="cx_rat">Justificación general de los criterios (rationale)</label><textarea id="cx_rat" placeholder="Quiénes estimaron los valores, con qué datos o antecedentes, qué controles existen hoy"></textarea></div>
+  </div></div>
+</section>
+
 <section id="t4">
   <h2>Riesgos para los derechos y libertades, y medidas</h2>
   <p class="sub">Art. 32 nums. 3 y 4 RGLOPDP. Nivel = impacto × probabilidad (1 a 25). Escalas propias del portafolio, compatibles con la guía de la SPDP (su Cap. II es referencial). Toca <b>?</b> junto a cada escala para ver los criterios.</p>
@@ -135,9 +154,11 @@
       <div><label for="r_esc">Escenario de riesgo</label><select id="r_esc"></select><input id="r_escO" style="margin-top:6px" placeholder="Describe el escenario" hidden></div>
       <div><label for="r_ame">Amenaza (origen)</label><select id="r_ame"></select></div>
       <div><label for="r_vul">Vulnerabilidad</label><select id="r_vul"></select><input id="r_vulD" style="margin-top:6px" placeholder="Detalle de la vulnerabilidad"></div>
-      <div class="full"><label>Consecuencias para el titular</label><div class="chips" id="r_imp"></div></div>
+      <div class="full"><label>Derechos afectados</label><div class="chips" id="r_der"></div></div>
+      <div class="full"><label>Consecuencias para el titular (impactos primarios y secundarios)</label><div class="chips" id="r_imp"></div></div>
       <div><div class="qh"><label>Impacto (antes de medidas)</label><button type="button" class="help" data-h="hI">?</button></div><div class="seg" data-s="i0"></div><div class="hbox" id="hI"></div></div>
       <div><div class="qh"><label>Probabilidad (antes de medidas)</label><button type="button" class="help" data-h="hP">?</button></div><div class="seg" data-s="p0"></div><div class="hbox" id="hP"></div></div>
+      <div class="full"><label for="r_rat">Justificación de impacto y probabilidad (rationale)</label><textarea id="r_rat" placeholder="Por qué este impacto y esta probabilidad: antecedentes, datos, controles existentes"></textarea></div>
       <div class="full" id="inh"></div>
       <div class="full"><label>Medidas y controles <span class="ref">art. 32 num. 4</span></label><div class="chips" id="r_ctl"></div><input id="r_ctlO" style="margin-top:6px" placeholder="Otras medidas (separadas por punto y coma)"></div>
       <div><label>Impacto residual</label><div class="seg" data-s="i1"></div></div>
@@ -156,7 +177,7 @@
   <p class="sub">El informe sigue el contenido mínimo del art. 32 RGLOPDP. No incluyas detalles confidenciales de la implementación de seguridad: basta describir las medidas.</p>
   <div id="resumen"></div>
   <div class="card"><div class="grid">
-    <div><label for="c_umbral">Riesgo residual aceptable hasta (1-25)</label><input id="c_umbral" data-c type="number" min="1" max="25"><p class="nota" style="margin:4px 0 0">Apetito de riesgo de la organización (Guía SPDP, Cap. II, 1.6). Por defecto 9 (nivel Medio).</p></div>
+    <div><label for="c_umbral">Riesgo residual aceptable hasta (1-25)</label><input id="c_umbral" data-c type="number" min="1" max="25"><p class="nota" style="margin:4px 0 0">Apetito de riesgo de la organización (Guía SPDP v2, establecimiento del contexto: tolerancia). Por defecto 9 (nivel Medio).</p></div>
     <div><label for="c_dict">Dictamen</label><select id="c_dict" data-c></select><p class="nota" id="c_sug" style="margin:4px 0 0"></p></div>
     <div class="full"><label for="c_obs">Observaciones del DPD o del evaluador</label><textarea id="c_obs" data-c></textarea></div>
     <div><label for="c_rev">Fecha prevista de revisión</label><input id="c_rev" data-c type="date"></div>
@@ -183,13 +204,13 @@ var CFG=/*__CONFIG__*/;
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function toast(t){var e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},1900)}
   var KEY='msc-eipd-v1';
-  function blank(){return{nec:{},d:{ops:[]},prop:{},riesgos:[],c:{c_umbral:CFG.umbral},f:{f_el:'Abg. Mariano X. Macías Sánchez',f_ec:'Consultor en Protección de Datos · Mat. 09-2022-736'}}}
+  function blank(){return{nec:{},d:{ops:[]},prop:{},ctx:{f:{},der:[]},riesgos:[],c:{c_umbral:CFG.umbral},f:{f_el:'Abg. Mariano X. Macías Sánchez',f_ec:'Consultor en Protección de Datos · Mat. 09-2022-736'}}}
   var S;try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}if(!S)S=blank();
   function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 
   // tabs
   var tabs=document.querySelectorAll('nav button');
-  function show(t){tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});document.querySelectorAll('section').forEach(function(s){s.classList.toggle('on',s.id===t)});if(t==='t5')resumen();if(t==='t4')renderR();window.scrollTo(0,0)}
+  function show(t){tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});document.querySelectorAll('section').forEach(function(s){s.classList.toggle('on',s.id===t)});if(t==='t5')resumen();if(t==='t4'){renderR();calc()}window.scrollTo(0,0)}
   tabs.forEach(function(b){b.onclick=function(){show(b.dataset.t)}});
 
   function nivel(n){for(var i=0;i<CFG.niveles.length;i++){var x=CFG.niveles[i];if(n>=x[0]&&n<=x[1])return x[2]}return''}
@@ -240,18 +261,18 @@ var CFG=/*__CONFIG__*/;
   $('hI').innerHTML=CFG.impacto.map(function(x){return'<b>'+x[0]+' · '+esc(x[1])+'</b>'+esc(x[2])}).join('')+'<div class="lit">Escala propia compatible con la guía SPDP (Cap. II, referencial)</div>';
   $('hP').innerHTML=CFG.probabilidad.map(function(x){return'<b>'+x[0]+' · '+esc(x[1])+'</b>'+esc(x[2])}).join('')+'<div class="lit">Escala propia; la guía SPDP estima la probabilidad entre 0 y 1 en un lapso determinado</div>';
   function calc(){var a=R.i0&&R.p0?R.i0*R.p0:0,b=R.i1&&R.p1?R.i1*R.p1:0;
-    $('inh').innerHTML=a?'Riesgo inherente: '+pill(a)+(R.i0===5&&R.p0<=2?'<div class="warn">Alto impacto con baja probabilidad: la guía de la SPDP advierte que las matrices pueden subestimar estos riesgos. Considera tratarlo aunque el nivel resulte bajo o medio.</div>':''):'';
+    var ps=pisoCx().piso;$('inh').innerHTML=a?'Riesgo inherente: '+pill(a)+(ps&&R.i0<ps?'<div class="warn">El impacto es menor que el piso sugerido por el contexto ('+ps+'). Explica el motivo en la justificación.</div>':'')+(R.i0===5&&R.p0<=2?'<div class="warn">Alto impacto con baja probabilidad: la guía de la SPDP advierte que las matrices pueden subestimar estos riesgos. Considera tratarlo aunque el nivel resulte bajo o medio.</div>':''):'';
     $('resi').innerHTML=b?'Riesgo residual: '+pill(b)+(b>a&&a?'<div class="warn">El residual no debería superar al inherente.</div>':''):''}
   var editR=-1;
-  function limpiarR(){R={};paintS();calc();$('fr').reset();escs();setChips($('r_imp'),[]);setChips($('r_ctl'),[]);editR=-1;$('rGuardar').textContent='Agregar riesgo';$('frTit').textContent='Agregar riesgo'}
+  function limpiarR(){R={};paintS();calc();$('fr').reset();escs();setChips($('r_imp'),[]);setChips($('r_der'),[]);setChips($('r_ctl'),[]);editR=-1;$('rGuardar').textContent='Agregar riesgo';$('frTit').textContent='Agregar riesgo'}
   $('rLimpiar').onclick=limpiarR;
   $('fr').onsubmit=function(e){e.preventDefault();var esc0=$('r_esc').value==='Otro (escribir)…'?$('r_escO').value.trim():$('r_esc').value;
     if(!esc0){toast('Indica el escenario de riesgo');return}if(!(R.i0&&R.p0)){toast('Indica impacto y probabilidad');return}
-    var o={dim:$('r_dim').value,esc:esc0,ame:$('r_ame').value,vul:$('r_vul').value,vulD:$('r_vulD').value.trim(),imp:getChips($('r_imp')),i0:R.i0,p0:R.p0,
+    var o={dim:$('r_dim').value,esc:esc0,ame:$('r_ame').value,vul:$('r_vul').value,vulD:$('r_vulD').value.trim(),der:getChips($('r_der')),rat:$('r_rat').value.trim(),imp:getChips($('r_imp')),i0:R.i0,p0:R.p0,
       ctl:getChips($('r_ctl')).concat($('r_ctlO').value.split(';').map(function(s){return s.trim()}).filter(Boolean)),i1:R.i1||R.i0,p1:R.p1||R.p0,dec:$('r_dec').value,own:$('r_own').value.trim(),plazo:$('r_plazo').value};
     if(editR>-1)S.riesgos[editR]=o;else S.riesgos.push(o);save();limpiarR();renderR();toast('Riesgo guardado')};
   function renderR(){var h=S.riesgos.map(function(o,i){var a=o.i0*o.p0,b=o.i1*o.p1;
-      return'<div class="risk"><h4>R'+(i+1)+' · '+esc(o.esc)+'</h4><div class="meta">'+esc(o.dim)+(o.ame?' · '+esc(o.ame):'')+(o.vul?' · Vulnerabilidad '+esc(o.vul.toLowerCase()):'')+'</div>'+
+      return'<div class="risk"><h4>R'+(i+1)+' · '+esc(o.esc)+'</h4><div class="meta">'+esc(o.dim)+(o.ame?' · '+esc(o.ame):'')+(o.vul?' · Vulnerabilidad '+esc(o.vul.toLowerCase()):'')+'</div>'+((o.der||[]).length?'<div class="nota" style="margin-top:4px">Derechos: '+esc(o.der.join('; '))+'</div>':'')+(o.rat?'':'<div class="warn">Sin justificación de los valores</div>')+
       '<div style="margin-top:6px;font-size:13px">Inherente '+pill(a)+' → Residual '+pill(b)+' · '+esc(o.dec)+'</div>'+
       (o.ctl.length?'<div class="nota" style="margin-top:4px">Medidas: '+esc(o.ctl.join('; '))+'</div>':'<div class="warn">Sin medidas definidas</div>')+
       (o.dec==='Aceptar'&&b>(+S.c.c_umbral||CFG.umbral)?'<div class="warn">Se acepta un riesgo por encima del umbral: justifícalo en las observaciones.</div>':'')+
@@ -262,7 +283,7 @@ var CFG=/*__CONFIG__*/;
     heat()}
   function editarR(i){var o=S.riesgos[i];limpiarR();$('r_dim').value=o.dim;escs();
     var ex=CFG.escenarios.some(function(e){return e[1]===o.esc});if(ex)$('r_esc').value=o.esc;else{$('r_esc').value='Otro (escribir)…';$('r_escO').hidden=false;$('r_escO').value=o.esc}
-    $('r_ame').value=o.ame;$('r_vul').value=o.vul;$('r_vulD').value=o.vulD||'';setChips($('r_imp'),o.imp);
+    $('r_ame').value=o.ame;$('r_vul').value=o.vul;$('r_vulD').value=o.vulD||'';setChips($('r_imp'),o.imp);setChips($('r_der'),o.der||[]);$('r_rat').value=o.rat||'';
     var base=o.ctl.filter(function(c){return CFG.controles.indexOf(c)>-1}),otros=o.ctl.filter(function(c){return CFG.controles.indexOf(c)<0});setChips($('r_ctl'),base);$('r_ctlO').value=otros.join('; ');
     R={i0:o.i0,p0:o.p0,i1:o.i1,p1:o.p1};paintS();calc();$('r_dec').value=o.dec;$('r_own').value=o.own;$('r_plazo').value=o.plazo;
     editR=i;$('rGuardar').textContent='Guardar cambios';$('frTit').textContent='Editar R'+(i+1);$('fr').scrollIntoView({behavior:'smooth'})}
@@ -270,6 +291,22 @@ var CFG=/*__CONFIG__*/;
   function heat(){var h='<div class="heat"><div class="ax">Impacto ↓ / Prob. →</div>'+[1,2,3,4,5].map(function(p){return'<div class="ax">'+p+'</div>'}).join('');
     for(var i=5;i>=1;i--){h+='<div class="ax">'+i+'</div>';for(var p=1;p<=5;p++){var n=S.riesgos.filter(function(o){return o.i1===i&&o.p1===p}).length;h+='<div style="background:'+color(i*p)+';font-weight:'+(n?700:400)+'">'+(n||'')+'</div>'}}
     $('heat').innerHTML=h+'</div>'}
+
+  // ---- contexto
+  $('pasos').innerHTML=CFG.pasos.map(function(p){return'<li><b>'+esc(p[0])+'.</b> '+esc(p[1])+'</li>'}).join('');
+  $('factores').innerHTML=CFG.factores.map(function(f){return'<div class="q"><div class="qh"><label>'+esc(f.letra)+') '+esc(f.nombre)+'</label><button type="button" class="help" data-h="hf_'+f.id+'">?</button></div><div class="hbox" id="hf_'+f.id+'">'+esc(f.ayuda)+'</div><div class="seg wide" data-fx="'+f.id+'">'+f.ops.map(function(o,i){return'<button type="button" data-i="'+i+'">'+esc(o[0])+'</button>'}).join('')+'</div></div>'}).join('');
+  document.querySelectorAll('#factores .help').forEach(function(b){b.onclick=function(){$(b.dataset.h).classList.toggle('on')}});
+  document.querySelectorAll('[data-fx]').forEach(function(s){s.querySelectorAll('button').forEach(function(b){b.onclick=function(){S.ctx.f[s.dataset.fx]=+b.dataset.i;save();paintCx()}})});
+  chips($('cx_der'),CFG.derechos);chips($('r_der'),CFG.derechos);
+  $('cx_der').addEventListener('click',function(){S.ctx.der=getChips($('cx_der'));save()});
+  opts($('cx_per'),CFG.periodos,'— Seleccionar —');opts($('cx_met'),CFG.metodos,'— Seleccionar —');
+  [['cx_per','per'],['cx_met','met'],['cx_cap','cap'],['cx_rat','rat']].forEach(function(x){$(x[0]).addEventListener('input',function(){S.ctx[x[1]]=$(x[0]).value;save()});$(x[0]).addEventListener('change',function(){S.ctx[x[1]]=$(x[0]).value;save()})});
+  function pisoCx(){var f=S.ctx.f||{},n=0,sum=0;CFG.factores.forEach(function(x){if(f[x.id]!=null){n++;sum+=x.ops[f[x.id]][1]}});return{n:n,sum:sum,piso:n?Math.max(1,Math.ceil(sum/2)):0}}
+  function paintCx(){var c=S.ctx||(S.ctx={f:{},der:[]});c.f=c.f||{};
+    document.querySelectorAll('[data-fx]').forEach(function(s){s.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',c.f[s.dataset.fx]===+b.dataset.i)})});
+    setChips($('cx_der'),c.der||[]);$('cx_per').value=c.per||'';$('cx_met').value=c.met||'';$('cx_cap').value=c.cap||'';$('cx_rat').value=c.rat||'';
+    var p=pisoCx(),nom=p.piso?CFG.impacto[p.piso-1][1]:'';
+    $('piso').innerHTML=p.n?'<div class="res '+(p.piso>=4?'si':p.piso>=3?'pe':'no')+'">Puntaje de contexto: '+p.sum+' de 10 · Piso de impacto sugerido: <b>'+p.piso+' ('+esc(nom)+')</b>'+(p.n<CFG.factores.length?' · faltan '+(CFG.factores.length-p.n)+' factores':'')+'<small>Ningún escenario de este tratamiento debería valorarse con un impacto menor sin una justificación expresa. Regla de cálculo: criterio propio.</small></div>':''}
 
   // ---- 5. conclusión
   opts($('c_dict'),CFG.dictamen,'— Seleccionar —');
@@ -293,10 +330,12 @@ var CFG=/*__CONFIG__*/;
     h+='<h2>1. Necesidad de la evaluación</h2><p><b>'+esc(n.t)+'.</b> '+esc(n.nota)+'</p>'+(n.items.length?'<ul>'+n.items.map(function(x){return'<li>'+esc(x)+'</li>'}).join('')+'</ul>':'');
     h+='<h2>2. Descripción sistemática del tratamiento (art. 32 num. 1 RGLOPDP)</h2>'+TB+tr(['Finalidades',d.d_fin||'—'])+tr(['Operaciones',(d.ops||[]).join(', ')||'—'])+tr(['Categorías de datos',d.d_datos||'—'])+tr(['Titulares y volumen',d.d_tit||'—'])+tr(['Sistemas, soportes y flujo',d.d_sist||'—'])+tr(['Encargados, destinatarios y transferencias',d.d_terc||'—'])+'</table>';
     h+='<h2>3. Necesidad y proporcionalidad (art. 32 num. 2 RGLOPDP)</h2>'+TB+tr(['Criterio','Valoración','Justificación'],1)+CFG.prop.map(function(p){var v=S.prop[p.id]||{};return tr([p.texto,v.r||'Sin valorar',v.j||''])}).join('')+'</table>';
-    h+='<h2>4. Evaluación de riesgos para los derechos y libertades (art. 32 num. 3 RGLOPDP)</h2><p>Nivel = impacto × probabilidad (escala 1 a 5 cada uno). Niveles: '+CFG.niveles.map(function(x){return x[2]+' '+x[0]+'-'+x[1]}).join('; ')+'. Escalas propias, compatibles con la Guía de Gestión de Riesgos y Evaluación de Impacto de la SPDP.</p>'+
-      TB+tr(['N.º','Escenario','Dimensión','Amenaza','Vulnerabilidad','Consecuencias para el titular','I','P','Inherente'],1)+S.riesgos.map(function(o,i){return tr(['R'+(i+1),o.esc,o.dim,o.ame,[o.vul,o.vulD].filter(Boolean).join(': '),o.imp.join('; '),o.i0,o.p0,o.i0*o.p0+' '+nivel(o.i0*o.p0)])}).join('')+'</table>';
-    h+='<h2>5. Medidas previstas y riesgo residual (art. 32 num. 4 RGLOPDP)</h2>'+TB+tr(['N.º','Medidas, garantías y mecanismos','Residual','Decisión','Responsable','Plazo'],1)+S.riesgos.map(function(o,i){return tr(['R'+(i+1),o.ctl.join('; ')||'Sin medidas',o.i1*o.p1+' '+nivel(o.i1*o.p1),o.dec,o.own,o.plazo])}).join('')+'</table>';
-    h+='<h2>6. Conclusión</h2><p>Riesgo residual máximo: <b>'+(s.max1?s.max1+' ('+nivel(s.max1)+')':'—')+'</b>. Umbral de aceptación: '+s.u+'. Riesgos sobre el umbral: '+s.sobre+'.</p><p><b>Dictamen:</b> '+esc(S.c.c_dict||'[DICTAMEN]')+'</p>'+(S.c.c_obs?'<p><b>Observaciones:</b> '+esc(S.c.c_obs)+'</p>':'')+'<p>Fecha prevista de revisión: '+esc(S.c.c_rev||'—')+'. La evaluación debe revisarse cuando cambie el tratamiento o sus riesgos.</p>';
+    var cx=S.ctx||{f:{}},pc=pisoCx();
+    h+='<h2>4. Establecimiento del contexto (Guía SPDP v2, Cap. II, etapa 1)</h2>'+TB+tr(['Factor','Valoración'],1)+CFG.factores.map(function(f){var i=(cx.f||{})[f.id];return tr([f.letra+') '+f.nombre,i==null?'Sin valorar':f.ops[i][0]])}).join('')+tr(['Piso de impacto sugerido (criterio propio)',pc.piso?pc.piso+' ('+CFG.impacto[pc.piso-1][1]+')':'—'])+tr(['Derechos potencialmente afectados',(cx.der||[]).join('; ')||'—'])+tr(['Periodo de la probabilidad',cx.per||'—'])+tr(['Método',cx.met||'—'])+tr(['Capacidad de riesgo',cx.cap?'USD '+cx.cap:'No definida'])+tr(['Justificación de los criterios',cx.rat||'—'])+'</table>';
+    h+='<h2>5. Evaluación de riesgos para los derechos y libertades (art. 32 num. 3 RGLOPDP)</h2><p>Nivel = impacto × probabilidad (escala 1 a 5 cada uno). Niveles: '+CFG.niveles.map(function(x){return x[2]+' '+x[0]+'-'+x[1]}).join('; ')+'. Escalas propias, compatibles con la Guía de Gestión de Riesgos y Evaluación de Impacto de la SPDP.</p>'+
+      TB+tr(['N.º','Escenario','Dimensión','Amenaza','Vulnerabilidad','Derechos afectados','Consecuencias para el titular','I','P','Inherente','Justificación'],1)+S.riesgos.map(function(o,i){return tr(['R'+(i+1),o.esc,o.dim,o.ame,[o.vul,o.vulD].filter(Boolean).join(': '),(o.der||[]).join('; '),o.imp.join('; '),o.i0,o.p0,o.i0*o.p0+' '+nivel(o.i0*o.p0),o.rat||''])}).join('')+'</table>';
+    h+='<h2>6. Medidas previstas y riesgo residual (art. 32 num. 4 RGLOPDP)</h2>'+TB+tr(['N.º','Medidas, garantías y mecanismos','Residual','Decisión','Responsable','Plazo'],1)+S.riesgos.map(function(o,i){return tr(['R'+(i+1),o.ctl.join('; ')||'Sin medidas',o.i1*o.p1+' '+nivel(o.i1*o.p1),o.dec,o.own,o.plazo])}).join('')+'</table>';
+    h+='<h2>7. Conclusión</h2><p>Riesgo residual máximo: <b>'+(s.max1?s.max1+' ('+nivel(s.max1)+')':'—')+'</b>. Umbral de aceptación: '+s.u+'. Riesgos sobre el umbral: '+s.sobre+'.</p><p><b>Dictamen:</b> '+esc(S.c.c_dict||'[DICTAMEN]')+'</p>'+(S.c.c_obs?'<p><b>Observaciones:</b> '+esc(S.c.c_obs)+'</p>':'')+'<p>Fecha prevista de revisión: '+esc(S.c.c_rev||'—')+'. La evaluación debe revisarse cuando cambie el tratamiento o sus riesgos.</p>';
     if(n.cls==='si')h+='<p><i>Por ser obligatoria, esta evaluación se realiza antes del inicio del tratamiento (art. 31 RGLOPDP) y se presenta ante la Superintendencia de Protección de Datos Personales (art. 32 RGLOPDP).</i></p>';
     var f=S.f;h+='<p><b>FIRMA DE RESPONSABILIDAD</b></p>'+TB+tr(['Elaborado por','Revisado y aprobado por'],1)+tr(['Firma: ______________________','Firma: ______________________'])+tr([f.f_el||'',f.f_ap||''])+tr([f.f_ec||'',f.f_ac||''])+tr(['Fecha: '+(f.f_fe||''),d.d_resp||''])+'</table>';
     return h}
@@ -305,12 +344,12 @@ var CFG=/*__CONFIG__*/;
   function fb(t){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Copiado')}catch(e){toast('No se pudo copiar')}ta.remove()}
   $('copInf').onclick=function(){if(!S.riesgos.length){toast('Agrega al menos un riesgo');return}copyHtml(informe())};
   $('copMat').onclick=function(){if(!S.riesgos.length){toast('No hay riesgos');return}var c=function(x){return String(x==null?'':x).replace(/[\t\n\r]+/g,' ')};
-    var rows=[['N.º','Escenario','Dimensión','Amenaza','Vulnerabilidad','Consecuencias','Impacto','Probabilidad','Inherente','Nivel inherente','Medidas','Impacto residual','Prob. residual','Residual','Nivel residual','Decisión','Responsable','Plazo'].join('\t')].concat(S.riesgos.map(function(o,i){return['R'+(i+1),o.esc,o.dim,o.ame,[o.vul,o.vulD].filter(Boolean).join(': '),o.imp.join('; '),o.i0,o.p0,o.i0*o.p0,nivel(o.i0*o.p0),o.ctl.join('; '),o.i1,o.p1,o.i1*o.p1,nivel(o.i1*o.p1),o.dec,o.own,o.plazo].map(c).join('\t')}));
+    var rows=[['N.º','Escenario','Dimensión','Amenaza','Vulnerabilidad','Derechos afectados','Consecuencias','Justificación','Impacto','Probabilidad','Inherente','Nivel inherente','Medidas','Impacto residual','Prob. residual','Residual','Nivel residual','Decisión','Responsable','Plazo'].join('\t')].concat(S.riesgos.map(function(o,i){return['R'+(i+1),o.esc,o.dim,o.ame,[o.vul,o.vulD].filter(Boolean).join(': '),(o.der||[]).join('; '),o.imp.join('; '),o.rat||'',o.i0,o.p0,o.i0*o.p0,nivel(o.i0*o.p0),o.ctl.join('; '),o.i1,o.p1,o.i1*o.p1,nivel(o.i1*o.p1),o.dec,o.own,o.plazo].map(c).join('\t')}));
     var t=rows.join('\n');if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){toast('Matriz copiada: pega en Excel')},function(){fb(t)});else fb(t)};
 
   $('nueva').onclick=function(){var b=this;if(!b.dataset.c){b.dataset.c=1;b.textContent='¿Borrar la evaluación actual?';return}delete b.dataset.c;b.textContent='Nueva evaluación';S=blank();save();all();toast('Evaluación nueva')};
   $('ejemplo').onclick=function(){S=JSON.parse(JSON.stringify(CFG.ejemplo));save();all();toast('Ejemplo ficticio cargado')};
-  function all(){paintNec();resNec();paintD();paintP();paintC();renderR();resumen()}
+  function all(){if(!S.ctx)S.ctx={f:{},der:[]};paintNec();resNec();paintD();paintP();paintCx();paintC();renderR();resumen()}
   all();
 })();
 </script>

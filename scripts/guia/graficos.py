@@ -50,11 +50,11 @@ def arrow(ax, a, b, color=OLI, rad=0.0):
 
 # 1. Flujo de las herramientas
 def flujo():
-    fig, ax = plt.subplots(figsize=(13.4, 3.7))
-    ax.set_xlim(0, 13.4); ax.set_ylim(0, 3.7); ax.axis("off")
+    fig, ax = plt.subplots(figsize=(15, 3.7))
+    ax.set_xlim(0, 15); ax.set_ylim(0, 3.7); ax.axis("off")
     pasos = [("01", "Catálogo", "Servicios\ny glosario"), ("02", "Honorarios", "Proforma\nantes de iniciar"), ("03", "Madurez", "Mapeo, diagnóstico\ny plan de acción"),
-             ("04", "RAT", "Inventario de\nactividades"), ("05", "Gran escala", "Puntaje MTGE\npor actividad"), ("06", "Evaluación\nde impacto", "Actividades de\nalto riesgo"),
-             ("07", "Plantillas", "Política, avisos,\ncontratos, DPD"), ("08", "Vulneraciones", "Protocolo y\nrespuesta")]
+             ("04", "RAT", "Inventario de\nactividades"), ("05", "Gran escala", "Puntaje MTGE\npor actividad"), ("06", "Interés\nlegítimo", "Ponderación\nprevia"), ("07", "Evaluación\nde impacto", "Actividades de\nalto riesgo"),
+             ("08", "Plantillas", "Política, avisos,\ncontratos, DPD"), ("09", "Vulneraciones", "Protocolo y\nrespuesta")]
     w, gap, y = 1.48, 0.18, 1.3
     for i, (n, t, s_) in enumerate(pasos):
         x = 0.08 + i * (w + gap)
@@ -66,8 +66,8 @@ def flujo():
         ax.text(x + w / 2, y + 0.33, s_, ha="center", va="center", fontsize=7.8, color=ORC if dark else OLI)
         if i < len(pasos) - 1:
             arrow(ax, (x + w + 0.02, y + 0.78), (x + w + gap - 0.02, y + 0.78))
-    arrow(ax, (12.6, 1.25), (4.1, 1.25), color=ORO, rad=-0.16)
-    ax.text(8.3, 0.12, "Revisión anual: repetir 03 · Madurez y 05 · Gran escala para medir el avance", ha="center", fontsize=9, color=OLI, style="italic")
+    arrow(ax, (14.2, 1.25), (4.1, 1.25), color=ORO, rad=-0.16)
+    ax.text(9.1, 0.12, "Revisión anual: repetir 03 · Madurez y 05 · Gran escala para medir el avance", ha="center", fontsize=9, color=OLI, style="italic")
     save(fig, "flujo_herramientas")
 
 
@@ -410,6 +410,49 @@ def mapeo():
     save(fig, "mapeo_areas")
 
 
+# 15. Roadmap de la gestión del DPD en la empresa
+def roadmap_dpd():
+    fig, ax = plt.subplots(figsize=(15, 7.6))
+    ax.set_xlim(0, 15); ax.set_ylim(0, 7.6); ax.axis("off")
+    F = [("0", "Propuesta", "Semana 0", "Reunión inicial, catálogo\ny proforma (01 · 02)", "Decide contratar;\ndesigna un enlace"),
+         ("1", "Diagnóstico", "Semanas 1-3", "Mapea áreas y mide\nla madurez (03)", "Entrega evidencias;\nla gerencia valida"),
+         ("2", "Inventario", "Semanas 3-6", "Guía el RAT y mide\nla gran escala (04 · 05)", "Cada área describe\nsus tratamientos"),
+         ("3", "Riesgos", "Semanas 6-9", "Contexto, ponderación\ne impacto (06 · 07)", "Dueños de proceso\nestiman y deciden"),
+         ("4", "Adecuación", "Semanas 9-14", "Redacta borradores:\npolítica, cláusulas,\nprotocolo (08 · 09)", "Aprueba, firma\ne IMPLEMENTA"),
+         ("5", "Designación", "Semana 14", "Verifica requisitos;\nregistro ante la SPDP", "Designa al DPD (si\ncorresponde) y\ncomunica el canal"),
+         ("6", "Control mensual", "Cada mes", "Supervisa, informa,\natiende consultas", "Ejecuta mejoras;\nresponde solicitudes"),
+         ("7", "Revisión anual", "Cada año", "Repite 03 y 05; revisa\nponderaciones y EIPD", "Actualiza el RAT y\nel plan de acción")]
+    w, gap, x0 = 1.68, 0.12, 0.55
+    ax.text(0.1, 5.05, "DPD O\nCONSULTOR", fontsize=8.5, weight="bold", color=ORO, rotation=90, va="center", ha="center")
+    ax.text(0.1, 2.75, "EMPRESA\n(RESPONSABLE)", fontsize=8.5, weight="bold", color=OK, rotation=90, va="center", ha="center")
+    ax.text(x0, 7.42, "ROADMAP DE LA GESTIÓN DEL DPD", fontsize=12, weight="bold", color=CAR)
+    ax.text(x0, 7.08, "El DPD asesora y supervisa; la empresa decide, aprueba e implementa", fontsize=9, color=OLI, style="italic")
+    for i, (n, t_, sem, dpd, emp) in enumerate(F):
+        x = x0 + i * (w + gap)
+        dark = i in (0, 4, 7)
+        ax.add_patch(FancyBboxPatch((x, 6.15), w, 0.75, boxstyle="round,pad=0.02,rounding_size=0.08", fc=CAR if dark else ORO, ec=ORO, lw=1.2))
+        ax.text(x + 0.12, 6.7, n, fontsize=8, weight="bold", color=ORC if dark else CAR)
+        ax.text(x + w / 2, 6.55, t_, ha="center", va="center", fontsize=9.6, weight="bold", color=MAR if dark else CAR)
+        ax.text(x + w / 2, 6.27, sem, ha="center", va="center", fontsize=7.2, color=ORC if dark else CAR)
+        ax.add_patch(FancyBboxPatch((x, 4.35), w, 1.45, boxstyle="round,pad=0.02,rounding_size=0.06", fc=MAR, ec=ORO, lw=1.2))
+        ax.text(x + w / 2, 5.07, dpd, ha="center", va="center", fontsize=7.6, color=CAR)
+        ax.add_patch(FancyBboxPatch((x, 2.05), w, 1.45, boxstyle="round,pad=0.02,rounding_size=0.06", fc="#E6F2EA", ec=OK, lw=1.2))
+        ax.text(x + w / 2, 2.77, emp, ha="center", va="center", fontsize=7.6, color="#2E5E40", weight="bold" if i == 4 else "normal")
+        arrow(ax, (x + w / 2, 4.33), (x + w / 2, 3.52), color=OLI)
+        if i < len(F) - 1:
+            arrow(ax, (x + w + 0.01, 6.52), (x + w + gap - 0.01, 6.52), color=OLI)
+    xa = x0 + 7 * (w + gap) + w / 2
+    xb = x0 + 3 * (w + gap) + w / 2
+    arrow(ax, (xa, 6.95), (xb, 6.95), color=ORO, rad=0.12)
+    ax.text((xa + xb) / 2, 7.5, "La revisión anual vuelve a medir los riesgos", ha="center", fontsize=8, color=OLI, style="italic")
+    ax.add_patch(FancyBboxPatch((x0, 0.25), 14.25, 1.25, boxstyle="round,pad=0.02,rounding_size=0.08", fc="#FBEDE5", ec=AL, lw=1.2))
+    ax.text(x0 + 0.2, 1.22, "POR EVENTO (en cualquier momento)", fontsize=8.5, weight="bold", color=AL)
+    ev = ["Vulneración: protocolo y\nnotificación en plazo (09)", "Proyecto nuevo: protección\ndesde el diseño y por defecto", "Solicitud de un titular:\nrespuesta en plazo", "Requerimiento de la SPDP:\nrespuesta con evidencia"]
+    for j, e in enumerate(ev):
+        ax.text(x0 + 1.9 + j * 3.55, 0.68, e, ha="center", va="center", fontsize=7.8, color=CAR)
+    save(fig, "roadmap_dpd")
+
+
 if __name__ == "__main__":
-    flujo(); ciclo(); idx = radar(); heatmap(); multa(); flujo_datos(); calendario(); iso(); estados_rat(); mtge(); honorarios(); roadmap(); roles(); mapeo()
+    flujo(); ciclo(); idx = radar(); heatmap(); multa(); flujo_datos(); calendario(); iso(); estados_rat(); mtge(); honorarios(); roadmap(); roles(); mapeo(); roadmap_dpd()
     print("índice ejemplo", round(idx, 2))

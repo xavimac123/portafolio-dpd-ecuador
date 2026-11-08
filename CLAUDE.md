@@ -26,9 +26,10 @@ La numeración de las herramientas sigue el orden de uso de la guía (`docs/guia
 - `03-madurez/` — diagnóstico de madurez, fuente `scripts/madurez_config.py` (modelo propio, rotularlo siempre así)
 - `04-registro-tratamientos/` — RAT
 - `05-gran-escala/` — evaluación de gran escala (MTGE), fuente `scripts/granescala_config.py`
-- `06-evaluacion-impacto/` — evaluación de impacto (EIPD), fuente `scripts/eipd_config.py`
-- `07-kit-plantillas/` — documentos contractuales e informativos
-- `08-kit-vulneraciones/` — gestión y notificación de vulneraciones
-- `docs/` — decisiones del proyecto
+- `06-interes-legitimo/` — evaluación de ponderación del interés legítimo, fuente `scripts/interes_config.py` (puntajes de ponderación de criterio propio)
+- `07-evaluacion-impacto/` — evaluación de impacto (EIPD), fuente `scripts/eipd_config.py`
+- `08-kit-plantillas/` — documentos contractuales e informativos
+- `09-kit-vulneraciones/` — gestión y notificación de vulneraciones
+- `docs/` — decisiones del proyecto, contraste con las guías de la SPDP y recursos pendientes
 - `referencias/` — plantillas ya utilizadas, anonimizadas
 - `scripts/` — generadores (Excel, exportación a Word)

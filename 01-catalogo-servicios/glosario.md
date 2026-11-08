@@ -40,7 +40,11 @@
 | Evaluación de impacto | Análisis previo de los riesgos de un tratamiento para los derechos de los titulares y de las medidas para mitigarlos. | LOPDP art. 42; RGLOPDP arts. 29 a 32 |
 | Responsabilidad proactiva | Obligación del responsable de acreditar que implementó mecanismos de protección de datos. | LOPDP art. 10 lit. k |
 | Base legitimadora | Fundamento que hace lícito el tratamiento: consentimiento, obligación legal, orden judicial, interés público, contrato, interés vital, fuentes públicas o interés legítimo. | LOPDP art. 7 |
-| Interés legítimo | Base de legitimación del sector privado que requiere una ponderación documentada frente a los derechos del titular. | Res. SPDP-SPD-2025-0041-R |
+| Interés legítimo | Base de legitimación del sector privado, limitada a los supuestos que admite la resolución, que requiere una evaluación de ponderación previa frente a los derechos del titular. | Res. SPDP-SPD-2025-0041-R |
+| Evaluación de ponderación | Análisis previo, motivado y documentado que determina si el interés legítimo del responsable prevalece sobre los derechos y libertades del titular. Se registra y se revisa al menos una vez al año. | Res. SPDP-SPD-2025-0041-R y Anexo 1 |
+| Establecimiento del contexto | Primera etapa de la gestión de riesgos: fijar los criterios de impacto en derechos, de probabilidad y de aceptación antes de valorar riesgos. | Res. SPDP-SPD-2026-0012-R (Guía v2), Cap. II |
+| Protección de datos desde el diseño y por defecto | Considerar los riesgos desde la planificación de un tratamiento y configurar los sistemas para tratar, por defecto, solo los datos necesarios. | LOPDP art. 39; Res. SPDP-SPD-2025-0040-R |
+| Cláusulas de protección de datos | Estipulaciones obligatorias en los contratos que implican tratamiento; la SPDP ofrece modelos referenciales por tipo de relación. | Res. SPDP-SPD-2025-0006-R |
 | Encargo | Acceso de un encargado a los datos para prestar un servicio al responsable; no es transferencia ni comunicación. | LOPDP arts. 34 y 35 |
 | Modelo Técnico de Gran Escala (MTGE) | Suma de seis variables por tratamiento: titulares, volumen, categorías, frecuencia, permanencia y alcance geográfico. | Res. SPDP-SPD-2026-0005-R arts. 7 a 10 |
 | SISPDP | Sistema de la SPDP por el que se notifican obligatoriamente las vulneraciones de seguridad. | Res. SPDP-SPD-2026-0040-R |
@@ -53,6 +57,7 @@
 | Implementación | Poner en operación las medidas: formularios, sistemas, contratos firmados, capacitación. La ejecuta la empresa. |
 | Supervisión | Verificar, medir e informar que lo documentado e implementado se cumple. Es la función propia del DPD. |
 | Riesgo inherente y residual | Riesgo antes de las medidas y riesgo que queda después de aplicarlas. |
+| Justificación (rationale) | Explicación de por qué se asigna cada valor de impacto o probabilidad: datos, antecedentes y controles. Sin ella, la guía v2 de la SPDP considera la estimación ruido. |
 | Apetito al riesgo | Pérdida que la gerencia está dispuesta a asumir, expresada como capacidad y tolerancia (criterio referencial de la guía de riesgos de la SPDP). |
 | Volumen de negocio | Ingresos por ventas y servicios del ejercicio anterior, sin IVA ni impuestos relacionados; base de las multas (LOPDP art. 73). |
 

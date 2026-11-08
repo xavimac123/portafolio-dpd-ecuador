@@ -174,7 +174,7 @@ CAMPOS = [
     {"k": "medidas", "h": "Medidas técnicas, jurídicas, administrativas y organizativas", "sec": "cons", "tipo": "lista",
      "w": 34, "min": "9", "nota": "Descripción general. No anotes contraseñas ni detalles que debiliten la seguridad."},
     {"k": "sistemas", "h": "Sistemas y soportes", "sec": "cons", "tipo": "lista", "w": 24, "min": None,
-     "nota": "Dónde residen los datos. Indispensable para gestionar una vulneración (Herramienta 08)."},
+     "nota": "Dónde residen los datos. Indispensable para gestionar una vulneración (Herramienta 09)."},
     {"k": "riesgo", "h": "Nivel de riesgo (orientativo)", "sec": "riesgo", "tipo": "auto", "w": 12, "min": None,
      "nota": "Automático. Criterio interno, no normativo: ver README."},
     {"k": "eipd", "h": "¿Requiere evaluación de impacto?", "sec": "riesgo", "tipo": "opc", "w": 14, "min": None,

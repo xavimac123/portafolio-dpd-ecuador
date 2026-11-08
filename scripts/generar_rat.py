@@ -67,7 +67,7 @@ def hoja_instrucciones(wb):
     ws.column_dimensions["B"].width = 100
     lines = [
         ("Registro de Actividades de Tratamiento (RAT) — LOPDP Ecuador", True, 14),
-        ("Macías Sánchez Consultores · Herramienta 08 · v0.4", False, 10),
+        ("Macías Sánchez Consultores · Herramienta 04 · v0.4", False, 10),
         ("", False, 10),
         ("Para qué sirve", True, 11),
         ("Documentar cada actividad de tratamiento con el contenido mínimo del art. 38 del Reglamento General a la LOPDP, separar lo exigido por la norma de lo recomendable y detectar vacíos automáticamente.", False, 10),

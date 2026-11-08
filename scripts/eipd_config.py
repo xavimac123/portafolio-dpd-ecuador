@@ -1,7 +1,8 @@
-"""Fuente única de la Herramienta 06: Evaluación de impacto del tratamiento de datos personales.
+"""Fuente única de la Herramienta 07: Evaluación de impacto del tratamiento de datos personales.
 
-Base: LOPDP arts. 40 y 42; RGLOPDP arts. 29 a 32; Res. SPDP-SPD-2025-0003-R (Guía de Gestión de
-Riesgos y Evaluación de Impacto, Cap. I obligatorio, Cap. II referencial).
+Base: LOPDP arts. 40 y 42; RGLOPDP arts. 29 a 32; Res. SPDP-SPD-2026-0012-R (Guía de Gestión de
+Riesgos y Evaluación de Impacto, versión 2: Cap. I obligatorio, Cap. II referencial). La guía v2 ordena
+cinco etapas: establecimiento del contexto, identificación, análisis, evaluación y tratamiento.
 
 Las escalas de impacto y probabilidad son PROPIAS del portafolio: la guía de la SPDP deja las escalas
 en el Cap. II, que es referencial, y permite agregar criterios. Ajustables aquí.
@@ -48,7 +49,7 @@ NECESIDAD = [
     {"id": "n_vulnerables", "grupo": "riesgo", "oblig": False,
      "texto": "¿Los titulares pertenecen a grupos vulnerables (niñas, niños y adolescentes, personas con discapacidad, adultos mayores, pacientes, trabajadores frente al empleador)?",
      "concepto": "La guía de la SPDP considera la vulnerabilidad de grupos especiales como criterio de evaluación.",
-     "norma": "Art. 40 LOPDP (particularidades de las partes involucradas); Guía Res. SPDP-SPD-2025-0003-R, Cap. II, 1.1."},
+     "norma": "Art. 40 LOPDP (particularidades de las partes involucradas); Guía Res. SPDP-SPD-2026-0012-R (v2), Cap. II, establecimiento del contexto."},
     {"id": "n_impide", "grupo": "riesgo", "oblig": False,
      "texto": "¿El tratamiento puede impedir a las personas ejercer un derecho o acceder a un servicio o contrato?",
      "concepto": "Ejemplos: listas de morosos, verificación de antecedentes que condiciona una contratación.",
@@ -135,8 +136,52 @@ CONTROLES = [
     "Acuerdos de confidencialidad y capacitación al personal", "Intervención humana en decisiones automatizadas",
     "Aviso de privacidad específico y canal de derechos", "Pruebas de seguridad (vulnerabilidades, penetración)",
     "Plan de respuesta a vulneraciones", "Señalética y limitación del ángulo de cámaras",
+    "Separación de bases de datos o de entornos (separar)", "Agregación o generalización de datos (abstraer)",
+    "Configuración por defecto más protectora (por defecto)",
 ]
 DECISIONES = ["Mitigar", "Aceptar", "Evitar", "Transferir"]
+
+# ---------- Establecimiento del contexto (Guía v2, Cap. II, etapa 1)
+# Los cinco factores (a-e) vienen de la guía. Las opciones y los puntos son CRITERIO PROPIO del portafolio.
+FACTORES_IMPACTO = [
+    {"id": "fa", "letra": "a", "nombre": "Categorías especiales de datos (art. 25 LOPDP)",
+     "ayuda": "Datos sensibles, de salud, de niñas, niños y adolescentes, y de personas con discapacidad.",
+     "ops": [["No se tratan", 0], ["Sí, de forma accesoria", 1], ["Sí, son el dato principal", 2]]},
+    {"id": "fb", "letra": "b", "nombre": "Vulnerabilidad de los titulares",
+     "ayuda": "La guía pide considerar edad, género, nivel educativo y socioeconómico, discapacidad y etnia. La relación de subordinación (trabajador frente al empleador, paciente frente a la clínica) reduce la capacidad de oponerse.",
+     "ops": [["Población general", 0], ["Relación de subordinación o dependencia", 1], ["Grupos especialmente vulnerables", 2]]},
+    {"id": "fc", "letra": "c", "nombre": "Número de titulares afectados",
+     "ayuda": "La guía admite reglas específicas; cita como ejemplo que una vulneración que afecte a más de mil personas sea de riesgo muy alto.",
+     "ops": [["Menos de 100", 0], ["De 100 a 1.000", 1], ["Más de 1.000", 2]]},
+    {"id": "fd", "letra": "d", "nombre": "Naturaleza de la afectación más grave posible",
+     "ayuda": "La pérdida de confidencialidad puede ser irreversible; la de integridad o disponibilidad suele ser temporal si existen respaldos y planes de continuidad. Analiza cada escenario por separado.",
+     "ops": [["Disponibilidad o integridad recuperable", 0], ["Integridad que altera decisiones sobre el titular", 1], ["Confidencialidad: exposición irreversible", 2]]},
+    {"id": "fe", "letra": "e", "nombre": "Volumen de datos por titular",
+     "ayuda": "Cuántos atributos y cuánto historial se guarda de cada persona.",
+     "ops": [["Pocos datos de identificación o contacto", 0], ["Perfil moderado", 1], ["Perfil amplio o historial detallado", 2]]},
+]
+# Piso de impacto sugerido = máx(1, redondeo hacia arriba de la suma / 2). Criterio propio.
+DERECHOS = [
+    "Protección de datos personales (autodeterminación informativa)", "Intimidad personal y familiar",
+    "Honra y buen nombre", "Igualdad y no discriminación", "Trabajo", "Salud", "Integridad personal",
+    "Libertad de expresión y de opinión", "Libertad de movimiento", "Acceso a bienes y servicios",
+    "Propiedad y patrimonio", "Interés superior de niñas, niños y adolescentes", "Seguridad jurídica",
+]
+PERIODOS = ["Un año", "Un semestre", "Un trimestre", "Un mes"]
+METODOS = [
+    "Cualitativo calibrado: juicio experto con justificación (rationale) de cada valor",
+    "Cuantitativo: frecuencias históricas y pérdidas en dólares",
+    "Híbrido: cualitativo con datos cuantitativos donde existan",
+]
+PASOS_IMPACTO = [
+    ["Define los criterios antes de valorar", "Completa los cinco factores de esta pestaña. Fijan cuán grave sería, como mínimo, una afectación en este tratamiento."],
+    ["Identifica los derechos en juego", "Marca qué derechos del titular podría afectar el tratamiento. No te limites a la privacidad: piensa en trabajo, salud, igualdad, patrimonio."],
+    ["Describe el escenario", "En la pestaña de riesgos, combina dato en riesgo, amenaza y vulnerabilidad: «un empleado con privilegios descarga la base de pacientes porque no hay registro de accesos»."],
+    ["Separa impactos primarios y secundarios", "Primario: lo que sufre directamente el titular (exposición, fraude). Secundario: lo que provocan terceros (despido, discriminación, burla)."],
+    ["Asigna impacto y probabilidad con justificación", "Cada valor necesita su rationale: antecedentes, datos del sector, controles existentes. Sin justificación, el número es ruido."],
+    ["Compara con el piso de impacto", "Si asignas un impacto menor al piso sugerido por el contexto, explica por qué."],
+    ["Decide y vuelve a medir", "Elige medidas, estima el riesgo residual y compáralo con el umbral de aceptación. Repite cuando cambie el tratamiento."],
+]
 
 OPERACIONES = ["Recolección", "Registro", "Almacenamiento", "Consulta y uso", "Análisis o perfilado",
                "Comunicación a terceros", "Transferencia internacional", "Conservación", "Supresión o anonimización"]

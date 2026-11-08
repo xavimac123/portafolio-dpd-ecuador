@@ -21,7 +21,7 @@ Las referencias europeas son comparativas y no vinculantes en Ecuador. La herram
 | Registro propio del encargado (art. 30.2 RGPD) | Hoja separada, exigible solo cuando el responsable está obligado (**art. 44 RGLOPDP**). Su contenido es de buena práctica hasta confirmar el texto del art. 44 | Hoja "RAT encargado" |
 | Descripción **general** de las medidas, sin detalles que debiliten la seguridad | Nota en el campo de medidas | Comentario del encabezado |
 | Vincular el registro con el análisis de riesgos y la evaluación de impacto | Nivel de riesgo orientativo y campo de evaluación de impacto con referencia (**art. 42 LOPDP**) | Sección 6 |
-| Identificar sistemas y soportes donde residen los datos | Campo "Sistemas y soportes", útil para la Herramienta 08 (vulneraciones) | Sección 5 |
+| Identificar sistemas y soportes donde residen los datos | Campo "Sistemas y soportes", útil para la Herramienta 09 (vulneraciones) | Sección 5 |
 | Registro vivo: responsable interno, fecha de alta, revisiones | Responsable interno, fecha de alta, última y próxima revisión, alerta de revisión vencida | Secciones 1 y 7 |
 | Relación con encargados y contratos | Campo de contrato de encargo y alerta (**art. 41 RGLOPDP; art. 68 num. 9 LOPDP**) | Sección 4 |
 

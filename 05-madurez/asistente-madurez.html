@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Nivel de madurez en protección de datos — LOPDP Ecuador</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light;--oro:#A09046;--carbon:#14181E;--marfil:#F7F5EE;--oliva:#6E6230;--oroc:#C9BC82;--linea:#DDD8C8;--ok:#2E7D4F;--okbg:#E6F2EA;--al:#A4461C;--albg:#FBEDE5;--am:#8A6A00;--ambg:#FFF4D6}
+  *{box-sizing:border-box}
+  html,body{background:var(--marfil);color:var(--carbon)}
+  body{margin:0;font-family:Archivo,system-ui,sans-serif;font-size:15px;line-height:1.5}
+  header{background:var(--carbon);color:var(--marfil);padding:22px 20px 18px}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}header .wrap{padding:0}
+  .marca{font-stretch:115%;font-weight:700;letter-spacing:.08em;color:var(--oro);font-size:12px;text-transform:uppercase}
+  h1{font-stretch:115%;font-weight:800;font-size:clamp(22px,4vw,32px);margin:6px 0 4px;line-height:1.15}
+  header p{margin:0;color:var(--oroc);font-size:14px}
+  nav{display:flex;gap:6px;margin:18px 0 0;flex-wrap:wrap}
+  nav button{background:transparent;border:1px solid #3a3f47;color:var(--marfil);padding:8px 14px;border-radius:999px;font:inherit;font-size:14px;cursor:pointer}
+  nav button[aria-selected=true]{background:var(--oro);border-color:var(--oro);color:var(--carbon);font-weight:700}
+  main{padding:24px 0 60px}
+  section{display:none}section.on{display:block}
+  h2{font-stretch:115%;font-size:20px;margin:0 0 6px}
+  h3{font-size:15px;margin:0 0 4px;font-stretch:108%}
+  .sub{color:var(--oliva);margin:0 0 16px;font-size:14px}
+  .card{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:18px;margin-bottom:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  label{display:block;font-weight:600;font-size:13px;margin-bottom:4px}
+  input,select,textarea{width:100%;font:inherit;font-size:14px;padding:9px 10px;border:1px solid var(--linea);border-radius:8px;background:#FFFDF6;color:#14181E;-webkit-text-fill-color:#14181E;caret-color:#14181E;color-scheme:light;opacity:1}
+  input::placeholder,textarea::placeholder{color:#8C8775;-webkit-text-fill-color:#8C8775}
+  select option{color:#14181E;background:#fff}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--oro);outline-offset:1px}
+  .dh{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
+  .base{font-size:12px;color:var(--oliva)}
+  .q{border-top:1px solid #EFEBDD;padding:12px 0}
+  .qt{font-size:14px;font-weight:600}
+  .ev{font-size:12px;color:var(--oliva)}
+  .seg{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-top:8px}
+  .seg button{padding:7px 2px;border:1px solid var(--linea);background:#FFFDF6;color:#14181E;border-radius:8px;font:inherit;font-size:12px;cursor:pointer;line-height:1.2}
+  .seg button b{display:block;font-size:14px}
+  .seg button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
+  .com{margin-top:6px;font-size:13px;padding:6px 8px}
+  .prog{height:6px;background:#EFEBDD;border-radius:3px;overflow:hidden;margin-top:6px}.prog i{display:block;height:100%;background:var(--oro)}
+  .btn{background:var(--carbon);color:#fff;border:0;padding:10px 16px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
+  .btn.sec{background:#fff;color:var(--carbon);border:1px solid var(--carbon)}
+  .btn.oro{background:var(--oro);color:var(--carbon)}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .big{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+  .score{font-size:48px;font-weight:800;font-stretch:115%;line-height:1}
+  .lvl{display:inline-block;border-radius:999px;padding:4px 12px;font-weight:700;font-size:14px}
+  .L0,.L1{background:var(--albg);color:var(--al)}.L2{background:var(--ambg);color:var(--am)}.L3,.L4{background:var(--okbg);color:var(--ok)}
+  .bars .b{display:grid;grid-template-columns:minmax(120px,1.4fr) 3fr 44px;gap:8px;align-items:center;font-size:13px;margin:6px 0}
+  .bars .t{height:12px;background:#EFEBDD;border-radius:6px;overflow:hidden}.bars .t i{display:block;height:100%}
+  table.plan{width:100%;border-collapse:collapse;font-size:13px}
+  table.plan th,table.plan td{border-bottom:1px solid #EFEBDD;padding:8px 6px;text-align:left;vertical-align:top}
+  table.plan th{font-size:12px;color:var(--oliva)}
+  .pr{font-weight:700;font-size:12px;border-radius:999px;padding:2px 8px;white-space:nowrap}
+  .pA{background:var(--albg);color:var(--al)}.pM{background:var(--ambg);color:var(--am)}.pB{background:var(--okbg);color:var(--ok)}
+  .nota{font-size:12px;color:var(--oliva)}
+  .scroll{overflow-x:auto}
+  .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--carbon);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;z-index:9}.toast.on{opacity:1}
+  footer{border-top:1px solid var(--linea);padding:18px 0;font-size:12px;color:var(--oliva)}
+  svg text{font-family:Archivo,system-ui,sans-serif}
+  @media (max-width:560px){.card{padding:14px}.seg button{font-size:11px}table.plan tr:first-child{display:none}table.plan tr{display:block;border-bottom:1px solid #EFEBDD;padding:10px 0}table.plan td{display:block;border:0;padding:3px 0}.bars .b{grid-template-columns:1fr 1.4fr 36px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="marca">Macías Sánchez Consultores · Herramienta 05</div>
+  <h1>Nivel de madurez en protección de datos personales</h1>
+  <p>Diagnóstico por dominios de la LOPDP, su Reglamento y la normativa de la SPDP</p>
+  <nav role="tablist">
+    <button data-t="t1" aria-selected="true">1 · Contexto</button>
+    <button data-t="t2" aria-selected="false">2 · Cuestionario</button>
+    <button data-t="t3" aria-selected="false">3 · Resultados y plan</button>
+  </nav>
+</div></header>
+
+<main class="wrap">
+<section id="t1" class="on">
+  <h2>Antes de empezar</h2>
+  <p class="sub">Responde con base en <b>evidencia</b> (documentos, registros), no en intenciones. Si un punto no aplica a la organización, marca <b>N/A</b>: no cuenta en el promedio.</p>
+  <div class="card"><div class="grid" id="ctx"></div></div>
+  <div class="card"><h3>Escala de respuesta</h3><div id="escala"></div></div>
+  <div class="card"><h3>Niveles de madurez</h3><div id="niveles"></div>
+    <p class="nota" style="margin:8px 0 0"><b>Modelo propio de Macías Sánchez Consultores.</b> La SPDP no ha emitido un modelo oficial de madurez. Los dominios siguen las obligaciones de la LOPDP, su Reglamento y la normativa de la SPDP; los dominios marcados como críticos pesan el doble por su exposición sancionatoria.</p></div>
+  <div class="row"><button class="btn" id="ir">Comenzar cuestionario</button><button class="btn sec" id="ejemplo">Cargar ejemplo ficticio</button><button class="btn sec" id="nueva">Nueva evaluación</button></div>
+</section>
+
+<section id="t2">
+  <h2>Cuestionario</h2>
+  <p class="sub" id="avance"></p>
+  <div id="dominios"></div>
+  <div class="row"><button class="btn oro" id="verRes">Ver resultados</button></div>
+</section>
+
+<section id="t3">
+  <h2>Resultados</h2>
+  <div class="card"><div class="big"><div><div class="score" id="idx">—</div><div class="nota">Índice de madurez (0 a 4)</div></div><div><span class="lvl" id="lvl"></span><p id="lvlD" style="margin:6px 0 0;font-size:14px;max-width:520px"></p><p class="nota" id="cobertura" style="margin:4px 0 0"></p></div></div></div>
+  <div class="grid">
+    <div class="card"><h3>Perfil por dominio</h3><div id="radar"></div></div>
+    <div class="card"><h3>Puntaje por dominio</h3><div class="bars" id="bars"></div></div>
+  </div>
+  <div class="card"><h3>Plan de acción priorizado</h3><p class="nota" style="margin:0 0 8px">Prioridad <b>Alta</b>: dominio crítico con puntaje menor a 2. <b>Media</b>: cualquier dominio menor a 2,8. <b>Baja</b>: mejora continua.</p><div class="scroll"><table class="plan" id="plan"></table></div></div>
+  <div class="card"><h3>Firma de responsabilidad</h3><div class="grid">
+    <div><label for="f_el">Elaborado por</label><input id="f_el" data-f></div>
+    <div><label for="f_ec">Cargo / matrícula</label><input id="f_ec" data-f></div>
+    <div><label for="f_ap">Revisado por</label><input id="f_ap" data-f placeholder="Representante legal de la organización"></div>
+    <div><label for="f_ac">Cargo</label><input id="f_ac" data-f></div>
+  </div></div>
+  <div class="row"><button class="btn oro" id="copInf">Copiar informe (Word)</button><button class="btn sec" id="copTab">Copiar resultados (Excel)</button></div>
+  <p class="nota">El informe incluye el gráfico como tabla de puntajes. Para el gráfico, toma una captura de esta pantalla.</p>
+</section>
+</main>
+<footer><div class="wrap">Abg. Mariano X. Macías Sánchez · Macías Sánchez Consultores · Diagnóstico orientativo; no constituye auditoría ni certificación de cumplimiento.</div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+var CFG={"escala": [[0, "No existe", "No hay nada al respecto."], [1, "Inicial", "Se hace de manera informal o aislada, sin documento."], [2, "En desarrollo", "Existe un documento o práctica, pero incompleto o sin aplicar en toda la organización."], [3, "Implementado", "Documentado, aprobado y aplicado; hay evidencia."], [4, "Gestionado", "Implementado, con responsables, indicadores y revisión periódica."]], "niveles": [[0.0, 0.99, "Inexistente", "La organización no ha iniciado su adecuación. Exposición alta a sanciones."], [1.0, 1.99, "Inicial", "Hay acciones aisladas. Faltan los documentos básicos exigidos por la LOPDP."], [2.0, 2.79, "En desarrollo", "Existen documentos clave, pero incompletos o sin aplicación sistemática."], [2.8, 3.49, "Implementado", "El cumplimiento está documentado y aplicado; falta medir y mejorar."], [3.5, 4.0, "Gestionado", "Cumplimiento sostenido, medido y revisado: responsabilidad proactiva demostrable."]], "dominios": [{"id": "gob", "corto": "Gobierno", "nombre": "Gobierno y responsabilidad proactiva", "peso": 1, "base": "LOPDP art. 47 (obligaciones del responsable)", "herramienta": "Esta evaluación (plan de acción)", "preguntas": [["La alta dirección aprobó formalmente una política interna de protección de datos.", "Política firmada o acta de aprobación"], ["Hay roles y responsables definidos para la protección de datos en cada área.", "Organigrama o matriz de responsabilidades"], ["Existe presupuesto o recursos asignados al cumplimiento.", "Presupuesto o plan anual"], ["La dirección recibe reportes periódicos del estado de cumplimiento.", "Informes o actas"]]}, {"id": "dpd", "corto": "DPD", "nombre": "Delegado de Protección de Datos", "peso": 2, "base": "LOPDP arts. 47 num. 13, 48 y 68; Res. SPDP-SPD-2025-0028-R", "herramienta": "02 · Designación del DPD", "preguntas": [["Se analizó si la organización está obligada a designar DPD (causales del art. 10 de la Res. 0028).", "Informe de análisis"], ["Si corresponde, el DPD está designado y registrado ante la SPDP.", "Nombramiento y constancia de registro"], ["El DPD actúa con independencia y tiene acceso a la información y a la dirección.", "Funciones documentadas"]]}, {"id": "rat", "corto": "RAT", "nombre": "Registro de actividades de tratamiento", "peso": 2, "base": "RGLOPDP arts. 38, 39 y 44; LOPDP art. 51", "herramienta": "01 · Registro de actividades de tratamiento", "preguntas": [["Existe un RAT con el contenido mínimo del art. 38 RGLOPDP para todas las actividades.", "RAT vigente"], ["El RAT se actualiza ante cambios (proveedores, sistemas, finalidades) y se revisa periódicamente.", "Fechas de revisión y motivo de actualización"], ["Las bases de datos se inscribieron en el Registro Nacional de Protección de Datos Personales.", "Constancia de inscripción"]]}, {"id": "lic", "corto": "Licitud", "nombre": "Licitud y bases legitimadoras", "peso": 2, "base": "LOPDP arts. 7 y 26; Res. SPDP-SPD-2025-0041-R", "herramienta": "01 · RAT (base legitimadora) y 02 · Cláusulas de consentimiento", "preguntas": [["Cada actividad tiene identificada su base legitimadora.", "Columna de base en el RAT"], ["Los consentimientos son específicos, informados, verificables y revocables.", "Formularios y registro de consentimientos"], ["Si se usa interés legítimo, existe la evaluación de ponderación documentada.", "Evaluación de ponderación"], ["Los datos sensibles se tratan solo bajo una excepción del art. 26 LOPDP.", "Análisis por actividad"]]}, {"id": "tra", "corto": "Transparencia", "nombre": "Transparencia e información al titular", "peso": 1, "base": "LOPDP art. 12", "herramienta": "02 · Política y avisos de privacidad", "preguntas": [["Existe una política de privacidad publicada con los contenidos del art. 12 LOPDP.", "Política publicada"], ["Cada punto de recolección (formularios, cámaras, web) tiene su aviso de privacidad.", "Avisos y letreros"], ["Los trabajadores reciben información sobre el tratamiento de sus datos.", "Aviso interno o cláusula contractual"]]}, {"id": "der", "corto": "Derechos", "nombre": "Derechos de los titulares", "peso": 1, "base": "LOPDP art. 12 y derechos del titular", "herramienta": "02 · Política de privacidad (canal de derechos)", "preguntas": [["Existe un canal y un procedimiento escrito para atender solicitudes de derechos.", "Procedimiento y correo de atención"], ["Las solicitudes se registran y se responden dentro del plazo legal.", "Registro de solicitudes"], ["El personal que recibe solicitudes sabe a quién derivarlas.", "Capacitación o instructivo"]]}, {"id": "enc", "corto": "Encargados", "nombre": "Encargados y terceros", "peso": 2, "base": "RGLOPDP art. 41; LOPDP art. 68 num. 9; Res. SPDP-SPD-2025-0006-R", "herramienta": "02 · Contrato de encargo", "preguntas": [["Existe un inventario de proveedores que tratan datos por cuenta de la organización.", "Lista de encargados"], ["Todos los encargados tienen contrato con el contenido del art. 41 RGLOPDP.", "Contratos firmados"], ["Se verifica periódicamente que los encargados cumplan sus obligaciones.", "Auditorías o certificaciones"]]}, {"id": "seg", "corto": "Seguridad", "nombre": "Seguridad y gestión de riesgos", "peso": 2, "base": "LOPDP art. 40; Res. SPDP-SPD-2025-0003-R", "herramienta": "04 · Evaluación de impacto (matriz de riesgos)", "preguntas": [["Existe un análisis de riesgos de los tratamientos con una metodología documentada.", "Matriz de riesgos"], ["Hay controles de acceso por perfil y mínimo privilegio.", "Política de accesos"], ["Hay respaldos periódicos y probados.", "Registro de pruebas de restauración"], ["Los datos sensibles o críticos están cifrados.", "Configuración documentada"]]}, {"id": "eipd", "corto": "Evaluación de impacto", "nombre": "Evaluación de impacto y privacidad desde el diseño", "peso": 1, "base": "LOPDP art. 42; RGLOPDP arts. 29 a 32", "herramienta": "04 · Evaluación de impacto", "preguntas": [["Se identifica qué tratamientos requieren evaluación de impacto.", "Columna en el RAT o análisis"], ["Las evaluaciones obligatorias se hacen antes de iniciar el tratamiento.", "Informes de evaluación"], ["Los proyectos nuevos consideran la protección de datos desde su diseño.", "Lista de verificación de proyectos"]]}, {"id": "vul", "corto": "Vulneraciones", "nombre": "Gestión de vulneraciones", "peso": 2, "base": "LOPDP art. 43; RGLOPDP arts. 24 a 28; Res. SPDP-SPD-2026-0040-R", "herramienta": "03 · Kit de vulneraciones", "preguntas": [["Existe un protocolo aprobado de respuesta a vulneraciones.", "Protocolo"], ["El personal sabe cómo reportar internamente un incidente.", "Canal interno y capacitación"], ["Existe una bitácora de incidentes, se notifiquen o no.", "Bitácora"], ["La organización conoce los plazos y el canal (SISPDP) para notificar a la SPDP.", "Protocolo con plazos"]]}, {"id": "tri", "corto": "Transferencias", "nombre": "Transferencias internacionales", "peso": 1, "base": "LOPDP (régimen de transferencias internacionales); RGLOPDP art. 38 num. 6", "herramienta": "01 · RAT (transferencias)", "preguntas": [["Se identificaron los servicios que alojan o envían datos fuera del Ecuador (nube, correo, CRM).", "Inventario de servicios"], ["Cada transferencia tiene una garantía documentada.", "Cláusulas o evaluación de la transferencia"]]}, {"id": "cul", "corto": "Cultura", "nombre": "Capacitación y cultura", "peso": 1, "base": "RGLOPDP art. 30 num. 4 (cultura preventiva)", "herramienta": "Plan de capacitación", "preguntas": [["El personal recibe capacitación en protección de datos al ingresar y periódicamente.", "Registro de asistencia"], ["El personal firma compromisos de confidencialidad.", "Acuerdos firmados"], ["Se miden los resultados de la capacitación.", "Evaluaciones o indicadores"]]}], "contexto": [["ctx_emp", "Organización evaluada", "texto"], ["ctx_sector", "Sector", "lista", ["Comercio", "Servicios profesionales", "Salud", "Educación", "Financiero o seguros", "Tecnología", "Industria", "Construcción", "Seguridad privada", "Sector público", "Otro"]], ["ctx_trab", "Número de trabajadores", "lista", ["1 a 9", "10 a 49", "50 a 99", "100 a 199", "200 o más"]], ["ctx_fecha", "Fecha de la evaluación", "fecha"], ["ctx_entrev", "Personas entrevistadas", "texto"]], "ejemplo": {"ctx": {"ctx_emp": "Ferretería Ficticia El Tornillo S.A. (EJEMPLO)", "ctx_sector": "Comercio", "ctx_trab": "10 a 49", "ctx_fecha": "2026-11-07", "ctx_entrev": "Gerente general, contadora, jefe de ventas"}, "r": {"gob_0": "2", "gob_1": "1", "gob_2": "1", "gob_3": "0", "dpd_0": "3", "dpd_1": "na", "dpd_2": "na", "rat_0": "2", "rat_1": "1", "rat_2": "0", "lic_0": "2", "lic_1": "2", "lic_2": "na", "lic_3": "1", "tra_0": "3", "tra_1": "2", "tra_2": "1", "der_0": "2", "der_1": "1", "der_2": "1", "enc_0": "2", "enc_1": "1", "enc_2": "0", "seg_0": "2", "seg_1": "2", "seg_2": "3", "seg_3": "1", "eipd_0": "1", "eipd_1": "na", "eipd_2": "0", "vul_0": "1", "vul_1": "1", "vul_2": "0", "vul_3": "1", "tri_0": "2", "tri_1": "1", "cul_0": "1", "cul_1": "3", "cul_2": "0"}, "c": {"dpd_1": "No obligada: ninguna causal del art. 10 de la Res. 0028 (análisis de 2026-10).", "dpd_2": "No aplica al no existir DPD.", "lic_2": "No se usa interés legítimo.", "eipd_1": "Ningún tratamiento obligado a evaluación."}, "f": {"f_el": "Abg. Mariano X. Macías Sánchez", "f_ec": "Consultor en Protección de Datos · Mat. 09-2022-736", "f_ap": "[REPRESENTANTE LEGAL]", "f_ac": "Gerente General"}}};
+(function(){
+  function $(i){return document.getElementById(i)}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function toast(t){var e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},1900)}
+  var KEY='msc-madurez-v1';
+  function blank(){return{ctx:{},r:{},c:{},f:{f_el:'Abg. Mariano X. Macías Sánchez',f_ec:'Consultor en Protección de Datos · Mat. 09-2022-736'}}}
+  var S;try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}if(!S)S=blank();
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+  var tabs=document.querySelectorAll('nav button');
+  function show(t){tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});document.querySelectorAll('section').forEach(function(s){s.classList.toggle('on',s.id===t)});if(t==='t3')resultados();window.scrollTo(0,0)}
+  tabs.forEach(function(b){b.onclick=function(){show(b.dataset.t)}});$('ir').onclick=function(){show('t2')};$('verRes').onclick=function(){show('t3')};
+
+  // contexto
+  $('ctx').innerHTML=CFG.contexto.map(function(c){var id=c[0],h='<div><label for="'+id+'">'+esc(c[1])+'</label>';
+    if(c[2]==='lista')h+='<select id="'+id+'" data-x><option value="">— Seleccionar —</option>'+c[3].map(function(o){return'<option>'+esc(o)+'</option>'}).join('')+'</select>';
+    else h+='<input id="'+id+'" data-x'+(c[2]==='fecha'?' type="date"':'')+'>';return h+'</div>'}).join('');
+  document.querySelectorAll('[data-x]').forEach(function(i){i.addEventListener('input',function(){S.ctx[i.id]=i.value;save()});i.addEventListener('change',function(){S.ctx[i.id]=i.value;save()})});
+  $('escala').innerHTML=CFG.escala.map(function(e){return'<div style="font-size:13px;margin:4px 0"><b>'+e[0]+' · '+esc(e[1])+'.</b> '+esc(e[2])+'</div>'}).join('')+'<div style="font-size:13px;margin:4px 0"><b>N/A.</b> No aplica a la organización (justifícalo en el comentario).</div>';
+  $('niveles').innerHTML=CFG.niveles.map(function(n,i){return'<div style="font-size:13px;margin:4px 0"><span class="lvl L'+i+'" style="font-size:12px;padding:1px 8px">'+esc(n[2])+'</span> '+n[0].toFixed(1)+' a '+n[1].toFixed(1)+' · '+esc(n[3])+'</div>'}).join('');
+
+  // cuestionario
+  $('dominios').innerHTML=CFG.dominios.map(function(d){return'<div class="card"><div class="dh"><div><h3>'+esc(d.nombre)+(d.peso>1?' <span class="pr pA">Crítico</span>':'')+'</h3><div class="base">'+esc(d.base)+'</div></div><div class="nota" id="ds_'+d.id+'"></div></div>'+
+    d.preguntas.map(function(p,i){var k=d.id+'_'+i;return'<div class="q"><div class="qt">'+esc(p[0])+'</div><div class="ev">Evidencia: '+esc(p[1])+'</div><div class="seg" data-q="'+k+'">'+CFG.escala.map(function(e){return'<button type="button" data-v="'+e[0]+'"><b>'+e[0]+'</b>'+esc(e[1])+'</button>'}).join('')+'<button type="button" data-v="na"><b>N/A</b>No aplica</button></div><input class="com" data-c="'+k+'" placeholder="Comentario o evidencia revisada (opcional)"></div>'}).join('')+'</div>'}).join('');
+  document.querySelectorAll('.seg[data-q]').forEach(function(s){s.querySelectorAll('button').forEach(function(b){b.onclick=function(){S.r[s.dataset.q]=b.dataset.v;save();paintQ()}})});
+  document.querySelectorAll('[data-c]').forEach(function(i){i.addEventListener('input',function(){S.c[i.dataset.c]=i.value;save()})});
+  function total(){var n=0;CFG.dominios.forEach(function(d){n+=d.preguntas.length});return n}
+  function paintQ(){document.querySelectorAll('.seg[data-q]').forEach(function(s){var v=S.r[s.dataset.q];s.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.v===v)})});
+    document.querySelectorAll('[data-c]').forEach(function(i){i.value=S.c[i.dataset.c]||''});
+    var resp=Object.keys(S.r).filter(function(k){return S.r[k]!=null}).length,t=total();
+    $('avance').innerHTML=resp+' de '+t+' preguntas respondidas<div class="prog"><i style="width:'+Math.round(resp/t*100)+'%"></i></div>';
+    CFG.dominios.forEach(function(d){var s=dom(d);$('ds_'+d.id).textContent=s.v==null?'':'Puntaje '+s.v.toFixed(2)})}
+
+  // cálculo
+  function dom(d){var sum=0,n=0,res=0;d.preguntas.forEach(function(p,i){var v=S.r[d.id+'_'+i];if(v==null)return;res++;if(v==='na')return;sum+=+v;n++});return{v:n?sum/n:null,n:n,res:res}}
+  function nivel(v){for(var i=0;i<CFG.niveles.length;i++){if(v<=CFG.niveles[i][1]+1e-9)return i}return CFG.niveles.length-1}
+  function calc(){var ws=0,w=0,ds=CFG.dominios.map(function(d){var s=dom(d);if(s.v!=null){ws+=s.v*d.peso;w+=d.peso}return{d:d,v:s.v,res:s.res}});return{idx:w?ws/w:null,ds:ds}}
+  function colorV(v){return v==null?'#ddd':v<2?'#C8693D':v<2.8?'#D2A93A':'#4E9A6B'}
+
+  function radar(ds){var N=ds.length,W=400,H=330,cx=W/2,cy=H/2+4,R=110,h='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Gráfico de madurez por dominio">';
+    for(var l=1;l<=4;l++){var pts=[];for(var i=0;i<N;i++){var a=-Math.PI/2+i*2*Math.PI/N;pts.push((cx+R*l/4*Math.cos(a)).toFixed(1)+','+(cy+R*l/4*Math.sin(a)).toFixed(1))}h+='<polygon points="'+pts.join(' ')+'" fill="none" stroke="#E4DFCF"/>'}
+    var vp=[];ds.forEach(function(x,i){var a=-Math.PI/2+i*2*Math.PI/N,v=x.v==null?0:x.v;h+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+R*Math.cos(a)).toFixed(1)+'" y2="'+(cy+R*Math.sin(a)).toFixed(1)+'" stroke="#EFEBDD"/>';
+      vp.push((cx+R*v/4*Math.cos(a)).toFixed(1)+','+(cy+R*v/4*Math.sin(a)).toFixed(1));
+      var lx=cx+(R+16)*Math.cos(a),ly=cy+(R+16)*Math.sin(a),an=Math.abs(Math.cos(a))<.2?'middle':(Math.cos(a)>0?'start':'end');
+      var words=(x.d.corto||x.d.nombre).split(' '),l1='',l2='';words.forEach(function(wd){if((l1+' '+wd).trim().length<=16&&!l2)l1=(l1+' '+wd).trim();else l2=(l2+' '+wd).trim()});if(l2.length>18)l2=l2.slice(0,17)+'…';
+      h+='<text x="'+lx.toFixed(1)+'" y="'+ly.toFixed(1)+'" font-size="11" fill="#6E6230" text-anchor="'+an+'"><tspan x="'+lx.toFixed(1)+'">'+esc(l1)+'</tspan>'+(l2?'<tspan x="'+lx.toFixed(1)+'" dy="11">'+esc(l2)+'</tspan>':'')+'</text>'});
+    h+='<polygon points="'+vp.join(' ')+'" fill="rgba(160,144,70,.28)" stroke="#A09046" stroke-width="2"/>';
+    ds.forEach(function(x,i){var a=-Math.PI/2+i*2*Math.PI/N,v=x.v==null?0:x.v;h+='<circle cx="'+(cx+R*v/4*Math.cos(a)).toFixed(1)+'" cy="'+(cy+R*v/4*Math.sin(a)).toFixed(1)+'" r="3" fill="#14181E"/>'});
+    return h+'</svg>'}
+
+  function plan(ds){var rows=[];ds.forEach(function(x){if(x.v==null)return;var d=x.d,pri=(d.peso>1&&x.v<2)?'Alta':(x.v<2.8?'Media':'Baja');
+      var brechas=d.preguntas.map(function(p,i){return{t:p[0],v:S.r[d.id+'_'+i]}}).filter(function(q){return q.v!=null&&q.v!=='na'&&+q.v<=2});
+      if(pri==='Baja'&&!brechas.length)return;
+      rows.push({pri:pri,ord:(pri==='Alta'?0:pri==='Media'?1:2)*10+x.v,dom:d.nombre,v:x.v,brechas:brechas,herr:d.herramienta,base:d.base})});
+    return rows.sort(function(a,b){return a.ord-b.ord})}
+
+  function resultados(){var c=calc();
+    if(c.idx==null){$('idx').textContent='—';$('lvl').textContent='Sin respuestas';$('lvl').className='lvl';$('lvlD').textContent='Responde el cuestionario.';$('radar').innerHTML='';$('bars').innerHTML='';$('plan').innerHTML='';$('cobertura').textContent='';return}
+    var li=nivel(c.idx),N=CFG.niveles[li];$('idx').textContent=c.idx.toFixed(2);$('lvl').textContent=N[2];$('lvl').className='lvl L'+li;$('lvlD').textContent=N[3];
+    var resp=Object.keys(S.r).length,t=total();$('cobertura').textContent='Respondidas '+resp+' de '+t+' preguntas.'+(resp<t?' El resultado es parcial.':'')+' Índice ponderado: los dominios críticos pesan el doble.';
+    $('radar').innerHTML=radar(c.ds);
+    $('bars').innerHTML=c.ds.map(function(x){return'<div class="b"><span>'+esc(x.d.nombre)+'</span><div class="t"><i style="width:'+((x.v||0)/4*100)+'%;background:'+colorV(x.v)+'"></i></div><b>'+(x.v==null?'—':x.v.toFixed(1))+'</b></div>'}).join('');
+    var p=plan(c.ds);
+    $('plan').innerHTML='<tr><th>Prioridad</th><th>Dominio</th><th>Brechas (puntaje 2 o menos)</th><th>Cómo cerrarlas</th></tr>'+(p.length?p.map(function(r){return'<tr><td><span class="pr p'+r.pri[0]+'">'+r.pri+'</span></td><td><b>'+esc(r.dom)+'</b><div class="nota">'+r.v.toFixed(1)+' · '+esc(r.base)+'</div></td><td>'+(r.brechas.length?'<ul style="margin:0;padding-left:16px">'+r.brechas.map(function(b){return'<li>'+esc(b.t)+' <span class="nota">('+b.v+')</span></li>'}).join('')+'</ul>':'Mantener y medir')+'</td><td>'+esc(r.herr)+'</td></tr>'}).join(''):'<tr><td colspan="4">Sin brechas relevantes.</td></tr>')}
+
+  // firma
+  document.querySelectorAll('[data-f]').forEach(function(i){i.addEventListener('input',function(){S.f[i.id]=i.value;save()})});
+  function paintF(){document.querySelectorAll('[data-f]').forEach(function(i){i.value=S.f[i.id]||''});document.querySelectorAll('[data-x]').forEach(function(i){i.value=S.ctx[i.id]||''})}
+
+  // exportar
+  var TB='<table border="1" cellpadding="5" style="border-collapse:collapse;width:100%;font-size:10pt">';
+  function tr(c,th){return'<tr>'+c.map(function(x){return(th?'<th>':'<td>')+esc(x)+(th?'</th>':'</td>')}).join('')+'</tr>'}
+  function informe(){var c=calc(),x=S.ctx,li=nivel(c.idx),N=CFG.niveles[li],p=plan(c.ds),h='';
+    h+='<h1>Diagnóstico de madurez en protección de datos personales</h1>'+TB+tr(['Organización',x.ctx_emp||'[ORGANIZACIÓN]'])+tr(['Sector',x.ctx_sector||'—'])+tr(['Trabajadores',x.ctx_trab||'—'])+tr(['Fecha',x.ctx_fecha||'—'])+tr(['Personas entrevistadas',x.ctx_entrev||'—'])+'</table>';
+    h+='<h2>1. Resultado general</h2><p>Índice de madurez: <b>'+c.idx.toFixed(2)+' de 4</b> · Nivel: <b>'+esc(N[2])+'</b>. '+esc(N[3])+'</p><p><i>Modelo propio de Macías Sánchez Consultores, organizado por las obligaciones de la LOPDP, su Reglamento y la normativa de la SPDP. Los dominios críticos pesan el doble. No constituye auditoría ni certificación.</i></p>';
+    h+='<h2>2. Resultado por dominio</h2>'+TB+tr(['Dominio','Base normativa','Puntaje (0-4)','Nivel'],1)+c.ds.map(function(y){return tr([y.d.nombre+(y.d.peso>1?' (crítico)':''),y.d.base,y.v==null?'—':y.v.toFixed(2),y.v==null?'—':CFG.niveles[nivel(y.v)][2]])}).join('')+'</table>';
+    h+='<h2>3. Plan de acción priorizado</h2>'+TB+tr(['Prioridad','Dominio','Brechas','Herramienta o acción'],1)+p.map(function(r){return tr([r.pri,r.dom+' ('+r.v.toFixed(1)+')',r.brechas.map(function(b){return'• '+b.t}).join(' ')||'Mantener y medir',r.herr])}).join('')+'</table>';
+    h+='<h2>4. Detalle de respuestas</h2>'+TB+tr(['Dominio','Pregunta','Respuesta','Comentario'],1);
+    CFG.dominios.forEach(function(d){d.preguntas.forEach(function(q,i){var v=S.r[d.id+'_'+i];h+=tr([d.nombre,q[0],v==null?'Sin responder':v==='na'?'N/A':v+' · '+CFG.escala[+v][1],S.c[d.id+'_'+i]||''])})});h+='</table>';
+    var f=S.f;h+='<p><b>FIRMA DE RESPONSABILIDAD</b></p>'+TB+tr(['Elaborado por','Revisado por'],1)+tr(['Firma: ______________________','Firma: ______________________'])+tr([f.f_el||'',f.f_ap||''])+tr([f.f_ec||'',f.f_ac||''])+'</table>';
+    return h}
+  function fb(t){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Copiado')}catch(e){toast('No se pudo copiar')}ta.remove()}
+  $('copInf').onclick=function(){if(calc().idx==null){toast('Responde el cuestionario');return}var html=informe(),tmp=document.createElement('div');tmp.innerHTML=html;var plain=tmp.innerText;
+    try{if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([plain],{type:'text/plain'})})]).then(function(){toast('Informe copiado: pega en Word')},function(){fb(plain)});return}}catch(e){}fb(plain)};
+  $('copTab').onclick=function(){var c=calc();if(c.idx==null){toast('Responde el cuestionario');return}
+    var t=['Dominio\tCrítico\tBase normativa\tPuntaje\tNivel'].concat(c.ds.map(function(y){return[y.d.nombre,y.d.peso>1?'Sí':'No',y.d.base,y.v==null?'':y.v.toFixed(2).replace('.',','),y.v==null?'':CFG.niveles[nivel(y.v)][2]].join('\t')})).concat(['','Índice ponderado\t\t\t'+c.idx.toFixed(2).replace('.',',')+'\t'+CFG.niveles[nivel(c.idx)][2]]).join('\n');
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){toast('Resultados copiados: pega en Excel')},function(){fb(t)});else fb(t)};
+
+  $('nueva').onclick=function(){var b=this;if(!b.dataset.c){b.dataset.c=1;b.textContent='¿Borrar la evaluación actual?';return}delete b.dataset.c;b.textContent='Nueva evaluación';S=blank();save();all();toast('Evaluación nueva')};
+  $('ejemplo').onclick=function(){S=JSON.parse(JSON.stringify(CFG.ejemplo));save();all();toast('Ejemplo ficticio cargado');show('t3')};
+  function all(){paintF();paintQ();resultados()}
+  all();
+})();
+</script>
+</body>
+</html>

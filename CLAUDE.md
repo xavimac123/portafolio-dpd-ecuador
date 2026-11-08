@@ -14,12 +14,15 @@ Repositorio de herramientas de cumplimiento LOPDP (Ecuador) de Macías Sánchez 
 - `referencias/` contiene documentos anonimizados que el usuario ya utilizó. Úsalos para mejorar la **estructura** de las plantillas (secciones, orden, campos), nunca para copiar redacción de terceros. Si una referencia contiene datos personales reales, detente y avisa antes de procesarla.
 - Ediciones hechas en los generadores web ("Copiar Markdown") se incorporan reemplazando el `.md` correspondiente y regenerando con `scripts/generar_generador.py`.
 - Toda exportación lleva firma de responsabilidad (`scripts/firma-responsabilidad.md`).
+- Escalas, umbrales y ponderaciones que no vienen de la norma se rotulan como criterio propio en la interfaz, el informe y el README.
 
 ## Estructura
 
 - `01-registro-tratamientos/` — RAT
 - `02-kit-plantillas/` — documentos contractuales e informativos
 - `03-kit-vulneraciones/` — gestión y notificación de vulneraciones
+- `04-evaluacion-impacto/` — evaluación de impacto (EIPD), fuente `scripts/eipd_config.py`
+- `05-madurez/` — diagnóstico de madurez, fuente `scripts/madurez_config.py` (modelo propio, rotularlo siempre así)
 - `docs/` — decisiones del proyecto
 - `referencias/` — plantillas ya utilizadas, anonimizadas
 - `scripts/` — generadores (Excel, exportación a Word)

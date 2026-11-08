@@ -8,9 +8,20 @@ Herramientas para la gestión del cumplimiento de la **Ley Orgánica de Protecci
 
 | # | Herramienta | Contenido | Estado |
 |---|---|---|---|
-| 01 | [Registro de actividades de tratamiento](01-registro-tratamientos/) | Plantilla Excel por secciones con control del mínimo legal, catálogo de actividades, RAT del encargado, asistente web | v0.4 |
-| 02 | [Kit de plantillas](02-kit-plantillas/) | Política de privacidad, aviso de privacidad, contrato de encargo, cláusulas de consentimiento | v0.1 |
-| 03 | [Kit de vulneraciones](03-kit-vulneraciones/) | Protocolo, bitácora, modelos de comunicación, calculadora de plazos y evaluación de riesgo | v0.1 |
+| 01 | [Registro de actividades de tratamiento](01-registro-tratamientos/) | Plantilla Excel por secciones con control del mínimo legal, catálogo de actividades, RAT del encargado, asistente web | v0.5 |
+| 02 | [Kit de plantillas](02-kit-plantillas/) | Política y avisos de privacidad, contrato de encargo, cláusulas de consentimiento, designación del DPD; generador web | v0.2 |
+| 03 | [Kit de vulneraciones](03-kit-vulneraciones/) | Protocolo, bitácora, modelos de comunicación, calculadora de plazos y evaluación de riesgo | v0.2 |
+| 04 | [Evaluación de impacto](04-evaluacion-impacto/) | Necesidad (art. 42), descripción, proporcionalidad, matriz de riesgos y medidas, informe del art. 32 RGLOPDP | v0.1 |
+| 05 | [Nivel de madurez](05-madurez/) | Diagnóstico en 12 dominios, índice ponderado, radar y plan de acción enlazado a las herramientas | v0.1 |
+
+## Flujo recomendado con un cliente
+
+1. **05 · Madurez**: diagnóstico inicial y plan de acción.
+2. **01 · RAT**: inventario de actividades; identifica cuáles requieren evaluación de impacto.
+3. **04 · Evaluación de impacto**: para las actividades de alto riesgo.
+4. **02 · Kit de plantillas**: política, avisos, contratos de encargo, DPD.
+5. **03 · Kit de vulneraciones**: protocolo y respuesta.
+6. Repetir **05** para medir el avance.
 
 ## Cómo se usa
 
@@ -33,6 +44,8 @@ Pendiente de definir antes de hacer público el repositorio (ver `docs/decision-
 python scripts/generar_rat.py          # Excel del RAT
 python scripts/generar_asistente_rat.py  # asistente web del RAT
 python scripts/generar_generador.py    # páginas web de los kits 02 y 03
+python scripts/generar_asistente_eipd.py     # asistente de evaluación de impacto
+python scripts/generar_asistente_madurez.py  # asistente y cuestionario de madurez
 bash scripts/exportar_docx.sh          # versiones Word
 ```
 

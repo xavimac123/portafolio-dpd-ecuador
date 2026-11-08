@@ -2,7 +2,7 @@
 
 Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:** ninguna plantilla cita un artículo que no esté en esta tabla. Antes de publicar o usar una herramienta con un cliente, contrasta cada fila con el texto oficial en el Registro Oficial y marca la columna "Verificado".
 
-Última revisión de fuentes: 2026-11-08.
+Última revisión de fuentes: 2026-11-07 (herramientas 04 y 05).
 
 ## Normas
 
@@ -15,6 +15,9 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | RES-0028 | Res. SPDP-SPD-2025-0028-R, figura del DPD y su registro | 30-07-2025 |
 | RES-0041 | Res. SPDP-SPD-2025-0041-R, interés legítimo como base de legitimación (solo sector privado) | 07-11-2025 |
 | RES-0040 | Res. SPDP-SPD-2026-0040-R, norma técnica de notificación de vulneraciones de seguridad | sept. 2026 (vigente desde su publicación en RO) |
+| RES-0003 | Res. SPDP-SPD-2025-0003-R, Guía de Gestión de Riesgos y Evaluación de Impacto (Cap. I obligatorio, Cap. II referencial; versión 2 en 2026) | 29-04-2025; RO 4to Supl. 41, 19-05-2025 |
+| RES-2026-0009 | Res. SPDP-SPD-2026-0009-R, norma general de protección de datos en sistemas de inteligencia artificial, reformada por Res. SPDP-SPD-2026-0037-R | 12-02-2026; reforma sept. 2026 |
+| RES-2026-0039 | Res. SPDP-SPD-2026-0039-R, norma general para el tratamiento de datos biométricos | sept. 2026 |
 
 ## Matriz por herramienta
 
@@ -28,6 +31,14 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | Categorías especiales | Datos sensibles; de niñas, niños y adolescentes; de salud; de personas con discapacidad y sus sustitutos | LOPDP art. 25 | ☐ |
 | Datos sensibles, tratamiento | Prohibido salvo las excepciones que enumera | LOPDP art. 26 | ☐ |
 | Evaluación de impacto | Procede, entre otros, ante evaluación sistemática automatizada de aspectos personales, gran escala de categorías especiales u observación sistemática a gran escala de zonas de acceso público | LOPDP art. 42 | ☐ |
+| Análisis de riesgos | Metodología que considere, entre otras, las particularidades del tratamiento y de las partes, y las categorías y volumen de datos | LOPDP art. 40; RES-0003 | ☐ |
+| Evaluación de impacto, supuestos | Alto riesgo por naturaleza, contexto o fines, o requerimiento de la SPDP; obligatoria en: (a) perfiles automatizados con efectos jurídicos, (b) gran escala de categorías especiales o datos penales, (c) observación sistemática a gran escala de zonas públicas | LOPDP art. 42 | ☐ |
+| Evaluación de impacto, concepto y objeto | Análisis preventivo y técnico; objeto: identificar riesgos, describir acciones, actuar preventivamente y propiciar una cultura preventiva (num. 4) | RGLOPDP arts. 29 y 30 | ☐ |
+| Evaluación de impacto, momento | Obligatoria en los casos de la ley y previa al inicio del tratamiento | RGLOPDP art. 31 | ☐ |
+| Evaluación de impacto, contenido | Se presenta ante la SPDP con: (1) descripción sistemática y finalidades; (2) necesidad y proporcionalidad; (3) evaluación de riesgos; (4) medidas, garantías y mecanismos. Sin detalles confidenciales de seguridad | RGLOPDP art. 32 | ☐ |
+| Datos biométricos | Medidas reforzadas según la guía de riesgos; con NNA, solo si no hay medio menos invasivo y con análisis de riesgos y evaluación de impacto | RES-2026-0039 | ☐ |
+| Inteligencia artificial | Norma general de protección de datos en sistemas de IA (remite a la evaluación de impacto del art. 29 RGLOPDP) | RES-2026-0009 | ☐ |
+| Obligaciones del responsable | Catálogo de obligaciones del responsable (base del modelo de madurez) | LOPDP art. 47 | ☐ |
 | Bases legitimadoras | Consentimiento; obligación legal; orden judicial; interés público/potestades públicas; contrato o medidas precontractuales; interés vital; bases de acceso público; interés legítimo | LOPDP art. 7 | ☐ |
 | Interés legítimo | Si es la base, debe constar en el RAT y respaldarse con la evaluación de ponderación | RGLOPDP art. 38 num. 7; RES-0041 | ☐ |
 | Registro Nacional | Las bases de datos se inscriben en el Registro Nacional de Protección de Datos Personales (figura distinta del RAT) | LOPDP art. 51 | ☐ |
@@ -59,6 +70,9 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 5. Contenido del RAT del encargado: el art. 44 RGLOPDP fija cuándo se lleva; confirmar si define su contenido. La hoja "RAT encargado" usa estructura de buena práctica.
 6. Periodicidad de revisión del RAT: la norma no la fija; la herramienta usa 12 meses como práctica interna.
 7. Criterios de "gran escala": pendientes de desarrollo por la SPDP; el volumen de titulares del RAT es solo orientativo.
+8. Escalas oficiales de impacto y probabilidad y anexo con el formato de evaluación de impacto de la Guía SPDP (RES-0003, v2 2026): no se pudieron leer completos; la herramienta 04 usa escalas propias. Contrastar al obtener el texto íntegro.
+9. Alcance exacto de la obligación de evaluación de impacto en la norma de IA (RES-2026-0009/0037) y en la de biométricos (RES-2026-0039): leer sus textos completos.
+10. Numeración de los artículos de la LOPDP sobre transferencias internacionales: pendiente; el modelo de madurez no los cita hasta verificarlos.
 
 ## Referencias comparadas (no vinculantes en Ecuador)
 
@@ -68,10 +82,14 @@ Solo pueden citarse en comparaciones explícitas, nunca como fundamento de una o
 |---|---|---|
 | RGPD (UE) 2016/679, art. 30 | Comparación de campos del RAT del responsable y del encargado (`docs/metodologia-rat.md`) | Texto conocido; no se cita en plantillas |
 | AEPD, FAQ-0250 "¿Cómo elaborar el RAT?" (aepd.es) | Criterios de metodología: registro por actividad, levantamiento por áreas, registro vivo | Página no accesible desde el entorno de trabajo el 2026-11-08; leer directamente antes de citar |
-| DPO Partners, RAT bajo la Ley 21.719 de Chile (dpopartners.cl) | Ninguno todavía | No leída; pendiente |
-| Wiibiq, RAT bajo la LOPDP (wiibiq.com) | Ninguno todavía | No leída; contrastar sus citas con el RO antes de usarlas |
+| DPO Partners, RAT bajo la Ley 21.719 de Chile (dpopartners.cl) | Ámbito o entidad, eventos de actualización, vínculo con evaluación de transferencias | Leída el 2026-11-07. Contenido comercial |
+| Wiibiq, RAT bajo la LOPDP (wiibiq.com) | Organización por macroprocesos y eventos de actualización | Leída el 2026-11-07. Contenido comercial. **Citas erróneas:** atribuye el RAT al art. 13 LOPDP y las transferencias a la Res. 0028; no usar sus citas |
 
 ## Fuentes consultadas
+
+- RES-0003 y considerandos con arts. 40 y 42 LOPDP y 29 a 32 RGLOPDP: Registro Oficial 4to Supl. 41, 19-05-2025 (copia en esacc.corteconstitucional.gob.ec).
+- Guía SPDP de riesgos y evaluación de impacto, v2: fielweb.com (lectura parcial).
+- RES-2026-0039 (biométricos) y RES-2026-0009/0037 (IA): resúmenes de nmslaw.com.ec, allende.com y ecija.com.
 
 - Resumen de la RES-0040: nmslaw.com.ec, 14-09-2026.
 - Reforma art. 43 por la LOFC: globalsuitesolutions.com.

@@ -25,7 +25,7 @@ NIVELES = [  # rango del promedio (0-4)
 # peso (1 = normal, 2 = crítico por exposición sancionatoria), preguntas (texto, evidencia sugerida)
 DOMINIOS = [
     {"id": "gob", "corto": "Gobierno", "nombre": "Gobierno y responsabilidad proactiva", "peso": 1,
-     "base": "LOPDP art. 47 (obligaciones del responsable)", "herramienta": "Esta evaluación (plan de acción)",
+     "base": "LOPDP arts. 10 lit. k y 47", "herramienta": "Esta evaluación (plan de acción)",
      "preguntas": [
          ("La alta dirección aprobó formalmente una política interna de protección de datos.", "Política firmada o acta de aprobación"),
          ("Hay roles y responsables definidos para la protección de datos en cada área.", "Organigrama o matriz de responsabilidades"),
@@ -99,7 +99,7 @@ DOMINIOS = [
          ("La organización conoce los plazos y el canal (SISPDP) para notificar a la SPDP.", "Protocolo con plazos"),
      ]},
     {"id": "tri", "corto": "Transferencias", "nombre": "Transferencias internacionales", "peso": 1,
-     "base": "LOPDP (régimen de transferencias internacionales); RGLOPDP art. 38 num. 6", "herramienta": "01 · RAT (transferencias)",
+     "base": "LOPDP art. 56; Res. SPDP-SPD-2026-0004-R; RGLOPDP art. 38 num. 6", "herramienta": "01 · RAT (transferencias)",
      "preguntas": [
          ("Se identificaron los servicios que alojan o envían datos fuera del Ecuador (nube, correo, CRM).", "Inventario de servicios"),
          ("Cada transferencia tiene una garantía documentada.", "Cláusulas o evaluación de la transferencia"),

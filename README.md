@@ -23,6 +23,10 @@ Herramientas para la gestión del cumplimiento de la **Ley Orgánica de Protecci
 5. **03 · Kit de vulneraciones**: protocolo y respuesta.
 6. Repetir **05** para medir el avance.
 
+## Guía de uso para el DPD
+
+[docs/guia/Guia-DPD-Kit-LOPDP.pdf](docs/guia/Guia-DPD-Kit-LOPDP.pdf): metodología, herramientas paso a paso, abordaje al cliente, propuestas de evaluación y control, identificación de datos (RAT y NIST Privacy Framework ID.IM-P), áreas de tratamiento, informe a la gerencia con matriz de soportes, control, normas ISO y anexos. Los gráficos, cronogramas, metas e ISO por prioridad son criterio propio.
+
 ## Cómo se usa
 
 1. Cada carpeta tiene un `README.md` con instrucciones.
@@ -47,6 +51,7 @@ python scripts/generar_generador.py    # páginas web de los kits 02 y 03
 python scripts/generar_asistente_eipd.py     # asistente de evaluación de impacto
 python scripts/generar_asistente_madurez.py  # asistente y cuestionario de madurez
 bash scripts/exportar_docx.sh          # versiones Word
+python scripts/guia/graficos.py && python scripts/guia/generar_guia.py  # guía PDF
 ```
 
-`scripts/vendor/marked.min.js` (licencia MIT, ver `marked-LICENSE.md`) se incrusta en las páginas web para que funcionen sin conexión.
+`scripts/vendor/marked.min.js` (licencia MIT, ver `marked-LICENSE.md`) se incrusta en las páginas web para que funcionen sin conexión. La tipografía Archivo (`scripts/vendor/fonts/`, licencia OFL) se usa en la guía PDF.

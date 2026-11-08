@@ -27,7 +27,7 @@
 
 ## 1. Gobierno y responsabilidad proactiva
 
-Base: LOPDP art. 47 (obligaciones del responsable). Herramienta: Esta evaluación (plan de acción).
+Base: LOPDP arts. 10 lit. k y 47. Herramienta: Esta evaluación (plan de acción).
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|
@@ -151,7 +151,7 @@ Base: LOPDP art. 43; RGLOPDP arts. 24 a 28; Res. SPDP-SPD-2026-0040-R. Herramien
 
 ## 11. Transferencias internacionales
 
-Base: LOPDP (régimen de transferencias internacionales); RGLOPDP art. 38 num. 6. Herramienta: 01 · RAT (transferencias).
+Base: LOPDP art. 56; Res. SPDP-SPD-2026-0004-R; RGLOPDP art. 38 num. 6. Herramienta: 01 · RAT (transferencias).
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|

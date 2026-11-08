@@ -1,0 +1,282 @@
+"""Gráficos de la Guía del DPD. Usa los datos de ejemplo de las herramientas (fuente única).
+
+Uso: python scripts/guia/graficos.py  -> docs/guia/img/*.png
+"""
+import math
+import sys
+from pathlib import Path
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt  # noqa: E402
+from matplotlib import font_manager  # noqa: E402
+from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, Circle, Wedge  # noqa: E402
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "scripts"))
+import madurez_config as MC  # noqa: E402
+
+OUT = ROOT / "docs" / "guia" / "img"
+OUT.mkdir(parents=True, exist_ok=True)
+FD = ROOT / "scripts" / "vendor" / "fonts"
+for f in FD.glob("*.ttf"):
+    font_manager.fontManager.addfont(str(f))
+plt.rcParams.update({"font.family": "Archivo", "font.size": 10, "axes.edgecolor": "#B8B19A",
+                     "axes.labelcolor": "#14181E", "xtick.color": "#6E6230", "ytick.color": "#6E6230"})
+
+ORO, CAR, MAR, OLI, ORC = "#A09046", "#14181E", "#F7F5EE", "#6E6230", "#C9BC82"
+OK, AM, AL, MA = "#4E9A6B", "#D2A93A", "#C8693D", "#9B3434"
+DPI = 220
+
+
+def save(fig, name):
+    fig.savefig(OUT / f"{name}.png", dpi=DPI, bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+    print("OK", name)
+
+
+def box(ax, x, y, w, h, title, sub="", fc=MAR, ec=ORO, tc=CAR, fs=10.5, fss=8.2):
+    ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.02,rounding_size=0.06", fc=fc, ec=ec, lw=1.4))
+    ax.text(x + w / 2, y + h * (0.64 if sub else 0.5), title, ha="center", va="center", fontsize=fs, weight="bold", color=tc)
+    if sub:
+        ax.text(x + w / 2, y + h * 0.3, sub, ha="center", va="center", fontsize=fss, color=ORC if fc in (CAR, OLI) else OLI, wrap=True)
+
+
+def arrow(ax, a, b, color=OLI, rad=0.0):
+    ax.add_patch(FancyArrowPatch(a, b, arrowstyle="-|>", mutation_scale=13, color=color, lw=1.4,
+                                 connectionstyle=f"arc3,rad={rad}"))
+
+
+# 1. Flujo de las herramientas
+def flujo():
+    fig, ax = plt.subplots(figsize=(10, 3.6))
+    ax.set_xlim(0, 10); ax.set_ylim(0, 3.6); ax.axis("off")
+    pasos = [("05", "Madurez", "Diagnóstico y\nplan de acción"), ("01", "RAT", "Inventario de\nactividades"),
+             ("04", "Evaluación\nde impacto", "Actividades de\nalto riesgo"), ("02", "Plantillas", "Política, avisos,\ncontratos, DPD"),
+             ("03", "Vulneraciones", "Protocolo y\nrespuesta")]
+    w, gap, y = 1.62, 0.37, 1.25
+    for i, (n, t, s) in enumerate(pasos):
+        x = 0.1 + i * (w + gap)
+        ax.add_patch(FancyBboxPatch((x, y), w, 1.55, boxstyle="round,pad=0.02,rounding_size=0.08", fc=CAR if i == 0 else MAR, ec=ORO, lw=1.5))
+        ax.text(x + 0.16, y + 1.32, n, fontsize=9, weight="bold", color=ORO)
+        ax.text(x + w / 2, y + 0.92, t, ha="center", va="center", fontsize=11, weight="bold", color=MAR if i == 0 else CAR)
+        ax.text(x + w / 2, y + 0.33, s, ha="center", va="center", fontsize=8.2, color=ORC if i == 0 else OLI)
+        if i < len(pasos) - 1:
+            arrow(ax, (x + w + 0.03, y + 0.78), (x + w + gap - 0.03, y + 0.78))
+    arrow(ax, (9.0, 1.2), (1.0, 1.2), color=ORO, rad=-0.18)
+    ax.text(5, 0.12, "Revisión anual: repetir 05 · Madurez para medir el avance", ha="center", fontsize=9, color=OLI, style="italic")
+    save(fig, "flujo_herramientas")
+
+
+# 2. Ciclo de intervención del DPD
+def ciclo():
+    fig, ax = plt.subplots(figsize=(6.6, 6.6))
+    ax.set_xlim(-1.62, 1.62); ax.set_ylim(-1.62, 1.62); ax.axis("off"); ax.set_aspect("equal")
+    fases = [("1", "Diagnóstico", "Madurez"), ("2", "Inventario", "RAT y mapa\nde datos"), ("3", "Riesgos", "Análisis y\nevaluación de impacto"),
+             ("4", "Adecuación", "Políticas, avisos,\ncontratos"), ("5", "Respuesta", "Vulneraciones\ny derechos"), ("6", "Control", "Indicadores,\nauditoría, mejora")]
+    cols = [CAR, OLI, ORO, "#8C7E3E", "#5A4F25", "#3A3F47"]
+    for i, (n, t, s) in enumerate(fases):
+        a0 = 90 - i * 60
+        ax.add_patch(Wedge((0, 0), 1.55, a0 - 58, a0, width=0.62, fc=cols[i], ec="white", lw=3))
+        am = math.radians(a0 - 29)
+        ax.text(1.24 * math.cos(am), 1.24 * math.sin(am) + 0.06, t, ha="center", va="center", fontsize=9, weight="bold", color="white")
+        ax.text(1.24 * math.cos(am), 1.24 * math.sin(am) - 0.12, n, ha="center", va="center", fontsize=8, color=ORC)
+        ax.text(0.62 * math.cos(am), 0.62 * math.sin(am), s, ha="center", va="center", fontsize=7.6, color=OLI)
+    ax.add_patch(Circle((0, 0), 0.34, fc=MAR, ec=ORO, lw=1.5))
+    ax.text(0, 0.05, "Responsabilidad", ha="center", fontsize=8.5, weight="bold", color=CAR)
+    ax.text(0, -0.1, "proactiva", ha="center", fontsize=8.5, weight="bold", color=CAR)
+    save(fig, "ciclo_dpd")
+
+
+# 3. Radar del ejemplo de madurez (mismos datos del asistente)
+EJ_R = {"gob": [2, 1, 1, 0], "dpd": [3, "na", "na"], "rat": [2, 1, 0], "lic": [2, 2, "na", 1], "tra": [3, 2, 1],
+        "der": [2, 1, 1], "enc": [2, 1, 0], "seg": [2, 2, 3, 1], "eipd": [1, "na", 0], "vul": [1, 1, 0, 1],
+        "tri": [2, 1], "cul": [1, 3, 0]}
+
+
+def puntajes():
+    res = []
+    for d in MC.DOMINIOS:
+        v = [x for x in EJ_R[d["id"]] if x != "na"]
+        res.append((d, sum(v) / len(v)))
+    w = sum(d["peso"] for d, _ in res)
+    idx = sum(s * d["peso"] for d, s in res) / w
+    return res, idx
+
+
+def radar():
+    res, idx = puntajes()
+    N = len(res)
+    ang = [2 * math.pi * i / N for i in range(N)] + [0]
+    val = [s for _, s in res] + [res[0][1]]
+    obj = [3.0] * (N + 1)
+    fig = plt.figure(figsize=(6.6, 6.2))
+    ax = fig.add_subplot(111, polar=True)
+    ax.set_theta_offset(math.pi / 2); ax.set_theta_direction(-1)
+    ax.set_ylim(0, 4); ax.set_yticks([1, 2, 3, 4]); ax.set_yticklabels(["1", "2", "3", "4"], fontsize=7, color=OLI)
+    ax.set_xticks(ang[:-1]); ax.set_xticklabels([d["corto"] for d, _ in res], fontsize=9, color=CAR)
+    ax.plot(ang, obj, color=OK, lw=1.3, ls="--", label="Meta del plan (3,0 · Implementado)")
+    ax.plot(ang, val, color=ORO, lw=2.2, label=f"Situación actual (índice {idx:.2f})")
+    ax.fill(ang, val, color=ORO, alpha=0.25)
+    ax.grid(color="#E4DFCF")
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.06), ncol=1, frameon=False, fontsize=8.5)
+    save(fig, "radar_madurez")
+    return idx
+
+
+# 4. Mapa de calor de evaluación de impacto (ejemplo del asistente)
+def heatmap():
+    inh = [(5, 2, "R1"), (4, 3, "R2"), (3, 4, "R3"), (3, 3, "R4")]
+    res = [(5, 1, "R1"), (4, 1, "R2"), (3, 1, "R3"), (2, 2, "R4")]
+    fig, axs = plt.subplots(1, 2, figsize=(10, 4.4))
+    for ax, data, tit in [(axs[0], inh, "Riesgo inherente (antes de medidas)"), (axs[1], res, "Riesgo residual (después de medidas)")]:
+        for i in range(1, 6):
+            for p in range(1, 6):
+                n = i * p
+                c = "#E6F2EA" if n <= 4 else "#FFF4D6" if n <= 9 else "#FBEDE5" if n <= 16 else "#F6DADA"
+                ax.add_patch(plt.Rectangle((p - 0.5, i - 0.5), 1, 1, fc=c, ec="white", lw=2))
+                ax.text(p, i - 0.32, str(n), ha="center", fontsize=6.5, color="#9a9278")
+        cell = {}
+        for i, p, r in data:
+            cell.setdefault((i, p), []).append(r)
+        for (i, p), rs in cell.items():
+            ax.text(p, i + 0.05, " ".join(rs), ha="center", va="center", fontsize=9.5, weight="bold", color=CAR)
+        ax.set_xlim(0.5, 5.5); ax.set_ylim(0.5, 5.5); ax.set_aspect("equal")
+        ax.set_xticks(range(1, 6)); ax.set_yticks(range(1, 6))
+        ax.set_xlabel("Probabilidad"); ax.set_ylabel("Impacto"); ax.set_title(tit, fontsize=10.5, weight="bold", color=CAR)
+        for s in ax.spines.values():
+            s.set_visible(False)
+    fig.text(0.5, -0.02, "Bajo 1-4 · Medio 5-9 · Alto 10-16 · Muy alto 17-25 (escala propia del portafolio)", ha="center", fontsize=8.5, color=OLI)
+    save(fig, "heatmap_eipd")
+
+
+# 5. Escenarios de multa (ejemplo del asistente de madurez)
+def multa():
+    sa, cp, mn, mx, lim = 17773.88, 15484.50, 12950.0, 18500.0, 8000.0
+    ea, ec = 4443.47, 1238.76
+    fig, axs = plt.subplots(1, 2, figsize=(10, 3.9), gridspec_kw={"width_ratios": [1.25, 1]})
+    ax = axs[0]
+    ax.barh([1, 0], [sa, cp], color=[AL, OK], height=0.5)
+    ax.axvspan(mn, mx, color="#EFEBDD", zorder=0)
+    ax.axvline(lim, color=CAR, ls="--", lw=1.3)
+    ax.text(lim, 1.5, f" Apetito al riesgo\n USD {lim:,.0f}".replace(",", "."), fontsize=8, color=CAR, va="top")
+    ax.text((mn + mx) / 2, -0.55, "Rango legal de infracción grave (0,7 %-1 % del volumen de negocio)", ha="center", fontsize=7.8, color=OLI)
+    for y, v in [(1, sa), (0, cp)]:
+        ax.text(v + 150, y, f"USD {v:,.0f}".replace(",", "."), va="center", fontsize=9, weight="bold", color=CAR)
+    ax.set_yticks([1, 0]); ax.set_yticklabels(["Si no actúa\n(índice 1,47)", "Con plan\n(índice 3,0)"])
+    ax.set_xlim(0, 21500); ax.set_ylim(-0.8, 1.6)
+    ax.set_title("Multa estimada", fontsize=10.5, weight="bold", color=CAR)
+    ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, _: f"{x/1000:.0f} mil"))
+    for s in ["top", "right"]:
+        ax.spines[s].set_visible(False)
+    ax = axs[1]
+    ax.bar([0, 1], [ea, ec], color=[AL, OK], width=0.55)
+    for x, v, p in [(0, ea, "25 %"), (1, ec, "8 %")]:
+        ax.text(x, v + 120, f"USD {v:,.0f}".replace(",", "."), ha="center", fontsize=9, weight="bold")
+        ax.text(x, v / 2, f"prob.\n{p}", ha="center", va="center", fontsize=8, color="white")
+    ax.set_xticks([0, 1]); ax.set_xticklabels(["Si no actúa", "Con plan"]); ax.set_ylim(0, 5600)
+    ax.set_title("Riesgo anual esperado (probabilidad × multa)", fontsize=10.5, weight="bold", color=CAR)
+    ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, _: f"{x/1000:.0f} mil"))
+    for s in ["top", "right"]:
+        ax.spines[s].set_visible(False)
+    fig.text(0.5, -0.03, "Ejemplo ficticio: volumen de negocio USD 1,85 millones · Res. SPDP-SPD-2025-0022-R (modelo MPRIV-1) · estimación orientativa",
+             ha="center", fontsize=8, color=OLI)
+    fig.tight_layout()
+    save(fig, "multa_escenarios")
+
+
+# 6. Mapa de flujo de datos (ejemplo)
+def flujo_datos():
+    fig, ax = plt.subplots(figsize=(10, 4.6))
+    ax.set_xlim(0, 10); ax.set_ylim(0, 4.6); ax.axis("off")
+    cols = [("ORIGEN", 0.2), ("RECOLECCIÓN", 2.2), ("SISTEMAS", 4.25), ("ENCARGADOS", 6.3), ("DESTINO", 8.3)]
+    for t, x in cols:
+        ax.text(x + 0.75, 4.35, t, ha="center", fontsize=8.5, weight="bold", color=ORO)
+    B = {}
+    def b(k, x, y, t, s="", fc=MAR):
+        box(ax, x, y, 1.5, 0.78, t, s, fc=fc, fs=8.6, fss=7); B[k] = (x, y)
+    b("cli", 0.2, 3.1, "Clientes", "identificación y contacto")
+    b("tra", 0.2, 1.7, "Trabajadores", "laborales, bancarios")
+    b("pos", 0.2, 0.3, "Postulantes", "hoja de vida")
+    b("web", 2.2, 3.1, "Formulario web", "aviso de privacidad")
+    b("fis", 2.2, 1.7, "Ficha física", "firma y consentimiento")
+    b("mail", 2.2, 0.3, "Correo", "")
+    b("erp", 4.25, 3.1, "ERP / facturación", "servidor local")
+    b("nom", 4.25, 1.7, "Software nómina", "nube")
+    b("arc", 4.25, 0.3, "Archivo físico", "bajo llave")
+    b("nube", 6.3, 2.45, "Proveedor nube", "EE. UU. · transferencia", fc="#FBEDE5")
+    b("cont", 6.3, 0.85, "Contadora externa", "contrato de encargo")
+    b("sri", 8.3, 3.1, "SRI", "obligación legal")
+    b("iess", 8.3, 1.7, "IESS · MDT", "obligación legal")
+    b("sup", 8.3, 0.3, "Supresión", "plazo vencido", fc="#E6F2EA")
+    def a(k1, k2):
+        x1, y1 = B[k1]; x2, y2 = B[k2]
+        arrow(ax, (x1 + 1.5, y1 + 0.39), (x2, y2 + 0.39))
+    for p in [("cli", "web"), ("tra", "fis"), ("pos", "mail"), ("web", "erp"), ("fis", "nom"), ("mail", "arc"),
+              ("erp", "sri"), ("nom", "nube"), ("nom", "cont"), ("cont", "iess"), ("arc", "sup")]:
+        a(*p)
+    save(fig, "flujo_datos")
+
+
+# 7. Calendario anual del DPD
+def calendario():
+    meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+    act = [("Reporte de indicadores a la gerencia", [3, 6, 9, 12], ORO),
+           ("Revisión del RAT por eventos y periódica", [1, 7], OLI),
+           ("Revisión de solicitudes de derechos", list(range(1, 13)), "#8C7E3E"),
+           ("Seguimiento a encargados (contratos, auditoría)", [2, 8], "#5A4F25"),
+           ("Capacitación al personal", [4, 10], OK),
+           ("Simulacro de vulneración", [5], AL),
+           ("Revisión de evaluaciones de impacto", [6], "#3A3F47"),
+           ("Diagnóstico de madurez y plan anual", [11], CAR),
+           ("Monitoreo normativo SPDP", list(range(1, 13)), "#B8B19A")]
+    fig, ax = plt.subplots(figsize=(10, 3.9))
+    for i, (t, ms, c) in enumerate(act):
+        y = len(act) - i
+        for m in ms:
+            ax.add_patch(FancyBboxPatch((m - 0.42, y - 0.32), 0.84, 0.64, boxstyle="round,pad=0,rounding_size=0.12", fc=c, ec="none"))
+        ax.text(0.3, y, t, ha="right", va="center", fontsize=8.6, color=CAR)
+    ax.set_xlim(0.4, 12.6); ax.set_ylim(0.3, len(act) + 0.8)
+    ax.set_xticks(range(1, 13)); ax.set_xticklabels(meses, fontsize=8.5); ax.set_yticks([])
+    ax.xaxis.tick_top()
+    for s in ax.spines.values():
+        s.set_visible(False)
+    ax.grid(axis="x", color="#EFEBDD")
+    save(fig, "calendario_dpd")
+
+
+# 8. ISO por niveles
+def iso():
+    fig, ax = plt.subplots(figsize=(10, 4.3))
+    ax.set_xlim(0, 10); ax.set_ylim(0, 4.3); ax.axis("off")
+    capas = [
+        ("INDISPENSABLES", CAR, MAR, ["ISO/IEC 27701:2025\nGestión de la privacidad", "ISO/IEC 27001:2022\nSeguridad de información", "ISO/IEC 29100\nMarco de privacidad", "ISO/IEC 29134\nEvaluación de impacto"]),
+        ("RECOMENDADAS", ORO, CAR, ["ISO/IEC 27002:2022\nControles", "ISO/IEC 27005 · ISO 31000\nGestión de riesgos", "ISO/IEC 27035\nIncidentes", "ISO/IEC 29151\nControles para datos personales"]),
+        ("SEGÚN EL CASO", MAR, CAR, ["ISO/IEC 27018\nDatos en la nube", "ISO/IEC 29184\nAvisos y consentimiento", "ISO/IEC 27560\nRegistro de consentimientos", "ISO/IEC 42001\nInteligencia artificial"]),
+    ]
+    for r, (t, fc, tc, items) in enumerate(capas):
+        y = 2.95 - r * 1.42
+        ax.text(0.05, y + 0.5, t, fontsize=9, weight="bold", color=ORO if r else CAR, va="center")
+        for j, it in enumerate(items):
+            x = 1.75 + j * 2.07
+            ax.add_patch(FancyBboxPatch((x, y), 1.92, 1.0, boxstyle="round,pad=0.02,rounding_size=0.07", fc=fc, ec=ORO, lw=1.2))
+            a, b_ = it.split("\n")
+            ax.text(x + 0.96, y + 0.64, a, ha="center", va="center", fontsize=8, weight="bold", color=tc)
+            ax.text(x + 0.96, y + 0.3, b_, ha="center", va="center", fontsize=7, color=tc if r == 1 else (ORC if r == 0 else OLI))
+    save(fig, "iso_niveles")
+
+
+# 9. Estados del RAT de ejemplo
+def estados_rat():
+    fig, ax = plt.subplots(figsize=(4.6, 3.4))
+    vals, labs, cols = [4, 3, 1], ["Incompleto (4)", "Mínimo cumplido (3)", "Completo (1)"], [AL, AM, OK]
+    ax.pie(vals, colors=cols, startangle=90, counterclock=False, wedgeprops={"width": 0.38, "edgecolor": "white", "linewidth": 2})
+    ax.text(0, 0.06, "50 %", ha="center", fontsize=17, weight="bold", color=CAR)
+    ax.text(0, -0.2, "con mínimo legal", ha="center", fontsize=8, color=OLI)
+    ax.legend(labs, loc="center left", bbox_to_anchor=(1, 0.5), frameon=False, fontsize=8.5)
+    save(fig, "estados_rat")
+
+
+if __name__ == "__main__":
+    flujo(); ciclo(); idx = radar(); heatmap(); multa(); flujo_datos(); calendario(); iso(); estados_rat()
+    print("índice ejemplo", round(idx, 2))

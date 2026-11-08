@@ -17,6 +17,7 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | RES-0040 | Res. SPDP-SPD-2026-0040-R, norma técnica de notificación de vulneraciones de seguridad | sept. 2026 (vigente desde su publicación en RO) |
 | RES-0003 | Res. SPDP-SPD-2025-0003-R, Guía de Gestión de Riesgos y Evaluación de Impacto (Cap. I obligatorio, Cap. II referencial; versión 2 en 2026) | 29-04-2025; RO 4to Supl. 41, 19-05-2025 |
 | RES-0022 | Res. SPDP-SPD-2025-0022-R, reglamento de la metodología para el cálculo de multas (modelos MPRIV-1 y MPUB-1; Anexo I) | 16-07-2025; RO 92, 30-07-2025 |
+| RES-2026-0004 | Res. SPDP-SPD-2026-0004-R, Norma General de Transferencias Internacionales | RO 3er Supl. 225, 13-02-2026 |
 | RES-2026-0009 | Res. SPDP-SPD-2026-0009-R, norma general de protección de datos en sistemas de inteligencia artificial, reformada por Res. SPDP-SPD-2026-0037-R | 12-02-2026; reforma sept. 2026 |
 | RES-2026-0039 | Res. SPDP-SPD-2026-0039-R, norma general para el tratamiento de datos biométricos | sept. 2026 |
 
@@ -44,6 +45,10 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | Volumen de negocio | Venta de productos y prestación de servicios del último ejercicio, previa deducción del IVA y otros impuestos directamente relacionados | LOPDP art. 73 | ☐ |
 | Cálculo de la multa (MPRIV-1) | CDI = VDN × RDMmín + (PDI/100) × VDN × (RDMmáx − RDMmín); SDI = 2 (IED + INT + RER) con PERT; IED 60 %, INT 40 %, RER 20 % opcional; Multa = CDI × SDI acotada a mínimo y máximo legal; opción estocástica (Monte Carlo) | RES-0022 (según resumen de Corral Rosales) | ☐ |
 | Apetito al riesgo | Capacidad (cuantitativa) y tolerancia (cualitativa); riesgo = probabilidad × impacto | RES-0003, Cap. II, 1.4 y 1.6 (referencial) | ☐ |
+| Responsabilidad proactiva | El responsable debe acreditar haber implementado mecanismos para la protección de datos personales | LOPDP art. 10 lit. k | ☐ |
+| Transferencias internacionales | Principio general de transferencia a países, organizaciones y personas jurídicas con nivel adecuado de protección; norma general de la SPDP | LOPDP art. 56; RES-2026-0004 | ☐ |
+| Certificación y códigos de conducta | La SPDP emite normativa sobre cláusulas tipo, códigos de conducta y mecanismos de certificación; el reglamento de certificaciones y sellos consta en su plan regulatorio | LOPDP art. 76 num. 5 | ☐ |
+| DPD, requisitos académicos | Programa profesionalizante; criterio SPDP (nov. 2025): el programa no equivale a título de tercer nivel | RGLOPDP art. 55 | ☐ |
 | Obligaciones del responsable | Catálogo de obligaciones del responsable (base del modelo de madurez) | LOPDP art. 47 | ☐ |
 | Bases legitimadoras | Consentimiento; obligación legal; orden judicial; interés público/potestades públicas; contrato o medidas precontractuales; interés vital; bases de acceso público; interés legítimo | LOPDP art. 7 | ☐ |
 | Interés legítimo | Si es la base, debe constar en el RAT y respaldarse con la evaluación de ponderación | RGLOPDP art. 38 num. 7; RES-0041 | ☐ |
@@ -78,7 +83,8 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 7. Criterios de "gran escala": pendientes de desarrollo por la SPDP; el volumen de titulares del RAT es solo orientativo.
 8. Escalas oficiales de impacto y probabilidad y anexo con el formato de evaluación de impacto de la Guía SPDP (RES-0003, v2 2026): no se pudieron leer completos; la herramienta 04 usa escalas propias. Contrastar al obtener el texto íntegro.
 9. Alcance exacto de la obligación de evaluación de impacto en la norma de IA (RES-2026-0009/0037) y en la de biométricos (RES-2026-0039): leer sus textos completos.
-10. Numeración de los artículos de la LOPDP sobre transferencias internacionales: pendiente; el modelo de madurez no los cita hasta verificarlos.
+10. Transferencias internacionales: identificado el art. 56 LOPDP y la RES-2026-0004 (norma general); falta leer el texto completo de la norma general para incorporar sus mecanismos a las herramientas 01 y 05.
+14. Estado del reglamento de certificaciones y sellos de la SPDP (plan regulatorio 2025-2026): verificar si fue expedido.
 11. Anexo I de la RES-0022: leer el texto oficial (spdp.gob.ec no fue accesible). Confirmar (a) el sentido del PDI: la herramienta 05 lo toma como complemento del índice de madurez (menor madurez, mayor multa); (b) cómo se aplican los pesos 60/40/20 dentro del SDI; (c) las escalas de IED, INT y RER.
 12. Múltiplos de SBU para infracciones graves de servidores públicos (art. 72 LOPDP): pendiente; la herramienta 05 no calcula multas del sector público.
 13. Catálogo completo de infracciones leves y graves (arts. 67 y 68 LOPDP): solo se clasifican como graves los tres dominios verificados (DPD, contrato de encargo, notificación a titulares).

@@ -9,6 +9,7 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
+import matplotlib.ticker  # noqa: E402,F401
 from matplotlib import font_manager  # noqa: E402
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, Circle, Wedge  # noqa: E402
 
@@ -49,22 +50,24 @@ def arrow(ax, a, b, color=OLI, rad=0.0):
 
 # 1. Flujo de las herramientas
 def flujo():
-    fig, ax = plt.subplots(figsize=(10, 3.6))
-    ax.set_xlim(0, 10); ax.set_ylim(0, 3.6); ax.axis("off")
-    pasos = [("05", "Madurez", "Diagnóstico y\nplan de acción"), ("01", "RAT", "Inventario de\nactividades"),
-             ("04", "Evaluación\nde impacto", "Actividades de\nalto riesgo"), ("02", "Plantillas", "Política, avisos,\ncontratos, DPD"),
-             ("03", "Vulneraciones", "Protocolo y\nrespuesta")]
-    w, gap, y = 1.62, 0.37, 1.25
-    for i, (n, t, s) in enumerate(pasos):
-        x = 0.1 + i * (w + gap)
-        ax.add_patch(FancyBboxPatch((x, y), w, 1.55, boxstyle="round,pad=0.02,rounding_size=0.08", fc=CAR if i == 0 else MAR, ec=ORO, lw=1.5))
-        ax.text(x + 0.16, y + 1.32, n, fontsize=9, weight="bold", color=ORO)
-        ax.text(x + w / 2, y + 0.92, t, ha="center", va="center", fontsize=11, weight="bold", color=MAR if i == 0 else CAR)
-        ax.text(x + w / 2, y + 0.33, s, ha="center", va="center", fontsize=8.2, color=ORC if i == 0 else OLI)
+    fig, ax = plt.subplots(figsize=(12, 3.7))
+    ax.set_xlim(0, 12); ax.set_ylim(0, 3.7); ax.axis("off")
+    pasos = [("06", "Honorarios", "Proforma\nantes de iniciar"), ("05", "Madurez", "Diagnóstico y\nplan de acción"), ("01", "RAT", "Inventario de\nactividades"),
+             ("07", "Gran escala", "Puntaje MTGE\npor actividad"), ("04", "Evaluación\nde impacto", "Actividades de\nalto riesgo"),
+             ("02", "Plantillas", "Política, avisos,\ncontratos, DPD"), ("03", "Vulneraciones", "Protocolo y\nrespuesta")]
+    w, gap, y = 1.5, 0.2, 1.3
+    for i, (n, t, s_) in enumerate(pasos):
+        x = 0.08 + i * (w + gap)
+        dark = i == 1
+        fc = CAR if dark else ("#EFEBDD" if i == 0 else MAR)
+        ax.add_patch(FancyBboxPatch((x, y), w, 1.55, boxstyle="round,pad=0.02,rounding_size=0.08", fc=fc, ec=ORO, lw=1.5, ls="--" if i == 0 else "-"))
+        ax.text(x + 0.14, y + 1.32, n, fontsize=9, weight="bold", color=ORO)
+        ax.text(x + w / 2, y + 0.92, t, ha="center", va="center", fontsize=10.5, weight="bold", color=MAR if dark else CAR)
+        ax.text(x + w / 2, y + 0.33, s_, ha="center", va="center", fontsize=7.8, color=ORC if dark else OLI)
         if i < len(pasos) - 1:
-            arrow(ax, (x + w + 0.03, y + 0.78), (x + w + gap - 0.03, y + 0.78))
-    arrow(ax, (9.0, 1.2), (1.0, 1.2), color=ORO, rad=-0.18)
-    ax.text(5, 0.12, "Revisión anual: repetir 05 · Madurez para medir el avance", ha="center", fontsize=9, color=OLI, style="italic")
+            arrow(ax, (x + w + 0.02, y + 0.78), (x + w + gap - 0.02, y + 0.78))
+    arrow(ax, (11.2, 1.25), (2.6, 1.25), color=ORO, rad=-0.16)
+    ax.text(6.9, 0.12, "Revisión anual: repetir 05 · Madurez y 07 · Gran escala para medir el avance", ha="center", fontsize=9, color=OLI, style="italic")
     save(fig, "flujo_herramientas")
 
 
@@ -277,6 +280,49 @@ def estados_rat():
     save(fig, "estados_rat")
 
 
+# 10. Puntaje MTGE del ejemplo de la herramienta 07
+def mtge():
+    import granescala_config as G
+    trat = [("Facturación y clientes", [2, 1, 0.5, 1, 2, 2], False), ("Nómina", [1, 2, 3, 1, 2, 1], False),
+            ("Asistencia con huella", [1, 0.5, 2, 2, 1, 1], True), ("Asistentes a feria", [1, 0.5, 0.5, 0.5, 0.5, 1], False)]
+    nombres = ["Titulares", "Volumen", "Categorías", "Frecuencia", "Permanencia", "Alcance"]
+    cols = [CAR, OLI, AL, ORO, "#8C7E3E", ORC]
+    fig, ax = plt.subplots(figsize=(9, 3.6))
+    for i, (t, v, d) in enumerate(trat):
+        left = 0
+        for j, x in enumerate(v):
+            ax.barh(i, x, left=left, color=cols[j], edgecolor="white", height=0.6, label=nombres[j] if i == 0 else None)
+            left += x
+        ax.text(left + 0.15, i, f"{str(left).replace('.0', '').replace('.', ',')} pts" + ("  · directa (biométrico)" if d else ""), va="center", fontsize=9, weight="bold", color=AL if left >= G.UMBRAL else OK)
+    ax.axvline(G.UMBRAL, color=CAR, lw=1.6, ls="--"); ax.text(G.UMBRAL + 0.08, 3.55, "Umbral 6", fontsize=8.5, weight="bold")
+    ax.set_yticks(range(len(trat))); ax.set_yticklabels([t for t, _, _ in trat]); ax.invert_yaxis(); ax.set_xlim(0, 15)
+    ax.set_xlabel("Puntaje MTGE (Res. SPDP-SPD-2026-0005-R, art. 8)")
+    for s_ in ("top", "right"): ax.spines[s_].set_visible(False)
+    ax.legend(ncol=6, fontsize=7.5, frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.22))
+    save(fig, "mtge_ejemplo")
+
+
+# 11. Honorarios por método (ejemplo de la herramienta 06)
+def honorarios():
+    fases = ["Evaluación inicial", "Adecuación", "Control mensual × 12"]
+    datos = {"Volumen de negocio": [1470, 3780, 350 * 12], "Volumen de tratamiento": [1090, 2210, 590 * 12], "Técnica (piso)": [1350, 2130, 370 * 12]}
+    rec = [1350, 2210, 370 * 12]
+    fig, ax = plt.subplots(figsize=(9, 3.6))
+    cols = [ORC, OLI, CAR]; wb = 0.24
+    for k, (m, v) in enumerate(datos.items()):
+        xs = [i + (k - 1) * wb for i in range(3)]
+        ax.bar(xs, v, width=wb, color=cols[k], label=m)
+    for i, r in enumerate(rec):
+        ax.plot([i - 0.4, i + 0.4], [r, r], color=AL, lw=2)
+        ax.text(i + 0.42, r, f"${r:,.0f}".replace(",", "."), va="center", fontsize=8.5, weight="bold", color=AL)
+    ax.plot([], [], color=AL, lw=2, label="Recomendado (mediana con piso técnico)")
+    ax.set_xticks(range(3)); ax.set_xticklabels(fases); ax.set_ylabel("USD sin IVA")
+    ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, _: f"{x:,.0f}".replace(",", ".")))
+    for s_ in ("top", "right"): ax.spines[s_].set_visible(False)
+    ax.legend(fontsize=8, frameon=False, ncol=2, loc="upper left")
+    save(fig, "honorarios_metodos")
+
+
 if __name__ == "__main__":
-    flujo(); ciclo(); idx = radar(); heatmap(); multa(); flujo_datos(); calendario(); iso(); estados_rat()
+    flujo(); ciclo(); idx = radar(); heatmap(); multa(); flujo_datos(); calendario(); iso(); estados_rat(); mtge(); honorarios()
     print("índice ejemplo", round(idx, 2))

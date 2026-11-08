@@ -14,6 +14,7 @@ Herramientas para la gestión del cumplimiento de la **Ley Orgánica de Protecci
 | 04 | [Evaluación de impacto](04-evaluacion-impacto/) | Necesidad (art. 42), descripción, proporcionalidad, matriz de riesgos y medidas, informe del art. 32 RGLOPDP | v0.1 |
 | 05 | [Nivel de madurez](05-madurez/) | Diagnóstico en 12 dominios, índice ponderado, radar, plan de acción, multa estimada (Res. SPDP-SPD-2025-0022-R) y apetito al riesgo | v0.2 |
 | 06 | [Calculadora de honorarios](06-honorarios/) | Honorarios por volumen de negocio, volumen de tratamiento (MTGE, Res. SPDP-SPD-2026-0005-R) y estimación técnica; IVA; comparación; paquetes; proforma con firma | v0.1 |
+| 07 | [Evaluación de gran escala](07-gran-escala/) | Calificación directa y Modelo Técnico de Gran Escala (Res. SPDP-SPD-2026-0005-R) por tratamiento, con evidencia, obligaciones, guion para la gerencia e informe | v0.1 |
 
 ## Flujo recomendado con un cliente
 
@@ -21,6 +22,7 @@ Herramientas para la gestión del cumplimiento de la **Ley Orgánica de Protecci
 
 1. **05 · Madurez**: diagnóstico inicial y plan de acción.
 2. **01 · RAT**: inventario de actividades; identifica cuáles requieren evaluación de impacto.
+   **07 · Gran escala**: puntuar cada actividad del RAT; define si el DPD y la evaluación de impacto son obligatorios.
 3. **04 · Evaluación de impacto**: para las actividades de alto riesgo.
 4. **02 · Kit de plantillas**: política, avisos, contratos de encargo, DPD.
 5. **03 · Kit de vulneraciones**: protocolo y respuesta.
@@ -54,6 +56,7 @@ python scripts/generar_generador.py    # páginas web de los kits 02 y 03
 python scripts/generar_asistente_eipd.py     # asistente de evaluación de impacto
 python scripts/generar_asistente_madurez.py  # asistente y cuestionario de madurez
 python scripts/generar_calculadora_honorarios.py  # calculadora, metodología y proforma de honorarios
+python scripts/generar_gran_escala.py  # evaluación de gran escala, informe y solicitud de información
 bash scripts/exportar_docx.sh          # versiones Word
 python scripts/guia/graficos.py && python scripts/guia/generar_guia.py  # guía PDF
 ```

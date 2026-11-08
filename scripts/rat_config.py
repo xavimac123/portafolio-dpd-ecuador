@@ -37,11 +37,15 @@ LISTAS = {
         "Laborales (cargo, remuneración)", "Académicos", "Imagen o video", "Navegación y cookies",
         "Geolocalización", "Firma",
         "Salud", "Biométricos (huella, rostro)", "Niñas, niños y adolescentes", "Discapacidad",
-        "Pasado judicial", "Etnia, religión, ideología u orientación sexual", "Condición migratoria",
+        "Pasado judicial", "Etnia, religión, ideología u orientación sexual", "Condición migratoria", "Genéticos",
     ],
      # opciones que activan "categorías especiales" (LOPDP arts. 4 y 25)
      "especiales": ["Salud", "Biométricos (huella, rostro)", "Niñas, niños y adolescentes", "Discapacidad",
-                    "Pasado judicial", "Etnia, religión, ideología u orientación sexual", "Condición migratoria"],
+                    "Pasado judicial", "Etnia, religión, ideología u orientación sexual", "Condición migratoria",
+                    "Genéticos"],
+     # subconjunto de datos sensibles (art. 4 LOPDP): su tratamiento requiere una excepción del art. 26
+     "sensibles": ["Salud", "Biométricos (huella, rostro)", "Pasado judicial",
+                   "Etnia, religión, ideología u orientación sexual", "Condición migratoria", "Genéticos"],
      "nna": ["Niñas, niños y adolescentes"]},
     "origen": {"tipo": "uno", "opciones": [
         "Del propio titular", "De terceros (otra empresa o persona)", "De fuentes de acceso público",
@@ -72,7 +76,184 @@ LISTAS = {
         "Contratos de encargo con proveedores", "Capacitación al personal", "Archivo físico bajo llave",
         "Bitácora de accesos", "Procedimiento de atención de derechos",
     ]},
+    "sistemas": {"tipo": "varios", "opciones": [
+        "Software contable o ERP", "Software de nómina", "Hojas de cálculo", "Correo electrónico",
+        "Almacenamiento en la nube (Drive, OneDrive)", "CRM o sistema de ventas", "Sistema clínico o académico",
+        "Sitio web y formularios", "WhatsApp o mensajería", "Grabador de cámaras (DVR/NVR)", "Reloj biométrico",
+        "Archivo físico",
+    ]},
+    "volumen": {"tipo": "uno", "opciones": [
+        "Menos de 100", "De 100 a 1.000", "De 1.001 a 10.000", "Más de 10.000",
+    ]},
+    "info": {"tipo": "uno", "opciones": [
+        "Aviso de privacidad en el formulario o punto de recogida", "Cláusula en el contrato",
+        "Política de privacidad publicada", "Cartel informativo (videovigilancia)",
+        "Comunicación interna al personal", "No se informa aún",
+    ]},
 }
+
+# Finalidades demasiado genéricas si aparecen solas: conviene describir el servicio concreto.
+FINALIDADES_GENERICAS = ["Ejecutar el contrato o prestar el servicio", "Elaborar estadísticas internas"]
+# Finalidad que casi siempre tiene una base distinta del resto: si se combina con otra, sugerir separar.
+FINALIDAD_SEPARABLE = "Enviar publicidad y promociones"
+
+# Práctica interna (no fijada por la norma): meses entre revisiones del RAT.
+REVISION_MESES = 12
+
+# ---------------------------------------------------------------------------
+# Campos del registro. Fuente única para el Excel y el asistente web.
+# tipo: lista (usa LISTAS[clave]) · base · sino · opc (opciones propias) · texto · fecha · auto
+# min: numeral del art. 38 RGLOPDP si forma parte del contenido mínimo; None = buena práctica
+# si: condición para mostrar el campo en el asistente web
+# ---------------------------------------------------------------------------
+SECCIONES = {
+    "ident": "1 · Identificación de la actividad",
+    "fin": "2 · Finalidad y legitimación",
+    "datos": "3 · Titulares y datos",
+    "com": "4 · Comunicaciones, encargados y transferencias",
+    "cons": "5 · Conservación, seguridad y sistemas",
+    "riesgo": "6 · Riesgo y evaluación de impacto",
+    "ctrl": "7 · Control del registro",
+}
+
+CAMPOS = [
+    {"k": "id", "h": "ID", "sec": "ident", "tipo": "texto", "w": 7, "min": None, "nota": "Código interno, ej. T-01"},
+    {"k": "actividad", "h": "Actividad de tratamiento", "sec": "ident", "tipo": "lista", "w": 28, "min": None,
+     "nota": "Nombre de la actividad, no de la base de datos ni del programa. Ej.: Nómina, Videovigilancia."},
+    {"k": "area", "h": "Área responsable", "sec": "ident", "tipo": "lista", "w": 16, "min": None, "nota": "Unidad interna a cargo"},
+    {"k": "propietario", "h": "Responsable interno (cargo)", "sec": "ident", "tipo": "texto", "w": 18, "min": None,
+     "nota": "Cargo que responde por la actividad y mantiene la fila al día. Ej.: Jefe de Talento Humano."},
+    {"k": "descripcion", "h": "Descripción breve", "sec": "ident", "tipo": "texto", "w": 30, "min": None,
+     "nota": "Qué se hace con los datos, en una o dos frases."},
+    {"k": "finalidad", "h": "Finalidades", "sec": "fin", "tipo": "lista", "w": 34, "min": "2",
+     "nota": "Para qué se tratan los datos. Concreta, no genérica. Si dos finalidades tienen bases distintas, sepáralas en dos actividades."},
+    {"k": "base", "h": "Base legitimadora", "sec": "fin", "tipo": "base", "w": 26, "min": "7", "nota": "Art. 7 LOPDP"},
+    {"k": "il", "h": "Ref. evaluación de interés legítimo", "sec": "fin", "tipo": "texto", "w": 20, "min": "7",
+     "si": "base=Interés legítimo", "nota": "Obligatoria si la base es interés legítimo (Res. SPDP-SPD-2025-0041-R)"},
+    {"k": "exc26", "h": "Excepción del art. 26 LOPDP (datos sensibles)", "sec": "fin", "tipo": "texto", "w": 24, "min": None,
+     "si": "sensibles", "nota": "Si hay datos sensibles, indica la excepción del art. 26 LOPDP que permite tratarlos."},
+    {"k": "info", "h": "Cómo se informa al titular", "sec": "fin", "tipo": "lista", "w": 24, "min": None,
+     "nota": "Medio por el que se cumple el derecho a la información (art. 12 LOPDP)."},
+    {"k": "titulares", "h": "Categorías de titulares", "sec": "datos", "tipo": "lista", "w": 22, "min": "4"},
+    {"k": "volumen", "h": "Volumen aproximado de titulares", "sec": "datos", "tipo": "lista", "w": 14, "min": None,
+     "nota": "Orienta la valoración de gran escala y de riesgo."},
+    {"k": "datos", "h": "Categorías de datos personales", "sec": "datos", "tipo": "lista", "w": 30, "min": "4"},
+    {"k": "especial", "h": "¿Categorías especiales?", "sec": "datos", "tipo": "sino", "w": 12, "min": None,
+     "nota": "Sí si incluye datos sensibles, de salud, biométricos, de NNA o de discapacidad (art. 25 LOPDP)."},
+    {"k": "nna", "h": "¿Datos de niñas, niños y adolescentes?", "sec": "datos", "tipo": "sino", "w": 14, "min": None},
+    {"k": "origen", "h": "Origen de los datos", "sec": "datos", "tipo": "lista", "w": 20, "min": None},
+    {"k": "dest", "h": "Categorías de destinatarios", "sec": "com", "tipo": "lista", "w": 26, "min": "3",
+     "nota": "A quién se comunican. Si no hay, escribe Ninguno."},
+    {"k": "enc", "h": "Encargados del tratamiento", "sec": "com", "tipo": "lista", "w": 24, "min": None,
+     "nota": "Proveedores que tratan datos por cuenta del responsable."},
+    {"k": "contrato", "h": "¿Contrato de encargo firmado?", "sec": "com", "tipo": "opc", "w": 14, "min": None,
+     "ops": ["Sí, con todos", "Con algunos", "No"], "si": "encargados",
+     "nota": "Contenido mínimo: art. 41 RGLOPDP. Su falta es infracción grave (art. 68 num. 9 LOPDP)."},
+    {"k": "transf", "h": "¿Transferencia internacional?", "sec": "com", "tipo": "sino", "w": 13, "min": "6"},
+    {"k": "pais", "h": "País de destino", "sec": "com", "tipo": "texto", "w": 16, "min": "6", "si": "transf=Sí"},
+    {"k": "tgar", "h": "Garantía de la transferencia", "sec": "com", "tipo": "lista", "w": 22, "min": "6", "si": "transf=Sí"},
+    {"k": "perfiles", "h": "¿Elaboración de perfiles o decisiones automatizadas?", "sec": "com", "tipo": "sino", "w": 14, "min": "5"},
+    {"k": "plazo", "h": "Plazo de conservación / supresión", "sec": "cons", "tipo": "lista", "w": 24, "min": "8",
+     "nota": "Plazo o criterio y su fundamento. Evita 'indefinido'."},
+    {"k": "medidas", "h": "Medidas técnicas, jurídicas, administrativas y organizativas", "sec": "cons", "tipo": "lista",
+     "w": 34, "min": "9", "nota": "Descripción general. No anotes contraseñas ni detalles que debiliten la seguridad."},
+    {"k": "sistemas", "h": "Sistemas y soportes", "sec": "cons", "tipo": "lista", "w": 24, "min": None,
+     "nota": "Dónde residen los datos. Indispensable para gestionar una vulneración (Herramienta 03)."},
+    {"k": "riesgo", "h": "Nivel de riesgo (orientativo)", "sec": "riesgo", "tipo": "auto", "w": 12, "min": None,
+     "nota": "Automático. Criterio interno, no normativo: ver README."},
+    {"k": "eipd", "h": "¿Requiere evaluación de impacto?", "sec": "riesgo", "tipo": "opc", "w": 14, "min": None,
+     "ops": ["Sí", "No", "Por analizar"], "nota": "Art. 42 LOPDP"},
+    {"k": "eipdref", "h": "Ref. evaluación de impacto", "sec": "riesgo", "tipo": "texto", "w": 16, "min": None, "si": "eipd=Sí"},
+    {"k": "alta", "h": "Fecha de alta", "sec": "ctrl", "tipo": "fecha", "w": 12, "min": None},
+    {"k": "rev", "h": "Fecha de última revisión", "sec": "ctrl", "tipo": "fecha", "w": 12, "min": None},
+    {"k": "prox", "h": "Próxima revisión", "sec": "ctrl", "tipo": "auto", "w": 12, "min": None,
+     "nota": "Automático: última revisión + %d meses (práctica interna)." % REVISION_MESES},
+]
+
+# Puntaje orientativo de riesgo (criterio interno del portafolio, no fijado por la norma).
+# Alto >= 4 · Medio 2-3 · Bajo 0-1
+RIESGO = {
+    "especial": 2, "nna": 1, "perfiles": 2, "transf": 1,
+    "volumen": {"De 1.001 a 10.000": 1, "Más de 10.000": 2},
+    "datos": {"Financieros y bancarios": 1, "Geolocalización": 1},
+    "umbral_alto": 4, "umbral_medio": 2,
+}
+
+# Catálogo de actividades típicas: punto de partida para el levantamiento.
+# Son sugerencias que el usuario debe revisar; nunca se cargan sin su acción.
+CATALOGO = [
+    {"actividad": "Gestión de nómina y personal", "area": "Talento Humano",
+     "finalidad": "Cumplir obligaciones laborales y de seguridad social; Cumplir obligaciones tributarias",
+     "titulares": "Trabajadores; Cargas familiares de trabajadores",
+     "datos": "Identificación (nombre, cédula); Contacto (teléfono, correo, dirección); Financieros y bancarios; Laborales (cargo, remuneración); Niñas, niños y adolescentes",
+     "origen": "Del propio titular", "base": "Obligación legal",
+     "dest": "IESS; SRI; Ministerio del Trabajo; Entidades bancarias", "enc": "Software contable o de nómina",
+     "plazo": "Plazo fijado por la normativa laboral o de seguridad social (indicar)",
+     "sistemas": "Software de nómina; Archivo físico", "info": "Comunicación interna al personal",
+     "nota": "Las cargas familiares suelen ser menores de edad: son categoría especial."},
+    {"actividad": "Selección de personal", "area": "Talento Humano", "finalidad": "Seleccionar personal",
+     "titulares": "Postulantes", "datos": "Identificación (nombre, cédula); Contacto (teléfono, correo, dirección); Académicos",
+     "origen": "Del propio titular", "base": "Ejecución de contrato o medidas precontractuales", "dest": "Ninguno",
+     "plazo": "Plazo corto fijado internamente (indicar días) salvo incidente",
+     "info": "Aviso de privacidad en el formulario o punto de recogida",
+     "nota": "Si se pide récord policial, es dato sensible (pasado judicial): justifica la necesidad y la excepción del art. 26. Conservar hojas de vida para futuras vacantes requiere otra base."},
+    {"actividad": "Control de asistencia (reloj o biométrico)", "area": "Talento Humano", "finalidad": "Controlar la asistencia",
+     "titulares": "Trabajadores", "datos": "Identificación (nombre, cédula); Biométricos (huella, rostro)",
+     "origen": "Del propio titular", "sistemas": "Reloj biométrico", "info": "Comunicación interna al personal",
+     "nota": "La huella o el rostro son datos sensibles. Analiza si un medio no biométrico (tarjeta, código) cumple la misma finalidad y documenta la excepción del art. 26."},
+    {"actividad": "Gestión de clientes y facturación", "area": "Contabilidad y Finanzas",
+     "finalidad": "Cumplir obligaciones tributarias; Gestionar cobros y pagos", "titulares": "Clientes",
+     "datos": "Identificación (nombre, cédula); Contacto (teléfono, correo, dirección); Financieros y bancarios",
+     "origen": "Del propio titular", "base": "Obligación legal", "dest": "SRI; Entidades bancarias",
+     "enc": "Software contable o de nómina", "plazo": "Plazo fijado por la normativa tributaria (indicar)",
+     "sistemas": "Software contable o ERP", "info": "Cláusula en el contrato",
+     "nota": "La prestación del servicio (base contractual) y la facturación (obligación legal) pueden registrarse como actividades separadas."},
+    {"actividad": "Marketing y publicidad", "area": "Marketing", "finalidad": "Enviar publicidad y promociones",
+     "titulares": "Clientes; Potenciales clientes", "datos": "Identificación (nombre, cédula); Contacto (teléfono, correo, dirección)",
+     "origen": "Del propio titular", "base": "Consentimiento del titular",
+     "enc": "Plataforma de correo masivo o mensajería", "plazo": "Hasta que el titular revoque su consentimiento",
+     "sistemas": "CRM o sistema de ventas; WhatsApp o mensajería",
+     "info": "Aviso de privacidad en el formulario o punto de recogida",
+     "nota": "Registra aparte de la gestión de clientes: tiene base y plazo distintos. Si segmentas por preferencias, marca elaboración de perfiles."},
+    {"actividad": "Sitio web y formularios de contacto", "area": "Marketing", "finalidad": "Atender solicitudes y reclamos",
+     "titulares": "Usuarios del sitio web", "datos": "Identificación (nombre, cédula); Contacto (teléfono, correo, dirección); Navegación y cookies",
+     "origen": "Captación automática (cámaras, sitio web)", "enc": "Proveedor de nube u hosting",
+     "sistemas": "Sitio web y formularios", "info": "Política de privacidad publicada",
+     "nota": "Si el hosting o las herramientas de analítica están fuera del Ecuador, hay transferencia internacional."},
+    {"actividad": "Videovigilancia", "area": "Seguridad física", "finalidad": "Seguridad de personas e instalaciones",
+     "titulares": "Trabajadores; Visitantes; Clientes", "datos": "Imagen o video",
+     "origen": "Captación automática (cámaras, sitio web)", "base": "Interés legítimo",
+     "dest": "Autoridades judiciales o policiales (por requerimiento)", "enc": "Empresa de seguridad",
+     "plazo": "Plazo corto fijado internamente (indicar días) salvo incidente",
+     "sistemas": "Grabador de cámaras (DVR/NVR)", "info": "Cartel informativo (videovigilancia)",
+     "nota": "Con interés legítimo, documenta la evaluación de ponderación (Res. SPDP-SPD-2025-0041-R). Si las cámaras captan la vía pública, revisa la evaluación de impacto (art. 42)."},
+    {"actividad": "Gestión de proveedores", "area": "Contabilidad y Finanzas", "finalidad": "Gestionar cobros y pagos",
+     "titulares": "Proveedores (personas naturales); Contactos de empresas proveedoras",
+     "datos": "Identificación (nombre, cédula); Contacto (teléfono, correo, dirección); Financieros y bancarios",
+     "origen": "Del propio titular", "base": "Ejecución de contrato o medidas precontractuales",
+     "dest": "SRI; Entidades bancarias", "sistemas": "Software contable o ERP", "info": "Cláusula en el contrato"},
+    {"actividad": "Atención de salud / historias clínicas", "area": "Dirección médica",
+     "finalidad": "Ejecutar el contrato o prestar el servicio", "titulares": "Pacientes",
+     "datos": "Identificación (nombre, cédula); Contacto (teléfono, correo, dirección); Salud",
+     "origen": "Del propio titular", "sistemas": "Sistema clínico o académico; Archivo físico",
+     "info": "Aviso de privacidad en el formulario o punto de recogida",
+     "nota": "Datos de salud a gran escala exigen evaluación de impacto (art. 42). Describe la finalidad concreta (atención, seguimiento) y la excepción del art. 26."},
+]
+
+# Hoja del encargado (art. 44 RGLOPDP). El art. 44 fija cuándo se lleva; el contenido es de buena práctica
+# hasta confirmar el texto (ver Puntos abiertos en BASE-LEGAL.md).
+CAMPOS_ENCARGADO = [
+    ("Responsable por cuenta de quien se trata", 26, "Cliente que encarga el tratamiento"),
+    ("Contacto del responsable", 22, ""),
+    ("¿El responsable está obligado a llevar el RAT?", 16, "Art. 44 RGLOPDP: solo entonces el encargado lleva este registro"),
+    ("Servicio o tratamientos que se realizan por cuenta del responsable", 32, ""),
+    ("Categorías de datos tratados", 26, ""),
+    ("Ref. del contrato de encargo", 18, "Art. 41 RGLOPDP"),
+    ("Subencargados", 22, "Otros proveedores que intervienen, con autorización del responsable"),
+    ("¿Transferencia internacional? País y garantía", 24, ""),
+    ("Medidas de seguridad", 30, "Descripción general"),
+    ("Fecha de última revisión", 13, "AAAA-MM-DD"),
+]
 
 BASES = [
     "Consentimiento del titular", "Obligación legal", "Orden judicial", "Interés público / potestades públicas",

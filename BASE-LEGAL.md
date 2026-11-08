@@ -2,7 +2,7 @@
 
 Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:** ninguna plantilla cita un artículo que no esté en esta tabla. Antes de publicar o usar una herramienta con un cliente, contrasta cada fila con el texto oficial en el Registro Oficial y marca la columna "Verificado".
 
-Última revisión de fuentes: 2026-11-07.
+Última revisión de fuentes: 2026-11-08.
 
 ## Normas
 
@@ -48,12 +48,28 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | DPD, causales y funciones | 14 actividades privadas con designación obligatoria; funciones ampliadas; registro ante la SPDP | RES-0028 arts. 10 y 13 | ☐ |
 | DPD, información al titular | Identidad y datos de contacto del DPD, cuando sea del caso | LOPDP art. 12 | ☐ |
 | Información al titular | Contenidos del derecho a la información (base de la política y aviso de privacidad) | LOPDP art. 12 | ☐ |
+| RAT, campos de buena práctica | Excepción del art. 26 para datos sensibles, información al titular, contrato de encargo y evaluación de impacto se registran como observaciones, no como contenido mínimo del art. 38 | LOPDP arts. 12, 26 y 42; RGLOPDP art. 41 | ☐ |
 
 ## Puntos abiertos (no resolver con supuestos)
 
 1. Plazo exacto de notificación a titulares: la doctrina cita 3 días (art. 46 LOPDP); los resúmenes de la RES-0040 no fijan un plazo específico. Leer ambos textos completos.
 2. Plazo y forma de notificación al CSIRT tras la LOFC.
 3. Texto literal del art. 12 LOPDP para cerrar la lista de la política de privacidad.
+4. Lista literal de excepciones del art. 26 LOPDP: incorporarla a `rat_config.py` para convertir el campo "Excepción del art. 26" en lista desplegable.
+5. Contenido del RAT del encargado: el art. 44 RGLOPDP fija cuándo se lleva; confirmar si define su contenido. La hoja "RAT encargado" usa estructura de buena práctica.
+6. Periodicidad de revisión del RAT: la norma no la fija; la herramienta usa 12 meses como práctica interna.
+7. Criterios de "gran escala": pendientes de desarrollo por la SPDP; el volumen de titulares del RAT es solo orientativo.
+
+## Referencias comparadas (no vinculantes en Ecuador)
+
+Solo pueden citarse en comparaciones explícitas, nunca como fundamento de una obligación.
+
+| Referencia | Uso en el portafolio | Estado |
+|---|---|---|
+| RGPD (UE) 2016/679, art. 30 | Comparación de campos del RAT del responsable y del encargado (`docs/metodologia-rat.md`) | Texto conocido; no se cita en plantillas |
+| AEPD, FAQ-0250 "¿Cómo elaborar el RAT?" (aepd.es) | Criterios de metodología: registro por actividad, levantamiento por áreas, registro vivo | Página no accesible desde el entorno de trabajo el 2026-11-08; leer directamente antes de citar |
+| DPO Partners, RAT bajo la Ley 21.719 de Chile (dpopartners.cl) | Ninguno todavía | No leída; pendiente |
+| Wiibiq, RAT bajo la LOPDP (wiibiq.com) | Ninguno todavía | No leída; contrastar sus citas con el RO antes de usarlas |
 
 ## Fuentes consultadas
 

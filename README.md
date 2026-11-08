@@ -8,7 +8,7 @@ Herramientas para la gestión del cumplimiento de la **Ley Orgánica de Protecci
 
 | # | Herramienta | Contenido | Estado |
 |---|---|---|---|
-| 01 | [Registro de actividades de tratamiento](01-registro-tratamientos/) | Plantilla Excel con alertas automáticas, ejemplo ficticio, asistente web | v0.1 |
+| 01 | [Registro de actividades de tratamiento](01-registro-tratamientos/) | Plantilla Excel por secciones con control del mínimo legal, catálogo de actividades, RAT del encargado, asistente web | v0.4 |
 | 02 | [Kit de plantillas](02-kit-plantillas/) | Política de privacidad, aviso de privacidad, contrato de encargo, cláusulas de consentimiento | v0.1 |
 | 03 | [Kit de vulneraciones](03-kit-vulneraciones/) | Protocolo, bitácora, modelos de comunicación, calculadora de plazos y evaluación de riesgo | v0.1 |
 
@@ -31,6 +31,7 @@ Pendiente de definir antes de hacer público el repositorio (ver `docs/decision-
 
 ```bash
 python scripts/generar_rat.py          # Excel del RAT
+python scripts/generar_asistente_rat.py  # asistente web del RAT
 python scripts/generar_generador.py    # páginas web de los kits 02 y 03
 bash scripts/exportar_docx.sh          # versiones Word
 ```

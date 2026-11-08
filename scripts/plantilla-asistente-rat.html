@@ -77,6 +77,15 @@
   .nota{font-size:12px;color:var(--oliva)}
   .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--carbon);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;z-index:9}
   .toast.on{opacity:1}
+  .sec{font-stretch:110%;font-weight:700;font-size:13px;color:var(--oliva);text-transform:uppercase;letter-spacing:.04em;margin:18px 0 8px;padding-top:12px;border-top:1px solid #EFEBDD}
+  .sec:first-child{margin-top:0;padding-top:0;border-top:0}
+  .tag{display:inline-block;font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px;margin-left:4px;vertical-align:1px}
+  .tag.m{background:#E4E9F4;color:#1F3864}.tag.b{background:#F1EEE2;color:var(--oliva)}
+  .sug{background:#F8F5EA;border-left:3px solid var(--oro);border-radius:6px;padding:10px 12px;font-size:13px;margin-top:8px}
+  .rk{font-weight:700}.rk.Alto{color:var(--al)}.rk.Medio{color:var(--oliva)}.rk.Bajo{color:var(--ok)}
+  .item.mc{border-left-color:var(--oro)}
+  .item ul.o{color:var(--oliva)}
+  .item .st{font-size:12px;font-weight:700;margin-top:6px}
   footer{border-top:1px solid var(--linea);padding:18px 0;font-size:12px;color:var(--oliva)}
   @media (max-width:560px){.card{padding:14px}.sticky{position:static}}
 </style>
@@ -104,33 +113,17 @@
 
 <section id="registro">
   <h2>Registrar una actividad de tratamiento</h2>
-  <p class="sub">Elige de las listas; si no aparece lo que necesitas, usa <b>Otro</b> y escríbelo. Los campos siguen el contenido mínimo del art. 38 del Reglamento. No ingreses datos de personas reales.</p>
+  <p class="sub">Elige de las listas; si no aparece lo que necesitas, usa <b>Otro</b> y escríbelo. Al elegir una actividad frecuente aparece una sugerencia de contenido que puedes cargar y ajustar. No ingreses datos de personas reales.</p>
+  <div class="card"><b>Cómo delimitar una actividad.</b> <span class="nota" style="font-size:13px">Una actividad se define por su finalidad, no por la base de datos ni el programa. Si dos finalidades tienen bases legitimadoras o plazos distintos (por ejemplo, prestar el servicio y enviar publicidad), regístralas por separado. Las etiquetas <span class="tag m">Art. 38</span> marcan el contenido mínimo; <span class="tag b">Buena práctica</span>, lo recomendable.</span></div>
   <form id="f" class="card" autocomplete="off">
-    <div class="grid">
-      <div><label>Actividad de tratamiento</label><div data-f="actividad"></div></div>
-      <div><label>Área responsable</label><div data-f="area"></div></div>
-      <div class="full"><label>Finalidades <span class="ref">art. 38 num. 2</span></label><div data-f="finalidad"></div></div>
-      <div class="full"><label>Categorías de titulares <span class="ref">num. 4</span></label><div data-f="titulares"></div></div>
-      <div class="full"><label>Categorías de datos <span class="ref">num. 4 · en rojo, categorías especiales</span></label><div data-f="datos"></div><div class="auto" id="autoEsp"></div></div>
-      <div><label>Origen de los datos</label><div data-f="origen"></div></div>
-      <div><label for="base">Base legitimadora <span class="ref">num. 7 · art. 7 LOPDP</span></label><select id="base"></select></div>
-      <div id="ilBox" hidden><label for="il">Referencia de la evaluación de interés legítimo</label><input id="il" placeholder="Código o fecha de la ponderación"></div>
-      <div class="full"><label>Categorías de destinatarios <span class="ref">num. 3</span></label><div data-f="dest"></div></div>
-      <div class="full"><label>Encargados del tratamiento</label><div data-f="enc"></div></div>
-      <div><label>¿Elaboración de perfiles? <span class="ref">num. 5</span></label><div class="seg" data-k="perfiles"><button type="button">Sí</button><button type="button">No</button></div></div>
-      <div><label>¿Transferencia internacional? <span class="ref">num. 6</span></label><div class="seg" data-k="transf"><button type="button">Sí</button><button type="button">No</button></div></div>
-      <div id="tBox" hidden class="full"><div class="grid"><div><label for="tpais">País de destino</label><input id="tpais" placeholder="Ej. Estados Unidos"></div><div><label>Garantía que habilita la transferencia</label><div data-f="tgar"></div></div></div></div>
-      <div class="full"><label>Plazo de conservación o supresión <span class="ref">num. 8</span></label><div data-f="plazo"></div></div>
-      <div class="full"><label>Medidas técnicas, jurídicas, administrativas y organizativas <span class="ref">num. 9</span></label><div data-f="medidas"></div></div>
-      <div><label for="rev">Fecha de última revisión</label><input id="rev" type="date"></div>
-    </div>
+    <div id="campos"></div>
     <div class="row" style="margin-top:16px"><button class="btn" type="submit" id="guardar">Agregar al registro</button><button class="btn sec" type="button" id="limpiar">Limpiar</button></div>
   </form>
 </section>
 
 <section id="estado">
   <h2>Estado del registro</h2>
-  <p class="sub">Las alertas revisan que cada campo exista, no que su contenido sea jurídicamente correcto.</p>
+  <p class="sub">Estado: <b>Incompleto</b> (falta contenido del art. 38) · <b>Mínimo cumplido</b> (hay observaciones de buena práctica o riesgo) · <b>Completo</b>. Las alertas revisan que cada campo exista, no que su contenido sea jurídicamente correcto. El nivel de riesgo es orientativo.</p>
   <div class="kpis" id="kpis"></div>
   <div class="card">
     <h3>Firma de responsabilidad</h3>
@@ -212,17 +205,33 @@ var CFG=/*__CONFIG__*/;
     out.innerHTML='<div class="res no">No obligada a llevar el RAT<small>Menos de 100 trabajadores, tratamiento ocasional, sin categorías especiales y sin indicadores de riesgo. Es una situación poco frecuente: revisa las respuestas. Llevar el registro igualmente demuestra responsabilidad proactiva.</small>'+encTxt+'</div>'}
   oblig();
 
-  // ---------- 2. registro: selectores con "Otro"
-  var L=CFG.listas, OTRO='Otro';
+  // ---------- 2. registro: formulario generado desde CFG.campos
+  var L=CFG.listas, OTRO='Otro', CAMPOS=CFG.campos, BYK={};CAMPOS.forEach(function(c){BYK[c.k]=c});
+  function tag(c){return c.tipo==='auto'?'<span class="tag b">Automático</span>':(c.min?'<span class="tag m">Art. 38 num. '+c.min+'</span>':'<span class="tag b">Buena práctica</span>')}
+  var wide={finalidad:1,titulares:1,datos:1,dest:1,enc:1,medidas:1,sistemas:1,descripcion:1,plazo:1};
+  (function(){var h='',sec=null;
+    CAMPOS.forEach(function(c){if(c.k==='id')return;
+      if(c.sec!==sec){if(sec)h+='</div>';sec=c.sec;h+='<div class="sec">'+esc(CFG.secciones[sec])+'</div><div class="grid">'}
+      var ctl;
+      if(c.tipo==='lista')ctl='<div data-f="'+c.k+'"></div>';
+      else if(c.tipo==='base')ctl='<select id="c_base"><option value="">— Seleccionar —</option>'+CFG.bases.map(function(b){return'<option>'+esc(b)+'</option>'}).join('')+'</select>';
+      else if(c.tipo==='sino'||c.tipo==='opc')ctl='<div class="seg" data-k="'+c.k+'">'+(c.ops||['Sí','No']).map(function(o){return'<button type="button">'+esc(o)+'</button>'}).join('')+'</div>';
+      else if(c.tipo==='fecha')ctl='<input type="date" id="c_'+c.k+'">';
+      else if(c.tipo==='auto')ctl='<div id="c_'+c.k+'" class="rk" style="padding:9px 0">—</div>';
+      else ctl='<input id="c_'+c.k+'"'+(c.nota?' placeholder="'+esc(c.nota)+'"':'')+'>';
+      var extra=c.k==='datos'?'<div class="auto" id="autoEsp"></div>':(c.k==='actividad'?'<div id="sugBox"></div>':'');
+      h+='<div id="w_'+c.k+'" class="'+(wide[c.k]?'full':'')+'"><label>'+esc(c.h)+tag(c)+'</label>'+ctl+extra+(c.nota&&c.tipo!=='texto'?'<div class="nota">'+esc(c.nota)+'</div>':'')+'</div>'});
+    h+='</div>';$('campos').innerHTML=h})();
+
   function pick(name){var box=document.querySelector('[data-f="'+name+'"]'),def=L[name],esp=def.especiales||[];
     if(def.tipo==='uno'){
       box.innerHTML='<select data-n="'+name+'"><option value="">— Seleccionar —</option>'+def.opciones.map(function(o){return'<option>'+esc(o)+'</option>'}).join('')+'<option value="'+OTRO+'">Otro (escribir)…</option></select><input class="otro" data-o="'+name+'" placeholder="Escribe cuál" hidden>';
-      var s=box.querySelector('select'),o=box.querySelector('input');s.onchange=function(){o.hidden=s.value!==OTRO;if(!o.hidden)o.focus()};
+      var s=box.querySelector('select'),o=box.querySelector('input');s.onchange=function(){o.hidden=s.value!==OTRO;if(!o.hidden)o.focus();onChange(name)};o.oninput=function(){onChange(name)};
     }else{
       box.innerHTML='<div class="chips">'+def.opciones.map(function(o){return'<button type="button" data-v="'+esc(o)+'" class="'+(esp.indexOf(o)>-1?'esp':'')+'">'+esc(o)+'</button>'}).join('')+'<button type="button" data-v="'+OTRO+'">+ Otro</button></div><input class="otro" data-o="'+name+'" placeholder="Escribe cuál o cuáles, separados por coma" hidden>';
       box.querySelectorAll('.chips button').forEach(function(b){b.onclick=function(){b.classList.toggle('on');if(b.dataset.v===OTRO){var o=box.querySelector('input');o.hidden=!b.classList.contains('on');if(!o.hidden)o.focus()}
-        if(name==='datos')autoEsp();
-        if(name==='dest'||name==='enc'){if(b.dataset.v==='Ninguno'&&b.classList.contains('on'))box.querySelectorAll('.chips button').forEach(function(x){if(x!==b){x.classList.remove('on')}}),box.querySelector('input').hidden=true;else if(b.dataset.v!=='Ninguno')box.querySelector('[data-v="Ninguno"]').classList.remove('on')}}});
+        if(name==='dest'||name==='enc'){var nin=box.querySelector('[data-v="Ninguno"]');if(b.dataset.v==='Ninguno'&&b.classList.contains('on')){box.querySelectorAll('.chips button').forEach(function(x){if(x!==b)x.classList.remove('on')});box.querySelector('input').hidden=true}else if(b.dataset.v!=='Ninguno'&&nin)nin.classList.remove('on')}
+        onChange(name)}});
     }}
   function getF(name){var box=document.querySelector('[data-f="'+name+'"]'),o=box.querySelector('input.otro');
     if(L[name].tipo==='uno'){var v=box.querySelector('select').value;return v===OTRO?o.value.trim():v}
@@ -234,74 +243,123 @@ var CFG=/*__CONFIG__*/;
     var parts=val.split(/;\s*/).filter(Boolean),otros=[];box.querySelectorAll('.chips button').forEach(function(b){b.classList.remove('on')});
     parts.forEach(function(p){var b=box.querySelector('.chips button[data-v="'+p.replace(/"/g,'\\"')+'"]');if(b&&p!==OTRO)b.classList.add('on');else otros.push(p.replace(/^Otro:\s*/,''))});
     var ob=box.querySelector('[data-v="'+OTRO+'"]');ob.classList.toggle('on',otros.length>0);o.hidden=!otros.length;o.value=otros.join(', ')}
-  Object.keys(L).forEach(pick);
-  $('base').innerHTML='<option value="">— Seleccionar —</option>'+CFG.bases.map(function(b){return'<option>'+esc(b)+'</option>'}).join('');
-  $('base').onchange=function(){$('ilBox').hidden=this.value!=='Interés legítimo'};
+  Object.keys(L).forEach(function(n){if(document.querySelector('[data-f="'+n+'"]'))pick(n)});
   var seg={};
-  document.querySelectorAll('#f .seg').forEach(function(g){g.querySelectorAll('button').forEach(function(b){b.onclick=function(){setSeg(g.dataset.k,b.textContent)}})});
-  function setSeg(k,v){seg[k]=v;document.querySelector('#f .seg[data-k="'+k+'"]').querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.textContent===v)});if(k==='transf')$('tBox').hidden=v!=='Sí'}
-  function autoEsp(){var d=getF('datos'),e=L.datos.especiales.filter(function(x){return d.indexOf(x)>-1}),n=L.datos.nna.some(function(x){return d.indexOf(x)>-1});
-    $('autoEsp').textContent=e.length?'Incluye categorías especiales: '+e.join(', ')+'.'+(n?' Incluye datos de niñas, niños y adolescentes.':''):'';return{esp:e.length?'Sí':'No',nna:n?'Sí':'No'}}
+  document.querySelectorAll('#f .seg').forEach(function(g){g.querySelectorAll('button').forEach(function(b){b.onclick=function(){setSeg(g.dataset.k,seg[g.dataset.k]===b.textContent?'':b.textContent)}})});
+  function setSeg(k,v){seg[k]=v;document.querySelector('#f .seg[data-k="'+k+'"]').querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.textContent===v)});onChange(k)}
+  function has(txt,list){return list.filter(function(x){return(txt||'').indexOf(x)>-1})}
+  function autoEsp(){var d=getF('datos'),e=has(d,L.datos.especiales),n=has(d,L.datos.nna).length>0;
+    $('autoEsp').textContent=e.length?'Incluye categorías especiales: '+e.join(', ')+'.'+(n?' Incluye datos de niñas, niños y adolescentes.':''):'';
+    if(e.length&&seg.especial!=='Sí')setSeg('especial','Sí');if(n&&seg.nna!=='Sí')setSeg('nna','Sí')}
+  function val(k){var c=BYK[k];if(c.tipo==='lista')return getF(k);if(c.tipo==='sino'||c.tipo==='opc')return seg[k]||'';if(c.tipo==='base')return $('c_base').value;if(c.tipo==='auto')return'';return $('c_'+k).value.trim()}
+  function cond(c,o){switch(c.si){case undefined:return true;case'sensibles':return has(o.datos,L.datos.sensibles).length>0;
+    case'encargados':return!!o.enc&&o.enc!=='Ninguno';default:var p=c.si.split('=');return o[p[0]]===p[1]}}
+  function riesgo(o){if(!o.actividad)return'';var R=CFG.riesgo,p=0;['especial','nna','perfiles','transf'].forEach(function(k){if(o[k]==='Sí')p+=R[k]});
+    p+=R.volumen[o.volumen]||0;Object.keys(R.datos).forEach(function(d){if((o.datos||'').indexOf(d)>-1)p+=R.datos[d]});
+    return p>=R.umbral_alto?'Alto':(p>=R.umbral_medio?'Medio':'Bajo')}
+  function prox(rev){if(!rev)return'';var d=new Date(rev+'T00:00:00');if(isNaN(d))return'';d.setMonth(d.getMonth()+CFG.revision_meses);return d.toISOString().slice(0,10)}
+  function hoy(){return new Date().toISOString().slice(0,10)}
+  var busy=false;
+  function onChange(k){if(busy)return;busy=true;if(k==='datos')autoEsp();var o=leer();
+    CAMPOS.forEach(function(c){var w=$('w_'+c.k);if(w)w.hidden=!cond(c,o)});
+    $('c_riesgo').textContent=riesgo(o)||'—';$('c_riesgo').className='rk '+riesgo(o);$('c_prox').textContent=prox(o.rev)||'—';
+    if(k==='actividad')sugerir(o.actividad);busy=false}
+  function sugerir(act){var it=CFG.catalogo.filter(function(x){return x.actividad===act})[0],box=$('sugBox');
+    if(!it){box.innerHTML='';return}
+    box.innerHTML='<div class="sug"><b>Sugerencia para esta actividad.</b> '+(it.nota?esc(it.nota)+' ':'')+'<div class="row" style="margin-top:6px"><button type="button" class="btn sec" id="sugOk" style="padding:6px 12px;font-size:13px">Cargar sugerencias en campos vacíos</button></div></div>';
+    $('sugOk').onclick=function(){busy=true;Object.keys(it).forEach(function(k){if(k==='nota'||k==='actividad'||!BYK[k])return;if(val(k))return;setVal(k,it[k])});busy=false;onChange('datos');toast('Sugerencias cargadas: revísalas')}}
+  function setVal(k,v){var c=BYK[k];v=v||'';if(c.tipo==='lista')setF(k,v);else if(c.tipo==='sino'||c.tipo==='opc'){seg[k]=v;document.querySelectorAll('#f .seg[data-k="'+k+'"] button').forEach(function(b){b.classList.toggle('on',b.textContent===v)})}
+    else if(c.tipo==='base')$('c_base').value=v;else if(c.tipo!=='auto')$('c_'+k).value=v}
+  $('c_base').onchange=function(){onChange('base')};
+  CAMPOS.forEach(function(c){var el=$('c_'+c.k);if(el&&el.tagName==='INPUT')el.addEventListener('input',function(){onChange(c.k)})});
 
-  var reg=ls('msc-rat-v2')||ls('msc-rat-v1')||[],editIdx=-1;
+  function migrar(o){if(o.tgar&&!o.pais&&o.tgar.indexOf(' — ')>-1){var p=o.tgar.split(' — ');o.pais=p[0];o.tgar=p.slice(1).join(' — ')}return o}
+  var reg=(ls('msc-rat-v2')||ls('msc-rat-v1')||[]).map(migrar),editIdx=-1;
   function save(){ls('msc-rat-v2',reg)}
-  function leer(){var o={};['actividad','area','finalidad','titulares','datos','origen','dest','enc','plazo','medidas'].forEach(function(n){o[n]=getF(n)});
-    var a=autoEsp();o.especial=a.esp;o.nna=a.nna;o.base=$('base').value;o.il=$('il').value.trim();o.perfiles=seg.perfiles||'';o.transf=seg.transf||'';
-    o.tgar=o.transf==='Sí'?[$('tpais').value.trim(),getF('tgar')].filter(Boolean).join(' — '):'';o.rev=$('rev').value;return o}
-  function limpiar(){$('f').reset();Object.keys(L).forEach(function(n){setF(n,'')});['perfiles','transf'].forEach(function(k){delete seg[k];document.querySelectorAll('#f .seg[data-k="'+k+'"] button').forEach(function(b){b.classList.remove('on')})});
-    $('ilBox').hidden=true;$('tBox').hidden=true;$('autoEsp').textContent='';editIdx=-1;$('guardar').textContent='Agregar al registro'}
+  function leer(){var o={};CAMPOS.forEach(function(c){if(c.k!=='id')o[c.k]=val(c.k)});
+    CAMPOS.forEach(function(c){if(!cond(c,o))o[c.k]=''});o.riesgo=riesgo(o);o.prox=prox(o.rev);return o}
+  function limpiar(){busy=true;$('f').reset();Object.keys(L).forEach(function(n){if(document.querySelector('[data-f="'+n+'"]'))setF(n,'')});
+    Object.keys(seg).forEach(function(k){setVal(k,'')});seg={};$('autoEsp').textContent='';$('sugBox').innerHTML='';editIdx=-1;$('guardar').textContent='Agregar al registro';busy=false;onChange('')}
   $('limpiar').onclick=limpiar;
   $('f').onsubmit=function(e){e.preventDefault();var o=leer();if(!o.actividad){toast('Indica la actividad de tratamiento');return}
-    if(editIdx>-1){reg[editIdx]=o;toast('Actividad actualizada')}else{reg.push(o);toast('Actividad agregada')}save();limpiar();show('estado')};
-  function editar(i){var o=reg[i];limpiar();['actividad','area','finalidad','titulares','datos','origen','dest','enc','plazo','medidas'].forEach(function(n){setF(n,o[n])});autoEsp();
-    $('base').value=o.base||'';$('ilBox').hidden=o.base!=='Interés legítimo';$('il').value=o.il||'';if(o.perfiles)setSeg('perfiles',o.perfiles);if(o.transf)setSeg('transf',o.transf);
-    if(o.tgar){var p=o.tgar.split(' — ');$('tpais').value=p[0]||'';setF('tgar',p.slice(1).join(' — '))}$('rev').value=o.rev||'';editIdx=i;$('guardar').textContent='Guardar cambios';show('registro')}
+    if(!o.alta)o.alta=hoy();
+    if(editIdx>-1){o.id=reg[editIdx].id;reg[editIdx]=o;toast('Actividad actualizada')}else{reg.push(o);toast('Actividad agregada')}save();limpiar();show('estado')};
+  function editar(i){var o=reg[i];limpiar();busy=true;CAMPOS.forEach(function(c){if(c.k!=='id')setVal(c.k,o[c.k])});busy=false;
+    onChange('datos');editIdx=i;$('guardar').textContent='Guardar cambios';show('registro')}
+  onChange('');
 
   // ---------- 3. estado
-  function alertas(o){var a=[];
-    if(!o.finalidad)a.push('Falta finalidad');if(!o.titulares)a.push('Faltan categorías de titulares');if(!o.datos)a.push('Faltan categorías de datos');
-    if(!o.base)a.push('Falta base legitimadora');if(o.base==='Interés legítimo'&&!o.il)a.push('Interés legítimo sin evaluación de ponderación');
-    if(o.base==='Consentimiento del titular'&&o.nna==='Sí')a.push('Datos de NNA con consentimiento: verificar quién lo otorga');
-    if(!o.dest)a.push('Faltan destinatarios (marca “Ninguno” si no hay)');if(o.transf==='Sí'&&!o.tgar)a.push('Transferencia internacional sin país o garantía');
-    if(!o.plazo)a.push('Falta plazo de conservación');if(/\(indicar/.test(o.plazo||''))a.push('Plazo genérico: indica la norma o el número de días');
-    if(!o.medidas)a.push('Faltan medidas de seguridad');if(!o.rev)a.push('Sin fecha de revisión');
-    if(o.especial==='Sí')a.push('Revisar si requiere evaluación de impacto (art. 42 LOPDP)');return a}
-  function render(){var tot=reg.length,ok=0,esp=0,tr=0;
-    var h=reg.map(function(o,i){var a=alertas(o);if(!a.length)ok++;if(o.especial==='Sí')esp++;if(o.transf==='Sí')tr++;
-      return'<div class="item'+(a.length?' al':'')+'"><h4>'+esc(o.actividad)+'</h4><div class="meta">'+esc(o.area||'Sin área')+' · '+esc(o.base||'Sin base')+'</div>'+
-      (a.length?'<ul>'+a.map(function(x){return'<li>'+esc(x)+'</li>'}).join('')+'</ul>':'<div class="okt">Completo</div>')+
+  function alertas(o){var m=[],b=[],gen=CFG.genericas;o.riesgo=riesgo(o);o.prox=prox(o.rev);
+    if(!o.finalidad)m.push('Finalidad (num. 2)');
+    if(!o.dest)m.push('Destinatarios (num. 3): marca “Ninguno” si no hay');
+    if(!o.titulares)m.push('Categorías de titulares (num. 4)');if(!o.datos)m.push('Categorías de datos (num. 4)');
+    if(!o.perfiles)m.push('Indicar si hay elaboración de perfiles (num. 5)');
+    if(!o.transf)m.push('Indicar si hay transferencia internacional (num. 6)');
+    if(o.transf==='Sí'&&(!o.pais||!o.tgar))m.push('País o garantía de la transferencia (num. 6)');
+    if(!o.base)m.push('Base legitimadora (num. 7)');
+    if(o.base==='Interés legítimo'&&!o.il)m.push('Evaluación de ponderación del interés legítimo (num. 7; Res. SPDP-SPD-2025-0041-R)');
+    if(!o.plazo)m.push('Plazo de conservación (num. 8)');if(!o.medidas)m.push('Medidas (num. 9)');
+    if(gen.indexOf(o.finalidad)>-1)b.push('Finalidad genérica: describe el servicio concreto');
+    if((o.finalidad||'').indexOf(CFG.separable)>-1&&(o.finalidad||'').indexOf(';')>-1)b.push('La publicidad suele tener otra base y otro plazo: considera registrarla como actividad separada');
+    if(has(o.datos,L.datos.especiales).length&&o.especial!=='Sí')b.push('Los datos incluyen categorías especiales: marca Sí');
+    if(has(o.datos,L.datos.sensibles).length&&!o.exc26)b.push('Datos sensibles sin indicar la excepción del art. 26 LOPDP');
+    if(o.base==='Consentimiento del titular'&&o.nna==='Sí')b.push('Datos de NNA con consentimiento: verificar quién lo otorga');
+    if(!o.info||o.info==='No se informa aún')b.push('Definir cómo se informa al titular (art. 12 LOPDP)');
+    if(o.enc&&o.enc!=='Ninguno'&&o.contrato!=='Sí, con todos')b.push('Encargados sin contrato de encargo completo (art. 41 RGLOPDP; su falta es infracción grave, art. 68 num. 9 LOPDP)');
+    if(/\(indicar/.test(o.plazo||''))b.push('Plazo genérico: indica la norma o el número de días');
+    if(!o.sistemas)b.push('Indica sistemas y soportes (necesario para gestionar vulneraciones)');
+    if(!o.volumen)b.push('Indica el volumen aproximado de titulares');
+    if((o.riesgo==='Alto'||o.especial==='Sí'||o.perfiles==='Sí')&&!o.eipd)b.push('Define si requiere evaluación de impacto (art. 42 LOPDP)');
+    if(o.eipd==='Sí'&&!o.eipdref)b.push('Falta la referencia de la evaluación de impacto');
+    if(!o.rev)b.push('Sin fecha de revisión');else if(o.prox&&o.prox<hoy())b.push('Revisión vencida (desde '+o.prox+')');
+    if(!o.propietario)b.push('Asigna un responsable interno');
+    return{m:m,b:b,estado:m.length?'Incompleto':(b.length?'Mínimo cumplido':'Completo')}}
+  function render(){var tot=reg.length,ok=0,mc=0,alto=0,venc=0;
+    var h=reg.map(function(o,i){var a=alertas(o);if(a.estado==='Completo')ok++;if(a.estado==='Mínimo cumplido')mc++;if(o.riesgo==='Alto')alto++;if(o.prox&&o.prox<hoy())venc++;
+      return'<div class="item'+(a.estado==='Incompleto'?' al':(a.estado==='Mínimo cumplido'?' mc':''))+'"><h4>'+esc(o.actividad)+'</h4><div class="meta">'+esc(o.area||'Sin área')+' · '+esc(o.base||'Sin base')+' · Riesgo <span class="rk '+o.riesgo+'">'+esc(o.riesgo)+'</span></div>'+
+      '<div class="st">'+esc(a.estado)+'</div>'+
+      (a.m.length?'<ul>'+a.m.map(function(x){return'<li>Falta: '+esc(x)+'</li>'}).join('')+'</ul>':'')+
+      (a.b.length?'<ul class="o">'+a.b.map(function(x){return'<li>'+esc(x)+'</li>'}).join('')+'</ul>':'')+
       '<div class="acts"><button data-e="'+i+'">Editar</button><button data-d="'+i+'">Eliminar</button></div></div>'}).join('');
     $('lista').innerHTML=tot?h:'<div class="vacio">Aún no hay actividades. Registra una, importa tu RAT o carga el ejemplo ficticio.</div>';
-    var pct=tot?Math.round(ok/tot*100):0;
-    $('kpis').innerHTML=[[tot,'Actividades'],[ok,'Completas'],[tot-ok,'Con alertas'],[pct+'%','Avance'],[esp,'Categorías especiales'],[tr,'Transferencias int.']].map(function(k){return'<div class="kpi"><b>'+k[0]+'</b><span>'+k[1]+'</span></div>'}).join('');
+    var pct=tot?Math.round((ok+mc)/tot*100):0;
+    $('kpis').innerHTML=[[tot,'Actividades'],[ok,'Completas'],[mc,'Mínimo cumplido'],[tot-ok-mc,'Incompletas'],[pct+'%','Con mínimo legal'],[alto,'Riesgo alto'],[venc,'Revisiones vencidas']].map(function(k){return'<div class="kpi"><b>'+k[0]+'</b><span>'+k[1]+'</span></div>'}).join('');
     $('lista').querySelectorAll('[data-e]').forEach(function(b){b.onclick=function(){editar(+b.dataset.e)}});
     $('lista').querySelectorAll('[data-d]').forEach(function(b){b.onclick=function(){if(b.dataset.c){reg.splice(+b.dataset.d,1);save();render();toast('Eliminada')}else{b.dataset.c=1;b.textContent='¿Confirmar?'}}})}
 
   var FK='msc-rat-firma-v1',fir=ls(FK)||{fElab:'Abg. Mariano X. Macías Sánchez',fCargo:'Consultor en Protección de Datos · Mat. 09-2022-736',fAprob:'',fCargoA:'',fFecha:''};
   Object.keys(fir).forEach(function(k){$(k).value=fir[k]||'';$(k).addEventListener('input',function(){fir[k]=$(k).value;ls(FK,fir)})});
   function firmaRows(){return['','FIRMA DE RESPONSABILIDAD','Elaborado por\t'+fir.fElab+'\t\tRevisado y aprobado por\t'+fir.fAprob,'Cargo\t'+fir.fCargo+'\t\tCargo\t'+fir.fCargoA,'Firma\t______________________\t\tFirma\t______________________','Fecha\t'+fir.fFecha]}
-  var H=['Actividad','Área','Finalidades','Titulares','Categorías de datos','¿Categorías especiales?','¿NNA?','Origen','Base legitimadora','Ref. interés legítimo','Destinatarios','Encargados','¿Perfiles?','¿Transferencia internacional?','País y garantía','Plazo de conservación','Medidas','Fecha de revisión','Alertas'];
-  var K=['actividad','area','finalidad','titulares','datos','especial','nna','origen','base','il','dest','enc','perfiles','transf','tgar','plazo','medidas','rev'];
+  var K=CAMPOS.map(function(c){return c.k}),H=CAMPOS.map(function(c){return c.h}).concat(['Estado','Faltantes del mínimo legal (art. 38)','Observaciones y recomendaciones']);
   function fb(t){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Copiado: pega en Excel')}catch(e){toast('No se pudo copiar')}ta.remove()}
   $('copiar').onclick=function(){if(!reg.length){toast('El registro está vacío');return}
     var c=function(s){return String(s||'').replace(/[\t\n\r]+/g,' ')};
-    var rows=[H.join('\t')].concat(reg.map(function(o){var a=alertas(o);return K.map(function(k){return c(o[k])}).concat([a.length?a.join('; '):'Completo']).join('\t')}));
+    var rows=[H.join('\t')].concat(reg.map(function(o,i){var a=alertas(o);return K.map(function(k){return k==='id'?(o.id||'T-'+('0'+(i+1)).slice(-2)):c(o[k])}).concat([a.estado,a.m.join('; '),a.b.join('; ')]).join('\t')}));
     var txt=rows.concat(firmaRows()).join('\n');
     if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(function(){toast('Copiado: pega en Excel')},function(){fb(txt)});else fb(txt)};
 
-  var MAP=[['actividad',/actividad|tratamiento|proceso/],['area',/área|area|departamento|unidad/],['finalidad',/finalidad|fin(es)?\b|propósito/],['titulares',/titular|interesad/],['datos',/categor.*dato|tipo.*dato|datos personales|^datos$/],['especial',/especial|sensible/],['nna',/niñ|menor|nna|adolescent/],['origen',/origen|fuente|procedencia/],['base',/base|legitima|licitud/],['il',/ponderaci|evaluaci.*inter/],['dest',/destinatari|cesion|comunicaci/],['enc',/encargad|proveedor/],['perfiles',/perfil/],['transf',/^¿?transferencia|internacional/],['tgar',/país|pais|garant/],['plazo',/plazo|conservaci|retenci|supresi/],['medidas',/medida|seguridad/],['rev',/revisi|fecha/]];
+  // orden: patrones específicos primero
+  var MAP=[['eipdref',/ref.*(impacto|eipd)/],['eipd',/impacto|eipd/],['il',/ponderaci|evaluaci.*inter/],['exc26',/art.*26|excepci/],['riesgo',/riesgo/],
+    ['prox',/pr[óo]xima/],['alta',/alta|creaci/],['rev',/revisi|fecha/],['propietario',/responsable interno|propietario|due[ñn]o/],['descripcion',/descripci/],
+    ['actividad',/actividad|tratamiento|proceso/],['area',/área|area|departamento|unidad/],['finalidad',/finalidad|fin(es)?\b|propósito/],
+    ['info',/inform/],['volumen',/volumen|n[úu]mero de titulares/],['titulares',/titular|interesad/],['especial',/especial|sensible/],['nna',/niñ|menor|nna|adolescent/],
+    ['datos',/categor.*dato|tipo.*dato|datos personales|^datos$/],['origen',/origen|fuente|procedencia/],['base',/base|legitima|licitud/],
+    ['contrato',/contrato/],['enc',/encargad|proveedor/],['dest',/destinatari|cesion|comunicaci/],['perfiles',/perfil/],
+    ['pais',/país|pais/],['tgar',/garant/],['transf',/transferencia|internacional/],['plazo',/plazo|conservaci|retenci|supresi/],
+    ['sistemas',/sistema|soporte|aplicaci/],['medidas',/medida|seguridad/],['id',/^id$|c[óo]digo/]];
   $('bImport').onclick=function(){$('pImport').hidden=false;$('imTxt').focus()};$('imNo').onclick=function(){$('pImport').hidden=true};
   $('imOk').onclick=function(){var lines=$('imTxt').value.replace(/\r/g,'').split('\n').filter(function(l){return l.trim()});
     if(lines.length<2){$('imRes').textContent='Pega al menos la fila de encabezados y una fila de datos.';return}
     var head=lines[0].split('\t'),col={},used={},nores=[];
-    head.forEach(function(h,i){var hl=h.trim().toLowerCase(),hit=null;for(var j=0;j<MAP.length;j++){if(!used[MAP[j][0]]&&MAP[j][1].test(hl)){hit=MAP[j][0];break}}
-      if(hit){col[hit]=i;used[hit]=1}else if(hl&&hl!=='alertas'&&hl!=='id')nores.push(h.trim())});
+    head.forEach(function(h,i){var hl=h.trim().toLowerCase(),hit=null;if(/^(estado|alertas|faltantes|observaciones)/.test(hl))return;
+      for(var j=0;j<MAP.length;j++){if(!used[MAP[j][0]]&&MAP[j][1].test(hl)){hit=MAP[j][0];break}}
+      if(hit){col[hit]=i;used[hit]=1}else if(hl)nores.push(h.trim())});
     if(col.actividad===undefined){$('imRes').textContent='No se encontró una columna de actividad o tratamiento. Revisa los encabezados.';return}
     var n=0;lines.slice(1).forEach(function(l){var c=l.split('\t');if(!(c[col.actividad]||'').trim())return;var o={};
       K.forEach(function(k){o[k]=col[k]!==undefined?(c[col[k]]||'').trim():''});
       ['especial','nna','perfiles','transf'].forEach(function(k){var v=o[k].toLowerCase();o[k]=/^s[ií]|^x$|^yes/.test(v)?'Sí':(/^no/.test(v)?'No':'')});
-      if(!o.especial&&L.datos.especiales.some(function(x){return o.datos.indexOf(x)>-1}))o.especial='Sí';
-      reg.push(o);n++});
+      if(!o.especial&&has(o.datos,L.datos.especiales).length)o.especial='Sí';
+      reg.push(migrar(o));n++});
     save();render();$('imTxt').value='';$('imRes').textContent=n+' actividades importadas.'+(nores.length?' Columnas no reconocidas: '+nores.join(', ')+'.':'')+' Revisa las alertas de cada actividad.';toast(n+' actividades importadas')};
 
   $('borrar').onclick=function(){var b=this;if(b.dataset.c){reg=[];save();render();b.textContent='Vaciar registro';delete b.dataset.c;toast('Registro vaciado')}else{b.dataset.c=1;b.textContent='¿Confirmar vaciado?'}};

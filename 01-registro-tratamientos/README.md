@@ -12,10 +12,10 @@ Responsables del tratamiento (empresas, profesionales, instituciones) y DPD que 
 
 | Archivo | Uso |
 |---|---|
-| `plantilla-RAT.xlsx` | Plantilla para completar. Incluye hoja de obligatoriedad, datos del responsable, registro con alertas automáticas y resumen. |
+| `plantilla-RAT.xlsx` | Plantilla para completar: obligatoriedad, responsable, RAT por secciones con control automático, RAT del encargado, catálogo de actividades y resumen. |
 | `ejemplo-RAT-ficticio.xlsx` | Clínica dental ficticia con 6 actividades: 2 completas y 4 con errores intencionales, útil para capacitaciones y demostraciones. |
-| `asistente-rat.html` | Versión web interactiva: verifica obligatoriedad, registra actividades, importa un RAT existente pegado desde Excel, muestra alertas y copia el registro con firma de responsabilidad. |
-| `../scripts/rat_config.py` | **Fuente única** de listas desplegables, preguntas de obligatoriedad y sus ayudas. Para agregar una opción o pegar el texto literal de una norma, edita este archivo y regenera. |
+| `asistente-rat.html` | Versión web interactiva: verifica obligatoriedad, registra actividades con sugerencias del catálogo, importa un RAT existente pegado desde Excel, muestra estado, riesgo y alertas, y copia el registro con firma de responsabilidad. |
+| `../scripts/rat_config.py` | **Fuente única** de campos, secciones, listas, catálogo, criterio de riesgo y preguntas de obligatoriedad. Para agregar un campo u opción, edita este archivo y regenera ambos formatos. |
 | `../scripts/generar_rat.py` · `../scripts/generar_asistente_rat.py` | Regeneran el Excel y el asistente web desde la configuración. |
 
 ## ¿Está obligada la organización?
@@ -36,31 +36,45 @@ Actividad, área, finalidades, titulares, categorías de datos, origen, destinat
 
 Estado de verificación de cada norma: ver [BASE-LEGAL.md](../BASE-LEGAL.md).
 
-## Correspondencia con el art. 38 RGLOPDP
+## Cómo delimitar una actividad
 
-| Numeral | Contenido | Columna en la plantilla |
+Una fila = una actividad de tratamiento, definida por su **finalidad**, no por la base de datos ni el programa. Si dos finalidades tienen bases legitimadoras o plazos distintos (por ejemplo, prestar el servicio y enviar publicidad), van en filas separadas. Levanta el registro recorriendo cada área de la organización; la hoja "Catálogo" sugiere actividades frecuentes.
+
+## Estructura del registro
+
+| Sección | Campos | Art. 38 RGLOPDP |
 |---|---|---|
-| 1 | Contacto del responsable, corresponsable y DPD | Hoja "Responsable" |
-| 2 | Finalidades | Finalidades |
-| 3 | Categorías de destinatarios | Categorías de destinatarios |
-| 4 | Titulares y categorías de datos | Categorías de titulares · Categorías de datos personales |
-| 5 | Uso de perfiles | ¿Elaboración de perfiles? |
-| 6 | Transferencias internacionales | ¿Transferencia internacional? · País y garantía |
-| 7 | Bases legitimadoras | Base legitimadora · Ref. evaluación de interés legítimo |
-| 8 | Plazos de supresión o revisión | Plazo de conservación / supresión |
-| 9 | Medidas técnicas, jurídicas, administrativas y organizativas | Medidas |
+| 1 · Identificación | ID, actividad, área, responsable interno, descripción | — (buena práctica) |
+| 2 · Finalidad y legitimación | Finalidades · Base legitimadora · Ref. interés legítimo | num. 2 · num. 7 |
+| | Excepción del art. 26 (si hay datos sensibles) · Cómo se informa al titular | buena práctica (LOPDP arts. 26 y 12) |
+| 3 · Titulares y datos | Categorías de titulares · Categorías de datos | num. 4 |
+| | Volumen, categorías especiales, NNA, origen | buena práctica |
+| 4 · Comunicaciones | Destinatarios · Transferencia, país y garantía · Perfiles | num. 3 · num. 6 · num. 5 |
+| | Encargados y contrato de encargo | buena práctica (RGLOPDP art. 41) |
+| 5 · Conservación y seguridad | Plazo · Medidas | num. 8 · num. 9 |
+| | Sistemas y soportes | buena práctica |
+| 6 · Riesgo | Nivel de riesgo orientativo (automático) · Evaluación de impacto y referencia | buena práctica (LOPDP art. 42) |
+| 7 · Control | Fecha de alta, última revisión, próxima revisión (automática) | buena práctica |
 
-Columnas adicionales (buena práctica, no exigidas por el art. 38): área responsable, categorías especiales, datos de niñas, niños y adolescentes, origen, encargados y fecha de revisión.
+El numeral 1 (contacto del responsable, corresponsable y DPD) está en la hoja "Responsable".
 
-## Alertas automáticas
+## Control automático
 
-Una fila se marca "Completo" cuando tiene todos los campos mínimos. Se generan alertas cuando:
+Cada fila tiene un **Estado**:
 
-- falta cualquier elemento mínimo del art. 38;
-- la base es interés legítimo y no hay referencia a la evaluación de ponderación;
-- hay transferencia internacional sin país o garantía;
-- incluye categorías especiales (recordatorio de revisar la evaluación de impacto);
-- no hay fecha de revisión.
+- **Incompleto:** falta algún contenido del art. 38 (columna "Faltantes del mínimo legal").
+- **Mínimo cumplido:** el art. 38 está cubierto, pero hay observaciones (columna "Observaciones y recomendaciones").
+- **Completo:** sin faltantes ni observaciones.
+
+Observaciones que se generan: finalidad genérica; publicidad mezclada con otras finalidades; datos especiales no marcados; datos sensibles sin excepción del art. 26; NNA con consentimiento; titular no informado; encargados sin contrato completo; plazo genérico; sin sistemas, volumen o responsable interno; evaluación de impacto sin definir o sin referencia; revisión ausente o vencida.
+
+## Nivel de riesgo orientativo
+
+Suma: categorías especiales 2, perfiles 2, NNA 1, transferencia internacional 1, datos financieros 1, geolocalización 1, volumen de 1.001 a 10.000 titulares 1, más de 10.000 titulares 2. **Alto** desde 4, **Medio** desde 2, **Bajo** el resto. Es un criterio interno para priorizar, no fijado por la norma, y no sustituye la evaluación de impacto. Se ajusta en `RIESGO` de `rat_config.py`.
+
+## RAT del encargado
+
+Hoja "RAT encargado": una fila por cliente por cuenta de quien se tratan datos. Solo es exigible si ese cliente está obligado a llevar el RAT (art. 44 RGLOPDP). Su contenido es de buena práctica hasta confirmar el texto del art. 44 (ver Puntos abiertos en BASE-LEGAL.md).
 
 ## Importar un RAT que ya uses
 
@@ -73,5 +87,7 @@ La hoja "Resumen" del Excel y la copia del asistente web incluyen el bloque "Ela
 ## Limitaciones
 
 - Las alertas comprueban que el campo exista, no que su contenido sea jurídicamente correcto.
+- El catálogo y el nivel de riesgo son puntos de partida; las bases legitimadoras sugeridas deben validarse en cada caso.
+- La comparación con la AEPD se hizo sin acceso a las páginas citadas por el usuario; ver `docs/metodologia-rat.md`.
 - El RAT no reemplaza la inscripción de bases de datos en el Registro Nacional de Protección de Datos Personales (art. 51 LOPDP).
 - El asistente web guarda los datos solo en el navegador de quien lo usa. No ingresar datos de personas reales.

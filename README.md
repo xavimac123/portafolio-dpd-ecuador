@@ -13,8 +13,11 @@ Herramientas para la gestión del cumplimiento de la **Ley Orgánica de Protecci
 | 03 | [Kit de vulneraciones](03-kit-vulneraciones/) | Protocolo, bitácora, modelos de comunicación, calculadora de plazos y evaluación de riesgo | v0.2 |
 | 04 | [Evaluación de impacto](04-evaluacion-impacto/) | Necesidad (art. 42), descripción, proporcionalidad, matriz de riesgos y medidas, informe del art. 32 RGLOPDP | v0.1 |
 | 05 | [Nivel de madurez](05-madurez/) | Diagnóstico en 12 dominios, índice ponderado, radar, plan de acción, multa estimada (Res. SPDP-SPD-2025-0022-R) y apetito al riesgo | v0.2 |
+| 06 | [Calculadora de honorarios](06-honorarios/) | Honorarios por volumen de negocio, volumen de tratamiento (MTGE, Res. SPDP-SPD-2026-0005-R) y estimación técnica; IVA; comparación; paquetes; proforma con firma | v0.1 |
 
 ## Flujo recomendado con un cliente
+
+0. **06 · Honorarios**: estimar y presentar la proforma antes de iniciar.
 
 1. **05 · Madurez**: diagnóstico inicial y plan de acción.
 2. **01 · RAT**: inventario de actividades; identifica cuáles requieren evaluación de impacto.
@@ -50,6 +53,7 @@ python scripts/generar_asistente_rat.py  # asistente web del RAT
 python scripts/generar_generador.py    # páginas web de los kits 02 y 03
 python scripts/generar_asistente_eipd.py     # asistente de evaluación de impacto
 python scripts/generar_asistente_madurez.py  # asistente y cuestionario de madurez
+python scripts/generar_calculadora_honorarios.py  # calculadora, metodología y proforma de honorarios
 bash scripts/exportar_docx.sh          # versiones Word
 python scripts/guia/graficos.py && python scripts/guia/generar_guia.py  # guía PDF
 ```

@@ -23,6 +23,7 @@ Repositorio de herramientas de cumplimiento LOPDP (Ecuador) de Macías Sánchez 
 - `03-kit-vulneraciones/` — gestión y notificación de vulneraciones
 - `04-evaluacion-impacto/` — evaluación de impacto (EIPD), fuente `scripts/eipd_config.py`
 - `05-madurez/` — diagnóstico de madurez, fuente `scripts/madurez_config.py` (modelo propio, rotularlo siempre así)
+- `06-honorarios/` — calculadora de honorarios y proforma, fuente `scripts/honorarios_config.py` (tarifas y tramos son criterio propio)
 - `docs/` — decisiones del proyecto
 - `referencias/` — plantillas ya utilizadas, anonimizadas
 - `scripts/` — generadores (Excel, exportación a Word)

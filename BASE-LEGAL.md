@@ -18,6 +18,11 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | RES-0003 | Res. SPDP-SPD-2025-0003-R, Guía de Gestión de Riesgos y Evaluación de Impacto (Cap. I obligatorio, Cap. II referencial; versión 2 en 2026) | 29-04-2025; RO 4to Supl. 41, 19-05-2025 |
 | RES-0022 | Res. SPDP-SPD-2025-0022-R, reglamento de la metodología para el cálculo de multas (modelos MPRIV-1 y MPUB-1; Anexo I) | 16-07-2025; RO 92, 30-07-2025 |
 | RES-2026-0004 | Res. SPDP-SPD-2026-0004-R, Norma General de Transferencias Internacionales | RO 3er Supl. 225, 13-02-2026 |
+| RES-2026-0005 | Res. SPDP-SPD-2026-0005-R, Norma General sobre el Tratamiento de Datos Personales a Gran Escala (Modelo Técnico de Gran Escala, MTGE) | 02-02-2026; RO Supl. 231, 25-02-2026 |
+| COPCI | Código Orgánico de la Producción, Comercio e Inversiones y su Reglamento (clasificación de MIPYMES) | RO Supl. 351, 29-12-2010 |
+| LRTI | Ley de Régimen Tributario Interno (IVA) | Codificación vigente |
+| RES-SRI-26-0009 | Res. NAC-DGERCGC26-00000009, porcentajes de retención en la fuente del impuesto a la renta | 27-02-2026; vigente desde 01-03-2026 |
+| CT | Código del Trabajo (remuneraciones adicionales y fondos de reserva) | Codificación vigente |
 | RES-2026-0009 | Res. SPDP-SPD-2026-0009-R, norma general de protección de datos en sistemas de inteligencia artificial, reformada por Res. SPDP-SPD-2026-0037-R | 12-02-2026; reforma sept. 2026 |
 | RES-2026-0039 | Res. SPDP-SPD-2026-0039-R, norma general para el tratamiento de datos biométricos | sept. 2026 |
 
@@ -71,6 +76,18 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | DPD, información al titular | Identidad y datos de contacto del DPD, cuando sea del caso | LOPDP art. 12 | ☐ |
 | Información al titular | Contenidos del derecho a la información (base de la política y aviso de privacidad) | LOPDP art. 12 | ☐ |
 | RAT, campos de buena práctica | Excepción del art. 26 para datos sensibles, información al titular, contrato de encargo y evaluación de impacto se registran como observaciones, no como contenido mínimo del art. 38 | LOPDP arts. 12, 26 y 42; RGLOPDP art. 41 | ☐ |
+| Gran escala, modelo | Seis variables por tratamiento (titulares en 12 meses, tipos de datos, categorías, frecuencia, permanencia, alcance geográfico); puntaje = suma | RES-2026-0005 arts. 8 y 9 | ☐ |
+| Gran escala, umbral | Gran escala si el puntaje es igual o mayor a 6; la SPDP puede ajustar el umbral | RES-2026-0005 art. 10 | ☐ |
+| Gran escala, efectos | Evaluación de impacto previa, DPD obligatorio, inclusión en el RAT y medidas reforzadas | RES-2026-0005 art. 12 | ☐ |
+| Gran escala, calificación directa | Salud y categorías especiales; perfiles automatizados con efectos jurídicos; observación sistemática en espacios públicos; biométricos y geolocalización; información crediticia; NNA; transferencias sistemáticas; mensajería y courier | RES-2026-0005 art. 14 | ☐ |
+| Gran escala, transitoria | 90 días desde la vigencia (25-02-2026) para designar y registrar al DPD | RES-2026-0005, disposición transitoria | ☐ |
+| Tamaño de empresa | Micro: 1-9 trabajadores y ventas hasta USD 100.000; pequeña: 10-49 y USD 100.001 a 1.000.000; mediana: 50-199 y USD 1.000.001 a 5.000.000 | Reglamento COPCI art. 106 | ☐ |
+| Tamaño de empresa, prevalencia | Si las variables no coinciden, prevalecen las ventas | COPCI art. 53 | ☐ |
+| IVA | Tarifa general del 15 % vigente mientras no la modifique un decreto ejecutivo (banda 13 % a 15 %) | LRTI art. 65; Circular SRI NAC-DGECCGC25-00000006 | ☐ |
+| Retención de renta, honorarios | 10 % en honorarios profesionales de personas naturales | RES-SRI-26-0009 | ☐ |
+| Retención de IVA, honorarios | 100 % del IVA en honorarios profesionales de personas naturales cuando paga un agente de retención | Tabla de porcentajes de retención de IVA del SRI | ☐ |
+| Costo laboral de referencia | Décimo tercero (art. 111), décimo cuarto equivalente a un SBU (art. 113), fondos de reserva 8,33 % (art. 196); SBU 2026 USD 482; aporte patronal 12,15 % | CT arts. 111, 113 y 196; Ley de Seguridad Social | ☐ |
+| Honorarios del DPD | No existe tabla oficial ni gremial en Ecuador; la herramienta 06 usa criterio propio | — | — |
 
 ## Puntos abiertos (no resolver con supuestos)
 
@@ -80,13 +97,15 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 4. Lista literal de excepciones del art. 26 LOPDP: incorporarla a `rat_config.py` para convertir el campo "Excepción del art. 26" en lista desplegable.
 5. Contenido del RAT del encargado: el art. 44 RGLOPDP fija cuándo se lleva; confirmar si define su contenido. La hoja "RAT encargado" usa estructura de buena práctica.
 6. Periodicidad de revisión del RAT: la norma no la fija; la herramienta usa 12 meses como práctica interna.
-7. Criterios de "gran escala": pendientes de desarrollo por la SPDP; el volumen de titulares del RAT es solo orientativo.
+7. Gran escala: resuelto por la RES-2026-0005 (MTGE), aplicado en la herramienta 06. Pendiente incorporarlo a las herramientas 01 (columna de puntaje por actividad) y 04 (supuestos de evaluación de impacto). El texto deja un vacío entre 100.000 y 101.000 titulares; la herramienta 06 lo asigna al tramo superior.
 8. Escalas oficiales de impacto y probabilidad y anexo con el formato de evaluación de impacto de la Guía SPDP (RES-0003, v2 2026): no se pudieron leer completos; la herramienta 04 usa escalas propias. Contrastar al obtener el texto íntegro.
 9. Alcance exacto de la obligación de evaluación de impacto en la norma de IA (RES-2026-0009/0037) y en la de biométricos (RES-2026-0039): leer sus textos completos.
 10. Transferencias internacionales: identificado el art. 56 LOPDP y la RES-2026-0004 (norma general); falta leer el texto completo de la norma general para incorporar sus mecanismos a las herramientas 01 y 05.
 14. Estado del reglamento de certificaciones y sellos de la SPDP (plan regulatorio 2025-2026): verificar si fue expedido.
 11. Anexo I de la RES-0022: leer el texto oficial (spdp.gob.ec no fue accesible). Confirmar (a) el sentido del PDI: la herramienta 05 lo toma como complemento del índice de madurez (menor madurez, mayor multa); (b) cómo se aplican los pesos 60/40/20 dentro del SDI; (c) las escalas de IED, INT y RER.
 12. Múltiplos de SBU para infracciones graves de servidores públicos (art. 72 LOPDP): pendiente; la herramienta 05 no calcula multas del sector público.
+15. Retenciones: confirmar en el texto de la Res. NAC-DGERCGC26-00000009 el porcentaje para sociedades (los resúmenes citan 5 %) y en la tabla vigente del SRI el porcentaje de retención de IVA según el tipo de cliente.
+16. Clasificación de empresas: una fuente secundaria cita el límite inferior de la pequeña empresa en USD 300.001; la herramienta usa USD 100.001 (mayoría de fuentes). Verificar en el texto vigente del Reglamento del COPCI art. 106.
 13. Catálogo completo de infracciones leves y graves (arts. 67 y 68 LOPDP): solo se clasifican como graves los tres dominios verificados (DPD, contrato de encargo, notificación a titulares).
 
 ## Referencias comparadas (no vinculantes en Ecuador)
@@ -108,6 +127,8 @@ Solo pueden citarse en comparaciones explícitas, nunca como fundamento de una o
 - RES-2026-0039 (biométricos) y RES-2026-0009/0037 (IA): resúmenes de nmslaw.com.ec, allende.com y ecija.com.
 
 - Resumen de la RES-0040: nmslaw.com.ec, 14-09-2026.
+- RES-2026-0005: copia del texto en procuraduria.utpl.edu.ec y fielweb.com; resúmenes de lexis.com.ec y corralrosales.com (2026-11-08).
+- IVA, retenciones y SBU 2026: eluniverso.com, ccq.ec (Circular NAC-DGECCGC25-00000006), nmslaw.com.ec (Res. NAC-DGERCGC26-00000009), vistazo.com (SBU).
 - Reforma art. 43 por la LOFC: globalsuitesolutions.com.
 - RES-0006 (texto firmado): primicias.ec.
 - RGLOPDP arts. 24-28, 38-44: copia de edicioneslegales.com.ec alojada en deltechaudit.ec.

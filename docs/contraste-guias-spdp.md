@@ -1,6 +1,6 @@
 # Contraste de las herramientas con las guías de la SPDP
 
-Revisión del 2026-11-08. Compara cada exigencia de las dos guías técnicas de la Superintendencia de Protección de Datos Personales (SPDP) con las herramientas del portafolio, para que ningún paso quede sin cubrir.
+Revisión del 2026-11-08, actualizada el 2026-11-09 con los resúmenes estructurados (JSON) aportados por el usuario. Compara cada exigencia de las dos guías técnicas de la Superintendencia de Protección de Datos Personales (SPDP) con las herramientas del portafolio, para que ningún paso quede sin cubrir.
 
 - **Guía v2 de gestión de riesgos y evaluación de impacto** (RES-2026-0012). Capítulo I obligatorio; capítulo II referencial. Lectura parcial: capítulo I y etapas 1 a 3.
 - **Guía de protección de datos desde el diseño y por defecto** (RES-2025-0040). Lectura de la versión de julio de 2025.
@@ -30,12 +30,13 @@ Estado: ✅ cubierto · 🟡 parcial · ⬜ pendiente.
 | 2. Identificación | Comunidades de amenaza y capacidad | 07 | ✅ | Catálogo de amenazas |
 | 2. Identificación | Vulnerabilidades jurídicas, de grupos vulnerables, organizacionales y técnicas | 07 | ✅ | Las cuatro categorías |
 | 2. Identificación | Escenarios de riesgo con impactos primarios y secundarios | 07 | ✅ | **Nuevo.** Rótulo de impactos primarios y secundarios y derechos afectados por escenario |
-| 3. Análisis | Modelo cualitativo calibrado con justificación | 07 | ✅ | Método declarado en el contexto |
+| 3. Análisis | Modelo cualitativo calibrado con justificación; Delphi, Lens o análisis argumental | 07 | ✅ | Método declarado en el contexto, con las opciones de la guía |
 | 3. Análisis | Modelos cuantitativos (frecuentista, bayesiano, Monte Carlo, FAIR) | 03 (multas) | 🟡 | Solo la estimación de multas usa simulación. Una evaluación cuantitativa completa requiere datos que las pymes rara vez tienen; queda como mejora futura |
 | 3. Análisis | Advertencia sobre matrices que subestiman riesgos de baja probabilidad y alto impacto | 07 | ✅ | Aviso automático |
 | 3. Análisis | Modelos paralelos para grupos vulnerables | 07 | 🟡 | Se reflejan en el piso de impacto; no hay un modelo separado |
 | 4. Evaluación | Comparar con la aceptación y decidir | 07, pestaña 6 | ✅ | Umbral y dictamen sugerido |
-| 5. Tratamiento | Medidas, responsables y plazos | 07 | ✅ | Decisión, responsable y plazo por riesgo |
+| 5. Tratamiento | Medidas, responsables y plazos; estrategias aceptar, modificar, transferir o evitar | 07 | ✅ | Decisión con las cuatro estrategias de la guía («Modificar» reemplaza a «Mitigar»), responsable y plazo |
+| 5. Tratamiento | Retorno de la inversión en seguridad (ROSI) y FAIR-CAM | — | ⬜ | Requiere datos de pérdidas y costos de controles; mejora futura |
 | 5. Tratamiento | Declaración de aplicabilidad | — | ⬜ | Texto no leído. Pendiente al obtener la guía completa |
 | Anexo | Formato oficial de evaluación de impacto | 07 | ⬜ | Anexo no leído. El informe sigue el art. 32 RGLOPDP; contrastar con el anexo |
 
@@ -54,7 +55,7 @@ Estado: ✅ cubierto · 🟡 parcial · ⬜ pendiente.
 | Principio «cumplir» | 07, 03 | 🟡 | Responsables y plazos por medida; falta la declaración de aplicabilidad |
 | Principio «demostrar» | 04, 09 | ✅ | RAT, bitácora e informes |
 | Configuración por defecto más protectora | 07 | ✅ | **Nuevo** control |
-| Madurez por principio (niveles 0 a 3) sobre las actividades del RAT | 03 | 🟡 | La 03 usa la misma escala 0 a 3, pero por dominio y no por principio y actividad. La SPDP anunció una guía de controles y madurez: adaptar al publicarse |
+| Madurez por principio (niveles 0 a 3: 0 %, menos de 25 %, 25 % a 75 %, más de 75 %) sobre las actividades del RAT, calibrada por eje (DevPrivOps, DevSecOps, DevRiskOps) | 03 | 🟡 | La 03 mide por dominio, no por principio y actividad. Las tácticas de cada principio ya constan en BASE-LEGAL. Candidata a una herramienta propia de madurez desde el diseño |
 | DevSecOps y DevRiskOps | Guía, cap. 13 | 🟡 | Se mencionan; su ejecución corresponde al área de tecnología, no al DPD |
 
 ## 4. Decisiones

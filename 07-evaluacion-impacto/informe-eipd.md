@@ -87,7 +87,7 @@ Supuestos verificados:
 
 | N.º | Medidas, garantías y mecanismos | Nivel residual | Decisión | Responsable | Plazo |
 |---|---|---|---|---|---|
-| R1 | [MEDIDAS] | [NIVEL] | [Mitigar / Aceptar / Evitar / Transferir] | [CARGO] | [FECHA] |
+| R1 | [MEDIDAS] | [NIVEL] | [Modificar (mitigar) / Aceptar / Evitar / Transferir] | [CARGO] | [FECHA] |
 
 ## 7. Conclusión
 

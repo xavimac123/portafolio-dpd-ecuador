@@ -10,6 +10,7 @@ R = pathlib.Path(__file__).resolve().parent
 ROOT = R.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import catalogo_config as CAT  # noqa: E402
+import barra_contexto as BC  # noqa: E402
 
 TOOLS = {"01": "01-catalogo-servicios/catalogo-servicios.html", "02": "02-honorarios/calculadora-honorarios.html",
          "03": "03-madurez/asistente-madurez.html", "04": "04-registro-tratamientos/asistente-rat.html",
@@ -20,7 +21,7 @@ TOOLS = {"01": "01-catalogo-servicios/catalogo-servicios.html", "02": "02-honora
 def js(o):
     return json.dumps(o, ensure_ascii=False).replace("</", "<\\/")
 
-tools = {k: (ROOT / v).read_text(encoding="utf-8") for k, v in TOOLS.items()}
+tools = {k: BC.aplicar((ROOT / v).read_text(encoding="utf-8"), k) for k, v in TOOLS.items()}
 serv = [[s["cod"], s["nombre"], s["fase"]] for s in CAT.SERVICIOS]
 emb = (R / "assets" / "embebidos.txt").read_text(encoding="utf-8").split("\n")
 img = {"iso": emb[0], "lineas": emb[1], "icono": emb[2]}

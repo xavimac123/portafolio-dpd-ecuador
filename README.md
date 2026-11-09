@@ -68,6 +68,7 @@ python scripts/generar_gran_escala.py              # 05
 python scripts/generar_interes_legitimo.py         # 06
 python scripts/generar_asistente_eipd.py           # 07
 python scripts/generar_generador.py                # 08 y 09
+python scripts/barra_contexto.py                   # barra de contexto en las nueve páginas web
 bash scripts/exportar_docx.sh                      # versiones Word
 python scripts/guia/graficos.py && python scripts/guia/generar_guia.py  # guía PDF
 ```

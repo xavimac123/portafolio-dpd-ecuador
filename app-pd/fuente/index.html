@@ -72,14 +72,25 @@ thead th{font-size:11px;color:var(--gris);text-transform:uppercase;letter-spacin
 #tool{position:fixed;inset:0;z-index:40;background:var(--marfil);display:flex;flex-direction:column}
 #tool[hidden]{display:none}
 #tool .bar{background:var(--carbon);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 12px;min-height:50px}
-#tool .bar button{background:none;border:1px solid #3A3F47;color:#fff;border-radius:8px;font:inherit;font-weight:700;padding:6px 12px;cursor:pointer}
-#tool .bar .tt{font-weight:700;font-size:14px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#tool .bar button{flex:none;white-space:nowrap;background:none;border:1px solid #3A3F47;color:#fff;border-radius:8px;font:inherit;font-weight:700;padding:6px 12px;cursor:pointer}
+#tool .bar .tt{min-width:0;font-weight:700;font-size:14px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #tool .bar .tt small{display:block;color:var(--oroc);font-weight:500;font-size:11.5px}
 #tool iframe{flex:1;border:0;width:100%;background:#fff}
 #lock{max-width:440px;margin:24px auto;padding:0 14px}
 #lock .card{position:relative;overflow:hidden}
 #toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--carbon);color:#fff;padding:10px 14px;border-radius:10px;font-size:13.5px;max-width:92%;z-index:60}
 #toast.e{background:var(--mal)}
+.sem{display:inline-block;width:12px;height:12px;border-radius:50%;flex:none;margin-top:4px;box-shadow:0 0 0 2px rgba(0,0,0,.06)}
+.sem.v{background:#2F8A45}.sem.g{background:#A7A9AC}.sem.a{background:#D9A21B}.sem.r{background:#C0392B}
+.semcard{display:flex;gap:10px;align-items:flex-start}.semcard .sem{width:16px;height:16px;margin-top:2px}
+.semcard ul{margin:4px 0 0;padding-left:18px;font-size:13px}
+.reloj{background:var(--malf);border:1px solid #E7B7B0;border-radius:10px;padding:12px;margin:0 0 12px}
+.reloj b{color:var(--mal)}.reloj .cd{font-size:20px;font-weight:800;font-stretch:110%;color:var(--mal)}
+#sug{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:70;background:var(--card);border:1px solid var(--oro);border-radius:12px;padding:12px 14px;box-shadow:0 6px 24px rgba(0,0,0,.25);width:min(94%,460px)}
+#ctx{position:fixed;top:0;left:0;right:0;z-index:35;background:var(--carbon);color:#F7F5EE;font-size:13px;font-weight:600;padding:9px 14px;display:flex;gap:6px;align-items:center;transform:translateY(-110%);transition:transform .18s;white-space:nowrap;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+#ctx.on{transform:none}#ctx b{color:var(--oroc)}#ctx span{overflow:hidden;text-overflow:ellipsis}
+#tool .bar .tt .cx{display:block;color:#C9C6BA;font-weight:500;font-size:11.5px;overflow:hidden;text-overflow:ellipsis}
+.bit td,.bit th{font-size:12.5px}
 .rc{font-family:ui-monospace,Menlo,monospace;font-size:17px;font-weight:700;letter-spacing:.04em;background:#FBF9F1;border:1px dashed var(--oro);border-radius:8px;padding:10px;text-align:center;word-break:break-all}
 footer{max-width:820px;margin:0 auto;padding:0 14px 28px;font-size:11.5px;color:var(--gris)}
 [hidden]{display:none!important}
@@ -107,7 +118,7 @@ body.dark .tag.g{background:#2A3038;color:#C9C6BA}
 </main>
 <footer id="foot" hidden>MSC Protección de Datos · Herramienta de uso profesional de Macías Sánchez Consultores. Los datos se guardan cifrados en este dispositivo y, si lo activa, en su Google Drive. No registre datos de los titulares (clientes o trabajadores de sus clientes): solo información de la empresa y de su cumplimiento. Escalas y puntajes de las herramientas: criterio propio cuando así se indica.</footer>
 
-<div id="tool" hidden><div class="bar"><button id="tool-x">‹ Volver</button><div class="tt" id="tool-t"></div></div><iframe id="tool-f" allow="clipboard-write" title="Herramienta"></iframe></div>
+<div id="ctx" aria-hidden="true"><b id="ctx-v"></b><span id="ctx-s"></span></div><div id="sug" hidden></div><div id="tool" hidden><div class="bar"><button id="tool-x">‹ Volver</button><div class="tt" id="tool-t"></div></div><iframe id="tool-f" allow="clipboard-write" title="Herramienta"></iframe></div>
 
 <script type="application/json" id="j-tools">__TOOLS_JSON__</script>
 <script type="application/json" id="j-serv">__SERV_JSON__</script>
@@ -130,7 +141,9 @@ function pd(s){var p=String(s).split('-');return new Date(+p[0],+p[1]-1,+p[2])}
 function hoy(){return iso(new Date())}
 function addDias(s,n){var d=pd(s);d.setDate(d.getDate()+n);return iso(d)}
 function addMeses(s,n){var d=pd(s);d.setMonth(d.getMonth()+n);return iso(d)}
-function addHabiles(s,n){var d=pd(s),k=0;while(k<n){d.setDate(d.getDate()+1);if(d.getDay()!==0&&d.getDay()!==6)k++}return iso(d)}
+var FERIADOS=[["2026-01-01", "Año Nuevo"], ["2026-01-02", "Descanso decretado (puente de Año Nuevo)"], ["2026-02-16", "Carnaval"], ["2026-02-17", "Carnaval"], ["2026-04-03", "Viernes Santo"], ["2026-05-01", "Día del Trabajo"], ["2026-05-25", "Batalla de Pichincha (traslado)"], ["2026-08-10", "Primer Grito de Independencia"], ["2026-10-09", "Independencia de Guayaquil"], ["2026-11-02", "Día de Difuntos"], ["2026-11-03", "Independencia de Cuenca"], ["2026-12-25", "Navidad"], ["2027-01-01", "Año Nuevo"], ["2027-02-08", "Carnaval"], ["2027-02-09", "Carnaval"], ["2027-03-26", "Viernes Santo"], ["2027-04-30", "Día del Trabajo (traslado)"], ["2027-05-24", "Batalla de Pichincha"], ["2027-08-09", "Primer Grito de Independencia (traslado)"], ["2027-10-08", "Independencia de Guayaquil (traslado)"], ["2027-11-01", "Día de Difuntos (traslado)"], ["2027-11-02", "Independencia de Cuenca (traslado)"], ["2027-12-25", "Navidad"]];
+function esFeriado(s){return FERIADOS.some(function(f){return f[0]===s})}
+function addHabiles(s,n){var d=pd(s),k=0;while(k<n){d.setDate(d.getDate()+1);if(d.getDay()!==0&&d.getDay()!==6&&!esFeriado(iso(d)))k++}return iso(d)}
 function difDias(s){return Math.round((pd(s)-pd(hoy()))/864e5)}
 var MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
 function fcorta(s){if(!s)return '';var d=pd(s);return d.getDate()+' '+MESES[d.getMonth()].slice(0,3)+' '+d.getFullYear()}
@@ -162,6 +175,7 @@ var TIPOS={
  rev_eipd:{n:'Revisión de evaluación de impacto',h:'07'},
  vul_spdp:{n:'Vulneración: notificar a la SPDP',h:'09'},
  vul_enc:{n:'Vulneración: comunicación del encargado',h:'09'},
+ vul_tit:{n:'Vulneración: comunicar a los titulares',h:'09'},
  sol:{n:'Solicitud de derechos: responder',h:''},
  entrega:{n:'Entrega de documento',h:'08'},
  reunion:{n:'Reunión con el cliente',h:''},
@@ -188,7 +202,7 @@ function codRec(){var A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',u=rnd(24),s='';for(va
 function envolver(v,dek,pw,rc){var salt=rnd(16),rs=rnd(16);v.iter=ITER;v.salt=b64(salt);v.rsalt=b64(rs);v.pwUpd=Date.now();
  return Promise.all([kdf(pw,salt,ITER),kdf(normRec(rc),rs,ITER)]).then(function(k){return Promise.all([cifra(k[0],dek),cifra(k[1],dek)])}).then(function(w){v.wpw=w[0];v.wrec=w[1];return v})}
 function abrir(v,secreto,esRec){return kdf(esRec?normRec(secreto):secreto,b64b(esRec?v.rsalt:v.salt),v.iter).then(function(k){return descifra(k,esRec?v.wrec:v.wpw)})}
-function vacio(){return{ver:1,clientes:[],ws:{},plazos:[],sol:[],cfg:{firma:{nom:'Abg. Mariano X. Macías Sánchez',cargo:'Consultor en Protección de Datos Personales',mat:'09-2022-736'},plazoSol:'',tema:'auto',gcal:{on:false}},seq:{}}}
+function vacio(){return{ver:1,clientes:[],ws:{},plazos:[],sol:[],inc:[],bit:[],docs:[],cfg:{firma:{nom:'Abg. Mariano X. Macías Sánchez',cargo:'Consultor en Protección de Datos Personales',mat:'09-2022-736'},plazoSol:'',plazoTit:'',tema:'auto',gcal:{on:false}},seq:{}}}
 function leer(v,k){if(!v.data)return Promise.resolve(vacio());return descifra(k,v.data).then(function(b){var d=JSON.parse(TD.decode(b));var z=vacio();Object.keys(z).forEach(function(x){if(d[x]==null)d[x]=z[x]});return d})}
 function bovedaLocal(){try{return JSON.parse(localStorage.getItem('mscpd:vault'))}catch(e){return null}}
 function guardaLocal(){try{localStorage.setItem('mscpd:vault',JSON.stringify(R.vault))}catch(e){toast('No se pudo guardar en este dispositivo: '+e.message,1)}}
@@ -260,10 +274,11 @@ function vIni(){var V=$('#v-ini'),pend=plazos().filter(function(p){return p.est!
  var venc=pend.filter(function(p){return difDias(p.f)<0}),sem=pend.filter(function(p){var d=difDias(p.f);return d>=0&&d<=7}),act=clientes().filter(function(c){return c.est==='activo'}),sa=sols().filter(function(s){return s.est!=='cerrada'});
  V.innerHTML='<div class="hero"><img src="'+IMG.lineas+'" alt=""><b>Buen día'+(R.data.cfg.firma.nom?', '+esc(R.data.cfg.firma.nom.split(' ').slice(1,2).join(' ')):'')+'</b><p>'+esc(fcorta(hoy()))+' · '+act.length+' cliente(s) activo(s). El DPD asesora y supervisa; la empresa decide e implementa.</p></div>'+
  '<div class="kpis"><div class="kpi'+(venc.length?' r':'')+'" data-go="age:venc"><div class="l">Vencidos</div><div class="n">'+venc.length+'</div></div><div class="kpi'+(sem.length?' a':'')+'" data-go="age:pend"><div class="l">Próximos 7 días</div><div class="n">'+sem.length+'</div></div><div class="kpi" data-go="cli"><div class="l">Clientes activos</div><div class="n">'+act.length+'</div></div><div class="kpi'+(sa.length?' a':'')+'" data-go="age:sol"><div class="l">Solicitudes abiertas</div><div class="n">'+sa.length+'</div></div></div>'+
+ relojes(null)+semResumen()+
  '<div class="card"><h3>Lo urgente <button class="btn sm sec" id="i-np">+ Plazo</button></h3><div class="list" id="i-l">'+(venc.concat(sem).slice(0,12).map(itemPlazo).join('')||'<p class="sub">Nada vencido ni para los próximos 7 días.</p>')+'</div></div>'+
- '<div class="card"><h3>Accesos rápidos</h3><div class="row"><button class="btn sec" id="i-nc">+ Cliente</button><button class="btn sec" data-h="09">Atender una vulneración</button><button class="btn sec" id="i-ns">Registrar solicitud de derechos</button><button class="btn sec" data-h="03">Diagnóstico de madurez</button></div></div>'+
+ '<div class="card"><h3>Accesos rápidos</h3><div class="row"><button class="btn sec" id="i-nc">+ Cliente</button><button class="btn sec" id="i-inc">Atender una vulneración</button><button class="btn sec" id="i-ns">Registrar solicitud de derechos</button><button class="btn sec" data-h="03">Diagnóstico de madurez</button></div></div>'+
  sinControl();
- bindPlazos(V);$('#i-np').onclick=function(){formPlazo(null)};$('#i-nc').onclick=function(){show('cli');formCliente(null)};$('#i-ns').onclick=function(){formSol(null,null)};
+ bindPlazos(V);$('#i-np').onclick=function(){formPlazo(null)};bindRelojes(V);$$('[data-sc]',V).forEach(function(e){e.onclick=function(){R.sel=e.dataset.sc;show('cli')}});$('#i-nc').onclick=function(){show('cli');formCliente(null)};$('#i-ns').onclick=function(){formSol(null,null)};$('#i-inc').onclick=function(){formInc(null,null)};
  $$('[data-h]',V).forEach(function(b){b.onclick=function(){elegirClienteYAbrir(b.dataset.h)}});
  $$('[data-go]',V).forEach(function(k){k.onclick=function(){var g=k.dataset.go.split(':');if(g[1])R.ageF=g[1];show(g[0])}});
 }
@@ -276,7 +291,7 @@ function vCli(){if(R.sel&&cli(R.sel))return fichaCliente(R.sel);var V=$('#v-cli'
  V.innerHTML='<h2>Clientes de protección de datos</h2><p class="sub">Empresas a las que presta el servicio. Cada cliente guarda sus propias evaluaciones de las nueve herramientas.</p><div class="row" style="margin-bottom:10px"><input id="c-q" placeholder="Buscar por razón social, RUC o código" style="flex:1" value="'+esc(q)+'"><button class="btn" id="c-n">+ Cliente</button></div><div class="card"><div class="list" id="c-l"></div></div>';
  var pinta=function(){var s=$('#c-q').value.toLowerCase();store('q',s);var L=clientes().filter(function(c){return !s||(c.rs+' '+(c.ruc||'')+' '+c.cod).toLowerCase().indexOf(s)>-1}).sort(function(a,b){var o={activo:1,propuesta:2,prospecto:3,pausa:4,cerrado:5};return (o[a.est]||9)-(o[b.est]||9)||a.rs.localeCompare(b.rs)});
   $('#c-l').innerHTML=L.map(function(c){var v=plazos(c.id).filter(function(p){return p.est!=='hecho'&&difDias(p.f)<0}).length,e=EST[c.est]||EST.prospecto;
-   return '<div class="it" data-cc="'+c.id+'"><div style="flex:1"><div class="t">'+esc(c.rs)+'</div><div class="m">'+esc(c.cod)+(c.ruc?' · RUC '+esc(c.ruc):'')+(c.modal?' · '+esc(c.modal):'')+'</div></div><div style="text-align:right">'+'<span class="tag '+e[1]+'">'+e[0]+'</span>'+(v?'<br><span class="tag r" style="margin-top:4px">'+v+' vencido'+(v>1?'s':'')+'</span>':'')+'</div></div>'}).join('')||'<p class="sub">Aún no hay clientes. Use «+ Cliente».</p>';
+   var sm=semaforo(c.id);return '<div class="it" data-cc="'+c.id+'"><span class="sem '+sm.c+'" title="'+esc(sm.t)+'"></span><div style="flex:1"><div class="t">'+esc(c.rs)+'</div><div class="m">'+esc(c.cod)+(c.ruc?' · RUC '+esc(c.ruc):'')+(c.modal?' · '+esc(c.modal):'')+'</div></div><div style="text-align:right">'+'<span class="tag '+e[1]+'">'+e[0]+'</span>'+(v?'<br><span class="tag r" style="margin-top:4px">'+v+' vencido'+(v>1?'s':'')+'</span>':'')+'</div></div>'}).join('')||'<p class="sub">Aún no hay clientes. Use «+ Cliente».</p>';
   $$('[data-cc]').forEach(function(e){e.onclick=function(){R.sel=e.dataset.cc;fichaCliente(R.sel)}})};
  $('#c-q').oninput=pinta;$('#c-n').onclick=function(){formCliente(null)};pinta()}
 function campo(id,l,v,t,full,ph){return '<div'+(full?' class="full"':'')+'><label for="'+id+'">'+l+'</label><input id="'+id+'" type="'+(t||'text')+'" value="'+esc(v||'')+'"'+(ph?' placeholder="'+esc(ph)+'"':'')+'></div>'}
@@ -287,14 +302,14 @@ function formCliente(id){var c=id?cli(id):{est:'prospecto',serv:[],ini:hoy()},V=
  '<div class="card"><h3>Empresa</h3><div class="grid">'+campo('f-rs','Razón social',c.rs,'text',true)+campo('f-ruc','RUC',c.ruc)+sel('f-tam','Tamaño',c.tam,TAM)+campo('f-sec','Sector o actividad',c.sec)+campo('f-ciu','Ciudad',c.ciu)+
  campo('f-trab','Número de trabajadores',c.trab,'number')+campo('f-ven','Ventas del ejercicio anterior (USD, sin IVA)',c.ven,'number')+'</div></div>'+
  '<div class="card"><h3>Contacto en la empresa</h3><div class="grid">'+campo('f-cn','Nombre',c.cn)+campo('f-cc','Cargo',c.cc)+campo('f-cm','Correo',c.cm,'email')+campo('f-ct','Teléfono',c.ct,'tel')+'</div></div>'+
- '<div class="card"><h3>Servicio</h3><div class="grid">'+sel('f-est','Estado',c.est,Object.keys(EST).map(function(k){return [k,EST[k][0]]}))+sel('f-mod','Modalidad',c.modal,MODAL)+campo('f-ini','Fecha de inicio',c.ini,'date')+campo('f-fin','Fin del contrato (opcional)',c.fin,'date')+
+ '<div class="card"><h3>Servicio</h3><div class="grid">'+sel('f-est','Estado',c.est,Object.keys(EST).map(function(k){return [k,EST[k][0]]}))+sel('f-mod','Modalidad',c.modal,MODAL)+campo('f-ini','Fecha de inicio',c.ini,'date')+campo('f-fin','Fin del contrato (opcional)',c.fin,'date')+campo('f-hon','Honorario mensual (USD, sin IVA)',c.hon,'number')+campo('f-tar','Valor hora objetivo (USD)',c.tar,'number')+
  '<div class="full"><label>Servicios contratados (catálogo S01 a S28)</label><div class="chips" id="f-sv">'+SERV.map(function(s){return '<button type="button" data-s="'+s[0]+'" title="'+esc(s[2])+'" class="'+((c.serv||[]).indexOf(s[0])>-1?'on':'')+'">'+s[0]+' · '+esc(s[1])+'</button>'}).join('')+'</div></div>'+
  '<div class="full"><label for="f-not">Notas</label><textarea id="f-not">'+esc(c.not||'')+'</textarea></div></div></div>'+
  '<div class="row"><button class="btn" id="f-g">Guardar</button>'+(id?'<button class="btn sec" id="f-d">Eliminar cliente</button>':'')+'</div><div class="msg" id="f-m"></div>';
  $$('#f-sv button').forEach(function(b){b.onclick=function(){b.classList.toggle('on')}});
  $('#f-b').onclick=function(){if(id){R.sel=id;fichaCliente(id)}else{R.sel=null;vCli()}};
  $('#f-g').onclick=function(){var rs=$('#f-rs').value.trim();if(!rs){$('#f-m').className='msg e';$('#f-m').textContent='Ingrese la razón social.';return}
-  var o=id?c:{id:uid(),cod:sigCod('PD')};var m={rs:rs,ruc:'f-ruc',tam:'f-tam',sec:'f-sec',ciu:'f-ciu',trab:'f-trab',ven:'f-ven',cn:'f-cn',cc:'f-cc',cm:'f-cm',ct:'f-ct',est:'f-est',modal:'f-mod',ini:'f-ini',fin:'f-fin',not:'f-not'};
+  var o=id?c:{id:uid(),cod:sigCod('PD')};var m={rs:rs,ruc:'f-ruc',tam:'f-tam',sec:'f-sec',ciu:'f-ciu',trab:'f-trab',ven:'f-ven',cn:'f-cn',cc:'f-cc',cm:'f-cm',ct:'f-ct',est:'f-est',modal:'f-mod',ini:'f-ini',fin:'f-fin',hon:'f-hon',tar:'f-tar',not:'f-not'};
   Object.keys(m).forEach(function(k){if(k!=='rs')o[k]=$('#'+m[k]).value.trim()});o.rs=rs;o.est=o.est||'prospecto';o.serv=$$('#f-sv button.on').map(function(b){return b.dataset.s});o.upd=Date.now();
   if(!id)R.data.clientes.push(o);guardar().then(function(){toast('Cliente guardado.');R.sel=o.id;fichaCliente(o.id)})};
  if(id)$('#f-d').onclick=function(){if(!confirmar(this))return;c.del=true;c.upd=Date.now();plazos(id).forEach(function(p){p.del=true;p.upd=Date.now()});guardar().then(function(){calSyncTodas(false);R.sel=null;vCli();toast('Cliente eliminado.')})};
@@ -305,17 +320,20 @@ function fichaCliente(id){var c=cli(id),V=$('#v-cli');if(!c){R.sel=null;return v
  var hechas=HERR.filter(function(h){return ultimo(id,h.id)}).length;
  V.innerHTML='<button class="back" id="k-b">‹ Clientes</button><div class="row" style="justify-content:space-between"><div><h2 style="margin-bottom:0">'+esc(c.rs)+'</h2><p class="sub">'+esc(c.cod)+(c.ruc?' · RUC '+esc(c.ruc):'')+(c.tam?' · '+esc(c.tam):'')+(c.sec?' · '+esc(c.sec):'')+'</p></div><span class="tag '+e[1]+'">'+e[0]+'</span></div>'+
  '<div class="kpis"><div class="kpi"><div class="l">Herramientas usadas</div><div class="n">'+hechas+' / 9</div></div><div class="kpi'+(pend.some(function(p){return difDias(p.f)<0})?' r':'')+'"><div class="l">Plazos pendientes</div><div class="n">'+pend.length+'</div></div><div class="kpi'+(S.some(function(s){return s.est!=='cerrada'})?' a':'')+'"><div class="l">Solicitudes abiertas</div><div class="n">'+S.filter(function(s){return s.est!=='cerrada'}).length+'</div></div><div class="kpi"><div class="l">Servicios</div><div class="n">'+(c.serv||[]).length+'</div></div></div>'+
+ fichaExtraTop(id)+
  '<div class="card"><h3>Expediente de herramientas</h3><p class="sub">Cada herramienta guarda aquí la evaluación de este cliente. Use «Copiar» dentro de cada una para llevar el resultado a Word o Excel.</p><div class="tools">'+HERR.map(function(h){var u=ultimo(id,h.id);return '<button class="tool" data-ht="'+h.id+'"><div class="n">'+h.id+'</div><div class="t">'+esc(h.n)+'</div><div class="m">'+esc(h.m)+'</div>'+(u?'<div class="u">Actualizado '+esc(fcorta(iso(new Date(u))))+'</div>':'')+'</button>'}).join('')+'</div></div>'+
  '<div class="card"><h3>Plazos y agenda <span class="row"><button class="btn sm sec" id="k-ciclo">Agendar ciclo anual</button><button class="btn sm" id="k-np">+ Plazo</button></span></h3><div class="list" id="k-pl">'+(P.slice().sort(function(a,b){return (a.est==='hecho')-(b.est==='hecho')||(a.f<b.f?-1:1)}).slice(0,30).map(itemPlazo).join('')||'<p class="sub">Sin plazos registrados.</p>')+'</div></div>'+
  '<div class="card"><h3>Solicitudes de derechos <button class="btn sm" id="k-ns">+ Solicitud</button></h3><p class="hint" style="margin:-4px 0 8px">Registre la solicitud con un código, sin nombre ni cédula del titular: esos datos quedan en el sistema del cliente.</p><div class="list">'+(S.map(function(s){var dd=s.flim?difDias(s.flim):null;return '<div class="it" data-s="'+s.id+'"><div class="d '+(s.est==='cerrada'?'v':dd!=null&&dd<0?'r':'a')+'">'+(s.flim?esc(fcorta(s.flim).replace(/ \d{4}$/,'')):'—')+'</div><div><div class="t">'+esc(s.cod)+' · '+esc(s.der)+'</div><div class="m">Recibida '+esc(fcorta(s.frec))+' · '+(s.est==='cerrada'?'Respondida':'Abierta')+'</div></div></div>'}).join('')||'<p class="sub">Sin solicitudes.</p>')+'</div></div>'+
  '<div class="card"><h3>Datos del cliente <button class="btn sm sec" id="k-ed">Editar</button></h3><table><tbody>'+
  [['Contacto',[c.cn,c.cc].filter(Boolean).join(', ')],['Correo',c.cm],['Teléfono',c.ct],['Ciudad',c.ciu],['Trabajadores',c.trab],['Ventas año anterior',c.ven?'USD '+Number(c.ven).toLocaleString('es-EC'):''],['Modalidad',c.modal],['Inicio',fcorta(c.ini)],['Fin del contrato',fcorta(c.fin)],['Servicios',(c.serv||[]).join(', ')],['Notas',c.not]].filter(function(r){return r[1]}).map(function(r){return '<tr><th style="width:38%">'+r[0]+'</th><td>'+esc(r[1])+'</td></tr>'}).join('')+'</tbody></table>'+
  (c.cm||c.ct?'<div class="row" style="margin-top:10px">'+(c.ct?'<a class="btn sm sec" href="https://wa.me/'+esc(String(c.ct).replace(/\D/g,'').replace(/^0/,'593'))+'" target="_blank" rel="noopener">WhatsApp</a>':'')+(c.cm?'<a class="btn sm sec" href="mailto:'+esc(c.cm)+'">Correo</a>':'')+'</div>':'')+'</div>'+
- '<div class="card"><h3>Exportar</h3><div class="row"><button class="btn sec" id="k-res">Copiar resumen del cliente (Word)</button></div></div>';
+ fichaExtraBottom(id)+
+ '<div class="card"><h3>Exportar</h3><div class="row"><button class="btn sec" id="k-res">Copiar resumen del cliente (Word)</button><button class="btn sec" id="k-inf">Informe mensual</button><button class="btn sec" id="k-prf">Enviar servicios a la proforma (Gestor Legal)</button></div><p class="hint">La proforma se arma en MSC Gestor Legal con los servicios marcados en la ficha (S01 a S28).</p></div>';
  $('#k-b').onclick=function(){R.sel=null;vCli()};$('#k-ed').onclick=function(){formCliente(id)};$('#k-np').onclick=function(){formPlazo(null,id)};$('#k-ns').onclick=function(){formSol(null,id)};$('#k-ciclo').onclick=function(){cicloAnual(id)};
  $$('[data-ht]',V).forEach(function(b){b.onclick=function(){abrirTool(b.dataset.ht,id)}});bindPlazos(V);
  $$('[data-s]',V).forEach(function(e){e.onclick=function(){formSol(e.dataset.s,id)}});
  $('#k-res').onclick=function(){copiarHtml(resumenCliente(id))};
+ bindExtra(id);
 }
 function cicloAnual(id){var c=cli(id),b=hoy(),n=0,add=function(tipo,f){if(plazos(id).some(function(p){return p.tipo===tipo&&p.f===f}))return;R.data.plazos.push({id:uid(),cli:id,tipo:tipo,tit:TIPOS[tipo].n,f:f,est:'pend',upd:Date.now()});n++};
  var men=/DPD externo|Acompañamiento/.test(c.modal||'');
@@ -394,13 +412,163 @@ window.PDBridge={
  save:function(ns,d){if(!R.data)return;var p=ns.split('|'),w=R.data.ws[p[0]]||(R.data.ws[p[0]]={});w[p[1]]=d;w._upd=w._upd||{};w._upd[p[1]]=Date.now();guardarDiferido()}
 };
 var SHIM='<script>(function(){try{var B=parent.PDBridge,ns=frameElement.getAttribute("data-ns");if(!B||!ns)return;var d=B.load(ns)||{};var S={getItem:function(k){return Object.prototype.hasOwnProperty.call(d,k)?d[k]:null},setItem:function(k,v){d[k]=String(v);B.save(ns,d)},removeItem:function(k){delete d[k];B.save(ns,d)},clear:function(){d={};B.save(ns,d)},key:function(i){return Object.keys(d)[i]||null}};Object.defineProperty(S,"length",{get:function(){return Object.keys(d).length}});Object.defineProperty(window,"localStorage",{configurable:true,get:function(){return S}})}catch(e){}})();<\/script>';
-function abrirTool(h,cid){var t=TOOLS[h];if(!t)return toast('Herramienta no disponible.',1);var c=cid==='_libre'?null:cli(cid);
+var _open=null;
+function abrirTool(h,cid){var t=TOOLS[h];if(!t)return toast('Herramienta no disponible.',1);var c=cid==='_libre'?null:cli(cid);_open={h:h,cid:cid,u0:cid==='_libre'?0:(ultimo(cid,h)||0)};
  var html=t.replace(/<head>/i,'<head>'+SHIM);var f=$('#tool-f');f.setAttribute('data-ns',cid+'|'+h);
- $('#tool-t').innerHTML=esc(h+' · '+herr(h).n)+'<small>'+(c?esc(c.rs):'Modo libre')+'</small>';$('#tool').hidden=false;document.body.style.overflow='hidden';
+ $('#tool-t').innerHTML=esc(h+' · '+herr(h).n)+'<small>'+(c?esc(c.rs):'Modo libre')+'</small><span class="cx" id="tool-cx"></span>';$('#tool').hidden=false;document.body.style.overflow='hidden';
  f.srcdoc=html;history.pushState({tool:1},'')}
-function cerrarTool(){if($('#tool').hidden)return;$('#tool').hidden=true;document.body.style.overflow='';$('#tool-f').srcdoc='about:blank';clearTimeout(_dT);if(R.data)guardar();if(R.view==='cli'&&R.sel)fichaCliente(R.sel)}
+function cerrarTool(){if($('#tool').hidden)return;$('#tool').hidden=true;document.body.style.overflow='';$('#tool-f').srcdoc='about:blank';clearTimeout(_dT);if(R.data)guardar();if(R.view==='cli'&&R.sel)fichaCliente(R.sel);var o=_open;_open=null;if(o)sugerirRevision(o)}
+window.PDCtx=function(s){var e=$('#tool-cx');if(e)e.textContent=s||''};
 $('#tool-x').onclick=function(){if(history.state&&history.state.tool)history.back();else cerrarTool()};
 window.addEventListener('popstate',function(){cerrarTool()});
+
+
+/* ===================== SEMÁFORO, VULNERACIONES, BITÁCORA, EVIDENCIAS, INFORME ===================== */
+var SEMN={v:'Verde',a:'Amarillo',r:'Rojo',g:'Sin seguimiento'};
+var CATB=['Reunión con el cliente','Revisión documental','Redacción de documentos','Aplicación de herramienta','Capacitación','Solicitud de derechos','Vulneración','Consulta o asesoría','Seguimiento y control','Otro'];
+var DIMS=['Confidencialidad','Integridad','Disponibilidad'];
+function incs(cid){return (R.data.inc||[]).filter(function(x){return !x.del&&(cid==null||x.cli===cid)})}
+function bits(cid){return (R.data.bit||[]).filter(function(x){return !x.del&&(cid==null||x.cli===cid)})}
+function docsCli(cid){return (R.data.docs||[]).filter(function(x){return !x.del&&x.cli===cid})}
+function diasDesde(ms){return Math.floor((Date.now()-ms)/864e5)}
+function semaforo(cid){var c=cli(cid);if(!c)return{c:'g',m:[],t:''};
+ if(c.est==='cerrado'||c.est==='pausa')return{c:'g',m:['Cliente '+(EST[c.est]||[''])[0].toLowerCase()+': sin seguimiento activo.'],t:'Sin seguimiento'};
+ var r=[],a=[],P=plazos(cid).filter(function(p){return p.est!=='hecho'});
+ var v=P.filter(function(p){return difDias(p.f)<0}).length;if(v)r.push(v+' plazo(s) vencido(s)');
+ var ia=incs(cid).filter(function(i){return i.est==='abierto'}).length;if(ia)r.push(ia+' vulneración(es) abierta(s)');
+ var s7=P.filter(function(p){var d=difDias(p.f);return d>=0&&d<=7}).length;if(s7)a.push(s7+' plazo(s) en los próximos 7 días');
+ if(c.est==='activo'){[['03','Madurez'],['04','RAT'],['05','Gran escala']].forEach(function(h){var u=ultimo(cid,h[0]);if(!u)a.push(h[1]+' ('+h[0]+') sin aplicar');else if(diasDesde(u)>365)a.push(h[1]+' ('+h[0]+') con más de 12 meses')});
+  ['06','07'].forEach(function(h){var u=ultimo(cid,h);if(u&&diasDesde(u)>365)a.push(herr(h).n+' ('+h+') con más de 12 meses')});
+  var m=hoy().slice(0,7);if(/DPD externo|Acompañamiento/.test(c.modal||'')&&!plazos(cid).some(function(p){return p.tipo==='control'&&p.f.slice(0,7)===m}))a.push('Sin control mensual agendado este mes')}
+ var col=r.length?'r':a.length?'a':'v';return{c:col,m:r.concat(a),t:SEMN[col]+(r.concat(a).length?': '+r.concat(a).join('; '):'')}}
+function semResumen(){var L=clientes().filter(function(c){return c.est==='activo'||c.est==='propuesta'});if(!L.length)return '';
+ var S=L.map(function(c){return{c:c,s:semaforo(c.id)}}),n={v:0,a:0,r:0,g:0};S.forEach(function(x){n[x.s.c]++});
+ var malos=S.filter(function(x){return x.s.c==='r'||x.s.c==='a'}).sort(function(x,y){return (x.s.c==='r'?0:1)-(y.s.c==='r'?0:1)}).slice(0,8);
+ return '<div class="card"><h3>Semáforo de clientes</h3><div class="row" style="gap:14px;margin-bottom:6px">'+['r','a','v'].map(function(k){return '<span class="row" style="gap:6px"><span class="sem '+k+'" style="margin:0"></span><b>'+n[k]+'</b> '+SEMN[k].toLowerCase()+'</span>'}).join('')+'</div>'+
+ (malos.length?'<div class="list">'+malos.map(function(x){return '<div class="it" data-sc="'+x.c.id+'"><span class="sem '+x.s.c+'"></span><div><div class="t">'+esc(x.c.rs)+'</div><div class="m">'+esc(x.s.m.slice(0,3).join(' · '))+'</div></div></div>'}).join('')+'</div>':'<p class="sub" style="margin:0">Todos los clientes activos están en verde.</p>')+'</div>'}
+function semCard(id){var s=semaforo(id);return '<div class="card"><div class="semcard"><span class="sem '+s.c+'"></span><div style="flex:1"><b>Semáforo de cumplimiento: '+SEMN[s.c]+'</b>'+(s.m.length?'<ul>'+s.m.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>':'<p class="sub" style="margin:2px 0 0">Plazos al día y herramientas básicas vigentes.</p>')+'<p class="hint">Rojo: plazos vencidos o vulneración abierta. Amarillo: plazos en 7 días o herramientas 03, 04 y 05 sin aplicar o con más de 12 meses. Reglas de criterio propio.</p></div></div></div>'}
+/* reloj de vulneraciones */
+function finPlazo(p){var d=pd(p.f);if(p.h){var h=p.h.split(':');d.setHours(+h[0],+h[1])}else d.setHours(23,59);return d}
+function resta(ms){if(ms<=0)return 'VENCIDO';var h=Math.floor(ms/36e5),d=Math.floor(h/24);return d?d+' d '+(h%24)+' h':h+' h '+Math.floor(ms%36e5/6e4)+' min'}
+function relojes(cid){var L=incs(cid).filter(function(i){return i.est!=='cerrado'});if(!L.length)return '';
+ return L.map(function(i){var c=cli(i.cli)||{},pp=(i.pl||[]).map(function(id){return R.data.plazos.filter(function(p){return p.id===id&&!p.del})[0]}).filter(function(p){return p&&p.est!=='hecho'}).sort(function(a,b){return finPlazo(a)-finPlazo(b)});
+  var nx=pp[0];return '<div class="reloj" data-inc="'+i.id+'" style="cursor:pointer"><div class="row" style="justify-content:space-between"><b>'+esc(i.cod)+' · '+esc(c.rs||'')+'</b><span class="tag r">'+(i.est==='abierto'?'Abierta':'Notificada')+'</span></div>'+
+  (nx?'<div style="margin-top:6px">'+esc(nx.tit)+' · vence '+esc(fcorta(nx.f))+(nx.h?' '+esc(nx.h):'')+'</div><div class="cd">'+resta(finPlazo(nx)-Date.now())+'</div>':'<div style="margin-top:6px">Sin plazos pendientes: actualice el estado.</div>')+
+  '<div class="hint">Constancia: '+esc(i.fc.replace('T',' '))+' · '+(i.rol==='encargado'?'el cliente es encargado':'el cliente es responsable')+'</div></div>'}).join('')}
+function bindRelojes(V){$$('[data-inc]',V).forEach(function(e){e.onclick=function(){formInc(e.dataset.inc)}})}
+function plazosInc(o){var d=o.fc.slice(0,10),h=o.fc.slice(11,16),L=[];
+ if(o.rol==='encargado')L.push(['vul_enc',addDias(d,2),'Comunicar la vulneración al responsable · '+o.cod]);
+ L.push(['vul_spdp',addHabiles(d,5),'Notificar a la SPDP por el SISPDP · '+o.cod]);
+ if(+R.data.cfg.plazoTit>0)L.push(['vul_tit',addDias(d,+R.data.cfg.plazoTit),'Comunicar a los titulares afectados · '+o.cod]);return L.map(function(x){return{tipo:x[0],f:x[1],h:h,tit:x[2]}})}
+function formInc(iid,cid){var i=iid?(R.data.inc||[]).filter(function(x){return x.id===iid})[0]:{cli:cid||R.sel||'',rol:'responsable',fc:hoy()+'T'+new Date().toTimeString().slice(0,5),dim:[],est:'abierto'};var V=$('#v-'+R.view);
+ var vuelta=function(){if(R.view==='cli'&&R.sel)fichaCliente(R.sel);else show(R.view)};
+ V.innerHTML='<button class="back" id="n-b">‹ Volver</button><h2>'+(iid?'Vulneración '+esc(i.cod):'Reloj de vulneraciones')+'</h2>'+
+ '<div class="nota">Registre la hora en que se tuvo constancia del incidente. La app calcula y agenda los plazos: notificación a la SPDP en el término de 5 días (hábiles: excluye fines de semana y feriados nacionales 2026-2027) y, si el cliente es encargado, comunicación al responsable en máximo 2 días (LOPDP art. 43; Res. SPDP-SPD-2026-0040-R). Si el cliente es encargado, el término ante la SPDP corre desde la constancia del responsable; la app lo calcula desde la misma hora, que es el escenario más estricto. No registre datos de los titulares.</div>'+
+ '<div class="card"><div class="grid">'+sel('n-cli','Cliente',i.cli,clientes().map(function(c){return [c.id,c.rs]}),true)+sel('n-rol','El cliente actúa como',i.rol,[['responsable','Responsable del tratamiento'],['encargado','Encargado del tratamiento']])+
+ '<div><label for="n-fc">Fecha y hora de constancia</label><input id="n-fc" type="datetime-local" value="'+esc(i.fc)+'"></div>'+
+ '<div class="full"><label>Dimensión afectada</label><div class="chips" id="n-dim">'+DIMS.map(function(d){return '<button type="button" class="'+((i.dim||[]).indexOf(d)>-1?'on':'')+'">'+d+'</button>'}).join('')+'</div></div>'+
+ '<div class="full"><label for="n-desc">Descripción breve (sin datos personales)</label><textarea id="n-desc" placeholder="Ej.: envío de una base de datos a un destinatario equivocado">'+esc(i.desc||'')+'</textarea></div>'+
+ sel('n-est','Estado',i.est,[['abierto','Abierta (por notificar)'],['notificado','Notificada a la SPDP'],['cerrado','Cerrada']])+campo('n-fsp','Fecha de notificación a la SPDP',i.fsp,'date')+
+ '<div class="full"><label for="n-not">Nota</label><textarea id="n-not">'+esc(i.not||'')+'</textarea></div></div><div id="n-prev" style="margin-top:10px"></div></div>'+
+ '<div class="row"><button class="btn" id="n-g">'+(iid?'Guardar':'Iniciar reloj y agendar plazos')+'</button><button class="btn sec" id="n-t">Abrir herramienta 09</button>'+(iid?'<button class="btn sec" id="n-d">Eliminar</button>':'')+'</div>'+
+ (R.data.cfg.plazoTit?'':'<p class="hint">El plazo para comunicar a los titulares no está configurado (punto abierto). Defínalo en Ajustes cuando lo verifique.</p>');
+ $$('#n-dim button').forEach(function(b){b.onclick=function(){b.classList.toggle('on')}});
+ var prev=function(){var fc=$('#n-fc').value;if(!fc){$('#n-prev').innerHTML='';return}var L=plazosInc({fc:fc,rol:$('#n-rol').value,cod:i.cod||'(nuevo)'});
+  $('#n-prev').innerHTML='<label>Plazos que se agendan</label><table><tbody>'+L.map(function(p){return '<tr><td>'+esc(p.tit.split(' · ')[0])+'</td><td style="white-space:nowrap"><b>'+esc(fcorta(p.f))+' '+esc(p.h)+'</b></td></tr>'}).join('')+'</tbody></table>'};
+ $('#n-fc').oninput=prev;$('#n-rol').onchange=prev;prev();
+ $('#n-b').onclick=vuelta;$('#n-t').onclick=function(){var c=$('#n-cli').value;abrirTool('09',c||'_libre')};
+ $('#n-g').onclick=function(){var o=iid?i:{id:uid(),cod:sigCod('VUL'),pl:[]};var fc0=o.fc,rol0=o.rol;o.cli=$('#n-cli').value;o.rol=$('#n-rol').value;o.fc=$('#n-fc').value;o.desc=$('#n-desc').value.trim();o.est=$('#n-est').value;o.fsp=$('#n-fsp').value;o.not=$('#n-not').value;o.dim=$$('#n-dim button.on').map(function(b){return b.textContent});o.upd=Date.now();
+  if(!o.cli||!o.fc)return toast('Elija el cliente y la fecha de constancia.',1);
+  var cambia=!iid||fc0!==o.fc||rol0!==o.rol,tocados=[];
+  if(cambia){(o.pl||[]).forEach(function(id){var p=R.data.plazos.filter(function(x){return x.id===id})[0];if(p&&p.est!=='hecho'){p.del=true;p.upd=Date.now();tocados.push(p)}});o.pl=(o.pl||[]).filter(function(id){var p=R.data.plazos.filter(function(x){return x.id===id})[0];return p&&!p.del});
+   plazosInc(o).forEach(function(x){var p={id:uid(),cli:o.cli,tipo:x.tipo,tit:x.tit,f:x.f,h:x.h,est:'pend',inc:o.id,upd:Date.now()};R.data.plazos.push(p);o.pl.push(p.id);tocados.push(p)})}
+  (o.pl||[]).forEach(function(id){var p=R.data.plazos.filter(function(x){return x.id===id&&!x.del})[0];if(!p)return;var hecho=o.est==='cerrado'||(o.est==='notificado'&&p.tipo==='vul_spdp')||(o.est!=='abierto'&&p.tipo==='vul_enc');if(hecho&&p.est!=='hecho'){p.est='hecho';p.upd=Date.now();tocados.push(p)}if(p.cli!==o.cli){p.cli=o.cli;p.upd=Date.now();tocados.push(p)}});
+  if(!iid)(R.data.inc=R.data.inc||[]).push(o);
+  guardar().then(function(){tocados.forEach(calTras);toast(iid?'Vulneración actualizada.':'Reloj iniciado: plazos agendados.');vuelta()})};
+ if(iid)$('#n-d').onclick=function(){if(!confirmar(this))return;i.del=true;i.upd=Date.now();(i.pl||[]).forEach(function(id){var p=R.data.plazos.filter(function(x){return x.id===id})[0];if(p){p.del=true;p.upd=Date.now();calTras(p)}});guardar().then(vuelta)};
+}
+/* ficha: bloques adicionales */
+function fichaExtraTop(id){return semCard(id)+relojes(id)}
+function horasMes(id,mes){return bits(id).filter(function(b){return b.f.slice(0,7)===mes}).reduce(function(s,b){return s+(+b.min||0)},0)/60}
+function fh(n){return (Math.round(n*100)/100).toLocaleString('es-EC',{maximumFractionDigits:2})}
+function fichaExtraBottom(id){var c=cli(id),mes=hoy().slice(0,7),hm=horasMes(id,mes),I=incs(id).sort(function(a,b){return a.fc<b.fc?1:-1}),B=bits(id).sort(function(a,b){return a.f<b.f?1:-1}),D=docsCli(id).sort(function(a,b){return (a.f||'')<(b.f||'')?1:-1});
+ var cob='';if(+c.hon>0){var ef=hm?+c.hon/hm:0;cob='<p class="sub" style="margin:6px 0 0">Honorario mensual: USD '+fh(+c.hon)+(hm?' · valor efectivo por hora: <b>USD '+fh(ef)+'</b>':'')+(+c.tar>0?' · su valor objetivo cubre '+fh(+c.hon/ +c.tar)+' h':'')+'.</p>'+(+c.tar>0&&hm>+c.hon/ +c.tar?'<div class="nota" style="border-left-color:var(--mal)">Este mes supera las horas que cubre el honorario. Revise el alcance o la tarifa.</div>':'')}
+ return '<div class="card"><h3>Vulneraciones <button class="btn sm" id="k-ni">+ Incidente</button></h3>'+(I.length?'<div class="list">'+I.map(function(i){return '<div class="it" data-inc="'+i.id+'"><div class="d '+(i.est==='cerrado'?'v':i.est==='abierto'?'r':'a')+'">'+esc(fcorta(i.fc.slice(0,10)).replace(/ \d{4}$/,''))+'</div><div><div class="t">'+esc(i.cod)+' · '+esc({abierto:'Abierta',notificado:'Notificada',cerrado:'Cerrada'}[i.est])+'</div><div class="m">'+esc((i.desc||'').slice(0,90))+'</div></div></div>'}).join('')+'</div>':'<p class="sub" style="margin:0">Sin vulneraciones registradas.</p>')+'</div>'+
+ '<div class="card"><h3>Bitácora de horas y actividades</h3><div class="kpis" style="grid-template-columns:repeat(2,1fr)"><div class="kpi"><div class="l">Horas este mes</div><div class="n">'+fh(hm)+'</div></div><div class="kpi"><div class="l">Registros este mes</div><div class="n">'+B.filter(function(b){return b.f.slice(0,7)===mes}).length+'</div></div></div>'+cob+
+ '<div class="grid" style="margin-top:10px">'+campo('b-f','Fecha',hoy(),'date')+'<div><label for="b-h">Duración (horas)</label><input id="b-h" type="number" min="0.25" step="0.25" inputmode="decimal" placeholder="Ej.: 1,5"></div>'+sel('b-c','Actividad','',CATB,true)+'<div class="full"><label for="b-d">Detalle</label><input id="b-d" placeholder="Ej.: revisión de contratos de encargo con el área legal"></div></div><div class="row" style="margin-top:8px"><button class="btn sm" id="b-g">Registrar</button></div>'+
+ (B.length?'<table class="bit" style="margin-top:10px"><tbody>'+B.slice(0,12).map(function(b){return '<tr><td style="white-space:nowrap">'+esc(fcorta(b.f))+'</td><td>'+esc(b.cat)+(b.desc?' · '+esc(b.desc):'')+'</td><td style="white-space:nowrap">'+fh(b.min/60)+' h</td><td><button class="btn sm sec" data-bx="'+b.id+'" title="Quitar">×</button></td></tr>'}).join('')+'</tbody></table>':'')+'</div>'+
+ '<div class="card"><h3>Evidencias</h3><p class="sub">Contratos firmados, actas, capturas o informes que respaldan el cumplimiento. Se guardan cifrados en este equipo y, si sincroniza, en su Google Drive. Máximo 8 MB por archivo.</p><div class="grid">'+
+ '<div class="full"><label for="e-file">Archivo</label><input id="e-file" type="file"></div>'+sel('e-h','Corresponde a',' ',[['G','General']].concat(HERR.map(function(h){return [h.id,h.id+' · '+h.n]})))+campo('e-f','Fecha del documento',hoy(),'date')+'<div class="full"><label for="e-d">Descripción</label><input id="e-d" placeholder="Ej.: contrato de encargo firmado con el proveedor de nómina"></div></div>'+
+ '<div class="row" style="margin-top:8px"><button class="btn sm" id="e-g">Guardar evidencia</button></div><div class="msg" id="e-m"></div>'+
+ (D.length?'<div class="list" style="margin-top:6px">'+D.map(function(d){return '<div class="it" style="cursor:default"><div class="d">'+esc(d.h==='G'?'Gral.':d.h)+'</div><div style="flex:1;min-width:0"><div class="t" style="word-break:break-all">'+esc(d.desc||d.n)+'</div><div class="m">'+esc(d.n)+' · '+esc(fcorta(d.f))+' · '+Math.max(1,Math.round(d.sz/1024))+' KB'+(d.drv?' · en Drive':'')+'</div></div><div class="row" style="flex:none;gap:4px"><button class="btn sm sec" data-eo="'+d.id+'">Abrir</button><button class="btn sm sec" data-ex="'+d.id+'">×</button></div></div>'}).join('')+'</div>':'')+'</div>'}
+function bindExtra(id){var V=$('#v-cli');bindRelojes(V);$('#k-ni').onclick=function(){formInc(null,id)};
+ $('#k-inf').onclick=function(){informeMensual(id)};$('#k-prf').onclick=function(){aProforma(id)};
+ $('#b-g').onclick=function(){var h=parseFloat(String($('#b-h').value).replace(',','.')),c=$('#b-c').value;if(!(h>0)||!c)return toast('Indique la duración y la actividad.',1);(R.data.bit=R.data.bit||[]).push({id:uid(),cli:id,f:$('#b-f').value||hoy(),min:Math.round(h*60),cat:c,desc:$('#b-d').value.trim(),upd:Date.now()});guardar().then(function(){toast('Actividad registrada.');fichaCliente(id)})};
+ $$('[data-bx]',V).forEach(function(b){b.onclick=function(){if(!confirmar(b))return;var x=R.data.bit.filter(function(y){return y.id===b.dataset.bx})[0];x.del=true;x.upd=Date.now();guardar().then(function(){fichaCliente(id)})}});
+ $('#e-g').onclick=function(){var f=$('#e-file').files[0],m=$('#e-m');if(!f){m.className='msg e';m.textContent='Elija el archivo.';return}if(f.size>8e6){m.className='msg e';m.textContent='El archivo supera 8 MB.';return}m.className='msg';m.textContent='Cifrando y guardando…';
+  guardaDoc(id,f,{h:$('#e-h').value||'G',f:$('#e-f').value||hoy(),desc:$('#e-d').value.trim()}).then(function(){toast('Evidencia guardada.');fichaCliente(id)}).catch(function(e){m.className='msg e';m.textContent=e.message||String(e)})};
+ $$('[data-eo]',V).forEach(function(b){b.onclick=function(){var d=R.data.docs.filter(function(y){return y.id===b.dataset.eo})[0],m=$('#e-m');m.className='msg';m.textContent='Abriendo…';leeDoc(d).then(function(bl){return entregar(bl,d.n,m)}).catch(function(e){m.className='msg e';m.textContent=e.message||String(e)})}});
+ $$('[data-ex]',V).forEach(function(b){b.onclick=function(){if(!confirmar(b))return;var d=R.data.docs.filter(function(y){return y.id===b.dataset.ex})[0];d.del=true;d.upd=Date.now();idbOp('readwrite',function(s){return s.delete('doc:'+d.id)}).catch(function(){});if(d.drv)gapi(DAPI+'/'+d.drv,{method:'DELETE'}).catch(function(){});guardar().then(function(){fichaCliente(id)})}});
+}
+/* evidencias cifradas */
+function guardaDoc(cid,file,o){var id=uid(),meta={id:id,cli:cid,n:file.name,t:file.type||'application/octet-stream',sz:file.size,f:o.f,h:o.h,desc:o.desc,upd:Date.now()};
+ return file.arrayBuffer().then(function(ab){return cifra(R.key,new Uint8Array(ab))}).then(function(enc){
+  return idbOp('readwrite',function(s){return s.put(enc,'doc:'+id)}).then(function(){(R.data.docs=R.data.docs||[]).push(meta);return guardar()}).then(function(){
+   if(syncDisp()&&R.vault&&R.vault.ls)return dCrear('mscpd-doc-'+id+'.json',enc).then(function(r){meta.drv=r.id;meta.upd=Date.now();return guardar()}).catch(function(){toast('La evidencia quedó en este equipo; se subirá a Drive más tarde.')})})})}
+function leeDoc(d){return idbOp('readonly',function(s){return s.get('doc:'+d.id)}).then(function(enc){if(enc)return enc;
+  if(!syncDisp())throw new Error('El archivo no está en este equipo.');
+  var pr=d.drv?dLeer(d.drv):gapi(DAPI+'?spaces=appDataFolder&q='+encodeURIComponent("name = 'mscpd-doc-"+d.id+".json'")+'&fields=files(id)').then(function(r){return r.json()}).then(function(j){var f=(j.files||[])[0];if(!f)throw new Error('El archivo no está en este equipo ni en Drive.');return dLeer(f.id)});
+  return pr.then(function(e){return idbOp('readwrite',function(s){return s.put(e,'doc:'+d.id)}).then(function(){return e})})}).then(function(enc){return descifra(R.key,enc)}).then(function(u){return new Blob([u],{type:d.t})})}
+function subirDocsPendientes(){if(!syncDisp()||!R.data)return;(R.data.docs||[]).filter(function(d){return !d.del&&!d.drv}).forEach(function(d){idbOp('readonly',function(s){return s.get('doc:'+d.id)}).then(function(enc){if(!enc)return;return dCrear('mscpd-doc-'+d.id+'.json',enc).then(function(r){d.drv=r.id;d.upd=Date.now();guardar()})}).catch(function(){})})}
+function entregar(blob,fn,m){var ok=function(t){if(m){m.className='msg o';m.textContent=t}};
+ try{var fl=new File([blob],fn,{type:blob.type});if(navigator.canShare&&navigator.canShare({files:[fl]}))return navigator.share({files:[fl],title:fn}).then(function(){ok('Archivo compartido.')},function(){ok('')})}catch(e){}
+ var u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=fn;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000);ok(PWA?'Archivo descargado: '+fn:'Si no se descarga, use la app instalada.');return Promise.resolve()}
+/* revisión automática */
+var REVT={'03':'rev_mad','04':'rev_rat','05':'rev_ge','06':'rev_il','07':'rev_eipd'};
+function sugerirRevision(o){if(!R.data||o.cid==='_libre'||!REVT[o.h])return;var u=ultimo(o.cid,o.h);if(!u||u===o.u0)return;var tipo=REVT[o.h];
+ if(plazos(o.cid).some(function(p){return p.tipo===tipo&&p.est!=='hecho'&&p.f>=hoy()}))return;var f=addMeses(hoy(),12),c=cli(o.cid),S=$('#sug');
+ S.innerHTML='<b>¿Agendar la próxima revisión?</b><p class="sub" style="margin:4px 0 10px">Actualizó «'+esc(o.h+' · '+herr(o.h).n)+'» de '+esc(c?c.rs.replace(/\.$/,''):'')+'. Propuesta: '+esc(fcorta(f))+' (12 meses, o antes si cambia el tratamiento).</p><div class="row"><button class="btn sm" id="sg-s">Agendar</button><button class="btn sm sec" id="sg-n">Ahora no</button></div>';
+ S.hidden=false;var cierra=function(){S.hidden=true};clearTimeout(S._t);S._t=setTimeout(cierra,15000);
+ $('#sg-n').onclick=cierra;$('#sg-s').onclick=function(){var p={id:uid(),cli:o.cid,tipo:tipo,tit:TIPOS[tipo].n,f:f,est:'pend',upd:Date.now()};R.data.plazos.push(p);guardar().then(function(){calTras(p);cierra();toast('Revisión agendada para el '+fcorta(f)+'.');if(R.view==='cli'&&R.sel)fichaCliente(R.sel)})}}
+/* proforma en Gestor Legal */
+function aProforma(id){var c=cli(id);if(!(c.serv||[]).length)return toast('Marque primero los servicios del cliente (Editar › Servicios).',1);
+ try{localStorage.setItem('msc:pd-handoff',JSON.stringify({rs:c.rs,ruc:c.ruc||'',tam:c.tam||'',serv:c.serv,t:Date.now()}))}catch(e){return toast('No se pudo preparar el envío.',1)}
+ if(location.hostname==='xavimac123.github.io'){window.open('/msc-gestorlegal/#prf','_blank');toast('Abriendo MSC Gestor Legal: pulse «Agregar servicios» en la proforma.')}
+ else toast('Envío preparado. Funciona en la app publicada, junto a MSC Gestor Legal.',1)}
+/* informe mensual */
+function informeMensual(id){var c=cli(id),V=$('#v-cli'),mes0=hoy().slice(0,7);
+ V.innerHTML='<button class="back" id="m-b">‹ Volver a la ficha</button><h2>Informe mensual</h2><p class="sub">Borrador para el cliente con lo hecho en el mes, los plazos y los pendientes. Revíselo, complete las observaciones y cópielo a Word.</p>'+
+ '<div class="card"><div class="grid"><div><label for="m-mes">Mes</label><input id="m-mes" type="month" value="'+mes0+'"></div><div><label>&nbsp;</label><label class="row" style="font-weight:500;gap:6px"><input type="checkbox" id="m-hrs" checked style="width:auto;min-height:0"> Incluir horas de dedicación</label></div>'+
+ '<div class="full"><label for="m-obs">Observaciones y recomendaciones del consultor</label><textarea id="m-obs" placeholder="Ej.: priorizar la firma de los contratos de encargo pendientes"></textarea></div></div>'+
+ '<div class="row" style="margin-top:10px"><button class="btn" id="m-c">Copiar informe (Word)</button></div></div><div class="card" id="m-prev" style="overflow-x:auto"></div>';
+ var pinta=function(){$('#m-prev').innerHTML=informeHtml(id,$('#m-mes').value||mes0,$('#m-hrs').checked,$('#m-obs').value)};
+ $('#m-mes').onchange=pinta;$('#m-hrs').onchange=pinta;$('#m-obs').oninput=pinta;pinta();
+ $('#m-b').onclick=function(){fichaCliente(id)};$('#m-c').onclick=function(){copiarHtml(informeHtml(id,$('#m-mes').value||mes0,$('#m-hrs').checked,$('#m-obs').value))}}
+function informeHtml(id,mes,conH,obs){var c=cli(id),F=R.data.cfg.firma,d=pd(mes+'-01'),nm=MESES[d.getMonth()]+' de '+d.getFullYear(),en=function(s){return s&&String(s).slice(0,7)===mes};
+ var TB='<table border="1" cellpadding="5" style="border-collapse:collapse;width:100%;font-size:10pt">',tr=function(a,th){return '<tr>'+a.map(function(x){return (th?'<th style="background:#EFEBDD;text-align:left">':'<td>')+esc(x)+(th?'</th>':'</td>')}).join('')+'</tr>'},vacio=function(n,t){return tr([t].concat(Array(n-1).fill('')))};
+ var B=bits(id).filter(function(b){return en(b.f)}).sort(function(a,b){return a.f<b.f?-1:1}),tot=B.reduce(function(s,b){return s+b.min},0)/60;
+ var H=HERR.filter(function(h){var u=ultimo(id,h.id);return u&&en(iso(new Date(u)))});
+ var P=plazos(id).filter(function(p){return en(p.f)}).sort(function(a,b){return a.f<b.f?-1:1});
+ var S=sols(id).filter(function(s){return en(s.frec)||en(s.fres)||s.est!=='cerrada'});
+ var I=incs(id).filter(function(i){return en(i.fc)||i.est!=='cerrado'});
+ var D=docsCli(id).filter(function(x){return en(x.f)});
+ var fin=iso(new Date(d.getFullYear(),d.getMonth()+1,0)),N=plazos(id).filter(function(p){return p.est!=='hecho'&&p.f>fin}).sort(function(a,b){return a.f<b.f?-1:1}).slice(0,10);
+ var sm=semaforo(id),h='<h1>Informe mensual de protección de datos personales</h1><p><b>'+esc(c.rs)+'</b>'+(c.ruc?' · RUC '+esc(c.ruc):'')+'<br>Periodo: '+esc(nm)+' · Fecha de emisión: '+esc(fcorta(hoy()))+'</p>';
+ h+='<h2>1. Estado general</h2><p>Semáforo de cumplimiento: <b>'+SEMN[sm.c]+'</b>.'+(sm.m.length?' Motivos: '+esc(sm.m.join('; '))+'.':'')+' Reglas del semáforo: criterio propio del consultor.</p>';
+ h+='<h2>2. Actividades realizadas</h2>'+TB+tr(['Fecha','Actividad','Detalle'].concat(conH?['Horas']:[]),1)+(B.map(function(b){return tr([fcorta(b.f),b.cat,b.desc||''].concat(conH?[fh(b.min/60)]:[]))}).join('')||vacio(conH?4:3,'Sin actividades registradas'))+(conH&&B.length?tr(['','','Total',fh(tot)]):'')+'</table>';
+ h+='<h2>3. Herramientas aplicadas o actualizadas</h2>'+TB+tr(['Herramienta','Fecha'],1)+(H.map(function(x){return tr([x.id+' · '+x.n,fcorta(iso(new Date(ultimo(id,x.id))))])}).join('')||vacio(2,'Ninguna en el periodo'))+'</table>';
+ h+='<h2>4. Plazos del periodo</h2>'+TB+tr(['Fecha','Actividad','Estado'],1)+(P.map(function(p){return tr([fcorta(p.f),p.tit||TIPOS[p.tipo].n,p.est==='hecho'?'Cumplido':difDias(p.f)<0?'Vencido':'Pendiente'])}).join('')||vacio(3,'Sin plazos en el periodo'))+'</table>';
+ h+='<h2>5. Solicitudes de derechos de los titulares</h2>'+TB+tr(['Código','Derecho','Recepción','Estado'],1)+(S.map(function(s){return tr([s.cod,s.der,fcorta(s.frec),s.est==='cerrada'?'Respondida '+fcorta(s.fres):'Abierta'])}).join('')||vacio(4,'Sin solicitudes'))+'</table>';
+ h+='<h2>6. Vulneraciones de la seguridad</h2>'+TB+tr(['Código','Constancia','Estado','Notificación a la SPDP'],1)+(I.map(function(i){return tr([i.cod,i.fc.replace('T',' '),{abierto:'Abierta',notificado:'Notificada',cerrado:'Cerrada'}[i.est],i.fsp?fcorta(i.fsp):'—'])}).join('')||vacio(4,'Sin vulneraciones'))+'</table>';
+ h+='<h2>7. Evidencias incorporadas</h2>'+TB+tr(['Fecha','Documento','Herramienta'],1)+(D.map(function(x){return tr([fcorta(x.f),x.desc||x.n,x.h==='G'?'General':x.h])}).join('')||vacio(3,'Ninguna en el periodo'))+'</table>';
+ h+='<h2>8. Próximos pasos</h2>'+TB+tr(['Fecha','Actividad'],1)+(N.map(function(p){return tr([fcorta(p.f),p.tit||TIPOS[p.tipo].n])}).join('')||vacio(2,'Sin plazos agendados'))+'</table>';
+ h+='<h2>9. Observaciones y recomendaciones</h2><p>'+(obs?esc(obs).replace(/\n/g,'<br>'):'[OBSERVACIONES]')+'</p>';
+ h+='<p><b>FIRMA DE RESPONSABILIDAD</b></p><p>Firma: ______________________<br>'+esc(F.nom||'')+'<br>'+esc(F.cargo||'')+(F.mat?' · Matrícula '+esc(F.mat):'')+'</p><p><i>El consultor asesora y supervisa; la empresa decide e implementa las medidas.</i></p>';return h}
+/* barra de contexto al desplazarse */
+(function(){var tk=0;function upd(){tk=0;var b=$('#ctx');if(!b)return;var y=window.scrollY||0;if(document.body.classList.contains('locked')||y<130){b.classList.remove('on');return}
+ var vb=$('#nav button[aria-selected="true"]'),sec=$('main section.on'),t='';if(sec){var hs=$$('h2,h3',sec).filter(function(e){return e.offsetParent!==null});for(var i=0;i<hs.length;i++){if(hs[i].getBoundingClientRect().top<70)t=(hs[i].childNodes[0]&&hs[i].childNodes[0].textContent||hs[i].textContent).trim();else break}}
+ var c=R.view==='cli'&&R.sel&&R.data?cli(R.sel):null;$('#ctx-v').textContent=vb?vb.textContent.replace(/\d+$/,''):'';$('#ctx-s').textContent=[c?c.rs:'',t].filter(Boolean).filter(function(x,i,a){return a.indexOf(x)===i}).map(function(x){return ' › '+x}).join('');b.classList.add('on')}
+ window.addEventListener('scroll',function(){if(!tk){tk=1;requestAnimationFrame(upd)}},{passive:true})})();
 
 /* ===================== AJUSTES ===================== */
 function vAju(){var V=$('#v-aju'),c=R.data.cfg,F=c.firma;
@@ -409,7 +577,7 @@ function vAju(){var V=$('#v-aju'),c=R.data.cfg,F=c.firma;
  '<div class="card"><h3>Google Drive</h3><p class="sub">Guarda una copia cifrada en la carpeta oculta de la app en su Google Drive (no aparece entre sus archivos) y la recupera al cambiar de teléfono o desde la PC. Conserva una versión diaria (10 días) y una mensual (12 meses).</p><div class="row"><button class="btn" id="g-sync">Sincronizar ahora</button><button class="btn sec" id="g-rest">Reemplazar este dispositivo con Drive</button></div><p class="hint sst"></p></div>'+
  '<div class="card"><h3>Google Calendar</h3><p class="sub">Agenda los plazos pendientes en su calendario principal con avisos 3 días y 1 día antes. El evento se actualiza o se elimina con el plazo.</p><div class="row"><button class="btn'+(c.gcal.on?' sec':'')+'" id="c-on">'+(c.gcal.on?'Desactivar':'Activar Google Calendar')+'</button>'+(c.gcal.on?'<button class="btn sec" id="c-sy">Sincronizar plazos</button>':'')+'</div><p class="hint" id="c-msg"></p></div>'+
  '<div class="card"><h3>Datos del consultor (firma)</h3><div class="grid">'+campo('a-nom','Nombre',F.nom)+campo('a-car','Cargo',F.cargo)+campo('a-mat','Matrícula',F.mat)+campo('a-mail','Correo',F.mail,'email')+'</div><p class="hint">No use el cargo de delegado de protección de datos hasta contar con el registro ante la SPDP.</p></div>'+
- '<div class="card"><h3>Plazos</h3>'+campo('a-psol','Plazo de respuesta a solicitudes de derechos (días)',c.plazoSol,'number',false,'Verifique el plazo vigente')+'<p class="hint">La app no fija este plazo por defecto: es un punto abierto de la matriz normativa del kit.</p></div>'+
+ '<div class="card"><h3>Plazos</h3>'+campo('a-psol','Plazo de respuesta a solicitudes de derechos (días)',c.plazoSol,'number',false,'Verifique el plazo vigente')+'<p class="hint">La app no fija este plazo por defecto: es un punto abierto de la matriz normativa del kit.</p>'+campo('a-pt','Plazo para comunicar una vulneración a los titulares (días)',c.plazoTit,'number',false,'Verifique el plazo vigente')+'<p class="hint">Las fuentes doctrinales citan 3 días (art. 46 LOPDP); es un punto abierto. Si lo define, el reloj de vulneraciones lo agenda en días calendario.</p></div>'+
  '<div class="row" style="margin-bottom:12px"><button class="btn" id="a-g">Guardar ajustes</button></div>'+
  '<div class="card"><h3>Seguridad y respaldo</h3><label>Cambiar contraseña (genera también un nuevo código de recuperación)</label><div class="grid"><input id="a-pw0" type="password" placeholder="Contraseña actual"><input id="a-pw" type="password" placeholder="Nueva contraseña (mínimo 10)"></div><div class="row" style="margin-top:8px"><button class="btn sec" id="a-cpw">Cambiar contraseña</button><button class="btn sec" id="a-exp">Descargar respaldo cifrado</button></div><div id="a-rcv"></div>'+
  '<details><summary>Borrar los datos de este dispositivo</summary><p class="hint">Solo borra la copia local. Si sincronizó con Google Drive, podrá restaurarla.</p><button class="btn mal" id="a-del">Borrar de este dispositivo</button></details></div>'+
@@ -418,7 +586,7 @@ function vAju(){var V=$('#v-aju'),c=R.data.cfg,F=c.firma;
  $('#g-sync').onclick=function(){sincronizar(true)};$('#g-rest').onclick=function(){if(confirmar(this))reemplazarConDrive()};
  $('#c-on').onclick=function(){if(c.gcal.on){c.gcal.on=false;c.gcal.upd=Date.now();guardar().then(vAju);return}tokenCal(true).then(function(){c.gcal.on=true;c.gcal.upd=Date.now();return guardar()}).then(function(){vAju();calSyncTodas(true)},function(e){$('#c-msg').textContent=e.message})};
  if($('#c-sy'))$('#c-sy').onclick=function(){calSyncTodas(true)};
- $('#a-g').onclick=function(){F.nom=$('#a-nom').value;F.cargo=$('#a-car').value;F.mat=$('#a-mat').value;F.mail=$('#a-mail').value;c.plazoSol=$('#a-psol').value;c.upd=Date.now();guardar().then(function(){toast('Ajustes guardados.')})};
+ $('#a-g').onclick=function(){F.nom=$('#a-nom').value;F.cargo=$('#a-car').value;F.mat=$('#a-mat').value;F.mail=$('#a-mail').value;c.plazoSol=$('#a-psol').value;c.plazoTit=$('#a-pt').value;c.upd=Date.now();guardar().then(function(){toast('Ajustes guardados.')})};
  $('#a-cpw').onclick=function(){var np=$('#a-pw').value;if(np.length<10)return toast('Mínimo 10 caracteres.',1);var rc=codRec();abrir(R.vault,$('#a-pw0').value,false).then(function(raw){return envolver(R.vault,raw,np,rc)},function(){throw new Error('La contraseña actual no es correcta.')}).then(function(){return sellar()}).then(function(){$('#a-pw0').value='';$('#a-pw').value='';$('#a-rcv').innerHTML='<p class="sub" style="margin-top:10px">Contraseña cambiada. Nuevo código de recuperación (el anterior ya no sirve):</p><div class="rc">'+rc+'</div>';sincroAuto()}).catch(function(e){toast(e.message,1)})};
  $('#a-exp').onclick=function(){var v=JSON.parse(JSON.stringify(R.vault));delete v.ls;var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(v)],{type:'application/json'}));a.download='mscpd-respaldo-'+hoy()+'.json';document.body.appendChild(a);a.click();a.remove()};
  $('#a-del').onclick=function(){if(!confirmar(this))return;try{localStorage.removeItem('mscpd:vault')}catch(e){}olvidar();R.vault=null;bloquear()};
@@ -443,7 +611,7 @@ function token(scope,inter,slot){var tk=slot==='c'?'ctok':'tok',te=tk+'Exp';
 function gapi(url,opt,inter){return token(GSCOPE,inter,'d').then(function(t){opt=opt||{};opt.headers=Object.assign({Authorization:'Bearer '+t},opt.headers||{});return fetch(url,opt)}).then(function(r){
  if(r.status===401){R.tok=null;try{sessionStorage.removeItem('mscpd:tok')}catch(e){}throw new Error('La sesión de Google expiró. Toque «Sincronizar ahora».')}
  if(!r.ok)throw new Error('Google Drive respondió '+r.status+'.'+(r.status===403?' Revise que la API de Drive esté activa y su cuenta sea usuario de prueba.':''));return r})}
-function dLista(i){return gapi(DAPI+'?spaces=appDataFolder&pageSize=200&q='+encodeURIComponent("name contains 'mscpd-'")+'&fields=files(id,name,modifiedTime)',null,i).then(function(r){return r.json()}).then(function(j){return j.files||[]})}
+function dLista(i){return gapi(DAPI+'?spaces=appDataFolder&pageSize=200&q='+encodeURIComponent("name contains 'mscpd-registro'")+'&fields=files(id,name,modifiedTime)',null,i).then(function(r){return r.json()}).then(function(j){return j.files||[]})}
 function dLeer(id){return gapi(DAPI+'/'+id+'?alt=media').then(function(r){return r.json()})}
 function dCrear(name,obj){var b='mscpd'+Date.now(),body='--'+b+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n'+JSON.stringify({name:name,parents:['appDataFolder']})+'\r\n--'+b+'\r\nContent-Type: application/json\r\n\r\n'+JSON.stringify(obj)+'\r\n--'+b+'--';return gapi(UAPI+'?uploadType=multipart&fields=id',{method:'POST',headers:{'Content-Type':'multipart/related; boundary='+b},body:body})}
 function dAct(id,obj){return gapi(UAPI+'/'+id+'?uploadType=media&fields=id',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(obj)})}
@@ -452,7 +620,7 @@ function mm(x,y){var m={};(x||[]).concat(y||[]).forEach(function(r){var c=m[r.id
 function fusionar(a,b){var s={};[a.seq||{},b.seq||{}].forEach(function(o){Object.keys(o).forEach(function(k){s[k]=Math.max(s[k]||0,o[k])})});
  var ws={};[a.ws||{},b.ws||{}].forEach(function(W){Object.keys(W).forEach(function(cid){var src=W[cid],dst=ws[cid]||(ws[cid]={_upd:{}});Object.keys(src).forEach(function(h){if(h==='_upd')return;var tu=(src._upd||{})[h]||0;if(!(h in dst)||tu>(dst._upd[h]||0)){dst[h]=src[h];dst._upd[h]=tu}})})});
  var cfg=((a.cfg||{}).upd||0)>=((b.cfg||{}).upd||0)?a.cfg:b.cfg;var gc=((a.cfg.gcal||{}).upd||0)>=((b.cfg.gcal||{}).upd||0)?a.cfg.gcal:b.cfg.gcal;cfg=Object.assign({},cfg,{gcal:gc});
- return {ver:1,clientes:mm(a.clientes,b.clientes),plazos:mm(a.plazos,b.plazos),sol:mm(a.sol,b.sol),ws:ws,cfg:cfg,seq:s}}
+ return {ver:1,clientes:mm(a.clientes,b.clientes),plazos:mm(a.plazos,b.plazos),sol:mm(a.sol,b.sol),inc:mm(a.inc,b.inc),bit:mm(a.bit,b.bit),docs:mm(a.docs,b.docs),ws:ws,cfg:cfg,seq:s}}
 function paraSubir(){var v=JSON.parse(JSON.stringify(R.vault));delete v.ls;return v}
 function sincroAuto(){if(!syncDisp()||!navigator.onLine||!R.key)return;token(GSCOPE,false,'d').then(function(){sincronizar(false)},function(){estadoSync()})}
 var SYNC=false;
@@ -462,7 +630,7 @@ function sincronizar(inter){if(!R.key)return;if(!syncDisp()){toast('La sincroniz
    return leer(rv,R.key).then(function(rd){R.data=fusionar(R.data,rd);if((rv.pwUpd||0)>(R.vault.pwUpd||0))['iter','salt','rsalt','wpw','wrec','pwUpd'].forEach(function(k){R.vault[k]=rv[k]})},function(){throw new Error('El registro en Drive usa otra llave. Use «Reemplazar este dispositivo con Drive» o borre el de Drive.')})}).then(function(){return main.id})})
  .then(function(mid){return sellar().then(function(){var v=paraSubir();return mid?dAct(mid,v):dCrear(VFILE,v)})})
  .then(function(){return versiones(files)})
- .then(function(){R.vault.ls=Date.now();R.dirty=false;guardaLocal();R.sync={st:'ok'};SYNC=false;estadoSync();badges();if(inter)toast('Sincronizado con Google Drive.');if(R.view==='ini')vIni()})
+ .then(function(){R.vault.ls=Date.now();R.dirty=false;guardaLocal();R.sync={st:'ok'};SYNC=false;estadoSync();badges();subirDocsPendientes();if(inter)toast('Sincronizado con Google Drive.');if(R.view==='ini')vIni()})
  .catch(function(e){SYNC=false;if(e.message==='sin-token'){R.sync={st:''};estadoSync();return}R.sync={st:'err',msg:e.message};estadoSync();if(inter)toast(e.message,1)})}
 function versiones(files){var d=hoy(),mes=d.slice(0,7),v=paraSubir(),p=[];
  var di=files.filter(function(f){return /^mscpd-registro-\d{4}-\d{2}-\d{2}\.json$/.test(f.name)}).sort(function(a,b){return b.name.localeCompare(a.name)});

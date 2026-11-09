@@ -139,7 +139,7 @@ CONTROLES = [
     "Separación de bases de datos o de entornos (separar)", "Agregación o generalización de datos (abstraer)",
     "Configuración por defecto más protectora (por defecto)",
 ]
-DECISIONES = ["Mitigar", "Aceptar", "Evitar", "Transferir"]
+DECISIONES = ["Modificar (mitigar)", "Aceptar", "Evitar", "Transferir"]  # estrategias de la Guía v2, etapa 5
 
 # ---------- Establecimiento del contexto (Guía v2, Cap. II, etapa 1)
 # Los cinco factores (a-e) vienen de la guía. Las opciones y los puntos son CRITERIO PROPIO del portafolio.
@@ -170,7 +170,8 @@ DERECHOS = [
 PERIODOS = ["Un año", "Un semestre", "Un trimestre", "Un mes"]
 METODOS = [
     "Cualitativo calibrado: juicio experto con justificación (rationale) de cada valor",
-    "Cuantitativo: frecuencias históricas y pérdidas en dólares",
+    "Cualitativo estructurado: Delphi, Lens o análisis argumental",
+    "Cuantitativo: frecuentista, bayesiano, Monte Carlo, FAIR o VaR",
     "Híbrido: cualitativo con datos cuantitativos donde existan",
 ]
 PASOS_IMPACTO = [

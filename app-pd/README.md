@@ -2,7 +2,7 @@
 
 App web instalable (PWA) que reúne las nueve herramientas del portafolio en un registro por cliente, con agenda de cumplimiento, cifrado y sincronización con Google. Funciona sin internet después de abrirla una vez. Ícono: isotipo MSC con las siglas **PD**, para distinguirla de MSC Gestor Legal.
 
-**Dirección prevista:** `https://xavimac123.github.io/msc-protecciondatos/` (repositorio público que solo contiene la carpeta `docs/` compilada).
+**Dirección:** `https://xavimac123.github.io/portafolio-dpd-ecuador/` (rama `gh-pages` de este repositorio, que solo contiene la app compilada).
 
 ## Qué incluye
 
@@ -36,7 +36,7 @@ python app-pd/make_assets.py             # íconos y gráficos embebidos (solo s
 python app-pd/build_pwa.py               # escribe app-pd/docs/ y app-pd/dist/preview.html
 ```
 
-Para publicar, copiar el contenido de `app-pd/docs/` al repositorio `msc-protecciondatos` (rama `main`, carpeta `/docs`) y activar GitHub Pages.
+Para publicar, copiar el contenido de `app-pd/docs/` a la rama `gh-pages` (GitHub Pages: Settings › Pages › rama `gh-pages`, carpeta raíz).
 
 ## Limitaciones
 

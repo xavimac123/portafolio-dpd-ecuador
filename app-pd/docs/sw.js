@@ -4,5 +4,5 @@ self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.a
 self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET')return;
  if(r.mode==='navigate'){e.respondWith(fetch(r).then(res=>{const cp=res.clone();caches.open(C).then(c=>c.put('./index.html',cp));return res}).catch(()=>caches.match('./index.html')));return}
  const u=new URL(r.url);if(u.origin!==self.location.origin&&!/fonts\.(googleapis|gstatic)\.com$/.test(u.hostname))return;
- if(u.origin===self.location.origin&&!u.pathname.includes('/msc-protecciondatos/'))return;
+ if(u.origin===self.location.origin&&!u.pathname.startsWith(new URL(self.registration.scope).pathname))return;
  e.respondWith(caches.match(r).then(hit=>hit||fetch(r).then(res=>{if(res.ok||res.type==='opaque'){const cp=res.clone();caches.open(C).then(c=>c.put(r,cp))}return res}).catch(()=>hit)))});

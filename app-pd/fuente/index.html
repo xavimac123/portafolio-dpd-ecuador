@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MSC Protección de Datos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
+<style>
+:root{--card:#fff;--oro:#A09046;--oroc:#C9BC82;--olivo:#6E6230;--carbon:#14181E;--marfil:#F7F5EE;--linea:#E3DFD0;--gris:#5B6068;--ok:#2F6B3A;--okf:#E5F0E4;--mal:#9B2C22;--malf:#F7E4E1;--avi:#8A5A00;--avif:#FBF0D9;--txt:#14181E}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--marfil);color:var(--txt);font-family:'Archivo',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:15px;line-height:1.45}
+header{background:var(--carbon);color:#fff;padding:14px 16px 0;position:relative;overflow:hidden}
+header .deco{position:absolute;right:-60px;top:-40px;width:230px;opacity:.16;pointer-events:none}
+.marca{display:flex;align-items:center;gap:10px;position:relative}
+.iso{width:36px;height:36px;flex:none}
+.wm{font-stretch:118%;font-weight:700;letter-spacing:.06em;font-size:12.5px;line-height:1.15;color:var(--oro)}
+.wm small{display:block;color:var(--oroc);font-weight:500;letter-spacing:.14em;font-size:9.5px;margin-top:2px}
+.pd{display:inline-block;background:var(--oroc);color:var(--carbon);font-weight:800;font-stretch:118%;font-size:11px;letter-spacing:.08em;border-radius:5px;padding:2px 6px;margin-left:4px;vertical-align:2px}
+#hdr-lock{position:absolute;right:12px;top:14px;background:none;border:1px solid #3A3F47;color:#C9C6BA;border-radius:8px;font:inherit;font-size:12px;font-weight:600;padding:6px 10px;cursor:pointer}
+nav{display:flex;gap:2px;margin-top:12px;overflow-x:auto;scrollbar-width:none;position:relative}nav::-webkit-scrollbar{display:none}
+nav button{flex:0 0 auto;background:none;border:0;color:#C9C6BA;font:inherit;font-weight:600;font-size:13px;padding:10px 7px 11px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav button[aria-selected=true]{color:#fff;border-bottom-color:var(--oro)}
+nav .b{background:var(--mal);color:#fff;border-radius:10px;padding:0 5px;font-size:10.5px;margin-left:3px}
+main{max-width:820px;margin:0 auto;padding:14px 14px 40px}
+section{display:none}section.on{display:block}
+h2{font-stretch:115%;font-size:18px;margin:6px 0 4px}
+.sub{color:var(--gris);font-size:13px;margin:0 0 12px}
+.card{background:var(--card);border:1px solid var(--linea);border-radius:10px;padding:14px;margin:0 0 12px}
+.card h3{margin:0 0 10px;font-size:13.5px;font-stretch:112%;letter-spacing:.03em;color:var(--olivo);text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;gap:8px}
+label{display:block;font-size:12.5px;font-weight:600;color:var(--gris);margin:0 0 4px}
+input,select,textarea{width:100%;font:inherit;font-size:15px;padding:10px 11px;border:1px solid #CFCABA;border-radius:8px;background:#fff;color:#14181E;min-height:44px;color-scheme:light}
+textarea{min-height:76px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--oro);border-color:var(--oro)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
+.hint{font-size:12px;color:var(--gris);margin:4px 0 0}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:20px;background:var(--avif);color:var(--avi);vertical-align:middle;white-space:nowrap}
+.tag.v{background:var(--okf);color:var(--ok)}.tag.r{background:var(--malf);color:var(--mal)}.tag.g{background:#ECEAE2;color:#3A3F47}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:700;font-size:14px;padding:10px 14px;border-radius:8px;border:1px solid var(--carbon);background:var(--carbon);color:#fff;cursor:pointer;min-height:44px;text-decoration:none}
+.btn.sec{background:#fff;color:var(--carbon)}.btn.oro{background:var(--oro);border-color:var(--oro);color:var(--carbon)}.btn.sm{min-height:34px;padding:6px 10px;font-size:13px}
+.btn.mal{background:var(--mal);border-color:var(--mal)}
+.btn:disabled{opacity:.5}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+@media(max-width:560px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--card);border:1px solid var(--linea);border-radius:10px;padding:10px;cursor:pointer}
+.kpi .l{font-size:11px;color:var(--gris);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.kpi .n{font-size:22px;font-weight:800;font-stretch:110%;margin-top:2px}
+.kpi.r .n{color:var(--mal)}.kpi.a .n{color:var(--avi)}
+.hero{background:var(--carbon);color:#fff;border-radius:12px;padding:16px;margin-bottom:12px;position:relative;overflow:hidden}
+.hero img{position:absolute;right:-30px;bottom:-60px;width:220px;opacity:.22}
+.hero b{font-stretch:115%;font-size:17px}.hero p{color:#C9C6BA;font-size:13px;margin:6px 0 0;max-width:80%}
+.list .it{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--linea);cursor:pointer}
+.list .it:last-child{border-bottom:0}
+.it .t{font-weight:700}.it .m{font-size:12.5px;color:var(--gris)}
+.it .d{flex:none;min-width:58px;text-align:center;border-radius:8px;padding:4px 6px;background:#F1EEE3;font-weight:800;font-size:12px;line-height:1.2}
+.it .d.r{background:var(--malf);color:var(--mal)}.it .d.a{background:var(--avif);color:var(--avi)}.it .d.v{background:var(--okf);color:var(--ok)}
+.tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.tool{background:var(--card);border:1px solid var(--linea);border-radius:10px;padding:12px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.tool:hover{border-color:var(--oro)}
+.tool .n{font-weight:800;color:var(--oro);font-stretch:115%;font-size:12px;letter-spacing:.06em}
+.tool .t{font-weight:700;margin:2px 0}.tool .m{font-size:12px;color:var(--gris)}
+.tool .u{font-size:11px;color:var(--ok);margin-top:6px;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{font:inherit;font-size:12.5px;border:1px solid #CFCABA;background:#fff;color:#3A3F47;border-radius:16px;padding:5px 10px;cursor:pointer}
+.chips button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
+.seg{display:flex;border:1px solid #CFCABA;border-radius:8px;overflow:hidden}
+.seg button{flex:1;border:0;background:#fff;font:inherit;font-size:13.5px;font-weight:600;padding:9px 6px;color:var(--gris);cursor:pointer}
+.seg button+button{border-left:1px solid #CFCABA}.seg button.on{background:var(--carbon);color:#fff}
+.nota{font-size:12.5px;color:var(--gris);border-left:3px solid var(--oroc);padding:6px 10px;background:#FBF9F1;border-radius:0 6px 6px 0;margin:8px 0}
+.msg{font-size:13px;margin-top:8px}.msg.e{color:var(--mal)}.msg.o{color:var(--ok)}
+.back{background:none;border:0;font:inherit;color:var(--olivo);font-weight:700;cursor:pointer;padding:4px 0;margin-bottom:6px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}th,td{padding:7px 6px;text-align:left;border-bottom:1px solid var(--linea);vertical-align:top}
+thead th{font-size:11px;color:var(--gris);text-transform:uppercase;letter-spacing:.04em}
+.scroll{overflow-x:auto}
+#tool{position:fixed;inset:0;z-index:40;background:var(--marfil);display:flex;flex-direction:column}
+#tool[hidden]{display:none}
+#tool .bar{background:var(--carbon);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 12px;min-height:50px}
+#tool .bar button{background:none;border:1px solid #3A3F47;color:#fff;border-radius:8px;font:inherit;font-weight:700;padding:6px 12px;cursor:pointer}
+#tool .bar .tt{font-weight:700;font-size:14px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#tool .bar .tt small{display:block;color:var(--oroc);font-weight:500;font-size:11.5px}
+#tool iframe{flex:1;border:0;width:100%;background:#fff}
+#lock{max-width:440px;margin:24px auto;padding:0 14px}
+#lock .card{position:relative;overflow:hidden}
+#toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--carbon);color:#fff;padding:10px 14px;border-radius:10px;font-size:13.5px;max-width:92%;z-index:60}
+#toast.e{background:var(--mal)}
+.rc{font-family:ui-monospace,Menlo,monospace;font-size:17px;font-weight:700;letter-spacing:.04em;background:#FBF9F1;border:1px dashed var(--oro);border-radius:8px;padding:10px;text-align:center;word-break:break-all}
+footer{max-width:820px;margin:0 auto;padding:0 14px 28px;font-size:11.5px;color:var(--gris)}
+[hidden]{display:none!important}
+body.dark{--marfil:#0F1216;--linea:#2A3038;--gris:#9AA1AA;--card:#171B21;--okf:#14261A;--malf:#2B1714;--avif:#2A2212;--olivo:#C9BC82;--txt:#E7E4DA}
+body.dark input,body.dark select,body.dark textarea,body.dark .btn.sec,body.dark .chips button,body.dark .seg button{background:#1C2128;color:#E7E4DA;border-color:#323A45;color-scheme:dark}
+body.dark .btn:not(.sec):not(.mal){background:var(--oro);border-color:var(--oro);color:#14181E}
+body.dark .chips button.on,body.dark .seg button.on{background:var(--oro);color:#14181E;border-color:var(--oro)}
+body.dark .nota,body.dark .rc{background:#1A1E24}body.dark .it .d{background:#232830}
+body.dark .tag.g{background:#2A3038;color:#C9C6BA}
+</style></head><body>
+<header><img class="deco" id="deco" alt=""><div class="marca"><img class="iso" id="isoimg" alt=""><div class="wm">MACÍAS SÁNCHEZ <span class="pd">PD</span><small>PROTECCIÓN DE DATOS · LOPDP</small></div></div>
+<button id="hdr-lock" hidden>Bloquear</button>
+<nav id="nav" hidden>
+<button data-t="ini" aria-selected="true">Inicio</button><button data-t="cli">Clientes</button><button data-t="her">Herramientas</button><button data-t="age">Agenda</button><button data-t="aju">Ajustes</button>
+</nav></header>
+
+<div id="lock"></div>
+
+<main id="app" hidden>
+<section id="v-ini"></section>
+<section id="v-cli"></section>
+<section id="v-her"></section>
+<section id="v-age"></section>
+<section id="v-aju"></section>
+</main>
+<footer id="foot" hidden>MSC Protección de Datos · Herramienta de uso profesional de Macías Sánchez Consultores. Los datos se guardan cifrados en este dispositivo y, si lo activa, en su Google Drive. No registre datos de los titulares (clientes o trabajadores de sus clientes): solo información de la empresa y de su cumplimiento. Escalas y puntajes de las herramientas: criterio propio cuando así se indica.</footer>
+
+<div id="tool" hidden><div class="bar"><button id="tool-x">‹ Volver</button><div class="tt" id="tool-t"></div></div><iframe id="tool-f" allow="clipboard-write" title="Herramienta"></iframe></div>
+
+<script type="application/json" id="j-tools">__TOOLS_JSON__</script>
+<script type="application/json" id="j-serv">__SERV_JSON__</script>
+<script type="application/json" id="j-img">__IMG_JSON__</script>
+<script>
+(function(){
+"use strict";
+var PWA=!!window.MSC_PWA;
+var TOOLS=JSON.parse(document.getElementById('j-tools').textContent);
+var SERV=JSON.parse(document.getElementById('j-serv').textContent);
+var IMG=JSON.parse(document.getElementById('j-img').textContent);
+document.getElementById('isoimg').src=IMG.iso;document.getElementById('deco').src=IMG.lineas;
+
+/* ===================== utilidades ===================== */
+function $(s,c){return (c||document).querySelector(s)}
+function $$(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function pd(s){var p=String(s).split('-');return new Date(+p[0],+p[1]-1,+p[2])}
+function hoy(){return iso(new Date())}
+function addDias(s,n){var d=pd(s);d.setDate(d.getDate()+n);return iso(d)}
+function addMeses(s,n){var d=pd(s);d.setMonth(d.getMonth()+n);return iso(d)}
+function addHabiles(s,n){var d=pd(s),k=0;while(k<n){d.setDate(d.getDate()+1);if(d.getDay()!==0&&d.getDay()!==6)k++}return iso(d)}
+function difDias(s){return Math.round((pd(s)-pd(hoy()))/864e5)}
+var MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function fcorta(s){if(!s)return '';var d=pd(s);return d.getDate()+' '+MESES[d.getMonth()].slice(0,3)+' '+d.getFullYear()}
+function store(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem('mscpd:'+k));localStorage.setItem('mscpd:'+k,JSON.stringify(v))}catch(e){return null}}
+function toast(t,err){var d=$('#toast');if(!d){d=document.createElement('div');d.id='toast';document.body.appendChild(d)}d.className=err?'e':'';d.textContent=t;d.hidden=false;clearTimeout(d._t);d._t=setTimeout(function(){d.hidden=true},3500)}
+function confirmar(b){if(b.dataset.c)return true;b.dataset.c=1;b.dataset.tx=b.textContent;b.textContent='Toque otra vez para confirmar';setTimeout(function(){delete b.dataset.c;if(b.dataset.tx)b.textContent=b.dataset.tx},5000);return false}
+
+/* ===================== catálogos de la app ===================== */
+var HERR=[
+ {id:'01',n:'Catálogo de servicios',m:'Qué ofrecer, responsables y glosario'},
+ {id:'02',n:'Honorarios y proforma',m:'Tres métodos, IVA y proforma'},
+ {id:'03',n:'Nivel de madurez',m:'Diagnóstico, multa estimada y plan'},
+ {id:'04',n:'Registro de actividades (RAT)',m:'Inventario con el mínimo legal'},
+ {id:'05',n:'Gran escala',m:'Calificación directa y MTGE'},
+ {id:'06',n:'Interés legítimo',m:'Evaluación de ponderación'},
+ {id:'07',n:'Evaluación de impacto',m:'Contexto, riesgos y art. 32 RGLOPDP'},
+ {id:'08',n:'Plantillas y cláusulas',m:'Política, avisos, contratos, cláusulas'},
+ {id:'09',n:'Vulneraciones',m:'Protocolo, plazos y notificaciones'}];
+function herr(id){return HERR.filter(function(h){return h.id===id})[0]}
+var EST={prospecto:['Prospecto','g'],propuesta:['Propuesta enviada',''],activo:['Activo','v'],pausa:['En pausa','g'],cerrado:['Cerrado','g']};
+var MODAL=['Diagnóstico inicial','Adecuación (proyecto)','DPD externo designado','Acompañamiento de cumplimiento','Revisión anual','Servicio puntual'];
+var TAM=['Microempresa','Pequeña','Mediana','Grande'];
+var TIPOS={
+ control:{n:'Control mensual',h:'03'},
+ rev_mad:{n:'Revisión anual de madurez',h:'03'},
+ rev_rat:{n:'Revisión del RAT',h:'04'},
+ rev_ge:{n:'Recálculo de gran escala',h:'05'},
+ rev_il:{n:'Revisión de ponderación (interés legítimo)',h:'06'},
+ rev_eipd:{n:'Revisión de evaluación de impacto',h:'07'},
+ vul_spdp:{n:'Vulneración: notificar a la SPDP',h:'09'},
+ vul_enc:{n:'Vulneración: comunicación del encargado',h:'09'},
+ sol:{n:'Solicitud de derechos: responder',h:''},
+ entrega:{n:'Entrega de documento',h:'08'},
+ reunion:{n:'Reunión con el cliente',h:''},
+ informe:{n:'Informe anual a la gerencia',h:''},
+ otro:{n:'Otro',h:''}};
+var DERECHOS=['Acceso','Rectificación y actualización','Eliminación','Oposición','Portabilidad','Suspensión del tratamiento','No ser objeto de decisiones automatizadas','Revocatoria del consentimiento'];
+
+/* ===================== estado y bóveda cifrada ===================== */
+var GCID='107156492846-bonbgep6b3vk8kshv3tb2vj0sa17fsot.apps.googleusercontent.com';
+var GSCOPE='https://www.googleapis.com/auth/drive.appdata',CSCOPE='https://www.googleapis.com/auth/calendar.events';
+var VFILE='mscpd-registro.json',ITER=310000;
+var DAPI='https://www.googleapis.com/drive/v3/files',UAPI='https://www.googleapis.com/upload/drive/v3/files',CAPI='https://www.googleapis.com/calendar/v3/calendars/primary/events';
+var R={vault:null,key:null,data:null,remember:false,dirty:false,sync:{st:''},tok:null,tokExp:0,ctok:null,ctokExp:0,hidAt:0,view:'ini',sel:null,ageF:'pend'};
+var TE=new TextEncoder(),TD=new TextDecoder();
+function rnd(n){return crypto.getRandomValues(new Uint8Array(n))}
+function b64(u){u=new Uint8Array(u);var s='';for(var i=0;i<u.length;i+=0x8000)s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(s)}
+function b64b(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u}
+function kdf(pw,salt,it){return crypto.subtle.importKey('raw',TE.encode(pw),'PBKDF2',false,['deriveKey']).then(function(b){return crypto.subtle.deriveKey({name:'PBKDF2',salt:salt,iterations:it,hash:'SHA-256'},b,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])})}
+function cifra(k,bytes){var iv=rnd(12);return crypto.subtle.encrypt({name:'AES-GCM',iv:iv},k,bytes).then(function(ct){return{iv:b64(iv),ct:b64(ct)}})}
+function descifra(k,o){return crypto.subtle.decrypt({name:'AES-GCM',iv:b64b(o.iv)},k,b64b(o.ct)).then(function(b){return new Uint8Array(b)})}
+function importDek(raw){return crypto.subtle.importKey('raw',raw,{name:'AES-GCM'},false,['encrypt','decrypt'])}
+function normRec(s){return String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'')}
+function codRec(){var A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',u=rnd(24),s='';for(var i=0;i<24;i++){s+=A[u[i]%32];if(i%4===3&&i<23)s+='-'}return s}
+function envolver(v,dek,pw,rc){var salt=rnd(16),rs=rnd(16);v.iter=ITER;v.salt=b64(salt);v.rsalt=b64(rs);v.pwUpd=Date.now();
+ return Promise.all([kdf(pw,salt,ITER),kdf(normRec(rc),rs,ITER)]).then(function(k){return Promise.all([cifra(k[0],dek),cifra(k[1],dek)])}).then(function(w){v.wpw=w[0];v.wrec=w[1];return v})}
+function abrir(v,secreto,esRec){return kdf(esRec?normRec(secreto):secreto,b64b(esRec?v.rsalt:v.salt),v.iter).then(function(k){return descifra(k,esRec?v.wrec:v.wpw)})}
+function vacio(){return{ver:1,clientes:[],ws:{},plazos:[],sol:[],cfg:{firma:{nom:'Abg. Mariano X. Macías Sánchez',cargo:'Consultor en Protección de Datos Personales',mat:'09-2022-736'},plazoSol:'',tema:'auto',gcal:{on:false}},seq:{}}}
+function leer(v,k){if(!v.data)return Promise.resolve(vacio());return descifra(k,v.data).then(function(b){var d=JSON.parse(TD.decode(b));var z=vacio();Object.keys(z).forEach(function(x){if(d[x]==null)d[x]=z[x]});return d})}
+function bovedaLocal(){try{return JSON.parse(localStorage.getItem('mscpd:vault'))}catch(e){return null}}
+function guardaLocal(){try{localStorage.setItem('mscpd:vault',JSON.stringify(R.vault))}catch(e){toast('No se pudo guardar en este dispositivo: '+e.message,1)}}
+function sellar(){return cifra(R.key,TE.encode(JSON.stringify(R.data))).then(function(d){R.vault.data=d;R.vault.upd=Date.now();guardaLocal()})}
+var _sT=null;
+function guardar(){clearTimeout(_sT);return sellar().then(function(){R.dirty=true;estadoSync();badges();_sT=setTimeout(sincroAuto,5000)})}
+var _dT=null;function guardarDiferido(){clearTimeout(_dT);_dT=setTimeout(guardar,900)}
+/* llave recordada (IndexedDB, no exportable) */
+function idb(){return new Promise(function(res,rej){var r=indexedDB.open('mscpd',1);r.onupgradeneeded=function(){r.result.createObjectStore('k')};r.onsuccess=function(){res(r.result)};r.onerror=function(){rej(r.error)}})}
+function idbOp(mode,fn){return idb().then(function(db){return new Promise(function(res,rej){var t=db.transaction('k',mode),s=t.objectStore('k'),q=fn(s);t.oncomplete=function(){res(q&&q.result)};t.onerror=function(){rej(t.error)}})})}
+function recordar(k,dias){return idbOp('readwrite',function(s){return s.put({key:k,exp:Date.now()+dias*864e5},'dek')})}
+function olvidar(){return idbOp('readwrite',function(s){return s.delete('dek')}).catch(function(){})}
+function llaveRecordada(){return idbOp('readonly',function(s){return s.get('dek')}).then(function(o){return o&&o.exp>Date.now()?o.key:null}).catch(function(){return null})}
+function uid(){return b64(rnd(9)).replace(/[^A-Za-z0-9]/g,'').slice(0,12)}
+function sigCod(p){var y=String(new Date().getFullYear()),k=p==='PD'?'PD':p+'-'+y;R.data.seq[k]=(R.data.seq[k]||0)+1;return p==='PD'?'PD-'+String(R.data.seq[k]).padStart(4,'0'):p+'-'+y+'-'+String(R.data.seq[k]).padStart(3,'0')}
+function clientes(){return R.data.clientes.filter(function(c){return !c.del})}
+function cli(id){return R.data.clientes.filter(function(c){return c.id===id})[0]}
+function plazos(cid){return R.data.plazos.filter(function(p){return !p.del&&(cid==null||p.cli===cid)})}
+function sols(cid){return R.data.sol.filter(function(s){return !s.del&&(cid==null||s.cli===cid)})}
+
+/* ===================== pantalla de bloqueo ===================== */
+function pantallaBloqueo(){
+ document.body.classList.add('locked');$('#app').hidden=true;$('#nav').hidden=true;$('#hdr-lock').hidden=true;$('#foot').hidden=true;
+ var v=R.vault,L=$('#lock');
+ if(!v){
+  L.innerHTML='<div class="card"><h3>Primer uso</h3><p class="sub">Cree una contraseña. Con ella se cifran en este dispositivo y en su Google Drive los datos de sus clientes de protección de datos. Nadie más puede leerlos, ni siquiera Google.</p>'+
+  '<label for="pw1">Contraseña (mínimo 10 caracteres)</label><input id="pw1" type="password" autocomplete="new-password"><label for="pw2" style="margin-top:8px">Repita la contraseña</label><input id="pw2" type="password" autocomplete="new-password">'+
+  '<div class="row" style="margin-top:12px"><button class="btn" id="b-crear">Crear registro cifrado</button></div><div class="msg" id="l-msg"></div>'+
+  '<details style="margin-top:12px"><summary>Ya tengo un registro</summary><div class="row" style="margin-top:8px"><button class="btn sec" id="b-rest">Restaurar desde Google Drive</button><label class="btn sec" style="margin:0">Importar respaldo<input type="file" id="f-imp" accept=".json,application/json" hidden></label></div></details></div>';
+  $('#b-crear').onclick=crear;bindRestaurar();return;
+ }
+ L.innerHTML='<div class="card"><h3>Registro bloqueado</h3><label for="pw">Contraseña</label><input id="pw" type="password" autocomplete="current-password">'+
+ '<label style="display:flex;gap:8px;align-items:center;margin-top:10px;font-weight:500"><input type="checkbox" id="rem" style="width:20px;min-height:0;height:20px"> Recordar en este dispositivo por 30 días</label>'+
+ '<div class="row" style="margin-top:12px"><button class="btn" id="b-ab">Desbloquear</button></div><div class="msg" id="l-msg"></div>'+
+ '<details style="margin-top:12px"><summary>Olvidé la contraseña</summary><label for="rc" style="margin-top:8px">Código de recuperación</label><input id="rc" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"><label for="npw" style="margin-top:8px">Nueva contraseña</label><input id="npw" type="password"><div class="row" style="margin-top:8px"><button class="btn sec" id="b-rec">Recuperar acceso</button></div></details>'+
+ '<details><summary>Otras opciones</summary><div class="row" style="margin-top:8px"><button class="btn sec" id="b-rest">Restaurar desde Google Drive</button><label class="btn sec" style="margin:0">Importar respaldo<input type="file" id="f-imp" accept=".json,application/json" hidden></label></div></details></div>';
+ $('#pw').addEventListener('keydown',function(e){if(e.key==='Enter')desbloquear()});
+ $('#b-ab').onclick=desbloquear;$('#b-rec').onclick=recuperar;bindRestaurar();setTimeout(function(){$('#pw').focus()},50);
+}
+function lmsg(t,ok){var m=$('#l-msg');if(m){m.className='msg '+(ok?'o':'e');m.textContent=t}}
+function bindRestaurar(){$('#b-rest').onclick=restaurarDrive;$('#f-imp').onchange=importar}
+function crear(){var a=$('#pw1').value,b=$('#pw2').value;if(a.length<10)return lmsg('La contraseña debe tener al menos 10 caracteres.');if(a!==b)return lmsg('Las contraseñas no coinciden.');
+ var dek=rnd(32),rc=codRec(),v={format:'mscpd-vault',v:1,data:null,upd:0};lmsg('Creando…',1);
+ envolver(v,dek,a,rc).then(function(){return importDek(dek)}).then(function(k){R.vault=v;R.key=k;R.data=vacio();return sellar()}).then(function(){
+  $('#lock').innerHTML='<div class="card"><h3>Guarde su código de recuperación</h3><p class="sub">Si olvida la contraseña, este código es la única forma de recuperar sus datos. Anótelo fuera del teléfono (por ejemplo, en papel).</p><div class="rc">'+rc+'</div><div class="row" style="margin-top:12px"><button class="btn" id="b-ok">Ya lo guardé</button></div></div>';
+  $('#b-ok').onclick=entrar});
+}
+function desbloquear(){var pw=$('#pw').value;if(!pw)return;lmsg('Verificando…',1);
+ abrir(R.vault,pw,false).then(importDek).then(function(k){R.key=k;R.remember=$('#rem').checked;return leer(R.vault,k)}).then(function(d){R.data=d;if(R.remember)recordar(R.key,30);else olvidar();entrar()},function(){lmsg('Contraseña incorrecta.')})}
+function recuperar(){var rc=$('#rc').value,np=$('#npw').value;if(np.length<10)return lmsg('La nueva contraseña debe tener al menos 10 caracteres.');lmsg('Verificando…',1);var dek;
+ abrir(R.vault,rc,true).then(function(raw){dek=raw;return envolver(R.vault,raw,np,rc)}).then(function(){return importDek(dek)}).then(function(k){R.key=k;return leer(R.vault,k)}).then(function(d){R.data=d;return sellar()}).then(function(){toast('Contraseña cambiada. El código de recuperación sigue siendo el mismo.');entrar()},function(){lmsg('El código de recuperación no es válido.')})}
+function importar(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var v=JSON.parse(r.result);if(v.format!=='mscpd-vault')throw 0;delete v.ls;R.vault=v;guardaLocal();pantallaBloqueo();lmsg('Respaldo importado. Ingrese la contraseña con la que se creó.',1)}catch(e){lmsg('El archivo no es un respaldo de MSC Protección de Datos.')}};r.readAsText(f)}
+function bloquear(){R.key=null;R.data=null;olvidar();cerrarTool();pantallaBloqueo()}
+function entrar(){document.body.classList.remove('locked');$('#lock').innerHTML='';$('#app').hidden=false;$('#nav').hidden=false;$('#hdr-lock').hidden=false;$('#foot').hidden=false;aplicarTema();show(store('tab')||'ini');sincroAuto()}
+
+/* ===================== navegación ===================== */
+$$('#nav button').forEach(function(b){b.onclick=function(){if(b.dataset.t==='cli')R.sel=null;show(b.dataset.t)}});
+$('#hdr-lock').onclick=bloquear;
+function show(t){R.view=t;store('tab',t);$$('#nav button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});$$('main section').forEach(function(s){s.classList.toggle('on',s.id==='v-'+t)});
+ ({ini:vIni,cli:vCli,her:vHer,age:vAge,aju:vAju})[t]();badges();window.scrollTo(0,0)}
+function badges(){if(!R.data)return;var n=plazos().filter(function(p){return p.est!=='hecho'&&difDias(p.f)<0}).length;var b=$('#nav button[data-t=age]');b.innerHTML='Agenda'+(n?'<span class="b">'+n+'</span>':'')}
+function aplicarTema(){var t=(R.data&&R.data.cfg.tema)||'auto',dk=t==='dark'||(t==='auto'&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);document.body.classList.toggle('dark',dk);document.documentElement.style.background=dk?'#0F1216':''}
+
+/* ===================== INICIO ===================== */
+function itemPlazo(p){var c=cli(p.cli),dd=difDias(p.f),cls=p.est==='hecho'?'v':dd<0?'r':dd<=7?'a':'',lab=p.est==='hecho'?'Hecho':dd<0?'Vencido':dd===0?'Hoy':dd===1?'Mañana':'En '+dd+' d';
+ return '<div class="it" data-p="'+p.id+'"><div class="d '+cls+'">'+esc(fcorta(p.f).replace(/ \d{4}$/,''))+'<br><span style="font-weight:600;font-size:10.5px">'+lab+'</span></div><div><div class="t">'+esc(p.tit||TIPOS[p.tipo].n)+'</div><div class="m">'+esc(c?c.rs:'Sin cliente')+(p.h?' · '+p.h:'')+(p.gev?' · Google Calendar':'')+'</div></div></div>'}
+function bindPlazos(c){$$('[data-p]',c).forEach(function(e){e.onclick=function(){formPlazo(e.dataset.p)}})}
+function vIni(){var V=$('#v-ini'),pend=plazos().filter(function(p){return p.est!=='hecho'}).sort(function(a,b){return a.f<b.f?-1:1});
+ var venc=pend.filter(function(p){return difDias(p.f)<0}),sem=pend.filter(function(p){var d=difDias(p.f);return d>=0&&d<=7}),act=clientes().filter(function(c){return c.est==='activo'}),sa=sols().filter(function(s){return s.est!=='cerrada'});
+ V.innerHTML='<div class="hero"><img src="'+IMG.lineas+'" alt=""><b>Buen día'+(R.data.cfg.firma.nom?', '+esc(R.data.cfg.firma.nom.split(' ').slice(1,2).join(' ')):'')+'</b><p>'+esc(fcorta(hoy()))+' · '+act.length+' cliente(s) activo(s). El DPD asesora y supervisa; la empresa decide e implementa.</p></div>'+
+ '<div class="kpis"><div class="kpi'+(venc.length?' r':'')+'" data-go="age:venc"><div class="l">Vencidos</div><div class="n">'+venc.length+'</div></div><div class="kpi'+(sem.length?' a':'')+'" data-go="age:pend"><div class="l">Próximos 7 días</div><div class="n">'+sem.length+'</div></div><div class="kpi" data-go="cli"><div class="l">Clientes activos</div><div class="n">'+act.length+'</div></div><div class="kpi'+(sa.length?' a':'')+'" data-go="age:sol"><div class="l">Solicitudes abiertas</div><div class="n">'+sa.length+'</div></div></div>'+
+ '<div class="card"><h3>Lo urgente <button class="btn sm sec" id="i-np">+ Plazo</button></h3><div class="list" id="i-l">'+(venc.concat(sem).slice(0,12).map(itemPlazo).join('')||'<p class="sub">Nada vencido ni para los próximos 7 días.</p>')+'</div></div>'+
+ '<div class="card"><h3>Accesos rápidos</h3><div class="row"><button class="btn sec" id="i-nc">+ Cliente</button><button class="btn sec" data-h="09">Atender una vulneración</button><button class="btn sec" id="i-ns">Registrar solicitud de derechos</button><button class="btn sec" data-h="03">Diagnóstico de madurez</button></div></div>'+
+ sinControl();
+ bindPlazos(V);$('#i-np').onclick=function(){formPlazo(null)};$('#i-nc').onclick=function(){show('cli');formCliente(null)};$('#i-ns').onclick=function(){formSol(null,null)};
+ $$('[data-h]',V).forEach(function(b){b.onclick=function(){elegirClienteYAbrir(b.dataset.h)}});
+ $$('[data-go]',V).forEach(function(k){k.onclick=function(){var g=k.dataset.go.split(':');if(g[1])R.ageF=g[1];show(g[0])}});
+}
+function sinControl(){var m=hoy().slice(0,7),L=clientes().filter(function(c){return c.est==='activo'&&/DPD externo|Acompañamiento/.test(c.modal||'')&&!plazos(c.id).some(function(p){return p.tipo==='control'&&p.f.slice(0,7)===m})});
+ return L.length?'<div class="card"><h3>Sin control agendado este mes</h3><div class="list">'+L.map(function(c){return '<div class="it" data-c="'+c.id+'"><div><div class="t">'+esc(c.rs)+'</div><div class="m">'+esc(c.modal)+'</div></div></div>'}).join('')+'</div></div>':''}
+document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-c]');if(t&&!t.closest('#v-cli')){R.sel=t.dataset.c;show('cli')}});
+
+/* ===================== CLIENTES ===================== */
+function vCli(){if(R.sel&&cli(R.sel))return fichaCliente(R.sel);var V=$('#v-cli'),q=store('q')||'';
+ V.innerHTML='<h2>Clientes de protección de datos</h2><p class="sub">Empresas a las que presta el servicio. Cada cliente guarda sus propias evaluaciones de las nueve herramientas.</p><div class="row" style="margin-bottom:10px"><input id="c-q" placeholder="Buscar por razón social, RUC o código" style="flex:1" value="'+esc(q)+'"><button class="btn" id="c-n">+ Cliente</button></div><div class="card"><div class="list" id="c-l"></div></div>';
+ var pinta=function(){var s=$('#c-q').value.toLowerCase();store('q',s);var L=clientes().filter(function(c){return !s||(c.rs+' '+(c.ruc||'')+' '+c.cod).toLowerCase().indexOf(s)>-1}).sort(function(a,b){var o={activo:1,propuesta:2,prospecto:3,pausa:4,cerrado:5};return (o[a.est]||9)-(o[b.est]||9)||a.rs.localeCompare(b.rs)});
+  $('#c-l').innerHTML=L.map(function(c){var v=plazos(c.id).filter(function(p){return p.est!=='hecho'&&difDias(p.f)<0}).length,e=EST[c.est]||EST.prospecto;
+   return '<div class="it" data-cc="'+c.id+'"><div style="flex:1"><div class="t">'+esc(c.rs)+'</div><div class="m">'+esc(c.cod)+(c.ruc?' · RUC '+esc(c.ruc):'')+(c.modal?' · '+esc(c.modal):'')+'</div></div><div style="text-align:right">'+'<span class="tag '+e[1]+'">'+e[0]+'</span>'+(v?'<br><span class="tag r" style="margin-top:4px">'+v+' vencido'+(v>1?'s':'')+'</span>':'')+'</div></div>'}).join('')||'<p class="sub">Aún no hay clientes. Use «+ Cliente».</p>';
+  $$('[data-cc]').forEach(function(e){e.onclick=function(){R.sel=e.dataset.cc;fichaCliente(R.sel)}})};
+ $('#c-q').oninput=pinta;$('#c-n').onclick=function(){formCliente(null)};pinta()}
+function campo(id,l,v,t,full,ph){return '<div'+(full?' class="full"':'')+'><label for="'+id+'">'+l+'</label><input id="'+id+'" type="'+(t||'text')+'" value="'+esc(v||'')+'"'+(ph?' placeholder="'+esc(ph)+'"':'')+'></div>'}
+function sel(id,l,v,ops,full){return '<div'+(full?' class="full"':'')+'><label for="'+id+'">'+l+'</label><select id="'+id+'"><option value="">— Seleccionar —</option>'+ops.map(function(o){var k=Array.isArray(o)?o[0]:o,t=Array.isArray(o)?o[1]:o;return '<option value="'+esc(k)+'"'+(k===v?' selected':'')+'>'+esc(t)+'</option>'}).join('')+'</select></div>'}
+function formCliente(id){var c=id?cli(id):{est:'prospecto',serv:[],ini:hoy()},V=$('#v-cli');
+ V.innerHTML='<button class="back" id="f-b">‹ '+(id?'Volver a la ficha':'Volver a clientes')+'</button><h2>'+(id?'Editar cliente':'Nuevo cliente')+'</h2>'+
+ '<div class="nota">Registre solo datos de la empresa y de su persona de contacto. No registre datos de los titulares (clientes, pacientes o trabajadores de la empresa).</div>'+
+ '<div class="card"><h3>Empresa</h3><div class="grid">'+campo('f-rs','Razón social',c.rs,'text',true)+campo('f-ruc','RUC',c.ruc)+sel('f-tam','Tamaño',c.tam,TAM)+campo('f-sec','Sector o actividad',c.sec)+campo('f-ciu','Ciudad',c.ciu)+
+ campo('f-trab','Número de trabajadores',c.trab,'number')+campo('f-ven','Ventas del ejercicio anterior (USD, sin IVA)',c.ven,'number')+'</div></div>'+
+ '<div class="card"><h3>Contacto en la empresa</h3><div class="grid">'+campo('f-cn','Nombre',c.cn)+campo('f-cc','Cargo',c.cc)+campo('f-cm','Correo',c.cm,'email')+campo('f-ct','Teléfono',c.ct,'tel')+'</div></div>'+
+ '<div class="card"><h3>Servicio</h3><div class="grid">'+sel('f-est','Estado',c.est,Object.keys(EST).map(function(k){return [k,EST[k][0]]}))+sel('f-mod','Modalidad',c.modal,MODAL)+campo('f-ini','Fecha de inicio',c.ini,'date')+campo('f-fin','Fin del contrato (opcional)',c.fin,'date')+
+ '<div class="full"><label>Servicios contratados (catálogo S01 a S28)</label><div class="chips" id="f-sv">'+SERV.map(function(s){return '<button type="button" data-s="'+s[0]+'" title="'+esc(s[2])+'" class="'+((c.serv||[]).indexOf(s[0])>-1?'on':'')+'">'+s[0]+' · '+esc(s[1])+'</button>'}).join('')+'</div></div>'+
+ '<div class="full"><label for="f-not">Notas</label><textarea id="f-not">'+esc(c.not||'')+'</textarea></div></div></div>'+
+ '<div class="row"><button class="btn" id="f-g">Guardar</button>'+(id?'<button class="btn sec" id="f-d">Eliminar cliente</button>':'')+'</div><div class="msg" id="f-m"></div>';
+ $$('#f-sv button').forEach(function(b){b.onclick=function(){b.classList.toggle('on')}});
+ $('#f-b').onclick=function(){if(id){R.sel=id;fichaCliente(id)}else{R.sel=null;vCli()}};
+ $('#f-g').onclick=function(){var rs=$('#f-rs').value.trim();if(!rs){$('#f-m').className='msg e';$('#f-m').textContent='Ingrese la razón social.';return}
+  var o=id?c:{id:uid(),cod:sigCod('PD')};var m={rs:rs,ruc:'f-ruc',tam:'f-tam',sec:'f-sec',ciu:'f-ciu',trab:'f-trab',ven:'f-ven',cn:'f-cn',cc:'f-cc',cm:'f-cm',ct:'f-ct',est:'f-est',modal:'f-mod',ini:'f-ini',fin:'f-fin',not:'f-not'};
+  Object.keys(m).forEach(function(k){if(k!=='rs')o[k]=$('#'+m[k]).value.trim()});o.rs=rs;o.est=o.est||'prospecto';o.serv=$$('#f-sv button.on').map(function(b){return b.dataset.s});o.upd=Date.now();
+  if(!id)R.data.clientes.push(o);guardar().then(function(){toast('Cliente guardado.');R.sel=o.id;fichaCliente(o.id)})};
+ if(id)$('#f-d').onclick=function(){if(!confirmar(this))return;c.del=true;c.upd=Date.now();plazos(id).forEach(function(p){p.del=true;p.upd=Date.now()});guardar().then(function(){calSyncTodas(false);R.sel=null;vCli();toast('Cliente eliminado.')})};
+}
+function ultimo(cid,h){var w=R.data.ws[cid];return w&&w._upd&&w._upd[h]}
+function fichaCliente(id){var c=cli(id),V=$('#v-cli');if(!c){R.sel=null;return vCli()}var e=EST[c.est]||EST.prospecto;
+ var P=plazos(id).sort(function(a,b){return a.f<b.f?-1:1}),pend=P.filter(function(p){return p.est!=='hecho'}),S=sols(id);
+ var hechas=HERR.filter(function(h){return ultimo(id,h.id)}).length;
+ V.innerHTML='<button class="back" id="k-b">‹ Clientes</button><div class="row" style="justify-content:space-between"><div><h2 style="margin-bottom:0">'+esc(c.rs)+'</h2><p class="sub">'+esc(c.cod)+(c.ruc?' · RUC '+esc(c.ruc):'')+(c.tam?' · '+esc(c.tam):'')+(c.sec?' · '+esc(c.sec):'')+'</p></div><span class="tag '+e[1]+'">'+e[0]+'</span></div>'+
+ '<div class="kpis"><div class="kpi"><div class="l">Herramientas usadas</div><div class="n">'+hechas+' / 9</div></div><div class="kpi'+(pend.some(function(p){return difDias(p.f)<0})?' r':'')+'"><div class="l">Plazos pendientes</div><div class="n">'+pend.length+'</div></div><div class="kpi'+(S.some(function(s){return s.est!=='cerrada'})?' a':'')+'"><div class="l">Solicitudes abiertas</div><div class="n">'+S.filter(function(s){return s.est!=='cerrada'}).length+'</div></div><div class="kpi"><div class="l">Servicios</div><div class="n">'+(c.serv||[]).length+'</div></div></div>'+
+ '<div class="card"><h3>Expediente de herramientas</h3><p class="sub">Cada herramienta guarda aquí la evaluación de este cliente. Use «Copiar» dentro de cada una para llevar el resultado a Word o Excel.</p><div class="tools">'+HERR.map(function(h){var u=ultimo(id,h.id);return '<button class="tool" data-ht="'+h.id+'"><div class="n">'+h.id+'</div><div class="t">'+esc(h.n)+'</div><div class="m">'+esc(h.m)+'</div>'+(u?'<div class="u">Actualizado '+esc(fcorta(iso(new Date(u))))+'</div>':'')+'</button>'}).join('')+'</div></div>'+
+ '<div class="card"><h3>Plazos y agenda <span class="row"><button class="btn sm sec" id="k-ciclo">Agendar ciclo anual</button><button class="btn sm" id="k-np">+ Plazo</button></span></h3><div class="list" id="k-pl">'+(P.slice().sort(function(a,b){return (a.est==='hecho')-(b.est==='hecho')||(a.f<b.f?-1:1)}).slice(0,30).map(itemPlazo).join('')||'<p class="sub">Sin plazos registrados.</p>')+'</div></div>'+
+ '<div class="card"><h3>Solicitudes de derechos <button class="btn sm" id="k-ns">+ Solicitud</button></h3><p class="hint" style="margin:-4px 0 8px">Registre la solicitud con un código, sin nombre ni cédula del titular: esos datos quedan en el sistema del cliente.</p><div class="list">'+(S.map(function(s){var dd=s.flim?difDias(s.flim):null;return '<div class="it" data-s="'+s.id+'"><div class="d '+(s.est==='cerrada'?'v':dd!=null&&dd<0?'r':'a')+'">'+(s.flim?esc(fcorta(s.flim).replace(/ \d{4}$/,'')):'—')+'</div><div><div class="t">'+esc(s.cod)+' · '+esc(s.der)+'</div><div class="m">Recibida '+esc(fcorta(s.frec))+' · '+(s.est==='cerrada'?'Respondida':'Abierta')+'</div></div></div>'}).join('')||'<p class="sub">Sin solicitudes.</p>')+'</div></div>'+
+ '<div class="card"><h3>Datos del cliente <button class="btn sm sec" id="k-ed">Editar</button></h3><table><tbody>'+
+ [['Contacto',[c.cn,c.cc].filter(Boolean).join(', ')],['Correo',c.cm],['Teléfono',c.ct],['Ciudad',c.ciu],['Trabajadores',c.trab],['Ventas año anterior',c.ven?'USD '+Number(c.ven).toLocaleString('es-EC'):''],['Modalidad',c.modal],['Inicio',fcorta(c.ini)],['Fin del contrato',fcorta(c.fin)],['Servicios',(c.serv||[]).join(', ')],['Notas',c.not]].filter(function(r){return r[1]}).map(function(r){return '<tr><th style="width:38%">'+r[0]+'</th><td>'+esc(r[1])+'</td></tr>'}).join('')+'</tbody></table>'+
+ (c.cm||c.ct?'<div class="row" style="margin-top:10px">'+(c.ct?'<a class="btn sm sec" href="https://wa.me/'+esc(String(c.ct).replace(/\D/g,'').replace(/^0/,'593'))+'" target="_blank" rel="noopener">WhatsApp</a>':'')+(c.cm?'<a class="btn sm sec" href="mailto:'+esc(c.cm)+'">Correo</a>':'')+'</div>':'')+'</div>'+
+ '<div class="card"><h3>Exportar</h3><div class="row"><button class="btn sec" id="k-res">Copiar resumen del cliente (Word)</button></div></div>';
+ $('#k-b').onclick=function(){R.sel=null;vCli()};$('#k-ed').onclick=function(){formCliente(id)};$('#k-np').onclick=function(){formPlazo(null,id)};$('#k-ns').onclick=function(){formSol(null,id)};$('#k-ciclo').onclick=function(){cicloAnual(id)};
+ $$('[data-ht]',V).forEach(function(b){b.onclick=function(){abrirTool(b.dataset.ht,id)}});bindPlazos(V);
+ $$('[data-s]',V).forEach(function(e){e.onclick=function(){formSol(e.dataset.s,id)}});
+ $('#k-res').onclick=function(){copiarHtml(resumenCliente(id))};
+}
+function cicloAnual(id){var c=cli(id),b=hoy(),n=0,add=function(tipo,f){if(plazos(id).some(function(p){return p.tipo===tipo&&p.f===f}))return;R.data.plazos.push({id:uid(),cli:id,tipo:tipo,tit:TIPOS[tipo].n,f:f,est:'pend',upd:Date.now()});n++};
+ var men=/DPD externo|Acompañamiento/.test(c.modal||'');
+ if(men)for(var i=1;i<=12;i++)add('control',addMeses(b,i));
+ add('rev_mad',addMeses(b,12));add('rev_rat',addMeses(b,12));add('rev_ge',addMeses(b,12));add('informe',addMeses(b,12));
+ if(ultimo(id,'06'))add('rev_il',addMeses(b,12));if(ultimo(id,'07'))add('rev_eipd',addMeses(b,12));
+ guardar().then(function(){toast(n+' plazo(s) agendado(s)'+(men?' (incluye 12 controles mensuales)':'')+'.');calSyncTodas(false);fichaCliente(id)})}
+function resumenCliente(id){var c=cli(id),P=plazos(id).filter(function(p){return p.est!=='hecho'}).sort(function(a,b){return a.f<b.f?-1:1}),F=R.data.cfg.firma,TB='<table border="1" cellpadding="5" style="border-collapse:collapse;width:100%;font-size:10pt">',tr=function(a,th){return '<tr>'+a.map(function(x){return (th?'<th>':'<td>')+esc(x)+(th?'</th>':'</td>')}).join('')+'</tr>'};
+ return '<h1>Estado de cumplimiento LOPDP · '+esc(c.rs)+'</h1><p>Fecha: '+esc(fcorta(hoy()))+'</p>'+TB+tr(['Código',c.cod])+tr(['RUC',c.ruc||''])+tr(['Modalidad',c.modal||''])+tr(['Servicios',(c.serv||[]).join(', ')])+'</table>'+
+ '<h2>Herramientas aplicadas</h2>'+TB+tr(['Herramienta','Última actualización'],1)+HERR.map(function(h){var u=ultimo(id,h.id);return tr([h.id+' · '+h.n,u?fcorta(iso(new Date(u))):'No aplicada'])}).join('')+'</table>'+
+ '<h2>Próximos plazos</h2>'+TB+tr(['Fecha','Actividad'],1)+(P.map(function(p){return tr([fcorta(p.f),p.tit||TIPOS[p.tipo].n])}).join('')||tr(['—','Sin plazos pendientes']))+'</table>'+
+ '<p><b>FIRMA DE RESPONSABILIDAD</b></p><p>Firma: ______________________<br>'+esc(F.nom||'')+'<br>'+esc(F.cargo||'')+(F.mat?' · Matrícula '+esc(F.mat):'')+'</p><p><i>El consultor asesora y supervisa; la empresa decide e implementa las medidas.</i></p>'}
+function copiarHtml(html){var tmp=document.createElement('div');tmp.innerHTML=html;var plain=tmp.innerText;try{if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([plain],{type:'text/plain'})})]).then(function(){toast('Copiado: pegue en Word o Google Docs')},function(){toast('No se pudo copiar',1)});return}}catch(e){}toast('Este navegador no permite copiar con formato',1)}
+
+/* ===================== PLAZOS ===================== */
+function formPlazo(pid,cid){var p=pid?R.data.plazos.filter(function(x){return x.id===pid})[0]:{tipo:'otro',f:hoy(),est:'pend',cli:cid||''};var V=$('#v-'+R.view)||$('#v-age');
+ var vuelta=function(){if(R.view==='cli'&&R.sel)fichaCliente(R.sel);else show(R.view)};
+ V.innerHTML='<button class="back" id="p-b">‹ Volver</button><h2>'+(pid?'Plazo':'Nuevo plazo')+'</h2><div class="card"><div class="grid">'+
+ sel('p-cli','Cliente',p.cli,clientes().map(function(c){return [c.id,c.rs]}),true)+sel('p-tipo','Tipo',p.tipo,Object.keys(TIPOS).map(function(k){return [k,TIPOS[k].n]}),true)+
+ '<div class="full" id="p-vul" hidden><div class="nota">Desde que el responsable tuvo constancia del incidente: notificación a la SPDP en el término de 5 días (hábiles); el encargado comunica al responsable en máximo 2 días (LOPDP art. 43; Res. SPDP-SPD-2026-0040-R). El cálculo excluye fines de semana, no feriados: verifíquelo.</div><label for="p-const">Fecha de constancia</label><input id="p-const" type="date" value="'+esc(p.const||'')+'"></div>'+
+ campo('p-tit','Título',p.tit,'text',true)+campo('p-f','Fecha',p.f,'date')+campo('p-h','Hora (opcional)',p.h,'time')+
+ '<div class="full"><label for="p-nota">Nota</label><textarea id="p-nota">'+esc(p.nota||'')+'</textarea></div></div></div>'+
+ '<div class="row"><button class="btn" id="p-g">Guardar</button>'+(pid?'<button class="btn sec" id="p-h2">'+(p.est==='hecho'?'Marcar pendiente':'Marcar como hecho')+'</button><button class="btn sec" id="p-d">Eliminar</button>':'')+(TIPOS[p.tipo]&&TIPOS[p.tipo].h&&p.cli?'<button class="btn sec" id="p-tool">Abrir herramienta '+TIPOS[p.tipo].h+'</button>':'')+'</div>'+
+ '<p class="hint">'+(R.data.cfg.gcal.on?'Se agenda en Google Calendar con avisos 3 días y 1 día antes.':'Active Google Calendar en Ajustes para recibir avisos en el celular.')+'</p>';
+ var tipo=$('#p-tipo'),vul=function(){var t=tipo.value;$('#p-vul').hidden=!(t==='vul_spdp'||t==='vul_enc');if(!$('#p-tit').value||Object.keys(TIPOS).some(function(k){return TIPOS[k].n===$('#p-tit').value}))$('#p-tit').value=t?TIPOS[t].n:''};
+ tipo.onchange=function(){vul();calcVul()};var calcVul=function(){var c=$('#p-const').value,t=tipo.value;if(!c)return;$('#p-f').value=t==='vul_spdp'?addHabiles(c,5):addDias(c,2)};$('#p-const').onchange=calcVul;vul();
+ $('#p-b').onclick=vuelta;
+ $('#p-g').onclick=function(){var o=pid?p:{id:uid()};o.cli=$('#p-cli').value;o.tipo=tipo.value||'otro';o.tit=$('#p-tit').value.trim()||TIPOS[o.tipo].n;o.f=$('#p-f').value;o.h=$('#p-h').value;o.nota=$('#p-nota').value;o.const=$('#p-const').value;o.est=o.est||'pend';o.upd=Date.now();if(!o.f)return toast('Indique la fecha.',1);
+  if(!pid)R.data.plazos.push(o);guardar().then(function(){calTras(o);toast('Plazo guardado.');vuelta()})};
+ if(pid){$('#p-h2').onclick=function(){p.est=p.est==='hecho'?'pend':'hecho';p.upd=Date.now();guardar().then(function(){calTras(p);vuelta()})};
+  $('#p-d').onclick=function(){if(!confirmar(this))return;p.del=true;p.upd=Date.now();guardar().then(function(){calTras(p);vuelta()})}}
+ if($('#p-tool'))$('#p-tool').onclick=function(){abrirTool(TIPOS[p.tipo].h,p.cli)};
+}
+
+/* ===================== SOLICITUDES DE DERECHOS ===================== */
+function formSol(sid,cid){var s=sid?R.data.sol.filter(function(x){return x.id===sid})[0]:{cli:cid||'',frec:hoy(),est:'abierta'};var V=$('#v-'+R.view);var pl=R.data.cfg.plazoSol;
+ var vuelta=function(){if(R.view==='cli'&&R.sel)fichaCliente(R.sel);else show(R.view)};
+ V.innerHTML='<button class="back" id="s-b">‹ Volver</button><h2>'+(sid?'Solicitud '+esc(s.cod):'Nueva solicitud de derechos')+'</h2><div class="nota">Use un código interno. El nombre y la cédula del titular quedan en el sistema del cliente, no en esta app.</div><div class="card"><div class="grid">'+
+ sel('s-cli','Cliente',s.cli,clientes().map(function(c){return [c.id,c.rs]}),true)+sel('s-der','Derecho ejercido',s.der,DERECHOS)+sel('s-can','Canal',s.can,['Correo','Formulario web','Presencial','Otro'])+campo('s-frec','Fecha de recepción',s.frec,'date')+
+ campo('s-flim','Fecha límite de respuesta',s.flim,'date')+'<div class="full"><p class="hint" style="margin:0">'+(pl?'Plazo configurado en Ajustes: '+pl+' días desde la recepción.':'Defina en Ajustes el plazo de respuesta que aplica, una vez verificado en la LOPDP y su reglamento, para calcular la fecha automáticamente.')+'</p></div>'+
+ sel('s-est','Estado',s.est,[['abierta','Abierta'],['cerrada','Respondida']])+campo('s-fres','Fecha de respuesta',s.fres,'date')+'<div class="full"><label for="s-not">Nota</label><textarea id="s-not">'+esc(s.not||'')+'</textarea></div></div></div>'+
+ '<div class="row"><button class="btn" id="s-g">Guardar</button>'+(sid?'<button class="btn sec" id="s-d">Eliminar</button>':'')+'</div>';
+ $('#s-frec').onchange=function(){if(pl&&this.value)$('#s-flim').value=addDias(this.value,+pl)};if(!sid&&pl)$('#s-flim').value=addDias(s.frec,+pl);
+ $('#s-b').onclick=vuelta;
+ $('#s-g').onclick=function(){var o=sid?s:{id:uid(),cod:sigCod('SOL')};['cli','der','can','frec','flim','est','fres','not'].forEach(function(k){o[k]=$('#s-'+k).value});o.upd=Date.now();if(!o.cli||!o.der)return toast('Elija cliente y derecho.',1);
+  if(!sid)R.data.sol.push(o);
+  var pp=R.data.plazos.filter(function(x){return x.sol===o.id&&!x.del})[0];
+  if(o.flim){if(!pp){pp={id:uid(),sol:o.id,tipo:'sol',upd:0};R.data.plazos.push(pp)}pp.cli=o.cli;pp.f=o.flim;pp.tit='Responder solicitud '+o.cod+' ('+o.der+')';pp.est=o.est==='cerrada'?'hecho':'pend';pp.upd=Date.now()}
+  guardar().then(function(){if(pp)calTras(pp);toast('Solicitud guardada.');vuelta()})};
+ if(sid)$('#s-d').onclick=function(){if(!confirmar(this))return;s.del=true;s.upd=Date.now();R.data.plazos.forEach(function(x){if(x.sol===s.id){x.del=true;x.upd=Date.now();calTras(x)}});guardar().then(vuelta)};
+}
+
+/* ===================== AGENDA ===================== */
+function vAge(){var V=$('#v-age'),f=R.ageF||'pend';
+ V.innerHTML='<h2>Agenda de cumplimiento</h2><p class="sub">Plazos de todos los clientes. Los vencidos aparecen en rojo.</p><div class="row" style="margin-bottom:8px"><button class="btn" id="a-n">+ Plazo</button></div><div class="seg" style="margin-bottom:10px">'+[['venc','Vencidos'],['pend','Pendientes'],['sol','Solicitudes'],['hecho','Hechos']].map(function(x){return '<button data-f="'+x[0]+'" class="'+(f===x[0]?'on':'')+'">'+x[1]+'</button>'}).join('')+'</div><div class="card"><div class="list" id="a-l"></div></div>'+
+ (R.data.cfg.gcal.on?'<div class="row"><button class="btn sec" id="a-sync">Sincronizar con Google Calendar</button></div>':'');
+ var L=plazos();if(f==='venc')L=L.filter(function(p){return p.est!=='hecho'&&difDias(p.f)<0});else if(f==='pend')L=L.filter(function(p){return p.est!=='hecho'});else if(f==='sol')L=L.filter(function(p){return p.tipo==='sol'&&p.est!=='hecho'});else L=L.filter(function(p){return p.est==='hecho'});
+ L.sort(function(a,b){return f==='hecho'?(a.f<b.f?1:-1):(a.f<b.f?-1:1)});
+ var mes='',h='';L.slice(0,150).forEach(function(p){var m=p.f.slice(0,7);if(m!==mes){mes=m;var d=pd(p.f);h+='<div style="font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--olivo);margin:10px 0 2px">'+MESES[d.getMonth()]+' '+d.getFullYear()+'</div>'}h+=itemPlazo(p)});
+ $('#a-l').innerHTML=h||'<p class="sub">Sin elementos.</p>';bindPlazos(V);
+ $$('[data-f]',V).forEach(function(b){b.onclick=function(){R.ageF=b.dataset.f;vAge()}});$('#a-n').onclick=function(){formPlazo(null)};
+ if($('#a-sync'))$('#a-sync').onclick=function(){calSyncTodas(true)};
+}
+
+/* ===================== HERRAMIENTAS (iframe por cliente) ===================== */
+function vHer(){var V=$('#v-her'),c0=store('hcli')||'';
+ V.innerHTML='<h2>Herramientas</h2><p class="sub">Elija el cliente: cada herramienta guarda su evaluación en el expediente de ese cliente. «Modo libre» sirve para practicar o para reuniones sin guardar en un cliente.</p>'+
+ '<div class="card">'+sel('h-cli','Trabajar para',c0,[['_libre','Modo libre (sin cliente)']].concat(clientes().map(function(c){return [c.id,c.rs]})))+'</div><div class="tools">'+HERR.map(function(h){return '<button class="tool" data-ht="'+h.id+'"><div class="n">'+h.id+'</div><div class="t">'+esc(h.n)+'</div><div class="m">'+esc(h.m)+'</div></button>'}).join('')+'</div>'+
+ '<div class="nota" style="margin-top:12px">Orden de uso: 01 › 02 para proponer; 03 › 04 › 05 para diagnosticar e inventariar; 06 › 07 para riesgos; 08 › 09 para adecuar y responder. Al año, repita 03 y 05.</div>';
+ $('#h-cli').onchange=function(){store('hcli',this.value)};
+ $$('[data-ht]',V).forEach(function(b){b.onclick=function(){var c=$('#h-cli').value;if(!c)return toast('Elija primero el cliente o el modo libre.',1);abrirTool(b.dataset.ht,c)}});
+}
+function elegirClienteYAbrir(h){var c=store('hcli');if(c&&(c==='_libre'||cli(c)))return abrirTool(h,c);show('her');toast('Elija el cliente y abra la herramienta '+h+'.')}
+window.PDBridge={
+ load:function(ns){var p=ns.split('|'),w=R.data&&R.data.ws[p[0]];return w&&w[p[1]]?JSON.parse(JSON.stringify(w[p[1]])):{}},
+ save:function(ns,d){if(!R.data)return;var p=ns.split('|'),w=R.data.ws[p[0]]||(R.data.ws[p[0]]={});w[p[1]]=d;w._upd=w._upd||{};w._upd[p[1]]=Date.now();guardarDiferido()}
+};
+var SHIM='<script>(function(){try{var B=parent.PDBridge,ns=frameElement.getAttribute("data-ns");if(!B||!ns)return;var d=B.load(ns)||{};var S={getItem:function(k){return Object.prototype.hasOwnProperty.call(d,k)?d[k]:null},setItem:function(k,v){d[k]=String(v);B.save(ns,d)},removeItem:function(k){delete d[k];B.save(ns,d)},clear:function(){d={};B.save(ns,d)},key:function(i){return Object.keys(d)[i]||null}};Object.defineProperty(S,"length",{get:function(){return Object.keys(d).length}});Object.defineProperty(window,"localStorage",{configurable:true,get:function(){return S}})}catch(e){}})();<\/script>';
+function abrirTool(h,cid){var t=TOOLS[h];if(!t)return toast('Herramienta no disponible.',1);var c=cid==='_libre'?null:cli(cid);
+ var html=t.replace(/<head>/i,'<head>'+SHIM);var f=$('#tool-f');f.setAttribute('data-ns',cid+'|'+h);
+ $('#tool-t').innerHTML=esc(h+' · '+herr(h).n)+'<small>'+(c?esc(c.rs):'Modo libre')+'</small>';$('#tool').hidden=false;document.body.style.overflow='hidden';
+ f.srcdoc=html;history.pushState({tool:1},'')}
+function cerrarTool(){if($('#tool').hidden)return;$('#tool').hidden=true;document.body.style.overflow='';$('#tool-f').srcdoc='about:blank';clearTimeout(_dT);if(R.data)guardar();if(R.view==='cli'&&R.sel)fichaCliente(R.sel)}
+$('#tool-x').onclick=function(){if(history.state&&history.state.tool)history.back();else cerrarTool()};
+window.addEventListener('popstate',function(){cerrarTool()});
+
+/* ===================== AJUSTES ===================== */
+function vAju(){var V=$('#v-aju'),c=R.data.cfg,F=c.firma;
+ V.innerHTML='<h2>Ajustes</h2>'+
+ '<div class="card"><h3>Apariencia</h3><div class="seg">'+[['auto','Automático'],['light','Claro'],['dark','Oscuro']].map(function(x){return '<button data-tema="'+x[0]+'" class="'+(c.tema===x[0]?'on':'')+'">'+x[1]+'</button>'}).join('')+'</div></div>'+
+ '<div class="card"><h3>Google Drive</h3><p class="sub">Guarda una copia cifrada en la carpeta oculta de la app en su Google Drive (no aparece entre sus archivos) y la recupera al cambiar de teléfono o desde la PC. Conserva una versión diaria (10 días) y una mensual (12 meses).</p><div class="row"><button class="btn" id="g-sync">Sincronizar ahora</button><button class="btn sec" id="g-rest">Reemplazar este dispositivo con Drive</button></div><p class="hint sst"></p></div>'+
+ '<div class="card"><h3>Google Calendar</h3><p class="sub">Agenda los plazos pendientes en su calendario principal con avisos 3 días y 1 día antes. El evento se actualiza o se elimina con el plazo.</p><div class="row"><button class="btn'+(c.gcal.on?' sec':'')+'" id="c-on">'+(c.gcal.on?'Desactivar':'Activar Google Calendar')+'</button>'+(c.gcal.on?'<button class="btn sec" id="c-sy">Sincronizar plazos</button>':'')+'</div><p class="hint" id="c-msg"></p></div>'+
+ '<div class="card"><h3>Datos del consultor (firma)</h3><div class="grid">'+campo('a-nom','Nombre',F.nom)+campo('a-car','Cargo',F.cargo)+campo('a-mat','Matrícula',F.mat)+campo('a-mail','Correo',F.mail,'email')+'</div><p class="hint">No use el cargo de delegado de protección de datos hasta contar con el registro ante la SPDP.</p></div>'+
+ '<div class="card"><h3>Plazos</h3>'+campo('a-psol','Plazo de respuesta a solicitudes de derechos (días)',c.plazoSol,'number',false,'Verifique el plazo vigente')+'<p class="hint">La app no fija este plazo por defecto: es un punto abierto de la matriz normativa del kit.</p></div>'+
+ '<div class="row" style="margin-bottom:12px"><button class="btn" id="a-g">Guardar ajustes</button></div>'+
+ '<div class="card"><h3>Seguridad y respaldo</h3><label>Cambiar contraseña (genera también un nuevo código de recuperación)</label><div class="grid"><input id="a-pw0" type="password" placeholder="Contraseña actual"><input id="a-pw" type="password" placeholder="Nueva contraseña (mínimo 10)"></div><div class="row" style="margin-top:8px"><button class="btn sec" id="a-cpw">Cambiar contraseña</button><button class="btn sec" id="a-exp">Descargar respaldo cifrado</button></div><div id="a-rcv"></div>'+
+ '<details><summary>Borrar los datos de este dispositivo</summary><p class="hint">Solo borra la copia local. Si sincronizó con Google Drive, podrá restaurarla.</p><button class="btn mal" id="a-del">Borrar de este dispositivo</button></details></div>'+
+ '<div class="card"><h3>Instalar la app</h3><p class="sub"><b>Android (Chrome):</b> menú ⋮ › Instalar aplicación. <b>PC (Chrome o Edge):</b> ícono de instalar en la barra de direcciones. <b>iPhone (Safari):</b> Compartir › Agregar a pantalla de inicio. Ábrala una vez con internet; después funciona sin conexión.</p></div>';
+ $$('[data-tema]',V).forEach(function(b){b.onclick=function(){c.tema=b.dataset.tema;aplicarTema();guardar();vAju()}});
+ $('#g-sync').onclick=function(){sincronizar(true)};$('#g-rest').onclick=function(){if(confirmar(this))reemplazarConDrive()};
+ $('#c-on').onclick=function(){if(c.gcal.on){c.gcal.on=false;c.gcal.upd=Date.now();guardar().then(vAju);return}tokenCal(true).then(function(){c.gcal.on=true;c.gcal.upd=Date.now();return guardar()}).then(function(){vAju();calSyncTodas(true)},function(e){$('#c-msg').textContent=e.message})};
+ if($('#c-sy'))$('#c-sy').onclick=function(){calSyncTodas(true)};
+ $('#a-g').onclick=function(){F.nom=$('#a-nom').value;F.cargo=$('#a-car').value;F.mat=$('#a-mat').value;F.mail=$('#a-mail').value;c.plazoSol=$('#a-psol').value;c.upd=Date.now();guardar().then(function(){toast('Ajustes guardados.')})};
+ $('#a-cpw').onclick=function(){var np=$('#a-pw').value;if(np.length<10)return toast('Mínimo 10 caracteres.',1);var rc=codRec();abrir(R.vault,$('#a-pw0').value,false).then(function(raw){return envolver(R.vault,raw,np,rc)},function(){throw new Error('La contraseña actual no es correcta.')}).then(function(){return sellar()}).then(function(){$('#a-pw0').value='';$('#a-pw').value='';$('#a-rcv').innerHTML='<p class="sub" style="margin-top:10px">Contraseña cambiada. Nuevo código de recuperación (el anterior ya no sirve):</p><div class="rc">'+rc+'</div>';sincroAuto()}).catch(function(e){toast(e.message,1)})};
+ $('#a-exp').onclick=function(){var v=JSON.parse(JSON.stringify(R.vault));delete v.ls;var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(v)],{type:'application/json'}));a.download='mscpd-respaldo-'+hoy()+'.json';document.body.appendChild(a);a.click();a.remove()};
+ $('#a-del').onclick=function(){if(!confirmar(this))return;try{localStorage.removeItem('mscpd:vault')}catch(e){}olvidar();R.vault=null;bloquear()};
+ estadoSync();
+}
+
+/* ===================== Google Drive ===================== */
+function syncDisp(){return PWA&&(location.protocol==='https:'||location.hostname==='localhost')}
+function estadoSync(){var E=$$('.sst');if(!E.length)return;var s=R.vault||{},t;
+ if(!syncDisp())t='La sincronización con Google funciona solo en la app instalada desde xavimac123.github.io.';
+ else if(R.sync.st==='run')t='Sincronizando…';else if(R.sync.st==='err')t='<span style="color:var(--mal)">'+esc(R.sync.msg)+'</span>';
+ else if(!navigator.onLine)t='Sin conexión: los cambios quedan en este dispositivo.';else if(!s.ls)t='Aún no se ha sincronizado.';
+ else{var d=new Date(s.ls);t=(R.dirty?'Cambios sin sincronizar · ':'')+'Última sincronización: '+fcorta(iso(d))+', '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+ E.forEach(function(x){x.innerHTML=t})}
+function cargaGIS(){if(window.google&&google.accounts&&google.accounts.oauth2)return Promise.resolve();return new Promise(function(res,rej){var s=document.createElement('script');s.src='https://accounts.google.com/gsi/client';s.async=true;s.onload=function(){res()};s.onerror=function(){rej(new Error('No se pudo cargar el inicio de sesión de Google.'))};document.head.appendChild(s)})}
+function token(scope,inter,slot){var tk=slot==='c'?'ctok':'tok',te=tk+'Exp';
+ if(R[tk]&&Date.now()<R[te]-60000)return Promise.resolve(R[tk]);
+ try{var t=JSON.parse(sessionStorage.getItem('mscpd:'+tk));if(t&&Date.now()<t[1]-60000){R[tk]=t[0];R[te]=t[1];return Promise.resolve(t[0])}}catch(e){}
+ if(!inter)return Promise.reject(new Error('sin-token'));
+ return cargaGIS().then(function(){return new Promise(function(res,rej){var tc=google.accounts.oauth2.initTokenClient({client_id:GCID,scope:scope,callback:function(r){if(r.error)return rej(new Error('Google no autorizó el acceso ('+r.error+').'));R[tk]=r.access_token;R[te]=Date.now()+(+r.expires_in||3600)*1000;try{sessionStorage.setItem('mscpd:'+tk,JSON.stringify([R[tk],R[te]]))}catch(e){}res(R[tk])},
+  error_callback:function(e){rej(new Error(e&&e.type==='popup_closed'?'Se cerró la ventana de Google sin autorizar.':'No se pudo abrir el inicio de sesión de Google (¿ventanas emergentes bloqueadas?).'))}});tc.requestAccessToken({prompt:''})})})}
+function gapi(url,opt,inter){return token(GSCOPE,inter,'d').then(function(t){opt=opt||{};opt.headers=Object.assign({Authorization:'Bearer '+t},opt.headers||{});return fetch(url,opt)}).then(function(r){
+ if(r.status===401){R.tok=null;try{sessionStorage.removeItem('mscpd:tok')}catch(e){}throw new Error('La sesión de Google expiró. Toque «Sincronizar ahora».')}
+ if(!r.ok)throw new Error('Google Drive respondió '+r.status+'.'+(r.status===403?' Revise que la API de Drive esté activa y su cuenta sea usuario de prueba.':''));return r})}
+function dLista(i){return gapi(DAPI+'?spaces=appDataFolder&pageSize=200&q='+encodeURIComponent("name contains 'mscpd-'")+'&fields=files(id,name,modifiedTime)',null,i).then(function(r){return r.json()}).then(function(j){return j.files||[]})}
+function dLeer(id){return gapi(DAPI+'/'+id+'?alt=media').then(function(r){return r.json()})}
+function dCrear(name,obj){var b='mscpd'+Date.now(),body='--'+b+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n'+JSON.stringify({name:name,parents:['appDataFolder']})+'\r\n--'+b+'\r\nContent-Type: application/json\r\n\r\n'+JSON.stringify(obj)+'\r\n--'+b+'--';return gapi(UAPI+'?uploadType=multipart&fields=id',{method:'POST',headers:{'Content-Type':'multipart/related; boundary='+b},body:body})}
+function dAct(id,obj){return gapi(UAPI+'/'+id+'?uploadType=media&fields=id',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(obj)})}
+function dBorrar(id){return gapi(DAPI+'/'+id,{method:'DELETE'})}
+function mm(x,y){var m={};(x||[]).concat(y||[]).forEach(function(r){var c=m[r.id];if(!c||(r.upd||0)>(c.upd||0))m[r.id]=r});return Object.keys(m).map(function(k){return m[k]})}
+function fusionar(a,b){var s={};[a.seq||{},b.seq||{}].forEach(function(o){Object.keys(o).forEach(function(k){s[k]=Math.max(s[k]||0,o[k])})});
+ var ws={};[a.ws||{},b.ws||{}].forEach(function(W){Object.keys(W).forEach(function(cid){var src=W[cid],dst=ws[cid]||(ws[cid]={_upd:{}});Object.keys(src).forEach(function(h){if(h==='_upd')return;var tu=(src._upd||{})[h]||0;if(!(h in dst)||tu>(dst._upd[h]||0)){dst[h]=src[h];dst._upd[h]=tu}})})});
+ var cfg=((a.cfg||{}).upd||0)>=((b.cfg||{}).upd||0)?a.cfg:b.cfg;var gc=((a.cfg.gcal||{}).upd||0)>=((b.cfg.gcal||{}).upd||0)?a.cfg.gcal:b.cfg.gcal;cfg=Object.assign({},cfg,{gcal:gc});
+ return {ver:1,clientes:mm(a.clientes,b.clientes),plazos:mm(a.plazos,b.plazos),sol:mm(a.sol,b.sol),ws:ws,cfg:cfg,seq:s}}
+function paraSubir(){var v=JSON.parse(JSON.stringify(R.vault));delete v.ls;return v}
+function sincroAuto(){if(!syncDisp()||!navigator.onLine||!R.key)return;token(GSCOPE,false,'d').then(function(){sincronizar(false)},function(){estadoSync()})}
+var SYNC=false;
+function sincronizar(inter){if(!R.key)return;if(!syncDisp()){toast('La sincronización funciona solo en la app instalada desde xavimac123.github.io.',1);return}if(!navigator.onLine||SYNC)return;SYNC=true;R.sync={st:'run'};estadoSync();var files;
+ return dLista(inter).then(function(f){files=f;var main=f.filter(function(x){return x.name===VFILE})[0];if(!main)return null;
+  return dLeer(main.id).then(function(rv){if(!rv||rv.format!=='mscpd-vault')throw new Error('El archivo en Drive no es un registro válido.');
+   return leer(rv,R.key).then(function(rd){R.data=fusionar(R.data,rd);if((rv.pwUpd||0)>(R.vault.pwUpd||0))['iter','salt','rsalt','wpw','wrec','pwUpd'].forEach(function(k){R.vault[k]=rv[k]})},function(){throw new Error('El registro en Drive usa otra llave. Use «Reemplazar este dispositivo con Drive» o borre el de Drive.')})}).then(function(){return main.id})})
+ .then(function(mid){return sellar().then(function(){var v=paraSubir();return mid?dAct(mid,v):dCrear(VFILE,v)})})
+ .then(function(){return versiones(files)})
+ .then(function(){R.vault.ls=Date.now();R.dirty=false;guardaLocal();R.sync={st:'ok'};SYNC=false;estadoSync();badges();if(inter)toast('Sincronizado con Google Drive.');if(R.view==='ini')vIni()})
+ .catch(function(e){SYNC=false;if(e.message==='sin-token'){R.sync={st:''};estadoSync();return}R.sync={st:'err',msg:e.message};estadoSync();if(inter)toast(e.message,1)})}
+function versiones(files){var d=hoy(),mes=d.slice(0,7),v=paraSubir(),p=[];
+ var di=files.filter(function(f){return /^mscpd-registro-\d{4}-\d{2}-\d{2}\.json$/.test(f.name)}).sort(function(a,b){return b.name.localeCompare(a.name)});
+ var me=files.filter(function(f){return /^mscpd-registro-mes-\d{4}-\d{2}\.json$/.test(f.name)}).sort(function(a,b){return b.name.localeCompare(a.name)});
+ var hd=di.filter(function(f){return f.name==='mscpd-registro-'+d+'.json'})[0];p.push(hd?dAct(hd.id,v):dCrear('mscpd-registro-'+d+'.json',v));
+ if(!me.some(function(f){return f.name==='mscpd-registro-mes-'+mes+'.json'}))p.push(dCrear('mscpd-registro-mes-'+mes+'.json',v));
+ di.slice(hd?10:9).forEach(function(f){p.push(dBorrar(f.id))});me.slice(12).forEach(function(f){p.push(dBorrar(f.id))});return Promise.all(p)}
+function restaurarDrive(){if(!syncDisp())return lmsg('Restaurar desde Drive funciona solo en la app instalada desde xavimac123.github.io.');lmsg('Conectando con Google…',1);
+ dLista(true).then(function(f){var m=f.filter(function(x){return x.name===VFILE})[0];if(!m)throw new Error('No hay un registro de MSC Protección de Datos en el Google Drive de esta cuenta.');return dLeer(m.id)})
+ .then(function(rv){if(!rv||rv.format!=='mscpd-vault')throw new Error('El archivo en Drive no es válido.');rv.ls=Date.now();R.vault=rv;guardaLocal();pantallaBloqueo();lmsg('Registro descargado. Ingrese su contraseña.',1)}).catch(function(e){lmsg(e.message)})}
+function reemplazarConDrive(){dLista(true).then(function(f){var m=f.filter(function(x){return x.name===VFILE})[0];if(!m)throw new Error('No hay registro en Drive.');return dLeer(m.id)}).then(function(rv){rv.ls=Date.now();R.vault=rv;guardaLocal();R.key=null;R.data=null;olvidar();pantallaBloqueo();lmsg('Registro de Drive descargado. Ingrese la contraseña con la que se creó.',1)}).catch(function(e){toast(e.message,1)})}
+
+/* ===================== Google Calendar ===================== */
+function capi(url,opt,inter){return token(CSCOPE,inter,'c').then(function(t){opt=opt||{};opt.headers=Object.assign({Authorization:'Bearer '+t,'Content-Type':'application/json'},opt.headers||{});return fetch(url,opt)}).then(function(r){
+ if(r.status===401){R.ctok=null;try{sessionStorage.removeItem('mscpd:ctok')}catch(e){}throw new Error('La autorización de Calendar expiró. Toque «Sincronizar plazos».')}
+ if(r.status===404||r.status===410)return null;if(r.status===403)throw new Error('Google Calendar respondió 403: revise que la API de Calendar y el permiso calendar.events estén activos.');if(!r.ok)throw new Error('Google Calendar respondió '+r.status+'.');return r})}
+function tokenCal(inter){return token(CSCOPE,inter,'c')}
+function evento(p){var c=cli(p.cli)||{},sig=function(d){return addDias(d,1)};
+ var b={summary:'[PD] '+(p.tit||TIPOS[p.tipo].n)+(c.rs?' – '+c.rs:''),description:[p.nota||'',c.cod?'Cliente '+c.cod:'','Registrado desde MSC Protección de Datos'].filter(Boolean).join('\n'),
+  reminders:{useDefault:false,overrides:[{method:'popup',minutes:4320},{method:'popup',minutes:1440}]},extendedProperties:{private:{mscpd:p.id}},colorId:p.tipo&&p.tipo.indexOf('vul')===0?'11':'5'};
+ if(p.h){var e=p.h.split(':'),m=(+e[0])*60+(+e[1])+60,hh=String(Math.min(23,Math.floor(m/60))).padStart(2,'0')+':'+String(m%60).padStart(2,'0');b.start={dateTime:p.f+'T'+p.h+':00',timeZone:'America/Guayaquil'};b.end={dateTime:p.f+'T'+hh+':00',timeZone:'America/Guayaquil'}}
+ else{b.start={date:p.f};b.end={date:sig(p.f)}}return b}
+function calSync(p,inter){var quitar=p.del||p.est==='hecho';
+ if(quitar){if(!p.gev)return Promise.resolve('nada');return capi(CAPI+'/'+encodeURIComponent(p.gev),{method:'DELETE'},inter).then(function(){delete p.gev;p.gcal=Date.now();return 'borrado'})}
+ var body=JSON.stringify(evento(p)),crear=function(){return capi(CAPI,{method:'POST',body:body},inter).then(function(r){return r.json()}).then(function(j){p.gev=j.id;p.gcal=Date.now();return 'creado'})};
+ if(!p.gev)return crear();return capi(CAPI+'/'+encodeURIComponent(p.gev),{method:'PATCH',body:body},inter).then(function(r){if(!r){delete p.gev;return crear()}return r.json().then(function(){p.gcal=Date.now();return 'actualizado'})})}
+function calOn(){return !!(syncDisp()&&R.data&&R.data.cfg.gcal.on)}
+function calTras(p){if(!calOn())return;calSync(p,true).then(function(){return guardar()},function(e){toast(e.message,1)})}
+function calSyncTodas(inter){if(!calOn())return;var h=hoy(),L=R.data.plazos.filter(function(p){return (p.del||p.est==='hecho')?!!p.gev:(p.f>=h&&(!p.gev||(p.upd||0)>(p.gcal||0)))}),n=0,err=null;
+ return L.reduce(function(pr,p){return pr.then(function(){if(err)return;return calSync(p,inter).then(function(){n++},function(e){err=e})})},Promise.resolve()).then(function(){return n?guardar():null}).then(function(){if(err)toast(err.message,1);else if(inter)toast(n?n+' plazo(s) sincronizado(s) con Google Calendar.':'Google Calendar ya está al día.')})}
+
+/* ===================== ciclo de vida ===================== */
+document.addEventListener('visibilitychange',function(){if(document.hidden){R.hidAt=Date.now();if(R.dirty)sincroAuto()}else if(R.key&&!R.remember&&R.hidAt&&Date.now()-R.hidAt>10*60000)bloquear()});
+window.addEventListener('online',function(){if(R.dirty)sincroAuto();estadoSync()});
+if(window.matchMedia)matchMedia('(prefers-color-scheme: dark)').addEventListener('change',aplicarTema);
+R.vault=bovedaLocal();
+llaveRecordada().then(function(k){if(k&&R.vault){R.key=k;R.remember=true;return leer(R.vault,k).then(function(d){R.data=d;entrar()},function(){pantallaBloqueo()})}pantallaBloqueo()});
+})();
+</script>
+</body></html>

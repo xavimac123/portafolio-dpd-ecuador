@@ -30,6 +30,7 @@ La numeración de las herramientas sigue el orden de uso de la guía (`docs/guia
 - `07-evaluacion-impacto/` — evaluación de impacto (EIPD), fuente `scripts/eipd_config.py`
 - `08-kit-plantillas/` — documentos contractuales e informativos
 - `09-kit-vulneraciones/` — gestión y notificación de vulneraciones
+- `app-pd/` — app instalable MSC Protección de Datos (PWA): `fuente/index.html`, `build_pwa.py`; publica `app-pd/docs/` en el repo público `msc-protecciondatos`
 - `docs/` — decisiones del proyecto, contraste con las guías de la SPDP y recursos pendientes
 - `referencias/` — plantillas ya utilizadas, anonimizadas
 - `scripts/` — generadores (Excel, exportación a Word)

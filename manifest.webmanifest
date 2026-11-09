@@ -1,0 +1,30 @@
+{
+ "name": "MSC Protección de Datos",
+ "short_name": "MSC PD",
+ "lang": "es-EC",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#F7F5EE",
+ "theme_color": "#14181E",
+ "id": "msc-proteccion-datos",
+ "description": "Gestión de clientes, herramientas LOPDP y agenda de cumplimiento del DPD. Uso profesional de Macías Sánchez Consultores.",
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}

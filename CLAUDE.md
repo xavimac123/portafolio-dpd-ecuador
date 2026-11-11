@@ -34,6 +34,7 @@ La numeración de las herramientas sigue el orden de uso de la guía (`docs/guia
 - `app-pd/` — app instalable MSC Protección de Datos (PWA): `fuente/index.html`, `build_pwa.py`; publica `app-pd/docs/` en la rama `gh-pages` (GitHub Pages)
 - `scripts/referencia_config.py` — fuente única de la pestaña «Referencia» de la app (normas, puntos de consulta y plazos); todo lo que cite debe constar en `BASE-LEGAL.md`
 - `scripts/responsabilidades_config.py` — fuente única de la pestaña «Responsabilidades DPO» (funciones, prohibiciones, qué no es un DPO, auditoría); toda cita debe constar en `BASE-LEGAL.md`
+- `scripts/publicidad_config.py` — fuente única de la pestaña «Publicidad» (preguntas, datos clave, llamados a la acción, enlace del autodiagnóstico); toda afirmación normativa lleva cita en `BASE-LEGAL.md`; los datos de contacto no van aquí
 - `scripts/glosario_config.py` — normas ISO y métodos de medición de riesgos del Glosario (las definiciones legales se toman de `catalogo_config.py`)
 - `scripts/tema_oscuro.py` — genera el modo oscuro de las herramientas a partir de su propio CSS (lo aplica `barra_contexto.py` en la app)
 - `scripts/exportar.js` — exportación a Word (.docx) y PDF con espacio para firma y sello; la usan la app y las nueve herramientas

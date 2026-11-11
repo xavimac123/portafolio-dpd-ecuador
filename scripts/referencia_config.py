@@ -181,3 +181,33 @@ PLAZOS = [
  ["Biometría: revisar la evaluación de impacto", "Cada 12 meses y cuando cambie el riesgo", "Res. 2026-0039 (resumen)", "Evaluación de impacto"],
  ["Biometría: adecuar sistemas existentes", "12 meses desde el 24-09-2026", "Res. 2026-0039, transitoria (resumen)", "Evaluación de impacto"],
 ]
+
+# Enlaces de consulta. [nombre, url, nota]. Verificados por búsqueda el 2026-11-11 (spdp.gob.ec no se pudo abrir
+# directamente desde el entorno de trabajo; las rutas constan en los resultados del buscador).
+ENLACES = {
+ "spdp": [
+  ["Portal de la SPDP", "https://www.spdp.gob.ec/", "Inicio, normativa, servicios en línea y noticias."],
+  ["Resoluciones de la SPDP", "https://spdp.gob.ec/resoluciones2/", "Resoluciones expedidas (reglamentos, normas generales, guías aprobadas)."],
+  ["Consultas absueltas", "https://www.spdp.gob.ec/docs/consultas-absueltas/", "Oficios de absolución por año. Son opiniones referenciales, no vinculantes."],
+  ["Consultas absueltas 2025", "https://spdp.gob.ec/consultas2025/", "Listado anterior del sitio, año 2025."],
+  ["Consultas absueltas 2026", "https://spdp.gob.ec/consultas2026/", "Listado anterior del sitio, año 2026."],
+  ["Guía de gestión de riesgos y evaluación de impacto, v2 (PDF)", "https://spdp.gob.ec/wp-content/uploads/2026/03/ggrispdp2026v2.pdf", "Res. SPDP-SPD-2026-0012-R."],
+  ["SISPDP · servicios en línea", "https://servicios.spdp.gob.ec", "Notificación de vulneraciones y trámites."],
+  ["Trámite: consultas a la SPDP (gob.ec)", "https://www.gob.ec/spdp/tramites/atencion-consultas-ley-organica-proteccion-datos-personales-reglamento-general-demas-regulacion-expedida-institucion", "Requisitos para presentar una consulta; correo consultas@spdp.gob.ec."],
+  ["LOPDP en gob.ec", "https://www.gob.ec/regulaciones/ley-organica-proteccion-datos-personales", "Ficha de la ley en el Registro Único de Trámites y Regulaciones."],
+ ],
+ "ext": [
+  ["Unión Europea", "Comité Europeo de Protección de Datos (EDPB)", "https://www.edpb.europa.eu", "Directrices sobre DPD, evaluación de impacto, perfiles y vulneraciones."],
+  ["Unión Europea", "Supervisor Europeo de Protección de Datos (EDPS)", "https://www.edps.europa.eu", "Autoridad de las instituciones de la UE; publicaciones técnicas."],
+  ["Unión Europea", "Reglamento General de Protección de Datos (RGPD) en EUR-Lex", "https://eur-lex.europa.eu/eli/reg/2016/679/oj", "Texto oficial en español."],
+  ["España", "Agencia Española de Protección de Datos (AEPD)", "https://www.aepd.es", "Guías prácticas en español (riesgos, evaluación de impacto, DPD)."],
+  ["Francia", "Commission Nationale de l'Informatique et des Libertés (CNIL)", "https://www.cnil.fr", "Guías técnicas y herramienta PIA."],
+  ["Chile", "Ley 21.719 (crea la Agencia de Protección de Datos Personales)", "https://www.bcn.cl/leychile/navegar?idLey=21719", "Vigencia prevista el 01-12-2026; hay un proyecto para postergarla y la Agencia aún se instala."],
+  ["Uruguay", "Unidad Reguladora y de Control de Datos Personales (URCDP)", "https://www.gub.uy/unidad-reguladora-control-datos-personales", "Guías, dictámenes y documento de trabajo sobre el delegado."],
+  ["Brasil", "Agencia Nacional de Protección de Datos (ANPD)", "https://www.gov.br/anpd/pt-br", "Guías orientativas y LGPD en español."],
+  ["Colombia", "Superintendencia de Industria y Comercio (SIC), Delegatura de Protección de Datos", "https://sedeelectronica.sic.gov.co/publicaciones/boletin-juridico/tema/Protecci%C3%B3n%20de%20Datos%20Personales", "Conceptos, sanciones y guía del oficial de protección de datos."],
+  ["Perú", "Autoridad Nacional de Protección de Datos Personales (ANPD)", "https://www.gob.pe/anpd", "Opiniones consultivas, directiva del oficial de datos y registro de sanciones."],
+  ["Panamá", "Autoridad Nacional de Transparencia y Acceso a la Información (ANTAI)", "https://www.antai.gob.pa", "Dirección de Protección de Datos Personales (Ley 81 de 2019)."],
+  ["Iberoamérica", "Red Iberoamericana de Protección de Datos (RIPD)", "https://www.redipd.org", "Estándares iberoamericanos y cláusulas contractuales modelo."],
+ ],
+}

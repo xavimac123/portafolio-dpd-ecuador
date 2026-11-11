@@ -201,3 +201,78 @@ ABIERTOS = [
  ["Vulneraciones: la Res. 0028 art. 13.3 aún nombra a la ARCOTEL; rige el art. 43 LOPDP reformado (organismo competente y CSIRT).", "BASE-LEGAL, punto 31"],
  ["Una misma firma como DPD e implementadora del mismo cliente: la norma no lo resuelve. Criterio prudente: no ser DPD de quien uno implementa; si la firma presta ambos servicios, personas distintas, declaración del art. 17 y consulta a la SPDP.", "BASE-LEGAL, punto 32"],
 ]
+
+# ---------------- Quién puede ser DPD ----------------
+# Los criterios de oficios de absolución de consultas se conocen por resúmenes de terceros (nmslaw.com.ec) y son
+# opiniones referenciales, no vinculantes (Res. SPDP-SPDP-2024-0012-R arts. 1 y 2).
+QUIEN = {
+ "requisitos": [
+  ["Ser persona natural: la función es personalísima. Una persona jurídica no puede ser DPD, pero puede prestar el servicio por medio de una persona natural, que responde personalmente.", "LOPDP art. 4; Oficio SPDP-IRD-2025-0277-O (resumen)"],
+  ["Estar en goce de los derechos políticos.", "RGLOPDP art. 55 num. 1"],
+  ["Ser mayor de edad.", "RGLOPDP art. 55 num. 2"],
+  ["Título de tercer nivel en Derecho, Sistemas de Información, Comunicación o Tecnologías. No lo reemplazan cursos, diplomados, certificaciones ni el programa profesionalizante.", "RGLOPDP art. 55 num. 3; criterio SPDP de noviembre de 2025 (resumen)"],
+  ["Experiencia profesional de al menos cinco años.", "RGLOPDP art. 55 num. 4"],
+  ["Desde el 1 de enero de 2029, aprobar el programa profesionalizante oficializado por la SPDP; maestrías y certificaciones no son equivalentes.", "Res. 0028 art. 11 y transitoria séptima; Oficio SPDP-IRD-2025-0262-O (resumen)"],
+  ["No estar incurso en impedimentos ni conflicto de intereses.", "RGLOPDP art. 56; Res. 0028 arts. 16 a 18"]],
+ "computo": [
+  ["Según la SPDP, los cinco años se cuentan desde la obtención del título de tercer nivel.", "Oficio SPDP-IRD-2025-0262-O (resumen)"],
+  ["La experiencia no tiene que ser en protección de datos: basta que sea profesional en un área habilitada (Derecho, Sistemas de Información, Comunicación o Tecnologías).", "Oficio SPDP-IRD-2025-0262-O (resumen)"],
+  ["La norma no dice cómo se prueba. Buena práctica (criterio propio): título registrado en la SENESCYT, certificados laborales o contratos, historial de aportes del IESS, matrícula profesional y facturas por servicios profesionales.", "criterio propio"],
+  ["La calculadora suma solo los periodos posteriores al título y en área habilitada, sin contar dos veces los periodos que se superponen.", "criterio propio sobre el Oficio SPDP-IRD-2025-0262-O"]],
+ "pueden": [
+  ["Abogados (título de tercer nivel en Derecho).", "RGLOPDP art. 55 num. 3"],
+  ["Profesionales de Sistemas de Información (por ejemplo, ingeniería o licenciatura en sistemas).", "RGLOPDP art. 55 num. 3"],
+  ["Profesionales de Comunicación.", "RGLOPDP art. 55 num. 3"],
+  ["Profesionales de Tecnologías (por ejemplo, tecnologías de la información, computación o software).", "RGLOPDP art. 55 num. 3"],
+  ["Pueden ser internos (relación de dependencia) o externos (prestación de servicios); en el sector público lo designa la máxima autoridad.", "RGLOPDP art. 49; Res. 0028 art. 12"]],
+ "no_pueden": [
+  ["Profesionales de otras áreas (contabilidad, administración, psicología, medicina, entre otras) si no tienen además un título habilitante.", "RGLOPDP art. 55 num. 3"],
+  ["Quien solo tiene cuarto nivel, diplomados o certificaciones en protección de datos sin título de tercer nivel habilitante.", "criterio SPDP de noviembre de 2025 (resumen)"],
+  ["Una persona jurídica como tal.", "Oficio SPDP-IRD-2025-0277-O (resumen)"],
+  ["Quienes tengan impedimentos: administradores, socios, parientes de directivos, oficial de seguridad o de cumplimiento, apoderados especiales y cargos de nivel jerárquico superior del sector público.", "RGLOPDP art. 56; Res. 0028 art. 16"]],
+ "otros": [
+  ["El DPD no puede registrar su propio nombramiento: lo hace el responsable o el encargado.", "Oficio SPDP-IRD-2025-0262-O (resumen)"],
+  ["El DPD no debe custodiar contraseñas de bases de datos o sistemas: es control operativo y compromete su independencia.", "Oficio SPDP-IRD-2025-0279-O (resumen)"],
+  ["Un DPD que no reside en el Ecuador no tiene régimen especial: cumple los mismos requisitos.", "Oficio SPDP-IRD-2025-0262-O (resumen)"]],
+ "areas": [["der", "Derecho"], ["sis", "Sistemas de Información"], ["com", "Comunicación"], ["tec", "Tecnologías"], ["otra", "Otra área (no habilitada)"]],
+}
+
+# ---------------- Temas clave ----------------
+TEMAS = [
+ {"id": "perfiles", "t": "Elaboración de perfiles",
+  "que": "Todo tratamiento de datos que permite evaluar, analizar o predecir aspectos de una persona para determinar comportamientos o estándares sobre su rendimiento profesional, situación económica, salud, preferencias, intereses, habilidad, ubicación o movimiento.",
+  "que_c": "LOPDP art. 4",
+  "ejemplos": ["Puntaje de crédito o de riesgo de cliente.", "Segmentación publicitaria por comportamiento de compra o navegación.", "Filtros automáticos de hojas de vida en selección de personal.", "Evaluación de desempeño con métricas automáticas o geolocalización de vendedores.", "Chatbots o sistemas de IA que clasifican a los usuarios."],
+  "implica": [
+   ["Informar al titular que existen valoraciones y decisiones automatizadas, incluida la elaboración de perfiles.", "LOPDP art. 12 num. 17"],
+   ["El titular puede oponerse en todo momento a perfiles con fines de mercadotecnia directa.", "LOPDP art. 16 num. 2"],
+   ["El titular puede no ser sometido a decisiones basadas única o parcialmente en valoraciones automatizadas con efectos jurídicos o que afecten sus derechos: pedir explicación motivada, presentar observaciones, conocer criterios, tipos de datos y fuente, e impugnar. Excepciones: contrato, autorización normativa, consentimiento explícito o falta de impacto grave.", "LOPDP art. 20"],
+   ["Con datos sensibles o de niñas, niños y adolescentes se requiere autorización expresa o un interés público esencial con salvaguardas.", "LOPDP art. 21; RGLOPDP art. 19"],
+   ["Evaluación de impacto obligatoria si hay evaluación sistemática y exhaustiva con decisiones de efectos jurídicos.", "LOPDP art. 42 lit. a"],
+   ["Registrar en el RAT el uso de perfiles y, con IA, las decisiones automatizadas con efectos jurídicos.", "RGLOPDP art. 38 num. 5; Res. 2026-0009 art. 7.1"],
+   ["Los perfiles automatizados con efectos jurídicos califican directamente como gran escala.", "Res. 2026-0005 art. 14"],
+   ["No pueden basarse en el interés legítimo (salvo finanzas y seguros con salvaguardas).", "Res. 2025-0041 art. 16.3"],
+   ["Las empresas de publicidad o investigación de mercados que perfilan deben designar DPD.", "Res. 0028 art. 10.6"],
+   ["La información inferida por perfiles no entra en la portabilidad.", "LOPDP art. 17"]],
+  "dpd": ["Identificar en el RAT cada tratamiento que perfila y si deriva en decisiones automatizadas.", "Asesorar sobre la base legal (consentimiento explícito, contrato o norma), nunca interés legítimo para perfiles con efectos.", "Exigir la evaluación de impacto antes de iniciar y revisar su justificación.", "Verificar que la política y los avisos informen los perfiles y cómo oponerse.", "Supervisar que exista intervención humana y un canal para explicar e impugnar decisiones.", "Revisar si el perfilamiento activa la gran escala o la obligación de designar DPD."],
+  "exigir": ["Inventario de modelos, reglas o proveedores que perfilan (incluida la IA).", "Criterios de valoración, variables usadas y su fuente.", "Pruebas de sesgo o discriminación y responsable de revisión humana.", "Evidencia del consentimiento o del contrato que respalda la decisión.", "Procedimiento de oposición y de impugnación con plazos."],
+  "herr": ["04", "07", "05"]},
+ {"id": "rationales", "t": "Rationales (justificación de los valores de riesgo)",
+  "que": "El rationale es el razonamiento de respaldo que sustenta cualquier valor de entrada de una gestión de riesgos (probabilidad, frecuencia, impacto, etiquetas de una matriz). Evita ingresar valores sin sustento que distorsionen el análisis.",
+  "que_c": "Guía v2, Cap. I, §§ 0 y 4.1",
+  "donde": [
+   ["Es obligatorio justificar toda estimación cuantitativa o cualitativa del impacto en los derechos de los titulares.", "Guía v2, Cap. I, § 4.1 (obligatorio)"],
+   ["Rige para el análisis de riesgos y la evaluación de impacto que exige la ley.", "LOPDP arts. 40 y 42; Guía v2, art. 2 de la resolución"],
+   ["Toda evaluación de impacto debe adjuntar como anexos los documentos de respaldo de las métricas y modelos usados.", "Guía v2, anexo"],
+   ["Se aplica también a los sistemas de IA y a la biometría, que remiten a la guía de riesgos vigente.", "Res. 2026-0009 arts. 5 y 6; Res. 2026-0039 (resumen)"],
+   ["Forma parte del contenido mínimo del programa profesionalizante del DPD.", "Res. 0004, Anexo I, bloque 3"]],
+  "tipos": [
+   ["Cuantitativo", "Se apoya en datos: frecuencias históricas, estadística, Bayes, Monte Carlo, predicción conformal. Se expresa en rangos o distribuciones.", "Guía v2, Cap. I, § 4.2"],
+   ["Cualitativo", "Se apoya en la opinión de expertos, idealmente calibrada (Delphi, Lens o análisis argumental). En pymes basta un experto que calibre sus opiniones.", "Guía v2, Cap. I, § 4.3"]],
+  "pasos": ["Definir el escenario de riesgo y el lapso (por ejemplo, un año).", "Reunir la evidencia: registros de incidentes, reportes del SOC, auditorías, estadísticas del sector, sanciones de la SPDP.", "Elegir el método (cuantitativo o cualitativo) y aplicarlo.", "Expresar el valor en un rango, no en una cifra exacta.", "Escribir el rationale: qué dato, de qué fuente, con qué método y por qué ese valor.", "Adjuntar el respaldo como anexo y revisarlo cuando cambien las circunstancias."],
+  "ejemplo": ["Escenario (ficticio): phishing con acceso a datos de clientes en el próximo año.", "Valor: entre 3 y 8 eventos al año.", "Rationale: promedio de los registros de incidentes de los últimos tres años [ADJUNTAR ANEXO], sin cambios relevantes en amenazas ni controles.", "Si no hay datos: cinco expertos consultados de forma anónima (método Delphi), promedio de sus estimaciones [ADJUNTAR ANEXO]."],
+  "errores": [["Usar escalas de 1 a 3 y llamarlo análisis cuantitativo: los números son solo etiquetas.", "Guía v2, Cap. II, § 3.2"], ["Usar la matriz de riesgo para calibrar: la matriz solo representa.", "Guía v2, Cap. II, § 3.5"], ["Multiplicar probabilidad por impacto por defecto y ocultar riesgos de baja probabilidad y alto impacto.", "Guía v2, Cap. II, § 3.9"], ["Copiar valores de otra empresa o de una plantilla sin respaldo.", "Guía v2, Cap. I, § 4.1"]],
+  "dpd": ["Revisar que cada valor tenga su rationale y su anexo; si falta, emitir observación escrita.", "Ayudar a los expertos internos a calibrar sus estimaciones mediante entrevistas.", "Proponer métodos de calibración (no fijar los valores por el responsable).", "Verificar que los rationales se actualicen tras un incidente o un cambio de sistema."],
+  "exigir": ["Registros de incidentes y reportes de seguridad.", "Identidad y perfil de los expertos consultados y sus respuestas.", "Fuentes externas usadas (informes, sanciones, estadísticas).", "Memoria de cálculo o archivo del modelo."],
+  "herr": ["07"]},
+]

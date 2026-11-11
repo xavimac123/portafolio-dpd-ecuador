@@ -1,6 +1,6 @@
 # ARCHIVO MAESTRO DE CONTEXTO · MSC Protección de Datos (MSC PD)
 
-Actualizado: 2026-11-11 (quinta entrega). Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (normas).
+Actualizado: 2026-11-11 (sexta entrega). Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (normas).
 
 ## 1. Identidad y propósito
 - **Qué es:** app instalable (PWA) para gestionar clientes y cumplimiento LOPDP (Ecuador) con las nueve herramientas del portafolio de Macías Sánchez Consultores.
@@ -10,7 +10,7 @@ Actualizado: 2026-11-11 (quinta entrega). Leer junto con `CLAUDE.md` (reglas) y 
 - **Reglas clave:** nunca datos reales de clientes ni de titulares; toda cita legal consta en `BASE-LEGAL.md`; escalas propias rotuladas «criterio propio»; firma «Consultor en Protección de Datos Personales» (no «DPD» hasta el registro ante la SPDP); el DPD asesora y supervisa, no implementa; terminología LOPDP; dinero como «USD $ 1.234,56»; exportaciones con 6 cm para firma y sello.
 
 ## 2. Estado arquitectónico
-- `app-pd/fuente/index.html`: toda la app. Pestañas: Inicio, Clientes, Herramientas, Agenda, Referencia, Responsabilidades DPO, Ajustes.
+- `app-pd/fuente/index.html`: toda la app. Pestañas: Inicio, Clientes, Herramientas, Agenda, Referencia, Responsabilidades DPO, Publicidad, Ajustes.
 - `app-pd/build_pwa.py`: incrusta las nueve herramientas, `scripts/exportar.js`, la Referencia (`scripts/referencia_config.py`, tablas de `docs/contraste-guias-spdp.md` y puntos abiertos de `BASE-LEGAL.md`) y copia los PDF de `app-pd/normas/`. Genera `app-pd/docs/` y `app-pd/dist/preview.html`.
 - `scripts/exportar.js` (MSCDoc): Word .docx real y PDF por impresión, con espacio para firma y sello. `scripts/barra_contexto.py` lo agrega a las nueve herramientas (botones «Word (.docx)» y «PDF» junto a cada «Copiar … (Word)»).
 - `scripts/*_config.py`: fuente única de cada herramienta; `scripts/generar_*.py` generan las páginas.
@@ -53,6 +53,12 @@ Actualizado: 2026-11-11 (quinta entrega). Leer junto con `CLAUDE.md` (reglas) y 
 ## 3e. Quinta entrega (2026-11-11)
 - Pestaña «Responsabilidades DPO» (fuente `scripts/responsabilidades_config.py`): qué es el delegado; catálogo de funciones y deberes por eje con cita y buena práctica (criterio propio); garantías que debe dar la organización; prohibiciones, conflictos e impedimentos; «Qué no es un DPO» (12 casos); buena auditoría (base normativa, principios, cinco fases de criterio propio, mapa de evidencias, errores frecuentes); lista «Antes de aceptar» guardada en el dispositivo; exportación Word y PDF con firma.
 - Leídos los textos de la Res. 0028 (DPD), la Res. 0004 (programa profesionalizante) y la copia LEXIS de la guía v2; BASE-LEGAL actualizada (filas de DPD y auditoría verificadas) y Referencia de la Res. 0028 con artículos. Nuevos puntos abiertos 30 a 32 (rol del DPD en riesgos según la guía v2, ARCOTEL en la Res. 0028, misma firma como DPD e implementadora).
+
+## 3f. Sexta entrega (2026-11-11)
+- Responsabilidades DPO: «Quién puede ser DPO» (requisitos, cómputo de los cinco años desde el título según el Oficio SPDP-IRD-2025-0262-O, quiénes pueden y no pueden, otros criterios) con calculadora de periodos que no se guarda; «Perfiles y rationales» con qué son, qué implican, qué hace el DPD y qué exigir.
+- Referencia: enlaces de la SPDP (portal, resoluciones, consultas absueltas, guía v2, SISPDP, trámite de consultas) y de autoridades extranjeras como referencia comparada.
+- Pestaña «Publicidad» (fuente `scripts/publicidad_config.py`): piezas PNG para WhatsApp (9:16, 4:5, 1:1) de servicios, preguntas, datos, «qué no es un DPO», presentación del profesional (solo dice «Delegado» con cargo y registro en Ajustes) y autodiagnóstico; mensaje con aviso de BAJA; contacto cifrado en cfg.pub.
+- Autodiagnóstico Tally X5LNKV enlazado: importación del CSV de respuestas como prospectos (solo con consentimiento), con brechas, seguimiento a 1 día, recordatorio de eliminar a los 6 meses, WhatsApp de seguimiento y acceso a la proforma.
 
 ## 4. Pendiente (orden de prioridad)
 2. PDF de la ley y el reglamento: son copias LEXIS; no se versionan mientras el repositorio sea público. Publicarlos al pasar a Cloudflare con Access.

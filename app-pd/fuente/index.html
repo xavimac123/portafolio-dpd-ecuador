@@ -138,6 +138,8 @@ footer{max-width:820px;margin:0 auto;padding:0 14px 28px;font-size:11.5px;color:
 body.dark .fase>li:before{background:var(--oro);color:#14181E}.fase b{font-stretch:108%}.fase ul{margin:4px 0 0;padding-left:16px;font-size:13.5px}.fase li li{margin:2px 0}
 .dsec{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--olivo);margin:16px 0 6px}
 .ckr{font-weight:700;font-size:13.5px;padding:10px 12px;border-radius:8px;margin-top:8px}.ckr.ok{background:var(--okf);color:var(--ok)}.ckr.al{background:var(--malf);color:var(--mal)}
+.pgrid{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;align-items:end;margin-top:6px}@media(max-width:520px){.pgrid{grid-template-columns:1fr 1fr}}
+.cst a.ex{color:var(--txt);text-decoration:none;font-weight:700}.cst a.ex:hover{color:var(--oro)}
 [hidden]{display:none!important}
 body.dark{--marfil:#0F1216;--linea:#2A3038;--gris:#9AA1AA;--card:#171B21;--okf:#14261A;--malf:#2B1714;--avif:#2A2212;--olivo:#C9BC82;--txt:#E7E4DA}
 body.dark input,body.dark select,body.dark textarea,body.dark .btn.sec,body.dark .chips button,body.dark .seg button{background:#1C2128;color:#E7E4DA;border-color:#323A45;color-scheme:dark}
@@ -150,7 +152,7 @@ body.dark .ref-n.p-Base{border-left-color:var(--oroc)}
 <header><img class="deco" id="deco" alt=""><div class="marca"><img class="iso" id="isoimg" alt=""><div class="wm">MACÍAS SÁNCHEZ <span class="pd">PD</span><small>PROTECCIÓN DE DATOS · LOPDP</small></div></div>
 <button id="hdr-lock" hidden>Bloquear</button>
 <nav id="nav" hidden>
-<button data-t="ini" aria-selected="true">Inicio</button><button data-t="cli">Clientes</button><button data-t="her">Herramientas</button><button data-t="age">Agenda</button><button data-t="ref">Referencia</button><button data-t="dpo">Responsabilidades DPO</button><button data-t="aju">Ajustes</button>
+<button data-t="ini" aria-selected="true">Inicio</button><button data-t="cli">Clientes</button><button data-t="her">Herramientas</button><button data-t="age">Agenda</button><button data-t="ref">Referencia</button><button data-t="dpo">Responsabilidades DPO</button><button data-t="pub">Publicidad</button><button data-t="aju">Ajustes</button>
 </nav></header>
 
 <div id="lock"></div>
@@ -162,6 +164,7 @@ body.dark .ref-n.p-Base{border-left-color:var(--oroc)}
 <section id="v-age"></section>
 <section id="v-ref"></section>
 <section id="v-dpo"></section>
+<section id="v-pub"></section>
 <section id="v-aju"></section>
 </main>
 <footer id="foot" hidden>MSC Protección de Datos · Herramienta de uso profesional de Macías Sánchez Consultores. Los datos se guardan cifrados en este dispositivo y, si lo activa, en su Google Drive. No registre datos de los titulares (clientes o trabajadores de sus clientes): solo información de la empresa y de su cumplimiento. Escalas y puntajes de las herramientas: criterio propio cuando así se indica.<br>© 2026 Macías Sánchez Consultores · Abg. Mariano X. Macías Sánchez. Todos los derechos reservados. Prohibida la reproducción, distribución o uso comercial sin autorización escrita.</footer>
@@ -174,6 +177,7 @@ body.dark .ref-n.p-Base{border-left-color:var(--oroc)}
 <script type="application/json" id="j-ref">__REF_JSON__</script>
 <script type="application/json" id="j-glo">__GLO_JSON__</script>
 <script type="application/json" id="j-dpo">__DPO_JSON__</script>
+<script type="application/json" id="j-pub">__PUB_JSON__</script>
 <script>__EXPORT_JS__</script>
 <script>
 (function(){
@@ -185,6 +189,7 @@ var IMG=JSON.parse(document.getElementById('j-img').textContent);
 var REF=JSON.parse(document.getElementById('j-ref').textContent);
 var GLO=JSON.parse(document.getElementById('j-glo').textContent);
 var DPO=JSON.parse(document.getElementById('j-dpo').textContent);
+var PUB=JSON.parse(document.getElementById('j-pub').textContent);
 var D=window.MSCDoc,usd=D.usd;
 document.getElementById('isoimg').src=IMG.iso;document.getElementById('deco').src=IMG.lineas;
 
@@ -236,6 +241,7 @@ var TIPOS={
  sol:{n:'Solicitud de derechos: responder',h:''},
  entrega:{n:'Entrega de documento',h:'08'},
  reunion:{n:'Reunión con el cliente',h:''},
+ seguim:{n:'Seguimiento de prospecto (autodiagnóstico)',h:''},
  informe:{n:'Informe anual a la gerencia',h:''},
  otro:{n:'Otro',h:''}};
 /* [días de plazo que fija la LOPDP (0 = no fija), nota] */
@@ -328,7 +334,7 @@ function entrar(){document.body.classList.remove('locked');$('#lock').innerHTML=
 $$('#nav button').forEach(function(b){b.onclick=function(){if(b.dataset.t==='cli')R.sel=null;show(b.dataset.t)}});
 $('#hdr-lock').onclick=bloquear;
 function show(t){R.view=t;store('tab',t);$$('#nav button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});$$('main section').forEach(function(s){s.classList.toggle('on',s.id==='v-'+t)});
- ({ini:vIni,cli:vCli,her:vHer,age:vAge,ref:vRef,dpo:vDpo,aju:vAju})[t]();badges();window.scrollTo(0,0)}
+ ({ini:vIni,cli:vCli,her:vHer,age:vAge,ref:vRef,dpo:vDpo,pub:vPub,aju:vAju})[t]();badges();window.scrollTo(0,0)}
 function badges(){if(!R.data)return;var n=plazos().filter(function(p){return p.est!=='hecho'&&difDias(p.f)<0}).length;var b=$('#nav button[data-t=age]');b.innerHTML='Agenda'+(n?'<span class="b">'+n+'</span>':'')}
 function aplicarTema(){var t=(R.data&&R.data.cfg.tema)||'auto',dk=t==='dark'||(t==='auto'&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);document.body.classList.toggle('dark',dk);document.documentElement.style.background=dk?'#0F1216':'';try{var w=$('#tool-f').contentWindow;if(w&&w.MSCTema)w.MSCTema()}catch(e){}}
 window.PDTema=function(){return document.body.classList.contains('dark')};
@@ -896,6 +902,8 @@ function vRef(){var V=$('#v-ref'),q=store('rq')||'',tm=store('rt')||'';
  V.innerHTML='<h2>Referencia normativa</h2><p class="sub">Ley, reglamento y resoluciones de la SPDP con los puntos de consulta rápida para reuniones con clientes. Revisión de fuentes: '+esc(fcorta(REF.rev))+'. Es un resumen de apoyo: antes de citar en un documento, confirme en el texto oficial.</p>'+
  '<div class="card"><h3>Ley y reglamento en PDF</h3><div class="row">'+pdfs.map(function(x){var f=REF.pdf[x[0]];return f?'<a class="btn sec" href="'+esc(f)+'" target="_blank" rel="noopener" download="'+x[3]+'">Descargar '+x[1]+' (PDF)</a>':'<button class="btn sec" disabled title="Archivo pendiente">'+x[1]+' (PDF pendiente)</button>'}).join('')+'</div>'+
  (REF.pdf.lopdp&&REF.pdf.rglopdp?'<p class="hint">Se guardan en el dispositivo para consultarlos sin conexión después de abrirlos una vez.</p>':'<p class="hint">Falta incorporar '+pdfs.filter(function(x){return !REF.pdf[x[0]]}).map(function(x){return x[1]}).join(' y ')+': guarde el PDF en <b>app-pd/normas/</b> (lopdp.pdf, rglopdp.pdf) y vuelva a compilar. Mientras tanto, use «Fuente» en cada norma.</p>')+'</div>'+
+ '<details class="card plg"'+(store('renl')===0?'':' open')+' id="r-enl"><summary>Enlaces oficiales y de consulta</summary><p class="hint" style="margin:0 0 6px">Superintendencia de Protección de Datos Personales (SPDP). Las consultas absueltas son opiniones referenciales, no vinculantes.</p><ul class="cst">'+REF.enlaces.spdp.map(function(x){return '<li><span class="st">🇪🇨</span><div><a class="ex" href="'+esc(x[1])+'" target="_blank" rel="noopener">'+esc(x[0])+' ›</a><div class="qh">'+esc(x[2])+'</div></div></li>'}).join('')+'</ul>'+
+ '<div class="rk" style="font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--olivo);margin:12px 0 4px">Autoridades extranjeras · referencia comparada, no vinculante en el Ecuador</div><ul class="cst">'+REF.enlaces.ext.map(function(x){return '<li><span class="st">🌐</span><div><span class="hz" style="margin:0 0 2px;display:inline-block;font-size:11px;font-weight:700;color:var(--olivo);background:var(--avif);border-radius:5px;padding:0 6px">'+esc(x[0])+'</span><br><a class="ex" href="'+esc(x[2])+'" target="_blank" rel="noopener">'+esc(x[1])+' ›</a><div class="qh">'+esc(x[3])+'</div></div></li>'}).join('')+'</ul><p class="hint">Enlaces verificados el 11 nov 2026. Si un sitio cambia de dirección, búsquelo por el nombre de la institución.</p></details>'+
  '<input id="r-q" placeholder="Buscar: vulneración, encargo, plazo, multa…" value="'+esc(q)+'" style="margin-bottom:8px"><div class="chips" id="r-t" style="margin-bottom:10px"><button data-tm="" class="'+(tm?'':'on')+'">Todo</button>'+temas.map(function(t){return '<button data-tm="'+esc(t)+'" class="'+(tm===t?'on':'')+'">'+esc(t)+'</button>'}).join('')+'</div>'+
  '<div id="r-pl"></div><div id="r-l"></div>'+
  '<details class="card plg"><summary>Contraste de las herramientas con las guías y normas de la SPDP</summary><p class="hint">Qué exige cada norma y qué herramienta lo cubre. ✅ cubierto · 🟡 parcial · ⬜ pendiente.</p>'+REF.contraste.map(function(c){return '<details class="plg" style="border-top:1px solid var(--linea)"><summary style="font-size:13.5px">'+esc(c.sec.replace(/^\d+\.\s*/,''))+' <span class="tag g">'+c.filas.length+'</span></summary><ul class="cst">'+c.filas.map(function(f){return '<li><span class="st">'+esc(f[2]||'·')+'</span><div><div class="ex">'+esc(f[0])+(f[1]&&f[1]!=='—'?'<span class="hz">'+esc(f[1])+'</span>':'')+'</div><div class="qh">'+esc(f[3])+'</div></div></li>'}).join('')+'</ul></details>'}).join('')+'</details>'+
@@ -903,7 +911,7 @@ function vRef(){var V=$('#v-ref'),q=store('rq')||'',tm=store('rt')||'';
  var pinta=function(){var k=norm($('#r-q').value),ok=function(t){return !k||norm(t).indexOf(k)>-1};
   var PL=REF.plazos.filter(function(x){return (!tm||x[3]===tm)&&ok(x.join(' '))});
   $('#r-pl').innerHTML=PL.length?'<details class="card plg"'+(k||tm||store('rpl')!==0?' open':'')+' id="r-pld"><summary>Plazos y cifras clave <span class="tag g">'+PL.length+'</span></summary><p class="hint" style="margin:0 0 8px">«Término» = días hábiles; «plazo» = días calendario.</p><div class="plz">'+PL.map(function(x){return '<div><div class="pv">'+esc(x[1])+'</div><div class="pa">'+esc(x[0])+'</div><div class="pf">'+esc(x[2])+'</div></div>'}).join('')+'</div></details>':'';
-  if($('#r-pld'))$('#r-pld').ontoggle=function(){store('rpl',this.open?1:0)};
+  if($('#r-pld'))$('#r-pld').ontoggle=function(){store('rpl',this.open?1:0)};if($('#r-enl'))$('#r-enl').ontoggle=function(){store('renl',this.open?1:0)};
   var L=REF.normas.filter(function(n){return (!tm||(n.tema||[]).indexOf(tm)>-1)&&ok(n.sigla+' '+n.nombre+' '+n.pub+' '+(n.resumen||'')+' '+(n.dpd||[]).join(' ')+' '+n.puntos.map(function(p){return p.join(' ')}).join(' '))}),g='';
   ['Base','Alta','Media'].forEach(function(pr){var G=L.filter(function(n){return n.prio===pr});if(!G.length)return;
    g+='<div style="font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--olivo);margin:14px 0 6px">'+({Base:'Ley y reglamento',Alta:'Resoluciones de uso frecuente',Media:'Resoluciones de consulta'})[pr]+'</div>'+
@@ -916,7 +924,41 @@ function vRef(){var V=$('#v-ref'),q=store('rq')||'',tm=store('rt')||'';
 
 /* ===================== RESPONSABILIDADES DPO ===================== */
 /* Fuente única: scripts/responsabilidades_config.py (citas en BASE-LEGAL.md). Formas de ejercer, fases de auditoría y clasificación de hallazgos: criterio propio. */
-var DSEC=[['','Todo'],['fun','Funciones'],['gar','Lo que debe garantizar la organización'],['pro','Lo que no debe hacer'],['noes','Qué no es un DPO'],['aud','Buena auditoría'],['ant','Antes de aceptar']];
+var DSEC=[['','Todo'],['fun','Funciones'],['quien','Quién puede ser DPO'],['temas','Perfiles y rationales'],['gar','Lo que debe garantizar la organización'],['pro','Lo que no debe hacer'],['noes','Qué no es un DPO'],['aud','Buena auditoría'],['ant','Antes de aceptar']];
+/* --- Quién puede ser DPD y cálculo de los cinco años (criterio del Oficio SPDP-IRD-2025-0262-O, por resumen) --- */
+var DCAL={area:'',ft:'',may:false,der:false,prog:'',per:[{d:'',h:'',a:'si'}]};
+function addAnios(s,n){var d=pd(s);d.setFullYear(d.getFullYear()+n);return iso(d)}
+function ymd(dias){var a=Math.floor(dias/365.25),r=dias-Math.round(a*365.25),m=Math.floor(r/30.44),ms=m+' mes'+(m===1?'':'es');if(!a)return m?ms:dias+' día'+(dias===1?'':'s');return a+' año'+(a===1?'':'s')+(m?' y '+ms:'')}
+function calcExp(){var Q=DPO.QUIEN,ft=DCAL.ft,hab=DCAL.area&&DCAL.area!=='otra',H=hoy(),iv=[];
+ DCAL.per.forEach(function(p){if(!p.d||p.a!=='si')return;var d=p.d,h=p.h||H;if(ft&&d<ft)d=ft;if(h>H)h=H;if(h>=d)iv.push([d,h])});
+ iv.sort(function(a,b){return a[0]<b[0]?-1:1});var mg=[];iv.forEach(function(x){var l=mg[mg.length-1];if(l&&x[0]<=addDia(l[1],1)){if(x[1]>l[1])l[1]=x[1]}else mg.push([x[0],x[1]])});
+ var dias=mg.reduce(function(s,x){return s+Math.round((pd(x[1])-pd(x[0]))/864e5)+1},0),need=1826,abierto=DCAL.per.some(function(p){return p.d&&!p.h&&p.a==='si'});
+ var f5=ft?addAnios(ft,5):'',L=[],ok=true,a=function(c,t){L.push('<li><span class="st">'+c+'</span><div>'+t+'</div></li>')};
+ if(!DCAL.area){a('⬜','Elija el área del título de tercer nivel.');ok=false}else if(!hab){a('⛔','El área del título no está entre las habilitadas (Derecho, Sistemas de Información, Comunicación o Tecnologías): no puede ser DPD con ese título (RGLOPDP art. 55 num. 3).');ok=false}else a('✅','Título en área habilitada: '+esc((Q.areas.filter(function(x){return x[0]===DCAL.area})[0]||[])[1])+'. Verifique que sea de tercer nivel y esté registrado en la SENESCYT.');
+ if(!ft){a('⬜','Ingrese la fecha de obtención del título: desde ella se cuentan los cinco años.');ok=false}else a(H>=f5?'✅':'⏳','Fecha más temprana posible para cumplir los cinco años desde el título: <b>'+esc(fcorta(f5))+'</b>'+(H>=f5?'.':' (faltan '+difDias(f5)+' días).'));
+ if(ft){var falt=Math.max(0,need-dias);a(dias>=need?'✅':'⏳','Experiencia profesional acreditada en área habilitada después del título: <b>'+ymd(dias)+'</b>'+(mg.length>1?' en '+mg.length+' periodos (sin duplicar superposiciones)':'')+'.'+(dias>=need?'':' Faltan '+ymd(falt)+(abierto?'; si continúa sin interrupción, cumpliría el <b>'+esc(fcorta(addDia(H,falt)))+'</b>.':'.')));if(dias<need)ok=false}
+ a(DCAL.may?'✅':'⬜','Mayoría de edad (RGLOPDP art. 55 num. 2).');a(DCAL.der?'✅':'⬜','Goce de los derechos políticos (RGLOPDP art. 55 num. 1).');if(!DCAL.may||!DCAL.der)ok=false;
+ var P29='2029-01-01';if(DCAL.prog==='si')a('✅','Programa profesionalizante aprobado (exigible desde el 01-01-2029).');else{a(H>=P29?'⛔':'⚠️','Programa profesionalizante '+(DCAL.prog==='curso'?'en curso':'no aprobado')+': '+(H>=P29?'es obligatorio desde el 1 de enero de 2029.':'será obligatorio desde el 1 de enero de 2029 (Res. 0028 art. 11 y transitoria séptima). Planifíquelo.'));if(H>=P29)ok=false}
+ a('➡️','Revise impedimentos y conflictos en la sección «Antes de aceptar».');
+ return '<div class="ckr '+(ok?'ok':'al')+'">'+(ok?'Con los datos ingresados, cumple los requisitos de tiempo, título y edad. Confirme impedimentos y documente la prueba.':'Con los datos ingresados, aún no cumple todos los requisitos.')+'</div><ul class="cst" style="margin-top:6px">'+L.join('')+'</ul><p class="hint">Cálculo orientativo (criterio propio sobre el Oficio SPDP-IRD-2025-0262-O, conocido por resumen). No se guarda: los datos de un candidato son personales. 5 años = 1.826 días.</p>'}
+function addDia(s,n){var d=pd(s);d.setDate(d.getDate()+n);return iso(d)}
+function quienHtml(ok){var Q=DPO.QUIEN,blk=function(t,L,ic){L=L.filter(function(x){return ok(x.join(' '))});return L.length?'<div class="card"><h3>'+t+'</h3><ul class="cst">'+L.map(function(x){return liD(ic,x)}).join('')+'</ul></div>':''};
+ return blk('Requisitos de la norma',Q.requisitos,'📌')+blk('Cómo se cuentan los cinco años',Q.computo,'🗓️')+blk('Quiénes pueden serlo',Q.pueden,'✅')+blk('Quiénes no pueden serlo',Q.no_pueden,'⛔')+blk('Otros criterios de la SPDP',Q.otros,'ℹ️')+
+ '<div class="card" id="d-cal"><h3>Calculadora de requisitos y de los cinco años</h3><div class="grid">'+sel('dc-a','Área del título de tercer nivel',DCAL.area,Q.areas)+campo('dc-f','Fecha de obtención del título',DCAL.ft,'date')+sel('dc-p','Programa profesionalizante',DCAL.prog,[['no','No aprobado'],['curso','En curso'],['si','Aprobado']])+
+ '<div><label>Otros requisitos</label><label style="font-weight:400;color:var(--txt);display:flex;gap:6px;align-items:center"><input type="checkbox" id="dc-m" style="width:20px;min-height:0"'+(DCAL.may?' checked':'')+'> Mayor de edad</label><label style="font-weight:400;color:var(--txt);display:flex;gap:6px;align-items:center"><input type="checkbox" id="dc-d" style="width:20px;min-height:0"'+(DCAL.der?' checked':'')+'> En goce de derechos políticos</label></div></div>'+
+ '<label style="margin-top:10px">Periodos de experiencia profesional (deje «hasta» vacío si continúa)</label><div id="dc-per"></div><div class="row" style="margin-top:6px"><button class="btn sm sec" id="dc-add">+ Periodo</button></div><div id="dc-r" style="margin-top:10px"></div></div>'}
+function bindCal(){if(!$('#d-cal'))return;var per=function(){$('#dc-per').innerHTML=DCAL.per.map(function(p,i){return '<div class="pgrid"><div><label>Desde</label><input type="date" data-pd="'+i+'" value="'+esc(p.d)+'"></div><div><label>Hasta</label><input type="date" data-ph="'+i+'" value="'+esc(p.h)+'"></div><div><label>¿Área habilitada?</label><select data-pa="'+i+'"><option value="si"'+(p.a==='si'?' selected':'')+'>Sí</option><option value="no"'+(p.a==='no'?' selected':'')+'>No</option></select></div><button class="btn sm sec" data-px="'+i+'" title="Quitar">✕</button></div>'}).join('');
+   $$('[data-pd]').forEach(function(e){e.oninput=function(){DCAL.per[+e.dataset.pd].d=e.value;res()}});$$('[data-ph]').forEach(function(e){e.oninput=function(){DCAL.per[+e.dataset.ph].h=e.value;res()}});$$('[data-pa]').forEach(function(e){e.onchange=function(){DCAL.per[+e.dataset.pa].a=e.value;res()}});
+   $$('[data-px]').forEach(function(e){e.onclick=function(){DCAL.per.splice(+e.dataset.px,1);if(!DCAL.per.length)DCAL.per.push({d:'',h:'',a:'si'});per();res()}})},res=function(){$('#dc-r').innerHTML=calcExp()};
+ $('#dc-a').onchange=function(){DCAL.area=this.value;res()};$('#dc-f').oninput=function(){DCAL.ft=this.value;res()};$('#dc-p').onchange=function(){DCAL.prog=this.value;res()};$('#dc-m').onchange=function(){DCAL.may=this.checked;res()};$('#dc-d').onchange=function(){DCAL.der=this.checked;res()};
+ $('#dc-add').onclick=function(){DCAL.per.push({d:'',h:'',a:'si'});per()};per();res()}
+function temaHtml(T,ok){if(!ok(JSON.stringify(T)))return '';var L=function(t,A,ic){return A&&A.length?'<div class="cmk" style="margin-top:12px">'+t+'</div><ul class="cst">'+A.map(function(x){return Array.isArray(x)?liD(ic,x):'<li><span class="st">'+ic+'</span><div>'+esc(x)+'</div></li>'}).join('')+'</ul>':''};
+ return '<div class="card"><h3>'+esc(T.t)+'</h3><div class="fd" style="font-size:14px">'+esc(T.que)+'</div>'+ciT(T.que_c)+
+ (T.ejemplos?L('Ejemplos frecuentes',T.ejemplos,'•'):'')+(T.implica?L('Qué implica según la norma',T.implica,'§'):'')+(T.donde?L('Dónde se exigen',T.donde,'§'):'')+
+ (T.tipos?'<div class="cmk" style="margin-top:12px">Tipos</div><div class="plz">'+T.tipos.map(function(x){return '<div><div class="pv">'+esc(x[0])+'</div><div class="pa">'+esc(x[1])+'</div><div class="pf">'+esc(x[2])+'</div></div>'}).join('')+'</div>':'')+
+ (T.pasos?'<div class="cmk" style="margin-top:12px">Cómo se desarrolla · criterio propio sobre la guía v2</div><ol style="margin:6px 0;padding-left:20px;font-size:13.5px">'+T.pasos.map(function(x){return '<li style="margin:3px 0">'+esc(x)+'</li>'}).join('')+'</ol>':'')+
+ (T.ejemplo?'<div class="nota">'+T.ejemplo.map(esc).join('<br>')+'</div>':'')+(T.errores?L('Errores frecuentes',T.errores,'✖'):'')+
+ L('Qué hace el DPD',T.dpd,'👤')+L('Qué exigir o pedir al responsable',T.exigir,'📄')+hBtns(T.herr)+'</div>'}
 function ciT(c){return '<span class="ci">'+esc(c)+'</span>'}
 function hBtns(H){return (H||[]).length?'<div class="row" style="margin-top:6px">'+H.map(function(h){return '<button class="btn sm sec" data-dh="'+h+'">Abrir '+h+' · '+esc(herr(h).n)+'</button>'}).join('')+'</div>':''}
 function liD(ic,x){return '<li><span class="st">'+ic+'</span><div><div>'+esc(x[0])+'</div>'+(x[1]?ciT(x[1]):'')+'</div></li>'}
@@ -933,6 +975,8 @@ function vDpo(){var V=$('#v-dpo'),q=store('dq')||'',sc=store('ds')||'',I=DPO.INT
   if(on('fun')){var f='';DPO.FUNCIONES.forEach(function(e){var L=e.items.filter(function(x){return ok(e.eje+' '+x.t+' '+x.d+' '+x.c+' '+x.como.join(' '))});if(!L.length)return;
     f+='<div class="card"><h3>'+esc(e.eje)+' <span class="tag g">'+L.length+'</span></h3>'+L.map(function(x){return '<div class="fn"><div class="ft">'+esc(x.t)+'</div><div class="fd">'+esc(x.d)+'</div>'+ciT(x.c)+(x.como.length?'<div class="cmk">Cómo ejercerla · buena práctica (criterio propio)</div><ul class="cm">'+x.como.map(function(c){return '<li>'+esc(c)+'</li>'}).join('')+'</ul>':'')+hBtns(x.herr)+'</div>'}).join('')+'</div>'});
    if(f)g+='<div class="dsec">Catálogo de funciones y deberes</div>'+f}
+  if(on('quien')){var qh=quienHtml(ok);if(qh)g+='<div class="dsec">Quién puede ser DPO y cómo se cuentan los cinco años</div>'+qh}
+  if(on('temas')){var th=DPO.TEMAS.map(function(T){return temaHtml(T,ok)}).join('');if(th)g+='<div class="dsec">Temas clave: elaboración de perfiles y rationales</div>'+th}
   if(on('gar')){var G=DPO.GARANTIAS.filter(function(x){return ok(x.join(' '))});if(G.length)g+='<div class="dsec">Lo que la organización debe garantizar (y el DPD exigir)</div><div class="card"><ul class="cst">'+G.map(function(x){return liD('✅',x)}).join('')+'</ul></div>'}
   if(on('pro')){var Pr=DPO.PROHIBICIONES.filter(function(x){return ok(x.join(' '))}),Im=DPO.IMPEDIMENTOS.filter(function(x){return ok(x.join(' '))});
    if(Pr.length||Im.length)g+='<div class="dsec">Lo que el DPD no debe hacer</div>'+(Pr.length?'<div class="card"><h3>Prohibiciones y conflictos de intereses <span class="tag r">'+Pr.length+'</span></h3><p class="hint" style="margin-top:0">En ningún caso puede recibir instrucciones sobre sus funciones ni sufrir represalias (Res. 0028 art. 15).</p><ul class="cst">'+Pr.map(function(x){return liD('⛔',x)}).join('')+'</ul></div>':'')+
@@ -951,7 +995,7 @@ function vDpo(){var V=$('#v-dpo'),q=store('dq')||'',sc=store('ds')||'',I=DPO.INT
   $('#d-l').innerHTML=g||'<p class="sub">Sin resultados para esa búsqueda.</p>';
   $$('[data-dh]',V).forEach(function(b){b.onclick=function(){elegirClienteYAbrir(b.dataset.dh)}});
   $$('[data-dk]',V).forEach(function(c){c.onchange=function(){var S=store('dpo:ck')||{};if(c.checked)S[c.dataset.dk]=1;else delete S[c.dataset.dk];store('dpo:ck',S);ckRes()}});
-  if($('#d-ck0'))$('#d-ck0').onclick=function(){store('dpo:ck',{});pinta()};ckRes()};
+  if($('#d-ck0'))$('#d-ck0').onclick=function(){store('dpo:ck',{});pinta()};ckRes();bindCal()};
  $('#d-q').oninput=function(){store('dq',this.value);pinta()};
  $$('[data-ds]',V).forEach(function(b){b.onclick=function(){sc=b.dataset.ds;store('ds',sc);$$('[data-ds]',V).forEach(function(x){x.classList.toggle('on',x===b)});pinta();var y=$('#d-s').getBoundingClientRect().top+window.scrollY-60;if(window.scrollY<y)window.scrollTo(0,y)}});pinta()}
 function ckRes(){var el=$('#d-ckr');if(!el)return;var S=store('dpo:ck')||{},fi=0,fg=0,n=0;DPO.ANTES.forEach(function(x,i){if(S[i])n++;else if(x[2]==='i')fi++;else fg++});
@@ -967,10 +1011,116 @@ function dpoDoc(){var F=R.data.cfg.firma,I=DPO.INTRO,A=DPO.AUDITORIA,TB='<table 
  '<h2>6. Cómo ejercer una buena auditoría</h2><h3>Qué exige la norma</h3>'+T(A.base,['Regla','Fuente'])+'<h3>Principios del auditor</h3>'+T(A.principios,['Principio','Qué implica','Fuente'])+
  '<h3>Fases (criterio propio)</h3>'+A.fases.map(function(f,i){return '<p><b>'+(i+1)+'. '+esc(f.n)+'</b></p><ul>'+f.pasos.map(function(p){return '<li>'+esc(p)+'</li>'}).join('')+'</ul>'}).join('')+
  '<h3>Qué revisar y qué evidencia pedir</h3>'+T(A.mapa.map(function(x){return [x[0],x[1],x[2]]}),['Área','Qué pedir o probar','Fuente'])+'<h3>Lo que no es una buena auditoría</h3>'+T(A.errores,['Error frecuente','Fuente'])+
- '<h2>7. Puntos abiertos</h2><ul>'+DPO.ABIERTOS.map(function(x){return '<li>'+esc(x[0])+' ('+esc(x[1])+')</li>'}).join('')+'</ul>'+
+ '<h2>7. Quién puede ser DPD</h2>'+T(DPO.QUIEN.requisitos,['Requisito','Fuente'])+'<h3>Cómo se cuentan los cinco años</h3>'+T(DPO.QUIEN.computo,['Regla','Fuente'])+'<h3>Quiénes pueden y quiénes no</h3>'+T(DPO.QUIEN.pueden.concat(DPO.QUIEN.no_pueden),['Supuesto','Fuente'])+'<h3>Otros criterios de la SPDP</h3>'+T(DPO.QUIEN.otros,['Criterio','Fuente'])+
+ DPO.TEMAS.map(function(t,i){return '<h2>'+(8+i)+'. '+esc(t.t)+'</h2><p>'+esc(t.que)+' ('+esc(t.que_c)+')</p>'+((t.implica||t.donde)?T(t.implica||t.donde,[t.implica?'Qué implica':'Dónde se exige','Fuente']):'')+(t.pasos?'<p><b>Cómo se desarrolla (criterio propio):</b></p><ol>'+t.pasos.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ol>':'')+'<p><b>Qué hace el DPD:</b></p><ul>'+t.dpd.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul><p><b>Qué exigir:</b></p><ul>'+t.exigir.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>'}).join('')+
+ '<h2>10. Puntos abiertos</h2><ul>'+DPO.ABIERTOS.map(function(x){return '<li>'+esc(x[0])+' ('+esc(x[1])+')</li>'}).join('')+'</ul>'+
  '<p><i>Documento informativo. No sustituye el texto oficial de las normas ni constituye una certificación de cumplimiento.</i></p>'+
  D.bloqueFirma([{rol:'Elaborado por',l:[F.nom||'',F.cargo||CARGOS[0],[F.mat?'Matrícula '+F.mat:'',F.cargo===CARGOS[1]&&F.reg?'Registro SPDP '+F.reg:''].filter(Boolean).join(' · ')]}],fcorta(hoy()));
  return h}
+
+/* ===================== PUBLICIDAD (WhatsApp) Y CAPTACIÓN ===================== */
+/* Fuente: scripts/publicidad_config.py y catálogo de servicios. Los datos de contacto se guardan cifrados en cfg.pub. */
+var PT=[['serv','Servicio'],['qa','Pregunta y respuesta'],['dato','Dato clave'],['noes','Qué no es un DPO'],['pres','Presentación del profesional'],['auto','Autodiagnóstico']];
+var PF=[['est','Estado 9:16'],['pub','Chat 4:5'],['sq','Cuadrado']],PH={est:1920,pub:1350,sq:1080};
+var QCORTA=['Delegado designado y registrado','Registro de actividades de tratamiento','Política aprobada por la gerencia','Aviso de privacidad previo','Base legal de cada uso','Prueba del consentimiento','Atención de derechos en plazo','Datos sensibles y de menores','Evaluación de impacto','Medidas de seguridad','Contratos con proveedores','Datos en el exterior','Notificación de vulneraciones','Confidencialidad del personal','Capacitación del personal'];
+var QPESO=[3,3,2,2,2,2,3,3,3,2,3,2,3,1,1];
+function pubCfg(){var c=R.data.cfg;if(!c.pub)c.pub={wa:'',mail:(c.firma&&c.firma.mail)||'',web:'',auto:PUB.AUTODIAG.url};return c.pub}
+function waNum(t){var d=String(t||'').replace(/\D/g,'');if(/^0\d{9}$/.test(d))d='593'+d.slice(1);return d}
+function waFmt(t){var d=String(t||'').replace(/\D/g,'');return /^0\d{9}$/.test(d)?d.slice(0,3)+' '+d.slice(3,6)+' '+d.slice(6):t}
+function esDPDreg(){var F=R.data.cfg.firma;return F.cargo===CARGOS[1]&&!!F.reg}
+function pubItems(t){var F=R.data.cfg.firma;
+ if(t==='serv')return PUB.SERV.map(function(x){return {k:'Servicio · '+x[0],t:x[1],x:x[2],c:'',r:x[4]}});
+ if(t==='qa')return PUB.PREGUNTAS.map(function(x){return {k:'Pregunta frecuente',t:x[0],x:x[1],c:x[2]}});
+ if(t==='dato')return PUB.DATOS.map(function(x){return {k:'Dato clave',t:x[0],x:x[1],c:x[2]}});
+ if(t==='noes')return DPO.NO_ES.map(function(x){return {k:'¿Sabía que…?',t:'El DPD no es '+minus(x[0]),x:x[1],c:x[2]}});
+ if(t==='pres')return [{k:esDPDreg()?'Delegado de Protección de Datos Personales':'Consultor en Protección de Datos Personales',t:F.nom||'[NOMBRE]',x:'Asesoría y supervisión independiente del cumplimiento de la LOPDP: diagnóstico, registro de actividades, evaluaciones de impacto, contratos, vulneraciones y Delegado externo.',c:[F.mat?'Matrícula '+F.mat:'',esDPDreg()?'Nombramiento inscrito en la SPDP · N.º '+F.reg:''].filter(Boolean).join(' · ')}];
+ return [{k:'Gratis · 5 minutos',t:PUB.AUTODIAG.titulo,x:PUB.AUTODIAG.texto,c:'',u:pubCfg().auto}]}
+function wrapTx(ctx,t,w){var out=[];String(t||'').split('\n').forEach(function(par){var ws=par.split(/\s+/),l='';ws.forEach(function(wd){var tr=l?l+' '+wd:wd;if(ctx.measureText(tr).width>w&&l){out.push(l);l=wd}else l=tr});out.push(l)});return out}
+function rrect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+var FONT="Archivo,'Segoe UI',Roboto,Arial,sans-serif";
+function dibujaPieza(cv,o,logo){var W=1080,H=PH[o.fmt]||1920,ctx=cv.getContext('2d'),P=84,cw=W-2*P;cv.width=W;cv.height=H;
+ ctx.fillStyle='#14181E';ctx.fillRect(0,0,W,H);ctx.strokeStyle='rgba(160,144,70,.18)';ctx.lineWidth=3;for(var i=0;i<6;i++){ctx.beginPath();ctx.moveTo(W-420+i*70,-20);ctx.lineTo(W+80,420-i*70);ctx.stroke()}
+ ctx.fillStyle='#A09046';ctx.fillRect(0,H-14,W,14);
+ var y=P;if(logo)ctx.drawImage(logo,P,y,104,104);ctx.textBaseline='top';ctx.fillStyle='#A09046';ctx.font='800 40px '+FONT;try{ctx.letterSpacing='5px'}catch(e){}ctx.fillText('MACÍAS SÁNCHEZ',P+130,y+14);ctx.fillStyle='#C9BC82';ctx.font='600 22px '+FONT;ctx.fillText('CONSULTORES · PROTECCIÓN DE DATOS',P+130,y+64);try{ctx.letterSpacing='0px'}catch(e){}
+ var y0=y+104+(o.fmt==='sq'?50:70),sq=o.fmt==='sq';
+ var foot=[o.wa?'WhatsApp '+waFmt(o.wa):'',o.mail||'',o.web||''].filter(Boolean),fh=foot.length*42+50,ctaH=o.cta?96:0,yb=H-P-14-fh,bottom=yb-(ctaH?ctaH+48:24);
+ var kg=sq?30:44,g1=sq?22:34,g2=sq?28:40,tz={est:[92,520],pub:[74,330],sq:[60,230]}[o.fmt],ts=tz[0],tl;do{ctx.font='800 '+ts+'px '+FONT;tl=wrapTx(ctx,o.t,cw);if(tl.length*ts*1.12<=tz[1]||ts<=40)break;ts-=4}while(true);
+ var cl=[];if(o.c){ctx.font='600 26px '+FONT;cl=wrapTx(ctx,o.c,cw)}var ch=cl.length?cl.length*34+18:0,fixed=52+kg+tl.length*ts*1.12+g1+6+g2+ch,bz={est:46,pub:40,sq:34}[o.fmt],bl;
+ do{ctx.font='400 '+bz+'px '+FONT;bl=wrapTx(ctx,o.x+(o.u?'\n'+o.u:''),cw);if(fixed+bl.length*bz*1.35<=bottom-y0||bz<=24)break;bz-=2}while(true);
+ if(fixed+bl.length*bz*1.35>bottom-y0&&cl.length){fixed-=ch;cl=[];ch=0}cv.dataset.over=fixed+bl.length*bz*1.35>bottom-y0?'1':'';cv.dataset.sincita=o.c&&!cl.length?'1':'';
+ var tot=fixed+bl.length*bz*1.35;y=y0+Math.max(0,(bottom-y0-tot)*0.42);
+ ctx.font='800 27px '+FONT;var kt=String(o.k||'').toUpperCase(),kw=Math.min(cw,ctx.measureText(kt).width+44);ctx.fillStyle='#A09046';rrect(ctx,P,y,kw,52,26);ctx.fill();ctx.fillStyle='#14181E';ctx.fillText(kt,P+22,y+13);y+=52+kg;
+ ctx.font='800 '+ts+'px '+FONT;ctx.fillStyle='#F7F5EE';tl.forEach(function(l){ctx.fillText(l,P,y);y+=ts*1.12});y+=g1;ctx.fillStyle='#A09046';ctx.fillRect(P,y,120,6);y+=6+g2;
+ ctx.font='400 '+bz+'px '+FONT;ctx.fillStyle='#E7E4DA';bl.forEach(function(l){ctx.fillText(l,P,y);y+=bz*1.35});if(cl.length){y+=18;ctx.font='600 26px '+FONT;ctx.fillStyle='#C9BC82';cl.forEach(function(l){ctx.fillText(l,P,y);y+=34})}
+ if(o.cta){var yc=yb-ctaH-24;ctx.fillStyle='#A09046';rrect(ctx,P,yc,cw,ctaH,18);ctx.fill();ctx.fillStyle='#14181E';var cz=38;ctx.font='800 '+cz+'px '+FONT;while(ctx.measureText(o.cta).width>cw-60&&cz>24){cz-=2;ctx.font='800 '+cz+'px '+FONT}ctx.textAlign='center';ctx.fillText(o.cta,W/2,yc+(ctaH-cz)/2);ctx.textAlign='left'}
+ ctx.strokeStyle='#2A3038';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(P,yb);ctx.lineTo(W-P,yb);ctx.stroke();var yf=yb+22;ctx.fillStyle='#F7F5EE';ctx.font='600 30px '+FONT;foot.forEach(function(l){ctx.fillText(l,P,yf);yf+=42});
+ ctx.fillStyle='#9AA1AA';ctx.font='400 20px '+FONT;ctx.fillText('Información general; no reemplaza una asesoría sobre su caso.',P,yf+4)}
+function pubMsg(o){var c=pubCfg(),L=['*'+o.t+'*',o.x];if(o.c)L.push('('+o.c+')');if(o.u)L.push('Hágalo aquí: '+o.u);L.push('');if(o.cta)L.push(o.cta+(c.wa?': https://wa.me/'+waNum(c.wa):''));if(c.mail)L.push('Correo: '+c.mail);L.push('');L.push(PUB.BAJA);return L.join('\n')}
+function vPub(){var V=$('#v-pub'),c=pubCfg(),st=store('pub')||{t:'qa',f:'est',i:0,cta:0},logo=new Image(),cv;
+ logo.src=IMG.iso;
+ V.innerHTML='<h2>Publicidad y captación</h2><p class="sub">Piezas para estados y chats de WhatsApp con su marca, mensajes listos y el autodiagnóstico enlazado con sus prospectos. Escritura profesional, sin promesas de resultado.</p>'+
+ '<details class="card plg"'+(c.wa?'':' open')+'><summary>Datos de contacto para las piezas</summary><div class="grid">'+campo('pb-wa','WhatsApp de atención',c.wa,'tel',false,'09XXXXXXXX')+campo('pb-ml','Correo de atención',c.mail,'email')+campo('pb-wb','Sitio web o red (opcional)',c.web,'text',false,'linkedin.com/in/…')+campo('pb-au','Enlace del autodiagnóstico',c.auto,'url')+'</div><div class="row" style="margin-top:8px"><button class="btn sm" id="pb-g">Guardar contacto</button></div><p class="hint">Se guardan cifrados en este dispositivo. El nombre, la matrícula y el registro salen de Ajustes › Datos del consultor.</p></details>'+
+ '<div class="card"><h3>Crear pieza</h3><div class="chips" id="pb-t" style="margin-bottom:8px">'+PT.map(function(x){return '<button data-pt="'+x[0]+'" class="'+(st.t===x[0]?'on':'')+'">'+x[1]+'</button>'}).join('')+'</div>'+
+ '<div class="seg" id="pb-f" style="margin-bottom:10px">'+PF.map(function(x){return '<button data-pf="'+x[0]+'" class="'+(st.f===x[0]?'on':'')+'">'+x[1]+'</button>'}).join('')+'</div>'+
+ '<div class="row" style="margin-bottom:8px"><select id="pb-i" style="flex:1"></select><button class="btn sm sec" id="pb-r">Otra al azar</button></div><div id="pb-hint"></div>'+
+ '<div class="grid">'+'<div class="full"><label for="pb-k">Etiqueta</label><input id="pb-k"></div><div class="full"><label for="pb-tt">Título</label><textarea id="pb-tt" style="min-height:60px"></textarea></div><div class="full"><label for="pb-x">Texto</label><textarea id="pb-x"></textarea></div><div><label for="pb-c">Fuente o nota</label><input id="pb-c"></div><div><label for="pb-cta">Llamado a la acción</label><input id="pb-cta" list="pb-ctal"><datalist id="pb-ctal">'+PUB.CTA.map(function(x){return '<option value="'+esc(x)+'">'}).join('')+'</datalist></div></div>'+
+ '<div style="margin:12px 0;text-align:center"><canvas id="pb-cv" style="width:100%;max-width:340px;height:auto;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.25)"></canvas></div>'+
+ '<div class="row"><button class="btn" id="pb-sh">Compartir imagen</button><button class="btn sec" id="pb-dl">Descargar PNG</button><button class="btn sec" id="pb-cp">Copiar mensaje</button><button class="btn sec" id="pb-wa2">Enviar texto por WhatsApp</button></div><p class="hint">«Compartir imagen» abre el menú del teléfono para enviarla a WhatsApp con el mensaje. En la PC, descargue el PNG y adjúntelo en WhatsApp Web.</p></div>'+
+ '<div class="card" id="pb-ad"></div>'+
+ '<details class="card plg"><summary>Buenas prácticas de la publicidad por WhatsApp</summary><ul class="cst">'+[
+  ['Envíe solo a contactos con relación previa o que aceptaron recibir información; no use listas compradas.','Res. SPDP-SPD-2025-0041-R art. 11'],
+  ['Incluya en cada mensaje una forma gratuita de dejar de recibirlos y atiéndala de inmediato; el mensaje copiado ya la trae.','LOPDP art. 16 num. 2; Res. SPDP-SPD-2025-0041-R arts. 11 y 17'],
+  ['No prometa resultados ni exagere multas; cite la norma cuando dé un dato.','criterio propio'],
+  ['Preséntese como Delegado solo con un nombramiento inscrito en la SPDP; la inscripción es por cada responsable, no una licencia general.','Res. SPDP-SPD-2025-0028-R arts. 5 a 7'],
+  ['Si dice «gratis», aclare desde el primer contacto que la asesoría posterior tiene costo.','criterio propio']].map(function(x){return liD('✔',x)}).join('')+'</ul></details>';
+ var it=function(){return pubItems(st.t)},cur=function(){return {fmt:st.f,k:$('#pb-k').value,t:$('#pb-tt').value,x:$('#pb-x').value,c:$('#pb-c').value,cta:$('#pb-cta').value,u:st.t==='auto'?pubCfg().auto:'',wa:pubCfg().wa,mail:pubCfg().mail,web:pubCfg().web}};
+ var draw=function(){cv=$('#pb-cv');dibujaPieza(cv,cur(),logo.complete?logo:null);var w=$('#pb-ov');if(!w){w=document.createElement('p');w.id='pb-ov';w.className='hint';cv.parentNode.appendChild(w)}w.textContent=cv.dataset.over?'El texto no cabe en este formato: acórtelo o use «Estado 9:16».':cv.dataset.sincita?'Para que el texto quepa se omitió la fuente en la imagen; se mantiene en el mensaje.':''};
+ var carga=function(){var L=it();if(st.i>=L.length)st.i=0;var o=L[st.i];$('#pb-i').innerHTML=L.map(function(x,i){return '<option value="'+i+'"'+(i===st.i?' selected':'')+'>'+esc((x.r?'['+x.r+'] ':'')+x.t)+'</option>'}).join('');$('#pb-i').disabled=L.length<2;
+  $('#pb-k').value=o.k;$('#pb-tt').value=o.t;$('#pb-x').value=o.x;$('#pb-c').value=o.c||'';$('#pb-cta').value=st.t==='auto'?'Responda el autodiagnóstico':PUB.CTA[st.cta%PUB.CTA.length];
+  $('#pb-hint').innerHTML=st.t==='pres'&&!esDPDreg()?'<p class="nota">Se presenta como Consultor. Para presentarse como Delegado, registre en Ajustes el cargo de Delegado y el número de inscripción de un nombramiento vigente.</p>':st.t==='auto'&&!pubCfg().auto?'<p class="nota">Ingrese el enlace del autodiagnóstico en «Datos de contacto».</p>':'';store('pub',st);draw()};
+ $$('[data-pt]',V).forEach(function(b){b.onclick=function(){st.t=b.dataset.pt;st.i=0;$$('[data-pt]',V).forEach(function(x){x.classList.toggle('on',x===b)});carga()}});
+ $$('[data-pf]',V).forEach(function(b){b.onclick=function(){st.f=b.dataset.pf;$$('[data-pf]',V).forEach(function(x){x.classList.toggle('on',x===b)});store('pub',st);draw()}});
+ $('#pb-i').onchange=function(){st.i=+this.value;carga()};$('#pb-r').onclick=function(){var n=it().length;st.i=n>1?(st.i+1+Math.floor(Math.random()*(n-1)))%n:0;st.cta=(st.cta||0)+1;carga()};
+ ['pb-k','pb-tt','pb-x','pb-c','pb-cta'].forEach(function(i){$('#'+i).oninput=draw});
+ $('#pb-g').onclick=function(){var c=pubCfg();c.wa=$('#pb-wa').value.trim();c.mail=$('#pb-ml').value.trim();c.web=$('#pb-wb').value.trim();c.auto=$('#pb-au').value.trim();guardar().then(function(){toast('Contacto guardado.');carga();padHtml()})};
+ var nom=function(){return ('MSC '+(PT.filter(function(x){return x[0]===st.t})[0][1])+' '+hoy()).replace(/[^\w\s-]/g,'')};
+ var blob=function(){return new Promise(function(r){cv.toBlob(r,'image/png')})};
+ $('#pb-dl').onclick=function(){blob().then(function(b){var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=nom().replace(/\s+/g,'-')+'.png';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1500)})};
+ $('#pb-sh').onclick=function(){var msg=pubMsg(cur());blob().then(function(b){var f=new File([b],nom().replace(/\s+/g,'-')+'.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f],text:msg}).catch(function(){});else{toast('Este navegador no comparte imágenes: se descargó el PNG y se copió el mensaje.');$('#pb-dl').onclick();copiarTexto(msg)}})};
+ $('#pb-cp').onclick=function(){copiarTexto(pubMsg(cur()))};$('#pb-wa2').onclick=function(){window.open('https://wa.me/?text='+encodeURIComponent(pubMsg(cur())),'_blank','noopener')};
+ logo.onload=draw;(document.fonts&&document.fonts.load?document.fonts.load('800 40px Archivo').catch(function(){}):Promise.resolve()).then(carga);padHtml()}
+function copiarTexto(t){(navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t):Promise.reject()).then(function(){toast('Mensaje copiado.')},function(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');toast('Mensaje copiado.')}catch(e){toast('No se pudo copiar.',1)}a.remove()})}
+/* --- Autodiagnóstico enlazado: importa el CSV de respuestas (Tally › Submissions › Download CSV) como prospectos --- */
+function parseCSV(t){var R2=[],r=[],f='',q=false;t=String(t).replace(/^\uFEFF/,'');for(var i=0;i<t.length;i++){var ch=t[i];if(q){if(ch==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=ch}else if(ch==='"')q=true;else if(ch===','){r.push(f);f=''}else if(ch==='\n'||ch==='\r'){if(ch==='\r'&&t[i+1]==='\n')i++;r.push(f);R2.push(r);r=[];f=''}else f+=ch}if(f||r.length){r.push(f);R2.push(r)}return R2.filter(function(x){return x.some(function(y){return y.trim()})})}
+function nivelAD(p,cr){return p<40?'alto':p<70?'medio':cr>0?'medio':'bajo'}
+function leerAD(rows){var h=rows[0].map(function(x){return norm(x).trim()}),col=function(re){for(var i=0;i<h.length;i++)if(re.test(h[i]))return i;return -1};
+ var ix={sid:col(/^submission id|^id de env/),f:col(/submitted at|^fecha/),nom:col(/^nombre completo/),car:col(/^cargo/),emp:col(/nombre de la empresa/),wa:col(/whatsapp/),cm:col(/^correo/),sec:col(/sector/),tra:col(/trabajadores/),con:col(/^consentimiento/),p:col(/^porcentaje$/),cr:col(/^criticas_fallidas$/),ns:col(/^nose$/)},qs={};
+ h.forEach(function(x,i){var m=/^(\d{1,2})\.\s/.exec(x);if(m&&+m[1]>=1&&+m[1]<=15)qs[+m[1]]=i});
+ return rows.slice(1).map(function(r){var g=function(k){return ix[k]>-1?String(r[ix[k]]||'').trim():''},pts=0,max=0,cr=0,ns=0,br=[];
+  for(var n=1;n<=15;n++){var w=QPESO[n-1],v=qs[n]!=null?norm(r[qs[n]]||''):'';if(qs[n]==null)continue;if(/^no aplica/.test(v))continue;max+=w;if(/^si/.test(v))pts+=w;else if(/^parcial/.test(v)){pts+=w/2;br.push(QCORTA[n-1]+' (parcial)')}else{if(/^no se/.test(v))ns++;if(v)br.push(QCORTA[n-1]);if(w===3&&/^no/.test(v))cr++}}
+  var p=g('p')!==''&&!isNaN(+g('p'))?Math.round(+g('p')):max?Math.round(pts*100/max):0;if(g('cr')!=='')cr=+g('cr')||0;
+  return {sid:g('sid'),f:(g('f')||hoy()).slice(0,10),nom:g('nom'),car:g('car'),emp:g('emp'),wa:g('wa'),cm:g('cm'),sec:g('sec'),tra:g('tra'),con:ix.con<0||!!g('con'),p:p,cr:cr,ns:g('ns')!==''?+g('ns'):ns,br:br,niv:nivelAD(p,cr)}}).filter(function(x){return x.nom||x.emp||x.wa})}
+function importarAD(L){var n=0,u=0,om=0,nuevos=[];L.forEach(function(a){if(!a.con){om++;return}var ex=clientes().filter(function(c){return c.ad&&((a.sid&&c.ad.sid===a.sid)||(waNum(c.ct)&&waNum(c.ct)===waNum(a.wa)&&norm(c.rs)===norm(a.emp)))})[0];
+  var ad={sid:a.sid,f:/^\d{4}-\d\d-\d\d/.test(a.f)?a.f:hoy(),p:a.p,niv:a.niv,cr:a.cr,ns:a.ns,br:a.br,sec:a.sec,tra:a.tra};
+  if(ex){ex.ad=ad;ex.upd=Date.now();u++;return}
+  var o={id:uid(),cod:sigCod('PD'),rs:a.emp||'[EMPRESA SIN NOMBRE]',cn:a.nom,cc:a.car,ct:a.wa,cm:a.cm,sec:a.sec,trab:a.tra,est:'prospecto',ini:hoy(),serv:[],ori:'autodiagnóstico',ad:ad,not:'Origen: autodiagnóstico del '+fcorta(ad.f)+'. Riesgo '+a.niv+' ('+a.p+' %). Consintió el tratamiento para recibir el resultado y ser contactado.',upd:Date.now()};
+  R.data.clientes.push(o);n++;nuevos.push(o);
+  [{tipo:'seguim',tit:'Seguimiento del autodiagnóstico: '+o.rs,f:addDia(hoy(),1)},{tipo:'otro',tit:'Eliminar datos del prospecto '+o.rs+' si no contrató (aviso: 6 meses)',f:addDia(ad.f,183)}].forEach(function(x){R.data.plazos.push({id:uid(),cli:o.id,tipo:x.tipo,tit:x.tit,f:x.f,est:'pend',upd:Date.now()})})});
+ return guardar().then(function(){if(R.data.cfg.gcal&&R.data.cfg.gcal.on&&typeof calSyncTodas==='function')calSyncTodas(false);toast(n+' prospecto'+(n===1?'':'s')+' nuevo'+(n===1?'':'s')+(u?', '+u+' actualizado'+(u===1?'':'s'):'')+(om?'; '+om+' omitido'+(om===1?'':'s')+' por no consentir':'')+'.');padHtml()})}
+function msgSeg(c){var F=R.data.cfg.firma,a=c.ad;return 'Hola '+(c.cn||'')+', le saluda '+(F.nom||'')+'. Gracias por completar el autodiagnóstico de protección de datos de '+c.rs+'. Su resultado fue riesgo '+a.niv+' ('+a.p+' %).'+(a.br.length?' Los puntos a reforzar son: '+a.br.slice(0,4).join(', ')+(a.br.length>4?' y '+(a.br.length-4)+' más':'')+'.':'')+' ¿Le parece si agendamos una reunión de diagnóstico de 30 minutos para revisarlos?\n\n'+PUB.BAJA}
+function padHtml(){var V=$('#pb-ad');if(!V)return;var c=pubCfg(),L=clientes().filter(function(x){return x.ad}).sort(function(a,b){return a.ad.f<b.ad.f?1:-1}),NV={alto:'r',medio:'',bajo:'v'};
+ var inv='Le comparto un autodiagnóstico de protección de datos para su empresa: 15 preguntas, 5 minutos y su nivel de riesgo al instante.\n'+c.auto+'\n\n'+PUB.BAJA;
+ V.innerHTML='<h3>Autodiagnóstico y prospectos <span class="tag g">'+L.length+'</span></h3><p class="hint" style="margin-top:0">Formulario para empresas (2 a 5 minutos) con aviso de privacidad y consentimiento. Sus respuestas llegan a su correo; para darles seguimiento aquí, descargue el CSV en Tally (Submissions › Download CSV) e impórtelo. Solo se importan las respuestas con consentimiento.</p>'+
+ '<div class="row"><button class="btn sm" id="ad-sh"'+(c.auto?'':' disabled')+'>Enviar invitación por WhatsApp</button><button class="btn sm sec" id="ad-cp"'+(c.auto?'':' disabled')+'>Copiar invitación</button>'+(c.auto?'<a class="btn sm sec" href="'+esc(c.auto)+'" target="_blank" rel="noopener">Abrir formulario</a>':'')+'<label class="btn sm sec" style="margin:0">Importar respuestas (CSV)<input type="file" id="ad-f" accept=".csv,text/csv" hidden></label></div><div id="ad-pv"></div>'+
+ (L.length?'<div class="list" style="margin-top:8px">'+L.map(function(x){var a=x.ad;return '<div class="it" style="cursor:default"><div class="d '+(NV[a.niv]||'')+'">'+a.p+' %</div><div style="flex:1"><div class="t">'+esc(x.rs)+' <span class="tag '+(NV[a.niv]||'')+'">Riesgo '+esc(a.niv)+'</span> <span class="tag g">'+esc((EST[x.est]||EST.prospecto)[0])+'</span></div><div class="m">'+esc([x.cn,x.cc,fcorta(a.f),a.sec].filter(Boolean).join(' · '))+'</div>'+(a.br.length?'<div class="m">Brechas: '+esc(a.br.join(', '))+'</div>':'')+
+  '<div class="row" style="margin-top:6px"><button class="btn sm" data-ads="'+x.id+'"'+(x.ct?'':' disabled')+'>WhatsApp de seguimiento</button><button class="btn sm sec" data-adp="'+x.id+'">Proforma (02)</button><button class="btn sm sec" data-adc="'+x.id+'">Ficha</button></div></div></div>'}).join('')+'</div>':'<p class="sub" style="margin-top:8px">Aún no hay prospectos del autodiagnóstico.</p>');
+ if($('#ad-sh'))$('#ad-sh').onclick=function(){window.open('https://wa.me/?text='+encodeURIComponent(inv),'_blank','noopener')};if($('#ad-cp'))$('#ad-cp').onclick=function(){copiarTexto(inv)};
+ $('#ad-f').onchange=function(){var f=this.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var rows=parseCSV(rd.result);if(rows.length<2)throw 0;var A=leerAD(rows);if(!A.length)throw 0;
+   $('#ad-pv').innerHTML='<div class="nota">'+A.length+' respuesta'+(A.length===1?'':'s')+' en el archivo ('+A.filter(function(x){return !x.con}).length+' sin consentimiento, que no se importarán).<ul style="margin:6px 0 0;padding-left:18px">'+A.slice(0,8).map(function(x){return '<li>'+esc(x.emp||'[sin empresa]')+' · riesgo '+x.niv+' ('+x.p+' %)'+(x.con?'':' · sin consentimiento')+'</li>'}).join('')+'</ul><div class="row" style="margin-top:8px"><button class="btn sm" id="ad-ok">Importar como prospectos</button><button class="btn sm sec" id="ad-no">Cancelar</button></div></div>';
+   $('#ad-ok').onclick=function(){importarAD(A)};$('#ad-no').onclick=function(){$('#ad-pv').innerHTML=''}}catch(e){toast('El archivo no parece un CSV de respuestas del autodiagnóstico.',1)}};rd.readAsText(f,'utf-8');this.value=''};
+ $$('[data-ads]',V).forEach(function(b){b.onclick=function(){var x=cli(b.dataset.ads);window.open('https://wa.me/'+waNum(x.ct)+'?text='+encodeURIComponent(msgSeg(x)),'_blank','noopener')}});
+ $$('[data-adp]',V).forEach(function(b){b.onclick=function(){store('hcli',b.dataset.adp);abrirConCliente('02',b.dataset.adp)}});
+ $$('[data-adc]',V).forEach(function(b){b.onclick=function(){R.sel=b.dataset.adc;show('cli')}})}
 
 /* ===================== AJUSTES ===================== */
 function vAju(){var V=$('#v-aju'),c=R.data.cfg,F=c.firma;

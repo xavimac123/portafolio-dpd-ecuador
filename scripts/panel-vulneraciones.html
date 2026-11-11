@@ -24,7 +24,15 @@
     <div><label for="pvFer">Feriados en el período (AAAA-MM-DD, separados por coma)</label><input type="text" id="pvFer" placeholder="2026-11-02, 2026-11-03"></div>
   </div>
   <div class="plz" id="pvPlz"></div>
-  <p class="nota" style="font-size:12px;color:var(--oliva);margin:8px 0 0">El término de 5 días se calcula en días hábiles (excluye sábados, domingos y los feriados que ingreses). El plazo de 2 días del encargado se muestra en días calendario como criterio conservador. Verifica siempre el cómputo con la normativa vigente.</p>
+  <p class="nota" style="font-size:12px;color:var(--oliva);margin:8px 0 0">Los términos se calculan en días hábiles (excluyen sábados, domingos y los feriados que ingreses). Si la organización es encargada, los 5 días del responsable corren desde que recibe su comunicación (Res. 0040 art. 11). El término a los titulares corre desde que el responsable conoció el riesgo; aquí se cuenta desde la constancia, que es el escenario más estricto.</p>
+  <details style="margin-top:10px"><summary style="cursor:pointer;font-weight:700;color:var(--oliva)">Guía para el DPD: qué hacer en las primeras horas</summary><ul style="font-size:13px;padding-left:18px;margin:8px 0 0">
+   <li>Fija por escrito la fecha y hora de constancia y quién la tuvo: de ahí parten los términos.</li>
+   <li>Clasifica la vulneración: confidencialidad, integridad o disponibilidad (puede ser más de una) y su alcance temporal, permanente o irreversible (Res. 0040 arts. 4 y 5).</li>
+   <li>Notifica por el SISPDP (servicios.spdp.gob.ec); otro canal oficial solo vale si el sistema no funciona. Guarda la constancia de recepción que llega al correo (arts. 8, 12 y 13).</li>
+   <li>Si notificas pasado el término, acompaña los motivos de la dilación (LOPDP art. 43).</li>
+   <li>No se comunica a los titulares si: las medidas de protección aplicadas a los datos eran efectivas; medidas posteriores impiden que el riesgo se concrete; o exigiría un esfuerzo desproporcionado (entonces, comunicación pública). Las dos primeras excepciones las califica la SPDP (LOPDP art. 46).</li>
+   <li>La comunicación a los titulares indica naturaleza de la vulneración, fecha de detección, medidas adoptadas y recomendaciones, en lenguaje claro (Res. 0040 art. 10).</li>
+   <li>No notificar a la autoridad o a los titulares es infracción grave (LOPDP art. 68 nums. 7 y 8). El DPD asesora y supervisa; quien notifica es el responsable.</li></ul></details>
 </div>
 <div class="pv">
   <h2>2 · ¿Debe notificarse? Evaluación inicial de riesgo</h2>
@@ -63,11 +71,11 @@
   function calend(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x}
   function plazos(){var v=$('pvF').value,box=$('pvPlz');if(!v){box.innerHTML='';return}
     var d=new Date(v),h='';
-    if($('pvRol').value==='e')h+='<div><b>Encargado → responsable</b><strong>'+fmt(calend(d,2))+'</strong><small>Máximo 2 días · Res. SPDP-SPD-2026-0040-R</small></div>';
+    if($('pvRol').value==='e')h+='<div><b>Encargado → responsable</b><strong>'+fmt(habiles(d,2))+'</strong><small>Término de 2 días · LOPDP art. 43; Res. SPDP-SPD-2026-0040-R art. 11 · por correo salvo pacto</small></div>';
     var lim=habiles(d,5);
     h+='<div><b>'+($('pvRol').value==='e'?'Responsable → SPDP (referencial)':'Notificación a la SPDP')+'</b><strong>'+fmt(lim)+'</strong><small>Término de 5 días · LOPDP art. 43 · vía SISPDP</small></div>';
-    h+='<div class="warn"><b>ARCOTEL y CSIRT</b><strong>Verificar</strong><small>Art. 43 reformado (mayo 2026): canal y plazo por confirmar</small></div>';
-    h+='<div class="warn"><b>Titulares</b><strong>Verificar</strong><small>Referencia doctrinal: 3 días (art. 46 LOPDP). Confirmar en texto vigente</small></div>';
+    h+='<div><b>Regulador competente y CSIRT</b><strong>'+fmt(lim)+'</strong><small>Mismo término · LOPDP art. 43 reformado (mayo 2026): organismo de regulación y control del sector y CSIRT correspondiente</small></div>';
+    h+='<div><b>Titulares afectados</b><strong>'+fmt(habiles(d,3))+'</strong><small>Término de 3 días desde que se conoció el riesgo · LOPDP art. 46 · salvo excepción calificada</small></div>';
     box.innerHTML=h;
     var inp=document.querySelector('#campos input[data-k="FECHA LÍMITE"]');if(inp){inp.value=fmt(lim);inp.dispatchEvent(new Event('input'))}
     var inp2=document.querySelector('#campos input[data-k="FECHA Y HORA"]');if(inp2){inp2.value=fmt(d);inp2.dispatchEvent(new Event('input'))}
@@ -78,7 +86,7 @@
     var out=$('pvR');
     if(!c&&!document.querySelectorAll('[data-g]:checked').length){out.innerHTML='';return}
     if(!c){out.innerHTML='<div class="rr r0">Sin causal del art. 24 marcada<small>Si ninguna de las cuatro situaciones ocurrió, puede no tratarse de una vulneración notificable. Documenta igualmente el incidente y la justificación en la bitácora.</small></div>';return}
-    if(g>=3)out.innerHTML='<div class="rr r2">Riesgo alto: notificar a la SPDP y a los titulares<small>Concurren causales del art. 24 y factores de gravedad significativos. Prepara también la notificación a ARCOTEL y al CSIRT.</small></div>';
+    if(g>=3)out.innerHTML='<div class="rr r2">Riesgo alto: notificar a la SPDP y a los titulares<small>Concurren causales del art. 24 y factores de gravedad significativos. Notifica también al organismo de regulación y control de su sector y al CSIRT correspondiente (LOPDP art. 43).</small></div>';
     else if(g>=1)out.innerHTML='<div class="rr r1">Riesgo: notificar a la SPDP; evaluar comunicación a titulares<small>Concurre al menos una causal del art. 24. Valora si las consecuencias para los titulares justifican comunicarles; la omisión injustificada es infracción grave.</small></div>';
     else out.innerHTML='<div class="rr r1">Causal presente con factores atenuantes<small>Hay una causal del art. 24, pero los atenuantes reducen el riesgo. La decisión de no notificar debe estar justificada por escrito; ante duda, notifica.</small></div>';
   }

@@ -14,8 +14,8 @@ OUT = ROOT / "06-interes-legitimo"
 OUT.mkdir(exist_ok=True)
 
 EJEMPLO = {
-    "y": {"priv": "Sí"}, "sup": "mkt", "cond": {"0": "Se cumple", "1": "Se cumple"},
-    "x": {"x_esp": "No", "x_perf": "No", "x_nna": "No", "x_masivo": "No"},
+    "y": {"priv": "Sí"}, "sup": "mkt", "cond": {"0": "Se cumple", "1": "Se cumple", "2": "Se cumple", "3": "Se cumple"},
+    "x": {"x_sens": "No", "x_esp": "No", "x_perf": "No", "x_nna": "No", "x_masivo": "No"},
     "i": {"i_resp": "Ferretería Ficticia El Tornillo S.A. (EJEMPLO)", "i_trat": "Correos de ofertas a clientes actuales",
           "i_rat": "T-12", "i_benef": "El responsable",
           "i_int": "Informar a quienes ya compraron en la tienda sobre ofertas de productos similares a los adquiridos.",
@@ -27,7 +27,7 @@ EJEMPLO = {
             "c_prop": {"r": "Cumple", "j": "Máximo dos correos al mes; sin perfiles detallados."},
             "c_expect": {"r": "Parcial", "j": "La política vigente no menciona el envío de ofertas: incorporarlo antes de iniciar."}},
     "n": {"n_indisp": {"r": "Cumple", "j": ""}, "n_alt": {"r": "Cumple", "j": ""},
-          "n_min": {"r": "Cumple", "j": "No se usa teléfono ni dirección."}, "n_plazo": {"r": "Parcial", "j": "Definir la baja automática a los 24 meses sin compras."}},
+          "n_min": {"r": "Cumple", "j": "No se usa teléfono ni dirección."}, "n_cons": {"r": "Cumple", "j": "Sin el envío, los clientes no conocen las ofertas y caen las ventas recurrentes."}, "n_plazo": {"r": "Parcial", "j": "Definir la baja automática a los 24 meses sin compras."}},
     "altd": "Publicidad en redes sin datos personales: no llega a los clientes recurrentes. Pedir consentimiento en caja: se mantiene como alternativa si la ponderación cambia.",
     "w": {"w_imp": 1, "w_benef": 1, "w_conexo": 2},
     "im": {"i_datos": 0, "i_expect": 1, "i_pos": 0, "i_efecto": 1, "i_escala": 1},
@@ -62,7 +62,7 @@ L += [f"| {p['texto']} | [SÍ / NO] | {p['nota']} |" for p in C.PROHIBICIONES]
 L += ["", "## 2. Identificación y justificación del interés", "", "| Campo | Contenido |", "|---|---|",
       "| Titular del interés | [RESPONSABLE / TERCERO] |", "| Interés invocado | [DESCRIPCIÓN] |", "| Datos | [DATOS] |",
       "| Titulares y volumen | [TITULARES] |", "| Por qué no otra base | [JUSTIFICACIÓN] |", "",
-      "| Característica (RES-0041, art. 4) | Valoración | Justificación |", "|---|---|---|"]
+      "| Característica (Res. SPDP-SPD-2025-0041-R, art. 4) | Valoración | Justificación |", "|---|---|---|"]
 L += [f"| {c['nombre']}: {c['pregunta']} | [CUMPLE / PARCIAL / NO CUMPLE] | [ ] |" for c in C.CARACTERISTICAS]
 L += ["", "## 3. Necesidad", "", "| Criterio | Valoración | Justificación |", "|---|---|---|"]
 L += [f"| {c['texto']} | [ ] | [ ] |" for c in C.NECESIDAD]
@@ -78,7 +78,7 @@ L += [f"- [ ] {s}" for s in C.SALVAGUARDAS]
 L += ["", "## 6. Resultado, transparencia y registro", ""]
 L += [f"- [ ] {r}" for r in C.RESULTADOS]
 L += ["", "| Campo | Contenido |", "|---|---|", "| Consta en la política de privacidad | [ ] |", "| Canal de oposición | [ ] |",
-      "| Próxima revisión (al menos anual) | [FECHA] |", "",
+      "| Próxima revisión (plazo de un año, art. 18) | [FECHA] |", "| Conservación de evidencias (Anexo 1) | Cinco años, o la duración del tratamiento más dos años |", "",
       "La evaluación se revisa al menos una vez al año o cuando cambien la finalidad, el tipo de datos o el nivel de riesgo. "
       "El titular puede ejercer en cualquier momento sus derechos, en especial el de oposición.", ""]
 (OUT / "informe-ponderacion.md").write_text("\n".join(L), encoding="utf-8")

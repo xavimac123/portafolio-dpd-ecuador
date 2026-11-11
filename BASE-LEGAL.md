@@ -2,7 +2,7 @@
 
 Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:** ninguna plantilla cita un artículo que no esté en esta tabla. Antes de publicar o usar una herramienta con un cliente, contrasta cada fila con el texto oficial en el Registro Oficial y marca la columna "Verificado".
 
-Última revisión de fuentes: 2026-11-08 (herramientas 06, 07 y 08; guías SPDP v2 y de diseño y por defecto).
+Última revisión de fuentes: 2026-11-10 (LOPDP con la reforma del 22-05-2026 y RGLOPDP, copias LEXIS aportadas por el usuario; RES-0040 y RES-0041 en el Registro Oficial; RES-2026-0005). Anterior: 2026-11-08.
 
 ## Normas
 
@@ -13,8 +13,8 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | LOFC | Ley Orgánica para el Fortalecimiento de la Ciberseguridad (reforma art. 43 LOPDP) | RO 5to Supl. 290, 22-05-2026 |
 | RES-0006 | Res. SPDP-SPD-2025-0006-R, contenidos mínimos de cláusulas de protección de datos en contratos | 30-04-2025 |
 | RES-0028 | Res. SPDP-SPD-2025-0028-R, figura del DPD y su registro | 30-07-2025 |
-| RES-0041 | Res. SPDP-SPD-2025-0041-R, interés legítimo como base de legitimación (solo sector privado) | 07-11-2025 |
-| RES-0040 | Res. SPDP-SPD-2026-0040-R, norma técnica de notificación de vulneraciones de seguridad | sept. 2026 (vigente desde su publicación en RO) |
+| RES-0041 | Res. SPDP-SPD-2025-0041-R, interés legítimo como base de legitimación (solo sector privado) | 07-11-2025; RO Supl. 177, 03-12-2025 |
+| RES-0040 | Res. SPDP-SPD-2026-0040-R, norma técnica de notificación de vulneraciones de seguridad | 09-09-2026; RO Supl. 376, 24-09-2026 |
 | RES-0003 | Res. SPDP-SPD-2025-0003-R, Guía de Gestión de Riesgos y Evaluación de Impacto, versión 1 (**sustituida por la v2**; se conserva como antecedente) | 29-04-2025; RO 4to Supl. 41, 19-05-2025 |
 | RES-2026-0012 | Res. SPDP-SPD-2026-0012-R, Guía de Gestión de Riesgos y Evaluación de Impacto del tratamiento de datos personales, **versión 2** (Cap. I obligatorio; Cap. II referencial; cinco etapas: contexto, identificación, análisis, evaluación y tratamiento; anexo con formato de evaluación de impacto) | RO Supl. 254, 30-03-2026 (número de resolución por confirmar en el RO) |
 | RES-2025-0040 | Res. SPDP-SPD-2025-0040-R, Guía de Protección de Datos desde el Diseño y por Defecto (capítulos 1 y 2 de aplicación obligatoria en lo pertinente; desarrolla el art. 39 LOPDP). No confundir con la RES-0040 de vulneraciones (2026) | Publicada por la SPDP el 21-10-2025; RO 13-11-2025 |
@@ -131,15 +131,31 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 | Retención de renta, honorarios | 10 % en honorarios profesionales de personas naturales | RES-SRI-26-0009 | ☐ |
 | Retención de IVA, honorarios | 100 % del IVA en honorarios profesionales de personas naturales cuando paga un agente de retención | Tabla de porcentajes de retención de IVA del SRI | ☐ |
 | Costo laboral de referencia | Décimo tercero (art. 111), décimo cuarto equivalente a un SBU (art. 113), fondos de reserva 8,33 % (art. 196); SBU 2026 USD 482; aporte patronal 12,15 % | CT arts. 111, 113 y 196; Ley de Seguridad Social | ☐ |
+| Vulneración, destinatarios (texto reformado) | SPDP, organismo de regulación y control competente y, para coordinación técnica, CSIRT correspondiente; término de 5 días desde la constancia; motivos si se notifica tarde; encargado al responsable en el término de 2 días | LOPDP art. 43 (reforma 22-05-2026) | ☑ copia LEXIS |
+| Vulneración, titulares (plazo y excepciones) | Sin dilación y dentro del término de 3 días desde que se conoció el riesgo; excepciones: medidas de protección efectivas, medidas posteriores que impiden el riesgo, esfuerzo desproporcionado (comunicación pública); las dos primeras las califica la SPDP | LOPDP art. 46 | ☑ copia LEXIS |
+| Vulneración, norma técnica | Tipos (art. 4) y alcance temporal, permanente o irreversible (art. 5); SISPDP como canal (arts. 8 y 12); no notificar es infracción grave (arts. 8 y 9.4); contenido de la comunicación a titulares (art. 10); encargado 2 días y responsable 5 días desde esa comunicación (art. 11); constancia de recepción (art. 13). No fija plazo propio para titulares | RES-0040 arts. 4 a 13 | ☑ RO |
+| Derechos, plazos | Acceso, rectificación y actualización, eliminación y oposición: plazo de 15 días; portabilidad, suspensión y decisiones automatizadas: sin plazo en días | LOPDP arts. 13 a 17, 19 y 20 | ☑ copia LEXIS |
+| Derechos, procedimiento | Canales simples; contenido de la solicitud; aclaración una sola vez en 5 días y respuesta del titular en 10; registro de solicitudes | RGLOPDP arts. 12 a 15 | ☑ copia |
+| Revocatoria del consentimiento | Revocable en cualquier momento; el tratamiento se suspende al recibirla | RGLOPDP art. 6 | ☑ copia |
+| Información al titular, lista | 17 elementos; 30 días o primera comunicación si los datos no vienen del titular | LOPDP art. 12 | ☑ copia LEXIS |
+| Datos sensibles, excepciones | Siete literales (a a g): consentimiento explícito; laboral y seguridad social; interés vital; datos hechos públicos por el titular; orden judicial; archivo, investigación o estadística; salud conforme a la ley | LOPDP art. 26 | ☑ copia LEXIS |
+| Principios, lista | Trece principios (literales a a m) | LOPDP art. 10 | ☑ copia LEXIS |
+| Obligaciones del responsable, lista | Quince obligaciones | LOPDP art. 47 | ☑ copia LEXIS |
+| DPD, casos de la ley | Sector público; control permanente y sistematizado; gran escala de categorías especiales | LOPDP art. 48 | ☑ copia LEXIS |
+| Infracciones leves del responsable | Cinco: no tramitar o negar solicitudes; no aplicar diseño y por defecto; no tener políticas disponibles; encargado sin garantías; incumplir medidas correctivas | LOPDP art. 67 | ☑ copia LEXIS |
+| Infracciones graves del responsable | Catorce; usadas en la herramienta 03: medidas de seguridad (num. 1), metodología de riesgos (num. 4), evaluación de impacto (num. 5), medidas ante riesgos (num. 6), notificación de vulneraciones (nums. 7 y 8), contratos con encargado y personal (num. 9), designación del DPD (num. 12) | LOPDP art. 68 | ☑ copia LEXIS |
+| Multas, servidores públicos | Leves 1 a 10 SBU; graves 10 a 20 SBU | LOPDP arts. 71 y 72 | ☑ copia LEXIS |
+| Transferencias internacionales, vías | Nivel adecuado (art. 56); garantías en instrumento vinculante (art. 57); normas corporativas vinculantes (art. 58); autorización de la SPDP (art. 59); excepciones (art. 60). Reglamento: arts. 71 a 78 | LOPDP arts. 56 a 60; RGLOPDP arts. 71 a 78 | ☑ copia |
+| Evaluación de impacto, consulta | Ante la duda, el responsable puede consultar a la SPDP | RGLOPDP art. 31 | ☑ copia |
+| DPD, requisitos e incompatibilidades del reglamento | Título de tercer nivel en Derecho, Sistemas de Información, Comunicación o Tecnologías y cinco años de experiencia (art. 55); incompatibilidades (art. 56); confidencialidad (art. 57); un DPD por grupo empresarial (art. 50) | RGLOPDP arts. 48 a 57 | ☑ copia |
+| Interés legítimo, estructura de la norma | Solo sector privado (art. 2); características (art. 4); evaluación previa y versión simplificada solo para riesgo bajo (art. 5); contenido y Anexo 1 (art. 6); disponibilidad (art. 9); supuestos admisibles (arts. 10 a 15); prohibiciones (art. 16: 16.1 datos sensibles, 16.2 categorías especiales con tres condiciones, 16.3 perfiles automatizados, 16.4 NNA, 16.5 reutilización incompatible); oposición inmediata (art. 17); registro y revisión en un año (art. 18) | RES-0041 arts. 2 a 18 | ☑ RO |
+| Interés legítimo, Anexo 1 | Cinco etapas: idoneidad, necesidad (incluye consecuencias de no tratar), ponderación con módulo de categorías especiales, medidas de seguridad (tipo, descripción y evidencia) y conclusión; declaración final firmada y sellada por el responsable; evidencias por cinco años o duración del tratamiento más dos | RES-0041 Anexo 1 | ☑ RO |
+| Gran escala, criterios de la SPDP | El MTGE se aplica por tratamiento, sin sumar bases; datos sensibles no bastan por sí solos; biometría y geolocalización son supuestos autónomos; transferencias sistemáticas son flujos recurrentes y estructurales | Oficio SPDP-IRD-2026-0221-O (resumen de nmslaw.com.ec) | ☐ |
+| DPD, programa profesionalizante | Exigible desde el 01-01-2029; sin equivalencias | RES-0028 (resumen de nmslaw.com.ec); Oficio SPDP-IRD-2025-0262-O | ☐ |
 | Honorarios del DPD | No existe tabla oficial ni gremial en Ecuador; la herramienta 02 usa criterio propio | — | — |
 
 ## Puntos abiertos (no resolver con supuestos)
 
-1. Plazo exacto de notificación a titulares: la doctrina cita 3 días (art. 46 LOPDP); los resúmenes de la RES-0040 no fijan un plazo específico. Leer ambos textos completos.
-2. Plazo y forma de notificación al CSIRT tras la LOFC.
-3. Texto literal del art. 12 LOPDP para cerrar la lista de la política de privacidad.
-4. Lista literal de excepciones del art. 26 LOPDP: incorporarla a `rat_config.py` para convertir el campo "Excepción del art. 26" en lista desplegable.
-5. Contenido del RAT del encargado: el art. 44 RGLOPDP fija cuándo se lleva; confirmar si define su contenido. La hoja "RAT encargado" usa estructura de buena práctica.
 6. Periodicidad de revisión del RAT: la norma no la fija; la herramienta usa 12 meses como práctica interna.
 7. Gran escala: resuelto por la RES-2026-0005 (MTGE), aplicado en la herramienta 02. Pendiente incorporarlo a las herramientas 04 (columna de puntaje por actividad) y 04 (supuestos de evaluación de impacto). El texto deja un vacío entre 100.000 y 101.000 titulares; la herramienta 02 lo asigna al tramo superior.
 8. Guía v2 (RES-2026-0012): leídos el Cap. I y las etapas 1 a 3 del Cap. II. El resumen estructurado aportado por el usuario (2026-11-09) confirma las estrategias de la etapa 5 (aceptar, modificar, transferir, evitar), ROSI y FAIR-CAM, y que la evaluación de impacto se formula en la etapa 4; la herramienta 07 ya usa «Modificar». Siguen sin leerse la declaración de aplicabilidad y el **anexo con el formato de evaluación de impacto**. La herramienta 07 usa escalas propias y un contexto con los cinco factores de la etapa 1. Contrastar el informe con el anexo al obtener el texto íntegro.
@@ -147,18 +163,29 @@ Matriz de las normas en que se apoyan las herramientas. **Regla del repositorio:
 10. Transferencias internacionales: identificado el art. 56 LOPDP y la RES-2026-0004 (norma general); falta leer el texto completo de la norma general para incorporar sus mecanismos a las herramientas 04 y 03.
 14. Estado del reglamento de certificaciones y sellos de la SPDP (plan regulatorio 2025-2026): verificar si fue expedido.
 11. Anexo I de la RES-0022: leer el texto oficial (spdp.gob.ec no fue accesible). Confirmar (a) el sentido del PDI: la herramienta 03 lo toma como complemento del índice de madurez (menor madurez, mayor multa); (b) cómo se aplican los pesos 60/40/20 dentro del SDI; (c) las escalas de IED, INT y RER.
-12. Múltiplos de SBU para infracciones graves de servidores públicos (art. 72 LOPDP): el resumen aportado por el usuario indica 10 a 20 SBU (graves) y 1 a 10 SBU (leves); confirmar en el texto oficial; la herramienta 03 no calcula multas del sector público.
 17. Gran escala, art. 14.1: «otros datos sensibles» podría calificar directamente cualquier tratamiento con datos sensibles (por ejemplo, certificados médicos en nómina). Confirmar el alcance con la SPDP o con criterios publicados; la herramienta 05 solo sugiere revisarlo.
 18. Gran escala, alcance «transfronterizo»: precisar si el almacenamiento en una nube fuera del Ecuador basta para calificar el alcance como transfronterizo; la herramienta 05 deja la decisión documentada al evaluador.
 15. Retenciones: confirmar en el texto de la Res. NAC-DGERCGC26-00000009 el porcentaje para sociedades (los resúmenes citan 5 %) y en la tabla vigente del SRI el porcentaje de retención de IVA según el tipo de cliente.
 16. Clasificación de empresas: una fuente secundaria cita el límite inferior de la pequeña empresa en USD 300.001; la herramienta usa USD 100.001 (mayoría de fuentes). Verificar en el texto vigente del Reglamento del COPCI art. 106.
-19. Interés legítimo: confirmar en el texto oficial de la RES-0041 (a) los números de artículo de los supuestos admisibles y las prohibiciones; (b) si existe una **evaluación de ponderación simplificada** para tratamientos de riesgo medio (el buscador muestra esa expresión en el texto oficial, sin contexto); (c) el contenido completo del Anexo 1 y las evidencias mínimas.
 20. Número exacto de la resolución que aprueba la Guía v2 (citado como Res. SPDP-SPD-2026-0012-R) y fecha de su publicación en el RO.
 21. Guía de diseño y por defecto: leída la versión de julio de 2025 publicada por un gremio (asobanca.org.ec); contrastar con el texto aprobado por la RES-2025-0040 y confirmar qué capítulos son obligatorios y el alcance de RGLOPDP art. 59.
 22. Cláusulas: la RES-0006 no trae un modelo separado para personal ni para contratos laborales; las plantillas `clausula-laboral.md` y `clausula-cargo-rol.md` adaptan el modelo responsable–titular y los acuerdos de confidencialidad. Verificar si la SPDP actualiza el Anexo I (disposición segunda).
-23. Plazo de comunicación a titulares: el resumen aportado por el usuario lo atribuye al Reglamento («5 días a la Autoridad y 3 días al titular»); es una segunda fuente coincidente con la doctrina, pero no el texto oficial. Se mantiene abierto: la app PD solo lo agenda si el consultor lo configura.
 24. Resúmenes estructurados aportados por el usuario (JSON, 2026-11-09): omiten derechos (no ser objeto de decisiones automatizadas, revocatoria) y principios del art. 10 LOPDP que sí constan en la matriz; no se usan para reducir el contenido del kit.
-13. Catálogo completo de infracciones leves y graves (arts. 67 y 68 LOPDP): solo se clasifican como graves los tres dominios verificados (DPD, contrato de encargo, notificación a titulares).
+25. Textos aportados al proyecto y aún no contrastados: Res. SPDP-SPD-2025-0028-R (DPD), reglamento del programa profesionalizante, guía v2 de riesgos y norma de inteligencia artificial. Contrastarlos cierra los puntos 8, 9 y 20 y las filas de RES-0028.
+26. Las filas marcadas «copia LEXIS» provienen de copias de una base jurídica; falta el cotejo con el Registro Oficial para marcarlas como verificadas en firme.
+27. Reclamo directo del titular ante el responsable (LOPDP art. 62): un resumen indica 10 días para contestar; confirmar su relación con el plazo de 15 días de los arts. 13 a 16 antes de usarlo.
+
+## Puntos resueltos el 2026-11-10
+
+- Punto 1. Plazo a titulares: término de 3 días desde que se conoció el riesgo (LOPDP art. 46). La RES-0040 no fija otro plazo.
+- Punto 2. CSIRT: el art. 43 reformado lo incluye entre los destinatarios, en el mismo término de 5 días, junto con el «organismo de regulación y control competente» (ya no nombra solo a la ARCOTEL). Queda por conocer el canal práctico de cada CSIRT.
+- Punto 3. Art. 12 LOPDP: 17 elementos; incorporados a la matriz.
+- Punto 4. Art. 26 LOPDP: siete excepciones (a a g); incorporadas a la ayuda del RAT.
+- Punto 5. El art. 44 RGLOPDP no define el contenido del RAT del encargado; la hoja sigue siendo buena práctica.
+- Punto 12. Servidores públicos: 1 a 10 SBU (leves) y 10 a 20 SBU (graves), LOPDP arts. 71 y 72.
+- Punto 19. RES-0041 leída en el Registro Oficial: artículos de supuestos (10 a 15) y prohibiciones (16); la evaluación simplificada es solo para riesgo bajo; Anexo 1 incorporado a la herramienta 06.
+- Punto 23. Resuelto con el punto 1: 5 días a la autoridad (art. 43) y 3 días al titular (art. 46), ambos en la LOPDP.
+- Punto 13. Catálogo de infracciones de los arts. 67 y 68 incorporado a la matriz.
 
 ## Referencias comparadas (no vinculantes en Ecuador)
 
@@ -186,6 +213,8 @@ Solo pueden citarse en comparaciones explícitas, nunca como fundamento de una o
 - Reforma art. 43 por la LOFC: globalsuitesolutions.com.
 - Resúmenes estructurados en JSON aportados por el usuario (2026-11-09): guía de diseño y por defecto, guía v2 de gestión de riesgos y corpus LOPDP, RGLOPDP y RES-0028.
 - RES-0006 (texto firmado, arts. 1 a 4, disposiciones y Anexo I): primicias.ec, leído el 2026-11-08.
+- LOPDP (última reforma 22-05-2026) y RGLOPDP: copias LEXIS aportadas por el usuario al proyecto (2026-11-10); lotaip.bomberosquito.gob.ec y dspace.espol.edu.ec.
+- RES-0040: Registro Oficial, Suplemento 376 del 24-09-2026 (strapi.lexis.com.ec). RES-0041 y Anexo 1: Registro Oficial, Suplemento 177 del 03-12-2025. RES-2026-0005: fielweb.com. Oficio SPDP-IRD-2026-0221-O y RES-0028: nmslaw.com.ec.
 - RES-0041: resúmenes de corralrosales.com y baclaw.ec; extractos del texto oficial en spdp.gob.ec (no descargable desde el entorno de trabajo), 2026-11-08.
 - Guía v2: spdp.gob.ec/wp-content/uploads/2026/11/guia_v2_vfinal_opt.pdf (lectura parcial: Cap. I y etapas 1 a 3), 2026-11-08.
 - Guía de diseño y por defecto: asobanca.org.ec (versión de julio de 2025); publicación de la RES-2025-0040 en el RO: tzvs.ec y nmslaw.com.ec.

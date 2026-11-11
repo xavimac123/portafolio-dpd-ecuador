@@ -145,7 +145,7 @@ CAMPOS = [
     {"k": "il", "h": "Ref. evaluación de interés legítimo", "sec": "fin", "tipo": "texto", "w": 20, "min": "7",
      "si": "base=Interés legítimo", "nota": "Obligatoria si la base es interés legítimo (Res. SPDP-SPD-2025-0041-R)"},
     {"k": "exc26", "h": "Excepción del art. 26 LOPDP (datos sensibles)", "sec": "fin", "tipo": "texto", "w": 24, "min": None,
-     "si": "sensibles", "nota": "Si hay datos sensibles, indica la excepción del art. 26 LOPDP que permite tratarlos."},
+     "si": "sensibles", "nota": "Si hay datos sensibles, indica cuál de las siete excepciones del art. 26 LOPDP permite tratarlos: a) consentimiento explícito con fines específicos; b) obligaciones y derechos laborales o de seguridad y protección social; c) interés vital cuando el titular no puede consentir; d) datos hechos manifiestamente públicos por el titular; e) orden de autoridad judicial; f) archivo de interés público, investigación científica o histórica, o estadística; g) datos de salud tratados conforme a la ley. El interés legítimo no sirve para datos sensibles (Res. SPDP-SPD-2025-0041-R art. 16.1)."},
     {"k": "info", "h": "Cómo se informa al titular", "sec": "fin", "tipo": "lista", "w": 24, "min": None,
      "nota": "Medio por el que se cumple el derecho a la información (art. 12 LOPDP)."},
     {"k": "titulares", "h": "Categorías de titulares", "sec": "datos", "tipo": "lista", "w": 22, "min": "4"},

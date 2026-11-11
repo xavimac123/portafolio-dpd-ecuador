@@ -24,7 +24,7 @@ NECESIDAD = [
      "norma": "Art. 42 lit. c LOPDP: observación sistemática a gran escala de una zona de acceso público."},
     {"id": "n_autoridad", "grupo": "ley", "oblig": True,
      "texto": "¿La SPDP ha requerido realizar la evaluación de impacto?",
-     "concepto": "La Superintendencia puede exigirla aunque no concurra ninguno de los tres supuestos.",
+     "concepto": "La Superintendencia puede exigirla aunque no concurra ninguno de los tres supuestos, y puede definir otros casos. Ante la duda sobre si procede, el responsable puede consultar a la SPDP (RGLOPDP art. 31). No hacerla cuando es obligatoria es infracción grave (LOPDP art. 68 num. 5).",
      "norma": "Art. 42 LOPDP: se realiza también cuando la Autoridad de Protección de Datos Personales lo requiera."},
     {"id": "n_biometricos", "grupo": "norma", "oblig": False,
      "texto": "¿Se tratan datos biométricos (huella, rostro, voz) para identificar a las personas?",
@@ -71,12 +71,12 @@ PROPORCIONALIDAD = [
      "ayuda": "Describe las alternativas consideradas y por qué se descartaron."},
     {"id": "p_minimizacion", "texto": "Solo se recogen los datos estrictamente necesarios (minimización).",
      "ayuda": "Revisa campo por campo del formulario o sistema."},
-    {"id": "p_conservacion", "texto": "El plazo de conservación está definido y justificado.", "ayuda": ""},
-    {"id": "p_calidad", "texto": "Existen mecanismos para mantener los datos exactos y actualizados.", "ayuda": ""},
-    {"id": "p_info", "texto": "Los titulares son informados conforme al art. 12 LOPDP.", "ayuda": ""},
-    {"id": "p_derechos", "texto": "Existe un procedimiento para que los titulares ejerzan sus derechos.", "ayuda": ""},
-    {"id": "p_encargados", "texto": "Los encargados tienen contrato con el contenido del art. 41 RGLOPDP.", "ayuda": ""},
-    {"id": "p_transf", "texto": "Las transferencias internacionales tienen garantía y están documentadas.", "ayuda": "Marca 'No aplica' si no hay transferencias."},
+    {"id": "p_conservacion", "texto": "El plazo de conservación está definido y justificado.", "ayuda": "Pide la norma o la razón de negocio que sustenta cada plazo y qué ocurre al vencer (supresión, anonimización o bloqueo)."},
+    {"id": "p_calidad", "texto": "Existen mecanismos para mantener los datos exactos y actualizados.", "ayuda": "Ejemplos: actualización periódica, validación al ingreso, canal de rectificación."},
+    {"id": "p_info", "texto": "Los titulares son informados conforme al art. 12 LOPDP.", "ayuda": "El art. 12 enumera 17 elementos: fines, base legal, tipos de tratamiento, conservación, existencia de la base de datos, origen, otras finalidades, identidad del responsable y del DPD, transferencias, consecuencias de entregar o no los datos, efecto de datos erróneos, revocatoria, ejercicio de derechos, portabilidad, reclamos y decisiones automatizadas. Si los datos no vienen del titular, se le informa en 30 días o en la primera comunicación."},
+    {"id": "p_derechos", "texto": "Existe un procedimiento para que los titulares ejerzan sus derechos.", "ayuda": "Verifica canal, responsable interno, registro de solicitudes y plazo de 15 días para acceso, rectificación, eliminación y oposición (LOPDP arts. 13 a 16; RGLOPDP arts. 12 a 15)."},
+    {"id": "p_encargados", "texto": "Los encargados tienen contrato con el contenido del art. 41 RGLOPDP.", "ayuda": "Contrato escrito con objeto, duración, naturaleza, finalidad, categorías de datos, titulares y obligaciones del encargado. No tenerlo es infracción grave (LOPDP art. 68 num. 9)."},
+    {"id": "p_transf", "texto": "Las transferencias internacionales tienen garantía y están documentadas.", "ayuda": "Marca 'No aplica' si no hay transferencias. Vías: país con nivel adecuado, garantías en instrumento vinculante, normas corporativas vinculantes, autorización de la SPDP o excepciones (LOPDP arts. 56 a 60). Un encargado en el exterior no convierte por sí solo el encargo en transferencia internacional."},
 ]
 RESP_PROP = ["Cumple", "Parcial", "No cumple", "No aplica"]
 

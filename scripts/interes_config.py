@@ -14,33 +14,45 @@ VERSION = "v0.1"
 
 # ---------- Paso 1. ¿Puede invocarse?
 SUPUESTOS = [
-    {"id": "mkt", "nombre": "Mercadotecnia directa",
+    {"id": "mkt", "nombre": "Mercadotecnia directa (art. 11)",
      "cond": ["No se usan datos sensibles ni datos de niñas, niños o adolescentes",
-              "Existe un mecanismo gratuito e inmediato para oponerse (darse de baja)"]},
-    {"id": "fraude", "nombre": "Prevención y reporte de fraude, lavado de activos y financiamiento del terrorismo",
-     "cond": ["Los datos se conservan solo el tiempo estrictamente necesario"]},
-    {"id": "grupo", "nombre": "Comunicación interna dentro de un grupo empresarial",
-     "cond": ["Se limita a finalidades legítimas", "Es transparente para los titulares (consta en la política y en los avisos)"]},
-    {"id": "redes", "nombre": "Seguridad de redes y sistemas de información",
-     "cond": ["Existen medidas técnicas y organizativas adecuadas"]},
-    {"id": "cctv", "nombre": "Videovigilancia con fines de seguridad de personas, bienes o instalaciones",
-     "cond": ["No se capta ni graba audio", "Hay señalética visible en las zonas vigiladas"]},
+              "Los titulares tienen una relación contractual previa o una expectativa razonable de ser contactados, y fueron informados antes",
+              "Cada comunicación ofrece un mecanismo de oposición visible, gratuito y eficaz, que se atiende sin dilación",
+              "Si hay perfilado, no produce efectos jurídicos significativos ni afecta gravemente los derechos"]},
+    {"id": "fraude", "nombre": "Prevención y reporte de fraude, lavado de activos y financiamiento del terrorismo (art. 12)",
+     "cond": ["Solo se tratan los datos estrictamente necesarios para detectar, analizar o reportar operaciones sospechosas",
+              "Las listas de bloqueo se conservan solo el tiempo estrictamente necesario"]},
+    {"id": "grupo", "nombre": "Comunicación interna dentro de un grupo empresarial (art. 13)",
+     "cond": ["El grupo empresarial puede acreditarse (actos societarios, certificados o registros)",
+              "Los datos se limitan a gestiones internas legítimas; si salen del país, hay nivel adecuado o garantías",
+              "El titular fue informado de finalidades, responsables, medidas y canales de derechos"]},
+    {"id": "redes", "nombre": "Seguridad de redes y sistemas de información (art. 14)",
+     "cond": ["Existen controles técnicos y organizativos acordes a los riesgos, sustentados en protocolos de ciberseguridad",
+              "Se aplica protección de datos desde el diseño y por defecto"]},
+    {"id": "cctv", "nombre": "Videovigilancia con fines de seguridad de personas, bienes o instalaciones (art. 15)",
+     "cond": ["La finalidad es de seguridad y existe una justificación concreta de necesidad y proporcionalidad",
+              "No se capta ni graba audio (prohibido, también para supervisión laboral)",
+              "No hay cámaras en zonas íntimas: baños, vestidores, lactarios o comedores",
+              "Hay señalética visible en las zonas vigiladas (deber de información, LOPDP art. 12)"]},
 ]
-# La última condición del CCTV (señalética) es deber de información general (LOPDP art. 12), no requisito de la RES-0041.
 
+# Prohibiciones del art. 16. efecto: "prohibido", "prohibido_salvo" o "reforzado".
 PROHIBICIONES = [
-    {"id": "x_esp", "texto": "¿El tratamiento usa datos sensibles o de categorías especiales?",
+    {"id": "x_sens", "texto": "¿El tratamiento usa datos sensibles (art. 4 LOPDP: etnia, identidad de género o cultural, religión, ideología, filiación política, pasado judicial, condición migratoria, orientación sexual, salud, biométricos, genéticos)?",
+     "efecto": "prohibido",
+     "nota": "Art. 16.1: no puede invocarse el interés legítimo para datos sensibles. Busca otra base (por ejemplo, una excepción del art. 26 LOPDP) o retira esos datos del tratamiento."},
+    {"id": "x_esp", "texto": "¿Usa otras categorías especiales (art. 25 LOPDP), como datos de personas con discapacidad?",
      "efecto": "reforzado",
-     "nota": "Solo se admite si es estrictamente indispensable, con medidas de seguridad reforzadas y una ponderación que garantice plenamente los derechos."},
-    {"id": "x_perf", "texto": "¿Hay elaboración de perfiles automatizada con efectos jurídicos o un impacto significativo en las personas?",
+     "nota": "Art. 16.2: solo si es estrictamente indispensable, la ponderación garantiza en todo momento los derechos y se aplican medidas reforzadas. El Anexo 1 exige una justificación reforzada por cada categoría."},
+    {"id": "x_perf", "texto": "¿Hay elaboración de perfiles automatizada con efectos jurídicos significativos o que afecte gravemente los derechos?",
      "efecto": "prohibido_salvo",
-     "nota": "Prohibido, salvo en los sectores financiero y de seguros con salvaguardas adicionales."},
+     "nota": "Art. 16.3: prohibido, salvo en los sectores financiero, bancario y de seguros, con medidas reforzadas, transparencia, oposición, revisión humana y supervisión."},
     {"id": "x_nna", "texto": "¿Se tratan datos de niñas, niños o adolescentes?",
      "efecto": "reforzado",
-     "nota": "Solo con justificación expresa en el interés superior del niño, respaldada en la ponderación, con medidas reforzadas."},
-    {"id": "x_masivo", "texto": "¿Se tratan datos de forma masiva o se reutilizan para una finalidad distinta o incompatible con la original?",
+     "nota": "Art. 16.4: solo con justificación expresa en el interés superior del niño, documentada en la evaluación, con medidas reforzadas. En mercadotecnia directa no se admite."},
+    {"id": "x_masivo", "texto": "¿Los datos se reutilizan para una finalidad nueva, incompatible con la original?",
      "efecto": "prohibido",
-     "nota": "No puede invocarse el interés legítimo. Busca otra base o rediseña el tratamiento."},
+     "nota": "Art. 16.5: no puede invocarse el interés legítimo para una reutilización incompatible con la finalidad original. Busca otra base o rediseña el tratamiento."},
 ]
 
 # ---------- Paso 2. Identificación del interés (RES-0041 art. 4: características)
@@ -58,6 +70,7 @@ NECESIDAD = [
     {"id": "n_alt", "texto": "Se analizaron alternativas menos intrusivas y ninguna logra el mismo fin."},
     {"id": "n_min", "texto": "Solo se usan los datos mínimos necesarios (campo por campo)."},
     {"id": "n_plazo", "texto": "El plazo de conservación está definido y es el mínimo necesario."},
+    {"id": "n_cons", "texto": "Se describieron las consecuencias previsibles de no realizar el tratamiento (seguridad, cumplimiento u operación)."},
 ]
 
 # ---------- Paso 4. Ponderación (CRITERIO PROPIO: puntajes 0 a 2)
@@ -78,6 +91,7 @@ SALVAGUARDAS = [
     "Minimización de datos", "Plazo de conservación corto con borrado automático", "Seudonimización o anonimización",
     "Acceso restringido por perfil y registro de accesos", "Sin decisiones automatizadas", "Sin audio (videovigilancia)",
     "Cifrado en reposo y en tránsito", "Revisión periódica de la ponderación",
+    "Revisión humana de las decisiones", "Capacitación del personal que accede a los datos", "Cláusulas de confidencialidad y contrato de encargo con proveedores",
 ]
 SALV_REDUCE = 0.5   # cada salvaguarda reduce 0,5 puntos el impacto (criterio propio)
 SALV_TOPE = 3       # reducción máxima por salvaguardas (criterio propio)
@@ -87,4 +101,4 @@ RESULTADOS = [
     "Prevalece solo con las salvaguardas indicadas: aplicarlas antes de iniciar",
     "No prevalece: el interés legítimo no puede ser la base; usar otra base o rediseñar el tratamiento",
 ]
-REVISION_MESES = 12  # revisión al menos anual, o antes si cambian finalidad, datos o riesgo (RES-0041)
+REVISION_MESES = 12  # art. 18: revisión en el plazo de un año; pierde vigencia si cambian finalidad, datos, titulares o riesgos

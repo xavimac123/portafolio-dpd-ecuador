@@ -186,8 +186,8 @@
   function num(x){var n=parseFloat(String(x==null?'':x).replace(',','.'));return isFinite(n)?n:0}
   function r10(x){return Math.round(x/10)*10}
   function r2(x){return Math.round(x*100)/100}
-  function usd(x){var neg=x<0;x=Math.abs(r2(x));var p=x.toFixed(2).split('.');p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.');return (neg?'−':'')+'$ '+p[0]+','+p[1]}
-  function usd0(x){var p=String(Math.round(x)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');return '$ '+p}
+  function usd(x){var neg=x<0;x=Math.abs(r2(x));var p=x.toFixed(2).split('.');p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.');return (neg?'−':'')+'USD $ '+p[0]+','+p[1]}
+  function usd0(x){return usd(x)}
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function pct(x,d){return (x).toFixed(d==null?1:d).replace('.',',')+' %'}
 

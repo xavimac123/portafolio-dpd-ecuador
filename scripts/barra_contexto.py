@@ -1,10 +1,15 @@
-"""Agrega a las nueve páginas web una barra de contexto que aparece al desplazarse.
+"""Complementos comunes de las nueve páginas web: barra de contexto y exportación a Word y PDF.
+
+1. Barra de contexto que aparece al desplazarse.
 
 Muestra «herramienta › pestaña › sección» para que el usuario sepa dónde está en páginas largas.
 Dentro de la app MSC Protección de Datos (iframe), no dibuja su propia barra: envía el texto a la
 barra superior de la app (window.parent.PDCtx).
 
-Es idempotente: reemplaza el bloque marcado si ya existe. Ejecutar después de los generadores:
+2. Exportación: junto a cada botón «Copiar … (Word)» agrega «Word (.docx)» y «PDF», que descargan el mismo
+informe con espacio para firma y sello (scripts/exportar.js). El texto copiado también lleva ese espacio.
+
+Es idempotente: reemplaza los bloques marcados si ya existen. Ejecutar después de los generadores:
     python scripts/barra_contexto.py
 """
 import pathlib
@@ -39,12 +44,42 @@ window.addEventListener('scroll',function(){if(!tk){tk=1;requestAnimationFrame(u
 document.addEventListener('click',function(){setTimeout(upd,60)});upd()})();</script>""" + FIN
 
 
-def aplicar(html: str, num: str) -> str:
-    bloque = SNIPPET.replace("__NUM__", num)
-    if INI in html:
-        return re.sub(re.escape(INI) + ".*?" + re.escape(FIN), lambda m: bloque, html, flags=re.S)
+EINI, EFIN = "<!--exportar-->", "<!--/exportar-->"
+LIB = (ROOT / "scripts" / "exportar.js").read_text(encoding="utf-8").replace("</", "<\\/")
+EXPORTA = r"""<style>.msc-exp{display:inline-flex;gap:6px;flex-wrap:wrap}body.msc-expmodo .toast{visibility:hidden}</style>
+<script>(function(){var D=window.MSCDoc,P=null;try{if(window.parent!==window&&window.parent.MSCDoc){P=window.parent;if(!D)D=P.MSCDoc}}catch(e){}if(!D)return;
+var modo=null,cap=null,OB=window.Blob;
+function B(parts,opt){if(opt&&/^text\/html/.test(opt.type||'')&&parts&&typeof parts[0]==='string'){try{var h=D.firma(parts.join(''));cap=h;parts=[h]}catch(e){}}return new OB(parts,opt)}
+B.prototype=OB.prototype;window.Blob=B;
+if(!window.ClipboardItem)window.ClipboardItem=function(o){this.o=o};
+try{var C=navigator.clipboard||{},cw=C.write?C.write.bind(C):null;var nw=function(it){if(modo)return Promise.resolve();return cw?cw(it):Promise.reject(new Error('sin portapapeles'))};
+ if(navigator.clipboard)navigator.clipboard.write=nw;else Object.defineProperty(navigator,'clipboard',{configurable:true,value:{write:nw}})}catch(e){}
+function aviso(t){try{if(P&&P.PDToast){P.PDToast(t);return}}catch(e){}var e=document.getElementById('msc-av');if(!e){e=document.createElement('div');e.id='msc-av';e.style.cssText='position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#14181E;color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;z-index:1000;max-width:92%';document.body.appendChild(e)}e.textContent=t;e.hidden=false;clearTimeout(e._t);e._t=setTimeout(function(){e.hidden=true},3200)}
+function titulo(src){var t='';try{var d=document.createElement('div');d.innerHTML=cap||'';var h=d.querySelector('h1,h2');t=h?h.textContent:''}catch(e){}if(!t)t=(src.textContent||'').replace(/^Copiar\s+/i,'').replace(/\s*\(Word\)\s*$/i,'');
+ var c='';try{if(P&&P.PDNombre)c=P.PDNombre()||''}catch(e){}var f=new Date(),iso=f.getFullYear()+'-'+String(f.getMonth()+1).padStart(2,'0')+'-'+String(f.getDate()).padStart(2,'0');return [t.trim().slice(0,48),c.slice(0,28),iso].filter(Boolean).join(' ')}
+function exporta(src,tipo){modo=tipo;cap=null;document.body.classList.add('msc-expmodo');try{src.click()}catch(e){}
+ setTimeout(function(){var h=cap,m=modo;modo=null;setTimeout(function(){document.body.classList.remove('msc-expmodo')},2200);
+  if(!h){aviso('Complete el informe antes de exportarlo.');return}var n=titulo(src);
+  try{if(m==='docx'){var fn=D.docx(h,n);aviso('Word descargado: '+fn)}else{D.pdf(h,n);aviso('En la impresión elija «Guardar como PDF».')}}catch(e){aviso('No se pudo exportar: '+e.message)}},80)}
+function botones(){[].slice.call(document.querySelectorAll('button')).forEach(function(b){if(b.dataset.mscx||b.closest('.msc-exp'))return;var t=(b.textContent||'').trim();if(!/\(Word\)$/i.test(t)&&!/^Copiar documento$/i.test(t))return;b.dataset.mscx=1;
+ var s=document.createElement('span');s.className='msc-exp';var cls=(b.className||'btn').replace(/\boro\b/,'').trim()+' sec';
+ [['docx','Word (.docx)'],['pdf','PDF']].forEach(function(k){var n=document.createElement('button');n.type='button';n.className=cls;n.textContent=k[1];n.title=t.replace(/^Copiar/i,'Descargar').replace(/\(Word\)$/i,'')+(k[0]==='pdf'?'en PDF':'en Word');n.onclick=function(){exporta(b,k[0])};s.appendChild(n)});
+ b.parentNode.insertBefore(s,b.nextSibling)})}
+botones();setTimeout(botones,600)})();</script>"""
+
+
+def _pon(html: str, ini: str, fin: str, bloque: str) -> str:
+    if ini in html:
+        return re.sub(re.escape(ini) + ".*?" + re.escape(fin), lambda m: bloque, html, flags=re.S)
     i = html.rindex("</body>")
     return html[:i] + bloque + html[i:]
+
+
+def aplicar(html: str, num: str, en_app: bool = False) -> str:
+    """en_app=True omite la biblioteca de exportación: dentro de la app se usa la de la ventana principal."""
+    html = _pon(html, INI, FIN, SNIPPET.replace("__NUM__", num))
+    lib = "" if en_app else "<script>" + LIB + "</script>"
+    return _pon(html, EINI, EFIN, EINI + lib + EXPORTA + EFIN)
 
 
 if __name__ == "__main__":

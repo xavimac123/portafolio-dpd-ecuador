@@ -62,10 +62,10 @@ DOMINIOS = [
          ("Los trabajadores reciben información sobre el tratamiento de sus datos.", "Aviso interno o cláusula contractual"),
      ]},
     {"id": "der", "corto": "Derechos", "nombre": "Derechos de los titulares", "peso": 1,
-     "base": "LOPDP art. 12 y derechos del titular", "herramienta": "08 · Política de privacidad (canal de derechos)",
+     "base": "LOPDP arts. 12 a 20 y 67 num. 1; RGLOPDP arts. 12 a 15", "herramienta": "08 · Política de privacidad (canal de derechos)",
      "preguntas": [
          ("Existe un canal y un procedimiento escrito para atender solicitudes de derechos.", "Procedimiento y correo de atención"),
-         ("Las solicitudes se registran y se responden dentro del plazo legal.", "Registro de solicitudes"),
+         ("Las solicitudes se registran y se responden dentro del plazo legal (15 días para acceso, rectificación, eliminación y oposición).", "Registro de solicitudes con fechas de recepción y respuesta"),
          ("El personal que recibe solicitudes sabe a quién derivarlas.", "Capacitación o instructivo"),
      ]},
     {"id": "enc", "corto": "Encargados", "nombre": "Encargados y terceros", "peso": 2,
@@ -96,7 +96,7 @@ DOMINIOS = [
          ("Existe un protocolo aprobado de respuesta a vulneraciones.", "Protocolo"),
          ("El personal sabe cómo reportar internamente un incidente.", "Canal interno y capacitación"),
          ("Existe una bitácora de incidentes, se notifiquen o no.", "Bitácora"),
-         ("La organización conoce los plazos y el canal (SISPDP) para notificar a la SPDP.", "Protocolo con plazos"),
+         ("La organización conoce los términos (5 días a la SPDP, al regulador y al CSIRT; 3 días a los titulares; 2 días del encargado) y el canal (SISPDP).", "Protocolo con plazos y responsables"),
      ]},
     {"id": "tri", "corto": "Transferencias", "nombre": "Transferencias internacionales", "peso": 1,
      "base": "LOPDP art. 56; Res. SPDP-SPD-2026-0004-R; RGLOPDP art. 38 num. 6", "herramienta": "04 · RAT (transferencias)",
@@ -164,7 +164,12 @@ MULTAS = {
 # Dominios cuyo incumplimiento está calificado como infracción GRAVE en las fuentes del portafolio.
 # Solo se listan los verificados (ver BASE-LEGAL.md); el resto queda a criterio del evaluador.
 INFRACCION_GRAVE = {
-    "dpd": "No designar al DPD cuando corresponde (LOPDP art. 68)",
-    "enc": "No suscribir el contrato de encargo (LOPDP art. 68 num. 9)",
-    "vul": "No notificar a los titulares una vulneración (Res. SPDP-SPD-2026-0040-R)",
+    "dpd": "No designar al DPD cuando corresponde (LOPDP art. 68 num. 12)",
+    "enc": "No suscribir contratos con cláusulas de confidencialidad y tratamiento adecuado con el encargado y el personal (LOPDP art. 68 num. 9)",
+    "seg": "No implementar medidas de seguridad ni usar una metodología de análisis y gestión de riesgos (LOPDP art. 68 nums. 1, 4 y 6)",
+    "eipd": "No realizar la evaluación de impacto cuando es obligatoria (LOPDP art. 68 num. 5)",
+    "vul": "No notificar una vulneración a la SPDP o a los titulares (LOPDP art. 68 nums. 7 y 8)",
 }
+# Infracciones leves del responsable (LOPDP art. 67), para orientar al evaluador en los demás dominios:
+# num. 1 no tramitar o negar solicitudes de titulares; num. 2 no aplicar diseño y por defecto; num. 3 no mantener
+# disponibles las políticas; num. 4 elegir un encargado sin garantías; num. 5 incumplir medidas correctivas.

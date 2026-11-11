@@ -239,7 +239,7 @@ var CFG=/*__CONFIG__*/;
   document.querySelectorAll('.help').forEach(function(b){b.onclick=function(){$(b.dataset.h).classList.toggle('on')}});
   document.querySelectorAll('[data-e]').forEach(function(i){var f=function(){S.e[i.id]=i.value;save();econ()};i.addEventListener('input',f);i.addEventListener('change',f)});
   function pert(t){return(t[0]+4*t[1]+t[2])/6}
-  function usd(v){return'USD '+(Math.round(v*100)/100).toLocaleString('es-EC',{minimumFractionDigits:2,maximumFractionDigits:2})}
+  function usd(v){var n=Math.abs(Math.round(v*100)/100),p=n.toFixed(2).split('.');return(v<0?'−':'')+'USD $ '+p[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.')+','+p[1]}
   function pct(v,d){return(v*100).toLocaleString('es-EC',{maximumFractionDigits:d==null?2:d})+' %'}
   function defaults(){var c=calc(),y=new Date().getFullYear();
     if(!S.e.e_anio){var f=S.ctx.ctx_fecha;S.e.e_anio=String((f?+f.slice(0,4):y)-1)}

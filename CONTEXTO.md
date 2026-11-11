@@ -1,40 +1,39 @@
 # ARCHIVO MAESTRO DE CONTEXTO · MSC Protección de Datos (MSC PD)
 
-Actualizado: 2026-11-10. Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (normas).
+Actualizado: 2026-11-11. Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (normas).
 
 ## 1. Identidad y propósito
 - **Qué es:** app instalable (PWA) para gestionar clientes y cumplimiento LOPDP (Ecuador) con las nueve herramientas del portafolio de Macías Sánchez Consultores.
 - **Usuario:** Abg. Mariano X. Macías Sánchez, consultor en protección de datos personales (Guayaquil).
 - **Stack:** HTML, CSS y JavaScript sin frameworks, en un solo archivo; compilación con Python. Sin dependencias externas por CDN.
 - **Publicación actual:** GitHub Pages, rama `gh-pages` › `https://xavimac123.github.io/portafolio-dpd-ecuador/`. Destino previsto: Cloudflare Pages con Cloudflare Access.
-- **Reglas clave:** nunca datos reales de clientes ni de titulares; toda cita legal consta en `BASE-LEGAL.md`; escalas propias rotuladas «criterio propio»; firma «Consultor en Protección de Datos Personales» (no «DPD» hasta el registro ante la SPDP); el DPD asesora y supervisa, no implementa; terminología LOPDP (titular, responsable, encargado, vulneración).
+- **Reglas clave:** nunca datos reales de clientes ni de titulares; toda cita legal consta en `BASE-LEGAL.md`; escalas propias rotuladas «criterio propio»; firma «Consultor en Protección de Datos Personales» (no «DPD» hasta el registro ante la SPDP); el DPD asesora y supervisa, no implementa; terminología LOPDP; dinero como «USD $ 1.234,56»; exportaciones con 6 cm para firma y sello.
 
 ## 2. Estado arquitectónico
-- `app-pd/fuente/index.html`: toda la app (interfaz, cifrado, clientes, agenda, sincronización).
-- `app-pd/build_pwa.py`: incrusta las nueve herramientas y genera `app-pd/docs/` (lo que se publica) y `app-pd/dist/preview.html`.
-- `scripts/*_config.py`: fuente única del contenido de cada herramienta; `scripts/generar_*.py` generan las páginas de las carpetas 01 a 09; `scripts/barra_contexto.py` agrega la barra de contexto.
-- Herramientas: 01 catálogo, 02 honorarios, 03 madurez, 04 RAT, 05 gran escala, 06 interés legítimo, 07 evaluación de impacto, 08 plantillas, 09 vulneraciones. Se abren dentro de la app y guardan por cliente.
-- Datos: registro cifrado (AES-GCM 256, PBKDF2-SHA256) en el dispositivo; copia cifrada en la carpeta oculta de Google Drive (`mscpd-…`); plazos en Google Calendar. Mismo cliente OAuth que MSC Gestor Legal.
-- Funciones probadas: clientes y expediente, agenda, solicitudes de derechos, semáforo de cumplimiento, reloj de vulneraciones, evidencias cifradas, bitácora de horas, informe mensual, revisiones a 12 meses, envío de servicios S01 a S28 a la proforma de Gestor Legal (`#prf&pd=…`), barra de contexto.
+- `app-pd/fuente/index.html`: toda la app. Pestañas: Inicio, Clientes, Herramientas, Agenda, Referencia, Ajustes.
+- `app-pd/build_pwa.py`: incrusta las nueve herramientas, `scripts/exportar.js`, la Referencia (`scripts/referencia_config.py`, tablas de `docs/contraste-guias-spdp.md` y puntos abiertos de `BASE-LEGAL.md`) y copia los PDF de `app-pd/normas/`. Genera `app-pd/docs/` y `app-pd/dist/preview.html`.
+- `scripts/exportar.js` (MSCDoc): Word .docx real y PDF por impresión, con espacio para firma y sello. `scripts/barra_contexto.py` lo agrega a las nueve herramientas (botones «Word (.docx)» y «PDF» junto a cada «Copiar … (Word)»).
+- `scripts/*_config.py`: fuente única de cada herramienta; `scripts/generar_*.py` generan las páginas.
+- Datos: registro cifrado (AES-GCM 256, PBKDF2-SHA256) en el dispositivo; copia cifrada en Google Drive (`mscpd-…`); plazos en Google Calendar. **No renombrar** el prefijo `mscpd-`, las claves `mscpd:` ni el cliente OAuth.
+- Plazos que calcula la app: vulneración 5 días hábiles (SPDP, regulador y CSIRT), 2 del encargado y 3 a titulares (LOPDP arts. 43 y 46); derechos 15 días calendario (arts. 13 a 16).
 
-## 3. Bugs y bloqueos activos
-- Al abrir una herramienta desde Inicio no se puede volver (sin reproducir aún).
-- Los informes solo se copian al portapapeles; no exportan a Word ni PDF; la firma no deja espacio para firma y sello.
-- Falta revisar todos los botones.
-- Repositorio público y sin licencia: contenido y tarifas a la vista.
-- Los datos no migran solos al cambiar de dirección web (restaurar desde Drive).
-- Normativa: puntos abiertos en `BASE-LEGAL.md` y `docs/recursos-pendientes.md` (plazo a titulares, texto íntegro de la Res. 0041, anexo de la Guía v2, número de la resolución de la Guía v2).
+## 3. Hecho el 2026-11-10/11 (rama `claude/correcciones-referencia-exportacion`)
+- «Volver» de las herramientas: cierre directo e iframe nuevo por apertura; desde Inicio se elige el cliente en un selector y se regresa a Inicio.
+- Exportación a Word y PDF en la app y en las herramientas; firma con 6 cm; formato «USD $».
+- Evidencias: lista por herramienta, casilla «verificado» y anexo en el informe mensual.
+- Pestaña Referencia: plazos clave, 14 normas con puntos de consulta, contraste con guías, puntos abiertos, PDF de LOPDP y RGLOPDP.
+- Normas: herramienta 06 alineada con la Res. 0041 (arts. 10 a 18 y Anexo 1); 09 y reloj con el art. 43 reformado y el art. 46; 03 con los numerales del art. 68; ayudas ampliadas en 04, 05 y 07.
+- Aviso «Todos los derechos reservados» y `LICENSE`.
+- Auditoría automatizada de funciones y botones: sin errores.
 
-## 4. Backlog (orden de prioridad)
-1. Corregir el botón de volver desde Inicio.
-2. Exportar informes a Word y PDF, con espacio de 3 a 4 dedos para firma y sello.
-3. Formato «USD $» con centavos en todos los valores.
-4. Evidencias: lista de documentos por herramienta, casilla «verificado» y anexos del informe.
-5. Sección «Normativa»: resoluciones de la SPDP por prioridad, ley y sitio de la SPDP.
-6. Mostrar en la app el contraste con los resúmenes JSON de normas.
-7. Aviso «Todos los derechos reservados» y archivo LICENSE.
-8. Traslado a Cloudflare Pages con Access; volver privado el repositorio.
-9. Plataforma con usuarios para vender accesos (especificación pendiente).
+## 4. Pendiente (orden de prioridad)
+1. Publicar: fusionar la rama en `main` y copiar `app-pd/docs/` a `gh-pages` (decisión del usuario).
+2. PDF de la ley y el reglamento: son copias LEXIS; no se versionan mientras el repositorio sea público. Publicarlos al pasar a Cloudflare con Access.
+3. Contrastar los textos aportados al proyecto y aún no leídos: Res. 0028 (DPD), programa profesionalizante, guía v2 de riesgos, norma de IA (puntos 8, 9, 20 y 25 de `BASE-LEGAL.md`).
+4. Traslado a Cloudflare Pages con Access; volver privado el repositorio. Los datos no migran solos: restaurar desde Drive.
+5. Cambio de nombre y marca (propuesta «Sentinel Data Protection»): solo tras la búsqueda fonética en SENADI; cambiar lo visible, no los identificadores internos. Hacerlo junto con el punto 4.
+6. Plataforma con usuarios para vender accesos (especificación pendiente).
+7. RAT: lista desplegable de excepciones del art. 26 y columna de puntaje MTGE por actividad.
 
 ## 5. Flujo de trabajo
-Editar fuente › `python scripts/generar_*.py` › `python scripts/barra_contexto.py` › `python app-pd/build_pwa.py` › probar en 390 px y 1200 px (claro y oscuro) › commit en español en `main` › copiar `app-pd/docs/` a `gh-pages`.
+Editar fuente › `python scripts/generar_*.py` › `python scripts/barra_contexto.py` › `python app-pd/build_pwa.py` › probar en 390 px y 1200 px (claro y oscuro) › commit en español › copiar `app-pd/docs/` a `gh-pages`.

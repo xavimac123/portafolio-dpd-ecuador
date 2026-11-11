@@ -83,7 +83,7 @@
 <header><div class="wrap">
   <div class="marca">Macías Sánchez Consultores · Herramienta 06</div>
   <h1>Evaluación de ponderación del interés legítimo</h1>
-  <p>Art. 7 LOPDP · Res. SPDP-SPD-2025-0041-R y su Anexo 1 · Solo sector privado</p>
+  <p>Art. 7 LOPDP · Res. SPDP-SPD-2025-0041-R y su Anexo 1 (RO Supl. 177, 03-12-2025) · Solo sector privado</p>
   <nav role="tablist">
     <button data-t="t1" aria-selected="true">1 · ¿Puede invocarse?</button>
     <button data-t="t2" aria-selected="false">2 · El interés</button>
@@ -96,7 +96,15 @@
 <main class="wrap">
 <section id="t1" class="on">
   <h2>¿Puede usarse el interés legítimo en este tratamiento?</h2>
-  <p class="sub">La resolución exige una evaluación de ponderación <b>previa, motivada, documentada y disponible</b> para la SPDP y para los titulares. Omitirla es <b>infracción grave</b>. Antes de ponderar, verifica que el caso entre en un supuesto admisible y no caiga en una prohibición.</p>
+  <p class="sub">La resolución exige una evaluación de ponderación <b>previa, motivada, documentada y disponible</b> para la SPDP y para los titulares. Omitirla es <b>infracción grave</b>. Antes de ponderar, verifica que el caso entre en un supuesto admisible (arts. 10 a 15) y no caiga en una prohibición (art. 16).</p>
+  <details class="card"><summary style="cursor:pointer;font-weight:700">Guía para el DPD: cómo conducir esta evaluación</summary><ul class="pasos" style="list-style:disc">
+   <li><b>Cuándo se hace:</b> antes de iniciar el tratamiento. Si ya está en marcha sin evaluación, documenta la fecha real y regulariza: la omisión es infracción grave (art. 6).</li>
+   <li><b>Qué pedir al cliente:</b> descripción del proceso, datos tratados campo por campo, número y tipo de titulares, política de privacidad vigente, canal de oposición y contratos con proveedores.</li>
+   <li><b>Evaluación simplificada:</b> la norma la admite solo como excepción, para tratamientos de riesgo bajo, recurrentes u homogéneos, con plantillas que sigan el Anexo 1. Usarla en riesgo medio, alto o crítico para eludir la regla es infracción grave (art. 5). Esta herramienta produce la evaluación completa.</li>
+   <li><b>Las cinco etapas del Anexo 1:</b> idoneidad del interés, necesidad, ponderación (con módulo reforzado si hay categorías especiales), medidas de seguridad y conclusión. Las pestañas 2 a 5 las recorren.</li>
+   <li><b>En caso de duda</b> prevalecen los derechos del titular (art. 5).</li>
+   <li><b>Quién firma:</b> la declaración final la firma y sella el responsable del tratamiento (Anexo 1). El consultor elabora y recomienda.</li>
+   <li><b>Después:</b> registrar la evaluación, tenerla disponible para la SPDP y para el titular (versión en español y lenguaje claro, art. 18), reflejar la base en el RAT e informar el tratamiento en la política.</li></ul></details>
   <div id="resFiltro"></div>
   <div class="card"><h3>Ámbito</h3>
     <div class="q"><div class="qt">¿El responsable es una persona natural o jurídica del sector privado?</div><div class="seg" data-y="priv" style="margin-top:8px;max-width:260px"><button type="button">Sí</button><button type="button">No</button></div></div>
@@ -111,7 +119,7 @@
 
 <section id="t2">
   <h2>Identificación y justificación del interés</h2>
-  <p class="sub">Primer criterio del Anexo 1. Describe el interés con precisión: quién lo tiene, para qué y por qué no basta otra base.</p>
+  <p class="sub">Etapa 1 del Anexo 1 (idoneidad). Describe el problema o riesgo concreto que origina el tratamiento, el contexto y los titulares afectados. Delimita el qué (datos y operación), el cuándo (periodo o frecuencia) y el para qué (un único propósito). Un interés hipotético o futuro no cumple el art. 4.</p>
   <div class="card"><div class="grid">
     <div><label for="i_resp">Responsable del tratamiento</label><input id="i_resp" data-i placeholder="Razón social"></div>
     <div><label for="i_trat">Tratamiento evaluado</label><input id="i_trat" data-i placeholder="Ej. Correos de ofertas a clientes actuales"></div>
@@ -127,24 +135,24 @@
 
 <section id="t3">
   <h2>Necesidad</h2>
-  <p class="sub">Segundo criterio del Anexo 1: demostrar que el tratamiento es indispensable para la finalidad y que no existen medios menos intrusivos.</p>
+  <p class="sub">Etapa 2 del Anexo 1: demostrar que el tratamiento es imprescindible, documentar las alternativas menos intrusivas evaluadas y por qué se descartaron, y describir las consecuencias de no realizarlo. Adjunta evidencia cuando exista (por ejemplo, un estudio de viabilidad técnica).</p>
   <div class="card"><table class="prop" id="nec"></table></div>
   <div class="card"><label for="n_altd">Alternativas consideradas y por qué se descartaron</label><textarea id="n_altd" placeholder="Ej. Segmentar sin historial de compras: descartado porque…"></textarea></div>
 </section>
 
 <section id="t4">
   <h2>Ponderación con los derechos del titular</h2>
-  <p class="sub">Tercer criterio del Anexo 1: comparar el peso del interés con el impacto en los derechos y las expectativas del titular, y documentar las salvaguardas. <b>Los puntajes de esta pestaña son criterio propio</b> del portafolio: ordenan el razonamiento; la conclusión debe motivarse por escrito.</p>
+  <p class="sub">Etapas 3 y 4 del Anexo 1: comparar el peso del interés con el impacto en los derechos y las expectativas del titular, y documentar las salvaguardas. <b>Los puntajes de esta pestaña son criterio propio</b> del portafolio: ordenan el razonamiento; la conclusión debe motivarse por escrito.</p>
   <div id="balance"></div>
   <div class="card"><h3>Peso del interés del responsable</h3><div id="peso"></div></div>
   <div class="card"><h3>Impacto en los derechos y expectativas del titular</h3><div id="impacto"></div></div>
-  <div class="card"><h3>Salvaguardas</h3><p class="nota">Cada salvaguarda reduce el impacto en <span id="sRed"></span> puntos, hasta un máximo de <span id="sTope"></span> (criterio propio). Solo cuenta si se implementa antes de iniciar.</p><div class="chips" id="salv"></div><input id="salvO" style="margin-top:8px" placeholder="Otras salvaguardas (separadas por punto y coma)"></div>
+  <div class="card"><h3>Salvaguardas</h3><p class="nota">Cada salvaguarda reduce el impacto en <span id="sRed"></span> puntos, hasta un máximo de <span id="sTope"></span> (criterio propio). Solo cuenta si se implementa antes de iniciar. El Anexo 1 pide registrar, por cada medida, su tipo (técnica, organizativa, administrativa, jurídica o informativa), su descripción y la evidencia que la respalda: anótalo en la motivación o adjúntalo.</p><div class="chips" id="salv"></div><input id="salvO" style="margin-top:8px" placeholder="Otras salvaguardas (separadas por punto y coma)"></div>
   <div class="card"><label for="p_mot">Motivación de la ponderación</label><textarea id="p_mot" placeholder="Explica con tus palabras por qué prevalece o no el interés frente a los derechos del titular"></textarea></div>
 </section>
 
 <section id="t5">
   <h2>Resultado, transparencia y registro</h2>
-  <p class="sub">El documento completo se conserva, se registra en el RAT y se revisa al menos una vez al año o cuando cambien la finalidad, los datos o el riesgo. Los titulares pueden ejercer en todo momento sus derechos, en especial el de oposición.</p>
+  <p class="sub">Etapa 5 del Anexo 1. La evaluación se registra, se refleja en el RAT y se revisa en el plazo de un año; pierde vigencia si cambian la finalidad, la categoría de datos, el tipo de titulares o los riesgos (art. 18). La oposición del titular se atiende de forma inmediata (art. 17). Las evidencias se conservan sumilladas, foliadas e indexadas por cinco años, o por la duración del tratamiento más dos años, lo que sea mayor (Anexo 1).</p>
   <div id="resumen"></div>
   <div class="card"><div class="grid">
     <div class="full"><label for="r_res">Resultado</label><select id="r_res" data-r></select><p class="nota" id="r_sug" style="margin:4px 0 0"></p></div>
@@ -158,14 +166,14 @@
   <div class="card"><h3>Firma de responsabilidad</h3><div class="grid">
     <div><label for="f_el">Elaborado por</label><input id="f_el" data-f></div>
     <div><label for="f_ec">Cargo / matrícula</label><input id="f_ec" data-f></div>
-    <div><label for="f_ap">Revisado y aprobado por</label><input id="f_ap" data-f placeholder="Representante legal del responsable"></div>
+    <div><label for="f_ap">Declaración final firmada por (responsable del tratamiento)</label><input id="f_ap" data-f placeholder="Representante legal del responsable"></div>
     <div><label for="f_ac">Cargo de quien aprueba</label><input id="f_ac" data-f></div>
   </div></div>
   <div class="row"><button class="btn oro" id="copInf">Copiar informe (Word)</button><button class="btn sec" id="copReg">Copiar fila del registro (Excel)</button></div>
-  <p class="nota">El consultor recomienda; la decisión de usar el interés legítimo y la implementación de las salvaguardas corresponden al responsable.</p>
+  <p class="nota">El consultor recomienda; la decisión de usar el interés legítimo y la implementación de las salvaguardas corresponden al responsable, que firma y sella la declaración final (Anexo 1).</p>
 </section>
 </main>
-<footer><div class="wrap">Abg. Mariano X. Macías Sánchez · Macías Sánchez Consultores · Herramienta de apoyo; no sustituye el análisis jurídico del caso concreto. Puntajes de ponderación de criterio propio. Contrasta las citas con el texto oficial de la Res. SPDP-SPD-2025-0041-R.</div></footer>
+<footer><div class="wrap">Abg. Mariano X. Macías Sánchez · Macías Sánchez Consultores · Herramienta de apoyo; no sustituye el análisis jurídico del caso concreto. Puntajes de ponderación de criterio propio. Citas contrastadas con la Res. SPDP-SPD-2025-0041-R publicada en el Registro Oficial, Suplemento 177 del 03-12-2025.</div></footer>
 <div class="toast" id="toast"></div>
 
 <script>

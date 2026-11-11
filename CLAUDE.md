@@ -13,7 +13,8 @@ Repositorio de herramientas de cumplimiento LOPDP (Ecuador) de Macías Sánchez 
 - Versionar con commits descriptivos en español.
 - `referencias/` contiene documentos anonimizados que el usuario ya utilizó. Úsalos para mejorar la **estructura** de las plantillas (secciones, orden, campos), nunca para copiar redacción de terceros. Si una referencia contiene datos personales reales, detente y avisa antes de procesarla.
 - Ediciones hechas en los generadores web ("Copiar Markdown") se incorporan reemplazando el `.md` correspondiente y regenerando con `scripts/generar_generador.py`.
-- Toda exportación lleva firma de responsabilidad (`scripts/firma-responsabilidad.md`).
+- Toda exportación lleva firma de responsabilidad (`scripts/firma-responsabilidad.md`) con 6 cm libres para firma y sello (`ALTO_FIRMA_CM` en `scripts/exportar.js`).
+- Los valores en dinero se muestran como «USD $ 1.234,56».
 - Escalas, umbrales y ponderaciones que no vienen de la norma se rotulan como criterio propio en la interfaz, el informe y el README.
 
 ## Estructura
@@ -31,6 +32,9 @@ La numeración de las herramientas sigue el orden de uso de la guía (`docs/guia
 - `08-kit-plantillas/` — documentos contractuales e informativos
 - `09-kit-vulneraciones/` — gestión y notificación de vulneraciones
 - `app-pd/` — app instalable MSC Protección de Datos (PWA): `fuente/index.html`, `build_pwa.py`; publica `app-pd/docs/` en la rama `gh-pages` (GitHub Pages)
+- `scripts/referencia_config.py` — fuente única de la pestaña «Referencia» de la app (normas, puntos de consulta y plazos); todo lo que cite debe constar en `BASE-LEGAL.md`
+- `scripts/exportar.js` — exportación a Word (.docx) y PDF con espacio para firma y sello; la usan la app y las nueve herramientas
+- `app-pd/normas/` — PDF de la LOPDP y del RGLOPDP (`lopdp.pdf`, `rglopdp.pdf`); no se versionan
 - `docs/` — decisiones del proyecto, contraste con las guías de la SPDP y recursos pendientes
 - `referencias/` — plantillas ya utilizadas, anonimizadas
 - `scripts/` — generadores (Excel, exportación a Word)

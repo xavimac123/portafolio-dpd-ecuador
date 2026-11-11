@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 app-pd/dist/
+# PDF de normas: copias de bases jurídicas de uso del suscriptor; no se publican en el repositorio
+app-pd/normas/*.pdf
+app-pd/docs/normas/

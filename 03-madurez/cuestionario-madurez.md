@@ -89,12 +89,12 @@ Base: LOPDP art. 12. Herramienta: 08 · Política y avisos de privacidad.
 
 ## 6. Derechos de los titulares
 
-Base: LOPDP art. 12 y derechos del titular. Herramienta: 08 · Política de privacidad (canal de derechos).
+Base: LOPDP arts. 12 a 20 y 67 num. 1; RGLOPDP arts. 12 a 15. Herramienta: 08 · Política de privacidad (canal de derechos).
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|
 | Existe un canal y un procedimiento escrito para atender solicitudes de derechos. | Procedimiento y correo de atención | [ ] | [EVIDENCIA] |
-| Las solicitudes se registran y se responden dentro del plazo legal. | Registro de solicitudes | [ ] | [EVIDENCIA] |
+| Las solicitudes se registran y se responden dentro del plazo legal (15 días para acceso, rectificación, eliminación y oposición). | Registro de solicitudes con fechas de recepción y respuesta | [ ] | [EVIDENCIA] |
 | El personal que recibe solicitudes sabe a quién derivarlas. | Capacitación o instructivo | [ ] | [EVIDENCIA] |
 
 **Puntaje del dominio:** [PROMEDIO]
@@ -145,7 +145,7 @@ Base: LOPDP art. 43; RGLOPDP arts. 24 a 28; Res. SPDP-SPD-2026-0040-R. Herramien
 | Existe un protocolo aprobado de respuesta a vulneraciones. | Protocolo | [ ] | [EVIDENCIA] |
 | El personal sabe cómo reportar internamente un incidente. | Canal interno y capacitación | [ ] | [EVIDENCIA] |
 | Existe una bitácora de incidentes, se notifiquen o no. | Bitácora | [ ] | [EVIDENCIA] |
-| La organización conoce los plazos y el canal (SISPDP) para notificar a la SPDP. | Protocolo con plazos | [ ] | [EVIDENCIA] |
+| La organización conoce los términos (5 días a la SPDP, al regulador y al CSIRT; 3 días a los titulares; 2 días del encargado) y el canal (SISPDP). | Protocolo con plazos y responsables | [ ] | [EVIDENCIA] |
 
 **Puntaje del dominio:** [PROMEDIO]
 

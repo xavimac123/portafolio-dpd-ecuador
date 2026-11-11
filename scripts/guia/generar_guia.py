@@ -279,7 +279,7 @@ def contenido():
                 ["05", "Evaluación de gran escala", "Sobre cada actividad del RAT", "Toda organización debe evaluar si trata datos a gran escala; define si el DPD y la evaluación de impacto son obligatorios", "Informe con el puntaje MTGE"],
                 ["06", "Interés legítimo", "Cuando el RAT usa el interés legítimo como base", "La ponderación previa es obligatoria y su omisión es infracción grave", "Informe de ponderación y fila del registro"],
                 ["07", "Evaluación de impacto", "Antes de tratamientos de alto riesgo o gran escala", "Es obligatoria y previa en los casos del art. 42 LOPDP y de gran escala", "Informe del art. 32 RGLOPDP"],
-                ["08", "Kit de plantillas", "Después del RAT", "Cumple el deber de información, formaliza a los encargados y pone cláusulas en cada tipo de contrato", "Política, avisos, contratos, cláusulas, DPD"],
+                ["08", "Kit de plantillas", "Después del RAT", "Cumple el deber de información, formaliza a los encargados y pone cláusulas en cada tipo de contrato", "Políticas, avisos, contratos, cláusulas, DPD, derechos, seguridad, supervisión, diseño, capacitación"],
                 ["09", "Kit de vulneraciones", "Antes del incidente y en las primeras horas", "Los plazos de notificación son de días", "Protocolo, bitácora, notificaciones"]],
                [0.06, 0.17, 0.22, 0.33, 0.22])
     s += h2("1.1 Qué herramienta usar según el caso")
@@ -722,7 +722,7 @@ def contenido():
     s += box("concepto", ["<b>Riesgo inherente</b> es el riesgo antes de las medidas; <b>riesgo residual</b>, el que queda después. Quien implementa las medidas es la empresa; el DPD verifica que el residual quede por debajo del umbral aceptado."])
     # 9.6 Plantillas
     s += h2("9.8 Herramienta 08 · Kit de plantillas")
-    s += ficha([("Qué es", "Generador de documentos: política de privacidad, avisos, contrato de encargo, cláusulas de consentimiento, cláusulas por tipo de contrato (laboral, por cargo o rol, encargo, transferencia y corresponsables) y designación del DPD."),
+    s += ficha([("Qué es", "Generador de documentos: política de privacidad, avisos, contrato de encargo, cláusulas de consentimiento, cláusulas por tipo de contrato (laboral, por cargo o rol, encargo, transferencia y corresponsables), designación del DPD, política interna, formulario y procedimiento de derechos, registro de medidas de seguridad, plan e informe de supervisión, evaluación de diseño y por defecto y plan de capacitación."),
                 ("Por qué", "Cumple el deber de información (art. 12 LOPDP), formaliza a los encargados (art. 41 RGLOPDP; su falta es infracción grave) y documenta consentimientos y la designación del DPD."),
                 ("Según el caso", "Siempre, pero después del RAT. Elija solo las plantillas necesarias: una empresa sin encargados no necesita contratos de encargo; el consentimiento solo cuando es la base. Los documentos son borradores que la gerencia aprueba."),
                 ("Entregable", "Documentos en Word con firma de responsabilidad.")])
@@ -730,7 +730,8 @@ def contenido():
                 ("Política desde el RAT", "Finalidad, base, plazo, destinatarios y transferencias de cada actividad."),
                 ("Avisos por punto de recolección", "Uno por formulario, letrero o canal."),
                 ("Contratos de encargo", "Uno por cada encargado del RAT (capítulo 8)."),
-                ("Aprobación", "La gerencia revisa, aprueba y publica; el DPD verifica que se usen.")])
+                ("Aprobación", "La gerencia revisa, aprueba y publica; el DPD verifica que se usen."),
+                ("Operación y supervisión", "Política interna al personal, procedimiento y registro de derechos, registro de medidas de seguridad; al cierre del periodo, plan e informe de supervisión.")])
     s += box("error", ["Pedir consentimiento para todo «por si acaso». Si el titular lo revoca y el tratamiento sigue siendo necesario, la cláusula queda engañosa."])
     # 9.7 Vulneraciones
     s += h2("9.9 Herramienta 09 · Kit de vulneraciones")

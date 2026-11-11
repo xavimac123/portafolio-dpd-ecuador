@@ -27,7 +27,7 @@
 
 ## 1. Gobierno y responsabilidad proactiva
 
-Base: LOPDP arts. 10 lit. k y 47. Herramienta: Esta evaluación (plan de acción).
+Base: LOPDP arts. 10 lit. k y 47. Herramienta: Esta evaluación (plan de acción), 08 · Política interna y 08 · Plan e informe de supervisión.
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|
@@ -89,7 +89,7 @@ Base: LOPDP art. 12. Herramienta: 08 · Política y avisos de privacidad.
 
 ## 6. Derechos de los titulares
 
-Base: LOPDP arts. 12 a 20 y 67 num. 1; RGLOPDP arts. 12 a 15. Herramienta: 08 · Política de privacidad (canal de derechos).
+Base: LOPDP arts. 12 a 20 y 67 num. 1; RGLOPDP arts. 12 a 15. Herramienta: 08 · Formulario y procedimiento de derechos.
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|
@@ -113,7 +113,7 @@ Base: RGLOPDP art. 41; LOPDP art. 68 num. 9; Res. SPDP-SPD-2025-0006-R. Herramie
 
 ## 8. Seguridad y gestión de riesgos (crítico)
 
-Base: LOPDP art. 40; Res. SPDP-SPD-2026-0012-R. Herramienta: 07 · Evaluación de impacto (matriz de riesgos).
+Base: LOPDP art. 40; Res. SPDP-SPD-2026-0012-R. Herramienta: 07 · Evaluación de impacto (matriz de riesgos) y 08 · Registro de medidas de seguridad.
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|
@@ -126,7 +126,7 @@ Base: LOPDP art. 40; Res. SPDP-SPD-2026-0012-R. Herramienta: 07 · Evaluación d
 
 ## 9. Evaluación de impacto y privacidad desde el diseño
 
-Base: LOPDP art. 42; RGLOPDP arts. 29 a 32. Herramienta: 07 · Evaluación de impacto.
+Base: LOPDP art. 42; RGLOPDP arts. 29 a 32. Herramienta: 07 · Evaluación de impacto y 08 · Evaluación de diseño y por defecto.
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|
@@ -162,7 +162,7 @@ Base: LOPDP art. 56; Res. SPDP-SPD-2026-0004-R; RGLOPDP art. 38 num. 6. Herramie
 
 ## 12. Capacitación y cultura
 
-Base: RGLOPDP art. 30 num. 4 (cultura preventiva). Herramienta: Plan de capacitación.
+Base: RGLOPDP art. 30 num. 4 (cultura preventiva). Herramienta: 08 · Plan de capacitación.
 
 | Pregunta | Evidencia sugerida | Puntaje (0-4 / N/A) | Evidencia revisada |
 |---|---|---|---|

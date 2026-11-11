@@ -1,6 +1,6 @@
 # ARCHIVO MAESTRO DE CONTEXTO · MSC Protección de Datos (MSC PD)
 
-Actualizado: 2026-11-11 (sexta entrega). Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (normas).
+Actualizado: 2026-11-11 (décima entrega). Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (normas).
 
 ## 1. Identidad y propósito
 - **Qué es:** app instalable (PWA) para gestionar clientes y cumplimiento LOPDP (Ecuador) con las nueve herramientas del portafolio de Macías Sánchez Consultores.
@@ -75,10 +75,22 @@ Actualizado: 2026-11-11 (sexta entrega). Leer junto con `CLAUDE.md` (reglas) y `
 - Publicidad: WhatsApp y correo salen de Ajustes (migración automática de `cfg.pub.wa/mail` a `cfg.firma.tel/mail`); la pestaña solo pide sitio web, LinkedIn, Instagram, Facebook/TikTok y enlace del autodiagnóstico. Número de WhatsApp grande en las piezas (64 px).
 - Contenido comercial: cada pregunta y dato tiene gancho (primera línea del mensaje) y «Para su negocio» (en la pieza y en el mensaje); tarjeta de estrategia de uso (criterio propio). Texto que no cabe se recorta con aviso.
 
+## 3i. Novena entrega (2026-11-11) · Contraste con las 12 herramientas de responsabilidad proactiva
+- Se contrastó la app con la lista «¿Cómo cumple? Herramientas» (políticas, RAT, diseño/defecto, riesgos, evaluación de impacto, medidas de seguridad, capacitación, DPD, incidentes, supervisión y auditoría, derechos, contratos con encargados). Tabla de correspondencia en `08-kit-plantillas/README.md`.
+- Decisión del usuario: ampliar el kit 08 (sin renumerar ni crear herramientas nuevas). Nuevas plantillas en el generador: `politica-interna.md`, `formulario-derechos.md`, `procedimiento-derechos.md` (con registro de solicitudes, modelos de respuesta y lista de supervisión), `registro-medidas-seguridad.md` y `plan-informe-supervision.md`. Todas con enfoque de supervisión del DPD (Res. 0028 art. 15).
+- BASE-LEGAL: filas nuevas verificadas en la copia LEXIS (arts. 8, 13 a 19, 24, 27, 37, 41, 47 nums. 4, 6, 10, 49, 62, 64, 67 num. 3, 69 num. 1, 76 num. 12); punto 27 actualizado (10 días del art. 62 frente a 15 días); puntos 35 a 37 nuevos.
+- Aplazados en un primer momento: capacitación y diseño y por defecto (completados en la décima entrega).
+
+## 3j. Décima entrega (2026-11-11)
+- Responsabilidades DPO › nueva categoría «Infracciones y sanciones» (`INFRACCIONES` en `scripts/responsabilidades_config.py`; chip `inf`): estimador de multa por rango legal (0,1-0,7 % y 0,7-1 % del volumen de negocio; 1-10 y 10-20 SBU), reglas de sanción y medidas correctivas (arts. 65, 66, 68 num. 14, 71 a 73), 30 infracciones del responsable y del encargado (arts. 67 a 70) con qué se exige para corregir y qué hace el DPD, selector de sector (privado y empresas públicas: multa a la entidad sobre el volumen de negocio; público: multa en SBU a los servidores o funcionarios, DPD siempre obligatorio, art. 38), pasos del DPD ante cualquier infracción y cómo protege su rol (LOPDP arts. 49 y 50; RGLOPDP art. 51; Res. 0028 arts. 13, 15 y 19 a 23). Incluido en la exportación Word/PDF de la pestaña.
+- Plantillas nuevas del kit 08: `evaluacion-diseno-defecto.md` (RGLOPDP arts. 59 y 60; RES-2025-0040 leída en el RO 163: DevPrivOps, DevSecOps, DevRiskOps, declaración de aplicabilidad y madurez) y `plan-capacitacion.md` (guía al DPD, 10 módulos, matriz de públicos, plan, asistencia, evaluación e indicadores; fundamento indirecto, punto 36).
+- BASE-LEGAL: puntos 21 y 37 resueltos; 36 actualizado; 38 nuevo (muy graves y DPD sin catálogo). Referencia y contraste de la guía de diseño actualizados.
+
 ## 4. Pendiente (orden de prioridad)
 2. PDF de la ley y el reglamento: son copias LEXIS; no se versionan mientras el repositorio sea público. Publicarlos al pasar a Cloudflare con Access.
 3. Contrastar los textos aportados al proyecto y aún no leídos: Res. 0028 (DPD), programa profesionalizante, guía v2 de riesgos; y los textos oficiales de las Res. 2026-0039 y 0037 (puntos 8, 20, 25, 28 y 29 de `BASE-LEGAL.md`).
 3a. Actualizar la herramienta 01 (catálogo y glosario) con las funciones de la Res. 0028 art. 13 y revisar las tablas de la guía v2 (punto 8 de BASE-LEGAL).
+3c. Vigilar normativa de la SPDP sobre formación del personal (punto 36), infracciones muy graves (punto 38) y la guía complementaria de controles de diseño (punto 21).
 3b. Evidencia de respaldo también en 06 y 07; cláusula de IA en el contrato de encargo; campo de alternativa no biométrica en la 07.
 4. Traslado a Cloudflare Pages con Access; volver privado el repositorio. Los datos no migran solos: restaurar desde Drive.
 5. Cambio de nombre y marca (propuesta «Sentinel Data Protection»): solo tras la búsqueda fonética en SENADI; cambiar lo visible, no los identificadores internos. Hacerlo junto con el punto 4.

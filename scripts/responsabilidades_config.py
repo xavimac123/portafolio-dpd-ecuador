@@ -200,6 +200,7 @@ ABIERTOS = [
  ["Riesgos: la guía v2 (Cap. II, referencial) pone al DPD a fijar criterios de riesgo y «auditar» informes, mientras la Res. 0028 art. 15.2 le prohíbe ejecutar la gestión de riesgos. Criterio de la app: el DPD propone, revisa y observa; el responsable aprueba y ejecuta.", "BASE-LEGAL, punto 30"],
  ["Vulneraciones: la Res. 0028 art. 13.3 aún nombra a la ARCOTEL; rige el art. 43 LOPDP reformado (organismo competente y CSIRT).", "BASE-LEGAL, punto 31"],
  ["Una misma firma como DPD e implementadora del mismo cliente: la norma no lo resuelve. Criterio prudente: no ser DPD de quien uno implementa; si la firma presta ambos servicios, personas distintas, declaración del art. 17 y consulta a la SPDP.", "BASE-LEGAL, punto 32"],
+ ["Infracciones muy graves: el art. 66 num. 3 LOPDP las menciona, pero la ley no las tipifica ni les fija multa. Tampoco hay un catálogo de infracciones propio del DPD; su responsabilidad se rige por el art. 49 LOPDP y la Res. 0028 art. 13. La multa exacta depende del Anexo I de la Res. 0022, aún no cotejado.", "BASE-LEGAL, puntos 11 y 38"],
 ]
 
 # ---------------- Quién puede ser DPD ----------------
@@ -276,3 +277,104 @@ TEMAS = [
   "exigir": ["Registros de incidentes y reportes de seguridad.", "Identidad y perfil de los expertos consultados y sus respuestas.", "Fuentes externas usadas (informes, sanciones, estadísticas).", "Memoria de cálculo o archivo del modelo."],
   "herr": ["07"]},
 ]
+
+# ---------------- Infracciones, sanciones y actuación del DPD ----------------
+# Fuente: LOPDP arts. 49, 65 a 73 y disposición general sexta; RGLOPDP art. 51; Res. 0028 arts. 13, 15 y 19 a 23.
+# «Qué se exige para corregir» resume la obligación que la conducta incumple (norma citada).
+# «Qué hace el DPD» y las prácticas de protección son criterio propio, salvo cita expresa.
+INFRACCIONES = {
+ "reglas": [
+  ["Leve, sector privado o empresa pública: multa de 0,1 % a 0,7 % del volumen de negocio del ejercicio económico inmediatamente anterior.", "LOPDP art. 71 num. 2"],
+  ["Grave, sector privado o empresa pública: multa de 0,7 % a 1 % del volumen de negocio del ejercicio anterior.", "LOPDP art. 72 num. 1"],
+  ["Servidores públicos: leve de 1 a 10 SBU; grave de 10 a 20 SBU, sin perjuicio de la responsabilidad extracontractual del Estado.", "LOPDP arts. 71 num. 1 y 72"],
+  ["Volumen de negocio: ventas de productos y servicios del último ejercicio, sin IVA ni otros impuestos ligados a la operación.", "LOPDP art. 73"],
+  ["La SPDP fija la multa dentro del rango por proporcionalidad: intencionalidad, reiteración, naturaleza del perjuicio y reincidencia. La metodología de cálculo es el modelo MPRIV-1 (sector privado).", "LOPDP arts. 71 y 72; Res. SPDP-SPD-2025-0022-R"],
+  ["Además de la multa, la SPDP dicta medidas correctivas: cese del tratamiento, eliminación de los datos o imposición de medidas técnicas, jurídicas, organizativas o administrativas.", "LOPDP art. 65"],
+  ["Leve: si el infractor ya consta en el Registro Único de Responsables y Encargados Incumplidos, la SPDP inicia directamente el procedimiento sancionatorio, con medidas correctivas y sanción.", "LOPDP art. 66 num. 1; disposición general sexta"],
+  ["Grave: primero medidas correctivas; si se cumplen tarde, en parte o de forma defectuosa, se sanciona.", "LOPDP art. 66 num. 2"],
+  ["Reiterar faltas leves, o incumplir las medidas correctivas después de una sanción leve, se convierte en infracción grave.", "LOPDP art. 68 num. 14"],
+  ["Notificar a tiempo una vulneración y ejecutar oportunamente medidas de respuesta son atenuantes.", "LOPDP art. 46"],
+  ["El art. 66 num. 3 menciona infracciones «muy graves», pero la LOPDP no las tipifica ni fija su multa. Ver puntos abiertos.", "LOPDP art. 66 num. 3"]],
+ "sectores": {
+  "priv": {"t": "Sector privado y empresas públicas", "quien": "Se sanciona a la entidad (responsable o encargado) con multa sobre su volumen de negocio. Las empresas públicas siguen esta misma regla.", "c": "LOPDP arts. 71 num. 2, 72 num. 1 y 73",
+   "notas": [["Base de la multa: volumen de negocio del ejercicio anterior, sin IVA.", "LOPDP art. 73"], ["Metodología de cálculo: modelo MPRIV-1.", "Res. SPDP-SPD-2025-0022-R"], ["El DPD es obligatorio en las causales de la Res. 0028 art. 10 y del RGLOPDP.", "LOPDP art. 48 nums. 2 y 3; Res. 0028 art. 10"]]},
+  "pub": {"t": "Sector público", "quien": "Se sanciona a los servidores o funcionarios por cuya acción u omisión se cometió la infracción, con multa en salarios básicos unificados (SBU), sin perjuicio de la responsabilidad extracontractual del Estado.", "c": "LOPDP arts. 71 num. 1 y 72",
+   "notas": [["Las conductas infractoras son las mismas de los arts. 67 a 70; cambia quién responde y la cuantía.", "LOPDP arts. 67 a 72"], ["Designar DPD es siempre obligatorio para las entidades del art. 225 de la Constitución.", "LOPDP art. 48 num. 1; Res. 0028 art. 9"], ["Las medidas de seguridad se rigen además por el mecanismo gubernamental de seguridad de la información.", "LOPDP art. 38"], ["No puede ser DPD quien ejerce un cargo del nivel jerárquico superior; la SPDP define otras incompatibilidades.", "Res. 0028 art. 16.4; RGLOPDP art. 56"], ["Metodología de cálculo para el sector público: modelo MPUB-1.", "Res. SPDP-SPD-2025-0022-R"]]}},
+ "grupos": [
+  {"id": "rl", "nivel": "Leve", "sujeto": "Responsable", "art": "LOPDP art. 67", "multa": {"priv": "0,1 % a 0,7 % del volumen de negocio del ejercicio anterior (art. 71 num. 2)", "pub": "1 a 10 SBU a los servidores o funcionarios por cuya acción u omisión se incurrió en la infracción (art. 71 num. 1)"}, "items": [
+   {"t": "No tramitar, tramitar fuera del término o negar sin justificación las peticiones o quejas del titular.", "c": "art. 67 num. 1",
+    "exige": "Canal operativo, registro de solicitudes y respuestas motivadas en término (LOPDP arts. 13 a 20 y 62; RGLOPDP arts. 12 a 15).",
+    "dpd": "Revisar el registro, alertar por escrito las solicitudes vencidas y recomendar respuesta inmediata; no responder en nombre de la empresa.", "herr": ["08"]},
+   {"t": "No implementar la protección de datos desde el diseño y por defecto.", "c": "art. 67 num. 2",
+    "exige": "Medidas previas al tratamiento y ajustes por defecto (LOPDP art. 39; RGLOPDP arts. 59 y 60; Res. SPDP-SPD-2025-0040-R).",
+    "dpd": "Pedir la evaluación de diseño y por defecto de cada proyecto nuevo y dejar observaciones no vinculantes antes de su lanzamiento.", "herr": ["08", "03"]},
+   {"t": "No mantener disponibles políticas de protección de datos afines al tratamiento.", "c": "art. 67 num. 3",
+    "exige": "Política de privacidad publicada y política interna aprobada y difundida (LOPDP arts. 12 y 47 num. 4).",
+    "dpd": "Verificar que existan, que coincidan con el RAT y que el personal las conozca; recomendar su aprobación por escrito.", "herr": ["08"]},
+   {"t": "Elegir un encargado que no ofrezca garantías suficientes.", "c": "art. 67 num. 4",
+    "exige": "Evaluación previa del proveedor y contrato de encargo (LOPDP art. 47 num. 11; RGLOPDP arts. 41 y 47).",
+    "dpd": "Revisar la evaluación de proveedores y el contrato; recomendar no entregar datos hasta que se firme.", "herr": ["08"]},
+   {"t": "Incumplir las medidas correctivas dispuestas por la SPDP.", "c": "art. 67 num. 5",
+    "exige": "Cumplir la medida en el plazo y la forma dispuestos (LOPDP arts. 65 y 66).",
+    "dpd": "Hacer seguimiento documentado del cumplimiento e informar al más alto nivel si hay atraso.", "herr": []}]},
+  {"id": "rg", "nivel": "Grave", "sujeto": "Responsable", "art": "LOPDP art. 68", "multa": {"priv": "0,7 % a 1 % del volumen de negocio del ejercicio anterior (art. 72 num. 1)", "pub": "10 a 20 SBU a los servidores o funcionarios por cuya acción u omisión se incurrió en la infracción (art. 72)"}, "items": [
+   {"t": "No implementar medidas administrativas, técnicas, físicas, organizativas y jurídicas que garanticen un tratamiento conforme a la ley.", "c": "art. 68 num. 1",
+    "exige": "Medidas documentadas y verificadas (LOPDP arts. 37 y 47 nums. 2 y 3).", "dpd": "Supervisar el registro de medidas y su verificación; dejar constancia de las brechas detectadas.", "herr": ["08", "03"],
+    "pub": "En el sector público, las medidas se integran al mecanismo gubernamental de seguridad de la información, que también alcanza a concesionarios de servicios públicos (LOPDP art. 38)."},
+   {"t": "Usar los datos para fines distintos a los declarados.", "c": "art. 68 num. 2",
+    "exige": "Respetar la finalidad del RAT y de la política (LOPDP art. 10 lit. d).", "dpd": "Advertir por escrito el desvío y recomendar suspender ese uso o buscar una base legítima.", "herr": ["04"]},
+   {"t": "Ceder o comunicar datos sin cumplir los requisitos legales.", "c": "art. 68 num. 3",
+    "exige": "Base de legitimación y documento de transferencia (LOPDP arts. 33 a 36).", "dpd": "Revisar las comunicaciones del RAT y recomendar la cláusula de transferencia o detener la entrega.", "herr": ["04", "08"]},
+   {"t": "No usar metodologías de análisis y gestión de riesgos adaptadas al tratamiento.", "c": "art. 68 num. 4",
+    "exige": "Gestión de riesgos según la guía v2 (LOPDP arts. 40 y 47 num. 5; Res. SPDP-SPD-2026-0012-R).", "dpd": "Proponer la metodología y revisar los rationales; no ejecutar el análisis (Res. 0028 art. 15.2).", "herr": ["07"]},
+   {"t": "No realizar evaluaciones de impacto cuando eran necesarias.", "c": "art. 68 num. 5",
+    "exige": "Evaluación de impacto previa en los casos del art. 42 LOPDP.", "dpd": "Advertir por escrito que es obligatoria antes de iniciar y emitir observaciones no vinculantes.", "herr": ["07", "05"]},
+   {"t": "No implementar medidas para prevenir, mitigar y controlar riesgos y vulneraciones identificados.", "c": "art. 68 num. 6",
+    "exige": "Plan de tratamiento de riesgos ejecutado (LOPDP arts. 41 y 47 num. 7).", "dpd": "Hacer seguimiento a los riesgos residuales y recordar por escrito las medidas pendientes.", "herr": ["07", "08"]},
+   {"t": "No notificar a la SPDP y al titular las vulneraciones que afecten derechos.", "c": "art. 68 nums. 7 y 8",
+    "exige": "Notificación en 5 días a la SPDP, regulador y CSIRT, y en 3 días a los titulares (LOPDP arts. 43 y 46; Res. SPDP-SPD-2026-0040-R).", "dpd": "Asesorar desde la primera hora, calcular los términos y recomendar notificar; la firma es del responsable.", "herr": ["09"]},
+   {"t": "No suscribir contratos de confidencialidad y tratamiento con el encargado y con el personal.", "c": "art. 68 num. 9",
+    "exige": "Contrato de encargo y cláusulas de confidencialidad firmadas (LOPDP art. 47 num. 10).", "dpd": "Revisar por muestreo los expedientes y contratos y reportar los faltantes.", "herr": ["08"]},
+   {"t": "No mantener actualizado o no consignar lo exigido en el Registro Nacional de Protección de Datos Personales.", "c": "art. 68 nums. 10 y 11",
+    "exige": "Información del art. 51 LOPDP reportada y actualizada.", "dpd": "Comparar el RAT con lo reportado y recomendar la actualización.", "herr": ["04"]},
+   {"t": "No designar al DPD cuando corresponde.", "c": "art. 68 num. 12",
+    "exige": "Designación y registro ante la SPDP (LOPDP arts. 47 num. 13 y 48; Res. SPDP-SPD-2025-0028-R).", "dpd": "Si es candidato, verificar que el nombramiento se registre; el registro tardío es incumplimiento de una medida jurídica (Res. 0028 art. 5).", "herr": ["08"],
+    "priv": "En el sector privado, la obligación depende de las causales de la Res. 0028 art. 10 y del RGLOPDP (control permanente y sistematizado, gran escala de categorías especiales).",
+    "pub": "En el sector público, designar DPD es siempre obligatorio (LOPDP art. 48 num. 1; Res. 0028 art. 9). No pueden ser DPD quienes ejercen cargos del nivel jerárquico superior (Res. 0028 art. 16.4)."},
+   {"t": "No permitir ni contribuir a auditorías o inspecciones del auditor acreditado por la SPDP.", "c": "art. 68 num. 13",
+    "exige": "Facilitar el acceso y la información (LOPDP art. 47 num. 14).", "dpd": "Actuar como punto de contacto y recomendar cooperación plena con la SPDP (LOPDP art. 49 num. 4).", "herr": []},
+   {"t": "Incumplir medidas correctivas después de una sanción leve, o reiterar faltas leves.", "c": "art. 68 num. 14",
+    "exige": "Cumplimiento completo y oportuno de las medidas correctivas.", "dpd": "Escalar al más alto nivel con un informe de riesgo de sanción grave.", "herr": []}]},
+  {"id": "el", "nivel": "Leve", "sujeto": "Encargado", "art": "LOPDP art. 69", "multa": {"priv": "0,1 % a 0,7 % del volumen de negocio del ejercicio anterior (art. 71 num. 2)", "pub": "1 a 10 SBU a los servidores o funcionarios por cuya acción u omisión se incurrió en la infracción (art. 71 num. 1)"}, "items": [
+   {"t": "No colaborar con el responsable para atender las solicitudes de derechos.", "c": "art. 69 num. 1", "exige": "Cláusula de colaboración en el contrato de encargo y respuesta oportuna.", "dpd": "Revisar que el contrato la incluya y que el encargado conteste a tiempo.", "herr": ["08"]},
+   {"t": "No facilitar al responsable la información sobre el cumplimiento de sus obligaciones.", "c": "art. 69 num. 2", "exige": "Entregar la información pedida (RGLOPDP art. 47).", "dpd": "Recomendar requerimientos por escrito y registrar las respuestas.", "herr": ["08"]},
+   {"t": "No permitir auditorías o inspecciones del responsable o de un auditor autorizado.", "c": "art. 69 num. 3", "exige": "Permitir la revisión de registros y procesos (RGLOPDP art. 47).", "dpd": "Incluir al encargado en el plan de supervisión y documentar la negativa.", "herr": ["08"]},
+   {"t": "Incumplir las medidas correctivas de la SPDP.", "c": "art. 69 num. 4", "exige": "Cumplir la medida dispuesta.", "dpd": "Hacer seguimiento y advertir al responsable.", "herr": []}]},
+  {"id": "eg", "nivel": "Grave", "sujeto": "Encargado", "art": "LOPDP art. 70", "multa": {"priv": "0,7 % a 1 % del volumen de negocio del ejercicio anterior (art. 72 num. 1)", "pub": "10 a 20 SBU a los servidores o funcionarios por cuya acción u omisión se incurrió en la infracción (art. 72)"}, "items": [
+   {"t": "Tratar datos sin observar los principios y derechos de la ley.", "c": "art. 70 num. 1", "exige": "Tratamiento conforme a la LOPDP.", "dpd": "Recomendar al responsable revisar al encargado y, si es necesario, suspender el encargo.", "herr": ["08"]},
+   {"t": "No tratar los datos según el contrato con el responsable, incluidas las transferencias internacionales.", "c": "art. 70 num. 2", "exige": "Cumplir las instrucciones del contrato (LOPDP art. 34).", "dpd": "Verificar el cumplimiento del contrato en la supervisión.", "herr": ["08"]},
+   {"t": "No suscribir contratos de confidencialidad con su personal.", "c": "art. 70 num. 3", "exige": "Cláusulas firmadas por el personal del encargado.", "dpd": "Pedir evidencia por muestreo.", "herr": ["08"]},
+   {"t": "No implementar mecanismos de confidencialidad, integridad, disponibilidad y resiliencia.", "c": "art. 70 num. 4", "exige": "Medidas de seguridad del encargado (LOPDP art. 37).", "dpd": "Pedir el informe de seguridad del encargado.", "herr": ["08"]},
+   {"t": "No implementar medidas preventivas y correctivas de seguridad.", "c": "art. 70 num. 5", "exige": "Plan de seguridad del encargado.", "dpd": "Revisar incidentes y acciones correctivas del encargado.", "herr": ["08"]},
+   {"t": "No suprimir los datos al terminar el encargo.", "c": "art. 70 num. 6", "exige": "Devolución o eliminación con constancia (LOPDP art. 34; RGLOPDP art. 46).", "dpd": "Pedir el acta de eliminación al cierre del contrato.", "herr": ["08"]},
+   {"t": "Comunicar datos sin cumplir los requisitos legales.", "c": "art. 70 num. 7", "exige": "Prohibición de comunicar sin instrucción (LOPDP art. 34).", "dpd": "Recomendar acciones contractuales y evaluar si hubo vulneración.", "herr": ["09"]},
+   {"t": "Incumplir medidas correctivas después de una sanción leve.", "c": "art. 70 num. 8", "exige": "Cumplimiento completo y oportuno.", "dpd": "Informar al responsable el riesgo de mantener el encargo.", "herr": []},
+   {"t": "No notificar al responsable una vulneración, o hacerlo con retraso injustificado.", "c": "art. 70 num. 9", "exige": "Notificar en el término de 2 días (LOPDP art. 43).", "dpd": "Verificar que el contrato fije el canal y el término y probarlo en un simulacro.", "herr": ["09"]}]}],
+ "actuar": [
+  ["Detectar y documentar: qué conducta, desde cuándo, qué tratamiento y qué evidencia existe.", "Criterio propio"],
+  ["Informar por escrito y sin demora al más alto nivel ejecutivo, con la norma incumplida, el riesgo para los titulares y el rango de multa.", "LOPDP art. 50 num. 5; Res. 0028 art. 22.3"],
+  ["Recomendar las medidas para corregir y un plazo; la empresa decide y ejecuta.", "LOPDP art. 49 nums. 1 y 2; Res. 0028 art. 15.1"],
+  ["Si hay vulneración de seguridad, activar el protocolo y los términos de notificación desde la primera hora.", "LOPDP arts. 43 y 46"],
+  ["Hacer seguimiento hasta el cierre y registrarlo en el informe de supervisión.", "Res. 0028 art. 22.4"],
+  ["Si la SPDP inicia un procedimiento, actuar como punto de contacto y cooperar; no representar a la empresa como responsable.", "LOPDP art. 49 num. 4; Res. 0028 art. 15.4"]],
+ "protege": [
+  ["El DPD responde administrativa, civil y penalmente si incumple sus funciones.", "LOPDP art. 49, último párrafo"],
+  ["No responde por las decisiones finales del responsable o del encargado si demuestra que actuó con diligencia: la prueba es su archivo de recomendaciones.", "Res. 0028 art. 13, último párrafo"],
+  ["No puede ser destituido ni sancionado por cumplir sus funciones; si lo es, puede ponerlo en conocimiento de la SPDP.", "LOPDP art. 50 num. 4; RGLOPDP art. 51"],
+  ["Debe denunciar ante la SPDP todo hecho que menoscabe su independencia o sea represalia; la SPDP investiga y puede sancionar al responsable.", "Res. 0028 arts. 19 a 21 y 23"],
+  ["La organización evalúa cada año, sin que la evaluación la haga el DPD, su independencia: contacto con la alta dirección, recursos, observaciones emitidas e informes.", "Res. 0028 art. 22"],
+  ["No ejecutar, no decidir y no firmar como responsable: hacerlo genera conflicto y traslada responsabilidad.", "Res. 0028 arts. 15 y 18"],
+  ["Toda observación por escrito, fechada y con constancia de recepción; nunca solo verbal.", "Criterio propio"],
+  ["Contrato o nombramiento que delimite el alcance (asesorar y supervisar) y el deber de la empresa de entregar información.", "Criterio propio; LOPDP art. 50 num. 2"],
+  ["Conservar el expediente de supervisión al menos mientras puedan iniciarse acciones en su contra.", "Criterio propio"],
+  ["Valorar un seguro de responsabilidad civil profesional.", "Criterio propio"]]}

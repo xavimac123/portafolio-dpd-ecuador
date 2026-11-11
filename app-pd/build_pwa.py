@@ -62,7 +62,7 @@ import glosario_config as GLC  # noqa: E402
 import responsabilidades_config as RESP  # noqa: E402
 glo = {"lopdp": CAT.GLOSARIO_LOPDP, "norma": CAT.GLOSARIO_NORMATIVA, "iso": GLC.ISO, "metodos": GLC.METODOS}
 ref = {"rev": REFC.REVISION, "normas": REFC.NORMAS, "plazos": REFC.PLAZOS, "contraste": contraste, "abiertos": abiertos, "pdf": pdf, "enlaces": REFC.ENLACES}
-dpo = {k: getattr(RESP, k) for k in ("REVISION", "INTRO", "FUNCIONES", "GARANTIAS", "PROHIBICIONES", "IMPEDIMENTOS", "NO_ES", "AUDITORIA", "ANTES", "ABIERTOS", "QUIEN", "TEMAS")}
+dpo = {k: getattr(RESP, k) for k in ("REVISION", "INTRO", "FUNCIONES", "GARANTIAS", "PROHIBICIONES", "IMPEDIMENTOS", "NO_ES", "AUDITORIA", "ANTES", "ABIERTOS", "QUIEN", "TEMAS", "INFRACCIONES")}
 import publicidad_config as PUBC  # noqa: E402
 pub = {k: getattr(PUBC, k) for k in ("PREGUNTAS", "DATOS", "CTA", "BAJA", "AUTODIAG", "ESTRATEGIA")}
 pub["SERV"] = [[x["cod"], x["nombre"], x["beneficio"], x["que"], x["fase"]] for x in CAT.SERVICIOS]

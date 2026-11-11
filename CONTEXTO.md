@@ -94,7 +94,7 @@ Actualizado: 2026-11-11 (undécima entrega). Leer junto con `CLAUDE.md` (reglas)
 - Herramientas 04, 06 y 07: panel «Elaboración / Revisión del DPO» (`scripts/revision_dpo.js`, insertado por `barra_contexto.py` solo en esas tres). Observaciones no vinculantes por pestaña con prioridad, estado y respuesta del responsable; conclusión; anexo automático al informe de la herramienta e informe propio con firma.
 - App: ficha del cliente con rol de MSC, implementación a cargo de y nombre del implementador (bloquea DPO + MSC implementador); `PDCliente` los entrega a las herramientas y el modo de 04, 06 y 07 se preselecciona. Modalidad «Adecuación (proyecto)» pasa a «Implementación (proyecto; MSC no es DPO del cliente)». Tema «Evaluación frente a implementación» en Responsabilidades DPO.
 - Guía (cap. 3.2, ruta y tabla de servicios) y READMEs actualizados.
-- Ramas: la novena y la décima entrega están en `claude/responsabilidad-proactiva-12-herramientas`; la undécima, en `claude/separar-evaluacion-implementacion`, que parte de ella y contiene las tres. Ninguna está fusionada en `main` ni publicada en `gh-pages`.
+- Publicado: las entregas novena, décima y undécima se fusionaron en `main` (avance rápido) y se publicaron en `gh-pages` compilado con `MSC_PUBLICO=1` (2026-11-11).
 
 ## 4. Pendiente (orden de prioridad)
 0. Separación evaluación/implementación: consultar a la SPDP la modalidad subcontratada (punto 32); declaración de la relación con el implementador aliado en el kit 08; servicios S29 y S30 en la proforma de MSC Gestor Legal (el traspaso `msc:pd-handoff` envía códigos que Gestor Legal quizá no tenga).

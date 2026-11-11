@@ -27,6 +27,10 @@ ejemplo = {
           "dpd_2": "No aplica al no existir DPD.", "lic_2": "No se usa interés legítimo.", "eipd_1": "Ningún tratamiento obligado a evaluación."},
     "f": {"f_el": "Abg. Mariano X. Macías Sánchez", "f_ec": "Consultor en Protección de Datos · Mat. 09-2022-736",
           "f_ap": "[REPRESENTANTE LEGAL]", "f_ac": "Gerente General"},
+    "ev": {"gob_0": {"s": "Presentada", "d": "Política interna aprobada en acta de junta del 2026-03-15", "v": 1, "f": "2026-11-07"},
+           "tra_0": {"s": "Presentada", "d": "Política de privacidad publicada en el sitio web (versión 1.0)", "v": 0},
+           "enc_1": {"s": "Solicitada", "d": "Contratos de encargo con el proveedor de nómina y el de facturación", "v": 0},
+           "seg_2": {"s": "No existe", "d": "", "v": 0}},
     "e": {"e_tipo": "Privada con fines de lucro", "e_anio": "2025", "e_ing": "1850000", "e_imp": "0",
           "e_ied": "1", "e_int": "1", "e_rer": "0", "e_cap": "8000", "e_tol": "Media", "e_plan": "6500"},
 }

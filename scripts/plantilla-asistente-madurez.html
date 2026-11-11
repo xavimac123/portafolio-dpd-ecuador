@@ -41,6 +41,12 @@
   .seg button b{display:block;font-size:14px}
   .seg button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
   .com{margin-top:6px;font-size:13px;padding:6px 8px}
+  .evb{margin-top:8px;border:1px dashed var(--linea);border-radius:8px;padding:8px 10px;background:#FFFDF6}
+  .evb .lb{font-size:12px;font-weight:700;color:var(--oliva);display:flex;justify-content:space-between;gap:8px;align-items:center}
+  .evb .sg{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}.evb .sg button{font:inherit;font-size:12px;padding:5px 9px;border:1px solid var(--linea);background:#fff;color:#14181E;border-radius:999px;cursor:pointer}
+  .evb .sg button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
+  .evb .ok{display:flex;gap:6px;align-items:center;font-size:12.5px;margin-top:6px}.evb .ok input{width:auto;margin:0}
+  .evb.v{border-style:solid;border-color:#2E7D4F;background:#F2F8F3}.evb.s{border-color:#C9A23B}
   .prog{height:6px;background:#EFEBDD;border-radius:3px;overflow:hidden;margin-top:6px}.prog i{display:block;height:100%;background:var(--oro)}
   .btn{background:var(--carbon);color:#fff;border:0;padding:10px 16px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
   .btn.sec{background:#fff;color:var(--carbon);border:1px solid var(--carbon)}
@@ -94,6 +100,7 @@
 <section id="t1" class="on">
   <h2>Antes de empezar</h2>
   <p class="sub">Responde con base en <b>evidencia</b> (documentos, registros), no en intenciones. Si un punto no aplica a la organización, marca <b>N/A</b>: no cuenta en el promedio.</p>
+  <p class="nota">En cada pregunta, registra la <b>evidencia de respaldo</b>: «Presentada» si el cliente la mostró (describe cuál es y marca «Verificada» cuando la revises), «Solicitada» si queda pendiente de entrega, o «No existe». Todo sale en el informe; la pestaña de resultados genera la solicitud de evidencias para el cliente.</p>
   <div class="card"><div class="grid" id="ctx"></div></div>
   <div class="card"><h3>Escala de respuesta</h3><div id="escala"></div></div>
   <div class="card"><h3>Niveles de madurez</h3><div id="niveles"></div>
@@ -123,6 +130,7 @@
     <div><label for="f_ac">Cargo</label><input id="f_ac" data-f></div>
   </div></div>
   <div class="row"><button class="btn oro" id="copInf">Copiar informe (Word)</button><button class="btn sec" id="copTab">Copiar resultados (Excel)</button></div>
+  <div class="card" style="margin-top:12px"><h3>Evidencias de respaldo</h3><p class="nota" id="evRes" style="margin:0 0 8px"></p><div class="row"><button class="btn sec" id="copSolEv">Copiar solicitud de evidencias (Word)</button></div><p class="nota">Incluye las evidencias marcadas «Solicitada» y las respuestas calificadas 3 o 4 sin evidencia verificada: esos niveles exigen documento y aplicación demostrable.</p></div>
   <p class="nota">El informe incluye el gráfico como tabla de puntajes. Para el gráfico, toma una captura de esta pantalla.</p>
 </section>
 
@@ -172,8 +180,9 @@ var CFG=/*__CONFIG__*/;
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function toast(t){var e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},1900)}
   var KEY='msc-madurez-v1';
-  function blank(){return{ctx:{},r:{},c:{},e:{},f:{f_el:'Abg. Mariano X. Macías Sánchez',f_ec:'Consultor en Protección de Datos · Mat. 09-2022-736'}}}
-  var S;try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}if(!S)S=blank();
+  var EVS=['Presentada','Solicitada','No existe'];
+  function blank(){return{ctx:{},r:{},c:{},e:{},ev:{},f:{f_el:'Abg. Mariano X. Macías Sánchez',f_ec:'Consultor en Protección de Datos · Mat. 09-2022-736'}}}
+  var S;try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}if(!S)S=blank();if(!S.ev)S.ev={};
   function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
   var tabs=document.querySelectorAll('nav button');
   function show(t){tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});document.querySelectorAll('section').forEach(function(s){s.classList.toggle('on',s.id===t)});if(t==='t3')resultados();if(t==='t4'){defaults();paintE();econ()}window.scrollTo(0,0)}
@@ -189,11 +198,28 @@ var CFG=/*__CONFIG__*/;
 
   // cuestionario
   $('dominios').innerHTML=CFG.dominios.map(function(d){return'<div class="card"><div class="dh"><div><h3>'+esc(d.nombre)+(d.peso>1?' <span class="pr pA">Crítico</span>':'')+'</h3><div class="base">'+esc(d.base)+'</div></div><div class="nota" id="ds_'+d.id+'"></div></div>'+
-    d.preguntas.map(function(p,i){var k=d.id+'_'+i;return'<div class="q"><div class="qt">'+esc(p[0])+'</div><div class="ev">Evidencia: '+esc(p[1])+'</div><div class="seg" data-q="'+k+'">'+CFG.escala.map(function(e){return'<button type="button" data-v="'+e[0]+'"><b>'+e[0]+'</b>'+esc(e[1])+'</button>'}).join('')+'<button type="button" data-v="na"><b>N/A</b>No aplica</button></div><input class="com" data-c="'+k+'" placeholder="Comentario o evidencia revisada (opcional)"></div>'}).join('')+'</div>'}).join('');
+    d.preguntas.map(function(p,i){var k=d.id+'_'+i;return'<div class="q"><div class="qt">'+esc(p[0])+'</div><div class="ev">Evidencia: '+esc(p[1])+'</div><div class="seg" data-q="'+k+'">'+CFG.escala.map(function(e){return'<button type="button" data-v="'+e[0]+'"><b>'+e[0]+'</b>'+esc(e[1])+'</button>'}).join('')+'<button type="button" data-v="na"><b>N/A</b>No aplica</button></div><input class="com" data-c="'+k+'" placeholder="Comentario (opcional)">'+
+      '<div class="evb" data-evk="'+k+'"><div class="lb"><span>Evidencia de respaldo</span><span class="evs"></span></div><div class="sg">'+EVS.map(function(x){return '<button type="button" data-es="'+x+'">'+x+'</button>'}).join('')+'</div>'+
+      '<input class="com" data-ed="'+k+'" placeholder="¿Qué evidencia es? Documento, fecha, versión o ubicación (sugerida: '+esc(p[1])+')">'+
+      '<label class="ok"><input type="checkbox" data-ev="'+k+'"> Verificada por el consultor</label></div></div>'}).join('')+'</div>'}).join('');
   document.querySelectorAll('.seg[data-q]').forEach(function(s){s.querySelectorAll('button').forEach(function(b){b.onclick=function(){S.r[s.dataset.q]=b.dataset.v;save();paintQ()}})});
   document.querySelectorAll('[data-c]').forEach(function(i){i.addEventListener('input',function(){S.c[i.dataset.c]=i.value;save()})});
+  /* Evidencia de respaldo: estado, descripción y verificación por pregunta; sale en el informe y en la solicitud. */
+  function evo(k){return S.ev[k]||(S.ev[k]={s:'',d:'',v:0})}
+  document.querySelectorAll('.evb').forEach(function(b){var k=b.dataset.evk;
+    b.querySelectorAll('[data-es]').forEach(function(x){x.onclick=function(){var o=evo(k);o.s=o.s===x.dataset.es?'':x.dataset.es;if(o.s!=='Presentada')o.v=0;save();paintEv()}});
+    b.querySelector('[data-ed]').addEventListener('input',function(){evo(k).d=this.value;save()});
+    b.querySelector('[data-ev]').onchange=function(){var o=evo(k);o.v=this.checked?1:0;if(o.v){o.s='Presentada';o.f=new Date().toISOString().slice(0,10)}save();paintEv()}});
+  function paintEv(){document.querySelectorAll('.evb').forEach(function(b){var o=S.ev[b.dataset.evk]||{};b.querySelectorAll('[data-es]').forEach(function(x){x.classList.toggle('on',x.dataset.es===o.s)});
+    var d=b.querySelector('[data-ed]');if(document.activeElement!==d)d.value=o.d||'';b.querySelector('[data-ev]').checked=!!o.v;b.classList.toggle('v',!!o.v);b.classList.toggle('s',o.s==='Solicitada');
+    b.querySelector('.evs').textContent=o.v?'✓ Verificada':o.s||'Sin registrar'})}
+  function evTxt(k){var o=S.ev[k];if(!o||!o.s)return 'Sin registrar';return o.s+(o.d?': '+o.d:'')+(o.v?' (verificada'+(o.f?' '+o.f:'')+')':'')}
+  function evPend(){var L=[];CFG.dominios.forEach(function(d){d.preguntas.forEach(function(q,i){var k=d.id+'_'+i,o=S.ev[k]||{},v=S.r[k];if(o.s==='Solicitada'||(v!=null&&v!=='na'&&+v>=3&&!o.v))L.push({d:d,q:q,k:k,o:o,v:v})})});return L}
+  function solicitudEv(){var L=evPend(),x=S.ctx,h='<h1>Solicitud de evidencias de cumplimiento</h1><p><b>'+esc(x.ctx_emp||'[ORGANIZACIÓN]')+'</b> · Fecha: '+esc(new Date().toLocaleDateString('es-EC'))+'</p><p>Para completar el diagnóstico de madurez en protección de datos personales, solicitamos remitir los siguientes documentos o registros. Si alguno no existe, indíquelo: esa respuesta también es útil para el plan de acción.</p>'+TB+tr(['N.º','Dominio','Punto evaluado','Evidencia solicitada','Motivo'],1);
+    L.forEach(function(e,n){h+=tr([String(n+1),e.d.nombre,e.q[0],e.o.d||e.q[1],e.o.s==='Solicitada'?'Solicitada en la entrevista':'Respaldar la calificación de '+e.v+' («'+CFG.escala[+e.v][1]+'»)'])});
+    if(!L.length)h+=tr(['—','','No hay evidencias pendientes','','']);return h+'</table><p>Plazo sugerido para la entrega: [FECHA]. Envío a: [CORREO DEL CONSULTOR].</p>'}
   function total(){var n=0;CFG.dominios.forEach(function(d){n+=d.preguntas.length});return n}
-  function paintQ(){document.querySelectorAll('.seg[data-q]').forEach(function(s){var v=S.r[s.dataset.q];s.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.v===v)})});
+  function paintQ(){paintEv();document.querySelectorAll('.seg[data-q]').forEach(function(s){var v=S.r[s.dataset.q];s.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.v===v)})});
     document.querySelectorAll('[data-c]').forEach(function(i){i.value=S.c[i.dataset.c]||''});
     var resp=Object.keys(S.r).filter(function(k){return S.r[k]!=null}).length,t=total();
     $('avance').innerHTML=resp+' de '+t+' preguntas respondidas<div class="prog"><i style="width:'+Math.round(resp/t*100)+'%"></i></div>';
@@ -297,19 +323,25 @@ var CFG=/*__CONFIG__*/;
     h+='<h2>2. Resultado por dominio</h2>'+TB+tr(['Dominio','Base normativa','Puntaje (0-4)','Nivel'],1)+c.ds.map(function(y){return tr([y.d.nombre+(y.d.peso>1?' (crítico)':''),y.d.base,y.v==null?'—':y.v.toFixed(2),y.v==null?'—':CFG.niveles[nivel(y.v)][2]])}).join('')+'</table>';
     h+='<h2>3. Plan de acción priorizado</h2>'+TB+tr(['Prioridad','Dominio','Brechas','Herramienta o acción'],1)+p.map(function(r){return tr([r.pri,r.dom+' ('+r.v.toFixed(1)+')',r.brechas.map(function(b){return'• '+b.t}).join(' ')||'Mantener y medir',r.herr])}).join('')+'</table>';
     econ();if(ECON){var E=ECON;h+='<h2>4. Impacto económico estimado y apetito al riesgo</h2><p>Estimación orientativa con la metodología MPRIV-1 de la Res. SPDP-SPD-2025-0022-R, sobre el volumen de negocio del ejercicio '+esc(S.e.e_anio)+' (LOPDP arts. 71 a 73). Interpretaciones del portafolio: PDI como complemento del índice de madurez; pesos 60/40/20 dentro del SDI; escalas propias de IED, INT y RER.</p>'+TB+tr(['Concepto','Si no actúa','Con plan de acción'],1)+tr(['Índice de madurez',c.idx.toFixed(2),E.obj.toFixed(2)])+tr(['Volumen de negocio (VDN)',usd(E.vdn),usd(E.vdn)])+tr(['Categoría simulada',E.cat,E.cat])+tr(['Multa estimada',usd(E.a.m),usd(E.b.m)])+tr(['Rango legal de la categoría',usd(E.a.min)+' a '+usd(E.a.max),usd(E.b.min)+' a '+usd(E.b.max)])+tr(['Probabilidad anual de sanción',pct(E.pA,0),pct(E.pB,0)])+tr(['Riesgo anual esperado',usd(E.eA),usd(E.eB)])+'</table>'+(E.cap?'<p><b>Apetito al riesgo:</b> capacidad '+usd(E.cap)+', tolerancia '+esc(E.tol)+', límite aceptable '+usd(E.lim)+'. La multa estimada '+(E.a.m<=E.lim?'está dentro':'excede')+' del apetito al riesgo.</p>':'')+(E.plan?'<p>Costo estimado del plan de adecuación: '+usd(E.plan)+'.</p>':'')+'<p><i>No es una liquidación: la SPDP fija los valores con sus propios rationales.</i></p>'}
-    h+='<h2>'+(ECON?'5':'4')+'. Detalle de respuestas</h2>'+TB+tr(['Dominio','Pregunta','Respuesta','Comentario'],1);
-    CFG.dominios.forEach(function(d){d.preguntas.forEach(function(q,i){var v=S.r[d.id+'_'+i];h+=tr([d.nombre,q[0],v==null?'Sin responder':v==='na'?'N/A':v+' · '+CFG.escala[+v][1],S.c[d.id+'_'+i]||''])})});h+='</table>';
+    h+='<h2>'+(ECON?'5':'4')+'. Detalle de respuestas y evidencia de respaldo</h2>'+TB+tr(['Dominio','Pregunta','Respuesta','Evidencia de respaldo','Comentario'],1);
+    CFG.dominios.forEach(function(d){d.preguntas.forEach(function(q,i){var k=d.id+'_'+i,v=S.r[k];h+=tr([d.nombre,q[0],v==null?'Sin responder':v==='na'?'N/A':v+' · '+CFG.escala[+v][1],evTxt(k),S.c[k]||''])})});h+='</table>';
+    var EV=[],nv=0;CFG.dominios.forEach(function(d){d.preguntas.forEach(function(q,i){var k=d.id+'_'+i,o=S.ev[k];if(o&&o.s==='Presentada'){EV.push([d.nombre,q[0],o.d||q[1],o.v?'Sí'+(o.f?' ('+o.f+')':''):'No']);if(o.v)nv++}})});
+    h+='<h2>'+(ECON?'6':'5')+'. Evidencias de respaldo</h2><p>'+EV.length+' evidencia(s) presentada(s), '+nv+' verificada(s) por el consultor. «Verificada» significa que el consultor revisó el documento; no certifica su suficiencia legal.</p>'+TB+tr(['Dominio','Punto evaluado','Evidencia','Verificada'],1)+(EV.map(function(r){return tr(r)}).join('')||tr(['—','Sin evidencias registradas','','']))+'</table>';
+    var PE=evPend();if(PE.length)h+='<h2>'+(ECON?'7':'6')+'. Evidencias pendientes</h2>'+TB+tr(['Dominio','Punto evaluado','Evidencia por entregar'],1)+PE.map(function(e){return tr([e.d.nombre,e.q[0],e.o.d||e.q[1]])}).join('')+'</table>';
     var f=S.f;h+='<p><b>FIRMA DE RESPONSABILIDAD</b></p>'+TB+tr(['Elaborado por','Revisado por'],1)+tr(['Firma: ______________________','Firma: ______________________'])+tr([f.f_el||'',f.f_ap||''])+tr([f.f_ec||'',f.f_ac||''])+'</table>';
     return h}
   function fb(t){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Copiado')}catch(e){toast('No se pudo copiar')}ta.remove()}
   $('copInf').onclick=function(){if(calc().idx==null){toast('Responde el cuestionario');return}var html=informe(),tmp=document.createElement('div');tmp.innerHTML=html;var plain=tmp.innerText;
     try{if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([plain],{type:'text/plain'})})]).then(function(){toast('Informe copiado: pega en Word')},function(){fb(plain)});return}}catch(e){}fb(plain)};
+  $('copSolEv').onclick=function(){var html=solicitudEv(),tmp=document.createElement('div');tmp.innerHTML=html;try{navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([tmp.innerText],{type:'text/plain'})})]).then(function(){toast('Solicitud copiada')},function(){toast('No se pudo copiar')})}catch(e){toast('No se pudo copiar')}};
+  function evResumen(){var t=0,p=0,v=0,s=0;Object.keys(S.ev).forEach(function(k){var o=S.ev[k];if(o.s==='Presentada')p++;if(o.v)v++;if(o.s==='Solicitada')s++});$('evRes').textContent=p+' presentada(s) · '+v+' verificada(s) · '+s+' solicitada(s) · '+evPend().length+' pendiente(s) en total.'}
+  document.addEventListener('click',function(){setTimeout(function(){if($('evRes'))evResumen()},50)});
   $('copTab').onclick=function(){var c=calc();if(c.idx==null){toast('Responde el cuestionario');return}
     var t=['Dominio\tCrítico\tBase normativa\tPuntaje\tNivel'].concat(c.ds.map(function(y){return[y.d.nombre,y.d.peso>1?'Sí':'No',y.d.base,y.v==null?'':y.v.toFixed(2).replace('.',','),y.v==null?'':CFG.niveles[nivel(y.v)][2]].join('\t')})).concat(['','Índice ponderado\t\t\t'+c.idx.toFixed(2).replace('.',',')+'\t'+CFG.niveles[nivel(c.idx)][2]]).concat((function(){econ();if(!ECON)return[];var E=ECON,n=function(v){return(Math.round(v*100)/100).toFixed(2).replace('.',',')};return['','IMPACTO ECONÓMICO (estimación orientativa, Res. SPDP-SPD-2025-0022-R)','Volumen de negocio ejercicio '+S.e.e_anio+'\t\t\t'+n(E.vdn),'Categoría simulada\t\t\t'+E.cat,'Multa estimada si no actúa\t\t\t'+n(E.a.m),'Multa estimada con plan\t\t\t'+n(E.b.m),'Riesgo anual esperado si no actúa\t\t\t'+n(E.eA),'Riesgo anual esperado con plan\t\t\t'+n(E.eB),'Límite de apetito al riesgo\t\t\t'+(E.cap?n(E.lim):'')]})()).join('\n');
     if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){toast('Resultados copiados: pega en Excel')},function(){fb(t)});else fb(t)};
 
   $('nueva').onclick=function(){var b=this;if(!b.dataset.c){b.dataset.c=1;b.textContent='¿Borrar la evaluación actual?';return}delete b.dataset.c;b.textContent='Nueva evaluación';S=blank();save();all();toast('Evaluación nueva')};
-  $('ejemplo').onclick=function(){S=JSON.parse(JSON.stringify(CFG.ejemplo));save();all();toast('Ejemplo ficticio cargado');show('t3')};
+  $('ejemplo').onclick=function(){S=JSON.parse(JSON.stringify(CFG.ejemplo));if(!S.ev)S.ev={};save();all();toast('Ejemplo ficticio cargado');show('t3')};
   function all(){if(!S.e)S.e={};defaults();paintE();paintF();paintQ();resultados();econ()}
   all();
 })();

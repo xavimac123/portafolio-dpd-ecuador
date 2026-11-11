@@ -18,6 +18,10 @@ App web instalable (PWA) que reúne las nueve herramientas del portafolio en un 
 - **Revisión automática:** al actualizar las herramientas 03 a 07 de un cliente, propone agendar su revisión a 12 meses.
 - **Proforma en Gestor Legal:** envía los servicios S01 a S28 de la ficha a la proforma de MSC Gestor Legal (misma dirección web; clave `msc:pd-handoff`, vigente 7 días).
 - **Barra de contexto:** al desplazarse, la app y cada herramienta muestran dónde está el usuario (pestaña › sección); dentro de la app, en la barra superior de la herramienta.
+- **Inicio:** búsqueda de clientes, accesos rápidos («¿Qué necesita hacer?»), «Continuar donde lo dejó» y lista de primeros pasos.
+- **Calculadora de plazos de notificación:** por caso (rol, sector, constancia, comunicación del encargado, riesgo para titulares, excepciones del art. 46, feriados locales); exporta a Word o PDF y agenda la vulneración en el cliente.
+- **Glosario:** términos de la LOPDP y de la normativa, normas ISO de protección de datos y ciberseguridad, y métodos de medición de riesgos con ejemplo y gráfico (`scripts/glosario_config.py`).
+- **Firma:** cargo «Consultor» o «Delegado de Protección de Datos Personales» y número de registro ante la SPDP; se propone también dentro de las herramientas.
 - **Referencia:** plazos y cifras clave, ley, reglamento y resoluciones de la SPDP con puntos de consulta, estado de verificación de cada fuente, contraste con las guías, puntos abiertos y descarga en PDF de la LOPDP y el RGLOPDP (si están en `app-pd/normas/`). Fuente: `scripts/referencia_config.py`.
 - **Exportación:** informes en Word (.docx) y PDF con 6 cm para firma y sello, en la app y dentro de cada herramienta (`scripts/exportar.js`).
 - **Evidencias:** lista de documentos sugeridos por herramienta, casilla «verificado» y anexo en el informe mensual.

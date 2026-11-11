@@ -65,7 +65,11 @@ function botones(){[].slice.call(document.querySelectorAll('button')).forEach(fu
  var s=document.createElement('span');s.className='msc-exp';var cls=(b.className||'btn').replace(/\boro\b/,'').trim()+' sec';
  [['docx','Word (.docx)'],['pdf','PDF']].forEach(function(k){var n=document.createElement('button');n.type='button';n.className=cls;n.textContent=k[1];n.title=t.replace(/^Copiar/i,'Descargar').replace(/\(Word\)$/i,'')+(k[0]==='pdf'?'en PDF':'en Word');n.onclick=function(){exporta(b,k[0])};s.appendChild(n)});
  b.parentNode.insertBefore(s,b.nextSibling)})}
-botones();setTimeout(botones,600)})();</script>"""
+function firmaApp(){var F=null;try{if(P&&P.PDFirma)F=P.PDFirma()}catch(e){}if(!F)return;
+ [].slice.call(document.querySelectorAll('input')).forEach(function(i){var v=(i.value||'').trim(),nv=null;
+  if(/^Consultor en Protecci[oó]n de Datos( Personales)?( · Mat\. ?[\d-]+)?$/.test(v)||/^Delegado de Protecci[oó]n de Datos/.test(v))nv=F.ec;else if(v==='Abg. Mariano X. Macías Sánchez'&&F.nom)nv=F.nom;
+  if(nv&&nv!==v){i.value=nv;i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}))}})}
+botones();setTimeout(botones,600);setTimeout(firmaApp,700);document.addEventListener('click',function(e){if(e.target&&/ejemplo|nueva/i.test(e.target.textContent||''))setTimeout(firmaApp,300)})})();</script>"""
 
 
 def _pon(html: str, ini: str, fin: str, bloque: str) -> str:

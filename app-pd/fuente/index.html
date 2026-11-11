@@ -105,6 +105,16 @@ thead th{font-size:11px;color:var(--gris);text-transform:uppercase;letter-spacin
 .evl input{width:20px;height:20px;min-height:0;flex:none;margin-top:1px}
 details.plg>summary{cursor:pointer;font-weight:700;color:var(--olivo);padding:6px 0}
 .ayu{font-size:12.5px;color:var(--gris);margin:6px 0 0}.ayu b{color:var(--txt)}
+.qa{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.qa button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;background:var(--card);border:1px solid var(--linea);border-radius:10px;padding:11px;font:inherit;color:inherit;cursor:pointer;min-height:74px}
+.qa button:hover{border-color:var(--oro)}.qa .ic{font-size:19px;line-height:1}.qa b{font-size:13.5px}.qa small{font-size:11.5px;color:var(--gris)}
+.pasos{list-style:none;margin:0;padding:0}.pasos li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--linea)}.pasos li:last-child{border-bottom:0}
+.pasos .ck{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid var(--oroc);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
+.pasos li.ok .ck{background:var(--ok);border-color:var(--ok);color:#fff}.pasos li.ok .t{text-decoration:line-through;color:var(--gris)}
+.cal td,.cal th{font-size:13px}.cal .lim{font-weight:800;white-space:nowrap}.cal tr.na td{color:var(--gris)}
+.gl-it{padding:9px 0;border-bottom:1px solid var(--linea)}.gl-it:last-child{border-bottom:0}.gl-it b{display:block}.gl-it .src{font-size:11.5px;color:var(--olivo);font-weight:700}
+.met h4{margin:12px 0 4px;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--olivo)}.met p{margin:0 0 6px;font-size:13.5px}
+.fig{width:100%;max-width:520px;height:auto;display:block;margin:6px 0 4px}
 footer{max-width:820px;margin:0 auto;padding:0 14px 28px;font-size:11.5px;color:var(--gris)}
 [hidden]{display:none!important}
 body.dark{--marfil:#0F1216;--linea:#2A3038;--gris:#9AA1AA;--card:#171B21;--okf:#14261A;--malf:#2B1714;--avif:#2A2212;--olivo:#C9BC82;--txt:#E7E4DA}
@@ -139,6 +149,7 @@ body.dark .ref-n.p-Base{border-left-color:var(--oroc)}
 <script type="application/json" id="j-serv">__SERV_JSON__</script>
 <script type="application/json" id="j-img">__IMG_JSON__</script>
 <script type="application/json" id="j-ref">__REF_JSON__</script>
+<script type="application/json" id="j-glo">__GLO_JSON__</script>
 <script>__EXPORT_JS__</script>
 <script>
 (function(){
@@ -148,6 +159,7 @@ var TOOLS=JSON.parse(document.getElementById('j-tools').textContent);
 var SERV=JSON.parse(document.getElementById('j-serv').textContent);
 var IMG=JSON.parse(document.getElementById('j-img').textContent);
 var REF=JSON.parse(document.getElementById('j-ref').textContent);
+var GLO=JSON.parse(document.getElementById('j-glo').textContent);
 var D=window.MSCDoc,usd=D.usd;
 document.getElementById('isoimg').src=IMG.iso;document.getElementById('deco').src=IMG.lineas;
 
@@ -231,7 +243,7 @@ function codRec(){var A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',u=rnd(24),s='';for(va
 function envolver(v,dek,pw,rc){var salt=rnd(16),rs=rnd(16);v.iter=ITER;v.salt=b64(salt);v.rsalt=b64(rs);v.pwUpd=Date.now();
  return Promise.all([kdf(pw,salt,ITER),kdf(normRec(rc),rs,ITER)]).then(function(k){return Promise.all([cifra(k[0],dek),cifra(k[1],dek)])}).then(function(w){v.wpw=w[0];v.wrec=w[1];return v})}
 function abrir(v,secreto,esRec){return kdf(esRec?normRec(secreto):secreto,b64b(esRec?v.rsalt:v.salt),v.iter).then(function(k){return descifra(k,esRec?v.wrec:v.wpw)})}
-function vacio(){return{ver:1,clientes:[],ws:{},plazos:[],sol:[],inc:[],bit:[],docs:[],cfg:{firma:{nom:'Abg. Mariano X. Macías Sánchez',cargo:'Consultor en Protección de Datos Personales',mat:'09-2022-736'},plazoSol:'',plazoTit:'',tema:'auto',gcal:{on:false}},seq:{}}}
+function vacio(){return{ver:1,clientes:[],ws:{},plazos:[],sol:[],inc:[],bit:[],docs:[],cfg:{firma:{nom:'Abg. Mariano X. Macías Sánchez',cargo:'Consultor en Protección de Datos Personales',mat:'09-2022-736',reg:''},plazoSol:'',plazoTit:'',tema:'auto',gcal:{on:false}},seq:{}}}
 function leer(v,k){if(!v.data)return Promise.resolve(vacio());return descifra(k,v.data).then(function(b){var d=JSON.parse(TD.decode(b));var z=vacio();Object.keys(z).forEach(function(x){if(d[x]==null)d[x]=z[x]});return d})}
 function bovedaLocal(){try{return JSON.parse(localStorage.getItem('mscpd:vault'))}catch(e){return null}}
 function guardaLocal(){try{localStorage.setItem('mscpd:vault',JSON.stringify(R.vault))}catch(e){toast('No se pudo guardar en este dispositivo: '+e.message,1)}}
@@ -304,13 +316,29 @@ function vIni(){var V=$('#v-ini'),pend=plazos().filter(function(p){return p.est!
  V.innerHTML='<div class="hero"><img src="'+IMG.lineas+'" alt=""><b>Buen día'+(R.data.cfg.firma.nom?', '+esc(R.data.cfg.firma.nom.split(' ').slice(1,2).join(' ')):'')+'</b><p>'+esc(fcorta(hoy()))+' · '+act.length+' cliente(s) activo(s). El DPD asesora y supervisa; la empresa decide e implementa.</p></div>'+
  '<div class="kpis"><div class="kpi'+(venc.length?' r':'')+'" data-go="age:venc"><div class="l">Vencidos</div><div class="n">'+venc.length+'</div></div><div class="kpi'+(sem.length?' a':'')+'" data-go="age:pend"><div class="l">Próximos 7 días</div><div class="n">'+sem.length+'</div></div><div class="kpi" data-go="cli"><div class="l">Clientes activos</div><div class="n">'+act.length+'</div></div><div class="kpi'+(sa.length?' a':'')+'" data-go="age:sol"><div class="l">Solicitudes abiertas</div><div class="n">'+sa.length+'</div></div></div>'+
  relojes(null)+semResumen()+
- '<div class="card"><h3>Lo urgente <button class="btn sm sec" id="i-np">+ Plazo</button></h3><div class="list" id="i-l">'+(venc.concat(sem).slice(0,12).map(itemPlazo).join('')||'<p class="sub">Nada vencido ni para los próximos 7 días.</p>')+'</div></div>'+
- '<div class="card"><h3>Accesos rápidos</h3><div class="row"><button class="btn sec" id="i-nc">+ Cliente</button><button class="btn sec" id="i-inc">Atender una vulneración</button><button class="btn sec" id="i-ns">Registrar solicitud de derechos</button><button class="btn sec" data-h="03">Diagnóstico de madurez</button></div></div>'+
+ '<div class="card"><h3>Lo urgente <button class="btn sm sec" id="i-np2">+ Plazo</button></h3><div class="list" id="i-l">'+(venc.concat(sem).slice(0,12).map(itemPlazo).join('')||'<p class="sub">Nada vencido ni para los próximos 7 días.</p>')+'</div></div>'+
+ '<div class="card"><h3>¿Qué necesita hacer?</h3><input id="i-q" placeholder="Buscar cliente por nombre, RUC o código" style="margin-bottom:10px"><div class="list" id="i-qr"></div><div class="qa">'+
+ [['i-inc','🚨','Atender una vulneración','Inicia el reloj y agenda los plazos'],['i-cal','⏱','Calcular plazos','Notificación a SPDP y titulares'],['i-ns','📨','Solicitud de derechos','Registra y calcula la respuesta'],['i-nc','➕','Nuevo cliente','Ficha y expediente'],['i-dia','📊','Diagnóstico de madurez','Herramienta 03 por cliente'],['i-glo','📖','Glosario','Términos, ISO y métodos'],['i-ref','⚖','Referencia','Plazos y normas clave'],['i-np','🗓','Agendar plazo','Recordatorio con aviso']].map(function(x){return '<button id="'+x[0]+'"><span class="ic">'+x[1]+'</span><b>'+x[2]+'</b><small>'+x[3]+'</small></button>'}).join('')+'</div></div>'+
+ continuar()+primerosPasos()+
  sinControl();
- bindPlazos(V);$('#i-np').onclick=function(){formPlazo(null)};bindRelojes(V);$$('[data-sc]',V).forEach(function(e){e.onclick=function(){R.sel=e.dataset.sc;show('cli')}});$('#i-nc').onclick=function(){show('cli');formCliente(null)};$('#i-ns').onclick=function(){formSol(null,null)};$('#i-inc').onclick=function(){formInc(null,null)};
+ bindPlazos(V);$('#i-np').onclick=$('#i-np2').onclick=function(){formPlazo(null)};$('#i-cal').onclick=function(){vCalc()};$('#i-glo').onclick=function(){vGlo()};$('#i-ref').onclick=function(){show('ref')};$('#i-dia').onclick=function(){elegirClienteYAbrir('03')};
+ var iq=function(){var k=norm($('#i-q').value);$('#i-qr').innerHTML=!k?'':(clientes().filter(function(c){return norm(c.rs+' '+(c.ruc||'')+' '+c.cod).indexOf(k)>-1}).slice(0,6).map(function(c){var sm=semaforo(c.id);return '<div class="it" data-sc="'+c.id+'"><span class="sem '+sm.c+'"></span><div><div class="t">'+esc(c.rs)+'</div><div class="m">'+esc(c.cod)+(c.ruc?' · RUC '+esc(c.ruc):'')+'</div></div></div>'}).join('')||'<p class="sub">Sin coincidencias.</p>');$$('#i-qr [data-sc]').forEach(function(e){e.onclick=function(){R.sel=e.dataset.sc;show('cli')}})};$('#i-q').oninput=iq;
+ if($('#i-cont'))$('#i-cont').onclick=function(){var l=store('last');elegirOAbrir(l)};if($('#i-pp-x'))$('#i-pp-x').onclick=function(){store('ppx',1);vIni()};
+ $$('[data-pp]',V).forEach(function(b){b.onclick=function(){var k=b.dataset.pp;if(k==='firma')show('aju');else if(k==='cli'){show('cli');formCliente(null)}else if(k==='drive')show('aju');else if(k==='dia')elegirClienteYAbrir('03');else if(k==='ciclo'){var c=clientes().filter(function(x){return x.est==='activo'})[0]||clientes()[0];if(c){R.sel=c.id;show('cli')}else{show('cli');formCliente(null)}}}});bindRelojes(V);$$('[data-sc]',V).forEach(function(e){e.onclick=function(){R.sel=e.dataset.sc;show('cli')}});$('#i-nc').onclick=function(){show('cli');formCliente(null)};$('#i-ns').onclick=function(){formSol(null,null)};$('#i-inc').onclick=function(){formInc(null,null)};
  $$('[data-h]',V).forEach(function(b){b.onclick=function(){elegirClienteYAbrir(b.dataset.h)}});
  $$('[data-go]',V).forEach(function(k){k.onclick=function(){var g=k.dataset.go.split(':');if(g[1])R.ageF=g[1];show(g[0])}});
 }
+function continuar(){var l=store('last');if(!l||!TOOLS[l.h]||(l.cid!=='_libre'&&!cli(l.cid)))return '';var c=l.cid==='_libre'?null:cli(l.cid);
+ return '<div class="card"><div class="row" style="justify-content:space-between"><div><div class="hint" style="margin:0">Continuar donde lo dejó</div><b>'+esc(l.h+' · '+herr(l.h).n)+'</b><div class="m" style="font-size:12.5px;color:var(--gris)">'+esc(c?c.rs:'Modo libre')+' · '+esc(fcorta(iso(new Date(l.t))))+'</div></div><button class="btn sm" id="i-cont">Abrir</button></div></div>'}
+function elegirOAbrir(l){if(l&&TOOLS[l.h]&&(l.cid==='_libre'||cli(l.cid)))abrirTool(l.h,l.cid)}
+function primerosPasos(){if(store('ppx'))return '';var F=R.data.cfg.firma,act=clientes(),P=[
+  ['firma','Revise su firma y cargo en Ajustes',!!R.data.cfg.firmaOk],
+  ['cli','Registre su primer cliente',act.length>0],
+  ['drive','Active la copia cifrada en Google Drive',!!(R.vault&&R.vault.ls)],
+  ['dia','Aplique el diagnóstico de madurez (03) a un cliente',act.some(function(c){return ultimo(c.id,'03')})],
+  ['ciclo','Agende el ciclo anual de un cliente activo',plazos().some(function(p){return p.tipo==='rev_mad'})]];
+ var n=P.filter(function(x){return x[2]}).length;if(n===P.length)return '';
+ return '<div class="card"><h3>Primeros pasos · '+n+' de '+P.length+' <button class="btn sm sec" id="i-pp-x">Ocultar</button></h3><ul class="pasos">'+P.map(function(x,i){return '<li class="'+(x[2]?'ok':'')+'"><span class="ck">'+(x[2]?'✓':i+1)+'</span><div style="flex:1"><div class="t">'+esc(x[1])+'</div></div>'+(x[2]?'':'<button class="btn sm sec" data-pp="'+x[0]+'">Ir</button>')+'</li>'}).join('')+'</ul></div>'}
 function sinControl(){var m=hoy().slice(0,7),L=clientes().filter(function(c){return c.est==='activo'&&/DPD externo|Acompañamiento/.test(c.modal||'')&&!plazos(c.id).some(function(p){return p.tipo==='control'&&p.f.slice(0,7)===m})});
  return L.length?'<div class="card"><h3>Sin control agendado este mes</h3><div class="list">'+L.map(function(c){return '<div class="it" data-c="'+c.id+'"><div><div class="t">'+esc(c.rs)+'</div><div class="m">'+esc(c.modal)+'</div></div></div>'}).join('')+'</div></div>':''}
 document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-c]');if(t&&!t.closest('#v-cli')){R.sel=t.dataset.c;show('cli')}});
@@ -379,7 +407,10 @@ function expBtns(id,pri){return '<button class="btn'+(pri?'':' sec')+'" id="'+id
 function bindExp(id,fn,nom){$('#'+id).onclick=function(){copiarHtml(fn())};
  $('#'+id+'-w').onclick=function(){try{toast('Word descargado: '+D.docx(fn(),nom()))}catch(e){toast('No se pudo generar el Word: '+e.message,1)}};
  $('#'+id+'-p').onclick=function(){try{D.pdf(fn(),nom());toast('En la impresión elija «Guardar como PDF».')}catch(e){toast('No se pudo generar el PDF: '+e.message,1)}}}
-function firmaInf(c){var F=R.data.cfg.firma;return D.bloqueFirma([{rol:'Elaborado por',l:[F.nom||'',F.cargo||'',F.mat?'Matrícula '+F.mat:'']},{rol:'Recibido por',l:[c.cn||'[NOMBRE]',c.cc||'[CARGO]',c.rs||'']}],fcorta(hoy()))}
+var CARGOS=['Consultor en Protección de Datos Personales','Delegado de Protección de Datos Personales'];
+function cargoTxt(F){var a=[F.cargo||CARGOS[0]];if(F.mat)a.push('Mat. '+F.mat);if(F.cargo===CARGOS[1]&&F.reg)a.push('Reg. SPDP '+F.reg);return a.join(' · ')}
+window.PDFirma=function(){if(!R.data)return null;var F=R.data.cfg.firma;return{nom:F.nom||'',ec:cargoTxt(F)}};
+function firmaInf(c){var F=R.data.cfg.firma;return D.bloqueFirma([{rol:'Elaborado por',l:[F.nom||'',F.cargo||CARGOS[0],[F.mat?'Matrícula '+F.mat:'',F.cargo===CARGOS[1]&&F.reg?'Registro SPDP '+F.reg:''].filter(Boolean).join(' · ')]},{rol:'Recibido por',l:[c.cn||'[NOMBRE]',c.cc||'[CARGO]',c.rs||'']}],fcorta(hoy()))}
 function copiarHtml(html){var tmp=document.createElement('div');tmp.innerHTML=html;var plain=tmp.innerText;try{if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([plain],{type:'text/plain'})})]).then(function(){toast('Copiado: pegue en Word o Google Docs')},function(){toast('No se pudo copiar',1)});return}}catch(e){}toast('Este navegador no permite copiar con formato',1)}
 
 /* ===================== PLAZOS ===================== */
@@ -436,10 +467,10 @@ function vAge(){var V=$('#v-age'),f=R.ageF||'pend';
 
 /* ===================== HERRAMIENTAS (iframe por cliente) ===================== */
 function vHer(){var V=$('#v-her'),c0=store('hcli')||'';
- V.innerHTML='<h2>Herramientas</h2><p class="sub">Elija el cliente: cada herramienta guarda su evaluación en el expediente de ese cliente. «Modo libre» sirve para practicar o para reuniones sin guardar en un cliente.</p>'+
+ V.innerHTML='<h2>Herramientas</h2><div class="card"><h3>Consulta rápida</h3><div class="qa"><button id="h-cal"><span class="ic">⏱</span><b>Calculadora de plazos</b><small>Vulneraciones e incidentes</small></button><button id="h-glo"><span class="ic">📖</span><b>Glosario</b><small>Ley, normas ISO y métodos de riesgo</small></button><button id="h-ref"><span class="ic">⚖</span><b>Referencia</b><small>Ley, reglamento y resoluciones</small></button></div></div><p class="sub">Elija el cliente: cada herramienta guarda su evaluación en el expediente de ese cliente. «Modo libre» sirve para practicar o para reuniones sin guardar en un cliente.</p>'+
  '<div class="card">'+sel('h-cli','Trabajar para',c0,[['_libre','Modo libre (sin cliente)']].concat(clientes().map(function(c){return [c.id,c.rs]})))+'</div><div class="tools">'+HERR.map(function(h){return '<button class="tool" data-ht="'+h.id+'"><div class="n">'+h.id+'</div><div class="t">'+esc(h.n)+'</div><div class="m">'+esc(h.m)+'</div></button>'}).join('')+'</div>'+
  '<div class="nota" style="margin-top:12px">Orden de uso: 01 › 02 para proponer; 03 › 04 › 05 para diagnosticar e inventariar; 06 › 07 para riesgos; 08 › 09 para adecuar y responder. Al año, repita 03 y 05.</div>';
- $('#h-cli').onchange=function(){store('hcli',this.value)};
+ $('#h-cli').onchange=function(){store('hcli',this.value)};$('#h-cal').onclick=function(){vCalc()};$('#h-glo').onclick=function(){vGlo()};$('#h-ref').onclick=function(){show('ref')};
  $$('[data-ht]',V).forEach(function(b){b.onclick=function(){var c=$('#h-cli').value;if(!c)return toast('Elija primero el cliente o el modo libre.',1);abrirTool(b.dataset.ht,c)}});
 }
 function elegirClienteYAbrir(h){elegir(h+' · '+herr(h).n,'¿Para qué cliente? La evaluación se guarda en su expediente. Al cerrar la herramienta volverá a esta pantalla.',clientes().map(function(c){return [c.id,c.rs,(EST[c.est]||EST.prospecto)[0]+(c.modal?' · '+c.modal:'')]}).concat([['_libre','Modo libre (sin cliente)','Para practicar o mostrar la herramienta; no se guarda en un expediente']]),function(c){store('hcli',c);abrirTool(h,c)})}
@@ -454,7 +485,7 @@ var _open=null;
 function marco(html,ns){var old=$('#tool-f'),f=document.createElement('iframe');f.id='tool-f';f.title='Herramienta';f.setAttribute('allow','clipboard-write');if(ns)f.setAttribute('data-ns',ns);if(html)f.srcdoc=html;old.parentNode.replaceChild(f,old);return f}
 function abrirTool(h,cid){var t=TOOLS[h];if(!t)return toast('Herramienta no disponible.',1);if(cid!=='_libre'&&!cli(cid))return toast('Elija un cliente o el modo libre.',1);var c=cid==='_libre'?null:cli(cid);_open={h:h,cid:cid,u0:cid==='_libre'?0:(ultimo(cid,h)||0)};
  $('#tool-t').innerHTML=esc(h+' · '+herr(h).n)+'<small>'+(c?esc(c.rs):'Modo libre')+'</small><span class="cx" id="tool-cx"></span>';$('#tool').hidden=false;document.body.style.overflow='hidden';
- marco(t.replace(/<head>/i,'<head>'+SHIM),cid+'|'+h);
+ marco(t.replace(/<head>/i,'<head>'+SHIM),cid+'|'+h);store('last',{h:h,cid:cid,t:Date.now()});
  try{if(!(history.state&&history.state.tool))history.pushState({tool:1},'')}catch(e){}}
 function cerrarTool(){if($('#tool').hidden)return;$('#tool').hidden=true;document.body.style.overflow='';marco('',null);clearTimeout(_dT);if(R.data)guardar();if(R.view==='cli'&&R.sel)fichaCliente(R.sel);else if(R.view==='ini'&&R.data&&$('#i-np'))vIni();var o=_open;_open=null;if(o)sugerirRevision(o)}
 window.PDCtx=function(s){var e=$('#tool-cx');if(e)e.textContent=s||''};
@@ -648,6 +679,90 @@ function informeHtml(id,mes,conH,obs,anx){var c=cli(id),F=R.data.cfg.firma,d=pd(
  var c=R.view==='cli'&&R.sel&&R.data?cli(R.sel):null;$('#ctx-v').textContent=vb?vb.textContent.replace(/\d+$/,''):'';$('#ctx-s').textContent=[c?c.rs:'',t].filter(Boolean).filter(function(x,i,a){return a.indexOf(x)===i}).map(function(x){return ' › '+x}).join('');b.classList.add('on')}
  window.addEventListener('scroll',function(){if(!tk){tk=1;requestAnimationFrame(upd)}},{passive:true})})();
 
+/* ===================== CALCULADORA DE PLAZOS DE NOTIFICACIÓN ===================== */
+/* Términos en días hábiles: LOPDP art. 43 (5 días a la SPDP, al regulador competente y al CSIRT; 2 días del encargado),
+   art. 46 (3 días a los titulares desde que se conoció el riesgo); Res. SPDP-SPD-2026-0040-R art. 11. */
+var REGUL=[['','— Seleccionar —'],['tel','Telecomunicaciones o internet'],['ban','Banca y servicios financieros privados'],['eps','Economía popular y solidaria (cooperativas)'],['seg','Seguros, mercado de valores o compañías'],['sal','Salud'],['otro','Otro sector']];
+var REGN={tel:'ARCOTEL',ban:'Superintendencia de Bancos',eps:'Superintendencia de Economía Popular y Solidaria',seg:'Superintendencia de Compañías, Valores y Seguros',sal:'ACESS (servicios de salud)',otro:'Organismo de control del sector, si lo hay'};
+function habX(s0,n,extra){var d=pd(s0),k=0;while(k<n){d.setDate(d.getDate()+1);var x=iso(d);if(d.getDay()!==0&&d.getDay()!==6&&!esFeriado(x)&&extra.indexOf(x)<0)k++}return iso(d)}
+function restaTxt(f){var fin=pd(f);fin.setHours(23,59,0,0);var ms=fin-Date.now();return ms<0?'<span class="tag r">Vencido</span>':'<span class="tag'+(ms<2*864e5?' r':'')+'">'+resta(ms)+'</span>'}
+function vCalc(){R.view='her';$$('main section').forEach(function(x){x.classList.toggle('on',x.id==='v-her')});$$('#nav button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.t==='her')});
+ var V=$('#v-her'),now=hoy()+'T'+new Date().toTimeString().slice(0,5);
+ V.innerHTML='<button class="back" id="cc-b">‹ Herramientas</button><h2>Calculadora de plazos de notificación</h2><p class="sub">Para vulneraciones de la seguridad e incidentes. Ingrese los datos del caso: la calculadora indica a quién notificar, hasta cuándo y con qué base legal. Términos en días hábiles (excluye fines de semana y feriados nacionales 2026-2027).</p>'+
+ '<div class="card"><div class="grid">'+sel('cc-cli','Cliente (opcional)','',clientes().map(function(c){return [c.id,c.rs]}),true)+
+ sel('cc-rol','El cliente actúa como','responsable',[['responsable','Responsable del tratamiento'],['encargado','Encargado del tratamiento']])+
+ sel('cc-sec','Sector del cliente','',REGUL.slice(1))+
+ '<div><label for="cc-fc">Fecha y hora de constancia del incidente</label><input id="cc-fc" type="datetime-local" value="'+now+'"></div>'+
+ '<div id="cc-encw"><label for="cc-fe">Fecha en que un encargado comunicó la vulneración (si aplica)</label><input id="cc-fe" type="datetime-local"></div>'+
+ '<div><label for="cc-fr">Fecha en que se conoció el riesgo para los titulares</label><input id="cc-fr" type="date"><p class="hint">Vacío = la fecha de constancia (escenario más estricto).</p></div>'+
+ '<div><label for="cc-fer">Feriados locales adicionales (AAAA-MM-DD, separados por coma)</label><input id="cc-fer" placeholder="Ej.: 2026-07-25"></div>'+
+ '<div class="full"><label>Evaluación del riesgo</label>'+
+ '<label class="row" style="gap:8px;font-weight:500;color:var(--txt)"><input type="checkbox" id="cc-imp" style="width:20px;height:20px;min-height:0"> Es improbable que la vulneración sea un riesgo para los derechos y libertades (no se notifica a la autoridad; se documenta)</label>'+
+ '<label class="row" style="gap:8px;font-weight:500;color:var(--txt)"><input type="checkbox" id="cc-tit" checked style="width:20px;height:20px;min-height:0"> Conlleva un riesgo para los derechos fundamentales de los titulares</label></div>'+
+ '<div class="full"><label>Excepciones a la comunicación a los titulares (LOPDP art. 46)</label>'+
+ [['e1','Las medidas de protección aplicadas a los datos afectados son efectivas (por ejemplo, cifrado no comprometido)'],['e2','Medidas posteriores garantizan que el riesgo ya no se concretará'],['e3','Comunicar a cada titular exige un esfuerzo desproporcionado (se hace una comunicación pública)']].map(function(x){return '<label class="row" style="gap:8px;font-weight:500;color:var(--txt)"><input type="checkbox" id="cc-'+x[0]+'" style="width:20px;height:20px;min-height:0"> '+x[1]+'</label>'}).join('')+'</div>'+
+ '</div></div><div class="card" id="cc-out"></div>';
+ var go=function(){var fc=$('#cc-fc').value;if(!fc){$('#cc-out').innerHTML='<p class="sub">Ingrese la fecha de constancia.</p>';return}
+  var enc=$('#cc-rol').value==='encargado',d0=fc.slice(0,10),h0=fc.slice(11,16),fe=$('#cc-fe').value,fr=$('#cc-fr').value||d0,ex=$('#cc-fer').value.split(',').map(function(x){return x.trim()}).filter(Boolean);
+  var imp=$('#cc-imp').checked,tit=$('#cc-tit').checked,e1=$('#cc-e1').checked,e2=$('#cc-e2').checked,e3=$('#cc-e3').checked,sec=$('#cc-sec').value;
+  $('#cc-encw').querySelector('label').textContent=enc?'Fecha y hora en que el responsable recibió su comunicación (si ya ocurrió)':'Fecha en que un encargado le comunicó la vulneración (si aplica)';
+  var base=fe?fe.slice(0,10):d0,F=[];
+  if(enc)F.push(['Encargado → responsable',habX(d0,2,ex),'Término de 2 días desde que el encargado tuvo constancia. Por correo, salvo otro medio pactado en el contrato.','LOPDP art. 43; Res. 0040 art. 11',1]);
+  var sp=habX(enc?base:(fe?fe.slice(0,10):d0),5,ex);
+  F.push(['SPDP, por el SISPDP (servicios.spdp.gob.ec)',imp?'':sp,imp?'No procede si es improbable el riesgo: documente la decisión y su motivación en la bitácora.':(enc?'La notifica el responsable: '+(fe?'5 días desde que recibió la comunicación del encargado.':'cuente 5 días desde que reciba la comunicación; se muestra el escenario más estricto.'):'5 días desde la constancia'+(fe?' (o desde la comunicación del encargado)':'')+'. Si se notifica tarde, acompañe los motivos de la dilación.'),'LOPDP art. 43; Res. 0040 arts. 8, 11 y 12',!imp]);
+  F.push([sec?'Regulador: '+REGN[sec]:'Organismo de regulación y control competente',imp?'':sp,sec?'Mismo término que la SPDP. Destinatario orientativo según el sector: confirme el organismo competente.':'Mismo término. Indique el sector para orientar el destinatario.','LOPDP art. 43 reformado',!imp]);
+  F.push(['CSIRT correspondiente',imp?'':sp,'Para fines informativos y de coordinación técnica. Canal práctico por confirmar con cada CSIRT.','LOPDP art. 43 reformado',!imp]);
+  var exc=e1||e2||e3,ft=habX(fr,3,ex);
+  F.push(['Titulares afectados',(!tit||e1||e2)?'':ft,!tit?'No procede si no hay riesgo para sus derechos: documente la motivación.':(e1||e2)?'Excepción del art. 46 (num. '+(e1?'1':'2')+'): la procedencia la califica la SPDP; infórmela en la notificación.':e3?'Esfuerzo desproporcionado: hacer una comunicación pública por cualquier medio, dentro del mismo término.':'Sin dilación y dentro de 3 días desde que se conoció el riesgo. Contenido: naturaleza, fecha de detección, medidas y recomendaciones, en lenguaje claro.','LOPDP art. 46; Res. 0040 art. 10; RGLOPDP art. 28',tit&&!e1&&!e2]);
+  $('#cc-out').innerHTML='<h3>Resultado</h3><div class="scroll"><table class="cal"><thead><tr><th>A quién</th><th>Vence</th><th>Restan</th><th>Qué hacer</th></tr></thead><tbody>'+F.map(function(x){return '<tr class="'+(x[4]?'':'na')+'"><td><b>'+esc(x[0])+'</b><div style="font-size:11.5px;color:var(--olivo)">'+esc(x[3])+'</div></td><td class="lim">'+(x[1]?esc(fcorta(x[1]))+'<br><span style="font-weight:500;font-size:11.5px">hasta las 23:59</span>':'No procede')+'</td><td>'+(x[1]?restaTxt(x[1]):'—')+'</td><td>'+esc(x[2])+'</td></tr>'}).join('')+'</tbody></table></div>'+
+  '<p class="hint">Recomendación: no espere al último día; la ley pide notificar «tan pronto sea posible». No notificar a la autoridad o a los titulares es infracción grave (LOPDP art. 68 nums. 7 y 8). Constancia registrada: '+esc(fcorta(d0))+' '+esc(h0)+'.</p>'+
+  '<label>Exportar el cálculo</label><div class="row">'+expBtns('cc-x')+'</div><div class="row" style="margin-top:10px"><button class="btn" id="cc-ag">Iniciar reloj y agendar en el cliente</button></div><p class="hint">Crea la vulneración en la ficha del cliente con estos datos y agenda los plazos en la app y en Google Calendar.</p>';
+  var doc=function(){var c=cli($('#cc-cli').value);return '<h1>Cálculo de plazos de notificación de una vulneración</h1><p>'+(c?'<b>'+esc(c.rs)+'</b> · ':'')+'El cliente actúa como <b>'+(enc?'encargado':'responsable')+'</b> del tratamiento · Constancia: '+esc(fcorta(d0))+' '+esc(h0)+' · Fecha del cálculo: '+esc(fcorta(hoy()))+'</p><table border="1" cellpadding="5" style="border-collapse:collapse;width:100%;font-size:10pt"><tr><th>Destinatario</th><th>Vence</th><th>Indicaciones</th><th>Base legal</th></tr>'+F.map(function(x){return '<tr><td>'+esc(x[0])+'</td><td>'+(x[1]?esc(fcorta(x[1]))+' (23:59)':'No procede')+'</td><td>'+esc(x[2])+'</td><td>'+esc(x[3])+'</td></tr>'}).join('')+'</table><p>Términos en días hábiles, sin fines de semana ni feriados nacionales'+(ex.length?' ni los feriados locales indicados ('+esc(ex.join(', '))+')':'')+'. El cálculo es una ayuda: confirme con el texto vigente de la LOPDP y de la Res. SPDP-SPD-2026-0040-R.</p>'+firmaInf(c||{})};
+  bindExp('cc-x',doc,function(){var c=cli($('#cc-cli').value);return 'Plazos de notificacion '+(c?c.rs+' ':'')+d0});
+  $('#cc-ag').onclick=function(){var c=$('#cc-cli').value;if(!c)return toast('Elija el cliente para agendar.',1);R.view='cli';R.sel=c;$$('main section').forEach(function(x){x.classList.toggle('on',x.id==='v-cli')});$$('#nav button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.t==='cli')});formInc(null,c);$('#n-fc').value=fc;$('#n-rol').value=enc?'encargado':'responsable';$('#n-fc').dispatchEvent(new Event('input'));window.scrollTo(0,0)}};
+ $$('#v-her input,#v-her select').forEach(function(x){x.addEventListener('input',go);x.addEventListener('change',go)});
+ $('#cc-b').onclick=function(){vHer()};go();window.scrollTo(0,0)}
+
+/* ===================== GLOSARIO ===================== */
+function svgFig(t){var W=520,H=200,o='<svg class="fig" viewBox="0 0 '+W+' '+H+'" role="img" xmlns="http://www.w3.org/2000/svg" font-family="inherit" font-size="11" fill="currentColor">',T=function(x,y,s,a,w){return '<text x="'+x+'" y="'+y+'"'+(a?' text-anchor="'+a+'"':'')+(w?' font-weight="700"':'')+'>'+s+'</text>'},ax='stroke="currentColor" stroke-opacity=".35"';
+ if(t==='matriz'){var C=['#2F8A45','#2F8A45','#D9A21B','#D9A21B','#C0392B'],cell=function(p,i){var v=p*i;return v<=4?'#2F8A45':v<=9?'#D9A21B':v<=16?'#E07B24':'#C0392B'};o+=T(10,14,'Impacto',null,1);
+  for(var i=5;i>=1;i--)for(var p=1;p<=5;p++){var x=60+(p-1)*56,y=20+(5-i)*30;o+='<rect x="'+x+'" y="'+y+'" width="54" height="28" rx="3" fill="'+cell(p,i)+'" fill-opacity=".8"/>'+T(x+27,y+18,p*i,'middle',1).replace('<text','<text fill="#fff"')}
+  for(var k=1;k<=5;k++){o+=T(48,20+(5-k)*30+18,k,'end')+T(60+(k-1)*56+27,186,k,'middle')}o+=T(200,198,'Probabilidad','middle',1);
+  o+='<circle cx="'+(60+2*56+27)+'" cy="'+(20+1*30+14)+'" r="13" fill="none" stroke="#14181E" stroke-width="3"/>'+T(355,60,'Ejemplo: P3 × I4 = 12',null,1)+T(355,78,'Riesgo alto')+T(355,110,'Verde: bajo (1-4)')+T(355,126,'Amarillo: medio (5-9)')+T(355,142,'Naranja: alto (10-16)')+T(355,158,'Rojo: muy alto (17-25)')}
+ else if(t==='delphi'){var R3=[[5,15,25,40,60],[15,20,25,30,35],[20,23,25,27,30]],sx=function(v){return 70+v*6.5};o+=T(10,14,'Estimación de probabilidad anual por ronda (%)',null,1);
+  [0,20,40,60].forEach(function(v){o+='<line x1="'+sx(v)+'" y1="24" x2="'+sx(v)+'" y2="160" '+ax+' stroke-dasharray="3 3"/>'+T(sx(v),176,v+' %','middle')});
+  R3.forEach(function(r,j){var y=45+j*45;o+=T(60,y+4,'Ronda '+(j+1),'end')+'<line x1="'+sx(r[0])+'" y1="'+y+'" x2="'+sx(r[4])+'" y2="'+y+'" stroke="var(--oro)" stroke-width="6" stroke-linecap="round" stroke-opacity=".5"/>'+r.map(function(v){return '<circle cx="'+sx(v)+'" cy="'+y+'" r="5" fill="var(--oro)"/>'}).join('')+'<line x1="'+sx(r[2])+'" y1="'+(y-12)+'" x2="'+sx(r[2])+'" y2="'+(y+12)+'" stroke="currentColor" stroke-width="2"/>'+T(sx(r[4])+10,y+4,'rango '+r[0]+'–'+r[4]+' %')});
+  o+=T(70,194,'Línea vertical: mediana del panel (25 %). La dispersión se reduce ronda a ronda.')}
+ else if(t==='frecuentista'){var B=[1,2,1,2],L=['S1 2025','S2 2025','S1 2026','S2 2026'];o+=T(10,14,'Incidentes por semestre',null,1);
+  B.forEach(function(v,j){var h=v*45,x=30+j*52;o+='<rect x="'+x+'" y="'+(150-h)+'" width="40" height="'+h+'" rx="3" fill="var(--oro)"/>'+T(x+20,145-h,v,'middle',1)+T(x+20,166,L[j],'middle')});
+  o+='<line x1="24" y1="150" x2="240" y2="150" '+ax+'/>'+T(30,190,'6 incidentes en 24 meses = 3 por año');
+  var px=function(l){return 290+l*52},py=function(pr){return 150-pr*120};o+=T(285,14,'P(al menos 1 en el año) = 1 − e^(−tasa)',null,1)+'<line x1="290" y1="150" x2="510" y2="150" '+ax+'/><line x1="290" y1="30" x2="290" y2="150" '+ax+'/>';
+  var d='';for(var l=0;l<=4.01;l+=0.1)d+=(l?'L':'M')+px(l).toFixed(1)+' '+py(1-Math.exp(-l)).toFixed(1);o+='<path d="'+d+'" fill="none" stroke="currentColor" stroke-width="2"/>';
+  [[0.2,'18 %'],[3,'95 %']].forEach(function(q){var X=px(q[0]),Y=py(1-Math.exp(-q[0]));o+='<circle cx="'+X+'" cy="'+Y+'" r="5" fill="var(--oro)"/>'+(q[0]>1?T(X-8,Y+16,'tasa 3 → 95 %','end'):T(X+7,Y+14,'tasa '+String(q[0]).replace('.',',')+' → '+q[1]))});
+  [0,1,2,3,4].forEach(function(l){o+=T(px(l),166,l,'middle')});o+=T(400,182,'Eventos por año (tasa)','middle')}
+ else if(t==='bayes'){var g=function(m,sd,col,lab){var d='';for(var x=0;x<=0.8;x+=0.01){var y=Math.exp(-Math.pow(x-m,2)/(2*sd*sd));d+=(x?'L':'M')+(40+x*560).toFixed(1)+' '+(160-y*120).toFixed(1)}return '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="2.5"/>'+T(40+m*560,30,lab,'middle',1)};
+  o+=g(0.30,0.12,'currentColor','Inicial: sector 30 %')+g(0.15,0.06,'var(--oro)','Actualizada: 15 %')+'<line x1="40" y1="160" x2="500" y2="160" '+ax+'/>';[0,0.2,0.4,0.6,0.8].forEach(function(x){o+=T(40+x*560,176,Math.round(x*100)+' %','middle')});o+=T(40,196,'Dos años sin pérdidas de equipos con discos cifrados desplazan y estrechan la estimación.')}
+ else if(t==='montecarlo'){var seed=7,rnd2=function(){seed=(seed*16807)%2147483647;return seed/2147483647},tri=function(a,c,b){var u=rnd2(),f=(c-a)/(b-a);return u<f?a+Math.sqrt(u*(b-a)*(c-a)):b-Math.sqrt((1-u)*(b-a)*(b-c))},bins=new Array(20).fill(0);
+  for(var n=0;n<4000;n++){var v=tri(0.7,0.8,1.0)*(0.6*tri(0.3,0.5,0.7)+0.4*tri(0.4,0.6,0.8))*2;bins[Math.min(19,Math.floor((v-0.4)/0.06))]++}var mx=Math.max.apply(null,bins);
+  o+=T(10,14,'4.000 simulaciones de la multa (como % del volumen de negocio)',null,1);bins.forEach(function(b,j){var h=b/mx*125;o+='<rect x="'+(40+j*23)+'" y="'+(155-h)+'" width="20" height="'+h+'" fill="var(--oro)" fill-opacity=".85"/>'});
+  o+='<line x1="36" y1="155" x2="505" y2="155" '+ax+'/>'+T(40,172,'menor')+T(505,172,'mayor','end')+T(270,192,'La altura indica cuántas simulaciones cayeron en cada rango: se informa el rango y el valor más probable.','middle')}
+ return o+'</svg>'}
+function vGlo(){R.view='her';$$('main section').forEach(function(x){x.classList.toggle('on',x.id==='v-her')});$$('#nav button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.t==='her')});
+ var V=$('#v-her'),sec=store('gs')||'';
+ var S=[['','Todo'],['lopdp','Términos de la LOPDP'],['norma','Términos de la normativa'],['iso','Normas ISO'],['met','Métodos de medición de riesgos']];
+ V.innerHTML='<button class="back" id="gl-b">‹ Herramientas</button><h2>Glosario del DPD</h2><p class="sub">Definiciones legales, normas técnicas internacionales y métodos para medir riesgos. Resúmenes de apoyo: la definición que vale es la del texto oficial. Las normas ISO son referencias técnicas, no obligaciones legales en el Ecuador.</p>'+
+ '<input id="gl-q" placeholder="Buscar término, norma o método" style="margin-bottom:8px"><div class="chips" id="gl-s" style="margin-bottom:10px">'+S.map(function(x){return '<button data-gs="'+x[0]+'" class="'+(sec===x[0]?'on':'')+'">'+x[1]+'</button>'}).join('')+'</div><div id="gl-l"></div>';
+ var pinta=function(){var k=norm($('#gl-q').value),ok=function(t){return !k||norm(t).indexOf(k)>-1},h='';
+  var lista=function(id,tit,L,fuente){var F=L.filter(function(x){return ok(x.join(' '))});if(!F.length||(sec&&sec!==id))return '';return '<div class="card"><h3>'+tit+' <span class="tag g">'+F.length+'</span></h3>'+F.map(function(x){return '<div class="gl-it"><b>'+esc(x[0])+'</b>'+esc(x[1])+'<div class="src">'+esc(x[2]||fuente)+'</div></div>'}).join('')+'</div>'};
+  h+=lista('lopdp','Términos de la LOPDP',GLO.lopdp,'LOPDP art. 4');h+=lista('norma','Términos de la normativa',GLO.norma,'');
+  if(!sec||sec==='iso'){var I=GLO.iso.filter(function(x){return ok(x.join(' '))});if(I.length)h+='<div class="card"><h3>Normas ISO de protección de datos y ciberseguridad <span class="tag g">'+I.length+'</span></h3><p class="hint" style="margin-top:0">Referencias técnicas para tener criterio y dialogar con tecnología. La guía v2 de la SPDP las trata como apoyo, no como garantía de cumplimiento.</p>'+I.map(function(x){return '<div class="gl-it"><b>'+esc(x[0])+' · '+esc(x[1])+'</b><span class="tag g" style="margin:2px 0 4px">'+esc(x[2])+'</span><div>'+esc(x[3])+'</div><div class="ayu"><b>Para el DPD:</b> '+esc(x[4])+'</div></div>'}).join('')+'</div>'}
+  if(!sec||sec==='met'){var M=GLO.metodos.filter(function(m){return ok(m.nombre+' '+m.que+' '+m.ejemplo+' '+m.cuando+' '+m.dpd)});
+   if(M.length)h+='<div class="card"><h3>Métodos de medición de riesgos</h3><p class="hint" style="margin-top:0">La guía v2 de la SPDP admite modelos cualitativos (Delphi, Lens, análisis argumental) y cuantitativos (frecuentista, bayesiano, Monte Carlo, FAIR), y exige justificar cada valor. El DPD asesora y supervisa la metodología; la decisión y la ejecución corresponden al responsable (LOPDP arts. 47 num. 5 y 49). Ejemplos con cifras ficticias.</p>'+
+    M.map(function(m){return '<details class="met gl-it"'+(k||sec==='met'?' open':'')+'><summary style="cursor:pointer"><b style="display:inline">'+esc(m.nombre)+'</b> <span class="tag g">'+esc(m.tipo)+'</span></summary><h4>Qué es</h4><p>'+esc(m.que)+'</p><h4>Ejemplo</h4><p>'+esc(m.ejemplo)+'</p>'+svgFig(m.grafico)+'<h4>Cuándo y en qué procesos se usa</h4><p>'+esc(m.cuando)+'</p><h4>Rol del DPD</h4><p>'+esc(m.dpd)+'</p><h4>Límite</h4><p>'+esc(m.limite)+'</p></details>'}).join('')+'</div>'}
+  $('#gl-l').innerHTML=h||'<p class="sub">Sin resultados.</p>'};
+ $('#gl-q').oninput=pinta;$$('[data-gs]',V).forEach(function(b){b.onclick=function(){sec=b.dataset.gs;store('gs',sec);$$('[data-gs]',V).forEach(function(x){x.classList.toggle('on',x===b)});pinta()}});
+ $('#gl-b').onclick=function(){vHer()};pinta();window.scrollTo(0,0)}
+
 /* ===================== REFERENCIA NORMATIVA ===================== */
 var ESTN={oficial:['Texto oficial leído','v'],copia:['Copia del texto leída',''],resumen:['Resumen de terceros','r']};
 function norm(t){return String(t||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')}
@@ -680,7 +795,7 @@ function vAju(){var V=$('#v-aju'),c=R.data.cfg,F=c.firma;
  '<div class="card"><h3>Apariencia</h3><div class="seg">'+[['auto','Automático'],['light','Claro'],['dark','Oscuro']].map(function(x){return '<button data-tema="'+x[0]+'" class="'+(c.tema===x[0]?'on':'')+'">'+x[1]+'</button>'}).join('')+'</div></div>'+
  '<div class="card"><h3>Google Drive</h3><p class="sub">Guarda una copia cifrada en la carpeta oculta de la app en su Google Drive (no aparece entre sus archivos) y la recupera al cambiar de teléfono o desde la PC. Conserva una versión diaria (10 días) y una mensual (12 meses).</p><div class="row"><button class="btn" id="g-sync">Sincronizar ahora</button><button class="btn sec" id="g-rest">Reemplazar este dispositivo con Drive</button></div><p class="hint sst"></p></div>'+
  '<div class="card"><h3>Google Calendar</h3><p class="sub">Agenda los plazos pendientes en su calendario principal con avisos 3 días y 1 día antes. El evento se actualiza o se elimina con el plazo.</p><div class="row"><button class="btn'+(c.gcal.on?' sec':'')+'" id="c-on">'+(c.gcal.on?'Desactivar':'Activar Google Calendar')+'</button>'+(c.gcal.on?'<button class="btn sec" id="c-sy">Sincronizar plazos</button>':'')+'</div><p class="hint" id="c-msg"></p></div>'+
- '<div class="card"><h3>Datos del consultor (firma)</h3><div class="grid">'+campo('a-nom','Nombre',F.nom)+campo('a-car','Cargo',F.cargo)+campo('a-mat','Matrícula',F.mat)+campo('a-mail','Correo',F.mail,'email')+'</div><p class="hint">No use el cargo de delegado de protección de datos hasta contar con el registro ante la SPDP.</p></div>'+
+ '<div class="card"><h3>Datos del consultor (firma)</h3><div class="grid">'+campo('a-nom','Nombre',F.nom)+sel('a-car','Cargo con el que firma',F.cargo,CARGOS)+campo('a-mat','Matrícula profesional (Foro de Abogados)',F.mat)+campo('a-reg','N.º de registro del DPD ante la SPDP',F.reg,'text',false,'Cuando se habilite')+campo('a-mail','Correo',F.mail,'email')+'</div><p class="hint" id="a-carh"></p><p class="hint">La firma se usa en los informes de la app y se propone en las herramientas. Vista previa: <b id="a-fprev"></b></p></div>'+
  '<div class="card"><h3>Plazos</h3>'+campo('a-psol','Plazo interno de respuesta a solicitudes de derechos (días)',c.plazoSol,'number',false,'Vacío = plazo legal de cada derecho')+'<p class="hint">Si lo deja vacío, la app aplica 15 días calendario a acceso, rectificación, eliminación y oposición (LOPDP arts. 13 a 16) y no calcula fecha para los derechos sin plazo legal. Si escribe un número, se usa para todos (por ejemplo, un plazo interno más corto).</p>'+campo('a-gl','Dirección de MSC Gestor Legal (para enviar servicios a la proforma)',c.glUrl,'url',false,'https://xavimac123.github.io/msc-gestorlegal/')+campo('a-pt','Término para comunicar una vulneración a los titulares (días hábiles)',c.plazoTit,'number',false,'Vacío = 3 (LOPDP art. 46)')+'<p class="hint">LOPDP art. 46: término de 3 días desde que el responsable conoció el riesgo. Vacío aplica 3; escriba 0 para no agendarlo.</p></div>'+
  '<div class="row" style="margin-bottom:12px"><button class="btn" id="a-g">Guardar ajustes</button></div>'+
  '<div class="card"><h3>Seguridad y respaldo</h3><label>Cambiar contraseña (genera también un nuevo código de recuperación)</label><div class="grid"><input id="a-pw0" type="password" placeholder="Contraseña actual"><input id="a-pw" type="password" placeholder="Nueva contraseña (mínimo 10)"></div><div class="row" style="margin-top:8px"><button class="btn sec" id="a-cpw">Cambiar contraseña</button><button class="btn sec" id="a-exp">Descargar respaldo cifrado</button></div><div id="a-rcv"></div>'+
@@ -690,7 +805,9 @@ function vAju(){var V=$('#v-aju'),c=R.data.cfg,F=c.firma;
  $('#g-sync').onclick=function(){sincronizar(true)};$('#g-rest').onclick=function(){if(confirmar(this))reemplazarConDrive()};
  $('#c-on').onclick=function(){if(c.gcal.on){c.gcal.on=false;c.gcal.upd=Date.now();guardar().then(vAju);return}tokenCal(true).then(function(){c.gcal.on=true;c.gcal.upd=Date.now();return guardar()}).then(function(){vAju();calSyncTodas(true)},function(e){$('#c-msg').textContent=e.message})};
  if($('#c-sy'))$('#c-sy').onclick=function(){calSyncTodas(true)};
- $('#a-g').onclick=function(){F.nom=$('#a-nom').value;F.cargo=$('#a-car').value;F.mat=$('#a-mat').value;F.mail=$('#a-mail').value;c.plazoSol=$('#a-psol').value;c.plazoTit=$('#a-pt').value;c.glUrl=$('#a-gl').value.trim();c.upd=Date.now();guardar().then(function(){toast('Ajustes guardados.')})};
+ var cH=function(){var dpd=$('#a-car').value===CARGOS[1],r=$('#a-reg').value.trim();$('#a-carh').innerHTML=dpd?(r?'Firma como delegado con el registro '+esc(r)+'.':'<span style="color:var(--mal)">El cargo de delegado de protección de datos solo debe usarse con el nombramiento registrado ante la SPDP (Res. SPDP-SPD-2025-0028-R). Ingrese el número de registro.</span>'):'Use «Delegado de Protección de Datos Personales» cuando cuente con el registro ante la SPDP.';$('#a-fprev').textContent=cargoTxt({cargo:$('#a-car').value,mat:$('#a-mat').value,reg:r})};
+ ['a-car','a-mat','a-reg'].forEach(function(k){$('#'+k).addEventListener('input',cH);$('#'+k).addEventListener('change',cH)});cH();
+ $('#a-g').onclick=function(){if($('#a-car').value===CARGOS[1]&&!$('#a-reg').value.trim()&&!confirmar(this))return;F.nom=$('#a-nom').value;F.cargo=$('#a-car').value||CARGOS[0];F.mat=$('#a-mat').value;F.reg=$('#a-reg').value.trim();F.mail=$('#a-mail').value;c.plazoSol=$('#a-psol').value;c.plazoTit=$('#a-pt').value;c.glUrl=$('#a-gl').value.trim();c.firmaOk=1;c.upd=Date.now();guardar().then(function(){toast('Ajustes guardados.')})};
  $('#a-cpw').onclick=function(){var np=$('#a-pw').value;if(np.length<10)return toast('Mínimo 10 caracteres.',1);var rc=codRec();abrir(R.vault,$('#a-pw0').value,false).then(function(raw){return envolver(R.vault,raw,np,rc)},function(){throw new Error('La contraseña actual no es correcta.')}).then(function(){return sellar()}).then(function(){$('#a-pw0').value='';$('#a-pw').value='';$('#a-rcv').innerHTML='<p class="sub" style="margin-top:10px">Contraseña cambiada. Nuevo código de recuperación (el anterior ya no sirve):</p><div class="rc">'+rc+'</div>';sincroAuto()}).catch(function(e){toast(e.message,1)})};
  $('#a-exp').onclick=function(){var v=JSON.parse(JSON.stringify(R.vault));delete v.ls;var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(v)],{type:'application/json'}));a.download='mscpd-respaldo-'+hoy()+'.json';document.body.appendChild(a);a.click();a.remove()};
  $('#a-del').onclick=function(){if(!confirmar(this))return;try{localStorage.removeItem('mscpd:vault')}catch(e){}olvidar();R.vault=null;bloquear()};

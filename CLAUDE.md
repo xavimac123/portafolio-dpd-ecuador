@@ -33,8 +33,9 @@ La numeración de las herramientas sigue el orden de uso de la guía (`docs/guia
 - `09-kit-vulneraciones/` — gestión y notificación de vulneraciones
 - `app-pd/` — app instalable MSC Protección de Datos (PWA): `fuente/index.html`, `build_pwa.py`; publica `app-pd/docs/` en la rama `gh-pages` (GitHub Pages)
 - `scripts/referencia_config.py` — fuente única de la pestaña «Referencia» de la app (normas, puntos de consulta y plazos); todo lo que cite debe constar en `BASE-LEGAL.md`
+- `scripts/glosario_config.py` — normas ISO y métodos de medición de riesgos del Glosario (las definiciones legales se toman de `catalogo_config.py`)
 - `scripts/exportar.js` — exportación a Word (.docx) y PDF con espacio para firma y sello; la usan la app y las nueve herramientas
-- `app-pd/normas/` — PDF de la LOPDP y del RGLOPDP (`lopdp.pdf`, `rglopdp.pdf`); no se versionan
+- `app-pd/normas/` — PDF de la LOPDP y del RGLOPDP (`lopdp.pdf`, `rglopdp.pdf`); no se versionan. Para publicar en un sitio público compilar con `MSC_PUBLICO=1` (omite esos PDF y enlaza a la fuente oficial)
 - `docs/` — decisiones del proyecto, contraste con las guías de la SPDP y recursos pendientes
 - `referencias/` — plantillas ya utilizadas, anonimizadas
 - `scripts/` — generadores (Excel, exportación a Word)

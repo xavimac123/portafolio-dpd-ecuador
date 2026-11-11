@@ -54,12 +54,17 @@ bl = (ROOT / "BASE-LEGAL.md").read_text(encoding="utf-8")
 ab = bl.split("## Puntos abiertos", 1)[1].split("\n## ", 1)[0]
 abiertos = [re.sub(r"\*\*|`", "", m.group(1)).strip() for m in re.finditer(r"^\d+\.\s+(.+)$", ab, flags=re.M)]
 NORMAS = R / "normas"
-pdf = {k: ("normas/%s.pdf" % k if (NORMAS / (k + ".pdf")).exists() else "") for k in ("lopdp", "rglopdp")}
+import os  # noqa: E402
+# MSC_PUBLICO=1: compilación para un sitio público; no incluye las copias de bases jurídicas de uso del suscriptor.
+PUBLICO = os.environ.get("MSC_PUBLICO") == "1"
+pdf = {k: ("normas/%s.pdf" % k if not PUBLICO and (NORMAS / (k + ".pdf")).exists() else "") for k in ("lopdp", "rglopdp")}
+import glosario_config as GLC  # noqa: E402
+glo = {"lopdp": CAT.GLOSARIO_LOPDP, "norma": CAT.GLOSARIO_NORMATIVA, "iso": GLC.ISO, "metodos": GLC.METODOS}
 ref = {"rev": REFC.REVISION, "normas": REFC.NORMAS, "plazos": REFC.PLAZOS, "contraste": contraste, "abiertos": abiertos, "pdf": pdf}
 exp_js = (ROOT / "scripts" / "exportar.js").read_text(encoding="utf-8").replace("</", "<\\/")
 src = src.replace("__TOOLS_JSON__", js(tools)).replace("__SERV_JSON__", js(serv)).replace("__IMG_JSON__", js(img))
-src = src.replace("__REF_JSON__", js(ref)).replace("__EXPORT_JS__", exp_js)
-assert "__REF_JSON__" not in src and "__EXPORT_JS__" not in src
+src = src.replace("__REF_JSON__", js(ref)).replace("__GLO_JSON__", js(glo)).replace("__EXPORT_JS__", exp_js)
+assert "__GLO_JSON__" not in src and "__REF_JSON__" not in src and "__EXPORT_JS__" not in src
 assert "__TOOLS_JSON__" not in src
 (R / "dist").mkdir(exist_ok=True)
 (R / "dist" / "preview.html").write_text(src, encoding="utf-8")

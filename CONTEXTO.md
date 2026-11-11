@@ -1,6 +1,6 @@
 # ARCHIVO MAESTRO DE CONTEXTO · MSC Protección de Datos (MSC PD)
 
-Actualizado: 2026-11-11. Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (normas).
+Actualizado: 2026-11-11 (segunda entrega). Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (normas).
 
 ## 1. Identidad y propósito
 - **Qué es:** app instalable (PWA) para gestionar clientes y cumplimiento LOPDP (Ecuador) con las nueve herramientas del portafolio de Macías Sánchez Consultores.
@@ -26,10 +26,19 @@ Actualizado: 2026-11-11. Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (
 - Aviso «Todos los derechos reservados» y `LICENSE`.
 - Auditoría automatizada de funciones y botones: sin errores.
 
+## 3b. Segunda entrega (2026-11-11)
+- Calculadora de plazos de notificación por caso (Herramientas › Consulta rápida y en Inicio).
+- Glosario: términos legales, 15 normas ISO y 5 métodos de medición de riesgos con gráfico (Delphi, frecuentista, bayesiano, Monte Carlo y matriz).
+- Inicio: búsqueda de clientes, accesos rápidos, «Continuar donde lo dejó», primeros pasos.
+- Herramienta 03: evidencia de respaldo por pregunta (presentada, solicitada, no existe; descripción y verificación), en el informe y en una solicitud de evidencias.
+- Firma: Consultor o Delegado con registro SPDP; se propaga a las herramientas.
+- Normas: biométricos (Res. 2026-0039, por resúmenes) e IA (Res. 2026-0009, texto leído; reforma 0037 por resumen) en la 07, la 05, Referencia, contraste y BASE-LEGAL. Tensión abierta: biometría y gran escala (punto 28).
+- Publicado en `main` y `gh-pages` compilado con `MSC_PUBLICO=1` (sin los PDF de LEXIS).
+
 ## 4. Pendiente (orden de prioridad)
-1. Publicar: fusionar la rama en `main` y copiar `app-pd/docs/` a `gh-pages` (decisión del usuario).
 2. PDF de la ley y el reglamento: son copias LEXIS; no se versionan mientras el repositorio sea público. Publicarlos al pasar a Cloudflare con Access.
-3. Contrastar los textos aportados al proyecto y aún no leídos: Res. 0028 (DPD), programa profesionalizante, guía v2 de riesgos, norma de IA (puntos 8, 9, 20 y 25 de `BASE-LEGAL.md`).
+3. Contrastar los textos aportados al proyecto y aún no leídos: Res. 0028 (DPD), programa profesionalizante, guía v2 de riesgos; y los textos oficiales de las Res. 2026-0039 y 0037 (puntos 8, 20, 25, 28 y 29 de `BASE-LEGAL.md`).
+3b. Evidencia de respaldo también en 06 y 07; cláusula de IA en el contrato de encargo; campo de alternativa no biométrica en la 07.
 4. Traslado a Cloudflare Pages con Access; volver privado el repositorio. Los datos no migran solos: restaurar desde Drive.
 5. Cambio de nombre y marca (propuesta «Sentinel Data Protection»): solo tras la búsqueda fonética en SENADI; cambiar lo visible, no los identificadores internos. Hacerlo junto con el punto 4.
 6. Plataforma con usuarios para vender accesos (especificación pendiente).

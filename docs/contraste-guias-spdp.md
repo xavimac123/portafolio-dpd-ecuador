@@ -58,7 +58,28 @@ Estado: ✅ cubierto · 🟡 parcial · ⬜ pendiente.
 | Madurez por principio (niveles 0 a 3: 0 %, menos de 25 %, 25 % a 75 %, más de 75 %) sobre las actividades del RAT, calibrada por eje (DevPrivOps, DevSecOps, DevRiskOps) | 03 | 🟡 | La 03 mide por dominio, no por principio y actividad. Las tácticas de cada principio ya constan en BASE-LEGAL. Candidata a una herramienta propia de madurez desde el diseño |
 | DevSecOps y DevRiskOps | Guía, cap. 13 | 🟡 | Se mencionan; su ejecución corresponde al área de tecnología, no al DPD |
 
-## 4. Decisiones
+## 4. Norma de inteligencia artificial (Res. SPDP-SPD-2026-0009-R, reformada por la 0037-R)
+
+| Exigencia | Herramienta | Estado | Qué se hizo o qué falta |
+|---|---|---|---|
+| Informar al titular el uso de IA, sus finalidades y su carácter automatizado (art. 5.1) | 08 | 🟡 | La política y los avisos cubren las decisiones automatizadas (LOPDP art. 12 num. 17); falta una cláusula específica sobre uso de IA |
+| Gestión de riesgos y evaluación de impacto (arts. 5.2 y 6) | 07 | ✅ | Pregunta de IA en «¿Es obligatoria?», con la regla de la reforma: gestión de riesgos previa y evaluación cuando corresponda |
+| Medidas de seguridad según categorías y volumen de datos (arts. 5.3 y 7.2) | 07 | ✅ | Catálogo de controles e intervención humana en decisiones automatizadas |
+| Incluir los tratamientos con IA y sus decisiones automatizadas con efectos jurídicos en el RAT (arts. 5.4 y 7.1) | 04 | 🟡 | El RAT registra perfiles y decisiones automatizadas; falta una columna que identifique el sistema de IA |
+| Auditar el sistema según su riesgo (arts. 5.5 y 7.3) | 01 (S20 y S21) | 🟡 | Servicio de auditoría en el catálogo; la auditoría técnica del modelo corresponde a especialistas |
+| Encargados: obligaciones solo donde tengan acceso, visibilidad o control efectivo; deber de informar al responsable (Res. 0037-R) | 08 | ⬜ | Agregar la cláusula al contrato de encargo para proveedores de IA |
+
+## 5. Norma de datos biométricos (Res. SPDP-SPD-2026-0039-R)
+
+| Exigencia | Herramienta | Estado | Qué se hizo o qué falta |
+|---|---|---|---|
+| Evaluación de impacto previa y revisión cada 12 meses | 07 | ✅ | La pregunta de biometría es ahora de obligatoriedad y explica la revisión anual |
+| Necesidad estricta y alternativa no biométrica ante asimetría | 07, 06 | 🟡 | Se pide en la ayuda de la 07; falta un campo propio para documentar la alternativa ofrecida |
+| Consentimiento explícito y revocable | 08 | 🟡 | Las cláusulas de consentimiento sirven; falta un modelo específico para biometría |
+| Gran escala | 05 | 🟡 | El art. 14.4 de la Res. 2026-0005 califica toda biometría como gran escala; la norma de biométricos dice que el reconocimiento facial no lo es por sí solo: punto abierto |
+| Adecuación de sistemas existentes en 12 meses | Agenda | ✅ | Plazo en la tabla de la pestaña Referencia |
+
+## 6. Decisiones
 
 1. Las escalas siguen siendo de criterio propio y se rotulan así; la guía v2 lo permite en su capítulo II.
 2. La herramienta 07 no implementa modelos cuantitativos: el DPD de una pyme rara vez cuenta con datos de frecuencias y pérdidas. Si el cliente los tiene, el método «cuantitativo» del contexto documenta que se usaron fuera de la herramienta.

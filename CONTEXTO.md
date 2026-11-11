@@ -1,13 +1,13 @@
 # ARCHIVO MAESTRO DE CONTEXTO · MSC Protección de Datos (MSC PD)
 
-Actualizado: 2026-11-11 (décima entrega). Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (normas).
+Actualizado: 2026-11-11 (undécima entrega). Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (normas).
 
 ## 1. Identidad y propósito
 - **Qué es:** app instalable (PWA) para gestionar clientes y cumplimiento LOPDP (Ecuador) con las nueve herramientas del portafolio de Macías Sánchez Consultores.
 - **Usuario:** Abg. Mariano X. Macías Sánchez, consultor en protección de datos personales (Guayaquil).
 - **Stack:** HTML, CSS y JavaScript sin frameworks, en un solo archivo; compilación con Python. Sin dependencias externas por CDN.
 - **Publicación actual:** GitHub Pages, rama `gh-pages` › `https://xavimac123.github.io/portafolio-dpd-ecuador/`. Destino previsto: Cloudflare Pages con Cloudflare Access.
-- **Reglas clave:** nunca datos reales de clientes ni de titulares; toda cita legal consta en `BASE-LEGAL.md`; escalas propias rotuladas «criterio propio»; firma «Consultor en Protección de Datos Personales» (no «DPD» hasta el registro ante la SPDP); el DPD asesora y supervisa, no implementa; terminología LOPDP; dinero como «USD $ 1.234,56»; exportaciones con 6 cm para firma y sello.
+- **Reglas clave:** nunca datos reales de clientes ni de titulares; toda cita legal consta en `BASE-LEGAL.md`; escalas propias rotuladas «criterio propio»; firma «Consultor en Protección de Datos Personales» (no «DPD» hasta el registro ante la SPDP); el DPD asesora y supervisa, no implementa (evaluación e implementación son líneas separadas, ver 3k); terminología LOPDP; dinero como «USD $ 1.234,56»; exportaciones con 6 cm para firma y sello.
 
 ## 2. Estado arquitectónico
 - `app-pd/fuente/index.html`: toda la app. Pestañas: Inicio, Clientes, Herramientas, Agenda, Referencia, Responsabilidades DPO, Publicidad, Ajustes.
@@ -86,7 +86,17 @@ Actualizado: 2026-11-11 (décima entrega). Leer junto con `CLAUDE.md` (reglas) y
 - Plantillas nuevas del kit 08: `evaluacion-diseno-defecto.md` (RGLOPDP arts. 59 y 60; RES-2025-0040 leída en el RO 163: DevPrivOps, DevSecOps, DevRiskOps, declaración de aplicabilidad y madurez) y `plan-capacitacion.md` (guía al DPD, 10 módulos, matriz de públicos, plan, asistencia, evaluación e indicadores; fundamento indirecto, punto 36).
 - BASE-LEGAL: puntos 21 y 37 resueltos; 36 actualizado; 38 nuevo (muy graves y DPD sin catálogo). Referencia y contraste de la guía de diseño actualizados.
 
+## 3k. Undécima entrega (2026-11-11) · Evaluación separada de la implementación
+- Decisión en `docs/decision-evaluacion-implementacion.md`; punto 32 de BASE-LEGAL actualizado. Base: Res. 0028 arts. 12, 13, 15.1, 15.2, 15.3, 17 y 18.
+- Dos líneas en `scripts/catalogo_config.py` (`LINEAS`, `ROLES_MSC`, `IMPLEMENTACION`): «Evaluación, diagnóstico y supervisión» (MSC como consultor o DPO) e «Implementación» (la decide el responsable: personal propio, proveedor, implementador aliado con contrato directo, MSC mediante un tercero subcontratado, o MSC como consultor si no es DPO del cliente). Fases reagrupadas; S05 a S07, S09 a S15 y S23 son implementación (naturaleza «I»); nuevos S29 (revisión del DPO a una evaluación) y S30 (verificación de la implementación). Códigos S01 a S30.
+- Herramienta 01: catálogo por línea, «Quién ejecuta» en cada servicio, tarjeta de modalidades con advertencias.
+- Herramienta 02: rol de MSC e implementación en la pestaña 6; la implementación solo suma si la factura MSC; si no, aparece como «a cargo de [implementador], no incluida»; advertencias de incompatibilidad (DPO que implementa) y de conflicto (subcontratada); sugerencias S29 y S30; paquetes sin implementación.
+- Herramientas 04, 06 y 07: panel «Elaboración / Revisión del DPO» (`scripts/revision_dpo.js`, insertado por `barra_contexto.py` solo en esas tres). Observaciones no vinculantes por pestaña con prioridad, estado y respuesta del responsable; conclusión; anexo automático al informe de la herramienta e informe propio con firma.
+- App: ficha del cliente con rol de MSC, implementación a cargo de y nombre del implementador (bloquea DPO + MSC implementador); `PDCliente` los entrega a las herramientas y el modo de 04, 06 y 07 se preselecciona. Modalidad «Adecuación (proyecto)» pasa a «Implementación (proyecto; MSC no es DPO del cliente)». Tema «Evaluación frente a implementación» en Responsabilidades DPO.
+- Guía (cap. 3.2, ruta y tabla de servicios) y READMEs actualizados.
+
 ## 4. Pendiente (orden de prioridad)
+0. Separación evaluación/implementación: consultar a la SPDP la modalidad subcontratada (punto 32); declaración de la relación con el implementador aliado en el kit 08; servicios S29 y S30 en la proforma de MSC Gestor Legal (el traspaso `msc:pd-handoff` envía códigos que Gestor Legal quizá no tenga).
 2. PDF de la ley y el reglamento: son copias LEXIS; no se versionan mientras el repositorio sea público. Publicarlos al pasar a Cloudflare con Access.
 3. Contrastar los textos aportados al proyecto y aún no leídos: Res. 0028 (DPD), programa profesionalizante, guía v2 de riesgos; y los textos oficiales de las Res. 2026-0039 y 0037 (puntos 8, 20, 25, 28 y 29 de `BASE-LEGAL.md`).
 3a. Actualizar la herramienta 01 (catálogo y glosario) con las funciones de la Res. 0028 art. 13 y revisar las tablas de la guía v2 (punto 8 de BASE-LEGAL).

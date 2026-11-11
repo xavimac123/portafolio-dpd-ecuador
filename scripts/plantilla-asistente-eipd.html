@@ -180,7 +180,7 @@
   <div class="card"><div class="grid">
     <div><label for="c_umbral">Riesgo residual aceptable hasta (1-25)</label><input id="c_umbral" data-c type="number" min="1" max="25"><p class="nota" style="margin:4px 0 0">Apetito de riesgo de la organización (Guía SPDP v2, establecimiento del contexto: tolerancia). Por defecto 9 (nivel Medio).</p></div>
     <div><label for="c_dict">Dictamen</label><select id="c_dict" data-c></select><p class="nota" id="c_sug" style="margin:4px 0 0"></p></div>
-    <div class="full"><label for="c_obs">Observaciones del DPD o del evaluador</label><textarea id="c_obs" data-c></textarea></div>
+    <div class="full"><label for="c_obs">Observaciones del evaluador (las del DPO se registran en «Revisión del DPO», arriba)</label><textarea id="c_obs" data-c></textarea></div>
     <div><label for="c_rev">Fecha prevista de revisión</label><input id="c_rev" data-c type="date"></div>
     <div><label for="c_ver">Versión del informe</label><input id="c_ver" data-c placeholder="1.0"></div>
   </div></div>
@@ -308,7 +308,7 @@ var CFG=/*__CONFIG__*/;
     if(c.sec&&!c.bit)L.push(['bayesiano','Bayesiano','Hay datos del sector o de un panel pero pocos datos propios: parta de esa referencia y actualícela con la experiencia del cliente.']);
     if(+c.cap>0)L.push(['montecarlo','Monte Carlo','Se definió una capacidad de riesgo en USD: simule la pérdida anual esperada y la probabilidad de superarla, y compare medidas (ROSI).']);
     var app=false;try{app=!!(window.parent!==window&&window.parent.PDRiesgo)}catch(e){}
-    $('sugMet').innerHTML=L.length?'<div class="hbox on" style="display:block"><b>Sugerencia para el DPD: método estadístico recomendado</b>'+L.map(function(x){return '<div style="margin-top:6px"><b style="display:inline;color:inherit">'+x[1]+':</b> '+esc(x[2])+(app?' <button type="button" class="btn sec" data-rk="'+x[0]+'" style="padding:4px 10px;font-size:12px;margin-left:4px">Calcular</button>':'')+'</div>'}).join('')+'<div class="nota" style="margin-top:6px">'+(app?'«Calcular» abre la calculadora de riesgos de la app; su avance aquí se conserva. ':'')+'Lleve el resultado a la probabilidad de cada riesgo con su justificación. Criterio propio, no exigencia de la norma.</div></div>':'<p class="nota">Sin datos históricos ni tecnología nueva, la matriz cualitativa con justificación de cada valor es suficiente.</p>';
+    $('sugMet').innerHTML=L.length?'<div class="hbox on" style="display:block"><b>Sugerencia para quien elabora: método estadístico recomendado</b>'+L.map(function(x){return '<div style="margin-top:6px"><b style="display:inline;color:inherit">'+x[1]+':</b> '+esc(x[2])+(app?' <button type="button" class="btn sec" data-rk="'+x[0]+'" style="padding:4px 10px;font-size:12px;margin-left:4px">Calcular</button>':'')+'</div>'}).join('')+'<div class="nota" style="margin-top:6px">'+(app?'«Calcular» abre la calculadora de riesgos de la app; su avance aquí se conserva. ':'')+'Lleve el resultado a la probabilidad de cada riesgo con su justificación. Criterio propio, no exigencia de la norma.</div></div>':'<p class="nota">Sin datos históricos ni tecnología nueva, la matriz cualitativa con justificación de cada valor es suficiente.</p>';
     document.querySelectorAll('[data-rk]').forEach(function(b){b.onclick=function(){try{window.parent.PDRiesgo(b.dataset.rk)}catch(e){}}})}
   ['cx_bit','cx_sec'].forEach(function(id){$(id).addEventListener('change',function(){S.ctx[id.slice(3)]=$(id).checked;save();sugMet()})});
   $('cx_cap').addEventListener('input',function(){setTimeout(sugMet,0)});

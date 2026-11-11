@@ -2,42 +2,54 @@
 
 Versión 0.2. Ficha interna para el consultor. Fuente única: `scripts/catalogo_config.py` (también alimenta la proforma de la herramienta 02).
 
-> **Rol del consultor:** asesora, redacta borradores para aprobación y supervisa. Las decisiones y la implementación son de la empresa.
+> **Dos líneas separadas.** Evaluación, diagnóstico y supervisión: La realiza el consultor o el DPO: mide, revisa, observa y verifica. No ejecuta ni decide por la empresa. Implementación: La decide el responsable y la ejecuta su personal, el proveedor que elija o el tercero que MSC coordina. El DPO de la empresa la supervisa y verifica. MSC la redacta solo si no es DPO de ese cliente.
+
+**Quién implementa** (lo decide el responsable):
+
+- **Personal del responsable.** La empresa implementa con su propio equipo; el DPO supervisa y verifica.
+- **Proveedor elegido por el responsable.** La empresa contrata a quien prefiera; el DPO supervisa y verifica.
+- **Implementador aliado presentado por MSC (contrato directo).** El tercero cotiza, firma y factura directamente al responsable; MSC coordina y el DPO supervisa y verifica. *Si MSC es DPO del cliente, declare por escrito la relación con el implementador aliado y que no recibe comisión de él (Res. SPDP-SPD-2025-0028-R art. 17).*
+- **MSC mediante un tercero (MSC subcontrata y factura).** MSC contrata al tercero y factura la implementación; la ejecuta personal distinto del DPO. *Si MSC es DPO del cliente, hay conflicto de intereses potencial: el DPO supervisaría un trabajo que su propia firma vende (Res. SPDP-SPD-2025-0028-R arts. 17 y 18; punto abierto 32 de BASE-LEGAL). Exige declaración del art. 17, personas distintas y, de preferencia, consulta a la SPDP. Prefiera el contrato directo.*
+- **MSC como consultor (no es DPO del cliente).** MSC redacta y ejecuta la implementación porque no es ni será DPO de ese cliente. *Incompatible con la designación de MSC como DPO de este cliente (Res. SPDP-SPD-2025-0028-R art. 15.1): si después lo designan, supervisaría su propio trabajo.*
+
+Base: Res. SPDP-SPD-2025-0028-R arts. 12, 15.1, 15.2, 17 y 18; punto abierto 32 de `BASE-LEGAL.md`.
 
 Precios sugeridos sin IVA por tamaño (micro / pequeña / mediana / grande), **criterio propio**. «Desde» indica el piso de la calculadora de honorarios.
 
 ## Índice
 
-| Código | Servicio | Fase | Naturaleza | Precio sugerido |
-|---|---|---|---|---|
-| S01 | Reunión de diagnóstico inicial | Evaluación inicial | Asesoría y diagnóstico | Sin costo por reunión |
-| S02 | Diagnóstico de madurez y exposición económica | Evaluación inicial | Asesoría y diagnóstico | desde $350 / desde $600 / desde $1.100 / desde $2.200 por servicio |
-| S03 | Análisis de gran escala y obligación de designar DPD | Evaluación inicial | Asesoría y diagnóstico | $120 / $180 / $250 / $350 por servicio |
-| S04 | Informe ejecutivo y presentación a la gerencia | Evaluación inicial | Asesoría y diagnóstico | $150 / $250 / $400 / $600 por servicio |
-| S05 | Registro de actividades de tratamiento (RAT) | Inventario y riesgos | Borradores para aprobación de la empresa | $350 / $700 / $1.400 / $2.800 por servicio |
-| S06 | Evaluación de impacto (por tratamiento) | Inventario y riesgos | Asesoría y diagnóstico | $450 / $600 / $900 / $1.500 por tratamiento |
-| S07 | Ponderación del interés legítimo (por tratamiento) | Inventario y riesgos | Asesoría y diagnóstico | $150 / $200 / $300 / $450 por tratamiento |
-| S08 | Análisis de encargos y transferencias | Inventario y riesgos | Asesoría y diagnóstico | $200 / $300 / $450 / $700 por servicio |
-| S09 | Programa de adecuación integral | Adecuación | Borradores para aprobación de la empresa | desde $900 / desde $1.800 / desde $3.500 / desde $7.000 por programa |
-| S10 | Política de privacidad y avisos | Adecuación | Borradores para aprobación de la empresa | $250 / $400 / $600 / $900 por paquete |
-| S11 | Contratos de encargo y cláusulas por tipo de contrato | Adecuación | Borradores para aprobación de la empresa | $200 / $350 / $500 / $800 por paquete |
-| S12 | Política interna y roles de protección de datos | Adecuación | Borradores para aprobación de la empresa | $200 / $300 / $450 / $700 por paquete |
-| S13 | Tabla de conservación y procedimiento de supresión | Adecuación | Borradores para aprobación de la empresa | $150 / $250 / $400 / $650 por paquete |
-| S14 | Procedimiento de atención de derechos | Adecuación | Borradores para aprobación de la empresa | $150 / $250 / $400 / $600 por paquete |
-| S15 | Protocolo de vulneraciones y bitácora | Adecuación | Borradores para aprobación de la empresa | $200 / $350 / $550 / $850 por paquete |
-| S16 | Revisión de sitio web y canales digitales | Adecuación | Asesoría y diagnóstico | $150 / $200 / $300 / $450 por servicio |
-| S17 | Capacitación al personal (taller de 2 horas) | Adecuación | Formación | $200 / $300 / $450 / $700 por taller |
-| S18 | Delegado de Protección de Datos externo | Control mensual | Supervisión (función del DPD) | desde $120 / desde $200 / desde $350 / desde $700 por mes |
-| S19 | Acompañamiento de cumplimiento (sin designación) | Control mensual | Asesoría y diagnóstico | desde $80 / desde $140 / desde $240 / desde $490 por mes |
-| S20 | Informe anual de cumplimiento | Control anual | Supervisión (función del DPD) | $200 / $300 / $500 / $800 por informe |
-| S21 | Auditoría de cumplimiento independiente | Control anual | Asesoría y diagnóstico | $500 / $900 / $1.600 / $3.000 por auditoría |
-| S22 | Gestión de una vulneración de la seguridad | Por evento | Acompañamiento ante la autoridad | $250 / $400 / $600 / $900 por incidente |
-| S23 | Atención de solicitud de derechos adicional | Por evento | Asesoría y diagnóstico | $25 / $35 / $50 / $70 por solicitud |
-| S24 | Privacidad desde el diseño en un proyecto nuevo | Por evento | Asesoría y diagnóstico | $250 / $350 / $500 / $800 por proyecto |
-| S25 | Evaluación de un proveedor encargado | Por evento | Asesoría y diagnóstico | $60 / $80 / $100 / $150 por proveedor |
-| S26 | Simulacro de vulneración | Por evento | Formación | $200 / $300 / $450 / $700 por ejercicio |
-| S27 | Acompañamiento ante requerimientos o consultas a la SPDP | Por evento | Acompañamiento ante la autoridad | $200 / $350 / $500 / $800 por trámite |
-| S28 | Hora adicional de asesoría | Por evento | Asesoría y diagnóstico | desde $40 / desde $40 / desde $40 / desde $40 por hora |
+| Código | Servicio | Línea | Fase | Naturaleza | Precio sugerido |
+|---|---|---|---|---|---|
+| S01 | Reunión de diagnóstico inicial | Evaluación, diagnóstico y supervisión | Evaluación inicial | Asesoría y diagnóstico | Sin costo por reunión |
+| S02 | Diagnóstico de madurez y exposición económica | Evaluación, diagnóstico y supervisión | Evaluación inicial | Asesoría y diagnóstico | desde $350 / desde $600 / desde $1.100 / desde $2.200 por servicio |
+| S03 | Análisis de gran escala y obligación de designar DPD | Evaluación, diagnóstico y supervisión | Evaluación inicial | Asesoría y diagnóstico | $120 / $180 / $250 / $350 por servicio |
+| S04 | Informe ejecutivo y presentación a la gerencia | Evaluación, diagnóstico y supervisión | Evaluación inicial | Asesoría y diagnóstico | $150 / $250 / $400 / $600 por servicio |
+| S08 | Análisis de encargos y transferencias | Evaluación, diagnóstico y supervisión | Evaluación inicial | Asesoría y diagnóstico | $200 / $300 / $450 / $700 por servicio |
+| S05 | Registro de actividades de tratamiento (RAT) | Implementación | Implementación · inventario y riesgos | Implementación (la ejecuta el responsable o el implementador que elija) | $350 / $700 / $1.400 / $2.800 por servicio |
+| S06 | Evaluación de impacto (por tratamiento) | Implementación | Implementación · inventario y riesgos | Implementación (la ejecuta el responsable o el implementador que elija) | $450 / $600 / $900 / $1.500 por tratamiento |
+| S07 | Ponderación del interés legítimo (por tratamiento) | Implementación | Implementación · inventario y riesgos | Implementación (la ejecuta el responsable o el implementador que elija) | $150 / $200 / $300 / $450 por tratamiento |
+| S09 | Programa de adecuación integral | Implementación | Implementación · documentos y procedimientos | Implementación (la ejecuta el responsable o el implementador que elija) | desde $900 / desde $1.800 / desde $3.500 / desde $7.000 por programa |
+| S10 | Política de privacidad y avisos | Implementación | Implementación · documentos y procedimientos | Implementación (la ejecuta el responsable o el implementador que elija) | $250 / $400 / $600 / $900 por paquete |
+| S11 | Contratos de encargo y cláusulas por tipo de contrato | Implementación | Implementación · documentos y procedimientos | Implementación (la ejecuta el responsable o el implementador que elija) | $200 / $350 / $500 / $800 por paquete |
+| S12 | Política interna y roles de protección de datos | Implementación | Implementación · documentos y procedimientos | Implementación (la ejecuta el responsable o el implementador que elija) | $200 / $300 / $450 / $700 por paquete |
+| S13 | Tabla de conservación y procedimiento de supresión | Implementación | Implementación · documentos y procedimientos | Implementación (la ejecuta el responsable o el implementador que elija) | $150 / $250 / $400 / $650 por paquete |
+| S14 | Procedimiento de atención de derechos | Implementación | Implementación · documentos y procedimientos | Implementación (la ejecuta el responsable o el implementador que elija) | $150 / $250 / $400 / $600 por paquete |
+| S15 | Protocolo de vulneraciones y bitácora | Implementación | Implementación · documentos y procedimientos | Implementación (la ejecuta el responsable o el implementador que elija) | $200 / $350 / $550 / $850 por paquete |
+| S16 | Revisión de sitio web y canales digitales | Evaluación, diagnóstico y supervisión | Revisión y verificación del DPO | Revisión y verificación (observaciones no vinculantes del DPO) | $150 / $200 / $300 / $450 por servicio |
+| S29 | Revisión del DPO a una evaluación elaborada por el responsable | Evaluación, diagnóstico y supervisión | Revisión y verificación del DPO | Revisión y verificación (observaciones no vinculantes del DPO) | $120 / $180 / $250 / $380 por evaluación |
+| S30 | Verificación de la implementación | Evaluación, diagnóstico y supervisión | Revisión y verificación del DPO | Revisión y verificación (observaciones no vinculantes del DPO) | $100 / $150 / $220 / $350 por hito |
+| S18 | Delegado de Protección de Datos externo | Evaluación, diagnóstico y supervisión | Control mensual | Supervisión (función del DPD) | desde $120 / desde $200 / desde $350 / desde $700 por mes |
+| S19 | Acompañamiento de cumplimiento (sin designación) | Evaluación, diagnóstico y supervisión | Control mensual | Asesoría y diagnóstico | desde $80 / desde $140 / desde $240 / desde $490 por mes |
+| S20 | Informe anual de cumplimiento | Evaluación, diagnóstico y supervisión | Control anual | Supervisión (función del DPD) | $200 / $300 / $500 / $800 por informe |
+| S21 | Auditoría de cumplimiento independiente | Evaluación, diagnóstico y supervisión | Control anual | Asesoría y diagnóstico | $500 / $900 / $1.600 / $3.000 por auditoría |
+| S17 | Capacitación al personal (taller de 2 horas) | Evaluación, diagnóstico y supervisión | Por evento | Formación | $200 / $300 / $450 / $700 por taller |
+| S22 | Gestión de una vulneración de la seguridad | Evaluación, diagnóstico y supervisión | Por evento | Acompañamiento ante la autoridad | $250 / $400 / $600 / $900 por incidente |
+| S24 | Privacidad desde el diseño en un proyecto nuevo | Evaluación, diagnóstico y supervisión | Por evento | Asesoría y diagnóstico | $250 / $350 / $500 / $800 por proyecto |
+| S25 | Evaluación de un proveedor encargado | Evaluación, diagnóstico y supervisión | Por evento | Asesoría y diagnóstico | $60 / $80 / $100 / $150 por proveedor |
+| S26 | Simulacro de vulneración | Evaluación, diagnóstico y supervisión | Por evento | Formación | $200 / $300 / $450 / $700 por ejercicio |
+| S27 | Acompañamiento ante requerimientos o consultas a la SPDP | Evaluación, diagnóstico y supervisión | Por evento | Acompañamiento ante la autoridad | $200 / $350 / $500 / $800 por trámite |
+| S28 | Hora adicional de asesoría | Evaluación, diagnóstico y supervisión | Por evento | Asesoría y diagnóstico | desde $40 / desde $40 / desde $40 / desde $40 por hora |
+| S23 | Atención de solicitud de derechos adicional | Implementación | Implementación · por evento | Implementación (la ejecuta el responsable o el implementador que elija) | $25 / $35 / $50 / $70 por solicitud |
 
 ## Evaluación inicial
 
@@ -111,61 +123,6 @@ Medir antes de proponer: dónde está la empresa, cuánto arriesga y qué obliga
 | Precio sugerido | $150 / $250 / $400 / $600 por servicio |
 | Recomendaciones | Hable en lenguaje de negocio: riesgo, costo, decisión · Cada cifra del informe debe tener soporte |
 
-## Inventario y riesgos
-
-Saber qué datos se tratan y qué riesgo tienen antes de redactar documentos.
-
-### S05 · Registro de actividades de tratamiento (RAT)
-
-| | |
-|---|---|
-| Qué es | Inventario de cada actividad de tratamiento con el contenido mínimo del art. 38 RGLOPDP, encargados, destinatarios y plazos. |
-| Naturaleza | Borradores para aprobación de la empresa |
-| Cómo se aplica | Entrevistas por proceso; Catálogo de actividades y validación con el dueño; Registro de encargados y destinatarios; Control del mínimo legal; Aprobación de la gerencia |
-| Para quién | Obligatorio con 100 o más trabajadores o en los supuestos del art. 39 RGLOPDP; necesario para cualquier adecuación |
-| Qué se obtiene | RAT aprobado: la base de la política, los contratos y la evaluación de impacto |
-| Responsable principal | Dueños de procesos |
-| Participan | Sistemas, legal |
-| Levantar información con | Cada jefe de área, sistemas, contabilidad |
-| Herramientas del kit | 04 RAT |
-| Base | RGLOPDP arts. 38, 39 y 44; LOPDP art. 51 |
-| Precio sugerido | $350 / $700 / $1.400 / $2.800 por servicio |
-| Recomendaciones | Una actividad por finalidad y base: no agrupe todo en «clientes» · El RAT es de la empresa: usted lo redacta, ellos lo aprueban y mantienen |
-
-### S06 · Evaluación de impacto (por tratamiento)
-
-| | |
-|---|---|
-| Qué es | Análisis previo de necesidad, proporcionalidad, contexto, riesgos para los derechos y medidas, con informe del contenido del art. 32 RGLOPDP y las etapas de la Guía v2 de la SPDP. |
-| Naturaleza | Asesoría y diagnóstico |
-| Cómo se aplica | Confirmar si es obligatoria; Describir el tratamiento; Evaluar necesidad y proporcionalidad; Establecer el contexto: criterios de impacto en derechos y aceptación; Valorar riesgos con justificación de cada valor y definir medidas; Dictamen y plan; aprobación de la gerencia |
-| Para quién | Tratamientos de gran escala, perfiles automatizados, biométricos, inteligencia artificial, datos de NNA |
-| Qué se obtiene | Decisión informada antes de lanzar un tratamiento de alto riesgo |
-| Responsable principal | Dueño del proceso evaluado |
-| Participan | Sistemas, gerencia |
-| Levantar información con | Dueño del proceso, sistemas, proveedor de la tecnología |
-| Herramientas del kit | 07 Evaluación de impacto |
-| Base | LOPDP art. 42; RGLOPDP arts. 29 a 32; Res. SPDP-SPD-2026-0012-R |
-| Precio sugerido | $450 / $600 / $900 / $1.500 por tratamiento |
-| Recomendaciones | Hágala antes del tratamiento, no después · Cada valor de impacto y probabilidad necesita su justificación: la guía v2 rechaza las estimaciones sin fundamento · Las medidas las implementa la empresa; usted verifica el riesgo residual |
-
-### S07 · Ponderación del interés legítimo (por tratamiento)
-
-| | |
-|---|---|
-| Qué es | Análisis que respalda el uso del interés legítimo como base: finalidad, necesidad y equilibrio con los derechos del titular. |
-| Naturaleza | Asesoría y diagnóstico |
-| Cómo se aplica | Verificar el supuesto admisible y las prohibiciones; Identificar el interés y sus cuatro características; Probar la necesidad; Ponderar con los derechos y expectativas del titular; Documentar salvaguardas, resultado y fecha de revisión anual |
-| Para quién | Empresas que usan videovigilancia, marketing a clientes, prevención de fraude u otros tratamientos sin consentimiento |
-| Qué se obtiene | Documento de ponderación que se registra en el RAT |
-| Responsable principal | Dueño del proceso |
-| Participan | Legal, marketing |
-| Levantar información con | Marketing, seguridad, legal |
-| Herramientas del kit | 04 RAT, 06 Interés legítimo |
-| Base | LOPDP art. 7; Res. SPDP-SPD-2025-0041-R; RGLOPDP art. 38 num. 7 |
-| Precio sugerido | $150 / $200 / $300 / $450 por tratamiento |
-| Recomendaciones | Solo en el sector privado y en los supuestos que admite la resolución · Omitir la ponderación es infracción grave · Si la ponderación no favorece a la empresa, la base debe ser otra |
-
 ### S08 · Análisis de encargos y transferencias
 
 | | |
@@ -183,17 +140,72 @@ Saber qué datos se tratan y qué riesgo tienen antes de redactar documentos.
 | Precio sugerido | $200 / $300 / $450 / $700 por servicio |
 | Recomendaciones | Un encargado en el exterior no convierte el encargo en transferencia internacional · Si un proveedor usa los datos para sus fines, es responsable |
 
-## Adecuación
+## Implementación · inventario y riesgos
 
-Documentos y procedimientos que la empresa aprueba e implementa; el consultor redacta y asesora.
+El responsable o su implementador elabora el RAT, las ponderaciones y las evaluaciones de impacto; el DPO las revisa (S29).
+
+### S05 · Registro de actividades de tratamiento (RAT)
+
+| | |
+|---|---|
+| Qué es | Inventario de cada actividad de tratamiento con el contenido mínimo del art. 38 RGLOPDP, encargados, destinatarios y plazos. |
+| Naturaleza | Implementación (la ejecuta el responsable o el implementador que elija) |
+| Cómo se aplica | Entrevistas por proceso; Catálogo de actividades y validación con el dueño; Registro de encargados y destinatarios; Control del mínimo legal; Aprobación de la gerencia |
+| Para quién | Obligatorio con 100 o más trabajadores o en los supuestos del art. 39 RGLOPDP; necesario para cualquier adecuación |
+| Qué se obtiene | RAT aprobado: la base de la política, los contratos y la evaluación de impacto |
+| Responsable principal | Dueños de procesos |
+| Participan | Sistemas, legal |
+| Levantar información con | Cada jefe de área, sistemas, contabilidad |
+| Herramientas del kit | 04 RAT |
+| Base | RGLOPDP arts. 38, 39 y 44; LOPDP art. 51 |
+| Precio sugerido | $350 / $700 / $1.400 / $2.800 por servicio |
+| Recomendaciones | Una actividad por finalidad y base: no agrupe todo en «clientes» · El RAT es de la empresa: lo elabora el implementador (MSC solo si no es DPO del cliente); la empresa lo aprueba y mantiene · Si MSC es DPO, use la herramienta 04 en modo «Revisión del DPO» y cotice S29 |
+
+### S06 · Evaluación de impacto (por tratamiento)
+
+| | |
+|---|---|
+| Qué es | Análisis previo de necesidad, proporcionalidad, contexto, riesgos para los derechos y medidas, con informe del contenido del art. 32 RGLOPDP y las etapas de la Guía v2 de la SPDP. |
+| Naturaleza | Implementación (la ejecuta el responsable o el implementador que elija) |
+| Cómo se aplica | Confirmar si es obligatoria; Describir el tratamiento; Evaluar necesidad y proporcionalidad; Establecer el contexto: criterios de impacto en derechos y aceptación; Valorar riesgos con justificación de cada valor y definir medidas; Dictamen y plan; aprobación de la gerencia |
+| Para quién | Tratamientos de gran escala, perfiles automatizados, biométricos, inteligencia artificial, datos de NNA |
+| Qué se obtiene | Decisión informada antes de lanzar un tratamiento de alto riesgo |
+| Responsable principal | Dueño del proceso evaluado |
+| Participan | Sistemas, gerencia |
+| Levantar información con | Dueño del proceso, sistemas, proveedor de la tecnología |
+| Herramientas del kit | 07 Evaluación de impacto |
+| Base | LOPDP art. 42; RGLOPDP arts. 29 a 32; Res. SPDP-SPD-2026-0012-R |
+| Precio sugerido | $450 / $600 / $900 / $1.500 por tratamiento |
+| Recomendaciones | Hágala antes del tratamiento, no después · Cada valor de impacto y probabilidad necesita su justificación: la guía v2 rechaza las estimaciones sin fundamento · El DPO no ejecuta la evaluación de impacto: solo emite observaciones no vinculantes (Res. SPDP-SPD-2025-0028-R art. 15.2). Si MSC es DPO, la elabora el implementador y MSC la revisa (S29) · Las medidas las implementa la empresa; el DPO verifica el riesgo residual |
+
+### S07 · Ponderación del interés legítimo (por tratamiento)
+
+| | |
+|---|---|
+| Qué es | Análisis que respalda el uso del interés legítimo como base: finalidad, necesidad y equilibrio con los derechos del titular. |
+| Naturaleza | Implementación (la ejecuta el responsable o el implementador que elija) |
+| Cómo se aplica | Verificar el supuesto admisible y las prohibiciones; Identificar el interés y sus cuatro características; Probar la necesidad; Ponderar con los derechos y expectativas del titular; Documentar salvaguardas, resultado y fecha de revisión anual |
+| Para quién | Empresas que usan videovigilancia, marketing a clientes, prevención de fraude u otros tratamientos sin consentimiento |
+| Qué se obtiene | Documento de ponderación que se registra en el RAT |
+| Responsable principal | Dueño del proceso |
+| Participan | Legal, marketing |
+| Levantar información con | Marketing, seguridad, legal |
+| Herramientas del kit | 04 RAT, 06 Interés legítimo |
+| Base | LOPDP art. 7; Res. SPDP-SPD-2025-0041-R; RGLOPDP art. 38 num. 7 |
+| Precio sugerido | $150 / $200 / $300 / $450 por tratamiento |
+| Recomendaciones | Solo en el sector privado y en los supuestos que admite la resolución · Omitir la ponderación es infracción grave · Si la ponderación no favorece a la empresa, la base debe ser otra · Si MSC es DPO, la elabora el implementador y MSC la revisa (S29) |
+
+## Implementación · documentos y procedimientos
+
+Documentos y procedimientos que el implementador redacta y la empresa aprueba y pone en marcha.
 
 ### S09 · Programa de adecuación integral
 
 | | |
 |---|---|
-| Qué es | Borradores de RAT, política y avisos, contratos de encargo, protocolo de vulneraciones, procedimiento de derechos, capacitación inicial y designación del DPD. |
-| Naturaleza | Borradores para aprobación de la empresa |
-| Cómo se aplica | Plan de trabajo con responsables de la empresa; Redacción de borradores; Revisión y aprobación de la gerencia; Implementación por la empresa; Verificación |
+| Qué es | Elaboración de RAT, política y avisos, contratos de encargo, protocolo de vulneraciones, procedimiento de derechos y capacitación inicial, a cargo del implementador que elija el responsable. |
+| Naturaleza | Implementación (la ejecuta el responsable o el implementador que elija) |
+| Cómo se aplica | El responsable elige quién implementa (personal propio, proveedor o MSC mediante un tercero); Plan de trabajo con responsables de la empresa; Redacción de documentos por el implementador; Revisión y aprobación de la gerencia; Puesta en marcha por la empresa; Verificación del DPO (S30) |
 | Para quién | Empresas sin documentación, que prefieren un solo programa |
 | Qué se obtiene | Documentos aprobados y plan de implementación a cargo de la empresa |
 | Responsable principal | Gerencia |
@@ -202,15 +214,15 @@ Documentos y procedimientos que la empresa aprueba e implementa; el consultor re
 | Herramientas del kit | 04 RAT, 08 Plantillas, 09 Vulneraciones |
 | Base | LOPDP arts. 10 lit. k y 47 |
 | Precio sugerido | desde $900 / desde $1.800 / desde $3.500 / desde $7.000 por programa |
-| Recomendaciones | Escriba en la propuesta qué implementa la empresa · No combine este programa con servicios sueltos que ya incluye |
+| Recomendaciones | Escriba en la propuesta quién implementa y quién verifica · Si MSC es DPO del cliente, no redacte: lo hace el implementador; MSC revisa y verifica · No combine este programa con servicios sueltos que ya incluye |
 
 ### S10 · Política de privacidad y avisos
 
 | | |
 |---|---|
 | Qué es | Política construida desde el RAT y avisos para cada punto de recolección: formularios, cámaras, correo, contratación. |
-| Naturaleza | Borradores para aprobación de la empresa |
-| Cómo se aplica | Trasladar finalidades, bases y plazos del RAT; Redactar un aviso por punto de recolección; Aprobación y publicación por la empresa |
+| Naturaleza | Implementación (la ejecuta el responsable o el implementador que elija) |
+| Cómo se aplica | Trasladar finalidades, bases y plazos del RAT; El implementador redacta un aviso por punto de recolección; Aprobación y publicación por la empresa; Revisión del DPO |
 | Para quién | Toda empresa que recolecta datos |
 | Qué se obtiene | Deber de información cumplido |
 | Responsable principal | Gerencia |
@@ -226,8 +238,8 @@ Documentos y procedimientos que la empresa aprueba e implementa; el consultor re
 | | |
 |---|---|
 | Qué es | Cláusulas de protección de datos según el tipo de contrato (laboral, por cargo o rol, encargo, transferencia, corresponsables) y contratos de encargo; paquete de hasta cinco modelos. |
-| Naturaleza | Borradores para aprobación de la empresa |
-| Cómo se aplica | Clasificar los contratos de la empresa por tipo de relación; Identificar encargados y destinatarios desde el RAT; Redactar las cláusulas y contratos de encargo con el contenido del art. 41; Firma de la empresa, el personal y los proveedores |
+| Naturaleza | Implementación (la ejecuta el responsable o el implementador que elija) |
+| Cómo se aplica | Clasificar los contratos de la empresa por tipo de relación; Identificar encargados y destinatarios desde el RAT; El implementador redacta las cláusulas y contratos de encargo con el contenido del art. 41; Firma de la empresa, el personal y los proveedores; Revisión del DPO |
 | Para quién | Empresas con contador, nómina, nube, seguridad u otros proveedores con acceso a datos |
 | Qué se obtiene | Encargados obligados por contrato |
 | Responsable principal | Legal o compras |
@@ -243,8 +255,8 @@ Documentos y procedimientos que la empresa aprueba e implementa; el consultor re
 | | |
 |---|---|
 | Qué es | Política interna aprobada por la dirección, roles y responsables por área, y reporte periódico a la gerencia. |
-| Naturaleza | Borradores para aprobación de la empresa |
-| Cómo se aplica | Definir responsables por área; Redactar la política interna; Aprobación de la gerencia y comunicación al personal |
+| Naturaleza | Implementación (la ejecuta el responsable o el implementador que elija) |
+| Cómo se aplica | Definir responsables por área; El implementador redacta la política interna; Aprobación de la gerencia y comunicación al personal; Revisión del DPO |
 | Para quién | Empresas medianas y grandes, o con varios procesos con datos |
 | Qué se obtiene | Gobierno de la protección de datos con responsables claros |
 | Responsable principal | Gerencia |
@@ -260,7 +272,7 @@ Documentos y procedimientos que la empresa aprueba e implementa; el consultor re
 | | |
 |---|---|
 | Qué es | Plazos de conservación por actividad y procedimiento de bloqueo, anonimización o eliminación al vencer el plazo. |
-| Naturaleza | Borradores para aprobación de la empresa |
+| Naturaleza | Implementación (la ejecuta el responsable o el implementador que elija) |
 | Cómo se aplica | Tomar los plazos del RAT; Contrastar con plazos legales; Definir método de supresión y constancia |
 | Para quién | Empresas con archivos acumulados o datos sin plazo definido |
 | Qué se obtiene | Datos conservados solo el tiempo necesario y supresión documentada |
@@ -277,8 +289,8 @@ Documentos y procedimientos que la empresa aprueba e implementa; el consultor re
 | | |
 |---|---|
 | Qué es | Canal, formularios, plazos y registro de solicitudes de acceso, rectificación, eliminación, oposición y otros derechos. |
-| Naturaleza | Borradores para aprobación de la empresa |
-| Cómo se aplica | Definir canal y responsable interno; Redactar formularios y respuestas tipo; Registro de solicitudes |
+| Naturaleza | Implementación (la ejecuta el responsable o el implementador que elija) |
+| Cómo se aplica | Definir canal y responsable interno; El implementador redacta formularios y respuestas tipo; Registro de solicitudes; El DPO supervisa la ejecución (Res. SPDP-SPD-2025-0028-R art. 14) |
 | Para quién | Toda empresa con clientes o trabajadores |
 | Qué se obtiene | Respuesta en plazo a cada titular |
 | Responsable principal | Servicio al cliente |
@@ -294,8 +306,8 @@ Documentos y procedimientos que la empresa aprueba e implementa; el consultor re
 | | |
 |---|---|
 | Qué es | Protocolo aprobado, roles, bitácora y modelos de notificación a la SPDP, ARCOTEL, CSIRT y titulares. |
-| Naturaleza | Borradores para aprobación de la empresa |
-| Cómo se aplica | Definir el equipo de respuesta; Redactar el protocolo con plazos; Aprobación y difusión interna |
+| Naturaleza | Implementación (la ejecuta el responsable o el implementador que elija) |
+| Cómo se aplica | Definir el equipo de respuesta; El implementador redacta el protocolo con plazos; Aprobación y difusión interna; Revisión del DPO |
 | Para quién | Toda empresa; prioritario si ya tuvo incidentes |
 | Qué se obtiene | Respuesta en plazo, sin improvisar |
 | Responsable principal | Sistemas |
@@ -306,12 +318,16 @@ Documentos y procedimientos que la empresa aprueba e implementa; el consultor re
 | Precio sugerido | $200 / $350 / $550 / $850 por paquete |
 | Recomendaciones | El protocolo debe existir antes del incidente · El responsable notifica; el DPD asesora y coordina |
 
+## Revisión y verificación del DPO
+
+Observaciones no vinculantes a lo elaborado y verificación de lo implementado: la función propia del DPO.
+
 ### S16 · Revisión de sitio web y canales digitales
 
 | | |
 |---|---|
 | Qué es | Revisión de formularios, avisos, cookies, chat y redes sociales donde la empresa recolecta datos. |
-| Naturaleza | Asesoría y diagnóstico |
+| Naturaleza | Revisión y verificación (observaciones no vinculantes del DPO) |
 | Cómo se aplica | Recorrer cada canal digital; Listar hallazgos; Recomendar ajustes; la empresa los implementa |
 | Para quién | Empresas con comercio electrónico, formularios web o campañas digitales |
 | Qué se obtiene | Lista priorizada de ajustes en canales digitales |
@@ -323,22 +339,39 @@ Documentos y procedimientos que la empresa aprueba e implementa; el consultor re
 | Precio sugerido | $150 / $200 / $300 / $450 por servicio |
 | Recomendaciones | Es la evidencia más visible para un cliente o la SPDP · No modifique el sitio usted mismo |
 
-### S17 · Capacitación al personal (taller de 2 horas)
+### S29 · Revisión del DPO a una evaluación elaborada por el responsable
 
 | | |
 |---|---|
-| Qué es | Taller práctico con casos del propio negocio, evaluación y registro de asistencia como evidencia. |
-| Naturaleza | Formación |
-| Cómo se aplica | Diseñar casos del negocio; Impartir el taller; Evaluar y registrar asistencia |
-| Para quién | Todo el personal; directivos por separado |
-| Qué se obtiene | Personal que reconoce riesgos y sabe a quién reportar |
-| Responsable principal | Talento humano |
-| Participan | Gerencia |
-| Levantar información con | Talento humano |
-| Herramientas del kit | 03 Madurez |
-| Base | RGLOPDP art. 30 num. 4 |
-| Precio sugerido | $200 / $300 / $450 / $700 por taller |
-| Recomendaciones | Capacitar es compatible con la función del DPD · Separe el taller de directivos del operativo |
+| Qué es | Revisión del RAT, de una ponderación del interés legítimo o de una evaluación de impacto elaborada por el responsable o su implementador, con observaciones no vinculantes y verificación de su atención. |
+| Naturaleza | Revisión y verificación (observaciones no vinculantes del DPO) |
+| Cómo se aplica | Recibir la versión elaborada y sus evidencias; Revisar pestaña por pestaña en modo «Revisión del DPO» (herramientas 04, 06 o 07); Emitir observaciones no vinculantes con prioridad; Verificar la respuesta del responsable y cerrar la revisión |
+| Para quién | Clientes de los que MSC es DPO, o que quieren una revisión independiente de lo que elaboró su equipo o su proveedor |
+| Qué se obtiene | Informe de observaciones del DPO y constancia de su atención |
+| Responsable principal | Gerencia |
+| Participan | Dueño del proceso, implementador |
+| Levantar información con | Dueño del proceso, implementador |
+| Herramientas del kit | 04 RAT, 06 Interés legítimo, 07 Evaluación de impacto |
+| Base | LOPDP art. 49; Res. SPDP-SPD-2025-0028-R arts. 13.1, 13.5 y 15.2 |
+| Precio sugerido | $120 / $180 / $250 / $380 por evaluación |
+| Recomendaciones | Observe y fundamente; no reescriba la evaluación: la decisión es del responsable · Registre si cada observación fue acogida o no y por qué · Cotice una revisión por cada evaluación o versión |
+
+### S30 · Verificación de la implementación
+
+| | |
+|---|---|
+| Qué es | Verificación, con evidencia, de lo que el implementador entregó y la empresa puso en marcha: documentos aprobados, firmas, formularios, controles y capacitación. |
+| Naturaleza | Revisión y verificación (observaciones no vinculantes del DPO) |
+| Cómo se aplica | Fijar con el responsable los hitos y las evidencias esperadas; Revisar cada entregable contra la norma y el diagnóstico; Probar en la práctica (muestreo, entrevistas, recorrido de canales); Informe de verificación con hallazgos y pendientes |
+| Para quién | Toda empresa que implementa con su personal, con un proveedor o con un tercero coordinado por MSC |
+| Qué se obtiene | Constancia independiente de que lo implementado funciona |
+| Responsable principal | Gerencia |
+| Participan | Implementador, áreas usuarias |
+| Levantar información con | Implementador y jefes de área |
+| Herramientas del kit | 03 Madurez, 08 Plantillas, 09 Vulneraciones |
+| Base | LOPDP arts. 37 y 49; Res. SPDP-SPD-2025-0028-R arts. 13.4 y 15.1 |
+| Precio sugerido | $100 / $150 / $220 / $350 por hito |
+| Recomendaciones | Verifique el «ser», no el «deber ser»: lo que se cumple en la práctica · No corrija usted lo que falta: lo corrige el implementador · Use la evidencia de la herramienta 03 para medir el avance |
 
 ## Control mensual
 
@@ -420,6 +453,23 @@ Revisiones e informes periódicos que exige o recomienda la norma.
 
 Servicios que se cotizan como tarifa y se cobran solo cuando ocurren.
 
+### S17 · Capacitación al personal (taller de 2 horas)
+
+| | |
+|---|---|
+| Qué es | Taller práctico con casos del propio negocio, evaluación y registro de asistencia como evidencia. |
+| Naturaleza | Formación |
+| Cómo se aplica | Diseñar casos del negocio; Impartir el taller; Evaluar y registrar asistencia |
+| Para quién | Todo el personal; directivos por separado |
+| Qué se obtiene | Personal que reconoce riesgos y sabe a quién reportar |
+| Responsable principal | Talento humano |
+| Participan | Gerencia |
+| Levantar información con | Talento humano |
+| Herramientas del kit | 03 Madurez |
+| Base | RGLOPDP art. 30 num. 4 |
+| Precio sugerido | $200 / $300 / $450 / $700 por taller |
+| Recomendaciones | Capacitar es compatible con la función del DPD · Separe el taller de directivos del operativo |
+
 ### S22 · Gestión de una vulneración de la seguridad
 
 | | |
@@ -436,23 +486,6 @@ Servicios que se cotizan como tarifa y se cobran solo cuando ocurren.
 | Base | LOPDP art. 43; Res. SPDP-SPD-2026-0040-R |
 | Precio sugerido | $250 / $400 / $600 / $900 por incidente |
 | Recomendaciones | Los plazos corren desde la constancia del incidente · La contención técnica la hace sistemas |
-
-### S23 · Atención de solicitud de derechos adicional
-
-| | |
-|---|---|
-| Qué es | Revisión y respuesta tipo para una solicitud fuera del volumen incluido en el plan mensual. |
-| Naturaleza | Asesoría y diagnóstico |
-| Cómo se aplica | Verificar identidad y alcance; Preparar respuesta; Registrar |
-| Para quién | Clientes con plan mensual que superan el volumen incluido |
-| Qué se obtiene | Respuesta en plazo |
-| Responsable principal | Servicio al cliente |
-| Participan | Legal |
-| Levantar información con | Servicio al cliente |
-| Herramientas del kit | 08 Plantillas |
-| Base | LOPDP arts. 12 y siguientes |
-| Precio sugerido | $25 / $35 / $50 / $70 por solicitud |
-| Recomendaciones | La respuesta la firma la empresa |
 
 ### S24 · Privacidad desde el diseño en un proyecto nuevo
 
@@ -539,14 +572,37 @@ Servicios que se cotizan como tarifa y se cobran solo cuando ocurren.
 | Precio sugerido | desde $40 / desde $40 / desde $40 / desde $40 por hora |
 | Recomendaciones | Registre el tiempo para justificar la factura |
 
+## Implementación · por evento
+
+Ejecución puntual a cargo del responsable o su implementador; el DPO supervisa.
+
+### S23 · Atención de solicitud de derechos adicional
+
+| | |
+|---|---|
+| Qué es | Preparación de la respuesta a una solicitud de derechos fuera del volumen previsto, a cargo del implementador. |
+| Naturaleza | Implementación (la ejecuta el responsable o el implementador que elija) |
+| Cómo se aplica | Verificar identidad y alcance; El responsable o su implementador prepara la respuesta; Registrar; El DPO supervisa |
+| Para quién | Clientes que superan el volumen de solicitudes previsto |
+| Qué se obtiene | Respuesta en plazo |
+| Responsable principal | Servicio al cliente |
+| Participan | Legal |
+| Levantar información con | Servicio al cliente |
+| Herramientas del kit | 08 Plantillas |
+| Base | LOPDP arts. 12 y siguientes |
+| Precio sugerido | $25 / $35 / $50 / $70 por solicitud |
+| Recomendaciones | La respuesta la prepara y firma la empresa; el DPO solo supervisa el procedimiento (Res. SPDP-SPD-2025-0028-R art. 14) |
+
 ## Recomendaciones generales
 
-- **Alcance escrito.** Cada servicio contratado debe indicar qué entrega el consultor y qué ejecuta la empresa.
+- **Dos líneas.** Separe la evaluación y el diagnóstico (los hace el consultor o el DPO) de la implementación (la decide el responsable y la ejecuta su personal, el proveedor que elija o el tercero que MSC coordina). El DPO de la empresa supervisa y verifica lo implementado (S29 y S30).
+- **Si MSC es DPO.** No redacte ni ejecute la implementación de ese cliente (Res. SPDP-SPD-2025-0028-R arts. 15.1 y 15.2). Prefiera que el tercero contrate y facture directo; si MSC subcontrata, declare el conflicto (art. 17) y use personas distintas (punto abierto 32).
+- **Alcance escrito.** Cada servicio contratado debe indicar qué entrega el consultor, qué ejecuta el implementador y qué verifica el DPO.
 - **Orden.** No ofrezca documentos antes del inventario: S05 antes de S10 a S15.
-- **Independencia.** Separe por contrato la adecuación (asesoría) del servicio de DPD (supervisión). No audite lo que adecuó o supervisa.
+- **Independencia.** Separe por contrato la implementación del servicio de DPD (supervisión). No audite lo que implementó o supervisa.
 - **Evidencia.** Todo servicio termina en un documento fechado y firmado: es la prueba de responsabilidad proactiva del cliente y su respaldo profesional.
 - **Confidencialidad y encargo.** Si accederá a datos personales del cliente, firme contrato de encargo y acuerdo de confidencialidad antes de iniciar.
 - **Precios.** Use los valores sugeridos como referencia; ajústelos con la calculadora (herramienta 02) al tamaño, sector y volumen real del cliente.
-- **Códigos.** Use los códigos S01 a S28 en la proforma, el contrato y la factura para que todos hablen del mismo servicio.
+- **Códigos.** Use los códigos S01 a S30 en la proforma, el contrato y la factura para que todos hablen del mismo servicio.
 - **Actualización.** Revise el catálogo cuando la SPDP emita normativa nueva: un servicio puede volverse obligatorio para el cliente.
 

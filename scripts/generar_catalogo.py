@@ -31,7 +31,7 @@ DESDE = {"diag": [H.VOLNEG["diag_piso"][t] for t in TAM], "adec": [H.VOLNEG["ade
          "hora": [hora] * 4}
 HERR = {"01": "Catálogo", "02": "Honorarios", "03": "Madurez", "04": "RAT", "05": "Gran escala", "06": "Interés legítimo", "07": "Evaluación de impacto",
         "08": "Plantillas", "09": "Vulneraciones"}
-cfg = {"version": C.VERSION, "tamanos": C.TAMANOS, "fases": C.FASES, "naturaleza": C.NATURALEZA, "servicios": C.SERVICIOS,
+cfg = {"version": C.VERSION, "tamanos": C.TAMANOS, "fases": C.FASES, "lineas": C.LINEAS, "impl": C.IMPLEMENTACION, "rolesMsc": C.ROLES_MSC, "naturaleza": C.NATURALEZA, "servicios": C.SERVICIOS,
        "recomendaciones": C.RECOMENDACIONES, "gloLopdp": C.GLOSARIO_LOPDP, "gloNorma": C.GLOSARIO_NORMATIVA, "gloKit": C.GLOSARIO_KIT,
        "desde": DESDE, "herramientas": HERR}
 shell = (ROOT / "scripts" / "plantilla-catalogo.html").read_text(encoding="utf-8")
@@ -54,11 +54,13 @@ def precios(s):
 
 M = ["# Catálogo de servicios de protección de datos personales", "",
      f"Versión {C.VERSION}. Ficha interna para el consultor. Fuente única: `scripts/catalogo_config.py` (también alimenta la proforma de la herramienta 02).", "",
-     "> **Rol del consultor:** asesora, redacta borradores para aprobación y supervisa. Las decisiones y la implementación son de la empresa.", "",
+     "> **Dos líneas separadas.** " + C.LINEAS["eval"][0] + ": " + C.LINEAS["eval"][1] + " " + C.LINEAS["impl"][0] + ": " + C.LINEAS["impl"][1], "",
+     "**Quién implementa** (lo decide el responsable):", ""] + [f"- **{o[1]}.** {o[2]}" + (f" *{o[4]}*" if o[4] else "") for o in C.IMPLEMENTACION] + ["",
+     "Base: Res. SPDP-SPD-2025-0028-R arts. 12, 15.1, 15.2, 17 y 18; punto abierto 32 de `BASE-LEGAL.md`.", "",
      "Precios sugeridos sin IVA por tamaño (micro / pequeña / mediana / grande), **criterio propio**. «Desde» indica el piso de la calculadora de honorarios.", "",
-     "## Índice", "", "| Código | Servicio | Fase | Naturaleza | Precio sugerido |", "|---|---|---|---|---|"]
-M += [f"| {s['cod']} | {s['nombre']} | {s['fase']} | {C.NATURALEZA[s['nat']]} | {precios(s)} por {s['unidad']} |" for s in C.SERVICIOS]
-for fase, desc in C.FASES:
+     "## Índice", "", "| Código | Servicio | Línea | Fase | Naturaleza | Precio sugerido |", "|---|---|---|---|---|---|"]
+M += [f"| {s['cod']} | {s['nombre']} | {C.LINEAS[s['linea']][0]} | {s['fase']} | {C.NATURALEZA[s['nat']]} | {precios(s)} por {s['unidad']} |" for s in C.SERVICIOS]
+for fase, desc, _lin in C.FASES:
     M += ["", f"## {fase}", "", desc]
     for s in [x for x in C.SERVICIOS if x["fase"] == fase]:
         M += ["", f"### {s['cod']} · {s['nombre']}", "", "| | |", "|---|---|",

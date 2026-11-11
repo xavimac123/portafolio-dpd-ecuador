@@ -67,6 +67,7 @@ import publicidad_config as PUBC  # noqa: E402
 pub = {k: getattr(PUBC, k) for k in ("PREGUNTAS", "DATOS", "CTA", "BAJA", "AUTODIAG", "ESTRATEGIA")}
 pub["SERV"] = [[x["cod"], x["nombre"], x["beneficio"], x["que"], x["fase"]] for x in CAT.SERVICIOS]
 exp_js = (ROOT / "scripts" / "exportar.js").read_text(encoding="utf-8").replace("</", "<\\/")
+src = src.replace("__SEP_JSON__", js({"roles": CAT.ROLES_MSC, "impl": CAT.IMPLEMENTACION, "lineas": CAT.LINEAS}))
 src = src.replace("__TOOLS_JSON__", js(tools)).replace("__SERV_JSON__", js(serv)).replace("__IMG_JSON__", js(img))
 src = src.replace("__REF_JSON__", js(ref)).replace("__GLO_JSON__", js(glo)).replace("__EXPORT_JS__", exp_js).replace("__DPO_JSON__", js(dpo)).replace("__PUB_JSON__", js(pub))
 assert "__PUB_JSON__" not in src and "__DPO_JSON__" not in src and "__GLO_JSON__" not in src and "__REF_JSON__" not in src and "__EXPORT_JS__" not in src

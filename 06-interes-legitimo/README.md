@@ -27,6 +27,10 @@ Regenerar: `python scripts/generar_interes_legitimo.py`.
 
 Estado de verificación: `BASE-LEGAL.md` (puntos abiertos 19 y 22).
 
+## Elaboración y revisión del DPO
+
+La herramienta tiene dos modos (panel bajo las pestañas). **Elaboración:** la completa el responsable o el implementador que eligió (MSC solo si no es DPO de ese cliente) y responde las observaciones. **Revisión del DPO:** el DPO registra observaciones no vinculantes por pestaña, con prioridad, y una conclusión; no corrige ni ejecuta la evaluación (Res. SPDP-SPD-2025-0028-R arts. 13, 15.2 y 15.3). Las observaciones se anexan al informe y tienen su propio informe con firma («Copiar observaciones del DPO»). En la app, el modo se preselecciona según el rol de MSC registrado en la ficha del cliente. Ver `docs/decision-evaluacion-implementacion.md`.
+
 ## Instrucciones
 
 1. Confirme en el RAT que la actividad usa el interés legítimo como base.

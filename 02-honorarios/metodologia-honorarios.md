@@ -4,12 +4,13 @@ Versión 0.1. Fuente única: `scripts/honorarios_config.py`.
 
 > **Criterio propio.** No existe en Ecuador una tabla oficial ni gremial de honorarios para el Delegado de Protección de Datos. Los tramos, pisos, tarifas y factores de esta herramienta son criterio propio de Macías Sánchez Consultores, contrastados con referencias públicas del mercado (sección «Referencias de mercado»). Solo son normativos: la clasificación de empresas, el Modelo Técnico de Gran Escala, la tarifa del IVA, las retenciones y los rubros laborales del DPD interno.
 
-## Tres fases del servicio
+## Fases del servicio
 
 | Fase | Cobro | Qué incluye |
 |---|---|---|
 | Evaluación inicial | Única vez | Diagnóstico de madurez, exposición económica, análisis de gran escala y plan de acción |
-| Adecuación | Única vez | RAT, política y avisos, contratos de encargo, protocolo de vulneraciones, derechos, capacitación, designación del DPD |
+| Implementación (referencial) | Única vez | RAT, política y avisos, contratos de encargo, protocolo de vulneraciones, derechos. La decide el responsable y la ejecuta su personal, un proveedor o un tercero coordinado por MSC; solo suma a la proforma si la factura MSC (subcontratada o como consultor que no es DPO del cliente). Si no, el valor sirve para comparar la cotización del implementador |
+| Revisión y verificación | Por evaluación o por hito | S29 revisión del DPO a evaluaciones elaboradas por el responsable; S30 verificación de lo implementado |
 | Control | Mensual | DPD externo o acompañamiento: supervisión, RAT vivo, derechos, incidentes, reporte a la gerencia |
 
 ## Tamaño de la empresa
@@ -43,7 +44,7 @@ Honorario **anual** de control = suma de cada tramo de ventas × su porcentaje m
 | Piso evaluación inicial | $350 | $600 | $1.100 | $2.200 |
 | Piso adecuación | $900 | $1.800 | $3.500 | $7.000 |
 
-Evaluación inicial = máx(piso, 35 % del control anual). Adecuación = máx(piso, 90 % del control anual).
+Evaluación inicial = máx(piso, 35 % del control anual). Implementación (referencial) = máx(piso, 90 % del control anual).
 
 ## Método 2 · Volumen de tratamiento
 
@@ -71,7 +72,7 @@ Tarifario sobre el puntaje (criterio propio):
 | Por solicitud de derechos mensual | $20 |
 | Por sede adicional | $30/mes |
 | Evaluación inicial | $250 + $45 por actividad + $15 por encargado + $300 si es gran escala + $100 por sede adicional |
-| Adecuación | $600 + $120 por actividad + $40 por encargado + $450 por evaluación de impacto |
+| Implementación (referencial) | $600 + $120 por actividad + $40 por encargado + $450 por evaluación de impacto |
 
 ## Método 3 · Estimación técnica
 
@@ -98,7 +99,7 @@ Gastos indirectos y reserva por defecto: 15 %. Áreas a entrevistar por tamaño:
 | Encargados y transferencias | 0,3 por encargado + 1 si hay transferencias |
 | Informe y presentación a la gerencia | 4 fijo |
 
-**Adecuación**
+**Implementación (referencial)**
 
 | Tarea | Horas |
 |---|---|

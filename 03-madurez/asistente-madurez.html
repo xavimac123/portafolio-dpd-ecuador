@@ -509,7 +509,7 @@ W.MSCDoc={vista:vista,xlsx:xlsx,guardar:guardar,firma:firma,bloqueFirma:bloqueFi
 </script><style>.msc-exp{display:inline-flex;gap:6px;flex-wrap:wrap}body.msc-expmodo .toast{visibility:hidden}</style>
 <script>(function(){var D=window.MSCDoc,P=null;try{if(window.parent!==window&&window.parent.MSCDoc){P=window.parent;if(!D)D=P.MSCDoc}}catch(e){}if(!D)return;
 var modo=null,cap=null,OB=window.Blob;
-function B(parts,opt){if(opt&&/^text\/html/.test(opt.type||'')&&parts&&typeof parts[0]==='string'){try{var h=D.firma(parts.join(''));cap=h;parts=[h]}catch(e){}}return new OB(parts,opt)}
+function B(parts,opt){if(opt&&/^text\/html/.test(opt.type||'')&&parts&&typeof parts[0]==='string'){try{var h=parts.join('');if(window.MSCRevAnexo){try{h=window.MSCRevAnexo(h)}catch(e){}}h=D.firma(h);cap=h;parts=[h]}catch(e){}}return new OB(parts,opt)}
 B.prototype=OB.prototype;window.Blob=B;
 if(!window.ClipboardItem)window.ClipboardItem=function(o){this.o=o};
 var capT=null;try{var C=navigator.clipboard||{},cw=C.write?C.write.bind(C):null,ct=C.writeText?C.writeText.bind(C):null;var nw=function(it){if(modo)return Promise.resolve();return cw?cw(it):Promise.reject(new Error('sin portapapeles'))},nt=function(t){if(modo){capT=String(t);return Promise.resolve()}return ct?ct(t):Promise.reject(new Error('sin portapapeles'))};

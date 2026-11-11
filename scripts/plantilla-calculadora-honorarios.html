@@ -86,7 +86,7 @@
 <header><div class="wrap">
   <div class="marca">Macías Sánchez Consultores · Herramienta 02</div>
   <h1>Calculadora de honorarios del DPD</h1>
-  <p>Evaluación inicial, adecuación y control mensual, con IVA, comparación de métodos y proforma de servicios</p>
+  <p>Evaluación inicial, implementación (referencial) y control mensual, con IVA, comparación de métodos y proforma de servicios</p>
   <nav role="tablist">
     <button data-t="t1" aria-selected="true">1 · Cliente</button>
     <button data-t="t2" aria-selected="false">2 · Volumen de negocio</button>
@@ -158,6 +158,7 @@
   <h2>Proforma de servicios</h2>
   <p class="sub">Elija los servicios que ofrecerá. Cada uno trae un <b>valor sugerido</b> según el tamaño del cliente, su sector y el método elegido en la pestaña 5; puede reemplazarlo por su propio valor.</p>
   <div class="card"><h3>Datos de la proforma</h3><div class="grid" id="fProf"></div></div>
+  <div class="card"><h3>Evaluación e implementación</h3><p class="nota" style="margin:-4px 0 10px">La evaluación, la revisión y la supervisión las presta MSC. La implementación la decide el responsable: con su personal, con un proveedor que elija o con un tercero coordinado por MSC. El DPO de la empresa la supervisa y verifica (S29 y S30).</p><div class="grid" id="fSep"></div><div id="sepBox"></div></div>
   <div class="card"><h3>Servicios</h3><p class="nota" style="margin:-4px 0 8px">Los códigos y servicios son los del catálogo (herramienta 01). Si ya eligió servicios allí, pegue los códigos:</p><div class="row" style="margin-bottom:6px"><input id="impCod" placeholder="Ej.: S02, S05, S09, S18" style="flex:1;min-width:180px"><button class="btn sm" id="impBtn" type="button">Importar del catálogo</button></div><div id="svcBox"></div><div id="svcWarn"></div></div>
   <div class="card"><h3>Totales</h3><div class="grid" id="fTot"></div><div class="g3" id="totBox" style="margin-top:12px"></div></div>
   <div class="card"><h3>Argumentos de valor para el cliente</h3><div class="grid" id="fMk"></div><p class="nota">Las cifras de exposición y ahorro son estimaciones: la proforma las presenta como tales.</p></div>
@@ -180,7 +181,7 @@
   function hoy(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
   function blank(){return {c:{sector:'Comercio',sedes:1,act:5,enc:3,sol:0,tr:'No',eipd:0,cap:4,areas:'',ventas:'',trab:''},v:{tit:0,vol:0,cat:0,fre:1,per:1,geo:0,dir:[]},
     t:{perfil:1,tarifa:CFG.perfiles[1][1],gastos:CFG.gastos,ov:{}},k:{met:'rec',salario:CFG.dpdInterno.salario,regimen:'Persona natural',agente:'Sí',retir:CFG.econ.ret_ir_natural,retiva:CFG.econ.ret_iva,horas:20},
-    p:{num:'MSC-'+new Date().getFullYear()+'-001',fecha:hoy(),validez:30,meses:12,desc:0,iva:CFG.econ.iva,cond:CFG.condiciones,multa:'',items:{},f:{el:'Abg. Mariano X. Macías Sánchez',ec:'Consultor en Protección de Datos Personales · Matrícula profesional 09-2022-736',cl:'',cc:''}}}}
+    p:{rol:'consultor',impl:'propio',implNom:'',implVal:'',num:'MSC-'+new Date().getFullYear()+'-001',fecha:hoy(),validez:30,meses:12,desc:0,iva:CFG.econ.iva,cond:CFG.condiciones,multa:'',items:{},f:{el:'Abg. Mariano X. Macías Sánchez',ec:'Consultor en Protección de Datos Personales · Matrícula profesional 09-2022-736',cl:'',cc:''}}}}
   var S;try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}if(!S)S=blank();
   function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
   function num(x){var n=parseFloat(String(x==null?'':x).replace(',','.'));return isFinite(n)?n:0}
@@ -228,6 +229,7 @@
   $('fInt').innerHTML=field('k','salario','Sueldo mensual de un DPD en nómina (USD)',{type:'number',help:'Referencia de mercado: avisos de empleo de DPD a tiempo completo en Quito publican entre USD 1.500 y 2.500 mensuales. Ajuste a la ciudad y al perfil.'});
   $('fRet').innerHTML=field('k','regimen','El DPD factura como',{opts:['Persona natural','Sociedad']})+field('k','agente','¿El cliente es agente de retención?',{opts:['Sí','No']})+
     field('k','retir','Retención de impuesto a la renta (%)',{type:'number'})+field('k','retiva','Retención de IVA (%)',{type:'number',help:'En honorarios profesionales de personas naturales el agente de retención suele retener el 100 % del IVA. Verifique la tabla vigente del SRI según el tipo de cliente y de prestador.'});
+  $('fSep').innerHTML=field('p','rol','Rol de MSC con este cliente',{opts:CFG.rolesMsc.map(function(x){return [x[0],x[1]]})})+field('p','impl','Implementación a cargo de',{opts:CFG.impl.map(function(x){return [x[0],x[1]]})})+field('p','implNom','Nombre del implementador',{ph:'Razón social del tercero o área interna'})+field('p','implVal','Valor informado por el implementador (USD, opcional)',{type:'number'});
   $('fProf').innerHTML=field('p','num','Número de proforma')+field('p','fecha','Fecha',{type:'date'})+field('p','validez','Validez (días)',{type:'number'})+field('p','aten','Dirigida a',{ph:'Nombre y cargo'});
   $('fTot').innerHTML=field('p','desc','Descuento (%)',{type:'number'})+field('p','iva','IVA (%)',{type:'number',help:'Tarifa general vigente: 15 % (art. 65 LRTI; el SRI confirmó su vigencia para 2026). Verifique si un decreto ejecutivo la modifica.'})+field('p','meses','Meses del servicio mensual',{type:'number'});
   $('fMk').innerHTML=field('p','multa','Multa estimada del cliente (USD, opcional)',{type:'number',help:'Copie el valor «multa estimada si no actúa» de la herramienta 03 (pestaña Impacto económico). Si lo deja vacío, la proforma no muestra la comparación.'});
@@ -277,20 +279,20 @@
       txt+=' Factor sectorial: <b>×'+String(sectorF()).replace('.',',')+'</b>.'}
     $('tamBox').innerHTML=txt}
   function rNeg(){var n=mNeg(),T=tam();
-    $('negK').innerHTML=kpi('Evaluación inicial (única vez)',usd0(n.diag),'sin IVA')+kpi('Adecuación (única vez)',usd0(n.adec),'sin IVA')+kpi('Control mensual',usd0(n.mens),'sin IVA · '+usd0(n.mens*12)+' al año');
+    $('negK').innerHTML=kpi('Evaluación inicial (única vez)',usd0(n.diag),'sin IVA')+kpi('Implementación, referencial (única vez)',usd0(n.adec),'sin IVA')+kpi('Control mensual',usd0(n.mens),'sin IVA · '+usd0(n.mens*12)+' al año');
     $('negCalc').innerHTML=n.v>0?('Volumen de negocio: <b>'+usd0(n.v)+'</b> → honorario anual por tramos <b>'+usd0(n.anual)+'</b> ('+usd0(n.mBase)+' al mes). Piso mensual para '+T.t.nombre.toLowerCase()+': <b>'+usd0(n.piso)+'</b>. Evaluación inicial = máx(piso, '+pct(CFG.volneg.diag_factor*100,0)+' del control anual); adecuación = máx(piso, '+pct(CFG.volneg.adec_factor*100,0)+' del control anual). Proporción de las ventas: <b>'+pct(n.v?n.mens*12/n.v*100:0,2)+'</b> al año.'):'Ingrese las ventas del ejercicio anterior en la pestaña 1.';
     $('negTab').innerHTML='<tr><th>Tramo de ventas</th><th class="n">% marginal</th><th class="n">Base del tramo</th><th class="n">Honorario anual</th></tr>'+n.rows.map(function(r){return '<tr><td>'+usd0(r[0])+' a '+(r[1]==null?'más':usd0(r[1]))+'</td><td class="n">'+pct(r[2],2)+'</td><td class="n">'+usd0(r[3])+'</td><td class="n">'+usd0(r[4])+'</td></tr>'}).join('')}
   function rVol(){var v=mVol(),m=v.m;
     $('mtgeBox').innerHTML='<div class="verd '+(m.ge?'vno':'vok')+'">Puntaje MTGE: '+String(m.P).replace('.',',')+' de 17 · '+(m.ge?'Gran escala':'No es gran escala')+'<small>'+(m.dir?'Calificación directa por un supuesto del art. 14. ':'')+(m.ge?'Consecuencias (art. 12): evaluación de impacto previa, DPD obligatorio, inclusión en el RAT y medidas reforzadas. El plazo transitorio de 90 días para designar y registrar al DPD corrió desde el 25-02-2026.':'Umbral: 6 puntos (art. 10). Recalcule ante cambios sustanciales del tratamiento (art. 13).')+'</small></div>';
-    $('volK').innerHTML=kpi('Evaluación inicial',usd0(v.diag),'sin IVA')+kpi('Adecuación',usd0(v.adec),'sin IVA')+kpi('Control mensual',usd0(v.mens),'sin IVA');
+    $('volK').innerHTML=kpi('Evaluación inicial',usd0(v.diag),'sin IVA')+kpi('Implementación, referencial',usd0(v.adec),'sin IVA')+kpi('Control mensual',usd0(v.mens),'sin IVA');
     var T=CFG.voltrat;$('volCalc').innerHTML='Control mensual = base por puntaje <b>'+usd0(v.base)+'</b> + actividades sobre '+T.act_incluidas+' ('+usd0(v.extra.act)+') + encargados ('+usd0(v.extra.enc)+') + transferencias ('+usd0(v.extra.tr)+') + solicitudes ('+usd0(v.extra.sol)+') + sedes adicionales ('+usd0(v.extra.sed)+'). Tarifario: base $'+T.base_mensual[0][2]+' (menos de 4 pts), $'+T.base_mensual[1][2]+' (4 a 5,9) y $'+T.base_mensual[2][2]+' (gran escala). <span class="propio">Criterio propio</span>'}
-  function rTec(){var t=mTec(),lab={diag:'Evaluación inicial',adec:'Adecuación',mens:'Control mensual'};
+  function rTec(){var t=mTec(),lab={diag:'Evaluación inicial',adec:'Implementación (referencial)',mens:'Control mensual'};
     $('tecTabs').innerHTML=['diag','adec','mens'].map(function(k){return '<h3 style="margin-top:12px">'+lab[k]+'</h3><div class="scroll"><table class="t"><tr><th>Tarea</th><th class="n">Automático</th><th class="n">Horas</th></tr>'+
       t[k+'L'].map(function(x){return '<tr><td>'+x.n+'</td><td class="n">'+String(x.auto).replace('.',',')+'</td><td class="n"><input type="number" inputmode="decimal" min="0" step="0.25" data-ov="'+x.key+'" value="'+esc(S.t.ov[x.key]==null?'':S.t.ov[x.key])+'" placeholder="'+String(x.auto).replace('.',',')+'"></td></tr>'}).join('')+
       '<tr class="rec"><td>Total</td><td></td><td class="n">'+String(t[k+'H']).replace('.',',')+' h</td></tr></table></div>'}).join('');
     document.querySelectorAll('[data-ov]').forEach(function(el){el.onchange=function(){S.t.ov[el.dataset.ov]=el.value;save();upd()}});
-    $('tecK').innerHTML=kpi('Tarifa efectiva',usd(t.tf)+'/h','con '+pct(num(S.t.gastos),0)+' de gastos')+kpi('Evaluación inicial',usd0(t.diag),String(t.diagH).replace('.',',')+' h')+kpi('Adecuación',usd0(t.adec),String(t.adecH).replace('.',',')+' h')+kpi('Control mensual',usd0(t.mens),String(t.mensH).replace('.',',')+' h al mes')}
-  function rCmp(){var R=mRec(),n=R.n,v=R.v,t=R.t,r=R.r,L=[['Evaluación inicial','diag'],['Adecuación','adec'],['Control mensual','mens']];
+    $('tecK').innerHTML=kpi('Tarifa efectiva',usd(t.tf)+'/h','con '+pct(num(S.t.gastos),0)+' de gastos')+kpi('Evaluación inicial',usd0(t.diag),String(t.diagH).replace('.',',')+' h')+kpi('Implementación, referencial',usd0(t.adec),String(t.adecH).replace('.',',')+' h')+kpi('Control mensual',usd0(t.mens),String(t.mensH).replace('.',',')+' h al mes')}
+  function rCmp(){var R=mRec(),n=R.n,v=R.v,t=R.t,r=R.r,L=[['Evaluación inicial','diag'],['Implementación (referencial)','adec'],['Control mensual','mens']];
     $('cmpTab').innerHTML='<tr><th>Concepto</th><th class="n">Volumen de negocio</th><th class="n">Volumen de tratamiento</th><th class="n">Técnica (piso)</th><th class="n">Recomendado</th><th class="n">Rango</th></tr>'+
       L.map(function(l){var k=l[1];return '<tr><td data-l="Concepto"><b>'+l[0]+'</b></td><td class="n" data-l="Volumen de negocio">'+usd0(n[k])+'</td><td class="n" data-l="Volumen de tratamiento">'+usd0(v[k])+'</td><td class="n" data-l="Técnica (piso)">'+usd0(t[k])+'</td><td class="n" data-l="Recomendado"><b>'+usd0(r[k])+'</b></td><td class="n" data-l="Rango">'+usd0(r[k+'Min'])+' – '+usd0(r[k+'Max'])+'</td></tr>'}).join('');
     var msgs=[];if(n.mens<t.mens)msgs.push('El volumen de negocio sugiere menos que el costo técnico mensual: el cliente tiene poca capacidad de pago para el trabajo que exige. Ofrezca el paquete Esencial, reduzca el alcance o cobre por evento; no baje del piso.');
@@ -298,9 +300,9 @@
     if(v.mens>n.mens*1.4)msgs.push('El volumen de tratamiento pesa más que las ventas: es un cliente con muchos datos y poca facturación (por ejemplo, educación o salud). Justifique el precio con el puntaje MTGE.');
     if(r.mens>=t.mens*1.5)msgs.push('Hay margen sobre el costo técnico: puede negociar un descuento por contrato anual sin perder rentabilidad.');
     $('cmpVer').innerHTML=msgs.map(function(m){return '<div class="verd vam" style="font-weight:600">'+m+'</div>'}).join('');
-    var s=sug();$('decide').innerHTML='Valores que tomará la proforma: evaluación inicial <b>'+usd0(s.diag)+'</b>, adecuación integral <b>'+usd0(s.adec)+'</b>, DPD externo <b>'+usd0(s.mens)+'/mes</b>, acompañamiento <b>'+usd0(s.acomp)+'/mes</b> (70 % del DPD), hora adicional <b>'+usd0(s.hora)+'</b>. Todos sin IVA.<br><b>Regla de decisión:</b> negocie dentro del rango; no cotice por debajo de la estimación técnica; si el cliente pide rebaja, reduzca alcance antes que precio.';
+    var s=sug();$('decide').innerHTML='Valores que tomará la proforma: evaluación inicial <b>'+usd0(s.diag)+'</b>, implementación integral <b>'+usd0(s.adec)+'</b> (solo se cobra si MSC la ejecuta; si no, sirve para comparar la cotización del implementador), DPD externo <b>'+usd0(s.mens)+'/mes</b>, acompañamiento <b>'+usd0(s.acomp)+'/mes</b> (70 % del DPD), hora adicional <b>'+usd0(s.hora)+'</b>. Todos sin IVA.<br><b>Regla de decisión:</b> negocie dentro del rango; no cotice por debajo de la estimación técnica; si el cliente pide rebaja, reduzca alcance antes que precio.';
     // paquetes
-    var su=s;$('pkBox').innerHTML=CFG.paquetes.map(function(p){var u=0,m=0;p.items.forEach(function(id){var sv=CFG.servicios.filter(function(x){return x[1]===id})[0];var pr=svcPrice(sv,su);if(sv[0]==='Control mensual')m+=pr;else u+=pr});
+    var su=s;$('pkBox').innerHTML=CFG.paquetes.map(function(p){var u=0,m=0;p.items.forEach(function(id){var sv=CFG.servicios.filter(function(x){return x[1]===id})[0];var pr=svcPrice(sv,su);if(sv[0]==='Control mensual')m+=pr;else if(!ev(sv[0]))u+=pr});
       return '<div class="card"><h3>'+p.nombre+'</h3><p class="nota" style="margin:0 0 6px">'+p.para+'</p><div style="font-size:13px">'+p.items.map(function(id){return '• '+CFG.servicios.filter(function(x){return x[1]===id})[0][2]}).join('<br>')+'</div><p style="margin:8px 0;font-size:14px">Única vez <b>'+usd0(u)+'</b> · Mensual <b>'+usd0(m)+'</b><br><span class="nota">sin IVA</span></p><button class="btn sm sec" data-pk="'+p.id+'">Cargar en la proforma</button></div>'}).join('');
     document.querySelectorAll('[data-pk]').forEach(function(b){b.onclick=function(){var p=CFG.paquetes.filter(function(x){return x.id===b.dataset.pk})[0];S.p.items={};p.items.forEach(function(id){S.p.items[id]={on:true,q:1,v:''}});save();upd();show('t6');toast('Paquete '+p.nombre+' cargado')}});
     // interno
@@ -310,26 +312,39 @@
     // retenciones
     var b=s.mens,iva=b*num(S.p.iva)/100,ag=S.k.agente==='Sí',ri=ag?b*num(S.k.retir)/100:0,rv=ag?iva*num(S.k.retiva)/100:0;
     $('retBox').innerHTML='<div class="calc">Factura mensual: <b>'+usd(b)+'</b> + IVA '+usd(iva)+' = '+usd(b+iva)+'. '+(ag?'Retención de renta '+usd(ri)+' y de IVA '+usd(rv)+'. ':'Sin retenciones. ')+'<b>Neto que recibe: '+usd(b+iva-ri-rv)+'</b>. La retención de renta es crédito tributario en su declaración; el IVA retenido lo entrega el cliente al SRI.</div>'}
-  function rSvc(){var su=sug(),g='',out='';
-    CFG.servicios.forEach(function(s){var id=s[1],it=S.p.items[id]||{on:false,q:1,v:''},pr=svcPrice(s,su);if(s[0]!==g){g=s[0];out+='<div class="grp">'+g+(g==='Por evento'?' · se cotizan como tarifa, no suman al total':'')+'</div>'}
+  function ev(g){return /por evento/i.test(g||'')}
+  function rolOpt(){return CFG.rolesMsc.filter(function(x){return x[0]===(S.p.rol||'consultor')})[0]||CFG.rolesMsc[0]}
+  function implOpt(){return CFG.impl.filter(function(x){return x[0]===(S.p.impl||'propio')})[0]||CFG.impl[0]}
+  function implQuien(){var o=implOpt();return (S.p.implNom?S.p.implNom+' · ':'')+o[1]}
+  function rSep(){var o=implOpt(),ro=rolOpt(),w=[];
+    if(ro[0]==='dpo'&&o[0]==='msc')w.push(['val','Incompatible: MSC no puede implementar para un cliente del que es o será DPO (Res. SPDP-SPD-2025-0028-R art. 15.1). Elija otro implementador.']);
+    else if(o[4]&&(ro[0]==='dpo'||o[0]==='msc'))w.push(['vam',o[4]]);
+    $('sepBox').innerHTML='<div class="calc"><b>'+esc(ro[1])+'.</b> '+esc(ro[2])+'<br><b>Implementación:</b> '+esc(o[2])+' '+(o[3]?'Los servicios de implementación <b>suman</b> a esta proforma.':'Los servicios de implementación que marque se muestran como <b>referencia, a cargo de '+esc(implQuien())+'</b>, y no suman al total.')+'</div>'+w.map(function(x){return '<div class="verd '+x[0]+'" style="font-weight:600">'+esc(x[1])+'</div>'}).join('')}
+  function rSvc(){rSep();var su=sug(),g='',out='',fac=implOpt()[3];
+    CFG.servicios.forEach(function(s){var id=s[1],it=S.p.items[id]||{on:false,q:1,v:''},pr=svcPrice(s,su);var ex=s[8]==='impl'&&!fac;if(s[0]!==g){g=s[0];out+='<div class="grp">'+g+(ev(g)?' · se cotizan como tarifa, no suman al total':'')+(s[8]==='impl'?(fac?' · la factura MSC':' · a cargo de '+esc(implQuien())+', no suma'):'')+'</div>'}
       var val=it.v!==''&&it.v!=null?num(it.v):pr;
       out+='<div class="svc"><input type="checkbox" data-si="'+id+'" '+(it.on?'checked':'')+' aria-label="Incluir '+esc(s[2])+'"><div><div class="nm">'+esc(s[7])+' · '+esc(s[2])+'</div><div class="ds">'+esc(s[3])+'</div></div>'+
         '<div><label class="nota" style="font-weight:400;margin:0">Cant. ('+s[4]+')</label><input type="number" min="0" step="1" data-sq="'+id+'" value="'+esc(it.q==null?1:it.q)+'"></div>'+
         '<div><label class="nota" style="font-weight:400;margin:0">Valor unitario</label><input type="number" min="0" step="any" inputmode="decimal" data-sv="'+id+'" value="'+esc(it.v==null?'':it.v)+'" placeholder="'+pr+'"><div class="sg">Sugerido: '+usd0(pr)+'</div></div>'+
-        '<div class="st">'+(it.on&&s[0]!=='Por evento'?usd(val*num(it.q==null?1:it.q)):'')+'</div></div>'});
+        '<div class="st">'+(it.on&&!ev(s[0])&&!ex?usd(val*num(it.q==null?1:it.q)):'')+'</div></div>'});
     $('svcBox').innerHTML=out;
     function bindI(attr,prop){document.querySelectorAll('['+attr+']').forEach(function(el){el.onchange=function(){var id=el.getAttribute(attr);var it=S.p.items[id]||(S.p.items[id]={on:false,q:1,v:''});it[prop]=prop==='on'?el.checked:el.value;if(prop!=='on'&&!it.on)it.on=true;save();upd()}})}
     bindI('data-si','on');bindI('data-sq','q');bindI('data-sv','v');
     var on=function(id){return S.p.items[id]&&S.p.items[id].on};var loose=['rat','politica','contratos','vulner','derechos'].filter(on);
     var w=[];if(on('adec')&&loose.length)w.push('Seleccionó el programa integral de adecuación y también servicios sueltos que ya incluye (RAT, política, contratos, vulneraciones o derechos). Quite unos u otros para no cobrar dos veces.');
+    var ro=rolOpt()[0],im=implOpt(),anyImpl=CFG.servicios.some(function(x){return x[8]==='impl'&&on(x[1])});
+    if(on('dpd')&&ro!=='dpo')w.push('Incluyó el servicio de DPD externo: cambie el rol de MSC a «DPO designado o por designar» para aplicar las reglas de separación.');
+    if(ro==='dpo'&&im[0]==='msc'&&anyImpl)w.push('MSC es DPO de este cliente y la implementación está a cargo de MSC: no es compatible (Res. SPDP-SPD-2025-0028-R art. 15.1). Elija otro implementador.');
+    if(ro==='dpo'&&['rat','eipd','ponderacion'].some(on)&&!on('revision'))w.push('Como DPO, MSC no elabora el RAT, la ponderación ni la evaluación de impacto: los elabora el implementador. Agregue S29 (revisión del DPO) por cada evaluación.');
+    if(anyImpl&&!on('verificacion'))w.push('Hay servicios de implementación: agregue S30 (verificación de la implementación) para que el DPO compruebe lo entregado.');
     if(on('dpd')&&on('acomp'))w.push('El DPD externo ya incluye el acompañamiento: elija uno de los dos.');
     if(mtge().ge&&!on('dpd'))w.push('El tratamiento principal es de gran escala: el DPD es obligatorio (Res. SPDP-SPD-2026-0005-R art. 12). Considere incluir el servicio de DPD externo.');
     $('svcWarn').innerHTML=w.map(function(x){return '<div class="verd vam" style="font-weight:600">'+x+'</div>'}).join('')}
-  function lines(){var su=sug(),L=[];CFG.servicios.forEach(function(s){var it=S.p.items[s[1]];if(!it||!it.on)return;var pr=svcPrice(s,su),v=it.v!==''&&it.v!=null?num(it.v):pr,q=num(it.q==null?1:it.q);L.push({g:s[0],id:s[1],c:s[7],n:s[2],d:s[3],u:s[4],q:q,v:v,st:v*q,b:s[6]})});return L}
-  function totals(){var L=lines(),d=num(S.p.desc)/100,iv=num(S.p.iva)/100,u=0,m=0;L.forEach(function(l){if(l.g==='Control mensual')m+=l.st;else if(l.g!=='Por evento')u+=l.st});
+  function lines(){var su=sug(),L=[],fac=implOpt()[3];CFG.servicios.forEach(function(s){var it=S.p.items[s[1]];if(!it||!it.on)return;var pr=svcPrice(s,su),v=it.v!==''&&it.v!=null?num(it.v):pr,q=num(it.q==null?1:it.q);L.push({g:s[0],id:s[1],c:s[7],n:s[2],d:s[3],u:s[4],q:q,v:v,st:v*q,b:s[6],lin:s[8],ex:s[8]==='impl'&&!fac})});return L}
+  function totals(){var L=lines(),d=num(S.p.desc)/100,iv=num(S.p.iva)/100,u=0,m=0;L.forEach(function(l){if(l.ex)return;if(l.g==='Control mensual')m+=l.st;else if(!ev(l.g))u+=l.st});
     var o={L:L,u:u,ud:u*d,un:u*(1-d),m:m,md:m*d,mn:m*(1-d),meses:num(S.p.meses)||12};o.uiva=o.un*iv;o.ut=o.un+o.uiva;o.miva=o.mn*iv;o.mt=o.mn+o.miva;o.anio=o.un+o.mn*o.meses;o.aniot=o.ut+o.mt*o.meses;return o}
   function rTot(){var t=totals();
-    $('totBox').innerHTML='<div class="kpi"><small>Pagos únicos (evaluación, adecuación y control anual)</small><div class="tot" style="margin:0">'+tr('Subtotal sin IVA',usd(t.u))+(t.ud?tr('Descuento',usd(-t.ud)):'')+tr('IVA '+pct(num(S.p.iva),0),usd(t.uiva))+'<span class="gt">Total</span><b class="gt">'+usd(t.ut)+'</b></div></div>'+
+    $('totBox').innerHTML='<div class="kpi"><small>Pagos únicos (evaluación, revisión, implementación facturada por MSC y control anual)</small><div class="tot" style="margin:0">'+tr('Subtotal sin IVA',usd(t.u))+(t.ud?tr('Descuento',usd(-t.ud)):'')+tr('IVA '+pct(num(S.p.iva),0),usd(t.uiva))+'<span class="gt">Total</span><b class="gt">'+usd(t.ut)+'</b></div></div>'+
       '<div class="kpi"><small>Control mensual</small><div class="tot" style="margin:0">'+tr('Subtotal sin IVA',usd(t.m))+(t.md?tr('Descuento',usd(-t.md)):'')+tr('IVA '+pct(num(S.p.iva),0),usd(t.miva))+'<span class="gt">Total mensual</span><b class="gt">'+usd(t.mt)+'</b></div></div>'+
       '<div class="kpi"><small>Inversión del primer año ('+t.meses+' meses)</small><b>'+usd(t.aniot)+'</b><span>con IVA · '+usd(t.anio)+' sin IVA</span></div>'}
   function tr(a,b){return '<span>'+a+'</span><b>'+b+'</b>'}
@@ -340,17 +355,20 @@
       '<h1 style="font-size:17pt;margin:4px 0">Proforma de servicios de protección de datos personales</h1><div style="font-size:9.5pt;color:#6E6230">N.º '+esc(S.p.num)+' · '+fechaTxt(S.p.fecha)+' · Validez: '+esc(S.p.validez)+' días</div></div>';
     h+='<table style="width:100%;border-collapse:collapse;margin-bottom:10px">'+[['Cliente',c.emp||'[RAZÓN SOCIAL]'],['RUC',c.ruc||'[RUC]'],['Dirigida a',S.p.aten||((c.contacto||'[NOMBRE]')+(c.cargo?', '+c.cargo:''))],['Perfil',T.t.nombre+' · sector '+(c.sector||'')+(m.ge?' · tratamiento de gran escala (MTGE '+String(m.P).replace('.',',')+' pts)':'')]].map(function(r){return '<tr><td style="'+td+';width:28%;color:#6E6230"><b>'+r[0]+'</b></td><td style="'+td+'">'+esc(r[1])+'</td></tr>'}).join('')+'</table>';
     h+='<p>Agradecemos su interés. A continuación presentamos la propuesta para que su organización cumpla la Ley Orgánica de Protección de Datos Personales (LOPDP), su Reglamento General y la normativa de la Superintendencia de Protección de Datos Personales (SPDP), y pueda <b>demostrarlo</b>.</p>';
-    function bloque(g,tit){var L=t.L.filter(function(l){return l.g===g});if(!L.length)return '';
-      return '<h2 style="font-size:12pt;margin:14px 0 6px">'+tit+'</h2><table style="width:100%;border-collapse:collapse"><tr><th style="'+th+'">Servicio</th><th style="'+th+';text-align:right">Cant.</th><th style="'+th+';text-align:right">Valor unitario</th>'+(g==='Por evento'?'':'<th style="'+th+';text-align:right">Subtotal</th>')+'</tr>'+
-        L.map(function(l){return '<tr><td style="'+td+'"><b>'+esc(l.c)+' · '+esc(l.n)+'</b><br><span style="color:#555">'+esc(l.d)+'</span></td><td style="'+tn+'">'+(g==='Por evento'?'por '+esc(l.u):l.q)+'</td><td style="'+tn+'">'+usd(l.v)+'</td>'+(g==='Por evento'?'':'<td style="'+tn+'">'+usd(l.st)+'</td>')+'</tr>'}).join('')+'</table>'}
-    var gi=0;CFG.grupos.forEach(function(g){var b=bloque(g,(gi+1)+'. '+g+(g==='Por evento'?' (tarifas, no incluidas en el total)':''));if(b){gi++;h+=b}});
+    var io=implOpt(),ro=rolOpt(),EX=t.L.filter(function(l){return l.ex}),hayImpl=t.L.some(function(l){return l.lin==='impl'});
+    h+='<h2 style="font-size:12pt;margin:14px 0 6px">Evaluación e implementación: funciones separadas</h2><p>Esta propuesta distingue dos líneas. La <b>evaluación, el diagnóstico y la supervisión</b> los presta Macías Sánchez Consultores'+(ro[0]==='dpo'?' en calidad de Delegado de Protección de Datos (DPD)':'')+'. La <b>implementación</b> (elaborar el registro de actividades, las evaluaciones, políticas, contratos y procedimientos, y ponerlos en marcha) la decide su organización'+(hayImpl?' y estará a cargo de: <b>'+esc(implQuien())+'</b>':'')+'. '+(ro[0]==='dpo'?'El DPD no implementa ni ejecuta la evaluación de impacto o la gestión de riesgos; revisa lo elaborado, emite observaciones no vinculantes y verifica lo implementado (Res. SPDP-SPD-2025-0028-R arts. 13 y 15).':'Si en el futuro su organización designa a nuestra firma como DPD, la implementación posterior la ejecutará otro implementador.')+'</p>';
+    function bloque(g,tit){var L=t.L.filter(function(l){return l.g===g&&!l.ex});if(!L.length)return '';
+      return '<h2 style="font-size:12pt;margin:14px 0 6px">'+tit+'</h2><table style="width:100%;border-collapse:collapse"><tr><th style="'+th+'">Servicio</th><th style="'+th+';text-align:right">Cant.</th><th style="'+th+';text-align:right">Valor unitario</th>'+(ev(g)?'':'<th style="'+th+';text-align:right">Subtotal</th>')+'</tr>'+
+        L.map(function(l){return '<tr><td style="'+td+'"><b>'+esc(l.c)+' · '+esc(l.n)+'</b><br><span style="color:#555">'+esc(l.d)+'</span></td><td style="'+tn+'">'+(ev(g)?'por '+esc(l.u):l.q)+'</td><td style="'+tn+'">'+usd(l.v)+'</td>'+(ev(g)?'':'<td style="'+tn+'">'+usd(l.st)+'</td>')+'</tr>'}).join('')+'</table>'}
+    var gi=0;CFG.grupos.forEach(function(g){var b=bloque(g,(gi+1)+'. '+g+(ev(g)?' (tarifas, no incluidas en el total)':'')+(/^Implementación/.test(g)?' · ejecuta: '+implQuien():''));if(b){gi++;h+=b}});
+    if(EX.length){h+='<h2 style="font-size:12pt;margin:14px 0 6px">Implementación a cargo de '+esc(implQuien())+' (no incluida en esta proforma)</h2><p style="font-size:9.5pt">'+esc(io[2])+(num(S.p.implVal)>0?' Valor informado por el implementador: <b>'+usd(num(S.p.implVal))+'</b> (referencial; lo cotiza y factura el implementador).':' La cotiza y factura el implementador.')+'</p><ul style="margin:0 0 6px 18px;padding:0">'+EX.map(function(l){return '<li><b>'+esc(l.c)+' · '+esc(l.n)+'</b></li>'}).join('')+'</ul>'}
     var sum=function(a,b,bold){return '<tr><td style="'+td+(bold?';font-weight:bold;border-top:2px solid #14181E':'')+'">'+a+'</td><td style="'+tn+(bold?';font-weight:bold;border-top:2px solid #14181E':'')+'">'+b+'</td></tr>'};
     h+='<h2 style="font-size:12pt;margin:14px 0 6px">Resumen económico</h2><table style="width:100%;border-collapse:collapse"><tr><th style="'+th+'">Concepto</th><th style="'+th+';text-align:right">Valor</th></tr>';
     if(t.u){h+=sum('Pagos únicos, subtotal sin IVA',usd(t.u))+(t.ud?sum('Descuento '+pct(num(S.p.desc),0),usd(-t.ud)):'')+sum('IVA '+pct(num(S.p.iva),0),usd(t.uiva))+sum('Total única vez',usd(t.ut),1)}
     if(t.m){h+=sum('Control mensual, subtotal sin IVA',usd(t.m))+(t.md?sum('Descuento '+pct(num(S.p.desc),0),usd(-t.md)):'')+sum('IVA '+pct(num(S.p.iva),0),usd(t.miva))+sum('Total mensual',usd(t.mt),1)+sum('Inversión del primer año ('+t.meses+' meses), con IVA',usd(t.aniot),1)}
     h+='</table>';
     // marketing
-    var ben=t.L.filter(function(l){return l.g!=='Por evento'}).map(function(l){return '<li><b>'+esc(l.n)+':</b> '+esc(l.b)+'</li>'}).join('');
+    var ben=t.L.filter(function(l){return !ev(l.g)&&!l.ex}).map(function(l){return '<li><b>'+esc(l.n)+':</b> '+esc(l.b)+'</li>'}).join('');
     var val=[];var mu=num(S.p.multa);var inv=t.u+t.m*Math.min(t.meses,12);
     if(mu>0&&inv>0)val.push('<li><b>Su inversión frente a su exposición.</b> La multa estimada para su organización si no actúa es de <b>'+usd0(mu)+'</b> (estimación con la metodología de la Res. SPDP-SPD-2025-0022-R sobre su volumen de negocio). La inversión del primer año sin IVA, <b>'+usd0(inv)+'</b>, equivale al <b>'+pct(inv/mu*100,0)+'</b> de esa exposición, y además reduce la probabilidad de sanción.</li>');
     if(t.L.some(function(l){return l.id==='dpd'})){var ci=dpdInt(),ex=t.m*12;if(ci.total>ex)val.push('<li><b>La dedicación que necesita, sin carga laboral.</b> Contratar un DPD a tiempo completo con sueldo de '+usd0(num(S.k.salario))+' costaría alrededor de <b>'+usd0(ci.total)+'</b> al año con aportes y beneficios de ley. Su organización requiere una dedicación estimada de '+String(R.t.mensH).replace('.',',')+' horas al mes, que este servicio cubre por <b>'+usd0(ex)+'</b> al año sin IVA, sin costos de selección, formación ni rotación.</li>')}
@@ -384,7 +402,7 @@
   $('copXls').onclick=function(){var t=totals();if(!t.L.length){toast('Elija al menos un servicio');return}
     var f=function(x){return r2(x).toFixed(2).replace('.',',')};
     var rows=[['Proforma',S.p.num],['Cliente',S.c.emp||''],['Fecha',S.p.fecha],[],['Grupo','Código','Servicio','Unidad','Cantidad','Valor unitario','Subtotal sin IVA']];
-    t.L.forEach(function(l){rows.push([l.g,l.c,l.n,l.u,l.q,f(l.v),l.g==='Por evento'?'':f(l.st)])});
+    t.L.forEach(function(l){rows.push([l.g,l.c,l.n,l.u,l.q,f(l.v),ev(l.g)?'':l.ex?'A cargo de '+implQuien()+' (no suma)':f(l.st)])});
     rows.push([],['Única vez sin IVA',f(t.un)],['IVA',f(t.uiva)],['Total única vez',f(t.ut)],['Mensual sin IVA',f(t.mn)],['IVA mensual',f(t.miva)],['Total mensual',f(t.mt)],['Primer año con IVA',f(t.aniot)]);
     var txt=rows.map(function(r){return r.join('\t')}).join('\n');
     if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(function(){toast('Detalle copiado: pegue en Excel')},function(){fb(txt)});else fb(txt)};

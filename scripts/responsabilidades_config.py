@@ -199,7 +199,7 @@ ANTES = [
 ABIERTOS = [
  ["Riesgos: la guía v2 (Cap. II, referencial) pone al DPD a fijar criterios de riesgo y «auditar» informes, mientras la Res. 0028 art. 15.2 le prohíbe ejecutar la gestión de riesgos. Criterio de la app: el DPD propone, revisa y observa; el responsable aprueba y ejecuta.", "BASE-LEGAL, punto 30"],
  ["Vulneraciones: la Res. 0028 art. 13.3 aún nombra a la ARCOTEL; rige el art. 43 LOPDP reformado (organismo competente y CSIRT).", "BASE-LEGAL, punto 31"],
- ["Una misma firma como DPD e implementadora del mismo cliente: la norma no lo resuelve. Criterio prudente: no ser DPD de quien uno implementa; si la firma presta ambos servicios, personas distintas, declaración del art. 17 y consulta a la SPDP.", "BASE-LEGAL, punto 32"],
+ ["Una misma firma como DPD e implementadora del mismo cliente: la norma no lo resuelve. Criterio adoptado en la app (2026-11-11): la evaluación y la supervisión se separan de la implementación; si MSC es DPO no implementa; la implementación la ejecuta el responsable, un proveedor o un tercero coordinado por MSC, de preferencia con contrato directo; si MSC subcontrata, personas distintas, declaración del art. 17 y consulta a la SPDP.", "BASE-LEGAL, punto 32"],
  ["Infracciones muy graves: el art. 66 num. 3 LOPDP las menciona, pero la ley no las tipifica ni les fija multa. Tampoco hay un catálogo de infracciones propio del DPD; su responsabilidad se rige por el art. 49 LOPDP y la Res. 0028 art. 13. La multa exacta depende del Anexo I de la Res. 0022, aún no cotejado.", "BASE-LEGAL, puntos 11 y 38"],
 ]
 
@@ -240,6 +240,18 @@ QUIEN = {
 
 # ---------------- Temas clave ----------------
 TEMAS = [
+ {"id": "separacion", "t": "Evaluación frente a implementación",
+  "que": "El DPD evalúa, revisa, observa y verifica; no implementa. La implementación (elaborar el RAT, las ponderaciones, las evaluaciones de impacto, políticas, contratos y procedimientos, y ponerlos en marcha) la decide el responsable y la ejecuta su personal, un proveedor o un tercero.",
+  "que_c": "Res. 0028 arts. 12, 13, 15.1 y 15.2",
+  "ejemplos": ["El implementador elabora la evaluación de impacto; el DPD la revisa y emite observaciones no vinculantes.", "El área legal redacta los contratos de encargo; el DPD verifica que tengan el contenido del art. 41 del RGLOPDP.", "Un tercero coordinado por la firma implementa el protocolo de vulneraciones; el DPD verifica que funciona con un simulacro."],
+  "implica": [
+   ["El DPD no puede implementar directamente la normativa.", "Res. 0028 art. 15.1"],
+   ["El DPD no ejecuta la gestión de riesgos ni la evaluación de impacto; puede emitir observaciones no vinculantes.", "Res. 0028 art. 15.2"],
+   ["La organización puede contratar, aparte del DPD, implementación o consultoría con personas jurídicas.", "Res. 0028 art. 12"],
+   ["Hay conflicto de intereses si el DPD ejecuta o participa en tratamientos; se declara antes de aceptar.", "Res. 0028 arts. 17 y 18"]],
+  "dpd": ["Registrar en la ficha del cliente su rol (consultor o DPO) y quién implementa.", "Usar las herramientas 04, 06 y 07 en modo «Revisión del DPO» cuando sea DPO del cliente.", "Verificar lo implementado con evidencia (S30) y dejar constancia de cada observación y su respuesta.", "Si la firma coordina la implementación, preferir que el tercero contrate y facture directo y declarar la relación."],
+  "exigir": ["Nombre del implementador y alcance de su contrato.", "Versiones fechadas de lo elaborado y respuesta escrita a cada observación.", "Evidencias de la puesta en marcha (documentos firmados, formularios publicados, registros)."],
+  "herr": ["01", "02", "04", "06", "07"]},
  {"id": "perfiles", "t": "Elaboración de perfiles",
   "que": "Todo tratamiento de datos que permite evaluar, analizar o predecir aspectos de una persona para determinar comportamientos o estándares sobre su rendimiento profesional, situación económica, salud, preferencias, intereses, habilidad, ubicación o movimiento.",
   "que_c": "LOPDP art. 4",

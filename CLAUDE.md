@@ -22,7 +22,7 @@ Repositorio de herramientas de cumplimiento LOPDP (Ecuador) de Macías Sánchez 
 La numeración de las herramientas sigue el orden de uso de la guía (`docs/guia/`). Si se agrega una herramienta, ubicarla en ese orden y actualizar la guía.
 
 
-- `01-catalogo-servicios/` — catálogo de servicios y glosario, fuente `scripts/catalogo_config.py`; la proforma de 02 importa de allí sus servicios (mismos códigos S01 a S28)
+- `01-catalogo-servicios/` — catálogo de servicios y glosario, fuente `scripts/catalogo_config.py`; la proforma de 02 importa de allí sus servicios (mismos códigos S01 a S30)
 - `02-honorarios/` — calculadora de honorarios y proforma, fuente `scripts/honorarios_config.py` (tarifas y tramos son criterio propio)
 - `03-madurez/` — diagnóstico de madurez, fuente `scripts/madurez_config.py` (modelo propio, rotularlo siempre así)
 - `04-registro-tratamientos/` — RAT

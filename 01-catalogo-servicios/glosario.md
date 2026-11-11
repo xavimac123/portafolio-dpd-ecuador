@@ -53,8 +53,9 @@
 
 | Término | Definición |
 |---|---|
-| Adecuación | Diagnosticar y documentar lo que la empresa debe cambiar para cumplir. La empresa la aprueba; el consultor puede redactar los borradores. |
-| Implementación | Poner en operación las medidas: formularios, sistemas, contratos firmados, capacitación. La ejecuta la empresa. |
+| Evaluación y diagnóstico | Medir el cumplimiento, revisar lo elaborado y emitir observaciones. Lo hace el consultor o el DPO; no ejecuta. |
+| Implementación | Elaborar los documentos y poner en operación las medidas: RAT, evaluaciones, políticas, contratos firmados, formularios, sistemas. La decide el responsable y la ejecuta su personal, un proveedor o el tercero que MSC coordina; MSC solo si no es DPO de ese cliente. |
+| Observación no vinculante | Opinión del DPO sobre lo elaborado por el responsable; este decide si la acoge (Res. SPDP-SPD-2025-0028-R arts. 15.2 y 15.3). |
 | Supervisión | Verificar, medir e informar que lo documentado e implementado se cumple. Es la función propia del DPD. |
 | Riesgo inherente y residual | Riesgo antes de las medidas y riesgo que queda después de aplicarlas. |
 | Justificación (rationale) | Explicación de por qué se asigna cada valor de impacto o probabilidad: datos, antecedentes y controles. Sin ella, la guía v2 de la SPDP considera la estimación ruido. |

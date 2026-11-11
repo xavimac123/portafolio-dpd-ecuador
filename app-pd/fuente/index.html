@@ -184,6 +184,7 @@ body.dark .ref-n.p-Base{border-left-color:var(--oroc)}
 
 <script type="application/json" id="j-tools">__TOOLS_JSON__</script>
 <script type="application/json" id="j-serv">__SERV_JSON__</script>
+<script type="application/json" id="j-sep">__SEP_JSON__</script>
 <script type="application/json" id="j-img">__IMG_JSON__</script>
 <script type="application/json" id="j-ref">__REF_JSON__</script>
 <script type="application/json" id="j-glo">__GLO_JSON__</script>
@@ -196,6 +197,9 @@ body.dark .ref-n.p-Base{border-left-color:var(--oroc)}
 var PWA=!!window.MSC_PWA;
 var TOOLS=JSON.parse(document.getElementById('j-tools').textContent);
 var SERV=JSON.parse(document.getElementById('j-serv').textContent);
+/* Separación evaluación / implementación (scripts/catalogo_config.py: ROLES_MSC, IMPLEMENTACION) */
+var SEP=JSON.parse(document.getElementById('j-sep').textContent);
+function sepNom(L,k){var x=(L||[]).filter(function(o){return o[0]===k})[0];return x?x[1]:''}
 var IMG=JSON.parse(document.getElementById('j-img').textContent);
 var REF=JSON.parse(document.getElementById('j-ref').textContent);
 var GLO=JSON.parse(document.getElementById('j-glo').textContent);
@@ -237,7 +241,7 @@ var HERR=[
  {id:'09',n:'Vulneraciones',m:'Protocolo, plazos y notificaciones'}];
 function herr(id){return HERR.filter(function(h){return h.id===id})[0]}
 var EST={prospecto:['Prospecto','g'],propuesta:['Propuesta enviada',''],activo:['Activo','v'],pausa:['En pausa','g'],cerrado:['Cerrado','g']};
-var MODAL=['Diagnóstico inicial','Adecuación (proyecto)','DPD externo designado','Acompañamiento de cumplimiento','Revisión anual','Servicio puntual'];
+var MODAL=['Diagnóstico inicial','Implementación (proyecto; MSC no es DPO del cliente)','DPD externo designado','Acompañamiento de cumplimiento','Revisión anual','Servicio puntual'];
 var TAM=['Microempresa','Pequeña','Mediana','Grande'];
 var TIPOS={
  control:{n:'Control mensual',h:'03'},
@@ -432,15 +436,21 @@ function formCliente(id){var c=id?cli(id):{est:'prospecto',serv:[],ini:hoy()},V=
  '<div class="card"><h3>Empresa</h3><div class="grid">'+campo('f-rs','Razón social',c.rs,'text',true)+campo('f-ruc','RUC',c.ruc)+sel('f-tam','Tamaño',c.tam,TAM)+campo('f-sec','Sector o actividad',c.sec)+campo('f-ciu','Ciudad',c.ciu)+
  campo('f-trab','Número de trabajadores',c.trab,'number')+campo('f-ven','Ventas del ejercicio anterior (USD, sin IVA)',c.ven,'number')+'</div></div>'+
  '<div class="card"><h3>Contacto en la empresa</h3><div class="grid">'+campo('f-cn','Nombre',c.cn)+campo('f-cc','Cargo',c.cc)+campo('f-cm','Correo',c.cm,'email')+campo('f-ct','Teléfono',c.ct,'tel')+'</div></div>'+
- '<div class="card"><h3>Servicio</h3><div class="grid">'+sel('f-est','Estado',c.est,Object.keys(EST).map(function(k){return [k,EST[k][0]]}))+sel('f-mod','Modalidad',c.modal,MODAL)+campo('f-ini','Fecha de inicio',c.ini,'date')+campo('f-fin','Fin del contrato (opcional)',c.fin,'date')+campo('f-hon','Honorario mensual (USD, sin IVA)',c.hon,'number')+campo('f-tar','Valor hora objetivo (USD)',c.tar,'number')+
- '<div class="full"><label>Servicios contratados (catálogo S01 a S28)</label><div class="chips" id="f-sv">'+SERV.map(function(s){return '<button type="button" data-s="'+s[0]+'" title="'+esc(s[2])+'" class="'+((c.serv||[]).indexOf(s[0])>-1?'on':'')+'">'+s[0]+' · '+esc(s[1])+'</button>'}).join('')+'</div></div>'+
+ '<div class="card"><h3>Servicio</h3><div class="grid">'+sel('f-est','Estado',c.est,Object.keys(EST).map(function(k){return [k,EST[k][0]]}))+sel('f-mod','Modalidad',c.modal==='Adecuación (proyecto)'?MODAL[1]:c.modal,MODAL)+campo('f-ini','Fecha de inicio',c.ini,'date')+campo('f-fin','Fin del contrato (opcional)',c.fin,'date')+campo('f-hon','Honorario mensual (USD, sin IVA)',c.hon,'number')+campo('f-tar','Valor hora objetivo (USD)',c.tar,'number')+
+ '<div class="full"><p class="hint" style="margin:4px 0 8px"><b>Evaluación e implementación separadas.</b> MSC evalúa, revisa y supervisa; la implementación la decide el responsable. Si MSC es DPO de este cliente, no la ejecuta (Res. SPDP-SPD-2025-0028-R art. 15.1).</p></div>'+sel('f-rol','Rol de MSC con este cliente',c.rol,SEP.roles.map(function(x){return [x[0],x[1]]}))+sel('f-impl','Implementación a cargo de',c.impl,SEP.impl.map(function(x){return [x[0],x[1]]}))+campo('f-imn','Nombre del implementador',c.implNom,'text',false,'Área interna o razón social del tercero')+'<div class="full" id="f-sepw"></div>'+
+ '<div class="full"><label>Servicios contratados (catálogo S01 a S30)</label><div class="chips" id="f-sv">'+SERV.map(function(s){return '<button type="button" data-s="'+s[0]+'" title="'+esc(s[2])+'" class="'+((c.serv||[]).indexOf(s[0])>-1?'on':'')+'">'+s[0]+' · '+esc(s[1])+'</button>'}).join('')+'</div></div>'+
  '<div class="full"><label for="f-not">Notas</label><textarea id="f-not">'+esc(c.not||'')+'</textarea></div></div></div>'+
  '<div class="row"><button class="btn" id="f-g">Guardar</button>'+(id?'<button class="btn sec" id="f-d">Eliminar cliente</button>':'')+'</div><div class="msg" id="f-m"></div>';
  $$('#f-sv button').forEach(function(b){b.onclick=function(){b.classList.toggle('on')}});
+ function sepAviso(){var ro=$('#f-rol').value,im=$('#f-impl').value,o=SEP.impl.filter(function(x){return x[0]===im})[0],t='';
+  if(ro==='dpo'&&im==='msc')t='<div class="msg e">Incompatible: MSC no implementa para un cliente del que es DPO (Res. SPDP-SPD-2025-0028-R art. 15.1).</div>';
+  else if(o&&o[4]&&(ro==='dpo'||im==='msc'))t='<div class="nota">'+esc(o[4])+'</div>';
+  else if(o)t='<p class="hint">'+esc(o[2])+'</p>';$('#f-sepw').innerHTML=t}
+ $('#f-rol').onchange=sepAviso;$('#f-impl').onchange=sepAviso;sepAviso();
  $('#f-b').onclick=function(){if(id){R.sel=id;fichaCliente(id)}else{R.sel=null;vCli()}};
  $('#f-g').onclick=function(){var rs=$('#f-rs').value.trim();if(!rs){$('#f-m').className='msg e';$('#f-m').textContent='Ingrese la razón social.';return}
-  var o=id?c:{id:uid(),cod:sigCod('PD')};var m={rs:rs,ruc:'f-ruc',tam:'f-tam',sec:'f-sec',ciu:'f-ciu',trab:'f-trab',ven:'f-ven',cn:'f-cn',cc:'f-cc',cm:'f-cm',ct:'f-ct',est:'f-est',modal:'f-mod',ini:'f-ini',fin:'f-fin',hon:'f-hon',tar:'f-tar',not:'f-not'};
-  Object.keys(m).forEach(function(k){if(k!=='rs')o[k]=$('#'+m[k]).value.trim()});o.rs=rs;o.est=o.est||'prospecto';o.serv=$$('#f-sv button.on').map(function(b){return b.dataset.s});o.upd=Date.now();
+  var o=id?c:{id:uid(),cod:sigCod('PD')};var m={rs:rs,ruc:'f-ruc',tam:'f-tam',sec:'f-sec',ciu:'f-ciu',trab:'f-trab',ven:'f-ven',cn:'f-cn',cc:'f-cc',cm:'f-cm',ct:'f-ct',est:'f-est',modal:'f-mod',ini:'f-ini',fin:'f-fin',hon:'f-hon',tar:'f-tar',not:'f-not',rol:'f-rol',impl:'f-impl',implNom:'f-imn'};
+  Object.keys(m).forEach(function(k){if(k!=='rs')o[k]=$('#'+m[k]).value.trim()});if(o.rol==='dpo'&&o.impl==='msc'){$('#f-m').className='msg e';$('#f-m').textContent='Si MSC es DPO de este cliente, no puede ser el implementador (Res. SPDP-SPD-2025-0028-R art. 15.1). Elija otro.';return}o.rs=rs;o.est=o.est||'prospecto';o.serv=$$('#f-sv button.on').map(function(b){return b.dataset.s});o.upd=Date.now();
   if(!id)R.data.clientes.push(o);guardar().then(function(){toast('Cliente guardado.');R.sel=o.id;fichaCliente(o.id)})};
  if(id)$('#f-d').onclick=function(){if(!confirmar(this))return;c.del=true;c.upd=Date.now();plazos(id).forEach(function(p){p.del=true;p.upd=Date.now()});guardar().then(function(){calSyncTodas(false);R.sel=null;vCli();toast('Cliente eliminado.')})};
 }
@@ -455,10 +465,10 @@ function fichaCliente(id){var c=cli(id),V=$('#v-cli');if(!c){R.sel=null;return v
  '<div class="card"><h3>Plazos y agenda <span class="row"><button class="btn sm sec" id="k-ciclo">Agendar ciclo anual</button><button class="btn sm" id="k-np">+ Plazo</button></span></h3><div class="list" id="k-pl">'+(P.slice().sort(function(a,b){return (a.est==='hecho')-(b.est==='hecho')||(a.f<b.f?-1:1)}).slice(0,30).map(itemPlazo).join('')||'<p class="sub">Sin plazos registrados.</p>')+'</div></div>'+
  '<div class="card"><h3>Solicitudes de derechos <button class="btn sm" id="k-ns">+ Solicitud</button></h3><p class="hint" style="margin:-4px 0 8px">Registre la solicitud con un código, sin nombre ni cédula del titular: esos datos quedan en el sistema del cliente.</p><div class="list">'+(S.map(function(s){var dd=s.flim?difDias(s.flim):null;return '<div class="it" data-s="'+s.id+'"><div class="d '+(s.est==='cerrada'?'v':dd!=null&&dd<0?'r':'a')+'">'+(s.flim?esc(fcorta(s.flim).replace(/ \d{4}$/,'')):'—')+'</div><div><div class="t">'+esc(s.cod)+' · '+esc(s.der)+'</div><div class="m">Recibida '+esc(fcorta(s.frec))+' · '+(s.est==='cerrada'?'Respondida':'Abierta')+'</div></div></div>'}).join('')||'<p class="sub">Sin solicitudes.</p>')+'</div></div>'+
  '<div class="card"><h3>Datos del cliente <button class="btn sm sec" id="k-ed">Editar</button></h3><table><tbody>'+
- [['Contacto',[c.cn,c.cc].filter(Boolean).join(', ')],['Correo',c.cm],['Teléfono',c.ct],['Ciudad',c.ciu],['Trabajadores',c.trab],['Ventas año anterior',+c.ven?usd(c.ven):''],['Modalidad',c.modal],['Honorario mensual',+c.hon?usd(c.hon)+' más IVA':''],['Valor hora objetivo',+c.tar?usd(c.tar):''],['Inicio',fcorta(c.ini)],['Fin del contrato',fcorta(c.fin)],['Servicios',(c.serv||[]).join(', ')],['Notas',c.not]].filter(function(r){return r[1]}).map(function(r){return '<tr><th style="width:38%">'+r[0]+'</th><td>'+esc(r[1])+'</td></tr>'}).join('')+'</tbody></table>'+
+ [['Contacto',[c.cn,c.cc].filter(Boolean).join(', ')],['Correo',c.cm],['Teléfono',c.ct],['Ciudad',c.ciu],['Trabajadores',c.trab],['Ventas año anterior',+c.ven?usd(c.ven):''],['Modalidad',c.modal],['Rol de MSC',sepNom(SEP.roles,c.rol)],['Implementación',[c.implNom,sepNom(SEP.impl,c.impl)].filter(Boolean).join(' · ')],['Honorario mensual',+c.hon?usd(c.hon)+' más IVA':''],['Valor hora objetivo',+c.tar?usd(c.tar):''],['Inicio',fcorta(c.ini)],['Fin del contrato',fcorta(c.fin)],['Servicios',(c.serv||[]).join(', ')],['Notas',c.not]].filter(function(r){return r[1]}).map(function(r){return '<tr><th style="width:38%">'+r[0]+'</th><td>'+esc(r[1])+'</td></tr>'}).join('')+'</tbody></table>'+
  (c.cm||c.ct?'<div class="row" style="margin-top:10px">'+(c.ct?'<a class="btn sm sec" href="https://wa.me/'+esc(String(c.ct).replace(/\D/g,'').replace(/^0/,'593'))+'" target="_blank" rel="noopener">WhatsApp</a>':'')+(c.cm?'<a class="btn sm sec" href="mailto:'+esc(c.cm)+'">Correo</a>':'')+'</div>':'')+'</div>'+
  fichaExtraBottom(id)+
- '<div class="card"><h3>Exportar</h3><label>Resumen del cliente (estado de cumplimiento)</label><div class="row">'+expBtns('k-res')+'</div><div class="row" style="margin-top:12px"><button class="btn" id="k-inf">Informe mensual</button><button class="btn sec" id="k-prf">Enviar servicios a la proforma (Gestor Legal)</button></div><p class="hint">La vista previa muestra el documento tal como saldrá; desde ahí se guarda en PDF o Word. Word y PDF salen con espacio de '+D.ALTO_FIRMA_CM+' cm para firma y sello. «Copiar» sirve para pegar en un documento ya abierto. La proforma se arma en MSC Gestor Legal con los servicios marcados en la ficha (S01 a S28).</p></div>';
+ '<div class="card"><h3>Exportar</h3><label>Resumen del cliente (estado de cumplimiento)</label><div class="row">'+expBtns('k-res')+'</div><div class="row" style="margin-top:12px"><button class="btn" id="k-inf">Informe mensual</button><button class="btn sec" id="k-prf">Enviar servicios a la proforma (Gestor Legal)</button></div><p class="hint">La vista previa muestra el documento tal como saldrá; desde ahí se guarda en PDF o Word. Word y PDF salen con espacio de '+D.ALTO_FIRMA_CM+' cm para firma y sello. «Copiar» sirve para pegar en un documento ya abierto. La proforma se arma en MSC Gestor Legal con los servicios marcados en la ficha (S01 a S30).</p></div>';
  $('#k-b').onclick=function(){R.sel=null;vCli()};$('#k-ed').onclick=function(){formCliente(id)};$('#k-np').onclick=function(){formPlazo(null,id)};$('#k-ns').onclick=function(){formSol(null,id)};$('#k-ciclo').onclick=function(){cicloAnual(id)};
  $$('[data-ht]',V).forEach(function(b){b.onclick=function(){abrirTool(b.dataset.ht,id)}});bindPlazos(V);
  $$('[data-s]',V).forEach(function(e){e.onclick=function(){formSol(e.dataset.s,id)}});
@@ -565,7 +575,7 @@ function elegirPractica(h){var ops=PRAC.map(function(t){var e=pracPerfil(t.k);re
   abrirTool(h,'_libre',pracPerfil(k))})}
 window.PDPrefill=function(on){if(_open)_open.pre=!!on};
 window.PDCliente=function(){if(!_open)return null;if(_open.perfil)return _open.perfil;var c=_open.cid&&_open.cid.charAt(0)!=='_'?cli(_open.cid):null;if(!c)return null;
- return {rs:c.rs,ruc:c.ruc||'',tam:c.tam||'',sec:c.sec||'',secK:c.sec||'',trab:c.trab||'',ven:c.ven||'',ciu:c.ciu||''}};
+ return {rs:c.rs,ruc:c.ruc||'',tam:c.tam||'',sec:c.sec||'',secK:c.sec||'',trab:c.trab||'',ven:c.ven||'',ciu:c.ciu||'',rol:c.rol||(/DPD externo/.test(c.modal||'')?'dpo':''),impl:c.impl||'',implNom:c.implNom||''}};
 function elegirClienteYAbrir(h){elegir(h+' · '+herr(h).n,'¿Con qué datos trabaja? Un cliente registrado completa la herramienta con su ficha y guarda la evaluación en su expediente. Al cerrar volverá a esta pantalla.',clientes().map(function(c){return [c.id,c.rs,'Cliente registrado · '+(EST[c.est]||EST.prospecto)[0]+(c.modal?' · '+c.modal:'')]}).concat([['_nuevo','Cliente nuevo (consulta)','Ingresa los datos en la herramienta; no se guarda en un expediente'],['_libre','Modo práctica','Empresa ficticia generada según el tipo de organización']]),function(c){store('hcli',c);abrirConCliente(h,c)})}
 function abrirConCliente(h,c){if(c==='_libre')return elegirPractica(h);abrirTool(h,c)}
 window.PDBridge={
@@ -1038,7 +1048,7 @@ function vDpo(){var V=$('#v-dpo'),q=store('dq')||'',sc=store('ds')||'',I=DPO.INT
     f+='<div class="card"><h3>'+esc(e.eje)+' <span class="tag g">'+L.length+'</span></h3>'+L.map(function(x){return '<div class="fn"><div class="ft">'+esc(x.t)+'</div><div class="fd">'+esc(x.d)+'</div>'+ciT(x.c)+(x.como.length?'<div class="cmk">Cómo ejercerla · buena práctica (criterio propio)</div><ul class="cm">'+x.como.map(function(c){return '<li>'+esc(c)+'</li>'}).join('')+'</ul>':'')+hBtns(x.herr)+'</div>'}).join('')+'</div>'});
    if(f)g+=grupo('fun','Funciones y deberes del DPD','Asesorar, supervisar, derechos, vulneraciones, cooperación con la SPDP y deberes propios',nf,f)}
   if(on('quien')){var qh=quienHtml(ok);if(qh)g+=grupo('quien','Quién puede ser DPO','Requisitos, cómputo de los cinco años, impedimentos y calculadora',0,qh)}
-  if(on('temas')){var th=DPO.TEMAS.map(function(T){return temaHtml(T,ok)}).join('');if(th)g+=grupo('temas','Perfiles y rationales','Qué son, qué implican, qué hace el DPD y qué exigir',0,th)}
+  if(on('temas')){var th=DPO.TEMAS.map(function(T){return temaHtml(T,ok)}).join('');if(th)g+=grupo('temas','Temas clave: evaluación e implementación, perfiles y rationales','Qué son, qué implican, qué hace el DPD y qué exigir',0,th)}
   if(on('gar')){var G=DPO.GARANTIAS.filter(function(x){return ok(x.join(' '))});if(G.length)g+=grupo('gar','Lo que la organización debe garantizar','Y que el DPD debe exigir',G.length,'<div class="card"><ul class="cst">'+G.map(function(x){return liD('✅',x)}).join('')+'</ul></div>')}
   if(on('pro')){var Pr=DPO.PROHIBICIONES.filter(function(x){return ok(x.join(' '))}),Im=DPO.IMPEDIMENTOS.filter(function(x){return ok(x.join(' '))});
    if(Pr.length||Im.length)g+=grupo('pro','Lo que el DPD no debe hacer','Prohibiciones, conflictos de intereses e impedimentos',Pr.length+Im.length,(Pr.length?'<div class="card"><h3>Prohibiciones y conflictos de intereses <span class="tag r">'+Pr.length+'</span></h3><p class="hint" style="margin-top:0">En ningún caso puede recibir instrucciones sobre sus funciones ni sufrir represalias (Res. 0028 art. 15).</p><ul class="cst">'+Pr.map(function(x){return liD('⛔',x)}).join('')+'</ul></div>':'')+

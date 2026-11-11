@@ -19,7 +19,16 @@ Al DPD o consultor, en especial al que empieza. La versión para el cliente (bot
 | `correos-campana.md` | Secuencia de cinco correos empresariales y dos respuestas tipo, con pie de baja obligatorio |
 | `docx/` | Versiones Word |
 
-Fuente única: `scripts/catalogo_config.py`. La calculadora de honorarios (herramienta 02) importa de allí sus servicios: **mismos códigos (S01 a S28), nombres, unidades y precios sugeridos**. Regenerar con `python scripts/generar_catalogo.py` y `python scripts/generar_calculadora_honorarios.py`.
+Fuente única: `scripts/catalogo_config.py`. La calculadora de honorarios (herramienta 02) importa de allí sus servicios: **mismos códigos (S01 a S30), nombres, unidades y precios sugeridos**. Regenerar con `python scripts/generar_catalogo.py` y `python scripts/generar_calculadora_honorarios.py`.
+
+## Dos líneas de trabajo (desde el 2026-11-11)
+
+Los servicios se agrupan en dos líneas separadas:
+
+- **Evaluación, diagnóstico y supervisión** (S01 a S04, S08, S16 a S22, S24 a S30): la realiza MSC como consultor o como DPO. Mide, revisa, emite observaciones no vinculantes y verifica; no ejecuta.
+- **Implementación** (S05 a S07, S09 a S15, S23): la decide el responsable y la ejecuta su personal, un proveedor que elija o un tercero coordinado por MSC (contrato directo o subcontratado). El DPO de la empresa la supervisa y verifica (S29 revisión de evaluaciones; S30 verificación de la implementación). MSC la redacta o ejecuta solo si **no es ni será DPO** de ese cliente.
+
+Base: Res. SPDP-SPD-2025-0028-R arts. 12, 15.1, 15.2, 17 y 18; punto abierto 32 de `BASE-LEGAL.md`. Decisión: `docs/decision-evaluacion-implementacion.md`.
 
 ## Sincronización con la proforma
 

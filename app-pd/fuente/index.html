@@ -124,6 +124,20 @@ details.plg>summary{cursor:pointer;font-weight:700;color:var(--olivo);padding:6p
 .met h4{margin:12px 0 4px;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--olivo)}.met p{margin:0 0 6px;font-size:13.5px}
 .fig{width:100%;max-width:520px;height:auto;display:block;margin:6px 0 4px}
 footer{max-width:820px;margin:0 auto;padding:0 14px 28px;font-size:11.5px;color:var(--gris)}
+.dv{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}@media(max-width:560px){.dv{grid-template-columns:1fr}}
+.dv>div{background:#1E242C;border-radius:10px;padding:10px 12px}.dv b{color:var(--oroc);font-stretch:112%;font-size:15px}.dv p{margin:3px 0 0;font-size:13px;color:#E7E4DA;max-width:none}.dv small{display:block;color:#9AA1AA;font-size:11px;margin-top:4px}
+.hero .dl{margin:10px 0 0;padding:0;list-style:none}.hero .dl li{font-size:13.5px;color:#E7E4DA;padding:5px 0;border-top:1px solid #2A3038}.hero .dl .f{color:var(--oroc);font-size:11px;font-weight:700}
+.regla{background:var(--oro);color:#14181E;border-radius:10px;padding:10px 12px;margin-top:10px;font-size:13.5px;font-weight:600}.regla small{display:block;font-weight:500;font-size:11.5px;margin-top:3px}
+.fn{padding:11px 0;border-top:1px solid var(--linea)}.fn:first-of-type{border-top:0}.fn .ft{font-weight:800;font-stretch:106%}.fn .fd{font-size:13.5px;margin:3px 0}
+.ci{display:inline-block;background:var(--avif);color:var(--olivo);font-weight:700;font-size:11px;border-radius:5px;padding:1px 7px;letter-spacing:.02em}
+.fn .cm{font-size:12.5px;color:var(--gris);margin:6px 0 0;padding-left:16px}.fn .cm li{margin:2px 0}.fn .cmk{font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--olivo);margin-top:6px}
+.noes{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px}.noes>div{background:var(--card);border:1px solid var(--linea);border-left:4px solid var(--mal);border-radius:10px;padding:10px 12px}
+.noes .nm{font-weight:800;font-stretch:106%;font-size:14px}.noes .nm span{color:var(--mal)}.noes .nr{font-size:13.5px;margin:4px 0 6px}
+.fase{counter-reset:f;list-style:none;margin:0;padding:0}.fase>li{position:relative;padding:10px 0 10px 40px;border-top:1px solid var(--linea)}.fase>li:first-child{border-top:0}
+.fase>li:before{counter-increment:f;content:counter(f);position:absolute;left:0;top:10px;width:28px;height:28px;border-radius:50%;background:var(--carbon);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px}
+body.dark .fase>li:before{background:var(--oro);color:#14181E}.fase b{font-stretch:108%}.fase ul{margin:4px 0 0;padding-left:16px;font-size:13.5px}.fase li li{margin:2px 0}
+.dsec{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--olivo);margin:16px 0 6px}
+.ckr{font-weight:700;font-size:13.5px;padding:10px 12px;border-radius:8px;margin-top:8px}.ckr.ok{background:var(--okf);color:var(--ok)}.ckr.al{background:var(--malf);color:var(--mal)}
 [hidden]{display:none!important}
 body.dark{--marfil:#0F1216;--linea:#2A3038;--gris:#9AA1AA;--card:#171B21;--okf:#14261A;--malf:#2B1714;--avif:#2A2212;--olivo:#C9BC82;--txt:#E7E4DA}
 body.dark input,body.dark select,body.dark textarea,body.dark .btn.sec,body.dark .chips button,body.dark .seg button{background:#1C2128;color:#E7E4DA;border-color:#323A45;color-scheme:dark}
@@ -136,7 +150,7 @@ body.dark .ref-n.p-Base{border-left-color:var(--oroc)}
 <header><img class="deco" id="deco" alt=""><div class="marca"><img class="iso" id="isoimg" alt=""><div class="wm">MACÍAS SÁNCHEZ <span class="pd">PD</span><small>PROTECCIÓN DE DATOS · LOPDP</small></div></div>
 <button id="hdr-lock" hidden>Bloquear</button>
 <nav id="nav" hidden>
-<button data-t="ini" aria-selected="true">Inicio</button><button data-t="cli">Clientes</button><button data-t="her">Herramientas</button><button data-t="age">Agenda</button><button data-t="ref">Referencia</button><button data-t="aju">Ajustes</button>
+<button data-t="ini" aria-selected="true">Inicio</button><button data-t="cli">Clientes</button><button data-t="her">Herramientas</button><button data-t="age">Agenda</button><button data-t="ref">Referencia</button><button data-t="dpo">Responsabilidades DPO</button><button data-t="aju">Ajustes</button>
 </nav></header>
 
 <div id="lock"></div>
@@ -147,6 +161,7 @@ body.dark .ref-n.p-Base{border-left-color:var(--oroc)}
 <section id="v-her"></section>
 <section id="v-age"></section>
 <section id="v-ref"></section>
+<section id="v-dpo"></section>
 <section id="v-aju"></section>
 </main>
 <footer id="foot" hidden>MSC Protección de Datos · Herramienta de uso profesional de Macías Sánchez Consultores. Los datos se guardan cifrados en este dispositivo y, si lo activa, en su Google Drive. No registre datos de los titulares (clientes o trabajadores de sus clientes): solo información de la empresa y de su cumplimiento. Escalas y puntajes de las herramientas: criterio propio cuando así se indica.<br>© 2026 Macías Sánchez Consultores · Abg. Mariano X. Macías Sánchez. Todos los derechos reservados. Prohibida la reproducción, distribución o uso comercial sin autorización escrita.</footer>
@@ -158,6 +173,7 @@ body.dark .ref-n.p-Base{border-left-color:var(--oroc)}
 <script type="application/json" id="j-img">__IMG_JSON__</script>
 <script type="application/json" id="j-ref">__REF_JSON__</script>
 <script type="application/json" id="j-glo">__GLO_JSON__</script>
+<script type="application/json" id="j-dpo">__DPO_JSON__</script>
 <script>__EXPORT_JS__</script>
 <script>
 (function(){
@@ -168,6 +184,7 @@ var SERV=JSON.parse(document.getElementById('j-serv').textContent);
 var IMG=JSON.parse(document.getElementById('j-img').textContent);
 var REF=JSON.parse(document.getElementById('j-ref').textContent);
 var GLO=JSON.parse(document.getElementById('j-glo').textContent);
+var DPO=JSON.parse(document.getElementById('j-dpo').textContent);
 var D=window.MSCDoc,usd=D.usd;
 document.getElementById('isoimg').src=IMG.iso;document.getElementById('deco').src=IMG.lineas;
 
@@ -311,7 +328,7 @@ function entrar(){document.body.classList.remove('locked');$('#lock').innerHTML=
 $$('#nav button').forEach(function(b){b.onclick=function(){if(b.dataset.t==='cli')R.sel=null;show(b.dataset.t)}});
 $('#hdr-lock').onclick=bloquear;
 function show(t){R.view=t;store('tab',t);$$('#nav button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});$$('main section').forEach(function(s){s.classList.toggle('on',s.id==='v-'+t)});
- ({ini:vIni,cli:vCli,her:vHer,age:vAge,ref:vRef,aju:vAju})[t]();badges();window.scrollTo(0,0)}
+ ({ini:vIni,cli:vCli,her:vHer,age:vAge,ref:vRef,dpo:vDpo,aju:vAju})[t]();badges();window.scrollTo(0,0)}
 function badges(){if(!R.data)return;var n=plazos().filter(function(p){return p.est!=='hecho'&&difDias(p.f)<0}).length;var b=$('#nav button[data-t=age]');b.innerHTML='Agenda'+(n?'<span class="b">'+n+'</span>':'')}
 function aplicarTema(){var t=(R.data&&R.data.cfg.tema)||'auto',dk=t==='dark'||(t==='auto'&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);document.body.classList.toggle('dark',dk);document.documentElement.style.background=dk?'#0F1216':'';try{var w=$('#tool-f').contentWindow;if(w&&w.MSCTema)w.MSCTema()}catch(e){}}
 window.PDTema=function(){return document.body.classList.contains('dark')};
@@ -896,6 +913,64 @@ function vRef(){var V=$('#v-ref'),q=store('rq')||'',tm=store('rt')||'';
   $('#r-l').innerHTML=g||'<p class="sub">Sin resultados para esa búsqueda.</p>';
   $$('[data-rh]',V).forEach(function(b){b.onclick=function(){elegirClienteYAbrir(b.dataset.rh)}})};
  $('#r-q').oninput=function(){store('rq',this.value);pinta()};$$('[data-tm]',V).forEach(function(b){b.onclick=function(){tm=b.dataset.tm;store('rt',tm);$$('[data-tm]',V).forEach(function(x){x.classList.toggle('on',x===b)});pinta()}});pinta()}
+
+/* ===================== RESPONSABILIDADES DPO ===================== */
+/* Fuente única: scripts/responsabilidades_config.py (citas en BASE-LEGAL.md). Formas de ejercer, fases de auditoría y clasificación de hallazgos: criterio propio. */
+var DSEC=[['','Todo'],['fun','Funciones'],['gar','Lo que debe garantizar la organización'],['pro','Lo que no debe hacer'],['noes','Qué no es un DPO'],['aud','Buena auditoría'],['ant','Antes de aceptar']];
+function ciT(c){return '<span class="ci">'+esc(c)+'</span>'}
+function hBtns(H){return (H||[]).length?'<div class="row" style="margin-top:6px">'+H.map(function(h){return '<button class="btn sm sec" data-dh="'+h+'">Abrir '+h+' · '+esc(herr(h).n)+'</button>'}).join('')+'</div>':''}
+function liD(ic,x){return '<li><span class="st">'+ic+'</span><div><div>'+esc(x[0])+'</div>'+(x[1]?ciT(x[1]):'')+'</div></li>'}
+function minus(s){return s.charAt(0).toLowerCase()+s.slice(1)}
+function vDpo(){var V=$('#v-dpo'),q=store('dq')||'',sc=store('ds')||'',I=DPO.INTRO;
+ V.innerHTML='<h2>Responsabilidades del DPO</h2><p class="sub">DPO es la sigla en inglés; en la LOPDP la figura se llama <b>delegado de protección de datos (DPD)</b>. Funciones, límites y deberes según la ley, el reglamento y las resoluciones de la SPDP. Revisión: '+esc(fcorta(DPO.REVISION))+'. Las citas son normativas; las formas de ejercer cada función y las fases de auditoría son <b>criterio propio</b>.</p>'+
+ '<div class="hero"><b>Qué es el delegado</b><ul class="dl">'+I.definicion.map(function(d){return '<li>'+esc(d[0])+' <span class="f">'+esc(d[1])+'</span></li>'}).join('')+'</ul>'+
+ '<div class="dv">'+I.verbos.map(function(v){return '<div><b>'+esc(v[0])+'</b><p>'+esc(v[1])+'</p><small>'+esc(v[2])+'</small></div>'}).join('')+'</div>'+
+ '<div class="regla">'+esc(I.regla)+'<small>'+esc(I.regla_cita)+'</small></div></div>'+
+ '<div class="card"><h3>Guía del rol en Word o PDF</h3><p class="hint" style="margin-top:0">Exporta toda la pestaña, con firma de responsabilidad, para entregarla al cliente o archivarla en el expediente.</p><div class="row">'+expBtns('dp-x')+'</div></div>'+
+ '<input id="d-q" placeholder="Buscar: auditoría, conflicto, vulneración, independencia…" value="'+esc(q)+'" style="margin-bottom:8px"><div class="chips" id="d-s" style="margin-bottom:6px">'+DSEC.map(function(s){return '<button data-ds="'+s[0]+'" class="'+(sc===s[0]?'on':'')+'">'+esc(s[1])+'</button>'}).join('')+'</div><div id="d-l"></div>';
+ bindExp('dp-x',dpoDoc,function(){return 'Responsabilidades del DPD Macias Sanchez Consultores'});
+ var pinta=function(){var k=norm($('#d-q').value),ok=function(t){return !k||norm(t).indexOf(k)>-1},on=function(s){return !sc||sc===s},g='';
+  if(on('fun')){var f='';DPO.FUNCIONES.forEach(function(e){var L=e.items.filter(function(x){return ok(e.eje+' '+x.t+' '+x.d+' '+x.c+' '+x.como.join(' '))});if(!L.length)return;
+    f+='<div class="card"><h3>'+esc(e.eje)+' <span class="tag g">'+L.length+'</span></h3>'+L.map(function(x){return '<div class="fn"><div class="ft">'+esc(x.t)+'</div><div class="fd">'+esc(x.d)+'</div>'+ciT(x.c)+(x.como.length?'<div class="cmk">Cómo ejercerla · buena práctica (criterio propio)</div><ul class="cm">'+x.como.map(function(c){return '<li>'+esc(c)+'</li>'}).join('')+'</ul>':'')+hBtns(x.herr)+'</div>'}).join('')+'</div>'});
+   if(f)g+='<div class="dsec">Catálogo de funciones y deberes</div>'+f}
+  if(on('gar')){var G=DPO.GARANTIAS.filter(function(x){return ok(x.join(' '))});if(G.length)g+='<div class="dsec">Lo que la organización debe garantizar (y el DPD exigir)</div><div class="card"><ul class="cst">'+G.map(function(x){return liD('✅',x)}).join('')+'</ul></div>'}
+  if(on('pro')){var Pr=DPO.PROHIBICIONES.filter(function(x){return ok(x.join(' '))}),Im=DPO.IMPEDIMENTOS.filter(function(x){return ok(x.join(' '))});
+   if(Pr.length||Im.length)g+='<div class="dsec">Lo que el DPD no debe hacer</div>'+(Pr.length?'<div class="card"><h3>Prohibiciones y conflictos de intereses <span class="tag r">'+Pr.length+'</span></h3><p class="hint" style="margin-top:0">En ningún caso puede recibir instrucciones sobre sus funciones ni sufrir represalias (Res. 0028 art. 15).</p><ul class="cst">'+Pr.map(function(x){return liD('⛔',x)}).join('')+'</ul></div>':'')+
+    (Im.length?'<div class="card"><h3>Quiénes no pueden ser DPD <span class="tag r">'+Im.length+'</span></h3><ul class="cst">'+Im.map(function(x){return liD('🚫',x)}).join('')+'</ul></div>':'')}
+  if(on('noes')){var N=DPO.NO_ES.filter(function(x){return ok(x.join(' '))});if(N.length)g+='<div class="dsec">Qué no es ser un DPO</div><div class="noes" style="margin-bottom:12px">'+N.map(function(x){return '<div><div class="nm"><span>No es</span> '+esc(minus(x[0]))+'</div><div class="nr">'+esc(x[1])+'</div>'+ciT(x[2])+'</div>'}).join('')+'</div>'}
+  if(on('aud')){var A=DPO.AUDITORIA,B=A.base.filter(function(x){return ok(x.join(' '))}),Pi=A.principios.filter(function(x){return ok(x.join(' '))}),F=A.fases.filter(function(x){return ok(x.n+' '+x.pasos.join(' '))}),M=A.mapa.filter(function(x){return ok(x.slice(0,3).join(' '))}),E=A.errores.filter(function(x){return ok(x.join(' '))});
+   if(B.length+Pi.length+F.length+M.length+E.length){g+='<div class="dsec">Cómo ejercer una buena auditoría de protección de datos</div>'+
+    (B.length?'<details class="card plg"'+(k||sc==='aud'?' open':'')+'><summary>Qué exige la norma sobre auditorías <span class="tag g">'+B.length+'</span></summary><ul class="cst">'+B.map(function(x){return liD('§',x)}).join('')+'</ul></details>':'')+
+    (Pi.length?'<div class="card"><h3>Principios del auditor</h3><div class="plz">'+Pi.map(function(x){return '<div><div class="pv">'+esc(x[0])+'</div><div class="pa">'+esc(x[1])+'</div><div class="pf">'+esc(x[2])+'</div></div>'}).join('')+'</div></div>':'')+
+    (F.length?'<div class="card"><h3>Fases de la auditoría <span class="tag">Criterio propio</span></h3><ol class="fase">'+F.map(function(x){return '<li><b>'+esc(x.n)+'</b><ul>'+x.pasos.map(function(p){return '<li>'+esc(p)+'</li>'}).join('')+'</ul>'+hBtns(x.herr)+'</li>'}).join('')+'</ol></div>':'')+
+    (M.length?'<div class="card"><h3>Qué revisar y qué evidencia pedir <span class="tag g">'+M.length+'</span></h3><ul class="cst">'+M.map(function(x){return '<li><span class="st">🔎</span><div><div class="ex">'+esc(x[0])+'</div><div class="qh">'+esc(x[1])+'</div>'+ciT(x[2])+hBtns(x[3])+'</div></li>'}).join('')+'</ul></div>':'')+
+    (E.length?'<div class="card"><h3>Lo que no es una buena auditoría</h3><ul class="cst">'+E.map(function(x){return liD('✖',x)}).join('')+'</ul></div>':'')}}
+  if(on('ant')){var S=store('dpo:ck')||{},Aa=DPO.ANTES.map(function(x,i){return [x,i]}).filter(function(p){return ok(p[0].join(' '))});
+   if(Aa.length)g+='<div class="dsec">Antes de aceptar una designación</div><div class="card"><p class="hint" style="margin-top:0">Marque lo que se cumple. Se guarda solo en este dispositivo y no se asocia a ningún cliente. Conserve la declaración de conflictos firmada (Res. 0028 art. 17).</p><ul class="evl">'+Aa.map(function(p){var x=p[0],i=p[1];return '<li><input type="checkbox" id="dk'+i+'" data-dk="'+i+'"'+(S[i]?' checked':'')+'><label for="dk'+i+'" style="margin:0;font-weight:400;font-size:13.5px;color:var(--txt)">'+(x[2]==='i'?'':'<b>Garantía:</b> ')+esc(x[0])+'<br>'+ciT(x[1])+'</label></li>'}).join('')+'</ul><div id="d-ckr"></div><div class="row" style="margin-top:8px"><button class="btn sm sec" id="d-ck0">Limpiar la lista</button></div></div>'}
+  if(!sc){var Ab=DPO.ABIERTOS.filter(function(x){return ok(x.join(' '))});if(Ab.length)g+='<details class="card plg"><summary>Puntos abiertos sobre el rol <span class="tag">'+Ab.length+'</span></summary><p class="hint">Tensiones entre normas que aún no resuelve la SPDP. No las presente al cliente como definitivas.</p><ul class="cst">'+Ab.map(function(x){return liD('⚠️',x)}).join('')+'</ul></details>'}
+  $('#d-l').innerHTML=g||'<p class="sub">Sin resultados para esa búsqueda.</p>';
+  $$('[data-dh]',V).forEach(function(b){b.onclick=function(){elegirClienteYAbrir(b.dataset.dh)}});
+  $$('[data-dk]',V).forEach(function(c){c.onchange=function(){var S=store('dpo:ck')||{};if(c.checked)S[c.dataset.dk]=1;else delete S[c.dataset.dk];store('dpo:ck',S);ckRes()}});
+  if($('#d-ck0'))$('#d-ck0').onclick=function(){store('dpo:ck',{});pinta()};ckRes()};
+ $('#d-q').oninput=function(){store('dq',this.value);pinta()};
+ $$('[data-ds]',V).forEach(function(b){b.onclick=function(){sc=b.dataset.ds;store('ds',sc);$$('[data-ds]',V).forEach(function(x){x.classList.toggle('on',x===b)});pinta();var y=$('#d-s').getBoundingClientRect().top+window.scrollY-60;if(window.scrollY<y)window.scrollTo(0,y)}});pinta()}
+function ckRes(){var el=$('#d-ckr');if(!el)return;var S=store('dpo:ck')||{},fi=0,fg=0,n=0;DPO.ANTES.forEach(function(x,i){if(S[i])n++;else if(x[2]==='i')fi++;else fg++});
+ el.innerHTML=!n?'':fi?'<div class="ckr al">'+fi+' punto'+(fi>1?'s':'')+' de impedimento o conflicto sin confirmar: declárelo'+(fi>1?'s':'')+' antes de aceptar y valore no aceptar la designación (Res. 0028 art. 17; RGLOPDP art. 56).</div>':fg?'<div class="ckr al">Sin impedimentos pendientes, pero falta'+(fg>1?'n ':' ')+fg+' garantía'+(fg>1?'s':'')+': pídala'+(fg>1?'s':'')+' por escrito antes de aceptar.</div>':'<div class="ckr ok">Todo confirmado. Conserve esta verificación junto con la declaración de conflictos.</div>'}
+function dpoDoc(){var F=R.data.cfg.firma,I=DPO.INTRO,A=DPO.AUDITORIA,TB='<table border="1" cellpadding="5" style="border-collapse:collapse;width:100%;font-size:10pt">',tr=function(a,th){return '<tr>'+a.map(function(x){return (th?'<th>':'<td>')+x+(th?'</th>':'</td>')}).join('')+'</tr>'},T=function(L,h){return TB+tr(h.map(esc),1)+L.map(function(x){return tr(x.map(esc))}).join('')+'</table>'};
+ var h='<h1>Responsabilidades del delegado de protección de datos (DPD)</h1><p>Guía de referencia según la LOPDP, su reglamento y las resoluciones de la SPDP. Revisión de fuentes: '+esc(fcorta(DPO.REVISION))+'. Fecha: '+esc(fcorta(hoy()))+'.</p>'+
+ '<h2>1. Qué es el delegado</h2><ul>'+I.definicion.map(function(d){return '<li>'+esc(d[0])+' ('+esc(d[1])+')</li>'}).join('')+'</ul>'+T(I.verbos,['Función esencial','Alcance','Fuente'])+'<p><b>Regla del rol:</b> '+esc(I.regla)+' ('+esc(I.regla_cita)+')</p>'+
+ '<h2>2. Funciones y deberes</h2><p>La columna «Buena práctica» es criterio propio de Macías Sánchez Consultores; el alcance y la fuente son normativos.</p>'+
+ DPO.FUNCIONES.map(function(e){return '<h3>'+esc(e.eje)+'</h3>'+TB+tr(['Función','Alcance','Buena práctica','Fuente'],1)+e.items.map(function(x){return tr(['<b>'+esc(x.t)+'</b>',esc(x.d),x.como.map(esc).join('<br>')||'—',esc(x.c)])}).join('')+'</table>'}).join('')+
+ '<h2>3. Lo que la organización debe garantizar</h2>'+T(DPO.GARANTIAS,['Garantía','Fuente'])+
+ '<h2>4. Lo que el DPD no debe hacer</h2>'+T(DPO.PROHIBICIONES,['Prohibición o conflicto','Fuente'])+'<h3>Quiénes no pueden ser DPD</h3>'+T(DPO.IMPEDIMENTOS,['Impedimento','Fuente'])+
+ '<h2>5. Qué no es ser un DPD</h2>'+TB+tr(['No es…','Lo que dice la norma','Fuente'],1)+DPO.NO_ES.map(function(x){return tr(['<b>'+esc(minus(x[0]))+'</b>',esc(x[1]),esc(x[2])])}).join('')+'</table>'+
+ '<h2>6. Cómo ejercer una buena auditoría</h2><h3>Qué exige la norma</h3>'+T(A.base,['Regla','Fuente'])+'<h3>Principios del auditor</h3>'+T(A.principios,['Principio','Qué implica','Fuente'])+
+ '<h3>Fases (criterio propio)</h3>'+A.fases.map(function(f,i){return '<p><b>'+(i+1)+'. '+esc(f.n)+'</b></p><ul>'+f.pasos.map(function(p){return '<li>'+esc(p)+'</li>'}).join('')+'</ul>'}).join('')+
+ '<h3>Qué revisar y qué evidencia pedir</h3>'+T(A.mapa.map(function(x){return [x[0],x[1],x[2]]}),['Área','Qué pedir o probar','Fuente'])+'<h3>Lo que no es una buena auditoría</h3>'+T(A.errores,['Error frecuente','Fuente'])+
+ '<h2>7. Puntos abiertos</h2><ul>'+DPO.ABIERTOS.map(function(x){return '<li>'+esc(x[0])+' ('+esc(x[1])+')</li>'}).join('')+'</ul>'+
+ '<p><i>Documento informativo. No sustituye el texto oficial de las normas ni constituye una certificación de cumplimiento.</i></p>'+
+ D.bloqueFirma([{rol:'Elaborado por',l:[F.nom||'',F.cargo||CARGOS[0],[F.mat?'Matrícula '+F.mat:'',F.cargo===CARGOS[1]&&F.reg?'Registro SPDP '+F.reg:''].filter(Boolean).join(' · ')]}],fcorta(hoy()));
+ return h}
 
 /* ===================== AJUSTES ===================== */
 function vAju(){var V=$('#v-aju'),c=R.data.cfg,F=c.firma;

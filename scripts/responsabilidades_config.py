@@ -1,0 +1,203 @@
+"""Fuente única de la pestaña «Responsabilidades DPO» de la app.
+
+Regla del repositorio: toda cita consta en BASE-LEGAL.md. Lo que no viene de la norma (formas de ejercer una función,
+fases de auditoría, clasificación de hallazgos) se rotula como criterio propio en la interfaz y en la exportación.
+DPO es la sigla en inglés; en la LOPDP la figura se llama «delegado de protección de datos» (DPD).
+Siglas de cita: «Res. 0028» = Res. SPDP-SPD-2025-0028-R; «Guía v2» = Res. SPDP-SPD-2026-0012-R.
+"""
+REVISION = "2026-11-11"
+
+INTRO = {
+ "definicion": [
+  ["Persona natural que informa al responsable o al encargado sobre sus obligaciones legales, vela o supervisa el cumplimiento y coopera con la SPDP como punto de contacto.", "LOPDP art. 4"],
+  ["Se encarga principalmente de asesorar, velar y supervisar, de manera independiente, el cumplimiento de las obligaciones legales del responsable y del encargado.", "RGLOPDP art. 48"],
+  ["Es uno de los seis integrantes del sistema de protección de datos personales.", "LOPDP art. 5"]],
+ "regla": "El DPD asesora y supervisa; el responsable decide e implementa. Sus observaciones sobre riesgos y evaluaciones de impacto no son vinculantes, pero deben constar por escrito: si actuó con diligencia, no responde por las decisiones finales del responsable.",
+ "regla_cita": "Res. 0028 arts. 13 (inciso final), 15.1 y 15.2",
+ "verbos": [
+  ["Asesorar", "Informa y orienta al responsable, a su personal y al encargado.", "LOPDP art. 49 num. 1"],
+  ["Supervisar", "Verifica que el cumplimiento sea real y que las medidas funcionen.", "LOPDP art. 49 num. 2"],
+  ["Cooperar", "Es el punto de contacto con la SPDP, sin representar a la organización.", "LOPDP art. 49 num. 4; Res. 0028 art. 15.4"]],
+}
+
+# Catálogo de funciones. Cada ítem: t (función), d (alcance según la norma), c (cita), como (buena práctica, criterio propio), herr.
+FUNCIONES = [
+ {"eje": "Asesorar", "items": [
+  {"t": "Asesorar sobre la normativa", "d": "Asesorar al responsable, a su personal y al encargado sobre la LOPDP, su reglamento y las directrices, lineamientos y regulaciones de la SPDP.", "c": "LOPDP art. 49 num. 1",
+   "como": ["Responder las consultas por escrito y con la norma citada.", "Emitir notas técnicas cuando cambie la normativa (nuevas resoluciones de la SPDP).", "Explicar a cada área sus obligaciones en lenguaje claro."], "herr": ["01"]},
+  {"t": "Asesorar en riesgos, evaluación de impacto y medidas de seguridad", "d": "Asesorar en el análisis de riesgo, la evaluación de impacto y la evaluación de medidas de seguridad, incluidas las aplicables a las transferencias de datos.", "c": "LOPDP art. 49 num. 3; Res. 0028 art. 13.1",
+   "como": ["Revisar que la metodología justifique cada valor de probabilidad e impacto (rationale).", "Emitir observaciones no vinculantes por escrito; no elaborar la evaluación por el cliente.", "Verificar que la evaluación de impacto se haga antes de iniciar el tratamiento."], "herr": ["07", "05"]},
+  {"t": "Intervenir a tiempo en todo asunto de protección de datos", "d": "La organización debe garantizar que su participación en todas las cuestiones de protección de datos sea apropiada y oportuna.", "c": "LOPDP art. 50 num. 1",
+   "como": ["Pedir que se le consulte antes de lanzar proyectos, sistemas, proveedores o campañas que traten datos.", "Dejar constancia cuando se le consulte tarde o no se le consulte."], "herr": []}]},
+ {"eje": "Supervisar el cumplimiento", "items": [
+  {"t": "Supervisar el cumplimiento normativo", "d": "Supervisar el cumplimiento de la LOPDP, el reglamento y las regulaciones de la SPDP en los tratamientos que se realicen.", "c": "LOPDP art. 49 num. 2; Res. 0028 art. 13.6",
+   "como": ["Planificar revisiones periódicas por tratamiento del RAT.", "Medir el avance con el diagnóstico de madurez.", "Informar a la alta dirección con hallazgos, riesgos y recomendaciones."], "herr": ["03"]},
+  {"t": "Supervisar la aplicación de riesgos, evaluación de impacto y medidas", "d": "Supervisar que el análisis de riesgo, la evaluación de impacto y las medidas de seguridad se apliquen.", "c": "LOPDP art. 49 num. 3",
+   "como": ["Verificar que cada medida tenga responsable, plazo y evidencia de implementación.", "Revisar el riesgo residual tras las medidas."], "herr": ["07"]},
+  {"t": "Controlar la eficacia y eficiencia de las medidas", "d": "Asesorar o supervisar el control de eficacia y eficiencia de las medidas técnicas, físicas, administrativas, organizativas y jurídicas implementadas.", "c": "Res. 0028 art. 13.4; LOPDP art. 37",
+   "como": ["Pedir indicadores de cumplimiento (por ejemplo, tiempos de respuesta a derechos o incidentes).", "Revisar los informes de auditoría técnica hechos por especialistas."], "herr": []},
+  {"t": "Supervisar el registro de actividades de tratamiento", "d": "Asesorar o supervisar el cumplimiento del RAT con los requisitos del reglamento y los que fije la SPDP.", "c": "Res. 0028 art. 13.5; RGLOPDP arts. 38 y 39",
+   "como": ["Verificar los nueve contenidos mínimos por actividad.", "Comprobar que el RAT esté actualizado tras cada cambio relevante."], "herr": ["04"]},
+  {"t": "Supervisar a los encargados", "d": "Sus funciones alcanzan al encargado. El encargado debe permitir que el responsable, o la persona que este determine, revise sus registros y procesos.", "c": "Res. 0028 art. 13; RGLOPDP art. 47",
+   "como": ["Pedir al responsable que lo designe para revisar a los encargados críticos.", "Verificar contratos de encargo, medidas y avisos de vulneración en 2 días."], "herr": ["08"]},
+  {"t": "Supervisar tratamientos especiales", "d": "Supervisar el cumplimiento de las normas especiales de la SPDP, como las de inteligencia artificial, biometría y gran escala.", "c": "LOPDP art. 49 num. 2; Res. 2026-0009 arts. 5 y 7; Res. 2026-0005 art. 12",
+   "como": ["Inventariar herramientas de IA y sistemas biométricos.", "Verificar si hay gran escala y, en ese caso, la auditoría anual."], "herr": ["05", "07"]}]},
+ {"eje": "Derechos de los titulares", "items": [
+  {"t": "Supervisar la atención de solicitudes", "d": "Asesorar o supervisar la atención de las solicitudes de derechos. Se limita a supervisar que el responsable, su personal o el encargado ejecuten correctamente el procedimiento.", "c": "Res. 0028 arts. 13.2 y 14",
+   "como": ["Revisar por muestreo el registro de solicitudes y las respuestas.", "Verificar el plazo de 15 días y la regla de aclaración en 5 días."], "herr": []},
+  {"t": "Ser contactable por los titulares", "d": "El titular puede contactar al DPD para ejercer sus derechos; la identidad y los datos de contacto del DPD se informan cuando sea del caso.", "c": "LOPDP arts. 12 num. 9 y 50 num. 6",
+   "como": ["Derivar la solicitud al canal del responsable y supervisar su respuesta.", "No resolver la solicitud por sí mismo."], "herr": ["08"]}]},
+ {"eje": "Vulneraciones de la seguridad", "items": [
+  {"t": "Asesorar o supervisar la gestión de vulneraciones", "d": "Asesorar o supervisar la gestión de vulneraciones y su notificación a los titulares, a la SPDP y al organismo competente.", "c": "Res. 0028 art. 13.3; LOPDP arts. 43 y 46",
+   "como": ["Verificar que exista un protocolo con responsables y plazos.", "Acompañar la evaluación del riesgo; la notificación la presenta el responsable por el SISPDP.", "Conservar la línea de tiempo y la constancia de recepción."], "herr": ["09"]}]},
+ {"eje": "Cooperación con la SPDP", "items": [
+  {"t": "Ser punto de contacto con la SPDP", "d": "Cooperar con la SPDP y actuar como punto de contacto en las cuestiones de tratamiento de datos.", "c": "LOPDP arts. 4 y 49 num. 4",
+   "como": ["Mantener un canal de comunicación con la SPDP.", "Informar al responsable de los requerimientos; no comparecer en su nombre."], "herr": []},
+  {"t": "Funciones que fije la SPDP", "d": "Las demás que establezca la SPDP con ocasión de las categorías especiales de datos.", "c": "LOPDP art. 49 num. 5",
+   "como": ["Revisar la pestaña Referencia tras cada resolución nueva."], "herr": []}]},
+ {"eje": "Deberes propios del delegado", "items": [
+  {"t": "Aceptar el cargo y verificar su registro", "d": "Firma la aceptación al pie del nombramiento y ejerce desde su otorgamiento. El responsable o encargado lo inscribe en la SPDP en el término de 15 días.", "c": "Res. 0028 arts. 4.7 y 5",
+   "como": ["Pedir copia de la constancia de inscripción."], "herr": ["08"]},
+  {"t": "Declarar los conflictos de intereses", "d": "Antes de aceptar, declara toda situación de conflicto real, potencial o aparente; lo mismo si surge durante el ejercicio.", "c": "Res. 0028 art. 17",
+   "como": ["Usar la lista «Antes de aceptar» de esta pestaña y conservar la declaración firmada."], "herr": []},
+  {"t": "Mantener independencia e imparcialidad", "d": "Total independencia e imparcialidad, incluso en relación de dependencia; no recibe instrucciones sobre sus funciones.", "c": "Res. 0028 arts. 12 y 15; RGLOPDP arts. 48 y 49",
+   "como": ["Dejar por escrito las recomendaciones que la dirección no acoja."], "herr": []},
+  {"t": "Guardar estricta confidencialidad", "d": "Mantiene la más estricta confidencialidad; suscribe un acuerdo que no puede limitar su acceso a la información necesaria y que subsiste al terminar la relación.", "c": "LOPDP art. 50 num. 7; RGLOPDP art. 57", "como": [], "herr": ["08"]},
+  {"t": "Cumplir los requisitos y formarse", "d": "Derechos políticos, mayoría de edad, título de tercer nivel en Derecho, Sistemas de Información, Comunicación o Tecnologías y cinco años de experiencia; desde el 1 de enero de 2029, aprobar el programa profesionalizante.", "c": "RGLOPDP art. 55; Res. 0028 art. 11 y transitoria séptima",
+   "como": ["Planificar el programa profesionalizante con una institución de educación superior aprobada por la SPDP (mínimo 80 horas)."], "herr": []},
+  {"t": "Denunciar el menoscabo de su independencia", "d": "Denuncia ante la SPDP cualquier hecho que menoscabe su independencia o constituya represalia.", "c": "Res. 0028 arts. 19 y 20; RGLOPDP art. 51",
+   "como": ["Conservar comunicaciones y evidencia de los hechos."], "herr": []},
+  {"t": "Responder por el incumplimiento de sus funciones", "d": "Responde administrativa, civil y penalmente si incumple sus funciones; no responde por las decisiones finales del responsable si demuestra diligencia.", "c": "LOPDP art. 49 (inciso final); Res. 0028 art. 13 (inciso final)",
+   "como": ["Trazabilidad: cada recomendación con fecha, destinatario, fundamento y respuesta de la dirección."], "herr": []}]},
+]
+
+# Lo que la organización debe garantizar al DPD (y que el DPD debe exigir).
+GARANTIAS = [
+ ["Participación apropiada y oportuna en todas las cuestiones de protección de datos.", "LOPDP art. 50 num. 1"],
+ ["Acceso a los datos de las operaciones de tratamiento y a los recursos necesarios.", "LOPDP art. 50 num. 2; RGLOPDP art. 48"],
+ ["Capacitación y actualización del delegado.", "LOPDP art. 50 num. 3"],
+ ["No destituirlo ni sancionarlo por el correcto desempeño de sus funciones; si ocurre, puede llevarlo a la SPDP.", "LOPDP art. 50 num. 4; RGLOPDP art. 51; Res. 0028 art. 23"],
+ ["Relación directa con el más alto nivel ejecutivo y de decisión.", "LOPDP art. 50 num. 5; Res. 0028 art. 22.1"],
+ ["No darle instrucciones sobre sus funciones ni tomar represalias por su actuación técnica.", "Res. 0028 art. 15 (inciso final)"],
+ ["Control anual de su independencia: contacto con la alta dirección, recursos técnicos, financieros y humanos, observaciones emitidas e informes de cumplimiento. Es institucional y no jerárquico; no lo ejecuta el DPD ni se usa para presionarlo.", "Res. 0028 art. 22"],
+ ["Nombramiento con sus nueve contenidos e inscripción en la SPDP en el término de 15 días; el registro tardío se considera incumplimiento de una medida de seguridad jurídica.", "Res. 0028 arts. 4 y 5"],
+ ["La inscripción no valida su idoneidad: la SPDP puede verificar los requisitos en cualquier momento.", "Res. 0028 art. 6"],
+ ["Otras funciones solo si no generan conflicto ni exigen una preparación distinta.", "LOPDP art. 50 (inciso final); RGLOPDP art. 48"],
+ ["Puede designarse un DPD único para un grupo empresarial, un DPD voluntario y un suplente.", "RGLOPDP arts. 50 y 52"],
+]
+
+PROHIBICIONES = [
+ ["Implementar directamente en la organización la LOPDP, el reglamento y la normativa: es obligación del responsable, su personal o el encargado.", "Res. 0028 art. 15.1"],
+ ["Ejecutar directamente la gestión de riesgos o la evaluación de impacto; solo emite observaciones u orientaciones no vinculantes.", "Res. 0028 art. 15.2"],
+ ["Decidir la finalidad del tratamiento o los medios para realizarlo.", "Res. 0028 art. 15.3"],
+ ["Representar a la organización ante la SPDP como responsable o encargado.", "Res. 0028 art. 15.4"],
+ ["Ejercer a la vez como oficial de seguridad de la información, oficial de cumplimiento, implementador u otro cargo en conflicto.", "Res. 0028 art. 15.5"],
+ ["Desempeñar cualquier función que comprometa su independencia, autonomía, imparcialidad u objetividad.", "Res. 0028 art. 15.6"],
+ ["Ejecutar actividades de tratamiento o participar en su ejecución, ocasional o permanentemente.", "Res. 0028 art. 18.1"],
+ ["Prestar asesorías ajenas a su función que busquen salvaguardar los intereses de la organización.", "Res. 0028 art. 18.2"],
+ ["Tomar decisiones sobre la organización, sus actividades o sus gestiones internas.", "Res. 0028 art. 18.3"],
+ ["Atender por sí mismo las solicitudes de derechos: solo supervisa el procedimiento.", "Res. 0028 art. 14"],
+]
+
+IMPEDIMENTOS = [
+ ["Miembros de los órganos de administración y control del responsable o encargado.", "RGLOPDP art. 56 num. 1"],
+ ["Socios o accionistas del responsable o encargado.", "RGLOPDP art. 56 num. 2"],
+ ["Cónyuges de administradores, directores o comisarios, o sus parientes hasta el cuarto grado de consanguinidad o segundo de afinidad.", "RGLOPDP art. 56 num. 3"],
+ ["Quienes tengan conflicto de intereses con el responsable o encargado.", "RGLOPDP art. 56 num. 4; Res. 0028 art. 18"],
+ ["El oficial de seguridad de la información y el oficial de cumplimiento de la organización.", "Res. 0028 arts. 16.1 y 16.2"],
+ ["Apoderados especiales de responsables o encargados extranjeros.", "Res. 0028 art. 16.3"],
+ ["Cargos del nivel jerárquico superior en el sector público.", "Res. 0028 art. 16.4"],
+]
+
+# Qué NO es ser un DPO: [mito, realidad, cita]
+NO_ES = [
+ ["El responsable del cumplimiento", "La obligación de cumplir y demostrar el cumplimiento es del responsable. El DPD asesora y supervisa y, si fue diligente, no responde por las decisiones finales del responsable.", "LOPDP arts. 10 lit. k y 47; Res. 0028 arts. 13 (inciso final) y 15.1"],
+ ["Quien implementa: hace el RAT, las políticas y la evaluación de impacto", "Tiene prohibido implementar directamente y ejecutar la gestión de riesgos o la evaluación de impacto; puede orientar con observaciones no vinculantes. La implementación se contrata como un servicio distinto.", "Res. 0028 arts. 12, 15.1 y 15.2"],
+ ["El oficial de seguridad (CISO) o el oficial de cumplimiento con otro título", "Son cargos incompatibles: no pueden ser designados como DPD ni ejercer ambas funciones a la vez.", "Res. 0028 arts. 15.5, 16.1 y 16.2"],
+ ["El representante o apoderado de la empresa ante la SPDP", "Es punto de contacto y coopera con la SPDP, pero no representa a la organización: ese rol es indelegable.", "LOPDP art. 49 num. 4; Res. 0028 arts. 15.4 y 16.3"],
+ ["El abogado que defiende los intereses de la empresa", "Asesorar fuera de su función para salvaguardar los intereses de la organización es conflicto de intereses (por ejemplo, defenderla frente a un titular: ejemplo de criterio propio).", "Res. 0028 art. 18.2"],
+ ["Quien responde las solicitudes de los titulares", "El titular puede contactarlo, pero quien atiende y responde es el responsable; el DPD supervisa el procedimiento.", "LOPDP art. 50 num. 6; RGLOPDP art. 42; Res. 0028 art. 14"],
+ ["Quien decide qué datos se recogen y para qué", "Decidir fines y medios es lo que define al responsable; al DPD le está prohibido.", "LOPDP art. 4; Res. 0028 art. 15.3"],
+ ["Un cargo para un directivo, socio o familiar de confianza", "Administradores, socios, parientes de directivos y cargos de nivel jerárquico superior en el sector público no pueden ser DPD.", "RGLOPDP art. 56; Res. 0028 art. 16.4"],
+ ["Un empleado que obedece instrucciones", "Ejerce con total independencia, aun en relación de dependencia; no recibe instrucciones sobre sus funciones ni puede ser sancionado por ejercerlas.", "RGLOPDP arts. 48 y 51; Res. 0028 arts. 12 y 15"],
+ ["Quien firma papeles para cumplir", "La SPDP exige cumplimiento real («el SER y no el DEBER SER») y la justificación de cada estimación de riesgo; las listas de chequeo no bastan.", "Guía v2, Cap. I, §§ 4 y 5; Cap. II, § 2.3"],
+ ["Un auditor acreditado o un certificador", "La auditoría por auditor acreditado por la SPDP y la certificación o los sellos de entidades de certificación son figuras distintas. El informe del DPD es de supervisión, no una certificación.", "LOPDP arts. 47 num. 14 y 54"],
+ ["Un trámite que termina con el nombramiento", "El nombramiento se inscribe en 15 días y la SPDP puede verificar en cualquier momento la idoneidad del delegado.", "Res. 0028 arts. 5 y 6"],
+]
+
+AUDITORIA = {
+ "base": [
+  ["Responsables y encargados deben auditar periódicamente el tratamiento. Auditar es verificar el cumplimiento en normas y riesgos de las obligaciones de la LOPDP. Se requieren auditorías jurídicas, organizacionales y técnicas.", "Guía v2, Cap. I, § 6.1 (obligatorio)"],
+  ["Auditoría jurídica: constatar en la práctica los principios, los derechos y los registros. No basta que exista una política: los titulares deben tener mecanismos reales para ejercer sus derechos. Los auditores jurídicos deben ser expertos en protección de datos.", "Guía v2, Cap. I, § 6.2"],
+  ["Auditoría organizacional: lo esencial es el cumplimiento en la práctica de las políticas y sistemas de gestión; auditores expertos en seguridad organizacional.", "Guía v2, Cap. I, § 6.3"],
+  ["Auditoría técnica: vulnerabilidades de software y hardware; requiere especialistas (hacking ético, pruebas de penetración, respuesta a incidentes, informática forense).", "Guía v2, Cap. I, § 6.4"],
+  ["El DPD revisa la veracidad de las auditorías de seguridad, audita los resultados de las auditorías jurídicas y de las evaluaciones de impacto, y pide ajustes en políticas, convenios con encargados y mecanismos de derechos.", "Guía v2, Cap. II, §§ 1.7 y 1.8 (referencial)"],
+  ["Debe asesorar o supervisar el control de eficacia y eficiencia de las medidas; sus observaciones e informes de cumplimiento forman parte del control anual de su independencia.", "Res. 0028 arts. 13.4, 22.3 y 22.4"],
+  ["El responsable implementa la verificación continua de las medidas y puede fijar indicadores de cumplimiento; el encargado debe permitir la revisión de sus registros y procesos.", "LOPDP arts. 37 y 47 num. 3; RGLOPDP arts. 36 y 47"],
+  ["Gran escala: auditoría cada 12 meses e informes conservados 5 años. Inteligencia artificial: auditar el sistema según su nivel de riesgo.", "Res. 2026-0005 arts. 17 y 18; Res. 2026-0009 arts. 5.5 y 7.3"],
+  ["Los resultados de auditorías pueden ser prueba en procesos sancionatorios: el informe debe ser riguroso y verificable.", "LOPDP art. 54"]],
+ "principios": [
+  ["Independencia", "No auditar lo que uno mismo implementó ni recibir instrucciones sobre el resultado.", "Res. 0028 arts. 15 y 18.1"],
+  ["Evidencia antes que declaración", "Cada conclusión se apoya en documentos, registros o pruebas fechadas y verificables.", "Guía v2, Cap. I, § 6.2"],
+  ["Enfoque en los titulares", "Priorizar lo que puede afectar sus derechos y libertades; ante conflicto prevalece su protección.", "Guía v2, Cap. I, § 1.2"],
+  ["Justificación", "Todo nivel de riesgo asignado lleva su rationale.", "Guía v2, Cap. I, § 4"],
+  ["Proporcionalidad", "Escalar la profundidad según tamaño, volumen y criticidad de los tratamientos.", "Guía v2, Cap. I, § 3.4"],
+  ["Competencia", "Si el DPD no es especialista técnico, se apoya en informes de especialistas y los revisa.", "Guía v2, Cap. I, § 6.4"],
+  ["Confidencialidad", "Los hallazgos y la evidencia se manejan con estricta reserva.", "LOPDP art. 50 num. 7"]],
+ # Fases: criterio propio sobre la base normativa anterior.
+ "fases": [
+  {"n": "Planificar", "pasos": ["Definir el alcance por tratamientos del RAT, áreas y encargados.", "Fijar los criterios: normas aplicables (pestaña Referencia).", "Declarar conflictos y verificar que no se audita trabajo propio.", "Acordar el plan y el cronograma con la alta dirección.", "Enviar con anticipación la solicitud de evidencias."], "herr": ["04", "05"]},
+  {"n": "Recolectar evidencia", "pasos": ["Revisión documental: políticas, contratos, registros, actas.", "Entrevistas que ayuden al entrevistado a calibrar sus estimaciones (Guía v2, Cap. II, § 3.7).", "Observación de los procesos en funcionamiento.", "Pruebas de recorrido: usar el canal de derechos o el formulario web como lo haría un titular.", "Muestreo de solicitudes, incidentes y contratos.", "Revisión de los informes técnicos de especialistas."], "herr": ["03"]},
+  {"n": "Evaluar", "pasos": ["Contrastar cada hallazgo con el criterio aplicable.", "Clasificarlo (escala de criterio propio): no conformidad crítica, mayor o menor, observación u oportunidad de mejora.", "Vincularlo al artículo y, si corresponde, a la infracción (LOPDP arts. 67 y 68).", "Valorar el riesgo para los titulares con su justificación."], "herr": ["07"]},
+  {"n": "Informar", "pasos": ["Informe escrito a la alta dirección (LOPDP art. 50 num. 5).", "Contenido: alcance, criterios, método, hallazgos con evidencia, riesgo, recomendación y prioridad.", "Las recomendaciones no son vinculantes: la dirección decide, fija responsables y plazos.", "Registrar la respuesta de la dirección a cada recomendación.", "Firma de responsabilidad con espacio para firma y sello."], "herr": []},
+  {"n": "Dar seguimiento", "pasos": ["Verificar el cierre con evidencia, no con declaraciones.", "Actualizar el diagnóstico de madurez y la agenda.", "Repetir al menos una vez al año (obligatorio en gran escala) y ante cambios: sistemas nuevos, IA, biometría, encargados nuevos o un incidente."], "herr": ["03"]}],
+ # [área, qué pedir o probar, cita, herramientas]
+ "mapa": [
+  ["Bases de legitimación y RAT", "RAT actualizado; base por actividad; excepción del art. 26 si hay datos sensibles.", "LOPDP arts. 7 y 26; RGLOPDP art. 38", ["04"]],
+  ["Información y transparencia", "Política y avisos frente a los 17 elementos; prueba en el formulario real.", "LOPDP art. 12", ["08"]],
+  ["Consentimiento", "Evidencia demostrable y procedimiento sencillo de revocatoria.", "LOPDP art. 8; RGLOPDP arts. 5 y 6", []],
+  ["Derechos de los titulares", "Registro de solicitudes; muestra de respuestas en plazo; prueba del canal.", "LOPDP arts. 13 a 16; RGLOPDP arts. 12 a 15", []],
+  ["Encargados y contratos", "Inventario de encargados; contrato con los siete contenidos; revisión de sus registros.", "RGLOPDP arts. 41 y 47; Res. 2025-0006", ["08"]],
+  ["Riesgos y evaluación de impacto", "Metodología, justificación de valores y evaluación previa al tratamiento.", "LOPDP arts. 40 y 42; Guía v2", ["07", "05"]],
+  ["Seguridad", "Informes técnicos, controles implementados e indicadores de eficacia.", "LOPDP art. 37; RGLOPDP art. 36", []],
+  ["Vulneraciones", "Protocolo, registro de incidentes, constancias del SISPDP y plazos cumplidos.", "LOPDP arts. 43 y 46; Res. 2026-0040", ["09"]],
+  ["Conservación y eliminación", "Plazos por categoría y evidencia de eliminación, incluso en respaldos.", "LOPDP art. 10 lit. i; RGLOPDP arts. 9 a 11", []],
+  ["Transferencias internacionales", "Proveedores fuera del país y garantías o mecanismo aplicable.", "LOPDP arts. 56 a 60", ["04"]],
+  ["Registro Nacional y DPD", "Inscripción de bases o tratamientos; nombramiento del DPD inscrito.", "LOPDP art. 47 nums. 12 y 13; Res. 0028 art. 5", []],
+  ["Personal", "Contratos de confidencialidad con quienes tratan datos.", "LOPDP art. 47 num. 10", ["08"]],
+  ["Tratamientos especiales", "IA, biometría y gran escala con sus obligaciones reforzadas.", "Res. 2026-0009; Res. 2026-0039; Res. 2026-0005", ["05", "07"]]],
+ "errores": [
+  ["Auditar solo documentos: la política existe, pero el canal no funciona.", "Guía v2, Cap. I, § 6.2"],
+  ["Asignar niveles de riesgo sin justificación o con una lista de chequeo.", "Guía v2, Cap. I, § 4"],
+  ["Autoauditarse: revisar lo que uno mismo implementó.", "Res. 0028 arts. 15.1 y 18.1"],
+  ["Declarar «cumple» sin evidencia fechada y verificable.", "criterio propio"],
+  ["Opinar sobre seguridad técnica sin informe de un especialista.", "Guía v2, Cap. I, § 6.4"],
+  ["Entregar el informe a un mando medio y no a la alta dirección.", "LOPDP art. 50 num. 5"],
+  ["Suavizar hallazgos por presión; ante represalias, denunciar.", "Res. 0028 art. 19"],
+  ["Fijar por la empresa responsables y plazos: el DPD recomienda y la dirección decide.", "Res. 0028 art. 15.3"],
+  ["No verificar el cierre de las recomendaciones.", "criterio propio"]],
+}
+
+# Lista de verificación antes de aceptar una designación. [texto, cita, clase] clase "i" = impedimento o conflicto; "g" = garantía.
+ANTES = [
+ ["No formo parte de los órganos de administración o control del cliente.", "RGLOPDP art. 56 num. 1", "i"],
+ ["No soy socio ni accionista del cliente.", "RGLOPDP art. 56 num. 2", "i"],
+ ["No soy cónyuge ni pariente (4.º de consanguinidad o 2.º de afinidad) de sus administradores, directores o comisarios.", "RGLOPDP art. 56 num. 3", "i"],
+ ["No soy su oficial de seguridad de la información ni su oficial de cumplimiento.", "Res. 0028 arts. 16.1 y 16.2", "i"],
+ ["No soy apoderado especial de un responsable o encargado extranjero.", "Res. 0028 art. 16.3", "i"],
+ ["No ocupo un cargo del nivel jerárquico superior en el sector público.", "Res. 0028 art. 16.4", "i"],
+ ["No ejecuto ni participo en tratamientos de datos del cliente.", "Res. 0028 art. 18.1", "i"],
+ ["No le presto asesorías ajenas a la función para salvaguardar sus intereses.", "Res. 0028 art. 18.2", "i"],
+ ["No tomo decisiones sobre la organización ni sus gestiones internas.", "Res. 0028 art. 18.3", "i"],
+ ["No implemento la normativa ni ejecuto su gestión de riesgos o evaluación de impacto (si lo hice antes, lo declaro como conflicto potencial o aparente).", "Res. 0028 arts. 15.1, 15.2 y 17", "i"],
+ ["Cumplo los requisitos: derechos políticos, mayoría de edad, título de tercer nivel afín y cinco años de experiencia.", "RGLOPDP art. 55", "g"],
+ ["Tendré relación directa con la alta dirección, acceso a los datos y recursos.", "LOPDP art. 50 nums. 2 y 5", "g"],
+ ["El acuerdo de confidencialidad no limita mi acceso a la información necesaria.", "RGLOPDP art. 57", "g"],
+ ["El nombramiento tendrá sus nueve contenidos y se inscribirá en 15 días.", "Res. 0028 arts. 4 y 5", "g"],
+]
+
+ABIERTOS = [
+ ["Riesgos: la guía v2 (Cap. II, referencial) pone al DPD a fijar criterios de riesgo y «auditar» informes, mientras la Res. 0028 art. 15.2 le prohíbe ejecutar la gestión de riesgos. Criterio de la app: el DPD propone, revisa y observa; el responsable aprueba y ejecuta.", "BASE-LEGAL, punto 30"],
+ ["Vulneraciones: la Res. 0028 art. 13.3 aún nombra a la ARCOTEL; rige el art. 43 LOPDP reformado (organismo competente y CSIRT).", "BASE-LEGAL, punto 31"],
+ ["Una misma firma como DPD e implementadora del mismo cliente: la norma no lo resuelve. Criterio prudente: no ser DPD de quien uno implementa; si la firma presta ambos servicios, personas distintas, declaración del art. 17 y consulta a la SPDP.", "BASE-LEGAL, punto 32"],
+]

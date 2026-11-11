@@ -59,12 +59,14 @@ import os  # noqa: E402
 PUBLICO = os.environ.get("MSC_PUBLICO") == "1"
 pdf = {k: ("normas/%s.pdf" % k if not PUBLICO and (NORMAS / (k + ".pdf")).exists() else "") for k in ("lopdp", "rglopdp")}
 import glosario_config as GLC  # noqa: E402
+import responsabilidades_config as RESP  # noqa: E402
 glo = {"lopdp": CAT.GLOSARIO_LOPDP, "norma": CAT.GLOSARIO_NORMATIVA, "iso": GLC.ISO, "metodos": GLC.METODOS}
 ref = {"rev": REFC.REVISION, "normas": REFC.NORMAS, "plazos": REFC.PLAZOS, "contraste": contraste, "abiertos": abiertos, "pdf": pdf}
+dpo = {k: getattr(RESP, k) for k in ("REVISION", "INTRO", "FUNCIONES", "GARANTIAS", "PROHIBICIONES", "IMPEDIMENTOS", "NO_ES", "AUDITORIA", "ANTES", "ABIERTOS")}
 exp_js = (ROOT / "scripts" / "exportar.js").read_text(encoding="utf-8").replace("</", "<\\/")
 src = src.replace("__TOOLS_JSON__", js(tools)).replace("__SERV_JSON__", js(serv)).replace("__IMG_JSON__", js(img))
-src = src.replace("__REF_JSON__", js(ref)).replace("__GLO_JSON__", js(glo)).replace("__EXPORT_JS__", exp_js)
-assert "__GLO_JSON__" not in src and "__REF_JSON__" not in src and "__EXPORT_JS__" not in src
+src = src.replace("__REF_JSON__", js(ref)).replace("__GLO_JSON__", js(glo)).replace("__EXPORT_JS__", exp_js).replace("__DPO_JSON__", js(dpo))
+assert "__DPO_JSON__" not in src and "__GLO_JSON__" not in src and "__REF_JSON__" not in src and "__EXPORT_JS__" not in src
 assert "__TOOLS_JSON__" not in src
 (R / "dist").mkdir(exist_ok=True)
 (R / "dist" / "preview.html").write_text(src, encoding="utf-8")

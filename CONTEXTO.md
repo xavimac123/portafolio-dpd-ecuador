@@ -1,6 +1,6 @@
 # ARCHIVO MAESTRO DE CONTEXTO · MSC Protección de Datos (MSC PD)
 
-Actualizado: 2026-11-11 (segunda entrega). Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (normas).
+Actualizado: 2026-11-11 (quinta entrega). Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (normas).
 
 ## 1. Identidad y propósito
 - **Qué es:** app instalable (PWA) para gestionar clientes y cumplimiento LOPDP (Ecuador) con las nueve herramientas del portafolio de Macías Sánchez Consultores.
@@ -10,7 +10,7 @@ Actualizado: 2026-11-11 (segunda entrega). Leer junto con `CLAUDE.md` (reglas) y
 - **Reglas clave:** nunca datos reales de clientes ni de titulares; toda cita legal consta en `BASE-LEGAL.md`; escalas propias rotuladas «criterio propio»; firma «Consultor en Protección de Datos Personales» (no «DPD» hasta el registro ante la SPDP); el DPD asesora y supervisa, no implementa; terminología LOPDP; dinero como «USD $ 1.234,56»; exportaciones con 6 cm para firma y sello.
 
 ## 2. Estado arquitectónico
-- `app-pd/fuente/index.html`: toda la app. Pestañas: Inicio, Clientes, Herramientas, Agenda, Referencia, Ajustes.
+- `app-pd/fuente/index.html`: toda la app. Pestañas: Inicio, Clientes, Herramientas, Agenda, Referencia, Responsabilidades DPO, Ajustes.
 - `app-pd/build_pwa.py`: incrusta las nueve herramientas, `scripts/exportar.js`, la Referencia (`scripts/referencia_config.py`, tablas de `docs/contraste-guias-spdp.md` y puntos abiertos de `BASE-LEGAL.md`) y copia los PDF de `app-pd/normas/`. Genera `app-pd/docs/` y `app-pd/dist/preview.html`.
 - `scripts/exportar.js` (MSCDoc): Word .docx real y PDF por impresión, con espacio para firma y sello. `scripts/barra_contexto.py` lo agrega a las nueve herramientas (botones «Word (.docx)» y «PDF» junto a cada «Copiar … (Word)»).
 - `scripts/*_config.py`: fuente única de cada herramienta; `scripts/generar_*.py` generan las páginas.
@@ -50,9 +50,14 @@ Actualizado: 2026-11-11 (segunda entrega). Leer junto con `CLAUDE.md` (reglas) y
 - Navegación «Anterior / Siguiente» en todas las herramientas con pestañas y resultado repetido al pie; resultado del diagnóstico al pie del cuestionario de la 03.
 - Pendiente de esta línea: evidencia de respaldo también en 06 y 07.
 
+## 3e. Quinta entrega (2026-11-11)
+- Pestaña «Responsabilidades DPO» (fuente `scripts/responsabilidades_config.py`): qué es el delegado; catálogo de funciones y deberes por eje con cita y buena práctica (criterio propio); garantías que debe dar la organización; prohibiciones, conflictos e impedimentos; «Qué no es un DPO» (12 casos); buena auditoría (base normativa, principios, cinco fases de criterio propio, mapa de evidencias, errores frecuentes); lista «Antes de aceptar» guardada en el dispositivo; exportación Word y PDF con firma.
+- Leídos los textos de la Res. 0028 (DPD), la Res. 0004 (programa profesionalizante) y la copia LEXIS de la guía v2; BASE-LEGAL actualizada (filas de DPD y auditoría verificadas) y Referencia de la Res. 0028 con artículos. Nuevos puntos abiertos 30 a 32 (rol del DPD en riesgos según la guía v2, ARCOTEL en la Res. 0028, misma firma como DPD e implementadora).
+
 ## 4. Pendiente (orden de prioridad)
 2. PDF de la ley y el reglamento: son copias LEXIS; no se versionan mientras el repositorio sea público. Publicarlos al pasar a Cloudflare con Access.
 3. Contrastar los textos aportados al proyecto y aún no leídos: Res. 0028 (DPD), programa profesionalizante, guía v2 de riesgos; y los textos oficiales de las Res. 2026-0039 y 0037 (puntos 8, 20, 25, 28 y 29 de `BASE-LEGAL.md`).
+3a. Actualizar la herramienta 01 (catálogo y glosario) con las funciones de la Res. 0028 art. 13 y revisar las tablas de la guía v2 (punto 8 de BASE-LEGAL).
 3b. Evidencia de respaldo también en 06 y 07; cláusula de IA en el contrato de encargo; campo de alternativa no biométrica en la 07.
 4. Traslado a Cloudflare Pages con Access; volver privado el repositorio. Los datos no migran solos: restaurar desde Drive.
 5. Cambio de nombre y marca (propuesta «Sentinel Data Protection»): solo tras la búsqueda fonética en SENADI; cambiar lo visible, no los identificadores internos. Hacerlo junto con el punto 4.

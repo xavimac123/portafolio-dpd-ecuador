@@ -60,6 +60,13 @@ Actualizado: 2026-11-11 (sexta entrega). Leer junto con `CLAUDE.md` (reglas) y `
 - Pestaña «Publicidad» (fuente `scripts/publicidad_config.py`): piezas PNG para WhatsApp (9:16, 4:5, 1:1) de servicios, preguntas, datos, «qué no es un DPO», presentación del profesional (solo dice «Delegado» con cargo y registro en Ajustes) y autodiagnóstico; mensaje con aviso de BAJA; contacto cifrado en cfg.pub.
 - Autodiagnóstico Tally X5LNKV enlazado: importación del CSV de respuestas como prospectos (solo con consentimiento), con brechas, seguimiento a 1 día, recordatorio de eliminar a los 6 meses, WhatsApp de seguimiento y acceso a la proforma.
 
+## 3g. Séptima entrega (2026-11-11)
+
+- Secciones plegables para que ninguna pestaña quede saturada. Funciones genéricas en `fuente/index.html`: `plegar(root,clave,opc)` convierte cada `.card` con `<h3>` en `<details>` (abierta por defecto si lleva `data-ab="1"`), `grupo(id,título,subtítulo,n,html,ab)` crea categorías y `abrirGrupos()` aplica el estado. El estado abierto/cerrado se guarda por dispositivo (`mscpd:pl`, `mscpd:plg`); con búsqueda o filtro activo todo se abre.
+- Responsabilidades DPO: 8 categorías cerradas (con conteo y subtítulo), botones «Abrir todo / Cerrar todo», definición legal plegada; requisitos y calculadora abiertos al desplegar «Quién puede ser DPO». Altura en móvil: 27.753 px → 2.025 px.
+- Referencia: normas agrupadas en «Ley y reglamento» (abierta), «Resoluciones de uso frecuente» y «de consulta» (cerradas); enlaces y plazos cerrados por defecto.
+- Publicidad: «Autodiagnóstico y prospectos» plegable. Ajustes: tarjetas plegables; «Apariencia» y «Datos del consultor» abiertas.
+
 ## 4. Pendiente (orden de prioridad)
 2. PDF de la ley y el reglamento: son copias LEXIS; no se versionan mientras el repositorio sea público. Publicarlos al pasar a Cloudflare con Access.
 3. Contrastar los textos aportados al proyecto y aún no leídos: Res. 0028 (DPD), programa profesionalizante, guía v2 de riesgos; y los textos oficiales de las Res. 2026-0039 y 0037 (puntos 8, 20, 25, 28 y 29 de `BASE-LEGAL.md`).

@@ -58,6 +58,7 @@
   </div>
   <div id="pvR"></div>
 </div>
+<div class="pv" id="pvEst"><h3>Prevención: ¿cuán probable es que vuelva a ocurrir?</h3><p class="sub" style="margin:0">Si la organización registra incidentes parecidos en su bitácora, estime la probabilidad con el método frecuentista y úsela en la evaluación de impacto (herramienta 07). Si es un incidente nuevo sin historial, use Delphi. Sugerencia de criterio propio.</p><div class="row" id="pvEstB" style="margin-top:8px"></div></div>
 <h2 style="margin-top:6px">3 · Documentos</h2>
 <p class="sub">Completa los datos del responsable e incidente y elige el documento.</p>
 <script>
@@ -91,5 +92,6 @@
     else out.innerHTML='<div class="rr r1">Causal presente con factores atenuantes<small>Hay una causal del art. 24, pero los atenuantes reducen el riesgo. La decisión de no notificar debe estar justificada por escrito; ante duda, notifica.</small></div>';
   }
   document.querySelectorAll('[data-c],[data-g]').forEach(function(x){x.onchange=riesgo});
+  try{if(window.parent!==window&&window.parent.PDRiesgo){$('pvEstB').innerHTML='<button type="button" class="btn sec" data-rk="frecuentista">Calcular con la bitácora (frecuentista)</button><button type="button" class="btn sec" data-rk="delphi">Panel de expertos (Delphi)</button>';document.querySelectorAll('#pvEstB [data-rk]').forEach(function(b){b.onclick=function(){window.parent.PDRiesgo(b.dataset.rk)}})}}catch(e){}
 })();
 </script>

@@ -35,6 +35,13 @@ Actualizado: 2026-11-11 (segunda entrega). Leer junto con `CLAUDE.md` (reglas) y
 - Normas: biométricos (Res. 2026-0039, por resúmenes) e IA (Res. 2026-0009, texto leído; reforma 0037 por resumen) en la 07, la 05, Referencia, contraste y BASE-LEGAL. Tensión abierta: biometría y gran escala (punto 28).
 - Publicado en `main` y `gh-pages` compilado con `MSC_PUBLICO=1` (sin los PDF de LEXIS).
 
+## 3c. Tercera entrega (2026-11-11)
+- Referencia: plazos en tarjetas y contraste en listas plegables por norma (sin tablas).
+- Modo oscuro en las nueve herramientas (generado desde su CSS).
+- Selector al abrir una herramienta: cliente registrado (rellena con su ficha), cliente nuevo (consulta) o práctica con empresa ficticia por tipo.
+- Calculadora de riesgos (frecuentista, Delphi, bayesiano, Monte Carlo con ROSI) enlazada desde el Glosario, Inicio y las sugerencias de las herramientas 07 y 09.
+- Las herramientas 01 y 04 no tienen campos de empresa: no se rellenan.
+
 ## 4. Pendiente (orden de prioridad)
 2. PDF de la ley y el reglamento: son copias LEXIS; no se versionan mientras el repositorio sea público. Publicarlos al pasar a Cloudflare con Access.
 3. Contrastar los textos aportados al proyecto y aún no leídos: Res. 0028 (DPD), programa profesionalizante, guía v2 de riesgos; y los textos oficiales de las Res. 2026-0039 y 0037 (puntos 8, 20, 25, 28 y 29 de `BASE-LEGAL.md`).

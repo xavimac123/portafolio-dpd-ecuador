@@ -136,6 +136,7 @@
   <div class="card"><h3>Probabilidad, método y aceptación</h3><div class="grid">
     <div><label for="cx_per">Periodo de referencia de la probabilidad</label><select id="cx_per"></select><p class="nota" style="margin:4px 0 0">La guía exige estimar la probabilidad dentro de un lapso definido.</p></div>
     <div><label for="cx_met">Método de análisis</label><select id="cx_met"></select></div>
+    <div class="full"><label style="display:flex;gap:8px;align-items:center;font-weight:500"><input type="checkbox" id="cx_bit" style="width:auto"> La organización tiene una bitácora de incidentes de 12 meses o más</label><label style="display:flex;gap:8px;align-items:center;font-weight:500;margin-top:4px"><input type="checkbox" id="cx_sec" style="width:auto"> Existen datos del sector o de un panel de expertos sobre este tipo de incidente</label><div id="sugMet" style="margin-top:8px"></div></div>
     <div><label for="cx_cap">Capacidad de riesgo (USD, opcional)</label><input id="cx_cap" type="number" min="0" placeholder="Pérdida máxima que la organización puede soportar"></div>
     <div><label>Tolerancia</label><p class="nota" style="margin:4px 0 0">Se fija como umbral de riesgo residual aceptable en la pestaña 6.</p></div>
     <div class="full"><label for="cx_rat">Justificación general de los criterios (rationale)</label><textarea id="cx_rat" placeholder="Quiénes estimaron los valores, con qué datos o antecedentes, qué controles existen hoy"></textarea></div>
@@ -300,11 +301,22 @@ var CFG={"necesidad": [{"id": "n_perfiles", "grupo": "ley", "oblig": true, "text
   chips($('cx_der'),CFG.derechos);chips($('r_der'),CFG.derechos);
   $('cx_der').addEventListener('click',function(){S.ctx.der=getChips($('cx_der'));save()});
   opts($('cx_per'),CFG.periodos,'— Seleccionar —');opts($('cx_met'),CFG.metodos,'— Seleccionar —');
+  /* Sugerencia de método estadístico (criterio propio): según el tipo de tratamiento y los datos disponibles. */
+  function sugMet(){var c=S.ctx||{},n=S.nec||{},L=[],nuevo=['n_nueva_tec','n_ia','n_biometricos'].some(function(k){return n[k]==='Sí'});
+    if(nuevo)L.push(['delphi','Delphi','El tratamiento usa tecnología nueva, IA o biometría: no hay historial confiable. Un panel de expertos de varias áreas estima la probabilidad con argumentos.']);
+    if(c.bit)L.push(['frecuentista','Frecuentista','Hay bitácora de 12 meses o más: estime la probabilidad con la frecuencia real de incidentes en lugar de la intuición.']);
+    if(c.sec&&!c.bit)L.push(['bayesiano','Bayesiano','Hay datos del sector o de un panel pero pocos datos propios: parta de esa referencia y actualícela con la experiencia del cliente.']);
+    if(+c.cap>0)L.push(['montecarlo','Monte Carlo','Se definió una capacidad de riesgo en USD: simule la pérdida anual esperada y la probabilidad de superarla, y compare medidas (ROSI).']);
+    var app=false;try{app=!!(window.parent!==window&&window.parent.PDRiesgo)}catch(e){}
+    $('sugMet').innerHTML=L.length?'<div class="hbox on" style="display:block"><b>Sugerencia para el DPD: método estadístico recomendado</b>'+L.map(function(x){return '<div style="margin-top:6px"><b style="display:inline;color:inherit">'+x[1]+':</b> '+esc(x[2])+(app?' <button type="button" class="btn sec" data-rk="'+x[0]+'" style="padding:4px 10px;font-size:12px;margin-left:4px">Calcular</button>':'')+'</div>'}).join('')+'<div class="nota" style="margin-top:6px">'+(app?'«Calcular» abre la calculadora de riesgos de la app; su avance aquí se conserva. ':'')+'Lleve el resultado a la probabilidad de cada riesgo con su justificación. Criterio propio, no exigencia de la norma.</div></div>':'<p class="nota">Sin datos históricos ni tecnología nueva, la matriz cualitativa con justificación de cada valor es suficiente.</p>';
+    document.querySelectorAll('[data-rk]').forEach(function(b){b.onclick=function(){try{window.parent.PDRiesgo(b.dataset.rk)}catch(e){}}})}
+  ['cx_bit','cx_sec'].forEach(function(id){$(id).addEventListener('change',function(){S.ctx[id.slice(3)]=$(id).checked;save();sugMet()})});
+  $('cx_cap').addEventListener('input',function(){setTimeout(sugMet,0)});
   [['cx_per','per'],['cx_met','met'],['cx_cap','cap'],['cx_rat','rat']].forEach(function(x){$(x[0]).addEventListener('input',function(){S.ctx[x[1]]=$(x[0]).value;save()});$(x[0]).addEventListener('change',function(){S.ctx[x[1]]=$(x[0]).value;save()})});
   function pisoCx(){var f=S.ctx.f||{},n=0,sum=0;CFG.factores.forEach(function(x){if(f[x.id]!=null){n++;sum+=x.ops[f[x.id]][1]}});return{n:n,sum:sum,piso:n?Math.max(1,Math.ceil(sum/2)):0}}
   function paintCx(){var c=S.ctx||(S.ctx={f:{},der:[]});c.f=c.f||{};
     document.querySelectorAll('[data-fx]').forEach(function(s){s.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',c.f[s.dataset.fx]===+b.dataset.i)})});
-    setChips($('cx_der'),c.der||[]);$('cx_per').value=c.per||'';$('cx_met').value=c.met||'';$('cx_cap').value=c.cap||'';$('cx_rat').value=c.rat||'';
+    setChips($('cx_der'),c.der||[]);$('cx_per').value=c.per||'';$('cx_met').value=c.met||'';$('cx_cap').value=c.cap||'';$('cx_rat').value=c.rat||'';$('cx_bit').checked=!!c.bit;$('cx_sec').checked=!!c.sec;sugMet();
     var p=pisoCx(),nom=p.piso?CFG.impacto[p.piso-1][1]:'';
     $('piso').innerHTML=p.n?'<div class="res '+(p.piso>=4?'si':p.piso>=3?'pe':'no')+'">Puntaje de contexto: '+p.sum+' de 10 · Piso de impacto sugerido: <b>'+p.piso+' ('+esc(nom)+')</b>'+(p.n<CFG.factores.length?' · faltan '+(CFG.factores.length-p.n)+' factores':'')+'<small>Ningún escenario de este tratamiento debería valorarse con un impacto menor sin una justificación expresa. Regla de cálculo: criterio propio.</small></div>':''}
 

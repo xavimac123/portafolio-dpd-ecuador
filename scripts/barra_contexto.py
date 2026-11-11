@@ -45,6 +45,30 @@ document.addEventListener('click',function(){setTimeout(upd,60)});upd()})();</sc
 
 
 EINI, EFIN = "<!--exportar-->", "<!--/exportar-->"
+OINI, OFIN = "<!--oscuro-->", "<!--/oscuro-->"
+import tema_oscuro as TO  # noqa: E402
+import sys as _s  # noqa: E402
+_s.path.insert(0, str(ROOT / "scripts"))
+
+# Modo oscuro (se activa si la app está en oscuro) y datos del cliente o de la empresa de práctica.
+OSCURO_JS = r"""<script>(function(){var P=null;try{if(window.parent!==window&&window.parent.PDTema)P=window.parent}catch(e){}if(!P)return;
+__MAPA__
+function tema(){var dk=false;try{dk=!!P.PDTema()}catch(e){}document.documentElement.classList.toggle('msc-dark',dk);if(dk){mscInline(document);if(!window._mscMo){window._mscMo=new MutationObserver(function(){if(window._mscT)return;window._mscT=setTimeout(function(){window._mscT=0;mscInline(document)},60)});window._mscMo.observe(document.body,{childList:true,subtree:true})}}}
+window.MSCTema=tema;tema();
+/* Datos de la empresa: rellena solo campos vacíos, por etiqueta, marcador o identificador. */
+function etq(i){var t='';if(i.id){var l=document.querySelector('label[for="'+i.id+'"]');if(l)t=l.textContent}if(!t){var b=i.closest('div');var l2=b&&b.querySelector('label');if(l2)t=l2.textContent}return (t+' '+(i.placeholder||'')+' '+(i.getAttribute('data-k')||'')+' '+(i.id||'')).toLowerCase()}
+function pon(i,v){if(v==null||v==='')return false;if(i.tagName==='SELECT'){var o=[].slice.call(i.options).filter(function(o){return o.value&&v(o.text)})[0];if(!o||i.value)return false;i.value=o.value}else{if(i.value)return false;i.value=v}i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}));return true}
+function rango(n){return function(t){var m=t.replace(/\./g,'').match(/(\d+)\D+(\d+)/),a=t.replace(/\./g,'').match(/(\d+)\s*o m[aá]s/);if(m)return n>=+m[1]&&n<=+m[2];if(a)return n>=+a[1];return false}}
+function datos(){var C=null;try{C=P.PDCliente&&P.PDCliente()}catch(e){}if(!C)return;var n=0;try{P.PDPrefill&&P.PDPrefill(true)}catch(e){}
+ [].slice.call(document.querySelectorAll('input:not([type=checkbox]):not([type=radio]):not([type=file]),select')).forEach(function(i){if(i.closest('#ctxbar'))return;var t=etq(i);
+  if(/raz[oó]n social|organizaci[oó]n evaluada|nombre de la empresa|responsable del tratamiento|\bcliente\b|i_resp|d_resp|ctx_emp/.test(t)&&!/representante|cargo|contacto|aprobado|elaborado|encargado/.test(t)){if(pon(i,i.tagName==='SELECT'?null:C.rs))n++}
+  else if(/\bruc\b/.test(t)&&i.tagName!=='SELECT'){if(pon(i,C.ruc))n++}
+  else if(/sector|actividad econ/.test(t)&&C.sec){if(i.tagName==='SELECT'){var k=(C.secK||C.sec).toLowerCase();if(pon(i,function(x){return x.toLowerCase().indexOf(k)>-1}))n++}}
+  else if(/trabajadores/.test(t)&&+C.trab){if(pon(i,i.tagName==='SELECT'?rango(+C.trab):String(C.trab)))n++}
+  else if(/ventas|ingresos por venta/.test(t)&&i.type==='number'&&+C.ven){if(pon(i,String(C.ven)))n++}
+  else if(/ciudad/.test(t)&&i.tagName!=='SELECT'){if(pon(i,C.ciu))n++}});
+ window.MSCDatos=n;setTimeout(function(){try{P.PDPrefill&&P.PDPrefill(false)}catch(e){}},400)}
+setTimeout(datos,750);document.addEventListener('click',function(e){var t=e.target&&e.target.textContent||'';if(/nueva/i.test(t)&&!/ejemplo/i.test(t))setTimeout(datos,350)})})();</script>""".replace("__MAPA__", TO.JS_MAPA)
 LIB = (ROOT / "scripts" / "exportar.js").read_text(encoding="utf-8").replace("</", "<\\/")
 EXPORTA = r"""<style>.msc-exp{display:inline-flex;gap:6px;flex-wrap:wrap}body.msc-expmodo .toast{visibility:hidden}</style>
 <script>(function(){var D=window.MSCDoc,P=null;try{if(window.parent!==window&&window.parent.MSCDoc){P=window.parent;if(!D)D=P.MSCDoc}}catch(e){}if(!D)return;
@@ -83,7 +107,10 @@ def aplicar(html: str, num: str, en_app: bool = False) -> str:
     """en_app=True omite la biblioteca de exportación: dentro de la app se usa la de la ventana principal."""
     html = _pon(html, INI, FIN, SNIPPET.replace("__NUM__", num))
     lib = "" if en_app else "<script>" + LIB + "</script>"
-    return _pon(html, EINI, EFIN, EINI + lib + EXPORTA + EFIN)
+    html = _pon(html, EINI, EFIN, EINI + lib + EXPORTA + EFIN)
+    if en_app:
+        html = _pon(html, OINI, OFIN, OINI + "<style>" + TO.css_oscuro(html) + "</style>" + OSCURO_JS + OFIN)
+    return html
 
 
 if __name__ == "__main__":

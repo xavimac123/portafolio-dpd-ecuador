@@ -55,3 +55,10 @@ Para publicar, copiar el contenido de `app-pd/docs/` a la rama `gh-pages` (GitHu
 - Los datos viven en cada dispositivo y se igualan mediante Google Drive; no hay usuarios múltiples. Es la base de la futura plataforma con usuario y contraseña, no esa plataforma.
 - La vista previa (`dist/preview.html`) no conecta con Google: el origen no está autorizado.
 - El repositorio público expone el contenido de las herramientas (no datos). Definir la licencia (`docs/decision-licencia.md`) antes de difundir el enlace.
+
+## Inicio, clima y autodiagnóstico
+
+- **Saludo:** «Buenos días / tardes / noches» según la hora, nombre abreviado con título (o el «Nombre para el saludo» de Ajustes) y el cargo con el que firma.
+- **Clima:** pronóstico de MET Norway (Locationforecast 2.0, datos CC BY 4.0; uso comercial permitido para sitios de bajo volumen que se identifican por su origen). Se consulta como máximo cada 30 minutos; ubicación predeterminada Guayaquil, o la del dispositivo redondeada a 2 decimales (Ajustes › Apariencia).
+- **Autodiagnóstico:** `build_pwa.py` genera `docs/autodiagnostico/` (página puente con `og:image` de la marca que redirige al formulario de Tally). Así el enlace enviado por WhatsApp muestra la vista previa de Macías Sánchez Consultores en lugar de la de Tally. El *service worker* no intercepta esa ruta.
+- **Contacto:** el WhatsApp y el correo de atención se guardan una sola vez en Ajustes › Datos del consultor (cifrados) y se usan en publicidad, invitaciones y mensajes. No se escriben en el código porque el repositorio es público.

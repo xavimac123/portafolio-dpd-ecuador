@@ -67,6 +67,14 @@ Actualizado: 2026-11-11 (sexta entrega). Leer junto con `CLAUDE.md` (reglas) y `
 - Referencia: normas agrupadas en «Ley y reglamento» (abierta), «Resoluciones de uso frecuente» y «de consulta» (cerradas); enlaces y plazos cerrados por defecto.
 - Publicidad: «Autodiagnóstico y prospectos» plegable. Ajustes: tarjetas plegables; «Apariencia» y «Datos del consultor» abiertas.
 
+## 3h. Octava entrega (2026-11-11)
+
+- Inicio: saludo según la hora, «Abg. Mariano Macías» (función `nomCorto`, o campo «Nombre para el saludo») con el cargo de Ajustes debajo, fecha completa con hora que se actualiza y clima (MET Norway, caché 30 min, Guayaquil por defecto o ubicación del dispositivo). Se eligió MET Norway porque la API gratuita de Open-Meteo es solo para uso no comercial.
+- Tarjeta «Autodiagnóstico para empresas» en Inicio: envío por WhatsApp, con imagen, copia del mensaje o del enlace; invitación formal con firma y aclaración de que la asesoría posterior tiene costo.
+- Página puente `autodiagnostico/` en gh-pages con vista previa de la marca (og.png 1200×630) que redirige a Tally X5LNKV. `PUB.AUTODIAG.corto`.
+- Publicidad: WhatsApp y correo salen de Ajustes (migración automática de `cfg.pub.wa/mail` a `cfg.firma.tel/mail`); la pestaña solo pide sitio web, LinkedIn, Instagram, Facebook/TikTok y enlace del autodiagnóstico. Número de WhatsApp grande en las piezas (64 px).
+- Contenido comercial: cada pregunta y dato tiene gancho (primera línea del mensaje) y «Para su negocio» (en la pieza y en el mensaje); tarjeta de estrategia de uso (criterio propio). Texto que no cabe se recorta con aviso.
+
 ## 4. Pendiente (orden de prioridad)
 2. PDF de la ley y el reglamento: son copias LEXIS; no se versionan mientras el repositorio sea público. Publicarlos al pasar a Cloudflare con Access.
 3. Contrastar los textos aportados al proyecto y aún no leídos: Res. 0028 (DPD), programa profesionalizante, guía v2 de riesgos; y los textos oficiales de las Res. 2026-0039 y 0037 (puntos 8, 20, 25, 28 y 29 de `BASE-LEGAL.md`).

@@ -46,6 +46,7 @@
   .evb .sg{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}.evb .sg button{font:inherit;font-size:12px;padding:5px 9px;border:1px solid var(--linea);background:#fff;color:#14181E;border-radius:999px;cursor:pointer}
   .evb .sg button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
   .evb .ok{display:flex;gap:6px;align-items:center;font-size:12.5px;margin-top:6px}.evb .ok input{width:auto;margin:0}
+  .evb.off .sg,.evb.off [data-ed],.evb.off .ok{display:none}.evb.na{display:none}.evb .esp{font-size:12px;color:var(--oliva);margin-top:4px}
   .evb.v{border-style:solid;border-color:#2E7D4F;background:#F2F8F3}.evb.s{border-color:#C9A23B}
   .prog{height:6px;background:#EFEBDD;border-radius:3px;overflow:hidden;margin-top:6px}.prog i{display:block;height:100%;background:var(--oro)}
   .btn{background:var(--carbon);color:#fff;border:0;padding:10px 16px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
@@ -100,7 +101,7 @@
 <section id="t1" class="on">
   <h2>Antes de empezar</h2>
   <p class="sub">Responde con base en <b>evidencia</b> (documentos, registros), no en intenciones. Si un punto no aplica a la organización, marca <b>N/A</b>: no cuenta en el promedio.</p>
-  <p class="nota">En cada pregunta, registra la <b>evidencia de respaldo</b>: «Presentada» si el cliente la mostró (describe cuál es y marca «Verificada» cuando la revises), «Solicitada» si queda pendiente de entrega, o «No existe». Todo sale en el informe; la pestaña de resultados genera la solicitud de evidencias para el cliente.</p>
+  <p class="nota">En cada pregunta, después de calificar, registra la <b>evidencia de respaldo</b>. La casilla indica qué debe mostrar el cliente según el nivel: 1, un registro informal; 2, la propuesta o el informe aprobado; 3 y 4, el documento aprobado y su aplicación. Con 0 queda como «No existe». Todo sale en el informe; la pestaña de resultados genera la solicitud de evidencias para el cliente.</p>
   <div class="card"><div class="grid" id="ctx"></div></div>
   <div class="card"><h3>Escala de respuesta</h3><div id="escala"></div></div>
   <div class="card"><h3>Niveles de madurez</h3><div id="niveles"></div>
@@ -112,6 +113,7 @@
   <h2>Cuestionario</h2>
   <p class="sub" id="avance"></p>
   <div id="dominios"></div>
+  <div class="card" id="finQ"></div>
   <div class="row"><button class="btn oro" id="verRes">Ver resultados</button></div>
 </section>
 
@@ -130,7 +132,7 @@
     <div><label for="f_ac">Cargo</label><input id="f_ac" data-f></div>
   </div></div>
   <div class="row"><button class="btn oro" id="copInf">Copiar informe (Word)</button><button class="btn sec" id="copTab">Copiar resultados (Excel)</button></div>
-  <div class="card" style="margin-top:12px"><h3>Evidencias de respaldo</h3><p class="nota" id="evRes" style="margin:0 0 8px"></p><div class="row"><button class="btn sec" id="copSolEv">Copiar solicitud de evidencias (Word)</button></div><p class="nota">Incluye las evidencias marcadas «Solicitada» y las respuestas calificadas 3 o 4 sin evidencia verificada: esos niveles exigen documento y aplicación demostrable.</p></div>
+  <div class="card" style="margin-top:12px"><h3>Evidencias de respaldo</h3><p class="nota" id="evRes" style="margin:0 0 8px"></p><div class="row"><button class="btn sec" id="copSolEv">Copiar solicitud de evidencias (Word)</button></div><p class="nota">Incluye las evidencias marcadas «Solicitada» y las respuestas calificadas 2 o más sin evidencia verificada: el nivel 2 requiere la propuesta o el informe aprobado; los niveles 3 y 4, el documento aprobado y su aplicación. El nivel 0 se registra como «No existe». Criterio propio.</p></div>
   <p class="nota">El informe incluye el gráfico como tabla de puntajes. Para el gráfico, toma una captura de esta pantalla.</p>
 </section>
 
@@ -199,27 +201,39 @@ var CFG=/*__CONFIG__*/;
   // cuestionario
   $('dominios').innerHTML=CFG.dominios.map(function(d){return'<div class="card"><div class="dh"><div><h3>'+esc(d.nombre)+(d.peso>1?' <span class="pr pA">Crítico</span>':'')+'</h3><div class="base">'+esc(d.base)+'</div></div><div class="nota" id="ds_'+d.id+'"></div></div>'+
     d.preguntas.map(function(p,i){var k=d.id+'_'+i;return'<div class="q"><div class="qt">'+esc(p[0])+'</div><div class="ev">Evidencia: '+esc(p[1])+'</div><div class="seg" data-q="'+k+'">'+CFG.escala.map(function(e){return'<button type="button" data-v="'+e[0]+'"><b>'+e[0]+'</b>'+esc(e[1])+'</button>'}).join('')+'<button type="button" data-v="na"><b>N/A</b>No aplica</button></div><input class="com" data-c="'+k+'" placeholder="Comentario (opcional)">'+
-      '<div class="evb" data-evk="'+k+'"><div class="lb"><span>Evidencia de respaldo</span><span class="evs"></span></div><div class="sg">'+EVS.map(function(x){return '<button type="button" data-es="'+x+'">'+x+'</button>'}).join('')+'</div>'+
+      '<div class="evb" data-evk="'+k+'" data-sug="'+esc(p[1])+'"><div class="lb"><span>Evidencia de respaldo</span><span class="evs"></span></div><div class="esp"></div><div class="sg">'+EVS.map(function(x){return '<button type="button" data-es="'+x+'">'+x+'</button>'}).join('')+'</div>'+
       '<input class="com" data-ed="'+k+'" placeholder="¿Qué evidencia es? Documento, fecha, versión o ubicación (sugerida: '+esc(p[1])+')">'+
       '<label class="ok"><input type="checkbox" data-ev="'+k+'"> Verificada por el consultor</label></div></div>'}).join('')+'</div>'}).join('');
   document.querySelectorAll('.seg[data-q]').forEach(function(s){s.querySelectorAll('button').forEach(function(b){b.onclick=function(){S.r[s.dataset.q]=b.dataset.v;save();paintQ()}})});
   document.querySelectorAll('[data-c]').forEach(function(i){i.addEventListener('input',function(){S.c[i.dataset.c]=i.value;save()})});
   /* Evidencia de respaldo: estado, descripción y verificación por pregunta; sale en el informe y en la solicitud. */
+  /* Evidencia esperada según la calificación (criterio propio, alineado con la escala de la herramienta). */
+  var EVLV={'0':'Nivel 0: no existe evidencia porque la práctica no se realiza. Se registra como «No existe».','1':'Nivel 1 · Inicial: basta un registro informal o aislado (correo, nota, práctica observada en la entrevista).','2':'Nivel 2 · En desarrollo: debe mostrar la propuesta, el borrador o el informe aprobado.','3':'Nivel 3 · Implementado: debe mostrar el documento aprobado y la evidencia de que se aplica (registros, firmas, actas).','4':'Nivel 4 · Gestionado: evidencia de aplicación más indicadores y la última revisión periódica.'};
   function evo(k){return S.ev[k]||(S.ev[k]={s:'',d:'',v:0})}
   document.querySelectorAll('.evb').forEach(function(b){var k=b.dataset.evk;
     b.querySelectorAll('[data-es]').forEach(function(x){x.onclick=function(){var o=evo(k);o.s=o.s===x.dataset.es?'':x.dataset.es;if(o.s!=='Presentada')o.v=0;save();paintEv()}});
     b.querySelector('[data-ed]').addEventListener('input',function(){evo(k).d=this.value;save()});
     b.querySelector('[data-ev]').onchange=function(){var o=evo(k);o.v=this.checked?1:0;if(o.v){o.s='Presentada';o.f=new Date().toISOString().slice(0,10)}save();paintEv()}});
-  function paintEv(){document.querySelectorAll('.evb').forEach(function(b){var o=S.ev[b.dataset.evk]||{};b.querySelectorAll('[data-es]').forEach(function(x){x.classList.toggle('on',x.dataset.es===o.s)});
+  function paintEv(){document.querySelectorAll('.evb').forEach(function(b){var k=b.dataset.evk,v=S.r[k],o=S.ev[k]||{};
+    b.classList.toggle('na',v==='na');b.classList.toggle('off',v==null||v==='0');
+    if(v==='0'&&o.s!=='No existe'){o=evo(k);o.s='No existe';o.v=0;o.auto=1;save()}else if(v!=null&&v!=='0'&&o.auto&&o.s==='No existe'){o=evo(k);o.s='';o.auto=0;save()}
+    b.querySelector('.esp').textContent=v==null?'Califique primero la pregunta para registrar la evidencia.':(EVLV[v]||'');
+    var inp=b.querySelector('[data-ed]');inp.placeholder=v==='2'?'Ej.: propuesta de política enviada el [FECHA] / informe aprobado en acta [N.º]':(v==='3'||v==='4')?'Ej.: política aprobada el [FECHA] y registros de su aplicación ('+b.dataset.sug+')':'¿Qué evidencia es? Documento, fecha, versión o ubicación';b.querySelectorAll('[data-es]').forEach(function(x){x.classList.toggle('on',x.dataset.es===o.s)});
     var d=b.querySelector('[data-ed]');if(document.activeElement!==d)d.value=o.d||'';b.querySelector('[data-ev]').checked=!!o.v;b.classList.toggle('v',!!o.v);b.classList.toggle('s',o.s==='Solicitada');
-    b.querySelector('.evs').textContent=o.v?'✓ Verificada':o.s||'Sin registrar'})}
-  function evTxt(k){var o=S.ev[k];if(!o||!o.s)return 'Sin registrar';return o.s+(o.d?': '+o.d:'')+(o.v?' (verificada'+(o.f?' '+o.f:'')+')':'')}
-  function evPend(){var L=[];CFG.dominios.forEach(function(d){d.preguntas.forEach(function(q,i){var k=d.id+'_'+i,o=S.ev[k]||{},v=S.r[k];if(o.s==='Solicitada'||(v!=null&&v!=='na'&&+v>=3&&!o.v))L.push({d:d,q:q,k:k,o:o,v:v})})});return L}
+    b.querySelector('.evs').textContent=v==='0'?'No existe':o.v?'✓ Verificada':o.s||(v!=null&&+v>=2?'Pendiente':'Sin registrar')})}
+  function evTxt(k){var o=S.ev[k];if(S.r[k]==='0')return 'No existe (nivel 0)';if(S.r[k]==='na')return 'No aplica';if(!o||!o.s)return 'Sin registrar';return o.s+(o.d?': '+o.d:'')+(o.v?' (verificada'+(o.f?' '+o.f:'')+')':'')}
+  function evPend(){var L=[];CFG.dominios.forEach(function(d){d.preguntas.forEach(function(q,i){var k=d.id+'_'+i,o=S.ev[k]||{},v=S.r[k];if(v==='0'||v==='na')return;if(o.s==='Solicitada'||(v!=null&&+v>=2&&!o.v))L.push({d:d,q:q,k:k,o:o,v:v})})});return L}
   function solicitudEv(){var L=evPend(),x=S.ctx,h='<h1>Solicitud de evidencias de cumplimiento</h1><p><b>'+esc(x.ctx_emp||'[ORGANIZACIÓN]')+'</b> · Fecha: '+esc(new Date().toLocaleDateString('es-EC'))+'</p><p>Para completar el diagnóstico de madurez en protección de datos personales, solicitamos remitir los siguientes documentos o registros. Si alguno no existe, indíquelo: esa respuesta también es útil para el plan de acción.</p>'+TB+tr(['N.º','Dominio','Punto evaluado','Evidencia solicitada','Motivo'],1);
-    L.forEach(function(e,n){h+=tr([String(n+1),e.d.nombre,e.q[0],e.o.d||e.q[1],e.o.s==='Solicitada'?'Solicitada en la entrevista':'Respaldar la calificación de '+e.v+' («'+CFG.escala[+e.v][1]+'»)'])});
+    L.forEach(function(e,n){h+=tr([String(n+1),e.d.nombre,e.q[0],e.o.d||(+e.v===2?'Propuesta, borrador o informe aprobado: ':'Documento aprobado y registros de aplicación: ')+e.q[1],e.o.s==='Solicitada'?'Solicitada en la entrevista':'Respaldar la calificación de '+e.v+' («'+CFG.escala[+e.v][1]+'»)'])});
     if(!L.length)h+=tr(['—','','No hay evidencias pendientes','','']);return h+'</table><p>Plazo sugerido para la entrega: [FECHA]. Envío a: [CORREO DEL CONSULTOR].</p>'}
   function total(){var n=0;CFG.dominios.forEach(function(d){n+=d.preguntas.length});return n}
-  function paintQ(){paintEv();document.querySelectorAll('.seg[data-q]').forEach(function(s){var v=S.r[s.dataset.q];s.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.v===v)})});
+  function finQ(){var c=calc(),t=total(),r=Object.keys(S.r).filter(function(k){return S.r[k]!=null}).length,e=$('finQ');if(!e)return;
+    if(c.idx==null){e.innerHTML='<h3>Resultado del diagnóstico</h3><p class="nota" style="margin:0">Aparecerá aquí a medida que responda. Lleva '+r+' de '+t+' preguntas.</p>';return}
+    var N=CFG.niveles[nivel(c.idx)],P=plan(c.ds).filter(function(x){return x.pri==='Alta'||x.pri==='Media'}).slice(0,4),pend=evPend().length;
+    e.innerHTML='<h3>Resultado del diagnóstico'+(r<t?' (parcial: '+r+' de '+t+')':'')+'</h3><div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap"><b style="font-size:28px;font-stretch:115%">'+c.idx.toFixed(2).replace('.',',')+'</b><span>de 4 · nivel <b>'+esc(N[2])+'</b></span></div><p class="nota" style="margin:4px 0 8px">'+esc(N[3])+'</p>'+
+     (P.length?'<b style="font-size:13px">Prioridades</b><ul style="margin:4px 0 8px;padding-left:18px;font-size:13.5px">'+P.map(function(x){return '<li>'+esc(x.pri)+': '+esc(x.dom)+'</li>'}).join('')+'</ul>':'')+
+     '<p class="nota" style="margin:0">'+(pend?pend+' evidencia(s) pendiente(s) de respaldo. ':'')+'Modelo propio: el detalle, el plan y el informe están en «Resultados y plan».</p>'}
+  function paintQ(){paintEv();finQ();document.querySelectorAll('.seg[data-q]').forEach(function(s){var v=S.r[s.dataset.q];s.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.v===v)})});
     document.querySelectorAll('[data-c]').forEach(function(i){i.value=S.c[i.dataset.c]||''});
     var resp=Object.keys(S.r).filter(function(k){return S.r[k]!=null}).length,t=total();
     $('avance').innerHTML=resp+' de '+t+' preguntas respondidas<div class="prog"><i style="width:'+Math.round(resp/t*100)+'%"></i></div>';

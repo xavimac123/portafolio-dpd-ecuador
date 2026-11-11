@@ -7,7 +7,7 @@ Cada punto: [texto, cita]. prio: Base, Alta o Media. Los resúmenes son de apoyo
 REVISION = "2026-11-10"
 
 NORMAS = [
- {"sigla": "LOPDP", "nombre": "Ley Orgánica de Protección de Datos Personales", "prio": "Base", "estado": "copia",
+ {"sigla": "LOPDP", "resumen": 'Ley que reconoce el derecho a la protección de datos personales: fija principios, bases de legitimación, derechos de los titulares, obligaciones de responsables y encargados, el delegado, las transferencias, la notificación de vulneraciones y el régimen de infracciones y multas.', "dpd": ['Diagnosticar el cumplimiento del cliente frente a las obligaciones del art. 47 (herramienta 03).', 'Verificar que cada tratamiento tenga base de legitimación (art. 7) y, si hay datos sensibles, una excepción del art. 26.', 'Solicitar la política de privacidad y los avisos y contrastarlos con los 17 elementos del art. 12.', 'Comprobar que exista un canal para derechos que responda en 15 días (arts. 13 a 16).', 'Asegurar el protocolo de vulneraciones con los términos de 5 y 3 días (arts. 43 y 46).'], "nombre": "Ley Orgánica de Protección de Datos Personales", "prio": "Base", "estado": "copia",
   "pub": "RO 5to Supl. 459, 26-05-2021 · última reforma 22-05-2026 (Ley de Ciberseguridad)",
   "tema": ["Principios y bases", "Derechos", "Vulneraciones", "DPD", "Sanciones", "Transferencias"], "herr": ["03", "04"],
   "url": "https://www.gob.ec/regulaciones/ley-organica-proteccion-datos-personales",
@@ -29,7 +29,7 @@ NORMAS = [
    ["Infracciones leves del responsable (5): no tramitar o negar solicitudes de titulares; no aplicar diseño y por defecto; no tener políticas disponibles; elegir encargado sin garantías; incumplir medidas correctivas.", "art. 67"],
    ["Infracciones graves del responsable (14), entre ellas: no implementar medidas de seguridad; usar datos para fines distintos; no usar metodología de riesgos; no hacer la evaluación de impacto; no notificar vulneraciones; no suscribir contratos con encargado y personal; no designar DPD.", "art. 68"],
    ["Multas, sector privado y empresas públicas: leves de 0,1 % a 0,7 % y graves de 0,7 % a 1 % del volumen de negocio del ejercicio anterior. Servidores públicos: 1 a 10 SBU (leves) y 10 a 20 SBU (graves).", "arts. 71 a 73"]]},
- {"sigla": "RGLOPDP", "nombre": "Reglamento General a la LOPDP", "prio": "Base", "estado": "copia",
+ {"sigla": "RGLOPDP", "resumen": 'Reglamento que desarrolla la ley: precisa el consentimiento, el procedimiento de derechos, el contenido de la notificación de vulneraciones, la evaluación de impacto, el RAT, el contrato de encargo, la figura del delegado y las transferencias internacionales.', "dpd": ['Levantar el RAT con sus nueve contenidos mínimos cuando el cliente esté obligado (arts. 38 y 39; herramienta 04).', 'Solicitar los contratos de encargo y revisar los siete contenidos del art. 41.', 'Implementar el registro de solicitudes de derechos y la regla de aclaración en 5 días (arts. 13 a 15).', 'Exigir la evaluación de impacto antes de iniciar tratamientos de alto riesgo (arts. 29 a 32; herramienta 07).'], "nombre": "Reglamento General a la LOPDP", "prio": "Base", "estado": "copia",
   "pub": "Decreto Ejecutivo 904 · RO 3er Supl. 435, 13-11-2023",
   "tema": ["Derechos", "RAT", "Vulneraciones", "Encargados", "DPD", "Evaluación de impacto", "Transferencias"], "herr": ["04", "07", "09"],
   "url": "https://www.gob.ec/regulaciones/reglamento-general-ley-organica-proteccion-datos-personales-0",
@@ -45,7 +45,7 @@ NORMAS = [
    ["DPD: persona natural; puede ser interno o externo; un solo DPD para un grupo empresarial; no puede ser sancionado por ejercer sus funciones.", "arts. 48 a 52"],
    ["DPD, requisitos: título de tercer nivel en Derecho, Sistemas de Información, Comunicación o Tecnologías y cinco años de experiencia. Incompatibilidades: administradores, socios, parientes de directivos y conflicto de intereses.", "arts. 55 y 56"],
    ["Transferencias internacionales: garantías adecuadas (cláusulas tipo, normas corporativas vinculantes, códigos de conducta); se inscriben en el Registro Nacional.", "arts. 71 a 78"]]},
- {"sigla": "Res. SPDP-SPD-2026-0040-R", "nombre": "Norma técnica de notificación de vulneraciones", "prio": "Alta", "estado": "oficial",
+ {"sigla": "Res. SPDP-SPD-2026-0040-R", "resumen": 'Norma técnica que regula cómo se notifican las vulneraciones de la seguridad a la SPDP: tipos de vulneración, alcance, canal obligatorio (SISPDP), plazos entre encargado y responsable y contenido de la comunicación a los titulares.', "dpd": ['Implementar un protocolo interno con responsables, plazos y canal SISPDP (herramienta 09).', 'Solicitar al cliente acceso o usuario en el SISPDP antes de que ocurra un incidente.', 'Incluir en los contratos de encargo la obligación de avisar en 2 días y el medio pactado.', 'Conservar la constancia de recepción del SISPDP como evidencia.'], "nombre": "Norma técnica de notificación de vulneraciones", "prio": "Alta", "estado": "oficial",
   "pub": "RO Supl. 376, 24-09-2026 · vigente desde su publicación", "tema": ["Vulneraciones"], "herr": ["09"],
   "url": "https://servicios.spdp.gob.ec",
   "puntos": [
@@ -57,7 +57,7 @@ NORMAS = [
    ["Encargado al responsable: máximo 2 días, por correo salvo pacto. El responsable notifica a la SPDP en 5 días desde que recibe esa comunicación.", "art. 11"],
    ["El SISPDP envía una constancia de recepción al correo: guardarla como evidencia.", "art. 13"],
    ["La norma no fija plazo propio para los titulares: rige el término de 3 días de la LOPDP.", "art. 7; LOPDP art. 46"]]},
- {"sigla": "Res. SPDP-SPD-2025-0041-R", "nombre": "Interés legítimo como base de legitimación", "prio": "Alta", "estado": "oficial",
+ {"sigla": "Res. SPDP-SPD-2025-0041-R", "resumen": 'Regula el uso del interés legítimo como base de legitimación en el sector privado: características del interés, evaluación de ponderación previa, supuestos admisibles, prohibiciones, oposición y registro de evaluaciones.', "dpd": ['Identificar en el RAT los tratamientos basados en interés legítimo.', 'Realizar la evaluación de ponderación con el Anexo 1 antes de iniciar (herramienta 06) y hacerla firmar por el responsable.', 'Verificar que el tratamiento esté informado en la política y que la oposición se atienda de inmediato.', 'Agendar la revisión anual de cada evaluación.'], "nombre": "Interés legítimo como base de legitimación", "prio": "Alta", "estado": "oficial",
   "pub": "07-11-2025 · RO Supl. 177, 03-12-2025", "tema": ["Principios y bases"], "herr": ["06"],
   "url": "https://spdp.gob.ec",
   "puntos": [
@@ -72,7 +72,7 @@ NORMAS = [
    ["Oposición: en todo momento y de atención inmediata.", "art. 17"],
    ["Registro de evaluaciones; revisión en el plazo de un año; pierde vigencia si cambian finalidad, datos, titulares o riesgos.", "art. 18"],
    ["Anexo 1: cinco etapas (idoneidad, necesidad, ponderación, medidas de seguridad, conclusión). Declaración final firmada y sellada por el responsable. Evidencias: cinco años, o la duración del tratamiento más dos años.", "Anexo 1"]]},
- {"sigla": "Res. SPDP-SPD-2026-0005-R", "nombre": "Tratamiento a gran escala (MTGE)", "prio": "Alta", "estado": "copia",
+ {"sigla": "Res. SPDP-SPD-2026-0005-R", "resumen": 'Norma general que define cuándo un tratamiento es de gran escala mediante el Modelo Técnico de Gran Escala (seis variables y umbral de 6) y los casos de calificación directa, con sus obligaciones reforzadas.', "dpd": ['Calcular el MTGE por cada tratamiento y registrarlo en el RAT (herramienta 05).', 'Solicitar el conteo de titulares únicos de 12 meses y la estructura de campos de cada base.', 'Si es gran escala: exigir DPD, evaluación de impacto, auditoría anual e informe anual de cumplimiento.', 'Recalcular al menos una vez al año.'], "nombre": "Tratamiento a gran escala (MTGE)", "prio": "Alta", "estado": "copia",
   "pub": "02-02-2026 · RO Supl. 231, 25-02-2026", "tema": ["Gran escala", "DPD", "Evaluación de impacto"], "herr": ["05"],
   "url": "https://spdp.gob.ec",
   "puntos": [
@@ -84,7 +84,7 @@ NORMAS = [
    ["RAT y cálculo: actualizar al menos una vez al año y conservar la evidencia.", "arts. 6 y 13"],
    ["Auditoría cada 12 meses; informes conservados 5 años; informe anual de cumplimiento; identificar estos tratamientos en la política.", "arts. 17 y 18"]],
   "nota": "El oficio se conoce por un resumen de terceros."},
- {"sigla": "Res. SPDP-SPD-2025-0028-R", "nombre": "Delegado de protección de datos y su registro", "prio": "Alta", "estado": "resumen",
+ {"sigla": "Res. SPDP-SPD-2025-0028-R", "resumen": 'Reglamento del delegado de protección de datos: casos de designación obligatoria en el sector privado, requisitos, incompatibilidades, funciones, garantías de independencia y registro del nombramiento ante la SPDP.', "dpd": ['Analizar si el cliente está en alguna de las 14 actividades con DPD obligatorio.', 'Si corresponde, preparar el nombramiento y su registro ante la SPDP (herramienta 08).', 'Verificar incompatibilidades (oficial de cumplimiento o de seguridad) y que el DPD tenga acceso a la gerencia y recursos.', 'Documentar el análisis aunque el cliente no esté obligado.'], "nombre": "Delegado de protección de datos y su registro", "prio": "Alta", "estado": "resumen",
   "pub": "30-07-2025", "tema": ["DPD"], "herr": ["01", "08"], "url": "https://spdp.gob.ec",
   "puntos": [
    ["Catorce actividades privadas con DPD obligatorio: educación, educación superior, datos de menores, entidades financieras, seguros, publicidad con perfiles, salud con historias clínicas, farmacéuticas, seguridad privada y administración de urbanizaciones, deporte, gremios, telecomunicaciones, videovigilancia masiva o tecnologías de la información, y concesionarios de servicios públicos.", "art. 10"],
@@ -94,7 +94,7 @@ NORMAS = [
    ["El nombramiento se registra ante la SPDP; no registrarlo en plazo se trata como falta de medidas de seguridad jurídicas.", "resumen"],
    ["Garantías: acceso directo al nivel ejecutivo, recursos y evaluación institucional, no jerárquica.", "resumen"]],
   "nota": "Pendiente de contrastar con el texto de la resolución aportado al proyecto."},
- {"sigla": "Res. SPDP-SPD-2026-0012-R", "nombre": "Guía de gestión de riesgos y evaluación de impacto, versión 2", "prio": "Alta", "estado": "copia",
+ {"sigla": "Res. SPDP-SPD-2026-0012-R", "resumen": 'Guía de gestión de riesgos y evaluación de impacto (versión 2): el capítulo I es obligatorio y exige justificar cada valor de riesgo; el capítulo II propone cinco etapas y modelos cualitativos y cuantitativos.', "dpd": ['Conducir el análisis de riesgos por etapas: contexto, identificación, análisis, evaluación y tratamiento (herramienta 07).', 'Exigir la justificación (rationale) de cada valor de probabilidad e impacto; usar la calculadora de riesgos cuando haya datos.', 'Definir con la gerencia la capacidad y la tolerancia al riesgo.', 'Supervisar que las medidas tengan responsable y plazo.'], "nombre": "Guía de gestión de riesgos y evaluación de impacto, versión 2", "prio": "Alta", "estado": "copia",
   "pub": "RO Supl. 254, 30-03-2026 (número por confirmar)", "tema": ["Evaluación de impacto"], "herr": ["07"], "url": "https://spdp.gob.ec",
   "puntos": [
    ["Capítulo I obligatorio; capítulo II referencial.", "Cap. I y II"],
@@ -103,27 +103,27 @@ NORMAS = [
    ["Criterios de impacto: categorías especiales, vulnerabilidad, número de titulares, naturaleza de la afectación y volumen por titular.", "Cap. II, etapa 1"],
    ["Estrategias: aceptar, modificar, transferir o evitar.", "Cap. II, etapa 5"]],
   "nota": "Lectura parcial: faltan la declaración de aplicabilidad y el anexo con el formato."},
- {"sigla": "Res. SPDP-SPD-2025-0006-R", "nombre": "Cláusulas de protección de datos en contratos", "prio": "Media", "estado": "copia",
+ {"sigla": "Res. SPDP-SPD-2025-0006-R", "resumen": 'Establece los contenidos mínimos y los defectos a evitar en las cláusulas de protección de datos de los contratos, con modelos referenciales por tipo de relación.', "dpd": ['Inventariar los contratos con proveedores, empleados y aliados que impliquen tratamiento de datos.', 'Solicitar los contratos vigentes y revisar los 12 defectos del art. 4.', 'Proponer las cláusulas de la herramienta 08 según el tipo de relación.'], "nombre": "Cláusulas de protección de datos en contratos", "prio": "Media", "estado": "copia",
   "pub": "30-04-2025", "tema": ["Encargados"], "herr": ["08"], "url": "https://spdp.gob.ec",
   "puntos": [
    ["Es obligatorio incluir cláusulas de protección de datos en los contratos entre actores del sistema.", "arts. 1 a 3"],
    ["Doce defectos que deben evitarse en las cláusulas.", "art. 4"],
    ["Cuatro modelos referenciales: responsable–titular, responsable–encargado, responsable–destinatario y corresponsables.", "Anexo I"]]},
- {"sigla": "Res. SPDP-SPD-2025-0040-R", "nombre": "Guía de protección de datos desde el diseño y por defecto", "prio": "Media", "estado": "copia",
+ {"sigla": "Res. SPDP-SPD-2025-0040-R", "resumen": 'Guía de protección de datos desde el diseño y por defecto: ocho principios (minimizar, ocultar, separar, abstraer, informar, controlar, cumplir y demostrar) y un modelo de madurez por proceso.', "dpd": ['Participar desde el inicio en proyectos nuevos o cambios de sistemas.', 'Verificar que la configuración por defecto trate solo los datos necesarios.', 'Recomendar tácticas por principio (por ejemplo, seudonimizar o separar bases) en la evaluación de impacto.'], "nombre": "Guía de protección de datos desde el diseño y por defecto", "prio": "Media", "estado": "copia",
   "pub": "21-10-2025 · RO 13-11-2025", "tema": ["Evaluación de impacto"], "herr": ["07"], "url": "https://spdp.gob.ec",
   "puntos": [
    ["Ocho principios: minimizar, ocultar, separar, abstraer, informar, controlar, cumplir y demostrar.", "guía"],
    ["Madurez por proceso en niveles 0 a 3.", "guía"]],
   "nota": "No confundir con la Res. 2026-0040 de vulneraciones. Leída una versión previa a la aprobada."},
- {"sigla": "Res. SPDP-SPD-2025-0022-R", "nombre": "Metodología para el cálculo de multas", "prio": "Media", "estado": "resumen",
+ {"sigla": "Res. SPDP-SPD-2025-0022-R", "resumen": 'Metodología con la que la SPDP calcula las multas: parte del volumen de negocio del año anterior y ajusta por gravedad, intencionalidad y reincidencia.', "dpd": ['Solicitar el volumen de negocio del ejercicio anterior para estimar la exposición (herramienta 03).', 'Presentar a la gerencia la multa estimada como rango, no como cifra exacta.', 'Usar la estimación para priorizar el plan de acción.'], "nombre": "Metodología para el cálculo de multas", "prio": "Media", "estado": "resumen",
   "pub": "16-07-2025 · RO 92, 30-07-2025", "tema": ["Sanciones"], "herr": ["03"], "url": "https://spdp.gob.ec",
   "puntos": [["Modelos MPRIV-1 (privado) y MPUB-1 (público); la multa parte del volumen de negocio y de factores de gravedad, intencionalidad y reincidencia.", "Anexo I"]],
   "nota": "Fórmulas tomadas de resúmenes: la estimación de la herramienta 03 es orientativa."},
- {"sigla": "Res. SPDP-SPD-2026-0004-R", "nombre": "Norma general de transferencias internacionales", "prio": "Media", "estado": "resumen",
+ {"sigla": "Res. SPDP-SPD-2026-0004-R", "resumen": 'Norma general sobre transferencias y comunicaciones internacionales de datos: mecanismos y garantías para enviar datos fuera del Ecuador.', "dpd": ['Identificar los servicios en la nube o proveedores fuera del país.', 'Distinguir si es un encargo (no es transferencia por sí solo) o una transferencia.', 'Solicitar las garantías contractuales y registrar la transferencia en el RAT.'], "nombre": "Norma general de transferencias internacionales", "prio": "Media", "estado": "resumen",
   "pub": "RO 3er Supl. 225, 13-02-2026", "tema": ["Transferencias"], "herr": ["04"], "url": "https://spdp.gob.ec",
   "puntos": [["El encargado ubicado fuera del Ecuador no convierte por sí solo el encargo en transferencia internacional.", "Oficio SPDP-IRD-2026-0300-O"]],
   "nota": "Texto completo no leído."},
- {"sigla": "Res. SPDP-SPD-2026-0039-R", "nombre": "Tratamiento de datos biométricos", "prio": "Alta", "estado": "resumen",
+ {"sigla": "Res. SPDP-SPD-2026-0039-R", "resumen": 'Norma general para el tratamiento de datos biométricos (huella, rostro, iris, voz): estricta necesidad, consentimiento explícito, alternativa no biométrica, evaluación de impacto previa y límites como la prohibición de identificación masiva.', "dpd": ['Identificar relojes biométricos, reconocimiento facial o voz en el cliente.', 'Exigir la evaluación de impacto antes de implementar y su revisión cada 12 meses (herramienta 07).', 'Verificar que se ofrezca una alternativa no biométrica a trabajadores y clientes.', 'Solicitar la configuración: plantillas en lugar de datos brutos; agendar la adecuación de 12 meses.'], "nombre": "Tratamiento de datos biométricos", "prio": "Alta", "estado": "resumen",
   "pub": "09-09-2026 · RO 376, 24-09-2026 · adecuación en 12 meses", "tema": ["Evaluación de impacto", "Gran escala"], "herr": ["07", "05"],
   "url": "https://spdp.gob.ec/r39/",
   "puntos": [
@@ -138,7 +138,7 @@ NORMAS = [
    ["El reconocimiento facial no constituye por sí mismo gran escala (contrasta con la Res. 2026-0005 art. 14.4).", "gran escala"],
    ["Quien ya usaba biometría tiene 12 meses desde la publicación para adecuar procesos y sistemas.", "disposición transitoria"]],
   "nota": "Basado en resúmenes de terceros (nmslaw.com.ec, avl.com.ec, lexis.com.ec); sin números de artículo. Leer el texto oficial antes de citar artículos."},
- {"sigla": "Res. SPDP-SPD-2026-0009-R", "nombre": "Protección de datos en sistemas de inteligencia artificial", "prio": "Alta", "estado": "copia",
+ {"sigla": "Res. SPDP-SPD-2026-0009-R", "resumen": 'Norma general para proteger los datos personales en sistemas de inteligencia artificial: aplica a quien desarrolla, despliega, distribuye o implementa IA con datos de titulares ecuatorianos y fija obligaciones de información, riesgos, RAT y auditoría.', "dpd": ['Inventariar las herramientas de IA que usan datos personales (chatbots, analítica, selección de personal).', 'Exigir la gestión de riesgos antes del desarrollo o la implementación y la evaluación de impacto cuando corresponda.', 'Incluir esos tratamientos y las decisiones automatizadas con efectos jurídicos en el RAT.', 'Solicitar al proveedor de IA la información sobre funcionamiento, limitaciones y controles.'], "nombre": "Protección de datos en sistemas de inteligencia artificial", "prio": "Alta", "estado": "copia",
   "pub": "12-02-2026 · RO 240, 10-03-2026 · reformada por la Res. SPDP-SPD-2026-0037-R (sept. 2026)", "tema": ["Evaluación de impacto", "RAT", "Derechos"], "herr": ["07", "04"],
   "url": "https://spdp.gob.ec",
   "puntos": [
@@ -151,7 +151,7 @@ NORMAS = [
    ["La SPDP puede auditar sistemas de IA e imponer medidas correctivas y cautelares; los incumplimientos se sancionan con el régimen de la LOPDP.", "arts. 8 y 10"],
    ["Reforma: el encargado solo responde por las fases en que tiene acceso, visibilidad o control efectivo de los datos; si alega no tenerlos, debe conservar evidencia; debe informar al responsable sobre funcionamiento, limitaciones, riesgos y controles del sistema.", "Res. SPDP-SPD-2026-0037-R"]],
   "nota": "Texto de la Res. 0009-R leído en copia LEXIS (RO 240) aportada al proyecto. La reforma 0037-R se conoce por un resumen de terceros."},
- {"sigla": "Res. SPDP-SPD-2025-0030-R", "nombre": "Seudonimización, anonimización, bloqueo y eliminación", "prio": "Media", "estado": "resumen",
+ {"sigla": "Res. SPDP-SPD-2025-0030-R", "resumen": 'Lineamientos técnicos para seudonimizar, anonimizar, bloquear y eliminar datos personales a lo largo de su ciclo de vida y al atender derechos.', "dpd": ['Verificar los plazos de conservación y qué ocurre al vencer (supresión, bloqueo o anonimización).', 'Solicitar el procedimiento de eliminación y la evidencia de su aplicación.', 'Comprobar que la «anonimización» del cliente realmente impida reidentificar.'], "nombre": "Seudonimización, anonimización, bloqueo y eliminación", "prio": "Media", "estado": "resumen",
   "pub": "2025", "tema": ["Principios y bases"], "herr": ["08"], "url": "https://spdp.gob.ec",
   "puntos": [["Lineamientos técnicos para el ciclo de vida de los datos y el ejercicio de derechos.", "resumen"]], "nota": "Texto completo no leído."},
 ]

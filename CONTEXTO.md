@@ -42,6 +42,14 @@ Actualizado: 2026-11-11 (segunda entrega). Leer junto con `CLAUDE.md` (reglas) y
 - Calculadora de riesgos (frecuentista, Delphi, bayesiano, Monte Carlo con ROSI) enlazada desde el Glosario, Inicio y las sugerencias de las herramientas 07 y 09.
 - Las herramientas 01 y 04 no tienen campos de empresa: no se rellenan.
 
+## 3d. Cuarta entrega (2026-11-11)
+- Evidencia de la 03 según el nivel (0 no existe; 1 informal; 2 propuesta o informe aprobado; 3-4 documento y aplicación).
+- Botones legibles en el modo oscuro de las herramientas (principal dorado, secundario gris con borde).
+- Vista previa antes de exportar; «Guardar como» en la PC para Word y Excel; Excel (.xlsx) real desde los botones «Excel».
+- Referencia: resumen de cada norma y «Qué debe implementar o solicitar el DPD».
+- Navegación «Anterior / Siguiente» en todas las herramientas con pestañas y resultado repetido al pie; resultado del diagnóstico al pie del cuestionario de la 03.
+- Pendiente de esta línea: evidencia de respaldo también en 06 y 07.
+
 ## 4. Pendiente (orden de prioridad)
 2. PDF de la ley y el reglamento: son copias LEXIS; no se versionan mientras el repositorio sea público. Publicarlos al pasar a Cloudflare con Access.
 3. Contrastar los textos aportados al proyecto y aún no leídos: Res. 0028 (DPD), programa profesionalizante, guía v2 de riesgos; y los textos oficiales de las Res. 2026-0039 y 0037 (puntos 8, 20, 25, 28 y 29 de `BASE-LEGAL.md`).

@@ -76,24 +76,47 @@ var modo=null,cap=null,OB=window.Blob;
 function B(parts,opt){if(opt&&/^text\/html/.test(opt.type||'')&&parts&&typeof parts[0]==='string'){try{var h=D.firma(parts.join(''));cap=h;parts=[h]}catch(e){}}return new OB(parts,opt)}
 B.prototype=OB.prototype;window.Blob=B;
 if(!window.ClipboardItem)window.ClipboardItem=function(o){this.o=o};
-try{var C=navigator.clipboard||{},cw=C.write?C.write.bind(C):null;var nw=function(it){if(modo)return Promise.resolve();return cw?cw(it):Promise.reject(new Error('sin portapapeles'))};
- if(navigator.clipboard)navigator.clipboard.write=nw;else Object.defineProperty(navigator,'clipboard',{configurable:true,value:{write:nw}})}catch(e){}
+var capT=null;try{var C=navigator.clipboard||{},cw=C.write?C.write.bind(C):null,ct=C.writeText?C.writeText.bind(C):null;var nw=function(it){if(modo)return Promise.resolve();return cw?cw(it):Promise.reject(new Error('sin portapapeles'))},nt=function(t){if(modo){capT=String(t);return Promise.resolve()}return ct?ct(t):Promise.reject(new Error('sin portapapeles'))};
+ if(navigator.clipboard){navigator.clipboard.write=nw;navigator.clipboard.writeText=nt}else Object.defineProperty(navigator,'clipboard',{configurable:true,value:{write:nw,writeText:nt}})}catch(e){}
+var oec=document.execCommand?document.execCommand.bind(document):null;document.execCommand=function(c){if(modo&&c==='copy'){var a=document.activeElement;if(a&&'value' in a)capT=a.value;else{var sl=window.getSelection();capT=sl?String(sl):''}return true}return oec?oec.apply(document,arguments):false};
 function aviso(t){try{if(P&&P.PDToast){P.PDToast(t);return}}catch(e){}var e=document.getElementById('msc-av');if(!e){e=document.createElement('div');e.id='msc-av';e.style.cssText='position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#14181E;color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;z-index:1000;max-width:92%';document.body.appendChild(e)}e.textContent=t;e.hidden=false;clearTimeout(e._t);e._t=setTimeout(function(){e.hidden=true},3200)}
-function titulo(src){var t='';try{var d=document.createElement('div');d.innerHTML=cap||'';var h=d.querySelector('h1,h2');t=h?h.textContent:''}catch(e){}if(!t)t=(src.textContent||'').replace(/^Copiar\s+/i,'').replace(/\s*\(Word\)\s*$/i,'');
- var c='';try{if(P&&P.PDNombre)c=P.PDNombre()||''}catch(e){}var f=new Date(),iso=f.getFullYear()+'-'+String(f.getMonth()+1).padStart(2,'0')+'-'+String(f.getDate()).padStart(2,'0');return [t.trim().slice(0,48),c.slice(0,28),iso].filter(Boolean).join(' ')}
-function exporta(src,tipo){modo=tipo;cap=null;document.body.classList.add('msc-expmodo');try{src.click()}catch(e){}
+function titulo(src){var t='';try{var d=document.createElement('div');d.innerHTML=cap||'';var h=d.querySelector('h1,h2');t=h?h.textContent:''}catch(e){}if(!t||modo==='xlsx')t=(src.textContent||'').replace(/^Copiar\s+/i,'').replace(/\s*\((Word|Excel)\)\s*$/i,'').replace(/\s*para Excel\s*$/i,'');t=t.replace(/\s+(de|del|en|para)\s*$/i,'');
+ var c='';try{if(P&&P.PDNombre)c=P.PDNombre()||''}catch(e){}var f=new Date(),iso=f.getFullYear()+'-'+String(f.getMonth()+1).padStart(2,'0')+'-'+String(f.getDate()).padStart(2,'0');t=t.trim();if(t.length>44)t=t.slice(0,44).replace(/\s+\S*$/,'');return [t||'documento',c.replace(/\.+$/,'').slice(0,28),iso].filter(Boolean).join(' ')}
+function exporta(src,tipo){modo=tipo;cap=null;capT=null;document.body.classList.add('msc-expmodo');try{src.click()}catch(e){}
  setTimeout(function(){var h=cap,m=modo;modo=null;setTimeout(function(){document.body.classList.remove('msc-expmodo')},2200);
-  if(!h){aviso('Complete el informe antes de exportarlo.');return}var n=titulo(src);
-  try{if(m==='docx'){var fn=D.docx(h,n);aviso('Word descargado: '+fn)}else{D.pdf(h,n);aviso('En la impresión elija «Guardar como PDF».')}}catch(e){aviso('No se pudo exportar: '+e.message)}},80)}
-function botones(){[].slice.call(document.querySelectorAll('button')).forEach(function(b){if(b.dataset.mscx||b.closest('.msc-exp'))return;var t=(b.textContent||'').trim();if(!/\(Word\)$/i.test(t)&&!/^Copiar documento$/i.test(t))return;b.dataset.mscx=1;
+  var n=titulo(src);
+  if(m==='xlsx'){if(!capT){aviso('Complete los datos antes de exportar.');return}try{D.xlsx(capT,n,'Datos').then(function(f){if(f)aviso('Excel guardado: '+f)})}catch(e){aviso('No se pudo exportar: '+e.message)}return}
+  if(!h){aviso('Complete el informe antes de exportarlo.');return}
+  try{if(m==='docx'){D.docx(h,n).then(function(f){if(f)aviso('Word guardado: '+f)})}else{D.vista(h,n,null,{aviso:aviso})}}catch(e){aviso('No se pudo exportar: '+e.message)}},80)}
+function botones(){[].slice.call(document.querySelectorAll('button')).forEach(function(b){if(b.dataset.mscx||b.closest('.msc-exp'))return;var t=(b.textContent||'').trim(),xl=/\(Excel\)$|para Excel/i.test(t);if(!/\(Word\)$/i.test(t)&&!/^Copiar documento$/i.test(t)&&!xl)return;b.dataset.mscx=1;
  var s=document.createElement('span');s.className='msc-exp';var cls=(b.className||'btn').replace(/\boro\b/,'').trim()+' sec';
- [['docx','Word (.docx)'],['pdf','PDF']].forEach(function(k){var n=document.createElement('button');n.type='button';n.className=cls;n.textContent=k[1];n.title=t.replace(/^Copiar/i,'Descargar').replace(/\(Word\)$/i,'')+(k[0]==='pdf'?'en PDF':'en Word');n.onclick=function(){exporta(b,k[0])};s.appendChild(n)});
+ (xl?[['xlsx','Excel (.xlsx)']]:[['pdf','Vista previa y PDF'],['docx','Word (.docx)']]).forEach(function(k){var n=document.createElement('button');n.type='button';n.className=cls;n.textContent=k[1];n.title=k[0]==='pdf'?'Ver el documento y guardarlo en PDF':'Guardar '+(k[0]==='xlsx'?'en Excel':'en Word')+' en su equipo';n.onclick=function(){exporta(b,k[0])};s.appendChild(n)});
  b.parentNode.insertBefore(s,b.nextSibling)})}
 function firmaApp(){var F=null;try{if(P&&P.PDFirma)F=P.PDFirma()}catch(e){}if(!F)return;
  [].slice.call(document.querySelectorAll('input')).forEach(function(i){var v=(i.value||'').trim(),nv=null;
   if(/^Consultor en Protecci[oó]n de Datos( Personales)?( · Mat\. ?[\d-]+)?$/.test(v)||/^Delegado de Protecci[oó]n de Datos/.test(v))nv=F.ec;else if(v==='Abg. Mariano X. Macías Sánchez'&&F.nom)nv=F.nom;
   if(nv&&nv!==v){i.value=nv;i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}))}})}
 botones();setTimeout(botones,600);setTimeout(firmaApp,700);document.addEventListener('click',function(e){if(e.target&&/ejemplo|nueva/i.test(e.target.textContent||''))setTimeout(firmaApp,300)})})();</script>"""
+
+
+# Navegación paso a paso y resultado al pie: al final de cada pestaña, «Anterior / Siguiente» y, si la pestaña
+# muestra un resultado arriba (resNec, resFiltro, balance…), una copia de ese resultado abajo, al terminar de responder.
+PASOS = r"""<style>.msc-pie{margin:18px 0 6px;border-top:1px solid rgba(128,128,128,.25);padding-top:14px}.msc-pie .pp{font-size:12px;opacity:.75;margin-bottom:8px}
+.msc-pie .row2{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between}.msc-pie button{font:inherit;font-weight:700;font-size:14px;border-radius:8px;padding:11px 16px;cursor:pointer;min-height:44px}
+.msc-pie .sig{background:#A09046;border:1px solid #A09046;color:#14181E;flex:1;min-width:180px}.msc-pie .ant{background:transparent;border:1px solid rgba(128,128,128,.5);color:inherit}
+.msc-res{margin:14px 0 4px}.msc-res>.t{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;opacity:.75;margin-bottom:6px}</style>
+<script>(function(){var B=[].slice.call(document.querySelectorAll('nav button[data-t]'));if(B.length<2)return;
+var S=B.map(function(b){return document.getElementById(b.dataset.t)}).filter(Boolean);if(S.length!==B.length)return;
+function nom(b){return (b.textContent||'').replace(/^\s*\d+\s*·\s*/,'').trim()}
+S.forEach(function(sec,i){if(sec.querySelector('.msc-pie'))return;
+ var src=[].slice.call(sec.querySelectorAll('[id]')).filter(function(e){return /^(res[A-Z]\w*|balance|pvR)$/.test(e.id)&&e.closest('section')===sec})[0],box=null;
+ if(src){box=document.createElement('div');box.className='msc-res';box.hidden=true;box.innerHTML='<div class="t">Resultado</div><div class="c"></div>';
+  var cp=function(){var h=src.innerHTML.trim();box.hidden=!h||/Responde todas|Responde las preguntas/i.test(src.textContent);box.querySelector('.c').innerHTML=h.replace(/\sid="/g,' data-oid="')};
+  new MutationObserver(cp).observe(src,{childList:true,subtree:true,characterData:true});cp()}
+ var pie=document.createElement('div');pie.className='msc-pie';
+ pie.innerHTML='<div class="pp">Paso '+(i+1)+' de '+S.length+'</div><div class="row2">'+(i?'<button type="button" class="ant">‹ '+nom(B[i-1])+'</button>':'<span></span>')+(i<S.length-1?'<button type="button" class="sig">Siguiente: '+nom(B[i+1])+' ›</button>':'')+'</div>';
+ var a=pie.querySelector('.ant'),n=pie.querySelector('.sig');if(a)a.onclick=function(){B[i-1].click();window.scrollTo(0,0)};if(n)n.onclick=function(){B[i+1].click();window.scrollTo(0,0)};
+ if(box)sec.appendChild(box);sec.appendChild(pie)})})();</script>"""
 
 
 def _pon(html: str, ini: str, fin: str, bloque: str) -> str:
@@ -107,7 +130,7 @@ def aplicar(html: str, num: str, en_app: bool = False) -> str:
     """en_app=True omite la biblioteca de exportación: dentro de la app se usa la de la ventana principal."""
     html = _pon(html, INI, FIN, SNIPPET.replace("__NUM__", num))
     lib = "" if en_app else "<script>" + LIB + "</script>"
-    html = _pon(html, EINI, EFIN, EINI + lib + EXPORTA + EFIN)
+    html = _pon(html, EINI, EFIN, EINI + lib + EXPORTA + PASOS + EFIN)
     if en_app:
         html = _pon(html, OINI, OFIN, OINI + "<style>" + TO.css_oscuro(html) + "</style>" + OSCURO_JS + OFIN)
     return html

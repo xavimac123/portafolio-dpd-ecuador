@@ -85,7 +85,8 @@ def css_oscuro(html):
                 root[k] = v.strip()
     salida = ["html.msc-dark{color-scheme:dark}html.msc-dark,html.msc-dark body{background:#0F1216!important;color:#E7E4DA!important}",
               "html.msc-dark input::placeholder,html.msc-dark textarea::placeholder{color:#8C8F96!important;-webkit-text-fill-color:#8C8F96!important}",
-              "html.msc-dark select option{background:#1C2128;color:#E7E4DA}"]
+              "html.msc-dark select option{background:#1C2128;color:#E7E4DA}",
+              "html.msc-dark button:disabled{opacity:.45}"]
     for media, sel, d in _reglas(estilos):
         if not sel or sel.startswith("@") or sel.strip() in (":root", "html,body", "body", "html"):
             continue
@@ -101,6 +102,29 @@ def css_oscuro(html):
                         r, g, b = [v / 255 for v in _hex(c)]
                         if 0.2 <= colorsys.rgb_to_hls(r, g, b)[1] <= 0.55:
                             fondo_medio = True
+        # Botones y elementos seleccionados: si el fondo es oscuro (carbón), pasan a dorado con texto oscuro,
+        # como en la app; si es claro, a gris elevado con borde visible.
+        es_boton = bool(re.search(r"btn|button|\.on\b|aria-selected|\.sel\b|\.act\b", sel))
+        if es_boton:
+            oscuro = claro = False
+            for prop, val in decl:
+                if PROPS.get(prop.strip()) == "bg":
+                    for c in RE_COLOR.findall(val):
+                        c = root.get(c[4:-1], "") if c.startswith("var(") else ("#FFFFFF" if c == "white" else c)
+                        if c.startswith("#"):
+                            r, g, b = [v / 255 for v in _hex(c)]
+                            L = colorsys.rgb_to_hls(r, g, b)[1]
+                            oscuro = oscuro or L < 0.2
+                            claro = claro or L > 0.55
+            if oscuro:
+                nuevas = ["background:#A09046!important", "color:#14181E!important", "border-color:#A09046!important", "-webkit-text-fill-color:#14181E!important"]
+            elif claro:
+                nuevas = ["background:#1F252D!important", "color:#E7E4DA!important", "border-color:#4A525E!important", "-webkit-text-fill-color:#E7E4DA!important"]
+            if oscuro or claro:
+                sels = ",".join("html.msc-dark " + x.strip() for x in sel.split(",") if x.strip())
+                regla = sels + "{" + ";".join(nuevas) + "}"
+                salida.append(media + "{" + regla + "}" if media else regla)
+                continue
         for prop, val in decl:
             if fondo_medio and PROPS.get(prop.strip()) == "tx":
                 continue

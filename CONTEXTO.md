@@ -1,6 +1,6 @@
 # ARCHIVO MAESTRO DE CONTEXTO · MSC Protección de Datos (MSC PD)
 
-Actualizado: 2026-11-11 (undécima entrega). Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (normas).
+Actualizado: 2026-11-11 (duodécima entrega). Leer junto con `CLAUDE.md` (reglas) y `BASE-LEGAL.md` (normas).
 
 ## 1. Identidad y propósito
 - **Qué es:** app instalable (PWA) para gestionar clientes y cumplimiento LOPDP (Ecuador) con las nueve herramientas del portafolio de Macías Sánchez Consultores.
@@ -100,6 +100,8 @@ Actualizado: 2026-11-11 (undécima entrega). Leer junto con `CLAUDE.md` (reglas)
 - Herramientas en bloques: diagnóstico y evaluación (DPD), implementación y cumplimiento (empresa; DPD verifica), gestión del consultor, consulta y cálculo. Clasificación por tamaño y sector; departamento responsable en las de implementación.
 - Nuevas vistas: informe del deber de información (art. 12, 17 elementos y condiciones) y plan de implementación (14 acciones del art. 47 y normas relacionadas) con verificación del DPD.
 - Fuente: `scripts/cumplimiento_config.py` (criterio propio en departamentos y clasificación).
+- Fusionada con la undécima entrega (trabajo paralelo): el plan muestra «Implementación a cargo de» de la ficha y recuerda que MSC, como DPO, solo verifica. Abrir una herramienta ya no la marca como actualizada (guardados del primer 1,5 s). Publicado en `main` y `gh-pages` con `MSC_PUBLICO=1`.
+- Nota: hubo dos sesiones trabajando en paralelo; antes de enviar, hacer `git fetch` y fusionar.
 
 ## 4. Pendiente (orden de prioridad)
 0. Separación evaluación/implementación: consultar a la SPDP la modalidad subcontratada (punto 32); declaración de la relación con el implementador aliado en el kit 08; servicios S29 y S30 en la proforma de MSC Gestor Legal (el traspaso `msc:pd-handoff` envía códigos que Gestor Legal quizá no tenga).

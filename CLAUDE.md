@@ -22,7 +22,7 @@ Repositorio de herramientas de cumplimiento LOPDP (Ecuador) de Macías Sánchez 
 La numeración de las herramientas sigue el orden de uso de la guía (`docs/guia/`). Si se agrega una herramienta, ubicarla en ese orden y actualizar la guía.
 
 
-- `01-catalogo-servicios/` — catálogo de servicios y glosario, fuente `scripts/catalogo_config.py`; la proforma de 02 importa de allí sus servicios (mismos códigos S01 a S28)
+- `01-catalogo-servicios/` — catálogo de servicios y glosario, fuente `scripts/catalogo_config.py`; la proforma de 02 importa de allí sus servicios (mismos códigos S01 a S30)
 - `02-honorarios/` — calculadora de honorarios y proforma, fuente `scripts/honorarios_config.py` (tarifas y tramos son criterio propio)
 - `03-madurez/` — diagnóstico de madurez, fuente `scripts/madurez_config.py` (modelo propio, rotularlo siempre así)
 - `04-registro-tratamientos/` — RAT
@@ -33,6 +33,8 @@ La numeración de las herramientas sigue el orden de uso de la guía (`docs/guia
 - `09-kit-vulneraciones/` — gestión y notificación de vulneraciones
 - `app-pd/` — app instalable MSC Protección de Datos (PWA): `fuente/index.html`, `build_pwa.py`; publica `app-pd/docs/` en la rama `gh-pages` (GitHub Pages)
 - `scripts/referencia_config.py` — fuente única de la pestaña «Referencia» de la app (normas, puntos de consulta y plazos); todo lo que cite debe constar en `BASE-LEGAL.md`
+- `scripts/responsabilidades_config.py` — fuente única de la pestaña «Responsabilidades DPO» (funciones, prohibiciones, qué no es un DPO, auditoría); toda cita debe constar en `BASE-LEGAL.md`
+- `scripts/publicidad_config.py` — fuente única de la pestaña «Publicidad» (preguntas, datos clave, llamados a la acción, enlace del autodiagnóstico); toda afirmación normativa lleva cita en `BASE-LEGAL.md`; los datos de contacto no van aquí
 - `scripts/glosario_config.py` — normas ISO y métodos de medición de riesgos del Glosario (las definiciones legales se toman de `catalogo_config.py`)
 - `scripts/cumplimiento_config.py` — organización de la pestaña Herramientas (diagnóstico, implementación, gestión), clasificación por tamaño de empresa, informe del art. 12 y plan de implementación con departamentos sugeridos (criterio propio)
 - `scripts/tema_oscuro.py` — genera el modo oscuro de las herramientas a partir de su propio CSS (lo aplica `barra_contexto.py` en la app)

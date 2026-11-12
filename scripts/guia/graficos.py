@@ -76,7 +76,7 @@ def ciclo():
     fig, ax = plt.subplots(figsize=(6.6, 6.6))
     ax.set_xlim(-1.62, 1.62); ax.set_ylim(-1.62, 1.62); ax.axis("off"); ax.set_aspect("equal")
     fases = [("1", "Diagnóstico", "Madurez"), ("2", "Inventario", "RAT y mapa\nde datos"), ("3", "Riesgos", "Análisis y\nevaluación de impacto"),
-             ("4", "Adecuación", "Políticas, avisos,\ncontratos"), ("5", "Respuesta", "Vulneraciones\ny derechos"), ("6", "Control", "Indicadores,\nauditoría, mejora")]
+             ("4", "Implementación", "Políticas, avisos,\ncontratos"), ("5", "Respuesta", "Vulneraciones\ny derechos"), ("6", "Control", "Indicadores,\nauditoría, mejora")]
     cols = [CAR, OLI, ORO, "#8C7E3E", "#5A4F25", "#3A3F47"]
     for i, (n, t, s) in enumerate(fases):
         a0 = 90 - i * 60
@@ -304,7 +304,7 @@ def mtge():
 
 # 11. Honorarios por método (ejemplo de la herramienta 01)
 def honorarios():
-    fases = ["Evaluación inicial", "Adecuación", "Control mensual × 12"]
+    fases = ["Evaluación inicial", "Implementación", "Control mensual × 12"]
     datos = {"Volumen de negocio": [1470, 3780, 350 * 12], "Volumen de tratamiento": [1090, 2210, 590 * 12], "Técnica (piso)": [1350, 2130, 370 * 12]}
     rec = [1350, 2210, 370 * 12]
     fig, ax = plt.subplots(figsize=(9, 3.6))
@@ -416,9 +416,9 @@ def roadmap_dpd():
     ax.set_xlim(0, 15); ax.set_ylim(0, 7.6); ax.axis("off")
     F = [("0", "Propuesta", "Semana 0", "Reunión inicial, catálogo\ny proforma (01 · 02)", "Decide contratar;\ndesigna un enlace"),
          ("1", "Diagnóstico", "Semanas 1-3", "Mapea áreas y mide\nla madurez (03)", "Entrega evidencias;\nla gerencia valida"),
-         ("2", "Inventario", "Semanas 3-6", "Guía el RAT y mide\nla gran escala (04 · 05)", "Cada área describe\nsus tratamientos"),
-         ("3", "Riesgos", "Semanas 6-9", "Contexto, ponderación\ne impacto (06 · 07)", "Dueños de proceso\nestiman y deciden"),
-         ("4", "Adecuación", "Semanas 9-14", "Redacta borradores:\npolítica, cláusulas,\nprotocolo (08 · 09)", "Aprueba, firma\ne IMPLEMENTA"),
+         ("2", "Inventario", "Semanas 3-6", "Mide la gran escala (05);\nrevisa el RAT (04, S29)", "El implementador\nelabora el RAT"),
+         ("3", "Riesgos", "Semanas 6-9", "Observaciones no\nvinculantes (06 · 07)", "Implementador elabora;\ndueños deciden"),
+         ("4", "Implementación", "Semanas 9-14", "Verifica lo\nimplementado (S30);\nredacta solo si no es DPD", "Elige implementador;\naprueba e IMPLEMENTA"),
          ("5", "Designación", "Semana 14", "Verifica requisitos;\nregistro ante la SPDP", "Designa al DPD (si\ncorresponde) y\ncomunica el canal"),
          ("6", "Control mensual", "Cada mes", "Supervisa, informa,\natiende consultas", "Ejecuta mejoras;\nresponde solicitudes"),
          ("7", "Revisión anual", "Cada año", "Repite 03 y 05; revisa\nponderaciones y EIPD", "Actualiza el RAT y\nel plan de acción")]

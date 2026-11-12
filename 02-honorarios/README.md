@@ -17,7 +17,7 @@ Al consultor o DPD externo que prepara una oferta. No se entrega al cliente: al 
 | `proforma-servicios.md` | Plantilla de proforma para Word, con firma de elaborado y aceptación del cliente |
 | `docx/` | Versiones Word |
 
-Fuente única: `scripts/honorarios_config.py`. Los servicios de la proforma (códigos S01 a S28) vienen del catálogo `scripts/catalogo_config.py` (herramienta 01); la proforma permite importar los códigos seleccionados allí. Regenerar con `python scripts/generar_calculadora_honorarios.py`.
+Fuente única: `scripts/honorarios_config.py`. Los servicios de la proforma (códigos S01 a S30) vienen del catálogo `scripts/catalogo_config.py` (herramienta 01); la proforma permite importar los códigos seleccionados allí. Regenerar con `python scripts/generar_calculadora_honorarios.py`.
 
 ## Base legal y técnica
 
@@ -31,6 +31,15 @@ Fuente única: `scripts/honorarios_config.py`. Los servicios de la proforma (có
 | Tramos por volumen de negocio, tarifario por puntaje, tarifas por hora, horas por tarea, pisos, paquetes y precios de servicios | Macías Sánchez Consultores | **Criterio propio** |
 
 Todas las citas constan en `BASE-LEGAL.md`.
+
+## Evaluación e implementación separadas (desde el 2026-11-11)
+
+En la pestaña 6, antes de elegir servicios, indique:
+
+- **Rol de MSC con el cliente:** consultor sin designación, o DPO designado o por designar.
+- **Implementación a cargo de:** personal del responsable; proveedor que elija el responsable; implementador aliado presentado por MSC con contrato directo; MSC mediante un tercero (MSC subcontrata y factura); o MSC como consultor (solo si no es DPO del cliente).
+
+Los servicios de implementación (S05 a S07, S09 a S15, S23) solo suman a la proforma cuando los factura MSC. En los demás casos aparecen como referencia «a cargo de [implementador], no incluida en esta proforma». La herramienta advierte la incompatibilidad de ser DPO e implementar (Res. SPDP-SPD-2025-0028-R art. 15.1), el conflicto potencial de subcontratar siendo DPO (arts. 17 y 18; punto abierto 32) y sugiere S29 (revisión del DPO) y S30 (verificación de la implementación). Los paquetes contienen solo la línea de evaluación y supervisión; la implementación se agrega aparte.
 
 ## Instrucciones
 

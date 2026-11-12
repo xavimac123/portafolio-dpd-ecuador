@@ -7,7 +7,7 @@ App web instalable (PWA) que reúne las nueve herramientas del portafolio en un 
 ## Qué incluye
 
 - **Inicio:** vencidos, próximos 7 días, clientes activos, solicitudes abiertas y accesos rápidos (cliente nuevo, vulneración, solicitud de derechos, diagnóstico).
-- **Clientes:** ficha de la empresa (razón social, RUC, tamaño, sector, contacto, modalidad, servicios del catálogo S01 a S28), expediente con las nueve herramientas, plazos, solicitudes de derechos y resumen para Word. Solo datos de la empresa: **nunca datos de los titulares**.
+- **Clientes:** ficha de la empresa (razón social, RUC, tamaño, sector, contacto, modalidad, rol de MSC e implementador, servicios del catálogo S01 a S30), expediente con las nueve herramientas, plazos, solicitudes de derechos y resumen para Word. Solo datos de la empresa: **nunca datos de los titulares**.
 - **Herramientas:** cada herramienta se abre dentro de la app y guarda su avance en el expediente del cliente elegido, o en «modo libre».
 - **Agenda:** plazos de todos los clientes (control mensual, revisiones anuales, vulneraciones, entregas, reuniones), «Agendar ciclo anual» y solicitudes de derechos con código.
 - **Semáforo de cumplimiento** por cliente (lista, ficha e inicio). Rojo: plazos vencidos o vulneración abierta. Amarillo: plazos en 7 días, herramientas 03, 04 y 05 sin aplicar o con más de 12 meses (06 y 07 si tienen más de 12 meses) o sin control mensual agendado. Reglas de **criterio propio**.
@@ -16,7 +16,7 @@ App web instalable (PWA) que reúne las nueve herramientas del portafolio en un 
 - **Bitácora de horas y actividades:** horas del mes, valor efectivo por hora frente al honorario mensual y aviso si se superan las horas que cubre el valor hora objetivo.
 - **Informe mensual:** borrador para Word con estado (semáforo), actividades, herramientas actualizadas, plazos, solicitudes, vulneraciones, evidencias, próximos pasos, observaciones y firma.
 - **Revisión automática:** al actualizar las herramientas 03 a 07 de un cliente, propone agendar su revisión a 12 meses.
-- **Proforma en Gestor Legal:** envía los servicios S01 a S28 de la ficha a la proforma de MSC Gestor Legal (misma dirección web; clave `msc:pd-handoff`, vigente 7 días).
+- **Proforma en Gestor Legal:** envía los servicios S01 a S30 de la ficha a la proforma de MSC Gestor Legal (misma dirección web; clave `msc:pd-handoff`, vigente 7 días).
 - **Barra de contexto:** al desplazarse, la app y cada herramienta muestran dónde está el usuario (pestaña › sección); dentro de la app, en la barra superior de la herramienta.
 - **Inicio:** búsqueda de clientes, accesos rápidos («¿Qué necesita hacer?»), «Continuar donde lo dejó» y lista de primeros pasos.
 - **Calculadora de plazos de notificación:** por caso (rol, sector, constancia, comunicación del encargado, riesgo para titulares, excepciones del art. 46, feriados locales); exporta a Word o PDF y agenda la vulneración en el cliente.
@@ -58,3 +58,10 @@ Para publicar, copiar el contenido de `app-pd/docs/` a la rama `gh-pages` (GitHu
 - Los datos viven en cada dispositivo y se igualan mediante Google Drive; no hay usuarios múltiples. Es la base de la futura plataforma con usuario y contraseña, no esa plataforma.
 - La vista previa (`dist/preview.html`) no conecta con Google: el origen no está autorizado.
 - El repositorio público expone el contenido de las herramientas (no datos). Definir la licencia (`docs/decision-licencia.md`) antes de difundir el enlace.
+
+## Inicio, clima y autodiagnóstico
+
+- **Saludo:** «Buenos días / tardes / noches» según la hora, nombre abreviado con título (o el «Nombre para el saludo» de Ajustes) y el cargo con el que firma.
+- **Clima:** pronóstico de MET Norway (Locationforecast 2.0, datos CC BY 4.0; uso comercial permitido para sitios de bajo volumen que se identifican por su origen). Se consulta como máximo cada 30 minutos; ubicación predeterminada Guayaquil, o la del dispositivo redondeada a 2 decimales (Ajustes › Apariencia).
+- **Autodiagnóstico:** `build_pwa.py` genera `docs/autodiagnostico/` (página puente con `og:image` de la marca que redirige al formulario de Tally). Así el enlace enviado por WhatsApp muestra la vista previa de Macías Sánchez Consultores en lugar de la de Tally. El *service worker* no intercepta esa ruta.
+- **Contacto:** el WhatsApp y el correo de atención se guardan una sola vez en Ajustes › Datos del consultor (cifrados) y se usan en publicidad, invitaciones y mensajes. No se escriben en el código porque el repositorio es público.

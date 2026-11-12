@@ -28,7 +28,9 @@ ejemplo = {
           "retir": C.ECON["ret_ir_natural"], "retiva": C.ECON["ret_iva"], "horas": 20},
     "p": {"num": "MSC-2026-001", "fecha": "2026-11-08", "validez": 30, "meses": 12, "desc": 0, "iva": C.ECON["iva"],
           "cond": C.CONDICIONES, "multa": "17773.88", "aten": "",
+          "rol": "dpo", "impl": "msc_directo", "implNom": "[IMPLEMENTADOR ALIADO]", "implVal": "",
           "items": {"diag": {"on": True, "q": 1, "v": ""}, "adec": {"on": True, "q": 1, "v": ""}, "dpd": {"on": True, "q": 1, "v": ""},
+                    "verificacion": {"on": True, "q": 3, "v": ""},
                     "capac": {"on": True, "q": 1, "v": ""}, "incidente": {"on": True, "q": 1, "v": ""}, "hora": {"on": True, "q": 1, "v": ""}},
           "f": {"el": "Abg. Mariano X. Macías Sánchez", "ec": "Consultor en Protección de Datos Personales · Matrícula profesional 09-2022-736",
                 "cl": "[REPRESENTANTE LEGAL]", "cc": "Gerente general"}},
@@ -36,7 +38,7 @@ ejemplo = {
 
 cfg = {"version": C.VERSION, "econ": C.ECON, "tamanos": C.TAMANOS, "sectores": C.SECTORES, "volneg": C.VOLNEG, "mtge": C.MTGE,
        "voltrat": C.VOLTRAT, "perfiles": C.PERFILES, "gastos": C.GASTOS_PCT, "tareas": C.TAREAS, "areas": C.AREAS_POR_TAMANO,
-       "dpdInterno": C.DPD_INTERNO, "paquetes": C.PAQUETES, "servicios": C.SERVICIOS, "grupos": C.GRUPOS, "condiciones": C.CONDICIONES,
+       "dpdInterno": C.DPD_INTERNO, "rolesMsc": C.ROLES_MSC, "impl": C.IMPLEMENTACION, "lineas": C.LINEAS, "paquetes": C.PAQUETES, "servicios": C.SERVICIOS, "grupos": C.GRUPOS, "condiciones": C.CONDICIONES,
        "beneficios": C.BENEFICIOS, "ejemplo": ejemplo}
 shell = (ROOT / "scripts" / "plantilla-calculadora-honorarios.html").read_text(encoding="utf-8")
 (OUT / "calculadora-honorarios.html").write_text(
@@ -62,10 +64,11 @@ M = ["# Metodología de la calculadora de honorarios del DPD", "",
      "Los tramos, pisos, tarifas y factores de esta herramienta son criterio propio de Macías Sánchez Consultores, contrastados con "
      "referencias públicas del mercado (sección «Referencias de mercado»). Solo son normativos: la clasificación de empresas, el "
      "Modelo Técnico de Gran Escala, la tarifa del IVA, las retenciones y los rubros laborales del DPD interno.", "",
-     "## Tres fases del servicio", "",
+     "## Fases del servicio", "",
      "| Fase | Cobro | Qué incluye |", "|---|---|---|",
      "| Evaluación inicial | Única vez | Diagnóstico de madurez, exposición económica, análisis de gran escala y plan de acción |",
-     "| Adecuación | Única vez | RAT, política y avisos, contratos de encargo, protocolo de vulneraciones, derechos, capacitación, designación del DPD |",
+     "| Implementación (referencial) | Única vez | RAT, política y avisos, contratos de encargo, protocolo de vulneraciones, derechos. La decide el responsable y la ejecuta su personal, un proveedor o un tercero coordinado por MSC; solo suma a la proforma si la factura MSC (subcontratada o como consultor que no es DPO del cliente). Si no, el valor sirve para comparar la cotización del implementador |",
+     "| Revisión y verificación | Por evaluación o por hito | S29 revisión del DPO a evaluaciones elaboradas por el responsable; S30 verificación de lo implementado |",
      "| Control | Mensual | DPD externo o acompañamiento: supervisión, RAT vivo, derechos, incidentes, reporte a la gerencia |", "",
      "## Tamaño de la empresa", "",
      "Reglamento a la Estructura e Institucionalidad de Desarrollo Productivo del COPCI, art. 106; COPCI art. 53 (las ventas prevalecen sobre los trabajadores).", "",
@@ -84,7 +87,7 @@ M += ["", "| | " + " | ".join(TAMN) + " |", "|---|---|---|---|---|",
       "| Piso mensual | " + " | ".join(usd(C.VOLNEG["piso_mensual"][k]) for k in TAM) + " |",
       "| Piso evaluación inicial | " + " | ".join(usd(C.VOLNEG["diag_piso"][k]) for k in TAM) + " |",
       "| Piso adecuación | " + " | ".join(usd(C.VOLNEG["adec_piso"][k]) for k in TAM) + " |", "",
-      f"Evaluación inicial = máx(piso, {n(C.VOLNEG['diag_factor'] * 100)} % del control anual). Adecuación = máx(piso, {n(C.VOLNEG['adec_factor'] * 100)} % del control anual).", "",
+      f"Evaluación inicial = máx(piso, {n(C.VOLNEG['diag_factor'] * 100)} % del control anual). Implementación (referencial) = máx(piso, {n(C.VOLNEG['adec_factor'] * 100)} % del control anual).", "",
       "## Método 2 · Volumen de tratamiento", "",
       "El puntaje es el **Modelo Técnico de Gran Escala (MTGE)** de la Res. SPDP-SPD-2026-0005-R (art. 8: variables; art. 9: suma; art. 10: umbral de 6 puntos; "
       "art. 12: efectos; art. 14: calificación directa). Se aplica al tratamiento principal del cliente.", "",
@@ -100,13 +103,13 @@ M += [f"| Base mensual por puntaje | {usd(V['base_mensual'][0][2])} (menos de 4)
       f"| Transferencias internacionales | {usd(V['transferencias'])}/mes |", f"| Por solicitud de derechos mensual | {usd(V['por_solicitud'])} |",
       f"| Por sede adicional | {usd(V['por_sede'])}/mes |",
       f"| Evaluación inicial | {usd(V['diag']['base'])} + {usd(V['diag']['por_actividad'])} por actividad + {usd(V['diag']['por_encargado'])} por encargado + {usd(V['diag']['gran_escala'])} si es gran escala + {usd(V['diag']['por_sede'])} por sede adicional |",
-      f"| Adecuación | {usd(V['adec']['base'])} + {usd(V['adec']['por_actividad'])} por actividad + {usd(V['adec']['por_encargado'])} por encargado + {usd(V['adec']['por_eipd'])} por evaluación de impacto |", "",
+      f"| Implementación (referencial) | {usd(V['adec']['base'])} + {usd(V['adec']['por_actividad'])} por actividad + {usd(V['adec']['por_encargado'])} por encargado + {usd(V['adec']['por_eipd'])} por evaluación de impacto |", "",
       "## Método 3 · Estimación técnica", "",
       "Horas por tarea × tarifa por hora × (1 + gastos indirectos). Las horas aumentan con el factor sectorial. Es el **piso** de la negociación.", "",
       "| Perfil | Tarifa sin IVA |", "|---|---|"]
 M += [f"| {p} | {usd(t)}/h |" for p, t in C.PERFILES]
 M += ["", f"Gastos indirectos y reserva por defecto: {C.GASTOS_PCT} %. Áreas a entrevistar por tamaño: " + ", ".join(f"{TAMN[i]} {C.AREAS_POR_TAMANO[k]}" for i, k in enumerate(TAM)) + ".", ""]
-lab = {"diag": "Evaluación inicial", "adec": "Adecuación", "mens": "Control mensual"}
+lab = {"diag": "Evaluación inicial", "adec": "Implementación (referencial)", "mens": "Control mensual"}
 var = {"base": "fijo", "a": "por área", "act": "por actividad", "enc": "por encargado", "sol": "por solicitud", "tr": "si hay transferencias",
        "ge": "si es gran escala", "eipd": "por evaluación de impacto", "cap": "por hora de capacitación anual"}
 for k in ("diag", "adec", "mens"):

@@ -36,6 +36,9 @@
   .chip.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
   .grp{font-stretch:110%;font-weight:800;font-size:13px;color:var(--oliva);text-transform:uppercase;letter-spacing:.05em;margin:16px 0 4px}
   .gd{font-size:13px;color:#555;margin:0 0 8px}
+  .lh{margin:22px 0 6px;padding:10px 12px;border-radius:8px;background:#14181E;color:#F7F5EE;font-weight:800;font-size:14px}.lh small{display:block;font-weight:400;font-size:12.5px;opacity:.85;margin-top:3px}.lh.impl{background:#6E6230}
+  .nat.V{background:#E7EEF7;color:#1F4E79}.nat.I{background:#F3E6D6;color:#7A4A12}
+  .lin p{margin:0 0 8px;font-size:13.5px}.lin .warn{font-size:12.5px;color:var(--al)}
   .svc{border:1px solid var(--linea);border-radius:12px;background:#fff;margin-bottom:8px;overflow:hidden}
   .svc .hd{display:grid;grid-template-columns:26px 54px 1fr auto;gap:10px;align-items:center;padding:12px 14px;cursor:pointer}
   .svc .cod{font-weight:800;font-stretch:110%;color:var(--oro)}
@@ -92,6 +95,7 @@
   <h2>Servicios que puede ofrecer</h2>
   <p class="sub">Toque un servicio para ver cómo se aplica, a quién va dirigido, qué se obtiene, quién responde en la empresa y las recomendaciones. Marque la casilla para agregarlo a su selección. Los códigos son los mismos de la proforma (herramienta 02).</p>
   <div class="bar"><div><label for="q">Buscar</label><input id="q" placeholder="Ej.: contrato, cámaras, auditoría"></div><div><label for="tam">Precios para</label><select id="tam"></select></div></div>
+  <div class="card lin"><h3>Dos líneas de trabajo</h3><div id="lineas"></div></div>
   <div class="chips" id="fases"></div>
   <div id="lista"></div>
   <div class="card"><h3>Recomendaciones generales</h3><div id="recs"></div>
@@ -102,7 +106,7 @@
   <h2>Quién responde en la empresa</h2>
   <p class="sub">Para cada servicio: el departamento responsable principal, los que participan y con quién debe conversar el DPD para levantar la información.</p>
   <div class="card"><div class="scroll"><table class="t" id="tabResp"></table></div></div>
-  <div class="card"><h3>Naturaleza de cada servicio</h3><div id="nats"></div><p class="nota" style="margin:8px 0 0">Solo los servicios de supervisión son función propia del DPD designado. Los borradores los aprueba la empresa; la implementación siempre es de la empresa.</p></div>
+  <div class="card"><h3>Naturaleza de cada servicio</h3><div id="nats"></div><p class="nota" style="margin:8px 0 0">Solo los servicios de revisión, verificación y supervisión son función propia del DPD designado. La implementación la decide el responsable y la ejecuta quien él elija; si MSC es DPO de ese cliente, no la ejecuta.</p></div>
 </section>
 
 <section id="t3">
@@ -153,13 +157,15 @@
   function card(s){var sel=S.sel.indexOf(s.cod)>=0,i=S.tam;
     return '<div class="svc'+(sel?' sel':'')+'" id="c_'+s.cod+'"><div class="hd" data-o="'+s.cod+'"><input type="checkbox" data-s="'+s.cod+'"'+(sel?' checked':'')+' aria-label="Seleccionar '+esc(s.nombre)+'"><span class="cod">'+s.cod+'</span><div><div class="nm">'+esc(s.nombre)+'</div><span class="nat '+s.nat+'">'+esc(CFG.naturaleza[s.nat])+'</span></div><div class="pr">'+ptxt(s,i)+'<small>por '+esc(s.unidad)+' · sin IVA</small></div></div>'+
       '<div class="bd"><dl class="kv"><dt>Qué es</dt><dd>'+esc(s.que)+'</dd><dt>Cómo se aplica</dt><dd>'+s.como.map(function(x,k){return (k+1)+'. '+esc(x)}).join('<br>')+'</dd><dt>Para quién</dt><dd>'+esc(s.para)+'</dd><dt>Qué se obtiene</dt><dd>'+esc(s.obtiene)+'</dd>'+
-      '<dt>Responsable principal</dt><dd>'+esc(s.resp)+'</dd><dt>Participan</dt><dd>'+esc(s.conj)+'</dd><dt>Levantar información con</dt><dd>'+esc(s.levantar)+'</dd><dt>Herramientas del kit</dt><dd>'+esc(herr(s))+'</dd><dt>Base</dt><dd>'+esc(s.base)+'</dd>'+
+      '<dt>Quién ejecuta</dt><dd>'+(s.linea==='impl'?'El implementador que elija el responsable (personal propio, proveedor o tercero coordinado por MSC). MSC solo si no es DPO de ese cliente. El DPO supervisa y verifica.':'MSC, como consultor o como DPO. No ejecuta la implementación.')+'</dd><dt>Responsable principal</dt><dd>'+esc(s.resp)+'</dd><dt>Participan</dt><dd>'+esc(s.conj)+'</dd><dt>Levantar información con</dt><dd>'+esc(s.levantar)+'</dd><dt>Herramientas del kit</dt><dd>'+esc(herr(s))+'</dd><dt>Base</dt><dd>'+esc(s.base)+'</dd>'+
       '<dt>Precios sugeridos</dt><dd><div class="prices">'+CFG.tamanos.map(function(t,k){return '<span class="'+(k===i?'on':'')+'">'+t+': '+ptxt(s,k)+'</span>'}).join('')+'</div></dd></dl>'+
       '<div class="rec"><b>Recomendaciones para el DPD</b><ul>'+s.rec.map(function(r){return '<li>'+esc(r)+'</li>'}).join('')+'</ul></div></div></div>'}
-  function rLista(){var h='',n=0;CFG.fases.forEach(function(f){var L=SV.filter(function(s){return s.fase===f[0]&&match(s)});if(!L.length)return;n+=L.length;h+='<div class="grp">'+esc(f[0])+'</div><p class="gd">'+esc(f[1])+'</p>'+L.map(card).join('')});
+  function rLista(){var h='',n=0;['eval','impl'].forEach(function(ln){var hl='';CFG.fases.forEach(function(f){if(f[2]!==ln)return;var L=SV.filter(function(s){return s.fase===f[0]&&match(s)});if(!L.length)return;n+=L.length;hl+='<div class="grp">'+esc(f[0])+'</div><p class="gd">'+esc(f[1])+'</p>'+L.map(card).join('')});
+      if(hl)h+='<div class="lh '+ln+'">'+esc(CFG.lineas[ln][0])+'<small>'+esc(CFG.lineas[ln][1])+'</small></div>'+hl});
     $('lista').innerHTML=h||'<p class="nota">Ningún servicio coincide con la búsqueda.</p>';
     document.querySelectorAll('.hd').forEach(function(el){el.onclick=function(e){if(e.target.matches('input'))return;$('c_'+el.dataset.o).classList.toggle('open')}});
     document.querySelectorAll('[data-s]').forEach(function(el){el.onchange=function(){var c=el.dataset.s,p=S.sel.indexOf(c);if(el.checked&&p<0)S.sel.push(c);if(!el.checked&&p>=0)S.sel.splice(p,1);S.sel.sort();save();$('c_'+c).classList.toggle('sel',el.checked);rSel()}})}
+  $('lineas').innerHTML=['eval','impl'].map(function(k){return '<p><b>'+esc(CFG.lineas[k][0])+'.</b> '+esc(CFG.lineas[k][1])+'</p>'}).join('')+'<p><b>Quién implementa</b> (lo decide el responsable):</p><ul style="margin:0 0 8px 18px;padding:0;font-size:13px">'+CFG.impl.map(function(o){return '<li><b>'+esc(o[1])+'.</b> '+esc(o[2])+(o[4]?'<br><span class="warn">'+esc(o[4])+'</span>':'')+'</li>'}).join('')+'</ul><p class="nota" style="margin:0">Base: Res. SPDP-SPD-2025-0028-R arts. 12, 15.1, 15.2, 17 y 18. La compatibilidad de ser DPO e implementador desde una misma firma no está resuelta por la norma (punto abierto 32): por eso la separación.</p>';
   $('recs').innerHTML=CFG.recomendaciones.map(function(r){return '<p style="margin:0 0 6px;font-size:13.5px"><b>'+esc(r[0])+'.</b> '+esc(r[1])+'</p>'}).join('');
   $('tabResp').innerHTML='<tr><th>Código</th><th>Servicio</th><th>Responsable principal</th><th>Participan</th><th>Levantar información con</th></tr>'+SV.map(function(s){return '<tr><td data-l="Código"><b>'+s.cod+'</b></td><td data-l="Servicio">'+esc(s.nombre)+'</td><td data-l="Responsable">'+esc(s.resp)+'</td><td data-l="Participan">'+esc(s.conj)+'</td><td data-l="Levantar con">'+esc(s.levantar)+'</td></tr>'}).join('');
   $('nats').innerHTML=Object.keys(CFG.naturaleza).map(function(k){return '<p style="margin:0 0 6px"><span class="nat '+k+'">'+esc(CFG.naturaleza[k])+'</span> '+SV.filter(function(s){return s.nat===k}).map(function(s){return s.cod}).join(', ')+'</p>'}).join('');

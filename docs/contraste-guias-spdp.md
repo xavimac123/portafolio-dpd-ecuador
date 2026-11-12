@@ -3,7 +3,7 @@
 Revisión del 2026-11-08, actualizada el 2026-11-09 con los resúmenes estructurados (JSON) aportados por el usuario. Compara cada exigencia de las dos guías técnicas de la Superintendencia de Protección de Datos Personales (SPDP) con las herramientas del portafolio, para que ningún paso quede sin cubrir.
 
 - **Guía v2 de gestión de riesgos y evaluación de impacto** (RES-2026-0012). Capítulo I obligatorio; capítulo II referencial. Lectura parcial: capítulo I y etapas 1 a 3.
-- **Guía de protección de datos desde el diseño y por defecto** (RES-2025-0040). Lectura de la versión de julio de 2025.
+- **Guía de protección de datos desde el diseño y por defecto** (RES-2025-0040). Leída la versión de julio de 2025 y, el 2026-11-11, el texto publicado en el RO 163 (13-11-2025).
 
 Estado: ✅ cubierto · 🟡 parcial · ⬜ pendiente.
 
@@ -52,11 +52,11 @@ Estado: ✅ cubierto · 🟡 parcial · ⬜ pendiente.
 | Principio «abstraer» | 07 | ✅ | **Nuevo** control: agregación o generalización |
 | Principio «informar» | 08 | ✅ | Política, avisos y comunicación de vulneraciones |
 | Principio «controlar» | 08, 06 | ✅ | Consentimiento y oposición; canal de derechos |
-| Principio «cumplir» | 07, 03 | 🟡 | Responsables y plazos por medida; falta la declaración de aplicabilidad |
+| Principio «cumplir» | 07, 03, 08 | ✅ | Responsables y plazos por medida; declaración de aplicabilidad en `evaluacion-diseno-defecto.md` (parte G) |
 | Principio «demostrar» | 04, 09 | ✅ | RAT, bitácora e informes |
 | Configuración por defecto más protectora | 07 | ✅ | **Nuevo** control |
-| Madurez por principio (niveles 0 a 3: 0 %, menos de 25 %, 25 % a 75 %, más de 75 %) sobre las actividades del RAT, calibrada por eje (DevPrivOps, DevSecOps, DevRiskOps) | 03 | 🟡 | La 03 mide por dominio, no por principio y actividad. Las tácticas de cada principio ya constan en BASE-LEGAL. Candidata a una herramienta propia de madurez desde el diseño |
-| DevSecOps y DevRiskOps | Guía, cap. 13 | 🟡 | Se mencionan; su ejecución corresponde al área de tecnología, no al DPD |
+| Madurez por principio (niveles 0 a 3: 0 %, menos de 25 %, 25 % a 75 %, más de 75 %) sobre las actividades del RAT, calibrada por eje (DevPrivOps, DevSecOps, DevRiskOps) | 03, 08 | 🟡 | `evaluacion-diseno-defecto.md` mide niveles 0 a 3 por principio y proyecto (parte H); la calibración sobre todo el RAT sigue pendiente (capítulo 3 optativo) |
+| DevSecOps y DevRiskOps | 08 | ✅ | Partes E y F de `evaluacion-diseno-defecto.md`; DevSecOps solo con desarrollo o personalización de software. La ejecución corresponde a tecnología, no al DPD |
 
 ## 4. Norma de inteligencia artificial (Res. SPDP-SPD-2026-0009-R, reformada por la 0037-R)
 

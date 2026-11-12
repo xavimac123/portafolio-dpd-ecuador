@@ -4,7 +4,7 @@ Regla: todo lo que aparece aquí consta en BASE-LEGAL.md. estado: "oficial" (tex
 "copia" (copia del texto en una base jurídica o sitio institucional) o "resumen" (resúmenes de terceros: confirmar).
 Cada punto: [texto, cita]. prio: Base, Alta o Media. Los resúmenes son de apoyo; no sustituyen el texto oficial.
 """
-REVISION = "2026-11-10"
+REVISION = "2026-11-11"
 
 NORMAS = [
  {"sigla": "LOPDP", "resumen": 'Ley que reconoce el derecho a la protección de datos personales: fija principios, bases de legitimación, derechos de los titulares, obligaciones de responsables y encargados, el delegado, las transferencias, la notificación de vulneraciones y el régimen de infracciones y multas.', "dpd": ['Diagnosticar el cumplimiento del cliente frente a las obligaciones del art. 47 (herramienta 03).', 'Verificar que cada tratamiento tenga base de legitimación (art. 7) y, si hay datos sensibles, una excepción del art. 26.', 'Solicitar la política de privacidad y los avisos y contrastarlos con los 17 elementos del art. 12.', 'Comprobar que exista un canal para derechos que responda en 15 días (arts. 13 a 16).', 'Asegurar el protocolo de vulneraciones con los términos de 5 y 3 días (arts. 43 y 46).'], "nombre": "Ley Orgánica de Protección de Datos Personales", "prio": "Base", "estado": "copia",
@@ -84,37 +84,45 @@ NORMAS = [
    ["RAT y cálculo: actualizar al menos una vez al año y conservar la evidencia.", "arts. 6 y 13"],
    ["Auditoría cada 12 meses; informes conservados 5 años; informe anual de cumplimiento; identificar estos tratamientos en la política.", "arts. 17 y 18"]],
   "nota": "El oficio se conoce por un resumen de terceros."},
- {"sigla": "Res. SPDP-SPD-2025-0028-R", "resumen": 'Reglamento del delegado de protección de datos: casos de designación obligatoria en el sector privado, requisitos, incompatibilidades, funciones, garantías de independencia y registro del nombramiento ante la SPDP.', "dpd": ['Analizar si el cliente está en alguna de las 14 actividades con DPD obligatorio.', 'Si corresponde, preparar el nombramiento y su registro ante la SPDP (herramienta 08).', 'Verificar incompatibilidades (oficial de cumplimiento o de seguridad) y que el DPD tenga acceso a la gerencia y recursos.', 'Documentar el análisis aunque el cliente no esté obligado.'], "nombre": "Delegado de protección de datos y su registro", "prio": "Alta", "estado": "resumen",
-  "pub": "30-07-2025", "tema": ["DPD"], "herr": ["01", "08"], "url": "https://spdp.gob.ec",
+ {"sigla": "Res. SPDP-SPD-2025-0028-R", "resumen": 'Reglamento del delegado de protección de datos: casos de designación obligatoria en el sector privado, requisitos, incompatibilidades, funciones, garantías de independencia y registro del nombramiento ante la SPDP.', "dpd": ['Analizar si el cliente está en alguna de las 14 actividades con DPD obligatorio.', 'Si corresponde, preparar el nombramiento y su registro ante la SPDP (herramienta 08).', 'Verificar incompatibilidades (oficial de cumplimiento o de seguridad) y que el DPD tenga acceso a la gerencia y recursos.', 'Documentar el análisis aunque el cliente no esté obligado.', 'Revisar el detalle de funciones y prohibiciones en la pestaña «Responsabilidades DPO».'], "nombre": "Reglamento del delegado de protección de datos", "prio": "Alta", "estado": "oficial",
+  "pub": "30-07-2025 · RO 105, 19-08-2025", "tema": ["DPD"], "herr": ["01", "08"], "url": "https://spdp.gob.ec",
   "puntos": [
-   ["Catorce actividades privadas con DPD obligatorio: educación, educación superior, datos de menores, entidades financieras, seguros, publicidad con perfiles, salud con historias clínicas, farmacéuticas, seguridad privada y administración de urbanizaciones, deporte, gremios, telecomunicaciones, videovigilancia masiva o tecnologías de la información, y concesionarios de servicios públicos.", "art. 10"],
-   ["Funciones ampliadas: asesorar y supervisar riesgos, derechos, vulneraciones y eficacia de las medidas.", "art. 13"],
-   ["El programa profesionalizante será exigible desde el 1 de enero de 2029; no admite equivalencias.", "resumen; Oficio SPDP-IRD-2025-0262-O"],
-   ["No puede ser oficial de cumplimiento ni de seguridad de la información, ni ejecutar funciones propias del responsable.", "resumen"],
-   ["El nombramiento se registra ante la SPDP; no registrarlo en plazo se trata como falta de medidas de seguridad jurídicas.", "resumen"],
-   ["Garantías: acceso directo al nivel ejecutivo, recursos y evaluación institucional, no jerárquica.", "resumen"]],
-  "nota": "Pendiente de contrastar con el texto de la resolución aportado al proyecto."},
+   ["Lo designa el responsable o el encargado; el nombramiento lleva nueve contenidos, entre ellos funciones, principios y la aceptación firmada del delegado.", "arts. 3 y 4"],
+   ["Inscripción en la SPDP en el término de 15 días; el registro tardío se considera incumplimiento de una medida de seguridad jurídica. La inscripción no valida la idoneidad.", "arts. 5 y 6"],
+   ["Catorce actividades privadas con DPD obligatorio: educación, educación superior, datos de menores, entidades financieras, seguros, publicidad con perfiles, salud con historias clínicas, farmacéuticas, seguridad privada y administración de urbanizaciones, deporte, gremios, telecomunicaciones, videovigilancia masiva o tecnologías de la información (incluida la IA), y concesionarios de servicios públicos.", "art. 10"],
+   ["Programa profesionalizante obligatorio, exigible desde el 1 de enero de 2029.", "art. 11 y transitoria séptima"],
+   ["Independencia aun en relación de dependencia; puede contratarse como servicio técnico especializado.", "art. 12"],
+   ["Funciones ampliadas: asesorar o supervisar riesgos y evaluación de impacto, derechos, vulneraciones, eficacia de las medidas, RAT y cumplimiento en los tratamientos. No responde por las decisiones finales si prueba diligencia.", "art. 13"],
+   ["En derechos se limita a supervisar el procedimiento del responsable.", "art. 14"],
+   ["Prohibido: implementar directamente, ejecutar la gestión de riesgos o la evaluación de impacto, decidir fines o medios, representar a la organización ante la SPDP y ser oficial de seguridad, de cumplimiento o implementador. No recibe instrucciones.", "art. 15"],
+   ["Impedimentos y conflicto de intereses: declararlo antes de aceptar; hay conflicto si ejecuta tratamientos, asesora para salvaguardar intereses de la organización o toma decisiones sobre ella.", "arts. 16 a 18"],
+   ["Garantías: denuncia ante la SPDP; evaluación anual institucional y no jerárquica de la independencia (contacto con la alta dirección, recursos, observaciones, informes).", "arts. 19 a 23"]],
+  "nota": "Texto de la resolución leído (2026-11-11). El art. 13.3 aún nombra a la ARCOTEL: rige el art. 43 LOPDP reformado."},
  {"sigla": "Res. SPDP-SPD-2026-0012-R", "resumen": 'Guía de gestión de riesgos y evaluación de impacto (versión 2): el capítulo I es obligatorio y exige justificar cada valor de riesgo; el capítulo II propone cinco etapas y modelos cualitativos y cuantitativos.', "dpd": ['Conducir el análisis de riesgos por etapas: contexto, identificación, análisis, evaluación y tratamiento (herramienta 07).', 'Exigir la justificación (rationale) de cada valor de probabilidad e impacto; usar la calculadora de riesgos cuando haya datos.', 'Definir con la gerencia la capacidad y la tolerancia al riesgo.', 'Supervisar que las medidas tengan responsable y plazo.'], "nombre": "Guía de gestión de riesgos y evaluación de impacto, versión 2", "prio": "Alta", "estado": "copia",
-  "pub": "RO Supl. 254, 30-03-2026 (número por confirmar)", "tema": ["Evaluación de impacto"], "herr": ["07"], "url": "https://spdp.gob.ec",
+  "pub": "19-03-2026 · RO Supl. 254, 30-03-2026", "tema": ["Evaluación de impacto"], "herr": ["07"], "url": "https://spdp.gob.ec",
   "puntos": [
    ["Capítulo I obligatorio; capítulo II referencial.", "Cap. I y II"],
    ["Cada valor de un modelo de riesgo necesita su justificación (rationale); no bastan las listas de chequeo.", "Cap. I"],
    ["Cinco etapas: contexto, identificación, análisis, evaluación y tratamiento.", "Cap. II"],
    ["Criterios de impacto: categorías especiales, vulnerabilidad, número de titulares, naturaleza de la afectación y volumen por titular.", "Cap. II, etapa 1"],
    ["Estrategias: aceptar, modificar, transferir o evitar.", "Cap. II, etapa 5"]],
-  "nota": "Lectura parcial: faltan la declaración de aplicabilidad y el anexo con el formato."},
+  "nota": "Copia LEXIS leída; sus tablas remiten al RO y no se reproducen."},
  {"sigla": "Res. SPDP-SPD-2025-0006-R", "resumen": 'Establece los contenidos mínimos y los defectos a evitar en las cláusulas de protección de datos de los contratos, con modelos referenciales por tipo de relación.', "dpd": ['Inventariar los contratos con proveedores, empleados y aliados que impliquen tratamiento de datos.', 'Solicitar los contratos vigentes y revisar los 12 defectos del art. 4.', 'Proponer las cláusulas de la herramienta 08 según el tipo de relación.'], "nombre": "Cláusulas de protección de datos en contratos", "prio": "Media", "estado": "copia",
   "pub": "30-04-2025", "tema": ["Encargados"], "herr": ["08"], "url": "https://spdp.gob.ec",
   "puntos": [
    ["Es obligatorio incluir cláusulas de protección de datos en los contratos entre actores del sistema.", "arts. 1 a 3"],
    ["Doce defectos que deben evitarse en las cláusulas.", "art. 4"],
    ["Cuatro modelos referenciales: responsable–titular, responsable–encargado, responsable–destinatario y corresponsables.", "Anexo I"]]},
- {"sigla": "Res. SPDP-SPD-2025-0040-R", "resumen": 'Guía de protección de datos desde el diseño y por defecto: ocho principios (minimizar, ocultar, separar, abstraer, informar, controlar, cumplir y demostrar) y un modelo de madurez por proceso.', "dpd": ['Participar desde el inicio en proyectos nuevos o cambios de sistemas.', 'Verificar que la configuración por defecto trate solo los datos necesarios.', 'Recomendar tácticas por principio (por ejemplo, seudonimizar o separar bases) en la evaluación de impacto.'], "nombre": "Guía de protección de datos desde el diseño y por defecto", "prio": "Media", "estado": "copia",
-  "pub": "21-10-2025 · RO 13-11-2025", "tema": ["Evaluación de impacto"], "herr": ["07"], "url": "https://spdp.gob.ec",
+ {"sigla": "Res. SPDP-SPD-2025-0040-R", "resumen": 'Guía de protección de datos desde el diseño y por defecto: ocho principios (minimizar, ocultar, separar, abstraer, informar, controlar, cumplir y demostrar) y un modelo de madurez por proceso.', "dpd": ['Participar desde el inicio en proyectos nuevos o cambios de sistemas.', 'Verificar que la configuración por defecto trate solo los datos necesarios.', 'Recomendar tácticas por principio (por ejemplo, seudonimizar o separar bases) en la evaluación de impacto.'], "nombre": "Guía de protección de datos desde el diseño y por defecto", "prio": "Media", "estado": "oficial",
+  "pub": "21-10-2025 · RO 163, 13-11-2025", "tema": ["Evaluación de impacto"], "herr": ["07", "08"], "url": "https://spdp.gob.ec",
   "puntos": [
-   ["Ocho principios: minimizar, ocultar, separar, abstraer, informar, controlar, cumplir y demostrar.", "guía"],
-   ["Madurez por proceso en niveles 0 a 3.", "guía"]],
-  "nota": "No confundir con la Res. 2026-0040 de vulneraciones. Leída una versión previa a la aprobada."},
+   ["Obligatorios los principios de los capítulos 1 y 2 cuando apliquen; el resto es orientativo.", "art. 2"],
+   ["Por defecto: valores preconfigurados con minimización y mecanismos de derechos.", "§ 1.2"],
+   ["DevPrivOps, ocho principios: minimizar, ocultar, separar, abstraer, informar, controlar, cumplir (con declaración de aplicabilidad y personal especializado) y demostrar.", "§ 2.1"],
+   ["DevSecOps, cuatro principios; obligatorio solo con desarrollo o personalización de software.", "§ 2.2"],
+   ["DevRiskOps, siete principios, entre ellos rationales y conformidad en la práctica.", "§ 2.3"],
+   ["Madurez por proceso en niveles 0 a 3 (optativa).", "cap. 3"]],
+  "nota": "No confundir con la Res. 2026-0040 de vulneraciones. Plantilla: 08 · Evaluación de diseño y por defecto."},
  {"sigla": "Res. SPDP-SPD-2025-0022-R", "resumen": 'Metodología con la que la SPDP calcula las multas: parte del volumen de negocio del año anterior y ajusta por gravedad, intencionalidad y reincidencia.', "dpd": ['Solicitar el volumen de negocio del ejercicio anterior para estimar la exposición (herramienta 03).', 'Presentar a la gerencia la multa estimada como rango, no como cifra exacta.', 'Usar la estimación para priorizar el plan de acción.'], "nombre": "Metodología para el cálculo de multas", "prio": "Media", "estado": "resumen",
   "pub": "16-07-2025 · RO 92, 30-07-2025", "tema": ["Sanciones"], "herr": ["03"], "url": "https://spdp.gob.ec",
   "puntos": [["Modelos MPRIV-1 (privado) y MPUB-1 (público); la multa parte del volumen de negocio y de factores de gravedad, intencionalidad y reincidencia.", "Anexo I"]],
@@ -177,3 +185,33 @@ PLAZOS = [
  ["Biometría: revisar la evaluación de impacto", "Cada 12 meses y cuando cambie el riesgo", "Res. 2026-0039 (resumen)", "Evaluación de impacto"],
  ["Biometría: adecuar sistemas existentes", "12 meses desde el 24-09-2026", "Res. 2026-0039, transitoria (resumen)", "Evaluación de impacto"],
 ]
+
+# Enlaces de consulta. [nombre, url, nota]. Verificados por búsqueda el 2026-11-11 (spdp.gob.ec no se pudo abrir
+# directamente desde el entorno de trabajo; las rutas constan en los resultados del buscador).
+ENLACES = {
+ "spdp": [
+  ["Portal de la SPDP", "https://www.spdp.gob.ec/", "Inicio, normativa, servicios en línea y noticias."],
+  ["Resoluciones de la SPDP", "https://spdp.gob.ec/resoluciones2/", "Resoluciones expedidas (reglamentos, normas generales, guías aprobadas)."],
+  ["Consultas absueltas", "https://www.spdp.gob.ec/docs/consultas-absueltas/", "Oficios de absolución por año. Son opiniones referenciales, no vinculantes."],
+  ["Consultas absueltas 2025", "https://spdp.gob.ec/consultas2025/", "Listado anterior del sitio, año 2025."],
+  ["Consultas absueltas 2026", "https://spdp.gob.ec/consultas2026/", "Listado anterior del sitio, año 2026."],
+  ["Guía de gestión de riesgos y evaluación de impacto, v2 (PDF)", "https://spdp.gob.ec/wp-content/uploads/2026/03/ggrispdp2026v2.pdf", "Res. SPDP-SPD-2026-0012-R."],
+  ["SISPDP · servicios en línea", "https://servicios.spdp.gob.ec", "Notificación de vulneraciones y trámites."],
+  ["Trámite: consultas a la SPDP (gob.ec)", "https://www.gob.ec/spdp/tramites/atencion-consultas-ley-organica-proteccion-datos-personales-reglamento-general-demas-regulacion-expedida-institucion", "Requisitos para presentar una consulta; correo consultas@spdp.gob.ec."],
+  ["LOPDP en gob.ec", "https://www.gob.ec/regulaciones/ley-organica-proteccion-datos-personales", "Ficha de la ley en el Registro Único de Trámites y Regulaciones."],
+ ],
+ "ext": [
+  ["Unión Europea", "Comité Europeo de Protección de Datos (EDPB)", "https://www.edpb.europa.eu", "Directrices sobre DPD, evaluación de impacto, perfiles y vulneraciones."],
+  ["Unión Europea", "Supervisor Europeo de Protección de Datos (EDPS)", "https://www.edps.europa.eu", "Autoridad de las instituciones de la UE; publicaciones técnicas."],
+  ["Unión Europea", "Reglamento General de Protección de Datos (RGPD) en EUR-Lex", "https://eur-lex.europa.eu/eli/reg/2016/679/oj", "Texto oficial en español."],
+  ["España", "Agencia Española de Protección de Datos (AEPD)", "https://www.aepd.es", "Guías prácticas en español (riesgos, evaluación de impacto, DPD)."],
+  ["Francia", "Commission Nationale de l'Informatique et des Libertés (CNIL)", "https://www.cnil.fr", "Guías técnicas y herramienta PIA."],
+  ["Chile", "Ley 21.719 (crea la Agencia de Protección de Datos Personales)", "https://www.bcn.cl/leychile/navegar?idLey=21719", "Vigencia prevista el 01-12-2026; hay un proyecto para postergarla y la Agencia aún se instala."],
+  ["Uruguay", "Unidad Reguladora y de Control de Datos Personales (URCDP)", "https://www.gub.uy/unidad-reguladora-control-datos-personales", "Guías, dictámenes y documento de trabajo sobre el delegado."],
+  ["Brasil", "Agencia Nacional de Protección de Datos (ANPD)", "https://www.gov.br/anpd/pt-br", "Guías orientativas y LGPD en español."],
+  ["Colombia", "Superintendencia de Industria y Comercio (SIC), Delegatura de Protección de Datos", "https://sedeelectronica.sic.gov.co/publicaciones/boletin-juridico/tema/Protecci%C3%B3n%20de%20Datos%20Personales", "Conceptos, sanciones y guía del oficial de protección de datos."],
+  ["Perú", "Autoridad Nacional de Protección de Datos Personales (ANPD)", "https://www.gob.pe/anpd", "Opiniones consultivas, directiva del oficial de datos y registro de sanciones."],
+  ["Panamá", "Autoridad Nacional de Transparencia y Acceso a la Información (ANTAI)", "https://www.antai.gob.pa", "Dirección de Protección de Datos Personales (Ley 81 de 2019)."],
+  ["Iberoamérica", "Red Iberoamericana de Protección de Datos (RIPD)", "https://www.redipd.org", "Estándares iberoamericanos y cláusulas contractuales modelo."],
+ ],
+}

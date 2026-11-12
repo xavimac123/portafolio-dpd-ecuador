@@ -119,26 +119,32 @@ AREAS_POR_TAMANO = {"micro": 3, "peq": 5, "med": 8, "gra": 12}
 
 # ---------------------------------------------------------------- Comparación y otras modalidades
 DPD_INTERNO = {"salario": 1800}  # referencia: avisos de empleo en Quito, USD 1.500 a 2.500 mensuales
+# Los paquetes solo contienen la línea de evaluación y supervisión. La implementación se agrega aparte, según quién la
+# ejecute (pestaña 6): así un paquete nunca mezcla el servicio del DPO con la implementación que supervisa.
 PAQUETES = [
     {"id": "esencial", "nombre": "Esencial", "para": "Microempresa o riesgo bajo",
-     "items": ["diag", "politica", "contratos", "acomp"]},
+     "items": ["diag", "acomp", "verificacion"]},
     {"id": "cumplimiento", "nombre": "Cumplimiento", "para": "Pequeña y mediana empresa",
-     "items": ["diag", "adec", "dpd", "capac"]},
+     "items": ["diag", "dpd", "verificacion", "capac"]},
     {"id": "integral", "nombre": "Integral", "para": "Gran escala, sectores regulados o gran empresa",
-     "items": ["diag", "adec", "eipd", "dpd", "capac", "informe"]},
+     "items": ["diag", "mtge", "dpd", "revision", "verificacion", "capac", "informeanual"]},
 ]
 
 # ---------------------------------------------------------------- Servicios de la proforma
 # Fuente única: scripts/catalogo_config.py (herramienta 01). Formato que usa la proforma:
-# [grupo, id, nombre, descripción, unidad, precio [micro, pequeña, mediana, grande] o "auto:clave", beneficio, código]
 import catalogo_config as _CAT  # noqa: E402
-SERVICIOS = [[x["fase"], x["id"], x["nombre"], x["que"], x["unidad"], x["precio"], x["beneficio"], x["cod"]]
+# [grupo, id, nombre, descripción, unidad, precio, beneficio, código, línea ("eval" o "impl")]
+SERVICIOS = [[x["fase"], x["id"], x["nombre"], x["que"], x["unidad"], x["precio"], x["beneficio"], x["cod"], x["linea"]]
              for x in _CAT.SERVICIOS if x["proforma"]]
-GRUPOS = [f for f, _ in _CAT.FASES]
+GRUPOS = [f[0] for f in _CAT.FASES]
+LINEAS = _CAT.LINEAS
+ROLES_MSC = _CAT.ROLES_MSC
+IMPLEMENTACION = _CAT.IMPLEMENTACION
 
 CONDICIONES = (
     "Los valores están expresados en dólares de los Estados Unidos de América. "
-    "Forma de pago: servicios de evaluación y adecuación, 50 % de anticipo y 50 % contra entrega; servicio mensual, por mes adelantado dentro de los cinco primeros días. "
+    "Forma de pago: servicios de evaluación e implementación facturados por MSC, 50 % de anticipo y 50 % contra entrega; servicio mensual, por mes adelantado dentro de los cinco primeros días. "
+    "La implementación que ejecute el personal del responsable, un proveedor de su elección o un implementador con contrato directo no forma parte de esta proforma. "
     "Plazo mínimo del servicio mensual: seis meses. "
     "Antes del inicio se suscribirán el contrato de prestación de servicios, el acuerdo de confidencialidad y el contrato de encargo del tratamiento (art. 41 RGLOPDP). "
     "No incluye pruebas técnicas de seguridad informática, tasas ni gastos de movilización fuera de la ciudad, salvo que se indique."
@@ -147,7 +153,7 @@ CONDICIONES = (
 BENEFICIOS = [
     "Metodología propia basada en la LOPDP, su Reglamento y las resoluciones de la SPDP, con herramientas de diagnóstico, registro y evaluación.",
     "Cada entregable deja evidencia documental para demostrar el cumplimiento ante la Superintendencia (responsabilidad proactiva, art. 10 lit. k LOPDP).",
-    "Independencia profesional: el consultor asesora y supervisa; no decide sobre las finalidades ni administra los sistemas que supervisa.",
+    "Independencia profesional: la evaluación y la supervisión están separadas de la implementación. Quien implementa lo decide su organización; el DPO revisa, emite observaciones no vinculantes y verifica, sin ejecutar lo que supervisa.",
     "Confidencialidad y contrato de encargo firmados antes de acceder a cualquier dato personal.",
     "Acompañamiento en los plazos legales ante una vulneración de la seguridad.",
 ]

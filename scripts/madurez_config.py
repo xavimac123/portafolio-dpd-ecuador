@@ -25,7 +25,7 @@ NIVELES = [  # rango del promedio (0-4)
 # peso (1 = normal, 2 = crítico por exposición sancionatoria), preguntas (texto, evidencia sugerida)
 DOMINIOS = [
     {"id": "gob", "corto": "Gobierno", "nombre": "Gobierno y responsabilidad proactiva", "peso": 1,
-     "base": "LOPDP arts. 10 lit. k y 47", "herramienta": "Esta evaluación (plan de acción)",
+     "base": "LOPDP arts. 10 lit. k y 47", "herramienta": "Esta evaluación (plan de acción), 08 · Política interna y 08 · Plan e informe de supervisión",
      "preguntas": [
          ("La alta dirección aprobó formalmente una política interna de protección de datos.", "Política firmada o acta de aprobación"),
          ("Hay roles y responsables definidos para la protección de datos en cada área.", "Organigrama o matriz de responsabilidades"),
@@ -62,7 +62,7 @@ DOMINIOS = [
          ("Los trabajadores reciben información sobre el tratamiento de sus datos.", "Aviso interno o cláusula contractual"),
      ]},
     {"id": "der", "corto": "Derechos", "nombre": "Derechos de los titulares", "peso": 1,
-     "base": "LOPDP arts. 12 a 20 y 67 num. 1; RGLOPDP arts. 12 a 15", "herramienta": "08 · Política de privacidad (canal de derechos)",
+     "base": "LOPDP arts. 12 a 20 y 67 num. 1; RGLOPDP arts. 12 a 15", "herramienta": "08 · Formulario y procedimiento de derechos",
      "preguntas": [
          ("Existe un canal y un procedimiento escrito para atender solicitudes de derechos.", "Procedimiento y correo de atención"),
          ("Las solicitudes se registran y se responden dentro del plazo legal (15 días para acceso, rectificación, eliminación y oposición).", "Registro de solicitudes con fechas de recepción y respuesta"),
@@ -76,7 +76,7 @@ DOMINIOS = [
          ("Se verifica periódicamente que los encargados cumplan sus obligaciones.", "Auditorías o certificaciones"),
      ]},
     {"id": "seg", "corto": "Seguridad", "nombre": "Seguridad y gestión de riesgos", "peso": 2,
-     "base": "LOPDP art. 40; Res. SPDP-SPD-2026-0012-R", "herramienta": "07 · Evaluación de impacto (matriz de riesgos)",
+     "base": "LOPDP art. 40; Res. SPDP-SPD-2026-0012-R", "herramienta": "07 · Evaluación de impacto (matriz de riesgos) y 08 · Registro de medidas de seguridad",
      "preguntas": [
          ("Existe un análisis de riesgos de los tratamientos con una metodología documentada.", "Matriz de riesgos"),
          ("Hay controles de acceso por perfil y mínimo privilegio.", "Política de accesos"),
@@ -84,7 +84,7 @@ DOMINIOS = [
          ("Los datos sensibles o críticos están cifrados.", "Configuración documentada"),
      ]},
     {"id": "eipd", "corto": "Evaluación de impacto", "nombre": "Evaluación de impacto y privacidad desde el diseño", "peso": 1,
-     "base": "LOPDP art. 42; RGLOPDP arts. 29 a 32", "herramienta": "07 · Evaluación de impacto",
+     "base": "LOPDP art. 42; RGLOPDP arts. 29 a 32", "herramienta": "07 · Evaluación de impacto y 08 · Evaluación de diseño y por defecto",
      "preguntas": [
          ("Se identifica qué tratamientos requieren evaluación de impacto.", "Columna en el RAT o análisis"),
          ("Las evaluaciones obligatorias se hacen antes de iniciar el tratamiento.", "Informes de evaluación"),
@@ -105,7 +105,7 @@ DOMINIOS = [
          ("Cada transferencia tiene una garantía documentada.", "Cláusulas o evaluación de la transferencia"),
      ]},
     {"id": "cul", "corto": "Cultura", "nombre": "Capacitación y cultura", "peso": 1,
-     "base": "RGLOPDP art. 30 num. 4 (cultura preventiva)", "herramienta": "Plan de capacitación",
+     "base": "RGLOPDP art. 30 num. 4 (cultura preventiva)", "herramienta": "08 · Plan de capacitación",
      "preguntas": [
          ("El personal recibe capacitación en protección de datos al ingresar y periódicamente.", "Registro de asistencia"),
          ("El personal firma compromisos de confidencialidad.", "Acuerdos firmados"),

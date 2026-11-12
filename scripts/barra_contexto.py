@@ -70,10 +70,14 @@ function datos(){var C=null;try{C=P.PDCliente&&P.PDCliente()}catch(e){}if(!C)ret
  window.MSCDatos=n;setTimeout(function(){try{P.PDPrefill&&P.PDPrefill(false)}catch(e){}},400)}
 setTimeout(datos,750);document.addEventListener('click',function(e){var t=e.target&&e.target.textContent||'';if(/nueva/i.test(t)&&!/ejemplo/i.test(t))setTimeout(datos,350)})})();</script>""".replace("__MAPA__", TO.JS_MAPA)
 LIB = (ROOT / "scripts" / "exportar.js").read_text(encoding="utf-8").replace("</", "<\\/")
+# Modo «Elaboración» / «Revisión del DPO» (Res. SPDP-SPD-2025-0028-R art. 15.2): solo en las herramientas que el DPO
+# no debe ejecutar por sí mismo (RAT, interés legítimo y evaluación de impacto).
+CON_REVISION = {"04", "06", "07"}
+REV = (ROOT / "scripts" / "revision_dpo.js").read_text(encoding="utf-8").replace("</", "<\\/")
 EXPORTA = r"""<style>.msc-exp{display:inline-flex;gap:6px;flex-wrap:wrap}body.msc-expmodo .toast{visibility:hidden}</style>
 <script>(function(){var D=window.MSCDoc,P=null;try{if(window.parent!==window&&window.parent.MSCDoc){P=window.parent;if(!D)D=P.MSCDoc}}catch(e){}if(!D)return;
 var modo=null,cap=null,OB=window.Blob;
-function B(parts,opt){if(opt&&/^text\/html/.test(opt.type||'')&&parts&&typeof parts[0]==='string'){try{var h=D.firma(parts.join(''));cap=h;parts=[h]}catch(e){}}return new OB(parts,opt)}
+function B(parts,opt){if(opt&&/^text\/html/.test(opt.type||'')&&parts&&typeof parts[0]==='string'){try{var h=parts.join('');if(window.MSCRevAnexo){try{h=window.MSCRevAnexo(h)}catch(e){}}h=D.firma(h);cap=h;parts=[h]}catch(e){}}return new OB(parts,opt)}
 B.prototype=OB.prototype;window.Blob=B;
 if(!window.ClipboardItem)window.ClipboardItem=function(o){this.o=o};
 var capT=null;try{var C=navigator.clipboard||{},cw=C.write?C.write.bind(C):null,ct=C.writeText?C.writeText.bind(C):null;var nw=function(it){if(modo)return Promise.resolve();return cw?cw(it):Promise.reject(new Error('sin portapapeles'))},nt=function(t){if(modo){capT=String(t);return Promise.resolve()}return ct?ct(t):Promise.reject(new Error('sin portapapeles'))};
@@ -130,7 +134,8 @@ def aplicar(html: str, num: str, en_app: bool = False) -> str:
     """en_app=True omite la biblioteca de exportación: dentro de la app se usa la de la ventana principal."""
     html = _pon(html, INI, FIN, SNIPPET.replace("__NUM__", num))
     lib = "" if en_app else "<script>" + LIB + "</script>"
-    html = _pon(html, EINI, EFIN, EINI + lib + EXPORTA + PASOS + EFIN)
+    rev = ("<script>" + REV + "</script>") if num in CON_REVISION else ""
+    html = _pon(html, EINI, EFIN, EINI + lib + rev + EXPORTA + PASOS + EFIN)
     if en_app:
         html = _pon(html, OINI, OFIN, OINI + "<style>" + TO.css_oscuro(html) + "</style>" + OSCURO_JS + OFIN)
     return html

@@ -44,3 +44,8 @@ Estado de verificación: `BASE-LEGAL.md`.
 - No implementa modelos cuantitativos (Monte Carlo, FAIR, bayesiano); el método «cuantitativo» del contexto documenta que se usaron fuera de la herramienta.
 - No se pudo leer el anexo de la guía v2 con el formato oficial ni sus etapas 4 y 5 (declaración de aplicabilidad); el informe sigue el art. 32 del Reglamento. Pendiente de contraste (ver puntos abiertos en `BASE-LEGAL.md`).
 - Los datos del asistente web se guardan solo en el navegador. No ingresar datos reales de personas.
+
+## Elaboración y revisión del DPO
+
+La herramienta tiene dos modos (panel bajo las pestañas). **Elaboración:** la completa el responsable o el implementador que eligió (MSC solo si no es DPO de ese cliente) y responde las observaciones. **Revisión del DPO:** el DPO registra observaciones no vinculantes por pestaña, con prioridad, y una conclusión; no corrige ni ejecuta la evaluación (Res. SPDP-SPD-2025-0028-R arts. 13, 15.2 y 15.3). Las observaciones se anexan al informe y tienen su propio informe con firma («Copiar observaciones del DPO»). En la app, el modo se preselecciona según el rol de MSC registrado en la ficha del cliente. Ver `docs/decision-evaluacion-implementacion.md`.
+

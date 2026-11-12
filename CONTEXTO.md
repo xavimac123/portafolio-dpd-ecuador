@@ -50,6 +50,11 @@ Actualizado: 2026-11-11 (segunda entrega). Leer junto con `CLAUDE.md` (reglas) y
 - Navegación «Anterior / Siguiente» en todas las herramientas con pestañas y resultado repetido al pie; resultado del diagnóstico al pie del cuestionario de la 03.
 - Pendiente de esta línea: evidencia de respaldo también en 06 y 07.
 
+## 3e. Quinta entrega (2026-11-11)
+- Herramientas en bloques: diagnóstico y evaluación (DPD), implementación y cumplimiento (empresa; DPD verifica), gestión del consultor, consulta y cálculo. Clasificación por tamaño y sector; departamento responsable en las de implementación.
+- Nuevas vistas: informe del deber de información (art. 12, 17 elementos y condiciones) y plan de implementación (14 acciones del art. 47 y normas relacionadas) con verificación del DPD.
+- Fuente: `scripts/cumplimiento_config.py` (criterio propio en departamentos y clasificación).
+
 ## 4. Pendiente (orden de prioridad)
 2. PDF de la ley y el reglamento: son copias LEXIS; no se versionan mientras el repositorio sea público. Publicarlos al pasar a Cloudflare con Access.
 3. Contrastar los textos aportados al proyecto y aún no leídos: Res. 0028 (DPD), programa profesionalizante, guía v2 de riesgos; y los textos oficiales de las Res. 2026-0039 y 0037 (puntos 8, 20, 25, 28 y 29 de `BASE-LEGAL.md`).

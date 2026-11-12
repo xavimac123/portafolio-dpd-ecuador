@@ -123,6 +123,12 @@ details.plg>summary{cursor:pointer;font-weight:700;color:var(--olivo);padding:6p
 .gl-it{padding:9px 0;border-bottom:1px solid var(--linea)}.gl-it:last-child{border-bottom:0}.gl-it b{display:block}.gl-it .src{font-size:11.5px;color:var(--olivo);font-weight:700}
 .met h4{margin:12px 0 4px;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--olivo)}.met p{margin:0 0 6px;font-size:13.5px}
 .fig{width:100%;max-width:520px;height:auto;display:block;margin:6px 0 4px}
+.grp{margin-top:22px;border-top:3px solid var(--oro);padding-top:14px}.grp .gh{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.grp .gn{flex:none;width:30px;height:30px;border-radius:50%;background:var(--oro);color:#14181E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+.grp .gh b{display:block;font-size:16px;font-stretch:110%;font-weight:800}.grp .gh small{display:block;color:var(--gris);font-size:13px;margin-top:2px}
+.tool .cl{margin-top:8px;font-size:11.5px;line-height:1.4}.tool .cl .tag{margin-right:4px}.tool .cl .why{color:var(--gris);display:block;margin-top:3px}
+.tool .dep{margin-top:6px;font-size:12px;border-top:1px dashed var(--linea);padding-top:6px}.tool.tenue{opacity:.82}
+.seg.sm button{font-size:13px;padding:7px 11px}.vdpd{border-radius:8px;padding:2px 10px 10px;margin-top:8px;border:1px dashed var(--linea)}.vdpd.on{border:1px solid var(--ok);background:var(--okf)}
 footer{max-width:820px;margin:0 auto;padding:0 14px 28px;font-size:11.5px;color:var(--gris)}
 [hidden]{display:none!important}
 body.dark{--marfil:#0F1216;--linea:#2A3038;--gris:#9AA1AA;--card:#171B21;--okf:#14261A;--malf:#2B1714;--avif:#2A2212;--olivo:#C9BC82;--txt:#E7E4DA}
@@ -158,6 +164,7 @@ body.dark .ref-n.p-Base{border-left-color:var(--oroc)}
 <script type="application/json" id="j-img">__IMG_JSON__</script>
 <script type="application/json" id="j-ref">__REF_JSON__</script>
 <script type="application/json" id="j-glo">__GLO_JSON__</script>
+<script type="application/json" id="j-cum">__CUM_JSON__</script>
 <script>__EXPORT_JS__</script>
 <script>
 (function(){
@@ -168,6 +175,7 @@ var SERV=JSON.parse(document.getElementById('j-serv').textContent);
 var IMG=JSON.parse(document.getElementById('j-img').textContent);
 var REF=JSON.parse(document.getElementById('j-ref').textContent);
 var GLO=JSON.parse(document.getElementById('j-glo').textContent);
+var CUM=JSON.parse(document.getElementById('j-cum').textContent);
 var D=window.MSCDoc,usd=D.usd;
 document.getElementById('isoimg').src=IMG.iso;document.getElementById('deco').src=IMG.lineas;
 
@@ -202,7 +210,7 @@ var HERR=[
  {id:'07',n:'Evaluación de impacto',m:'Contexto, riesgos y art. 32 RGLOPDP'},
  {id:'08',n:'Plantillas y cláusulas',m:'Política, avisos, contratos, cláusulas'},
  {id:'09',n:'Vulneraciones',m:'Protocolo, plazos y notificaciones'}];
-function herr(id){return HERR.filter(function(h){return h.id===id})[0]}
+function herr(id){return herrX(id)}
 var EST={prospecto:['Prospecto','g'],propuesta:['Propuesta enviada',''],activo:['Activo','v'],pausa:['En pausa','g'],cerrado:['Cerrado','g']};
 var MODAL=['Diagnóstico inicial','Adecuación (proyecto)','DPD externo designado','Acompañamiento de cumplimiento','Revisión anual','Servicio puntual'];
 var TAM=['Microempresa','Pequeña','Mediana','Grande'];
@@ -475,13 +483,115 @@ function vAge(){var V=$('#v-age'),f=R.ageF||'pend';
 }
 
 /* ===================== HERRAMIENTAS (iframe por cliente) ===================== */
-function vHer(){var V=$('#v-her'),c0=store('hcli')||'';
- V.innerHTML='<h2>Herramientas</h2><div class="card"><h3>Consulta y cálculo</h3><div class="qa"><button id="h-cal"><span class="ic">⏱</span><b>Calculadora de plazos</b><small>Vulneraciones e incidentes</small></button><button id="h-glo"><span class="ic">📖</span><b>Glosario</b><small>Ley, normas ISO y métodos de riesgo</small></button><button id="h-rie"><span class="ic">📈</span><b>Calculadora de riesgos</b><small>Frecuentista, Delphi, bayesiano, Monte Carlo</small></button><button id="h-ref"><span class="ic">⚖</span><b>Referencia</b><small>Ley, reglamento y resoluciones</small></button></div></div><p class="sub">Elija el cliente: cada herramienta guarda su evaluación en el expediente de ese cliente. «Modo libre» sirve para practicar o para reuniones sin guardar en un cliente.</p>'+
- '<div class="card">'+sel('h-cli','Trabajar con',c0,clientes().map(function(c){return [c.id,c.rs+' (registrado)']}).concat([['_nuevo','Cliente nuevo (consulta, sin expediente)'],['_libre','Modo práctica (empresa ficticia)']]))+'<p class="hint">Cliente registrado: la herramienta toma los datos de su ficha y guarda en su expediente. Cliente nuevo: para consultas; los datos se ingresan en la herramienta. Práctica: elija un tipo de empresa ficticia.</p>'+'</div><div class="tools">'+HERR.map(function(h){return '<button class="tool" data-ht="'+h.id+'"><div class="n">'+h.id+'</div><div class="t">'+esc(h.n)+'</div><div class="m">'+esc(h.m)+'</div></button>'}).join('')+'</div>'+
- '<div class="nota" style="margin-top:12px">Si no elige arriba, al tocar una herramienta se le preguntará con qué datos trabajar. Orden de uso: 01 › 02 para proponer; 03 › 04 › 05 para diagnosticar e inventariar; 06 › 07 para riesgos; 08 › 09 para adecuar y responder. Al año, repita 03 y 05.</div>';
- $('#h-cli').onchange=function(){store('hcli',this.value)};$('#h-cal').onclick=function(){vCalc()};$('#h-rie').onclick=function(){vRiesgo()};$('#h-glo').onclick=function(){vGlo()};$('#h-ref').onclick=function(){show('ref')};
- $$('[data-ht]',V).forEach(function(b){b.onclick=function(){var c=$('#h-cli').value;if(!c)return elegirClienteYAbrir(b.dataset.ht);abrirConCliente(b.dataset.ht,c)}});
-}
+/* ===================== HERRAMIENTAS: organización por tipo y por función ===================== */
+/* Bloques: diagnóstico y evaluación (DPD), implementación y cumplimiento (empresa; el DPD verifica) y gestión del consultor.
+   Clasificación por tamaño y departamentos sugeridos: criterio propio (scripts/cumplimiento_config.py). */
+var NAT_H=[{id:'A12',n:'Informe del deber de información (art. 12)',m:'Qué debe informar la empresa al titular: 17 elementos'},{id:'IMP',n:'Plan de implementación y verificación',m:'Qué hace cada departamento y qué verifica el DPD'}];
+function herrX(id){return HERR.concat(NAT_H).filter(function(h){return h.id===id})[0]}
+function tamDe(c){if(!c)return '';if(CUM.tam.indexOf(c.tam)>-1)return c.tam;var t=+c.trab;if(!t)return '';return t<10?'Microempresa':t<50?'Pequeña':t<200?'Mediana':'Grande'}
+function secAlto(c){return !!(c&&c.sec&&new RegExp(CUM.secAlto,'i').test(c.sec))}
+var CLV={E:['Esencial','v'],R:['Recomendada',''],C:['Según el caso','g']};
+function clasif(id,c,tam){var k=CUM.clasif[id];if(!k||!tam)return null;var v=k[CUM.tam.indexOf(tam)],why=k[4];
+ if(id==='05'&&secAlto(c)){v='E';why='La actividad del cliente está entre las de calificación directa o alto volumen (Res. 2026-0005 art. 14): evalúela.'}
+ if(id==='04'&&c&&+c.trab){v=+c.trab>=100?'E':'C';why=+c.trab>=100?'Obligatorio: el cliente tiene 100 o más trabajadores (RGLOPDP art. 38).':'Con menos de 100 trabajadores es obligatorio si hay riesgo, tratamiento no ocasional o categorías especiales (RGLOPDP art. 38).'}
+ return [v,why]}
+function depDe(id,tam){var a=CUM.acc.filter(function(x){return x.id===id})[0];return a&&tam?a.dep[CUM.tam.indexOf(tam)]:''}
+var DEPT={'04':'A03','09':'A09','07':'A08','03':'A11'};
+function ctxSel(v){if(!v)return null;if(v==='_libre'||v==='_nuevo')return null;return cli(v)}
+function vHer(){var V=$('#v-her'),c0=store('hcli')||'',c=ctxSel(c0),tam=tamDe(c)||store('htam')||'';
+ var tile=function(id,blq){var h=herrX(id),k=clasif(id,c,tam),dep=blq==='imp'?(id==='IMP'?'Asigna cada acción a su departamento':id==='08'?'Legal, Talento humano y Compras, según el documento':depDe(DEPT[id],tam)):'';
+  return '<button class="tool'+(k&&k[0]==='C'?' tenue':'')+'" data-ht="'+id+'"><div class="n">'+(id==='A12'?'Art. 12':id==='IMP'?'Plan':id)+'</div><div class="t">'+esc(h.n)+'</div><div class="m">'+esc(h.m)+'</div>'+
+   (k?'<div class="cl"><span class="tag '+CLV[k[0]][1]+'">'+CLV[k[0]][0]+'</span><span class="why">'+esc(k[1])+'</span></div>':'')+
+   (dep&&tam?'<div class="dep"><b>Responsable en la empresa:</b> '+esc(dep)+'</div>':'')+'</button>'};
+ V.innerHTML='<h2>Herramientas</h2>'+
+ '<div class="card"><div class="grid">'+sel('h-cli','Trabajar con',c0,clientes().map(function(x){return [x.id,x.rs+' (registrado)']}).concat([['_nuevo','Cliente nuevo (consulta, sin expediente)'],['_libre','Modo práctica (empresa ficticia)']]))+
+ (c&&tamDe(c)?'<div><label>Tipo de empresa</label><div style="padding:11px 0;font-weight:700">'+esc(tamDe(c))+(c.sec?' · '+esc(c.sec):'')+(c.trab?' · '+esc(c.trab)+' trabajadores':'')+'</div></div>':sel('h-tam','Tipo de empresa (para clasificar las herramientas)',tam,CUM.tam.map(function(t){return [t,t]})))+'</div>'+
+ '<p class="hint">Las herramientas se clasifican por tamaño de empresa: <span class="tag v">Esencial</span> <span class="tag">Recomendada</span> <span class="tag g">Según el caso</span>. Clasificación y departamentos sugeridos: criterio propio.</p></div>'+
+ '<div class="grp"><div class="gh"><span class="gn">1</span><div><b>Diagnóstico y evaluación</b><small>Las realiza el DPD: miden la situación de la empresa y sustentan el informe.</small></div></div><div class="tools">'+['03','A12','05','06','07'].map(function(x){return tile(x,'dia')}).join('')+'</div></div>'+
+ '<div class="grp"><div class="gh"><span class="gn">2</span><div><b>Implementación y cumplimiento</b><small>Las ejecuta la empresa por departamento; el DPD asesora, supervisa y verifica la evidencia.</small></div></div><div class="tools">'+['IMP','04','08','09'].map(function(x){return tile(x,'imp')}).join('')+'</div></div>'+
+ '<div class="grp"><div class="gh"><span class="gn">3</span><div><b>Gestión del consultor</b><small>Para proponer y cotizar el servicio.</small></div></div><div class="tools">'+['01','02'].map(function(x){return tile(x,'ges')}).join('')+'</div></div>'+
+ '<div class="grp"><div class="gh"><span class="gn">+</span><div><b>Consulta y cálculo</b><small>Apoyo en reuniones con clientes.</small></div></div><div class="qa"><button id="h-cal"><span class="ic">⏱</span><b>Calculadora de plazos</b><small>Vulneraciones e incidentes</small></button><button id="h-rie"><span class="ic">📈</span><b>Calculadora de riesgos</b><small>Frecuentista, Delphi, bayesiano, Monte Carlo</small></button><button id="h-glo"><span class="ic">📖</span><b>Glosario</b><small>Ley, normas ISO y métodos de riesgo</small></button><button id="h-ref"><span class="ic">⚖</span><b>Referencia</b><small>Ley, reglamento y resoluciones</small></button></div></div>'+
+ '<div class="nota" style="margin-top:12px">Orden sugerido: 01 › 02 para proponer; 03, art. 12 y 05 para diagnosticar; 06 y 07 si el caso lo exige; luego el plan de implementación con 04, 08 y 09. Al año, repita 03 y 05.</div>';
+ $('#h-cli').onchange=function(){store('hcli',this.value);vHer()};if($('#h-tam'))$('#h-tam').onchange=function(){store('htam',this.value);vHer()};
+ $('#h-cal').onclick=function(){vCalc()};$('#h-rie').onclick=function(){vRiesgo()};$('#h-glo').onclick=function(){vGlo()};$('#h-ref').onclick=function(){show('ref')};
+ $$('[data-ht]',V).forEach(function(b){b.onclick=function(){var v=$('#h-cli').value;if(!v)return elegirClienteYAbrir(b.dataset.ht);abrirConCliente(b.dataset.ht,v)}})}
+
+/* ----- datos de las vistas nativas (art. 12 y plan) por cliente, práctica o consulta ----- */
+function nsDe(cid,perfil){return perfil?'_prac-'+perfil.k:cid}
+function datosNat(cid,perfil,key){var ns=nsDe(cid,perfil),w=R.data.ws[ns]||(R.data.ws[ns]={});return w[key]||(w[key]={})}
+function tocaNat(cid,perfil,h){var ns=nsDe(cid,perfil),w=R.data.ws[ns];if(w&&cli(cid)){w._upd=w._upd||{};w._upd[h]=Date.now()}guardarDiferido()}
+function empNat(cid,perfil){var c=cli(cid);if(c)return c;if(perfil)return perfil;return null}
+function vNat(){R.view='her';$$('main section').forEach(function(x){x.classList.toggle('on',x.id==='v-her')});$$('#nav button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.t==='her')});window.scrollTo(0,0)}
+function segH(name,val,ops){return '<div class="seg sm" data-sg="'+name+'">'+ops.map(function(o){return '<button type="button" data-o="'+esc(o)+'" class="'+(val===o?'on':'')+'">'+esc(o)+'</button>'}).join('')+'</div>'}
+
+/* ----- Informe del deber de información (LOPDP art. 12) ----- */
+var R12=['Cumple','Parcial','No cumple','No aplica'];
+function vArt12(cid,perfil){vNat();var V=$('#v-her'),d=datosNat(cid,perfil,'_a12'),E=empNat(cid,perfil);d.it=d.it||{};d.co=d.co||{};
+ V.innerHTML='<button class="back" id="a12-b">‹ Herramientas</button><h2>Informe del deber de información (LOPDP art. 12)</h2><p class="sub">'+(E?esc(E.rs)+' · ':(cid==='_nuevo'?'Cliente nuevo (consulta) · ':''))+'El DPD revisa la política de privacidad y los avisos de la empresa y verifica si informan al titular los 17 elementos que exige la ley. El resultado es un informe detallado de lo que la empresa tiene y de lo que le falta.</p>'+
+ '<div class="card"><div class="grid">'+(E?'':campo('a12-emp','Empresa evaluada',d.emp||'','text',true))+campo('a12-doc','Documentos revisados',d.doc||'','text',true,'Ej.: política de privacidad web (versión 2026), aviso del formulario de contacto, contrato de trabajo')+campo('a12-f','Fecha de revisión',d.f||hoy(),'date')+'</div></div>'+
+ '<h3 style="margin:16px 0 8px">Elementos que debe informar (art. 12, nums. 1 a 17)</h3>'+
+ CUM.a12.map(function(x){var o=d.it[x[0]]||{};return '<div class="card q12" data-n="'+x[0]+'"><div class="row" style="justify-content:space-between;align-items:flex-start;flex-wrap:nowrap;gap:10px"><div><span class="tag g">Num. '+x[0]+'</span> <b>'+esc(x[1])+'</b><p class="hint" style="margin:4px 0 8px">'+esc(x[2])+'</p></div></div>'+segH('r',o.r||'',R12)+
+  '<div class="grid" style="margin-top:8px"><div><label>Dónde consta</label><select data-k="doc"><option value="">— Seleccionar —</option>'+CUM.docs12.map(function(t){return '<option'+(o.doc===t?' selected':'')+'>'+esc(t)+'</option>'}).join('')+'</select></div><div><label>Observación o redacción a corregir</label><input data-k="obs" value="'+esc(o.obs||'')+'" placeholder="Qué falta o qué hay que precisar"></div></div></div>'}).join('')+
+ '<h3 style="margin:16px 0 8px">Condiciones de la información</h3><div class="card">'+CUM.a12c.map(function(x,i){var o=d.co[i]||{};return '<div class="q12c" data-c="'+i+'" style="padding:8px 0;border-bottom:1px solid var(--linea)"><b>'+esc(x[0])+'</b><p class="hint" style="margin:2px 0 6px">'+esc(x[1])+'</p>'+segH('c',o.r||'',['Cumple','No cumple','No aplica'])+'</div>'}).join('')+'</div>'+
+ '<div class="card"><div id="a12-res"></div><label style="margin-top:10px">Informe detallado</label><div class="row">'+expBtns('a12-x',1)+'</div></div>';
+ var guarda=function(){if($('#a12-emp'))d.emp=$('#a12-emp').value;d.doc=$('#a12-doc').value;d.f=$('#a12-f').value;tocaNat(cid,perfil,'A12');pinta()};
+ $$('.q12',V).forEach(function(q){var n=q.dataset.n,o=function(){return d.it[n]||(d.it[n]={})};
+  $$('[data-sg=r] button',q).forEach(function(b){b.onclick=function(){var x=o();x.r=x.r===b.dataset.o?'':b.dataset.o;$$('[data-sg=r] button',q).forEach(function(y){y.classList.toggle('on',y.dataset.o===x.r)});guarda()}});
+  $$('[data-k]',q).forEach(function(i){i.addEventListener('input',function(){o()[i.dataset.k]=i.value;guarda()});i.addEventListener('change',function(){o()[i.dataset.k]=i.value;guarda()})})});
+ $$('.q12c',V).forEach(function(q){var n=q.dataset.c;$$('button',q).forEach(function(b){b.onclick=function(){var x=d.co[n]||(d.co[n]={});x.r=x.r===b.dataset.o?'':b.dataset.o;$$('button',q).forEach(function(y){y.classList.toggle('on',y.dataset.o===x.r)});guarda()}})});
+ ['a12-doc','a12-f','a12-emp'].forEach(function(k){if($('#'+k))$('#'+k).addEventListener('input',guarda)});
+ var calc=function(){var ap=0,pt=0,n={},resp=0;R12.forEach(function(r){n[r]=0});CUM.a12.forEach(function(x){var r=(d.it[x[0]]||{}).r;if(!r)return;resp++;n[r]++;if(r!=='No aplica'){ap++;pt+=r==='Cumple'?1:r==='Parcial'?.5:0}});return{ap:ap,pct:ap?pt/ap*100:null,n:n,resp:resp}};
+ var informe=function(){var k=calc(),emp=E?E.rs:(d.emp||'[EMPRESA]'),TB='<table border="1" cellpadding="5" style="border-collapse:collapse;width:100%;font-size:10pt">';
+  var falt=CUM.a12.filter(function(x){var r=(d.it[x[0]]||{}).r;return r==='No cumple'||r==='Parcial'});
+  return '<h1>Informe de cumplimiento del deber de información</h1><p><b>'+esc(emp)+'</b> · Base: Ley Orgánica de Protección de Datos Personales, art. 12 · Fecha de revisión: '+esc(fcorta(d.f||hoy()))+'</p>'+
+  '<h2>1. Alcance</h2><p>Documentos revisados: '+esc(d.doc||'[DOCUMENTOS REVISADOS]')+'. Se verificó si la información que la empresa entrega a los titulares contiene los 17 elementos del art. 12 y cumple sus condiciones de forma y momento.</p>'+
+  '<h2>2. Resultado general</h2><p>Elementos evaluados: '+k.resp+' de 17 · Cumplen: '+k.n['Cumple']+' · Parciales: '+k.n['Parcial']+' · No cumplen: '+k.n['No cumple']+' · No aplican: '+k.n['No aplica']+'.'+(k.pct!=null?' Nivel de cumplimiento: <b>'+pctf(k.pct,0)+'</b> (los parciales cuentan la mitad; indicador de criterio propio).':'')+'</p>'+
+  '<h2>3. Detalle por elemento</h2>'+TB+'<tr><th>Num.</th><th>Elemento</th><th>Resultado</th><th>Dónde consta</th><th>Observación</th></tr>'+CUM.a12.map(function(x){var o=d.it[x[0]]||{};return '<tr><td>'+x[0]+'</td><td>'+esc(x[1])+'</td><td>'+esc(o.r||'Sin evaluar')+'</td><td>'+esc(o.doc||'')+'</td><td>'+esc(o.obs||'')+'</td></tr>'}).join('')+'</table>'+
+  '<h2>4. Condiciones de la información</h2>'+TB+'<tr><th>Condición</th><th>Exigencia</th><th>Resultado</th></tr>'+CUM.a12c.map(function(x,i){return '<tr><td>'+esc(x[0])+'</td><td>'+esc(x[1])+'</td><td>'+esc((d.co[i]||{}).r||'Sin evaluar')+'</td></tr>'}).join('')+'</table>'+
+  '<h2>5. Lo que la empresa debe corregir</h2>'+(falt.length?'<ol>'+falt.map(function(x){var o=d.it[x[0]]||{};return '<li><b>'+esc(x[1])+'</b> (num. '+x[0]+', '+esc(o.r.toLowerCase())+'): '+esc(o.obs||x[2])+'</li>'}).join('')+'</ol><p>Responsable sugerido de la corrección: '+esc(depDe('A02',tamDe(E))||'el área que administra la política de privacidad')+' (criterio propio). Instrumento: plantillas de política y avisos (herramienta 08).</p>':'<p>No se identificaron elementos faltantes en lo evaluado.</p>')+
+  '<p><i>El consultor asesora y supervisa; la empresa decide e implementa las correcciones. No informar al titular puede constituir incumplimiento del principio de transparencia y del derecho a la información.</i></p>'+firmaInf(cli(cid)||{})};
+ var pinta=function(){var k=calc(),falt=CUM.a12.filter(function(x){var r=(d.it[x[0]]||{}).r;return r==='No cumple'||r==='Parcial'});
+  $('#a12-res').innerHTML='<h3>Resultado</h3>'+(k.resp?'<div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap"><b style="font-size:28px;font-stretch:115%">'+(k.pct!=null?pctf(k.pct,0):'—')+'</b><span>'+k.resp+' de 17 evaluados · '+k.n['Cumple']+' cumplen · '+k.n['Parcial']+' parciales · '+k.n['No cumple']+' no cumplen</span></div>'+
+   (falt.length?'<p style="margin:8px 0 4px"><b>Debe corregir:</b></p><ul style="margin:0;padding-left:18px">'+falt.map(function(x){return '<li>Num. '+x[0]+': '+esc(x[1])+'</li>'}).join('')+'</ul>':'')+'<p class="hint">Porcentaje: los parciales cuentan la mitad (criterio propio).</p>':'<p class="sub">El resultado aparecerá aquí a medida que evalúe los elementos.</p>')+
+   '';};
+ bindExp('a12-x',informe,function(){return 'Informe art 12 '+(E?E.rs:(d.emp||''))+' '+(d.f||hoy())});
+ $('#a12-b').onclick=function(){vHer()};pinta()}
+
+/* ----- Plan de implementación por departamento y verificación del DPD ----- */
+var EST_I=['Pendiente','En proceso','Implementado','No aplica'];
+function reglaTxt(a,E){if(a.regla==='rat'){var t=E&&+E.trab;return t>=100?'Obligatorio: 100 o más trabajadores (RGLOPDP art. 38).':'Obligatorio si hay riesgo, tratamiento no ocasional o categorías especiales; con menos de 100 trabajadores, verifique (RGLOPDP art. 38).'}
+ if(a.regla==='dpd')return secAlto(E)?'Probablemente obligatorio por la actividad (Res. 2025-0028 art. 10): confírmelo y documente el análisis.':'Evalúe: LOPDP art. 48, las 14 actividades de la Res. 2025-0028 y la herramienta 05.';
+ if(a.regla==='reg')return 'Cuando la SPDP habilite el registro.';return 'Aplica a toda empresa.'}
+function vImp(cid,perfil){vNat();var V=$('#v-her'),d=datosNat(cid,perfil,'_imp'),E=empNat(cid,perfil),tam=tamDe(E)||d.tam||store('htam')||'';d.ac=d.ac||{};
+ V.innerHTML='<button class="back" id="im-b">‹ Herramientas</button><h2>Plan de implementación y verificación</h2><p class="sub">'+(E?esc(E.rs)+' · ':'')+'Lo que la empresa debe implementar para cumplir la LOPDP, quién lo hace según su tamaño y qué verificó el DPD. La empresa ejecuta; el DPD asesora, supervisa y verifica la evidencia.</p>'+
+ '<div class="card"><div class="grid">'+(tamDe(E)?'<div><label>Tipo de empresa</label><div style="padding:11px 0;font-weight:700">'+esc(tam)+(E&&E.sec?' · '+esc(E.sec):'')+'</div></div>':sel('im-tam','Tipo de empresa',tam,CUM.tam.map(function(t){return [t,t]})))+'</div><div id="im-prog" style="margin-top:8px"></div><p class="hint">Departamentos sugeridos según el tamaño: criterio propio; ajústelos al organigrama del cliente.</p></div>'+
+ CUM.acc.map(function(a){var o=d.ac[a.id]||{},dep=o.dep||(tam?a.dep[CUM.tam.indexOf(tam)]:'');
+  return '<div class="card acc" data-a="'+a.id+'"><div><span class="tag g">'+a.id+'</span> <b>'+esc(a.n)+'</b></div><div class="ayu" style="margin:4px 0"><b>Base:</b> '+esc(a.base)+' · <b>Aplicación:</b> '+esc(reglaTxt(a,E))+'</div><div class="ayu" style="margin:0 0 8px"><b>Entregable:</b> '+esc(a.ent)+'</div>'+
+  '<div class="grid"><div><label>Departamento responsable</label><input data-k="dep" value="'+esc(dep)+'" placeholder="'+esc(tam?'':'Elija el tipo de empresa')+'"></div><div><label>Fecha compromiso</label><input type="date" data-k="fc" value="'+esc(o.fc||'')+'"></div></div>'+
+  '<label style="margin-top:8px">Estado</label>'+segH('e',o.e||'',EST_I)+
+  '<div class="vdpd'+(o.v?' on':'')+'"><label class="row" style="gap:8px;margin:8px 0 4px;font-weight:700"><input type="checkbox" data-k="v"'+(o.v?' checked':'')+' style="width:20px;height:20px;min-height:0"> Verificado por el DPD'+(o.vf?' el '+esc(fcorta(o.vf)):'')+'</label><input data-k="ev" value="'+esc(o.ev||'')+'" placeholder="Evidencia revisada (documento, fecha, versión)"></div>'+
+  (a.herr?'<div class="row" style="margin-top:8px"><button class="btn sm sec" data-ir="'+a.herr+'">'+(a.herr==='SOL'?'Ir a solicitudes del cliente':a.herr==='A12'?'Abrir informe del art. 12':'Abrir herramienta '+a.herr)+'</button></div>':'')+'</div>'}).join('')+
+ '<div class="card"><div id="im-res"></div><label style="margin-top:10px">Plan y constancia de verificación</label><div class="row">'+expBtns('im-x',1)+'</div></div>';
+ var guarda=function(){if($('#im-tam'))d.tam=$('#im-tam').value;tocaNat(cid,perfil,'IMP');pinta()};
+ if($('#im-tam'))$('#im-tam').onchange=function(){d.tam=this.value;store('htam',this.value);guarda();vImp(cid,perfil)};
+ $$('.acc',V).forEach(function(q){var id=q.dataset.a,o=function(){return d.ac[id]||(d.ac[id]={})};
+  $$('[data-sg=e] button',q).forEach(function(b){b.onclick=function(){var x=o();x.e=x.e===b.dataset.o?'':b.dataset.o;$$('[data-sg=e] button',q).forEach(function(y){y.classList.toggle('on',y.dataset.o===x.e)});guarda()}});
+  $$('[data-k]',q).forEach(function(i){var f=function(){var x=o();if(i.dataset.k==='v'){x.v=i.checked?1:0;x.vf=i.checked?hoy():'';if(i.checked&&!x.e)x.e='Implementado';q.querySelector('.vdpd').classList.toggle('on',i.checked)}else x[i.dataset.k]=i.value;guarda()};i.addEventListener('input',f);i.addEventListener('change',f)});
+  $$('[data-ir]',q).forEach(function(b){b.onclick=function(){var h=b.dataset.ir;if(h==='SOL'){if(cli(cid)){R.sel=cid;show('cli')}else toast('Las solicitudes se registran en la ficha de un cliente registrado.',1)}else if(h==='A12')vArt12(cid,perfil);else abrirTool(h,cid,perfil)}})});
+ var calc=function(){var ap=0,im=0,pr=0,ve=0;CUM.acc.forEach(function(a){var e=(d.ac[a.id]||{}).e;if(e==='No aplica')return;ap++;if(e==='Implementado')im++;if(e==='En proceso')pr++;if((d.ac[a.id]||{}).v)ve++});return{ap:ap,im:im,pr:pr,ve:ve,pct:ap?im/ap*100:0}};
+ var informe=function(){var k=calc(),TB='<table border="1" cellpadding="5" style="border-collapse:collapse;width:100%;font-size:9.5pt">';
+  return '<h1>Plan de implementación y verificación del DPD</h1><p><b>'+esc(E?E.rs:'[EMPRESA]')+'</b>'+(tam?' · '+esc(tam):'')+' · Fecha: '+esc(fcorta(hoy()))+'</p>'+
+  '<h2>1. Resumen</h2><p>Acciones aplicables: '+k.ap+' · Implementadas: '+k.im+' ('+pctf(k.pct,0)+') · En proceso: '+k.pr+' · Verificadas por el DPD: '+k.ve+'.</p>'+
+  '<h2>2. Acciones, responsables y estado</h2>'+TB+'<tr><th>Acción</th><th>Base</th><th>Departamento</th><th>Fecha compromiso</th><th>Estado</th><th>Verificación del DPD</th></tr>'+CUM.acc.map(function(a){var o=d.ac[a.id]||{};return '<tr><td>'+esc(a.id+' · '+a.n)+'</td><td>'+esc(a.base)+'</td><td>'+esc(o.dep||(tam?a.dep[CUM.tam.indexOf(tam)]:''))+'</td><td>'+esc(o.fc?fcorta(o.fc):'')+'</td><td>'+esc(o.e||'Pendiente')+'</td><td>'+(o.v?'Verificado '+esc(fcorta(o.vf))+(o.ev?': '+esc(o.ev):''):'No')+'</td></tr>'}).join('')+'</table>'+
+  '<h2>3. Constancia de verificación</h2><p>El consultor en protección de datos verificó la existencia de la evidencia señalada en las acciones marcadas como «Verificado». Esta constancia no certifica el cumplimiento integral de la LOPDP ni sustituye la responsabilidad del responsable del tratamiento, que decide, implementa y debe demostrar el cumplimiento (LOPDP art. 47).</p><p><i>Departamentos sugeridos según el tamaño de la empresa: criterio propio.</i></p>'+firmaInf(cli(cid)||{})};
+ var pinta=function(){var k=calc(),bar='<div style="height:10px;border-radius:6px;background:var(--linea);overflow:hidden"><div style="height:100%;width:'+k.pct+'%;background:var(--ok)"></div></div>';
+  $('#im-prog').innerHTML=bar+'<p class="hint" style="margin:6px 0 0">'+k.im+' de '+k.ap+' acciones implementadas · '+k.ve+' verificadas por el DPD</p>';
+  $('#im-res').innerHTML='<h3>Resultado</h3>'+bar+'<p style="margin:8px 0">'+pctf(k.pct,0)+' implementado · '+k.pr+' en proceso · '+k.ve+' verificadas por el DPD</p>'+(k.ap-k.im?'<p class="hint">Pendientes: '+CUM.acc.filter(function(a){var e=(d.ac[a.id]||{}).e;return e!=='Implementado'&&e!=='No aplica'}).map(function(a){return a.id}).join(', ')+'.</p>':'')+
+   '';};
+ bindExp('im-x',informe,function(){return 'Plan de implementacion '+(E?E.rs:'')+' '+hoy()});
+ $('#im-b').onclick=function(){vHer()};pinta()}
+var NATIVAS={A12:vArt12,IMP:vImp};
+
 var PRAC=[
  {k:'micro',n:'Microempresa de comercio',tam:'Microempresa',sec:'Comercio minorista',secK:'Comercio',trab:6,ven:85000,pre:['Ferretería','Bazar','Panadería','Papelería'],suf:'Cía. Ltda.'},
  {k:'salud',n:'Pequeña empresa de salud',tam:'Pequeña',sec:'Salud (consultorio y laboratorio)',secK:'Salud',trab:25,ven:620000,pre:['Clínica Dental','Laboratorio Clínico','Centro Médico'],suf:'S.A.'},
@@ -506,14 +616,14 @@ function elegirClienteYAbrir(h){elegir(h+' · '+herr(h).n,'¿Con qué datos trab
 function abrirConCliente(h,c){if(c==='_libre')return elegirPractica(h);abrirTool(h,c)}
 window.PDBridge={
  load:function(ns){var p=ns.split('|'),w=R.data&&R.data.ws[p[0]];return w&&w[p[1]]?JSON.parse(JSON.stringify(w[p[1]])):{}},
- save:function(ns,d){if(!R.data)return;var p=ns.split('|'),w=R.data.ws[p[0]]||(R.data.ws[p[0]]={});w[p[1]]=d;if(!(_open&&_open.pre)){w._upd=w._upd||{};w._upd[p[1]]=Date.now()}guardarDiferido()}
+ save:function(ns,d){if(!R.data)return;var p=ns.split('|'),w=R.data.ws[p[0]]||(R.data.ws[p[0]]={});w[p[1]]=d;if(!(_open&&(_open.pre||Date.now()-(_open.t0||0)<1500))){w._upd=w._upd||{};w._upd[p[1]]=Date.now()}guardarDiferido()}
 };
 var SHIM='<script>(function(){try{var B=parent.PDBridge,ns=frameElement.getAttribute("data-ns");if(!B||!ns)return;var d=B.load(ns)||{};var S={getItem:function(k){return Object.prototype.hasOwnProperty.call(d,k)?d[k]:null},setItem:function(k,v){d[k]=String(v);B.save(ns,d)},removeItem:function(k){delete d[k];B.save(ns,d)},clear:function(){d={};B.save(ns,d)},key:function(i){return Object.keys(d)[i]||null}};Object.defineProperty(S,"length",{get:function(){return Object.keys(d).length}});Object.defineProperty(window,"localStorage",{configurable:true,get:function(){return S}})}catch(e){}})();<\/script>';
 var _open=null;
 /* Cada apertura usa un iframe nuevo: así el botón «Volver» y el gesto atrás no dependen del historial interno del iframe
    (en algunos navegadores, cambiar su contenido agregaba entradas y «Volver» dejaba de cerrar la herramienta). */
 function marco(html,ns){var old=$('#tool-f'),f=document.createElement('iframe');f.id='tool-f';f.title='Herramienta';f.setAttribute('allow','clipboard-write');if(ns)f.setAttribute('data-ns',ns);if(html)f.srcdoc=html;old.parentNode.replaceChild(f,old);return f}
-function abrirTool(h,cid,perfil){var t=TOOLS[h];if(!t)return toast('Herramienta no disponible.',1);var esp=cid==='_libre'||cid==='_nuevo';if(!esp&&!cli(cid))return toast('Elija un cliente, un cliente nuevo o el modo práctica.',1);var c=esp?null:cli(cid);_open={h:h,cid:cid,perfil:perfil||null,u0:esp?0:(ultimo(cid,h)||0)};
+function abrirTool(h,cid,perfil){if(NATIVAS[h]){if(cid!=='_libre'&&cid!=='_nuevo'&&!cli(cid))return toast('Elija un cliente, un cliente nuevo o el modo práctica.',1);return NATIVAS[h](cid,perfil)}var t=TOOLS[h];if(!t)return toast('Herramienta no disponible.',1);var esp=cid==='_libre'||cid==='_nuevo';if(!esp&&!cli(cid))return toast('Elija un cliente, un cliente nuevo o el modo práctica.',1);var c=esp?null:cli(cid);_open={h:h,cid:cid,perfil:perfil||null,t0:Date.now(),u0:esp?0:(ultimo(cid,h)||0)};
  $('#tool-t').innerHTML=esc(h+' · '+herr(h).n)+'<small>'+(c?esc(c.rs):perfil?'Práctica · '+esc(perfil.rs):cid==='_nuevo'?'Cliente nuevo (consulta)':'Modo libre')+'</small><span class="cx" id="tool-cx"></span>';$('#tool').hidden=false;document.body.style.overflow='hidden';
  marco(t.replace(/<head>/i,'<head>'+SHIM),(perfil?'_prac-'+perfil.k:cid)+'|'+h);store('last',{h:h,cid:cid,k:perfil?perfil.k:'',t:Date.now()});
  try{if(!(history.state&&history.state.tool))history.pushState({tool:1},'')}catch(e){}}
@@ -750,7 +860,7 @@ function vCalc(){R.view='her';$$('main section').forEach(function(x){x.classList
   var doc=function(){var c=cli($('#cc-cli').value);return '<h1>Cálculo de plazos de notificación de una vulneración</h1><p>'+(c?'<b>'+esc(c.rs)+'</b> · ':'')+'El cliente actúa como <b>'+(enc?'encargado':'responsable')+'</b> del tratamiento · Constancia: '+esc(fcorta(d0))+' '+esc(h0)+' · Fecha del cálculo: '+esc(fcorta(hoy()))+'</p><table border="1" cellpadding="5" style="border-collapse:collapse;width:100%;font-size:10pt"><tr><th>Destinatario</th><th>Vence</th><th>Indicaciones</th><th>Base legal</th></tr>'+F.map(function(x){return '<tr><td>'+esc(x[0])+'</td><td>'+(x[1]?esc(fcorta(x[1]))+' (23:59)':'No procede')+'</td><td>'+esc(x[2])+'</td><td>'+esc(x[3])+'</td></tr>'}).join('')+'</table><p>Términos en días hábiles, sin fines de semana ni feriados nacionales'+(ex.length?' ni los feriados locales indicados ('+esc(ex.join(', '))+')':'')+'. El cálculo es una ayuda: confirme con el texto vigente de la LOPDP y de la Res. SPDP-SPD-2026-0040-R.</p>'+firmaInf(c||{})};
   bindExp('cc-x',doc,function(){var c=cli($('#cc-cli').value);return 'Plazos de notificacion '+(c?c.rs+' ':'')+d0});
   $('#cc-ag').onclick=function(){var c=$('#cc-cli').value;if(!c)return toast('Elija el cliente para agendar.',1);R.view='cli';R.sel=c;$$('main section').forEach(function(x){x.classList.toggle('on',x.id==='v-cli')});$$('#nav button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.t==='cli')});formInc(null,c);$('#n-fc').value=fc;$('#n-rol').value=enc?'encargado':'responsable';$('#n-fc').dispatchEvent(new Event('input'));window.scrollTo(0,0)}};
- $$('#v-her input,#v-her select').forEach(function(x){x.addEventListener('input',go);x.addEventListener('change',go)});
+ $$('#v-her input,#v-her select').forEach(function(x){x.addEventListener('input',go)});
  $('#cc-b').onclick=function(){vHer()};go();window.scrollTo(0,0)}
 
 /* ===================== CALCULADORA DE RIESGOS ===================== */

@@ -63,8 +63,10 @@ glo = {"lopdp": CAT.GLOSARIO_LOPDP, "norma": CAT.GLOSARIO_NORMATIVA, "iso": GLC.
 ref = {"rev": REFC.REVISION, "normas": REFC.NORMAS, "plazos": REFC.PLAZOS, "contraste": contraste, "abiertos": abiertos, "pdf": pdf}
 exp_js = (ROOT / "scripts" / "exportar.js").read_text(encoding="utf-8").replace("</", "<\\/")
 src = src.replace("__TOOLS_JSON__", js(tools)).replace("__SERV_JSON__", js(serv)).replace("__IMG_JSON__", js(img))
-src = src.replace("__REF_JSON__", js(ref)).replace("__GLO_JSON__", js(glo)).replace("__EXPORT_JS__", exp_js)
-assert "__GLO_JSON__" not in src and "__REF_JSON__" not in src and "__EXPORT_JS__" not in src
+import cumplimiento_config as CUM  # noqa: E402
+cum = {"tam": CUM.TAMANOS, "a12": CUM.ART12, "a12c": CUM.ART12_COND, "docs12": CUM.DOCS12, "acc": CUM.ACCIONES, "clasif": CUM.CLASIF, "secAlto": CUM.SECTORES_ALTO}
+src = src.replace("__REF_JSON__", js(ref)).replace("__GLO_JSON__", js(glo)).replace("__CUM_JSON__", js(cum)).replace("__EXPORT_JS__", exp_js)
+assert "__CUM_JSON__" not in src and "__GLO_JSON__" not in src and "__REF_JSON__" not in src and "__EXPORT_JS__" not in src
 assert "__TOOLS_JSON__" not in src
 (R / "dist").mkdir(exist_ok=True)
 (R / "dist" / "preview.html").write_text(src, encoding="utf-8")

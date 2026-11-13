@@ -80,7 +80,7 @@ assert "__TOOLS_JSON__" not in src
 ver = hashlib.sha1(src.encode()).hexdigest()[:8]
 NAME = "MSC Protección de Datos"
 head = ('<script>window.MSC_PWA=true</script><link rel="manifest" href="manifest.webmanifest">'
-        '<meta name="theme-color" content="#14181E"><meta name="apple-mobile-web-app-capable" content="yes">'
+        '<meta name="theme-color" content="#0B1E33"><meta name="apple-mobile-web-app-capable" content="yes">'
         '<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">'
         f'<meta name="apple-mobile-web-app-title" content="MSC PD"><link rel="apple-touch-icon" href="icons/icon-180.png"><link rel="icon" href="icons/icon-192.png">')
 reg = '<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>'
@@ -96,7 +96,7 @@ for k, v in pdf.items():
         shutil.copyfile(NORMAS / (k + ".pdf"), D / v)
         extra += ",'./" + v + "'"
 man = {"name": NAME, "short_name": "MSC PD", "lang": "es-EC", "start_url": "./", "scope": "./", "display": "standalone",
-       "background_color": "#F7F5EE", "theme_color": "#14181E", "id": "msc-proteccion-datos",
+       "background_color": "#F3F7FA", "theme_color": "#0B1E33", "id": "msc-proteccion-datos",
        "description": "Gestión de clientes, herramientas LOPDP y agenda de cumplimiento del DPD. Uso profesional de Macías Sánchez Consultores.",
        "icons": [{"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
                  {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png"},
@@ -147,7 +147,7 @@ def puente():
 <meta property="og:title" content="{e(t)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{e(base)}">
 <meta property="og:image" content="{e(base)}og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Autodiagnóstico de protección de datos, Macías Sánchez Consultores">
 <meta name="twitter:card" content="summary_large_image"><meta http-equiv="refresh" content="1;url={e(url)}">
-<style>body{{margin:0;background:#14181E;color:#F7F5EE;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center;text-align:center;padding:24px}}a{{color:#C9BC82}}img{{max-width:100%;border-radius:12px}}</style>
+<style>body{{margin:0;background:#0B1E33;color:#F3F7FA;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center;text-align:center;padding:24px}}a{{color:#8FD6E0}}img{{max-width:100%;border-radius:12px}}</style>
 <script>location.replace({json.dumps(url)})</script></head><body><div><img src="og.png" alt="" width="600"><p>Abriendo el autodiagnóstico…</p><p><a href="{e(url)}">Si no se abre, toque aquí</a></p></div></body></html>""", encoding="utf-8")
 
 puente()

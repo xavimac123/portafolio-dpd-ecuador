@@ -7,7 +7,7 @@
 <title>Catálogo de servicios y glosario del DPD — LOPDP Ecuador</title>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
 <style>
-  :root{color-scheme:light;--oro:#A09046;--carbon:#14181E;--marfil:#F7F5EE;--oliva:#6E6230;--oroc:#C9BC82;--linea:#DDD8C8;--ok:#2E7D4F;--okbg:#E6F2EA;--al:#A4461C;--albg:#FBEDE5;--am:#8A6A00;--ambg:#FFF4D6;--az:#3A4A66;--azbg:#EEF1F6}
+  :root{color-scheme:light;--oro:#3FB8C9;--carbon:#0B1E33;--marfil:#F3F7FA;--oliva:#17677A;--oroc:#8FD6E0;--linea:#D0DCE5;--ok:#2E7D4F;--okbg:#E6F2EA;--al:#A4461C;--albg:#FBEDE5;--am:#8A6A00;--ambg:#FFF4D6;--az:#3A4A66;--azbg:#EEF1F6}
   *{box-sizing:border-box}
   html,body{background:var(--marfil);color:var(--carbon)}
   body{margin:0;font-family:Archivo,system-ui,sans-serif;font-size:15px;line-height:1.5}
@@ -17,7 +17,7 @@
   h1{font-stretch:115%;font-weight:800;font-size:clamp(22px,4vw,32px);margin:6px 0 4px;line-height:1.15}
   header p{margin:0;color:var(--oroc);font-size:14px}
   nav{display:flex;gap:6px;margin:18px 0 0;flex-wrap:wrap}
-  nav button{background:transparent;border:1px solid #3a3f47;color:var(--marfil);padding:8px 13px;border-radius:999px;font:inherit;font-size:13.5px;cursor:pointer}
+  nav button{background:transparent;border:1px solid #2C4A68;color:var(--marfil);padding:8px 13px;border-radius:999px;font:inherit;font-size:13.5px;cursor:pointer}
   nav button[aria-selected=true]{background:var(--oro);border-color:var(--oro);color:var(--carbon);font-weight:700}
   main{padding:24px 0 60px}
   section{display:none}section.on{display:block}
@@ -25,10 +25,10 @@
   h3{font-size:15px;margin:0 0 8px;font-stretch:108%}
   .sub{color:var(--oliva);margin:0 0 16px;font-size:14px}
   .card{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:16px;margin-bottom:12px}
-  input,select{width:100%;font:inherit;font-size:14px;padding:9px 10px;border:1px solid var(--linea);border-radius:8px;background:#FFFDF6;color:#14181E;-webkit-text-fill-color:#14181E;caret-color:#14181E;color-scheme:light;opacity:1}
+  input,select{width:100%;font:inherit;font-size:14px;padding:9px 10px;border:1px solid var(--linea);border-radius:8px;background:#FBFDFE;color:#0B1E33;-webkit-text-fill-color:#0B1E33;caret-color:#0B1E33;color-scheme:light;opacity:1}
   input[type=checkbox]{width:18px;height:18px;padding:0;accent-color:var(--carbon);flex:none}
-  input::placeholder{color:#8C8775;-webkit-text-fill-color:#8C8775}
-  select option{color:#14181E;background:#fff}
+  input::placeholder{color:#7C8B99;-webkit-text-fill-color:#7C8B99}
+  select option{color:#0B1E33;background:#fff}
   label{display:block;font-weight:600;font-size:13px;margin-bottom:4px}
   .bar{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:10px}
   .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
@@ -36,7 +36,7 @@
   .chip.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
   .grp{font-stretch:110%;font-weight:800;font-size:13px;color:var(--oliva);text-transform:uppercase;letter-spacing:.05em;margin:16px 0 4px}
   .gd{font-size:13px;color:#555;margin:0 0 8px}
-  .lh{margin:22px 0 6px;padding:10px 12px;border-radius:8px;background:#14181E;color:#F7F5EE;font-weight:800;font-size:14px}.lh small{display:block;font-weight:400;font-size:12.5px;opacity:.85;margin-top:3px}.lh.impl{background:#6E6230}
+  .lh{margin:22px 0 6px;padding:10px 12px;border-radius:8px;background:#0B1E33;color:#F3F7FA;font-weight:800;font-size:14px}.lh small{display:block;font-weight:400;font-size:12.5px;opacity:.85;margin-top:3px}.lh.impl{background:#17677A}
   .nat.V{background:#E7EEF7;color:#1F4E79}.nat.I{background:#F3E6D6;color:#7A4A12}
   .lin p{margin:0 0 8px;font-size:13.5px}.lin .warn{font-size:12.5px;color:var(--al)}
   .svc{border:1px solid var(--linea);border-radius:12px;background:#fff;margin-bottom:8px;overflow:hidden}
@@ -45,36 +45,36 @@
   .svc .nm{font-weight:700;font-size:14.5px}
   .svc .pr{font-weight:800;font-stretch:108%;white-space:nowrap;text-align:right}
   .svc .pr small{display:block;font-weight:400;font-size:11px;color:var(--oliva)}
-  .svc .bd{display:none;border-top:1px solid #EFEBDD;padding:12px 14px 14px;font-size:13.5px}
+  .svc .bd{display:none;border-top:1px solid #E6EEF3;padding:12px 14px 14px;font-size:13.5px}
   .svc.open .bd{display:block}
   .svc.sel{border-color:var(--oro);box-shadow:0 0 0 1px var(--oro)}
   .kv{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;margin:0}
   .kv dt{color:var(--oliva);font-weight:700;font-size:12.5px}
   .kv dd{margin:0}
   .nat{display:inline-block;border-radius:999px;padding:2px 9px;font-size:11.5px;font-weight:700;background:var(--azbg);color:var(--az)}
-  .nat.S{background:var(--okbg);color:var(--ok)}.nat.B{background:var(--ambg);color:var(--am)}.nat.F{background:#F1EEE2;color:var(--oliva)}.nat.R{background:var(--albg);color:var(--al)}
-  .rec{background:#F8F5EA;border-left:3px solid var(--oro);border-radius:6px;padding:8px 10px;margin-top:8px}
+  .nat.S{background:var(--okbg);color:var(--ok)}.nat.B{background:var(--ambg);color:var(--am)}.nat.F{background:#EAF1F5;color:var(--oliva)}.nat.R{background:var(--albg);color:var(--al)}
+  .rec{background:#F1F6F9;border-left:3px solid var(--oro);border-radius:6px;padding:8px 10px;margin-top:8px}
   .rec ul{margin:4px 0 0 18px;padding:0}
   .prices{display:flex;gap:6px;flex-wrap:wrap}
-  .prices span{background:#FAF8F1;border-radius:6px;padding:2px 8px;font-size:12.5px}
+  .prices span{background:#F8FAFC;border-radius:6px;padding:2px 8px;font-size:12.5px}
   .prices span.on{background:var(--carbon);color:#fff}
   .propio{display:inline-block;background:var(--ambg);color:var(--am);border-radius:999px;padding:2px 9px;font-size:11.5px;font-weight:700}
   .nota{font-size:12px;color:var(--oliva)}
   .btn{background:var(--carbon);color:#fff;border:0;padding:10px 16px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
   .btn.sec{background:#fff;color:var(--carbon);border:1px solid var(--carbon)}.btn.oro{background:var(--oro);color:var(--carbon)}
   .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-  .term{border-bottom:1px solid #EFEBDD;padding:10px 0}
+  .term{border-bottom:1px solid #E6EEF3;padding:10px 0}
   .term b{font-size:14.5px}.term .src{font-size:11.5px;color:var(--oliva);margin-left:6px}
   .term p{margin:3px 0 0;font-size:13.5px}
   table.t{width:100%;border-collapse:collapse;font-size:13px}
-  table.t th,table.t td{border-bottom:1px solid #EFEBDD;padding:7px 6px;text-align:left;vertical-align:top}
+  table.t th,table.t td{border-bottom:1px solid #E6EEF3;padding:7px 6px;text-align:left;vertical-align:top}
   table.t th{font-size:12px;color:var(--oliva)}
   .scroll{overflow-x:auto}
-  .codes{font-family:ui-monospace,Menlo,monospace;background:#FAF8F1;border-radius:8px;padding:10px;font-size:14px;word-break:break-word}
+  .codes{font-family:ui-monospace,Menlo,monospace;background:#F8FAFC;border-radius:8px;padding:10px;font-size:14px;word-break:break-word}
   .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--carbon);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;z-index:9}.toast.on{opacity:1}
   footer{border-top:1px solid var(--linea);padding:18px 0;font-size:12px;color:var(--oliva)}
   @media (max-width:640px){.bar{grid-template-columns:1fr}.svc .hd{grid-template-columns:24px 1fr auto;grid-template-areas:"c k p" "c n p"}.svc .hd>:nth-child(1){grid-area:c}.svc .hd>:nth-child(2){grid-area:k}.svc .hd>:nth-child(3){grid-area:n}.svc .hd>:nth-child(4){grid-area:p}.kv{grid-template-columns:1fr}.kv dt{margin-top:6px}
-    table.t tr:first-child{display:none}table.t tr{display:block;border-bottom:1px solid #EFEBDD;padding:8px 0}table.t td{display:block;border:0;padding:2px 0}table.t td:before{content:attr(data-l)': ';color:var(--oliva);font-size:12px;font-weight:700}}
+    table.t tr:first-child{display:none}table.t tr{display:block;border-bottom:1px solid #E6EEF3;padding:8px 0}table.t td{display:block;border:0;padding:2px 0}table.t td:before{content:attr(data-l)': ';color:var(--oliva);font-size:12px;font-weight:700}}
 </style>
 </head>
 <body>
@@ -181,18 +181,18 @@
   function copyHtml(html,msg){var tmp=document.createElement('div');tmp.innerHTML=html;var plain=tmp.innerText;try{if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([plain],{type:'text/plain'})})]).then(function(){toast(msg)},function(){fb(plain)});return}}catch(e){}fb(plain)}
   $('copCod').onclick=function(){var t=$('codes').textContent;if(t==='—'){toast('No hay servicios seleccionados');return}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){toast('Códigos copiados')},function(){fb(t)});else fb(t)};
   $('limpiar').onclick=function(){S.sel=[];save();rLista();rSel()};
-  var ST='font-family:Arial,sans-serif;color:#14181E;font-size:10.5pt;line-height:1.45',TD='border-bottom:1px solid #DDD8C8;padding:5px 7px;vertical-align:top;font-size:9.5pt',TH='background:#14181E;color:#fff;padding:5px 7px;text-align:left;font-size:9pt';
+  var ST='font-family:Arial,sans-serif;color:#0B1E33;font-size:10.5pt;line-height:1.45',TD='border-bottom:1px solid #D0DCE5;padding:5px 7px;vertical-align:top;font-size:9.5pt',TH='background:#0B1E33;color:#fff;padding:5px 7px;text-align:left;font-size:9pt';
   function doc(interno){var L=selList();if(!L.length)L=SV.filter(function(s){return interno||s.proforma});var i=S.tam;
-    var h='<div style="'+ST+'"><div style="border-bottom:3px solid #A09046;padding-bottom:6px;margin-bottom:10px"><div style="font-size:9pt;letter-spacing:1px;color:#A09046;font-weight:bold">MACÍAS SÁNCHEZ CONSULTORES</div><h1 style="font-size:16pt;margin:4px 0">'+(interno?'Ficha interna de servicios de protección de datos':'Catálogo de servicios de protección de datos personales')+'</h1></div>';
+    var h='<div style="'+ST+'"><div style="border-bottom:3px solid #3FB8C9;padding-bottom:6px;margin-bottom:10px"><div style="font-size:9pt;letter-spacing:1px;color:#3FB8C9;font-weight:bold">MACÍAS SÁNCHEZ CONSULTORES</div><h1 style="font-size:16pt;margin:4px 0">'+(interno?'Ficha interna de servicios de protección de datos':'Catálogo de servicios de protección de datos personales')+'</h1></div>';
     if(!interno)h+='<p>Servicios para cumplir la Ley Orgánica de Protección de Datos Personales (LOPDP), su Reglamento y la normativa de la Superintendencia de Protección de Datos Personales, y poder demostrarlo. Nuestro rol es asesorar, elaborar los borradores y supervisar; las decisiones y la implementación corresponden a su organización.</p>';
     CFG.fases.forEach(function(f){var G=L.filter(function(s){return s.fase===f[0]});if(!G.length)return;h+='<h2 style="font-size:12pt;margin:12px 0 4px">'+esc(f[0])+'</h2>';
       G.forEach(function(s){h+='<table style="width:100%;border-collapse:collapse;margin-bottom:8px"><tr><th style="'+TH+'" colspan="2">'+s.cod+' · '+esc(s.nombre)+'</th></tr>'+
-        [['Qué es',s.que],['Para quién',s.para],['Qué obtiene',interno?s.obtiene:s.beneficio],['Cómo se aplica',s.como.join('; ')],['Participación de la empresa',s.resp+(s.conj&&s.conj!=='—'?'; '+s.conj:'')]].concat(interno?[['Levantar información con',s.levantar],['Herramientas',herr(s)],['Base',s.base],['Recomendaciones',s.rec.join(' · ')]]:[]).concat([['Precio de referencia',ptxt(s,i)+' por '+s.unidad+', sin IVA ('+CFG.tamanos[i].toLowerCase()+' empresa)']]).map(function(r){return '<tr><td style="'+TD+';width:26%;color:#6E6230"><b>'+esc(r[0])+'</b></td><td style="'+TD+'">'+esc(r[1])+'</td></tr>'}).join('')+'</table>'})});
-    h+='<p style="font-size:8.5pt;color:#6E6230">Valores referenciales en dólares, sin IVA. El valor definitivo consta en la proforma de cada caso.</p>';
+        [['Qué es',s.que],['Para quién',s.para],['Qué obtiene',interno?s.obtiene:s.beneficio],['Cómo se aplica',s.como.join('; ')],['Participación de la empresa',s.resp+(s.conj&&s.conj!=='—'?'; '+s.conj:'')]].concat(interno?[['Levantar información con',s.levantar],['Herramientas',herr(s)],['Base',s.base],['Recomendaciones',s.rec.join(' · ')]]:[]).concat([['Precio de referencia',ptxt(s,i)+' por '+s.unidad+', sin IVA ('+CFG.tamanos[i].toLowerCase()+' empresa)']]).map(function(r){return '<tr><td style="'+TD+';width:26%;color:#17677A"><b>'+esc(r[0])+'</b></td><td style="'+TD+'">'+esc(r[1])+'</td></tr>'}).join('')+'</table>'})});
+    h+='<p style="font-size:8.5pt;color:#17677A">Valores referenciales en dólares, sin IVA. El valor definitivo consta en la proforma de cada caso.</p>';
     h+='<table style="width:100%;border-collapse:collapse;margin-top:12px"><tr><th style="'+TH+'">Elaborado por</th></tr><tr><td style="'+TD+';height:48px;vertical-align:bottom">Firma: ______________________</td></tr><tr><td style="'+TD+'">Abg. Mariano X. Macías Sánchez<br>Consultor en Protección de Datos Personales · Matrícula profesional 09-2022-736</td></tr></table></div>';return h}
   $('copCli').onclick=function(){copyHtml(doc(false),'Catálogo copiado: pegue en Word')};
   $('copInt').onclick=function(){copyHtml(doc(true),'Ficha interna copiada: pegue en Word')};
-  $('copGlo').onclick=function(){var h='<div style="'+ST+'"><h1 style="font-size:16pt">Glosario de protección de datos personales</h1><p style="font-size:9pt;color:#6E6230">Resumen de definiciones; consulte el texto oficial para escritos formales.</p>';
+  $('copGlo').onclick=function(){var h='<div style="'+ST+'"><h1 style="font-size:16pt">Glosario de protección de datos personales</h1><p style="font-size:9pt;color:#17677A">Resumen de definiciones; consulte el texto oficial para escritos formales.</p>';
     [['LOPDP, art. 4',CFG.gloLopdp.map(function(t){return [t[0],t[1],'LOPDP art. 4']})],['Reglamento y normativa de la SPDP',CFG.gloNorma],['Conceptos del kit',CFG.gloKit.map(function(t){return [t[0],t[1],'']})]].forEach(function(g){h+='<h2 style="font-size:12pt">'+g[0]+'</h2><table style="width:100%;border-collapse:collapse">'+g[1].map(function(t){return '<tr><td style="'+TD+';width:28%"><b>'+esc(t[0])+'</b></td><td style="'+TD+'">'+esc(t[1])+(t[2]?' <i>('+esc(t[2])+')</i>':'')+'</td></tr>'}).join('')+'</table>'});
     copyHtml(h+'</div>','Glosario copiado: pegue en Word')};
   function show(t){document.querySelectorAll('nav button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===t)});document.querySelectorAll('section').forEach(function(s){s.classList.toggle('on',s.id===t)});window.scrollTo(0,0)}

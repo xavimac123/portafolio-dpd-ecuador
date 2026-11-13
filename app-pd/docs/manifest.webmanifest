@@ -5,8 +5,8 @@
  "start_url": "./",
  "scope": "./",
  "display": "standalone",
- "background_color": "#F7F5EE",
- "theme_color": "#14181E",
+ "background_color": "#F3F7FA",
+ "theme_color": "#0B1E33",
  "id": "msc-proteccion-datos",
  "description": "Gestión de clientes, herramientas LOPDP y agenda de cumplimiento del DPD. Uso profesional de Macías Sánchez Consultores.",
  "icons": [

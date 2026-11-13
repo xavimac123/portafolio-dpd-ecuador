@@ -7,7 +7,7 @@
 <title>Evaluación del tratamiento a gran escala — LOPDP Ecuador</title>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
 <style>
-  :root{color-scheme:light;--oro:#A09046;--carbon:#14181E;--marfil:#F7F5EE;--oliva:#6E6230;--oroc:#C9BC82;--linea:#DDD8C8;--ok:#2E7D4F;--okbg:#E6F2EA;--al:#A4461C;--albg:#FBEDE5;--am:#8A6A00;--ambg:#FFF4D6;--az:#3A4A66;--azbg:#EEF1F6}
+  :root{color-scheme:light;--oro:#3FB8C9;--carbon:#0B1E33;--marfil:#F3F7FA;--oliva:#17677A;--oroc:#8FD6E0;--linea:#D0DCE5;--ok:#2E7D4F;--okbg:#E6F2EA;--al:#A4461C;--albg:#FBEDE5;--am:#8A6A00;--ambg:#FFF4D6;--az:#3A4A66;--azbg:#EEF1F6}
   *{box-sizing:border-box}
   html,body{background:var(--marfil);color:var(--carbon)}
   body{margin:0;font-family:Archivo,system-ui,sans-serif;font-size:15px;line-height:1.5}
@@ -17,7 +17,7 @@
   h1{font-stretch:115%;font-weight:800;font-size:clamp(22px,4vw,32px);margin:6px 0 4px;line-height:1.15}
   header p{margin:0;color:var(--oroc);font-size:14px}
   nav{display:flex;gap:6px;margin:18px 0 0;flex-wrap:wrap}
-  nav button{background:transparent;border:1px solid #3a3f47;color:var(--marfil);padding:8px 13px;border-radius:999px;font:inherit;font-size:13.5px;cursor:pointer}
+  nav button{background:transparent;border:1px solid #2C4A68;color:var(--marfil);padding:8px 13px;border-radius:999px;font:inherit;font-size:13.5px;cursor:pointer}
   nav button[aria-selected=true]{background:var(--oro);border-color:var(--oro);color:var(--carbon);font-weight:700}
   main{padding:24px 0 60px}
   section{display:none}section.on{display:block}
@@ -27,10 +27,10 @@
   .card{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:18px;margin-bottom:14px}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
   label{display:block;font-weight:600;font-size:13px;margin-bottom:4px}
-  input,select,textarea{width:100%;font:inherit;font-size:14px;padding:9px 10px;border:1px solid var(--linea);border-radius:8px;background:#FFFDF6;color:#14181E;-webkit-text-fill-color:#14181E;caret-color:#14181E;color-scheme:light;opacity:1}
+  input,select,textarea{width:100%;font:inherit;font-size:14px;padding:9px 10px;border:1px solid var(--linea);border-radius:8px;background:#FBFDFE;color:#0B1E33;-webkit-text-fill-color:#0B1E33;caret-color:#0B1E33;color-scheme:light;opacity:1}
   input[type=checkbox]{width:18px;height:18px;padding:0;accent-color:var(--carbon);flex:none;margin-top:2px}
-  input::placeholder,textarea::placeholder{color:#8C8775;-webkit-text-fill-color:#8C8775}
-  select option{color:#14181E;background:#fff}
+  input::placeholder,textarea::placeholder{color:#7C8B99;-webkit-text-fill-color:#7C8B99}
+  select option{color:#0B1E33;background:#fff}
   input:focus,select:focus,textarea:focus{outline:2px solid var(--oro);outline-offset:1px}
   .btn{background:var(--carbon);color:#fff;border:0;padding:10px 16px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
   .btn.sec{background:#fff;color:var(--carbon);border:1px solid var(--carbon)}
@@ -45,13 +45,13 @@
   .bz{background:var(--azbg);border-left:4px solid var(--az)}.bz b.t{color:var(--az)}
   .ba{background:var(--ambg);border-left:4px solid var(--am)}.ba b.t{color:var(--am)}
   .bl{background:var(--albg);border-left:4px solid var(--al)}.bl b.t{color:var(--al)}
-  .bo{background:#F1EEE2;border-left:4px solid var(--oliva)}.bo b.t{color:var(--oliva)}
+  .bo{background:#EAF1F5;border-left:4px solid var(--oliva)}.bo b.t{color:var(--oliva)}
   .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;counter-reset:f}
-  .flow div{background:#FAF8F1;border-radius:10px;padding:12px;font-size:13.5px;position:relative}
+  .flow div{background:#F8FAFC;border-radius:10px;padding:12px;font-size:13.5px;position:relative}
   .flow div:before{counter-increment:f;content:counter(f);display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--oro);color:var(--carbon);font-weight:800;margin-bottom:6px}
   .flow b{display:block}
   table.t{width:100%;border-collapse:collapse;font-size:13px}
-  table.t th,table.t td{border-bottom:1px solid #EFEBDD;padding:7px 6px;text-align:left;vertical-align:top}
+  table.t th,table.t td{border-bottom:1px solid #E6EEF3;padding:7px 6px;text-align:left;vertical-align:top}
   table.t th{font-size:12px;color:var(--oliva);font-weight:700}
   table.t td.n,table.t th.n{text-align:right;white-space:nowrap}
   .scroll{overflow-x:auto}
@@ -59,37 +59,37 @@
   .chip{border:1px solid var(--linea);background:#fff;border-radius:999px;padding:7px 12px;font:inherit;font-size:13.5px;cursor:pointer;color:var(--carbon)}
   .chip.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}
   .chip i{font-style:normal;font-weight:700;margin-left:6px;border-radius:999px;padding:0 7px;font-size:12px}
-  .chip i.ge{background:var(--albg);color:var(--al)}.chip i.no{background:var(--okbg);color:var(--ok)}.chip i.pe{background:#EFEBDD;color:var(--oliva)}
+  .chip i.ge{background:var(--albg);color:var(--al)}.chip i.no{background:var(--okbg);color:var(--ok)}.chip i.pe{background:#E6EEF3;color:var(--oliva)}
   .chk label{display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:13.5px;margin:7px 0}
   .chk small{color:var(--oliva)}
-  .var{border-top:1px solid #EFEBDD;padding:14px 0}
+  .var{border-top:1px solid #E6EEF3;padding:14px 0}
   .var .hd{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
   .var .q{font-weight:600;font-size:14px;margin:4px 0 8px}
-  .pts{font-weight:800;font-stretch:110%;font-size:15px;white-space:nowrap;border-radius:999px;padding:2px 10px;background:#EFEBDD}
+  .pts{font-weight:800;font-stretch:110%;font-size:15px;white-space:nowrap;border-radius:999px;padding:2px 10px;background:#E6EEF3}
   .pts.ok{background:var(--carbon);color:#fff}
-  .hb{display:none;background:#F8F5EA;border-left:3px solid var(--oro);border-radius:6px;padding:10px 12px;font-size:13px;margin:6px 0 8px}.hb.on{display:block}
+  .hb{display:none;background:#F1F6F9;border-left:3px solid var(--oro);border-radius:6px;padding:10px 12px;font-size:13px;margin:6px 0 8px}.hb.on{display:block}
   .hb p{margin:0 0 5px}
   .help{background:none;border:1px solid var(--oro);color:var(--oliva);border-radius:999px;padding:3px 10px;cursor:pointer;font:inherit;font-size:12px;font-weight:700}
   .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px}
-  .opts button{padding:8px 6px;border:1px solid var(--linea);background:#FFFDF6;color:#14181E;border-radius:8px;font:inherit;font-size:13px;cursor:pointer;line-height:1.25}
+  .opts button{padding:8px 6px;border:1px solid var(--linea);background:#FBFDFE;color:#0B1E33;border-radius:8px;font:inherit;font-size:13px;cursor:pointer;line-height:1.25}
   .opts button b{display:block;font-size:12px;color:var(--oliva)}
   .opts button.on{background:var(--carbon);color:#fff;border-color:var(--carbon)}.opts button.on b{color:var(--oroc)}
   .cnt{columns:2 220px;font-size:13px}.cnt h4{margin:6px 0 2px;font-size:12px;color:var(--oliva);break-after:avoid}
   .cnt label{display:flex;gap:6px;font-weight:400;font-size:13px;margin:3px 0;break-inside:avoid}
   details{margin-top:8px}summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--oliva)}
-  .meter{position:relative;height:16px;background:#EFEBDD;border-radius:8px;margin:28px 0 6px}
+  .meter{position:relative;height:16px;background:#E6EEF3;border-radius:8px;margin:28px 0 6px}
   .meter i{position:absolute;left:0;top:0;bottom:0;border-radius:8px}
   .meter .u{position:absolute;top:-8px;bottom:-8px;width:2px;background:var(--carbon)}
   .meter .u:after{content:'Umbral 6';position:absolute;top:-18px;left:-22px;font-size:11px;font-weight:700;white-space:nowrap}
   .verd{border-radius:12px;padding:12px 14px;font-weight:700;margin:10px 0;font-size:16px}
   .verd small{display:block;font-weight:400;color:var(--carbon);margin-top:4px;font-size:13px}
-  .vok{background:var(--okbg);color:var(--ok)}.vno{background:var(--albg);color:var(--al)}.vpe{background:#F1EEE2;color:var(--oliva)}
-  .script{background:#FAF8F1;border-radius:10px;padding:14px;font-style:italic;font-size:14px}
-  .doc{background:#fff;border:1px solid var(--linea);border-radius:4px;padding:28px;box-shadow:0 2px 10px rgba(20,24,30,.06)}
+  .vok{background:var(--okbg);color:var(--ok)}.vno{background:var(--albg);color:var(--al)}.vpe{background:#EAF1F5;color:var(--oliva)}
+  .script{background:#F8FAFC;border-radius:10px;padding:14px;font-style:italic;font-size:14px}
+  .doc{background:#fff;border:1px solid var(--linea);border-radius:4px;padding:28px;box-shadow:0 2px 10px rgba(11,30,51,.06)}
   .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--carbon);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;z-index:9}.toast.on{opacity:1}
   footer{border-top:1px solid var(--linea);padding:18px 0;font-size:12px;color:var(--oliva)}
   @media (max-width:640px){.card{padding:14px}.doc{padding:16px}.flow{grid-template-columns:1fr 1fr}
-    table.t.resp tr:first-child{display:none}table.t.resp tr{display:block;border-bottom:1px solid #EFEBDD;padding:8px 0}table.t.resp td{display:flex;justify-content:space-between;gap:10px;border:0;padding:2px 0}table.t.resp td:before{content:attr(data-l);color:var(--oliva);font-size:12px;flex:none}}
+    table.t.resp tr:first-child{display:none}table.t.resp tr{display:block;border-bottom:1px solid #E6EEF3;padding:8px 0}table.t.resp td{display:flex;justify-content:space-between;gap:10px;border:0;padding:2px 0}table.t.resp td:before{content:attr(data-l);color:var(--oliva);font-size:12px;flex:none}}
   #prev{overflow-x:auto}
 </style>
 </head>
@@ -245,7 +245,7 @@
       h+='<div style="margin-top:8px"><label for="ev_'+v.id+'" class="nota" style="font-weight:600">Fuente o evidencia del dato</label><input id="ev_'+v.id+'" data-ev="'+v.id+'" placeholder="Ej. reporte del ERP del 01-11-2026; entrevista con contadora"></div></div>'});
     h+='</div>';
     // Resultado
-    var pc=Math.min(100,r.P/17*100),col=r.est==='ge'?'#A4461C':r.est==='no'?'#2E7D4F':'#A09046';
+    var pc=Math.min(100,r.P/17*100),col=r.est==='ge'?'#A4461C':r.est==='no'?'#2E7D4F':'#3FB8C9';
     h+='<div class="card"><h3>Resultado del tratamiento</h3><div class="meter"><i style="width:'+pc+'%;background:'+col+'"></i><span class="u" style="left:'+(6/17*100)+'%"></span></div><div class="nota">'+n1(r.P)+' de 17 puntos</div>'+verdict(r)+'</div>';
     $('ed').innerHTML=h;
     // enlaces
@@ -289,8 +289,8 @@
   // ---------- pestaña 5
   function fechaTxt(f){if(!f)return '[FECHA]';var p=f.split('-');var M=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];return (+p[2])+' de '+M[+p[1]-1]+' de '+p[0]}
   function informe(){var X=resumen(),o=S.org,f=S.f;
-    var st='font-family:Arial,sans-serif;color:#14181E;font-size:10.5pt;line-height:1.45',th='background:#14181E;color:#fff;padding:5px 7px;text-align:left;font-size:9pt',td='border-bottom:1px solid #DDD8C8;padding:5px 7px;vertical-align:top;font-size:9pt',tn=td+';text-align:right';
-    var h='<div style="'+st+'"><div style="border-bottom:3px solid #A09046;padding-bottom:8px;margin-bottom:12px"><div style="font-size:9pt;letter-spacing:1px;color:#A09046;font-weight:bold">MACÍAS SÁNCHEZ CONSULTORES</div><h1 style="font-size:16pt;margin:4px 0">Informe de evaluación del tratamiento a gran escala</h1><div style="font-size:9.5pt;color:#6E6230">'+esc(o.emp||'[RAZÓN SOCIAL]')+' · RUC '+esc(o.ruc||'[RUC]')+' · '+fechaTxt(o.fecha)+'</div></div>';
+    var st='font-family:Arial,sans-serif;color:#0B1E33;font-size:10.5pt;line-height:1.45',th='background:#0B1E33;color:#fff;padding:5px 7px;text-align:left;font-size:9pt',td='border-bottom:1px solid #D0DCE5;padding:5px 7px;vertical-align:top;font-size:9pt',tn=td+';text-align:right';
+    var h='<div style="'+st+'"><div style="border-bottom:3px solid #3FB8C9;padding-bottom:8px;margin-bottom:12px"><div style="font-size:9pt;letter-spacing:1px;color:#3FB8C9;font-weight:bold">MACÍAS SÁNCHEZ CONSULTORES</div><h1 style="font-size:16pt;margin:4px 0">Informe de evaluación del tratamiento a gran escala</h1><div style="font-size:9.5pt;color:#17677A">'+esc(o.emp||'[RAZÓN SOCIAL]')+' · RUC '+esc(o.ruc||'[RUC]')+' · '+fechaTxt(o.fecha)+'</div></div>';
     h+='<h2 style="font-size:12pt">1. Alcance y metodología</h2><p>Se evaluaron '+X.R.length+' tratamientos en los que la organización actúa como <b>'+esc((o.rol||'Responsable').toLowerCase())+'</b>'+(o.sector?', sector '+esc(o.sector):'')+'. Información proporcionada por: '+esc(o.entrev||'[PERSONAS ENTREVISTADAS]')+'. Se aplicaron los casos de calificación directa del RGLOPDP (art. 4 num. 7) y de la Res. SPDP-SPD-2026-0005-R (art. 14), y el Modelo Técnico de Gran Escala (arts. 7 a 10): suma de seis variables con umbral de 6 puntos.</p>';
     h+='<h2 style="font-size:12pt">2. Resultado</h2><table style="width:100%;border-collapse:collapse"><tr><th style="'+th+'">Tratamiento</th>'+V.map(function(v){return '<th style="'+th+';text-align:right">'+v.nombre.split(' (')[0]+'</th>'}).join('')+'<th style="'+th+';text-align:right">Total</th><th style="'+th+'">Resultado</th></tr>'+
       X.R.map(function(x){return '<tr><td style="'+td+'"><b>'+esc(x.t.nombre)+'</b></td>'+V.map(function(v){var p=x.r.o[v.id];return '<td style="'+tn+'">'+(p==null?'—':n1(p))+'</td>'}).join('')+'<td style="'+tn+'"><b>'+n1(x.r.P)+'</b></td><td style="'+td+'">'+estTxt(x.r)+(x.r.dir?' (directa)':'')+'</td></tr>'}).join('')+'</table>';
@@ -314,7 +314,7 @@
   function fb(t){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Copiado')}catch(e){toast('No se pudo copiar')}ta.remove()}
   function copyHtml(html,msg){var tmp=document.createElement('div');tmp.innerHTML=html;var plain=tmp.innerText;try{if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([plain],{type:'text/plain'})})]).then(function(){toast(msg)},function(){fb(plain)});return}}catch(e){}fb(plain)}
   $('copInf').onclick=function(){copyHtml(informe(),'Informe copiado: pegue en Word')};
-  $('copSol').onclick=function(){var td='border:1px solid #DDD8C8;padding:5px 7px;font-size:10pt;vertical-align:top';var h='<div style="font-family:Arial,sans-serif;font-size:10.5pt"><p><b>Asunto: Solicitud de información para la evaluación de tratamientos a gran escala</b></p><p>Estimado(a) [NOMBRE]:</p><p>Para determinar si los tratamientos de datos personales de [RAZÓN SOCIAL] son de gran escala según la Res. SPDP-SPD-2026-0005-R, le agradeceré remitir la siguiente información hasta el [FECHA]:</p><table style="border-collapse:collapse;width:100%"><tr><th style="'+td+';background:#14181E;color:#fff">Información</th><th style="'+td+';background:#14181E;color:#fff">Para qué</th><th style="'+td+';background:#14181E;color:#fff">Área sugerida</th></tr>'+CFG.solicitud.map(function(r){return '<tr><td style="'+td+'">'+esc(r[0])+'</td><td style="'+td+'">'+esc(r[1])+'</td><td style="'+td+'">'+esc(r[2])+'</td></tr>'}).join('')+'</table><p>No es necesario enviar datos personales de clientes o trabajadores: bastan conteos, listas de campos y descripciones. La información se tratará con confidencialidad.</p><p>Atentamente,<br>'+esc(S.f.el||'[NOMBRE]')+'<br>'+esc(S.f.ec||'[CARGO]')+'</p></div>';copyHtml(h,'Solicitud copiada: pegue en Word o en el correo')};
+  $('copSol').onclick=function(){var td='border:1px solid #D0DCE5;padding:5px 7px;font-size:10pt;vertical-align:top';var h='<div style="font-family:Arial,sans-serif;font-size:10.5pt"><p><b>Asunto: Solicitud de información para la evaluación de tratamientos a gran escala</b></p><p>Estimado(a) [NOMBRE]:</p><p>Para determinar si los tratamientos de datos personales de [RAZÓN SOCIAL] son de gran escala según la Res. SPDP-SPD-2026-0005-R, le agradeceré remitir la siguiente información hasta el [FECHA]:</p><table style="border-collapse:collapse;width:100%"><tr><th style="'+td+';background:#0B1E33;color:#fff">Información</th><th style="'+td+';background:#0B1E33;color:#fff">Para qué</th><th style="'+td+';background:#0B1E33;color:#fff">Área sugerida</th></tr>'+CFG.solicitud.map(function(r){return '<tr><td style="'+td+'">'+esc(r[0])+'</td><td style="'+td+'">'+esc(r[1])+'</td><td style="'+td+'">'+esc(r[2])+'</td></tr>'}).join('')+'</table><p>No es necesario enviar datos personales de clientes o trabajadores: bastan conteos, listas de campos y descripciones. La información se tratará con confidencialidad.</p><p>Atentamente,<br>'+esc(S.f.el||'[NOMBRE]')+'<br>'+esc(S.f.ec||'[CARGO]')+'</p></div>';copyHtml(h,'Solicitud copiada: pegue en Word o en el correo')};
   $('copXls').onclick=function(){var X=resumen(),rows=[['Tratamiento','Área','Calificación directa'].concat(V.map(function(v){return v.nombre}),['Puntaje MTGE','Resultado','Fecha del cálculo'])];
     X.R.forEach(function(x){rows.push([x.t.nombre,x.t.area||'',x.r.dir?x.r.dirL.map(function(d){return d[0]}).join('; '):'No'].concat(V.map(function(v){return x.r.o[v.id]==null?'':n1(x.r.o[v.id])}),[n1(x.r.P),estTxt(x.r),S.org.fecha||'']))});
     var txt=rows.map(function(r){return r.join('\t')}).join('\n');if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(function(){toast('Columnas copiadas: pegue en el RAT')},function(){fb(txt)});else fb(txt)};

@@ -7,7 +7,7 @@
 <title>Calculadora de honorarios del DPD — LOPDP Ecuador</title>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
 <style>
-  :root{color-scheme:light;--oro:#A09046;--carbon:#14181E;--marfil:#F7F5EE;--oliva:#6E6230;--oroc:#C9BC82;--linea:#DDD8C8;--ok:#2E7D4F;--okbg:#E6F2EA;--al:#A4461C;--albg:#FBEDE5;--am:#8A6A00;--ambg:#FFF4D6;--az:#3A4A66;--azbg:#EEF1F6}
+  :root{color-scheme:light;--oro:#3FB8C9;--carbon:#0B1E33;--marfil:#F3F7FA;--oliva:#17677A;--oroc:#8FD6E0;--linea:#D0DCE5;--ok:#2E7D4F;--okbg:#E6F2EA;--al:#A4461C;--albg:#FBEDE5;--am:#8A6A00;--ambg:#FFF4D6;--az:#3A4A66;--azbg:#EEF1F6}
   *{box-sizing:border-box}
   html,body{background:var(--marfil);color:var(--carbon)}
   body{margin:0;font-family:Archivo,system-ui,sans-serif;font-size:15px;line-height:1.5}
@@ -17,7 +17,7 @@
   h1{font-stretch:115%;font-weight:800;font-size:clamp(22px,4vw,32px);margin:6px 0 4px;line-height:1.15}
   header p{margin:0;color:var(--oroc);font-size:14px}
   nav{display:flex;gap:6px;margin:18px 0 0;flex-wrap:wrap}
-  nav button{background:transparent;border:1px solid #3a3f47;color:var(--marfil);padding:8px 13px;border-radius:999px;font:inherit;font-size:13.5px;cursor:pointer}
+  nav button{background:transparent;border:1px solid #2C4A68;color:var(--marfil);padding:8px 13px;border-radius:999px;font:inherit;font-size:13.5px;cursor:pointer}
   nav button[aria-selected=true]{background:var(--oro);border-color:var(--oro);color:var(--carbon);font-weight:700}
   main{padding:24px 0 60px}
   section{display:none}section.on{display:block}
@@ -28,13 +28,13 @@
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
   .g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
   label{display:block;font-weight:600;font-size:13px;margin-bottom:4px}
-  input,select,textarea{width:100%;font:inherit;font-size:14px;padding:9px 10px;border:1px solid var(--linea);border-radius:8px;background:#FFFDF6;color:#14181E;-webkit-text-fill-color:#14181E;caret-color:#14181E;color-scheme:light;opacity:1}
+  input,select,textarea{width:100%;font:inherit;font-size:14px;padding:9px 10px;border:1px solid var(--linea);border-radius:8px;background:#FBFDFE;color:#0B1E33;-webkit-text-fill-color:#0B1E33;caret-color:#0B1E33;color-scheme:light;opacity:1}
   input[type=checkbox]{width:18px;height:18px;padding:0;accent-color:var(--carbon);flex:none}
-  input::placeholder,textarea::placeholder{color:#8C8775;-webkit-text-fill-color:#8C8775}
-  select option{color:#14181E;background:#fff}
+  input::placeholder,textarea::placeholder{color:#7C8B99;-webkit-text-fill-color:#7C8B99}
+  select option{color:#0B1E33;background:#fff}
   input:focus,select:focus,textarea:focus{outline:2px solid var(--oro);outline-offset:1px}
   .help{background:none;border:1px solid var(--oro);color:var(--oliva);border-radius:999px;width:22px;height:22px;cursor:pointer;font:inherit;font-size:12px;font-weight:700;line-height:1;margin-left:4px;vertical-align:middle;padding:0}
-  .hbox{display:none;margin-top:6px;background:#F8F5EA;border-left:3px solid var(--oro);border-radius:6px;padding:8px 10px;font-size:12.5px;font-weight:400}.hbox.on{display:block}
+  .hbox{display:none;margin-top:6px;background:#F1F6F9;border-left:3px solid var(--oro);border-radius:6px;padding:8px 10px;font-size:12.5px;font-weight:400}.hbox.on{display:block}
   .btn{background:var(--carbon);color:#fff;border:0;padding:10px 16px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
   .btn.sec{background:#fff;color:var(--carbon);border:1px solid var(--carbon)}
   .btn.oro{background:var(--oro);color:var(--carbon)}
@@ -44,15 +44,15 @@
   .propio{display:inline-block;background:var(--ambg);color:var(--am);border-radius:999px;padding:2px 9px;font-size:11.5px;font-weight:700;margin-left:4px}
   .norma{display:inline-block;background:var(--azbg);color:var(--az);border-radius:999px;padding:2px 9px;font-size:11.5px;font-weight:700;margin-left:4px}
   .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
-  .kpi{background:#FAF8F1;border-radius:10px;padding:12px 14px}
+  .kpi{background:#F8FAFC;border-radius:10px;padding:12px 14px}
   .kpi small{display:block;color:var(--oliva);font-size:12px}
   .kpi b{display:block;font-size:22px;font-stretch:110%;font-weight:800;line-height:1.2}
   .kpi span{font-size:12px;color:#555}
   .tag{display:inline-block;border-radius:999px;padding:4px 12px;font-weight:700;font-size:14px;background:var(--carbon);color:#fff}
-  .calc{font-size:12.5px;color:#444;background:#FAF8F1;border-radius:8px;padding:10px 12px;line-height:1.7;margin-top:10px}
+  .calc{font-size:12.5px;color:#444;background:#F8FAFC;border-radius:8px;padding:10px 12px;line-height:1.7;margin-top:10px}
   .calc b{color:var(--carbon)}
   table.t{width:100%;border-collapse:collapse;font-size:13px}
-  table.t th,table.t td{border-bottom:1px solid #EFEBDD;padding:7px 6px;text-align:left;vertical-align:top}
+  table.t th,table.t td{border-bottom:1px solid #E6EEF3;padding:7px 6px;text-align:left;vertical-align:top}
   table.t th{font-size:12px;color:var(--oliva);font-weight:700}
   table.t td.n,table.t th.n{text-align:right;white-space:nowrap}
   table.t input{padding:5px 6px;font-size:13px;max-width:110px}
@@ -62,7 +62,7 @@
   .verd small{display:block;font-weight:400;color:var(--carbon);margin-top:4px;font-size:13px}
   .vok{background:var(--okbg);color:var(--ok)}.vno{background:var(--albg);color:var(--al)}.vam{background:var(--ambg);color:var(--am)}
   .dir label{display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:13.5px;margin:6px 0}
-  .svc{border-top:1px solid #EFEBDD;padding:10px 0;display:grid;grid-template-columns:26px 1fr 70px 120px 110px;gap:10px;align-items:center}
+  .svc{border-top:1px solid #E6EEF3;padding:10px 0;display:grid;grid-template-columns:26px 1fr 70px 120px 110px;gap:10px;align-items:center}
   .svc .nm{font-weight:600;font-size:14px}.svc .ds{font-size:12px;color:#555}
   .svc .sg{font-size:11.5px;color:var(--oliva)}
   .svc input[type=number]{padding:6px 7px;font-size:13.5px}
@@ -70,7 +70,7 @@
   .grp{font-stretch:110%;font-weight:800;font-size:13px;color:var(--oliva);text-transform:uppercase;letter-spacing:.05em;margin:14px 0 2px}
   .tot{display:grid;grid-template-columns:1fr auto;gap:4px 16px;font-size:14px;max-width:420px;margin-left:auto}
   .tot b{text-align:right}.kpi .tot b{display:block;font-size:14px;font-weight:700;line-height:1.5;font-stretch:100%}.kpi .tot .gt{font-size:16px;font-weight:800}.tot .gt{font-size:17px;font-weight:800;border-top:2px solid var(--carbon);padding-top:4px}
-  .doc{background:#fff;border:1px solid var(--linea);border-radius:4px;padding:28px;box-shadow:0 2px 10px rgba(20,24,30,.06)}
+  .doc{background:#fff;border:1px solid var(--linea);border-radius:4px;padding:28px;box-shadow:0 2px 10px rgba(11,30,51,.06)}
   .doc h1{color:var(--carbon);font-size:22px}
   .pk{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
   .pk .card{margin:0}
@@ -79,7 +79,7 @@
   @media (max-width:640px){.card{padding:14px}.doc{padding:16px}
     .svc{grid-template-columns:26px 1fr 1fr;grid-template-areas:"c n n" ". q v" ". s s"}
     .svc>:nth-child(1){grid-area:c}.svc>:nth-child(2){grid-area:n}.svc>:nth-child(3){grid-area:q}.svc>:nth-child(4){grid-area:v}.svc>:nth-child(5){grid-area:s}
-    table.t.resp tr:first-child{display:none}table.t.resp tr{display:block;border-bottom:1px solid #EFEBDD;padding:8px 0}table.t.resp td{display:flex;justify-content:space-between;gap:10px;border:0;padding:2px 0}table.t.resp td:before{content:attr(data-l);color:var(--oliva);font-size:12px}table.t.resp td.n{text-align:right}}
+    table.t.resp tr:first-child{display:none}table.t.resp tr{display:block;border-bottom:1px solid #E6EEF3;padding:8px 0}table.t.resp td{display:flex;justify-content:space-between;gap:10px;border:0;padding:2px 0}table.t.resp td:before{content:attr(data-l);color:var(--oliva);font-size:12px}table.t.resp td.n{text-align:right}}
 </style>
 </head>
 <body>
@@ -350,10 +350,10 @@
   function tr(a,b){return '<span>'+a+'</span><b>'+b+'</b>'}
   function fechaTxt(f){if(!f)return '[FECHA]';var p=f.split('-');var M=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];return (+p[2])+' de '+M[+p[1]-1]+' de '+p[0]}
   function proforma(){var t=totals(),c=S.c,T=tam(),su=sug(),R=su.R,m=mtge();
-    var st='font-family:Arial,sans-serif;color:#14181E;font-size:10.5pt;line-height:1.45',th='background:#14181E;color:#fff;padding:6px 8px;text-align:left;font-size:9.5pt',td='border-bottom:1px solid #DDD8C8;padding:6px 8px;vertical-align:top;font-size:9.5pt',tn=td+';text-align:right;white-space:nowrap';
-    var h='<div style="'+st+'"><div style="border-bottom:3px solid #A09046;padding-bottom:8px;margin-bottom:12px"><div style="font-size:9pt;letter-spacing:1px;color:#A09046;font-weight:bold">MACÍAS SÁNCHEZ CONSULTORES</div>'+
-      '<h1 style="font-size:17pt;margin:4px 0">Proforma de servicios de protección de datos personales</h1><div style="font-size:9.5pt;color:#6E6230">N.º '+esc(S.p.num)+' · '+fechaTxt(S.p.fecha)+' · Validez: '+esc(S.p.validez)+' días</div></div>';
-    h+='<table style="width:100%;border-collapse:collapse;margin-bottom:10px">'+[['Cliente',c.emp||'[RAZÓN SOCIAL]'],['RUC',c.ruc||'[RUC]'],['Dirigida a',S.p.aten||((c.contacto||'[NOMBRE]')+(c.cargo?', '+c.cargo:''))],['Perfil',T.t.nombre+' · sector '+(c.sector||'')+(m.ge?' · tratamiento de gran escala (MTGE '+String(m.P).replace('.',',')+' pts)':'')]].map(function(r){return '<tr><td style="'+td+';width:28%;color:#6E6230"><b>'+r[0]+'</b></td><td style="'+td+'">'+esc(r[1])+'</td></tr>'}).join('')+'</table>';
+    var st='font-family:Arial,sans-serif;color:#0B1E33;font-size:10.5pt;line-height:1.45',th='background:#0B1E33;color:#fff;padding:6px 8px;text-align:left;font-size:9.5pt',td='border-bottom:1px solid #D0DCE5;padding:6px 8px;vertical-align:top;font-size:9.5pt',tn=td+';text-align:right;white-space:nowrap';
+    var h='<div style="'+st+'"><div style="border-bottom:3px solid #3FB8C9;padding-bottom:8px;margin-bottom:12px"><div style="font-size:9pt;letter-spacing:1px;color:#3FB8C9;font-weight:bold">MACÍAS SÁNCHEZ CONSULTORES</div>'+
+      '<h1 style="font-size:17pt;margin:4px 0">Proforma de servicios de protección de datos personales</h1><div style="font-size:9.5pt;color:#17677A">N.º '+esc(S.p.num)+' · '+fechaTxt(S.p.fecha)+' · Validez: '+esc(S.p.validez)+' días</div></div>';
+    h+='<table style="width:100%;border-collapse:collapse;margin-bottom:10px">'+[['Cliente',c.emp||'[RAZÓN SOCIAL]'],['RUC',c.ruc||'[RUC]'],['Dirigida a',S.p.aten||((c.contacto||'[NOMBRE]')+(c.cargo?', '+c.cargo:''))],['Perfil',T.t.nombre+' · sector '+(c.sector||'')+(m.ge?' · tratamiento de gran escala (MTGE '+String(m.P).replace('.',',')+' pts)':'')]].map(function(r){return '<tr><td style="'+td+';width:28%;color:#17677A"><b>'+r[0]+'</b></td><td style="'+td+'">'+esc(r[1])+'</td></tr>'}).join('')+'</table>';
     h+='<p>Agradecemos su interés. A continuación presentamos la propuesta para que su organización cumpla la Ley Orgánica de Protección de Datos Personales (LOPDP), su Reglamento General y la normativa de la Superintendencia de Protección de Datos Personales (SPDP), y pueda <b>demostrarlo</b>.</p>';
     var io=implOpt(),ro=rolOpt(),EX=t.L.filter(function(l){return l.ex}),hayImpl=t.L.some(function(l){return l.lin==='impl'});
     h+='<h2 style="font-size:12pt;margin:14px 0 6px">Evaluación e implementación: funciones separadas</h2><p>Esta propuesta distingue dos líneas. La <b>evaluación, el diagnóstico y la supervisión</b> los presta Macías Sánchez Consultores'+(ro[0]==='dpo'?' en calidad de Delegado de Protección de Datos (DPD)':'')+'. La <b>implementación</b> (elaborar el registro de actividades, las evaluaciones, políticas, contratos y procedimientos, y ponerlos en marcha) la decide su organización'+(hayImpl?' y estará a cargo de: <b>'+esc(implQuien())+'</b>':'')+'. '+(ro[0]==='dpo'?'El DPD no implementa ni ejecuta la evaluación de impacto o la gestión de riesgos; revisa lo elaborado, emite observaciones no vinculantes y verifica lo implementado (Res. SPDP-SPD-2025-0028-R arts. 13 y 15).':'Si en el futuro su organización designa a nuestra firma como DPD, la implementación posterior la ejecutará otro implementador.')+'</p>';
@@ -362,7 +362,7 @@
         L.map(function(l){return '<tr><td style="'+td+'"><b>'+esc(l.c)+' · '+esc(l.n)+'</b><br><span style="color:#555">'+esc(l.d)+'</span></td><td style="'+tn+'">'+(ev(g)?'por '+esc(l.u):l.q)+'</td><td style="'+tn+'">'+usd(l.v)+'</td>'+(ev(g)?'':'<td style="'+tn+'">'+usd(l.st)+'</td>')+'</tr>'}).join('')+'</table>'}
     var gi=0;CFG.grupos.forEach(function(g){var b=bloque(g,(gi+1)+'. '+g+(ev(g)?' (tarifas, no incluidas en el total)':'')+(/^Implementación/.test(g)?' · ejecuta: '+implQuien():''));if(b){gi++;h+=b}});
     if(EX.length){h+='<h2 style="font-size:12pt;margin:14px 0 6px">Implementación a cargo de '+esc(implQuien())+' (no incluida en esta proforma)</h2><p style="font-size:9.5pt">'+esc(io[2])+(num(S.p.implVal)>0?' Valor informado por el implementador: <b>'+usd(num(S.p.implVal))+'</b> (referencial; lo cotiza y factura el implementador).':' La cotiza y factura el implementador.')+'</p><ul style="margin:0 0 6px 18px;padding:0">'+EX.map(function(l){return '<li><b>'+esc(l.c)+' · '+esc(l.n)+'</b></li>'}).join('')+'</ul>'}
-    var sum=function(a,b,bold){return '<tr><td style="'+td+(bold?';font-weight:bold;border-top:2px solid #14181E':'')+'">'+a+'</td><td style="'+tn+(bold?';font-weight:bold;border-top:2px solid #14181E':'')+'">'+b+'</td></tr>'};
+    var sum=function(a,b,bold){return '<tr><td style="'+td+(bold?';font-weight:bold;border-top:2px solid #0B1E33':'')+'">'+a+'</td><td style="'+tn+(bold?';font-weight:bold;border-top:2px solid #0B1E33':'')+'">'+b+'</td></tr>'};
     h+='<h2 style="font-size:12pt;margin:14px 0 6px">Resumen económico</h2><table style="width:100%;border-collapse:collapse"><tr><th style="'+th+'">Concepto</th><th style="'+th+';text-align:right">Valor</th></tr>';
     if(t.u){h+=sum('Pagos únicos, subtotal sin IVA',usd(t.u))+(t.ud?sum('Descuento '+pct(num(S.p.desc),0),usd(-t.ud)):'')+sum('IVA '+pct(num(S.p.iva),0),usd(t.uiva))+sum('Total única vez',usd(t.ut),1)}
     if(t.m){h+=sum('Control mensual, subtotal sin IVA',usd(t.m))+(t.md?sum('Descuento '+pct(num(S.p.desc),0),usd(-t.md)):'')+sum('IVA '+pct(num(S.p.iva),0),usd(t.miva))+sum('Total mensual',usd(t.mt),1)+sum('Inversión del primer año ('+t.meses+' meses), con IVA',usd(t.aniot),1)}
@@ -380,7 +380,7 @@
     var f=S.p.f;h+='<h2 style="font-size:12pt;margin:18px 0 6px">Firma de responsabilidad</h2><table style="width:100%;border-collapse:collapse"><tr><th style="'+th+'">Elaborado por</th><th style="'+th+'">Aceptado por el cliente</th></tr>'+
       '<tr><td style="'+td+';height:60px;vertical-align:bottom">Firma: ______________________</td><td style="'+td+';height:60px;vertical-align:bottom">Firma: ______________________</td></tr>'+
       '<tr><td style="'+td+'">'+esc(f.el||'[ELABORADO POR]')+'<br>'+esc(f.ec||'[CARGO / MATRÍCULA]')+'</td><td style="'+td+'">'+esc(f.cl||'[REPRESENTANTE LEGAL]')+'<br>'+esc(f.cc||'[CARGO]')+'<br>'+esc(c.emp||'[RAZÓN SOCIAL]')+'</td></tr></table>'+
-      '<p style="font-size:9.5pt">Fecha de aceptación: ____________________</p><p style="font-size:8.5pt;color:#6E6230">Valores referenciales en dólares de los Estados Unidos de América. Las estimaciones de exposición y ahorro son orientativas y no constituyen una liquidación de multa ni una garantía de resultado.</p></div>';
+      '<p style="font-size:9.5pt">Fecha de aceptación: ____________________</p><p style="font-size:8.5pt;color:#17677A">Valores referenciales en dólares de los Estados Unidos de América. Las estimaciones de exposición y ahorro son orientativas y no constituyen una liquidación de multa ni una garantía de resultado.</p></div>';
     return h}
   function upd(){rTam();rNeg();rVol();rTec();rCmp();rSvc();rTot();$('prev').innerHTML=proforma();
     // reenlazar bolsa (se reconstruye)

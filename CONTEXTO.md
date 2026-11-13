@@ -103,6 +103,10 @@ Actualizado: 2026-11-11 (duodécima entrega). Leer junto con `CLAUDE.md` (reglas
 - Fusionada con la undécima entrega (trabajo paralelo): el plan muestra «Implementación a cargo de» de la ficha y recuerda que MSC, como DPO, solo verifica. Abrir una herramienta ya no la marca como actualizada (guardados del primer 1,5 s). Publicado en `main` y `gh-pages` con `MSC_PUBLICO=1`.
 - Nota: hubo dos sesiones trabajando en paralelo; antes de enviar, hacer `git fetch` y fusionar.
 
+## 3m. Colores de la división (2026-11-13)
+- La app y las nueve herramientas adoptan la paleta de la división de Protección de Datos del sitio web: azul marino `#0B1E33`, cian `#3FB8C9`, cian claro `#8FD6E0`, verde azulado `#17677A` (texto sobre claro) y fondo `#F3F7FA`. El isotipo dorado de MSC se conserva como vínculo con la marca principal.
+- No se cambiaron: los documentos exportados (`scripts/exportar.js`), la guía PDF (`scripts/guia/`), los Excel del RAT ni el icono instalable; siguen con la paleta dorada de Macías Sánchez Consultores.
+
 ## 4. Pendiente (orden de prioridad)
 0. Separación evaluación/implementación: consultar a la SPDP la modalidad subcontratada (punto 32); declaración de la relación con el implementador aliado en el kit 08; servicios S29 y S30 en la proforma de MSC Gestor Legal (el traspaso `msc:pd-handoff` envía códigos que Gestor Legal quizá no tenga).
 2. PDF de la ley y el reglamento: son copias LEXIS; no se versionan mientras el repositorio sea público. Publicarlos al pasar a Cloudflare con Access.

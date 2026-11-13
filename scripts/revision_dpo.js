@@ -22,11 +22,11 @@ var TIT=(document.title||'').split(' — ')[0];
 function tabs(){return [].slice.call(document.querySelectorAll('nav [data-t]')).map(function(b){return (b.textContent||'').replace(/^\s*\d+\s*·\s*/,'').trim()})}
 function actual(){var b=document.querySelector('nav [aria-selected="true"]');return b?(b.textContent||'').replace(/^\s*\d+\s*·\s*/,'').trim():''}
 
-var css='#mscrev{border:1px solid rgba(128,128,128,.35);border-left:4px solid #A09046;border-radius:10px;padding:12px 14px;margin:12px 0}'+
+var css='#mscrev{border:1px solid rgba(128,128,128,.35);border-left:4px solid #3FB8C9;border-radius:10px;padding:12px 14px;margin:12px 0}'+
  '#mscrev summary{cursor:pointer;font-weight:800;font-size:14.5px;list-style:none}#mscrev summary::-webkit-details-marker{display:none}'+
  '#mscrev summary small{display:block;font-weight:400;font-size:12.5px;opacity:.8;margin-top:2px}'+
  '#mscrev .mr-seg{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}#mscrev .mr-seg button{flex:1;min-width:170px;min-height:42px;border:1px solid rgba(128,128,128,.5);background:transparent;color:inherit;border-radius:8px;font:inherit;font-weight:700;font-size:13px;padding:8px;cursor:pointer}'+
- '#mscrev .mr-seg button.on{background:#A09046;color:#14181E;border-color:#A09046}'+
+ '#mscrev .mr-seg button.on{background:#3FB8C9;color:#0B1E33;border-color:#3FB8C9}'+
  '#mscrev .mr-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px 12px;margin:8px 0}#mscrev label{display:block;font-size:12.5px;font-weight:700;margin-bottom:3px}'+
  '#mscrev input,#mscrev select,#mscrev textarea{width:100%;box-sizing:border-box;font:inherit;font-size:14px;padding:8px;border:1px solid rgba(128,128,128,.5);border-radius:6px;background:transparent;color:inherit}#mscrev textarea{min-height:70px}'+
  '#mscrev .mr-n{font-size:12.5px;opacity:.85;margin:6px 0}#mscrev .mr-o{border:1px solid rgba(128,128,128,.3);border-radius:8px;padding:8px 10px;margin:8px 0;font-size:13.5px}'+
@@ -67,11 +67,11 @@ function pinta(){var d=document.getElementById('mscrev');if(!d)return;var rev=S.
  [].slice.call(d.querySelectorAll('[data-ix]')).forEach(function(i){i.onchange=function(){S.obs[+i.dataset.ix][i.dataset.k]=i.value;save();pinta()}});
  [].slice.call(d.querySelectorAll('[data-del]')).forEach(function(b){b.onclick=function(){if(!b.dataset.c){b.dataset.c=1;b.textContent='¿Eliminar? Toque otra vez';return}S.obs.splice(+b.dataset.del,1);save();pinta()}})}
 
-function tabla(){var th='style="text-align:left;background:#EFEBDD"';return '<table border="1" cellpadding="5" style="border-collapse:collapse;width:100%;font-size:10pt"><tr><th '+th+'>N.º</th><th '+th+'>Pestaña o sección</th><th '+th+'>Prioridad</th><th '+th+'>Observación del DPO</th><th '+th+'>Estado</th><th '+th+'>Respuesta del responsable</th></tr>'+
+function tabla(){var th='style="text-align:left;background:#E6EEF3"';return '<table border="1" cellpadding="5" style="border-collapse:collapse;width:100%;font-size:10pt"><tr><th '+th+'>N.º</th><th '+th+'>Pestaña o sección</th><th '+th+'>Prioridad</th><th '+th+'>Observación del DPO</th><th '+th+'>Estado</th><th '+th+'>Respuesta del responsable</th></tr>'+
  S.obs.map(function(o,i){return '<tr><td>'+(i+1)+'</td><td>'+esc(o.sec)+'</td><td>'+esc(o.pri)+'</td><td>'+esc(o.txt).replace(/\n/g,'<br>')+'</td><td>'+esc(o.est)+'</td><td>'+esc(o.resp)+'</td></tr>'}).join('')+'</table>'}
 function datos(){return '<p>Elaborado por: <b>'+esc(S.el||'[IMPLEMENTADOR]')+'</b>'+(S.ver?' · versión '+esc(S.ver):'')+'. Revisado por el DPO: <b>'+esc(S.rv||'[DPO]')+'</b>'+(S.fe?' · '+esc(S.fe):'')+'.</p>'}
 var NOTA='<p style="font-size:9pt">Observaciones no vinculantes del Delegado de Protección de Datos. El DPD no ejecuta la gestión de riesgos ni la evaluación de impacto y no decide sobre los fines ni los medios del tratamiento; la decisión final corresponde al responsable (Res. SPDP-SPD-2025-0028-R arts. 13, 15.2 y 15.3).</p>';
-function firmas(){var th='style="text-align:left;background:#EFEBDD;width:50%"';return '<table border="1" cellpadding="5" style="border-collapse:collapse;width:100%;font-size:10pt"><tr><th '+th+'>Revisado por (DPO)</th><th '+th+'>Recibido por el responsable</th></tr><tr><td>Firma: ______________________</td><td>Firma: ______________________</td></tr><tr><td>'+esc(S.rv||'')+'</td><td></td></tr></table>'}
+function firmas(){var th='style="text-align:left;background:#E6EEF3;width:50%"';return '<table border="1" cellpadding="5" style="border-collapse:collapse;width:100%;font-size:10pt"><tr><th '+th+'>Revisado por (DPO)</th><th '+th+'>Recibido por el responsable</th></tr><tr><td>Firma: ______________________</td><td>Firma: ______________________</td></tr><tr><td>'+esc(S.rv||'')+'</td><td></td></tr></table>'}
 function hayAlgo(){return S.obs.length||S.concl||S.modo==='rev'}
 window.MSCRevAnexo=function(html){if(!html||/data-mscrev/.test(html)||!hayAlgo())return html;
  var a='<div data-mscrev="1"><h2>Revisión del DPO</h2>'+datos()+(S.obs.length?tabla():'<p>Sin observaciones.</p>')+(S.concl?'<p><b>Conclusión:</b> '+esc(S.concl)+'</p>':'<p><b>Conclusión:</b> revisión en curso.</p>')+NOTA+'<p><b>Firma del DPO</b></p>'+firmas()+'</div>';

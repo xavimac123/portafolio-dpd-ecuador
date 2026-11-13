@@ -83,9 +83,9 @@ def css_oscuro(html):
         if sel.strip() == ":root":
             for k, v in re.findall(r"(--[\w-]+)\s*:\s*([^;]+)", d):
                 root[k] = v.strip()
-    salida = ["html.msc-dark{color-scheme:dark}html.msc-dark,html.msc-dark body{background:#0F1216!important;color:#E7E4DA!important}",
+    salida = ["html.msc-dark{color-scheme:dark}html.msc-dark,html.msc-dark body{background:#07172A!important;color:#E3EAF0!important}",
               "html.msc-dark input::placeholder,html.msc-dark textarea::placeholder{color:#8C8F96!important;-webkit-text-fill-color:#8C8F96!important}",
-              "html.msc-dark select option{background:#1C2128;color:#E7E4DA}",
+              "html.msc-dark select option{background:#102A44;color:#E3EAF0}",
               "html.msc-dark button:disabled{opacity:.45}"]
     for media, sel, d in _reglas(estilos):
         if not sel or sel.startswith("@") or sel.strip() in (":root", "html,body", "body", "html"):
@@ -117,9 +117,9 @@ def css_oscuro(html):
                             oscuro = oscuro or L < 0.2
                             claro = claro or L > 0.55
             if oscuro:
-                nuevas = ["background:#A09046!important", "color:#14181E!important", "border-color:#A09046!important", "-webkit-text-fill-color:#14181E!important"]
+                nuevas = ["background:#3FB8C9!important", "color:#0B1E33!important", "border-color:#3FB8C9!important", "-webkit-text-fill-color:#0B1E33!important"]
             elif claro:
-                nuevas = ["background:#1F252D!important", "color:#E7E4DA!important", "border-color:#4A525E!important", "-webkit-text-fill-color:#E7E4DA!important"]
+                nuevas = ["background:#12304D!important", "color:#E3EAF0!important", "border-color:#4A525E!important", "-webkit-text-fill-color:#E3EAF0!important"]
             if oscuro or claro:
                 sels = ",".join("html.msc-dark " + x.strip() for x in sel.split(",") if x.strip())
                 regla = sels + "{" + ";".join(nuevas) + "}"
